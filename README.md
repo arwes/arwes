@@ -1,2 +1,4 @@
-# prhone-ui
-Sci-Fi frontend user interface.
+# PRHONE UI
+> Sci-Fi frontend user interface.
+
+**Not working project yet**.
