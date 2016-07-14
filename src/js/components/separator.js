@@ -1,4 +1,4 @@
-import React from 'react';
+const React = require('react');
 
 const Separator = React.createClass({
 
@@ -21,4 +21,4 @@ const Separator = React.createClass({
   }
 });
 
-export default Separator;
+module.exports = Separator;

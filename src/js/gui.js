@@ -1,11 +1,11 @@
-import React from 'react';
-import Card from './components/card.js';
-import Img from './components/img.js';
-import Separator from './components/separator.js';
-import Loading from './components/loading.js';
-import Blink from './components/blink.js';
-import Box from './components/box.js';
-import Selector from './components/selector.js';
-import Btn from './components/btn.js';
+const React = require('react');
+const Card = require('./components/card.js');
+const Img = require('./components/img.js');
+const Separator = require('./components/separator.js');
+const Loading = require('./components/loading.js');
+const Blink = require('./components/blink.js');
+const Box = require('./components/box.js');
+const Selector = require('./components/selector.js');
+const Btn = require('./components/btn.js');
 
-export { Card, Img, Separator, Loading, Blink, Box, Selector, Btn };
+module.exports = { Card, Img, Separator, Loading, Blink, Box, Selector, Btn };

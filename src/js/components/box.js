@@ -1,4 +1,4 @@
-import React from 'react';
+const React = require('react');
 
 const Box = React.createClass({
   render () {
@@ -19,4 +19,4 @@ const Box = React.createClass({
   }
 });
 
-export default Box;
+module.exports = Box;

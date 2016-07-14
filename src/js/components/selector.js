@@ -1,6 +1,6 @@
-import _ from 'lodash';
-import React from 'react';
-import Box from './box.js';
+const _ = require('lodash');
+const React = require('react');
+const Box = require('./box');
 
 const Selector = React.createClass({
 
@@ -60,4 +60,4 @@ const Selector = React.createClass({
   }
 });
 
-export default Selector;
+module.exports = Selector;

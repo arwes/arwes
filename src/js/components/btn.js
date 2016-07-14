@@ -1,5 +1,5 @@
-import React from 'react';
-import Box from './box.js';
+const React = require('react');
+const Box = require('./box');
 
 const Btn = React.createClass({
 
@@ -30,4 +30,4 @@ const Btn = React.createClass({
   }
 });
 
-export default Btn;
+module.exports = Btn;

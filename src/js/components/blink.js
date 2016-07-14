@@ -1,4 +1,4 @@
-import React from 'react';
+const React = require('react');
 
 const Blink = React.createClass({
   render () {
@@ -8,4 +8,4 @@ const Blink = React.createClass({
   }
 });
 
-export default Blink;
+module.exports = Blink;

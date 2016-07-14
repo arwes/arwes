@@ -1,4 +1,4 @@
-import React from 'react';
+const React = require('react');
 
 const Loading = React.createClass({
 
@@ -23,4 +23,4 @@ const Loading = React.createClass({
   }
 });
 
-export default Loading;
+module.exports = Loading;

@@ -1,4 +1,4 @@
-import React from 'react';
+const React = require('react');
 
 const Img = React.createClass({
 
@@ -19,4 +19,4 @@ const Img = React.createClass({
   }
 });
 
-export default Img;
+module.exports = Img;

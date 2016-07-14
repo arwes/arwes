@@ -1,4 +1,4 @@
-import React from 'react';
+const React = require('react');
 import Box from './box.js';
 
 const Card = React.createClass({
@@ -53,4 +53,4 @@ const Card = React.createClass({
   }
 });
 
-export default Card;
+module.exports = Card;
