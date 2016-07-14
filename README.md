@@ -1,4 +1,9 @@
-# PRHONE UI
-> Sci-Fi frontend user interface.
+# [PRHONE GUI](http://romelperez.com/projects/gui)
 
-**Not working project yet**.
+> Sci-Fi Graphical User Interface.
+
+PRHONE Sci-Fi Graphical User Interface.
+
+## License
+
+[MIT](./LICENSE)
