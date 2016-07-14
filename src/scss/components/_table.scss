@@ -1,54 +1,58 @@
-.pr-table {
-  width: 100%;
-  max-width: 100%;
-  margin-bottom: 10px;
-  border: 1px solid #5e5e5e;
-  font-size: 0.9rem;
-}
+@mixin pr-table {
 
-.pr-table > thead > tr > th,
-.pr-table > tbody > tr > th,
-.pr-table > tfoot > tr > th,
-.pr-table > thead > tr > td,
-.pr-table > tbody > tr > td,
-.pr-table > tfoot > tr > td {
-  padding: 5px;
-  vertical-align: top;
-  border-top: 1px solid #5e5e5e;
-}
+  .pr-table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #5e5e5e;
+    font-size: 0.9rem;
+  }
 
-.pr-table > thead > tr > th {
-  vertical-align: bottom;
-  border-bottom: 2px solid #5e5e5e;
-}
+  .pr-table > thead > tr > th,
+  .pr-table > tbody > tr > th,
+  .pr-table > tfoot > tr > th,
+  .pr-table > thead > tr > td,
+  .pr-table > tbody > tr > td,
+  .pr-table > tfoot > tr > td {
+    padding: 5px;
+    vertical-align: top;
+    border-top: 1px solid #5e5e5e;
+  }
 
-.pr-table > caption + thead > tr:first-child > th,
-.pr-table > colgroup + thead > tr:first-child > th,
-.pr-table > thead:first-child > tr:first-child > th,
-.pr-table > caption + thead > tr:first-child > td,
-.pr-table > colgroup + thead > tr:first-child > td,
-.pr-table > thead:first-child > tr:first-child > td {
-  border-top: 0;
-}
+  .pr-table > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #5e5e5e;
+  }
 
-.pr-table > tbody + tbody {
-  border-top: 2px solid #5e5e5e;
-}
+  .pr-table > caption + thead > tr:first-child > th,
+  .pr-table > colgroup + thead > tr:first-child > th,
+  .pr-table > thead:first-child > tr:first-child > th,
+  .pr-table > caption + thead > tr:first-child > td,
+  .pr-table > colgroup + thead > tr:first-child > td,
+  .pr-table > thead:first-child > tr:first-child > td {
+    border-top: 0;
+  }
 
-.pr-table > thead > tr > th,
-.pr-table > tbody > tr > th,
-.pr-table > tfoot > tr > th,
-.pr-table > thead > tr > td,
-.pr-table > tbody > tr > td,
-.pr-table > tfoot > tr > td {
-  border: 1px solid #5e5e5e;
-}
+  .pr-table > tbody + tbody {
+    border-top: 2px solid #5e5e5e;
+  }
 
-.pr-table > thead > tr > th,
-.pr-table > thead > tr > td {
-  border-bottom-width: 2px;
-}
+  .pr-table > thead > tr > th,
+  .pr-table > tbody > tr > th,
+  .pr-table > tfoot > tr > th,
+  .pr-table > thead > tr > td,
+  .pr-table > tbody > tr > td,
+  .pr-table > tfoot > tr > td {
+    border: 1px solid #5e5e5e;
+  }
 
-.pr-table > tbody > tr:hover {
-  background-color: #333333;
+  .pr-table > thead > tr > th,
+  .pr-table > thead > tr > td {
+    border-bottom-width: 2px;
+  }
+
+  .pr-table > tbody > tr:hover {
+    background-color: #333333;
+  }
+
 }

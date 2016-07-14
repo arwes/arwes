@@ -1,6 +1,6 @@
-@import './foundation';
-
 @import './vars';
+
+@import './foundation';
 
 @import './base/general';
 @import './base/headers';
@@ -10,6 +10,15 @@
 @import './base/table';
 @import './base/form';
 @import './base/media';
+
+@import './components/img';
+@import './components/separator';
+@import './components/card';
+@import './components/loading';
+@import './components/blink';
+@import './components/box';
+@import './components/selector';
+@import './components/btn';
 
 @mixin pr-all {
 
@@ -27,7 +36,14 @@
   @include pr-form;
   @include pr-media;
 
-}
+  @include pr-blink;
+  @include pr-box;
+  @include pr-btn;
+  @include pr-card;
+  @include pr-img;
+  @include pr-loading;
+  @include pr-selector;
+  @include pr-separator;
+  @include pr-table;
 
-// DEBUG:
-@include pr-all;
+}

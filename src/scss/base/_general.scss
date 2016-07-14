@@ -35,8 +35,9 @@
   }
   ::-webkit-scrollbar-track {}
   ::-webkit-scrollbar-thumb {
-    border: 2px solid $pr-color4;
+    border-radius: $pr-radius;
+    border: 1px solid $pr-color4;
     cursor: pointer;
   }
-  
+
 }

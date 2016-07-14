@@ -1,0 +1,114 @@
+@mixin pr-loading {
+
+  .pr-loading {
+    z-index: 1000;
+    position: absolute;;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: $pr-background5;
+    transition: all #{$pr-animation-time}ms ease 0s;
+
+    &.pr-loading_success {
+      background: rgba($pr-color-success, 0.1);
+
+      .pr-loading__circle1 {
+        border-top-color: $pr-color-success;
+        border-bottom-color: $pr-color-success;
+        box-shadow: 0 0 30px $pr-color-success;
+      }
+      .pr-loading__circle2 {
+        border-top-color: $pr-color-success;
+        border-bottom-color: $pr-color-success;
+        box-shadow: 0 0 15px $pr-color-success;
+      }
+    }
+
+    &.pr-loading_error {
+      background: rgba($pr-color-error, 0.1);
+
+      .pr-loading__circle1 {
+        border-top-color: $pr-color-error;
+        border-bottom-color: $pr-color-error;
+        box-shadow: 0 0 30px $pr-color-error;
+      }
+      .pr-loading__circle2 {
+        border-top-color: $pr-color-error;
+        border-bottom-color: $pr-color-error;
+        box-shadow: 0 0 15px $pr-color-error;
+      }
+    }
+  }
+
+  .pr-loading__content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .pr-loading__circle1 {
+    position: relative;
+    left: 0;
+    top: 20px;
+
+    margin: 0 auto;
+  	border: 5px solid $pr-color-info;
+  	border-right: 5px solid rgba(0,0,0,0);
+  	border-left: 5px solid rgba(0,0,0,0);
+  	border-radius: 50px;
+    width: 50px;
+  	height: 50px;
+
+    opacity: 0.9;
+    box-shadow: 0 0 30px $pr-color-info;
+    background-color: rgba(0,0,0,0);
+  	animation: pr-anim-loading-1 #{$pr-animation-time*2.5}ms infinite linear;
+    transition: all #{$pr-animation-time}ms ease 0s;
+  }
+
+  .pr-loading__circle2 {
+    position: relative;
+    left: 0;
+    top: -20px;
+
+    margin: 0 auto;
+  	border: 5px solid $pr-color-info;
+  	border-left: 5px solid rgba(0,0,0,0);
+  	border-right: 5px solid rgba(0,0,0,0);
+  	border-radius: 50px;
+    width: 30px;
+  	height: 30px;
+
+    opacity: 0.9;
+    box-shadow: 0 0 15px $pr-color-info;
+    background-color: rgba(0,0,0,0);
+  	animation: pr-anim-loading-2 #{$pr-animation-time*2.5}ms infinite linear;
+    transition: all #{$pr-animation-time}ms ease 0s;
+  }
+
+  @keyframes pr-anim-loading-1 {
+  	0% {
+      transform: rotate(160deg);
+      opacity: 0;
+    }
+  	50% {
+      transform:rotate(145deg);
+      opacity: 1;
+    }
+  	100% {
+      transform: rotate(-320deg);
+      opacity: 0;
+    }
+  }
+  @keyframes pr-anim-loading-2 {
+  	0% {
+      transform: rotate(0deg);
+    }
+  	100% {
+      transform: rotate(360deg);
+    }
+  }
+
+}

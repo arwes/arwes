@@ -1,3 +1,39 @@
-.pr-card {
-  //
+@mixin pr-card {
+
+  .pr-card {
+    margin-bottom: $pr-font-size;
+  }
+
+  .pr-card__frame {
+    padding: $pr-font-size;
+  }
+
+  .pr-card__title {
+    display: inline-block;
+    margin: 0 0 $pr-font-size 0;
+    font-size: map-get($pr-headers-sizes, h3);
+    line-height: 1;
+  }
+
+  .pr-card__info {
+    text-align: right;
+    font-size: 80%;
+  }
+
+  .pr-card__content {
+    p {
+      margin: 0;
+    }
+    p + p {
+      margin-top: $pr-font-size;
+    }
+  }
+
+  @include breakpoint(small down) {
+    .pr-card__info {
+      margin: 0 0 $pr-font-size 0;
+      text-align: left;
+    }
+  }
+
 }

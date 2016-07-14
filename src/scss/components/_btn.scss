@@ -1,0 +1,36 @@
+@mixin pr-btn {
+
+  a:focus,
+  a:hover,
+  a:active {
+    .pr-btn {
+      color: $pr-color3-active;
+    }
+  }
+
+  .pr-btn {
+    display: inline-block;
+    margin-bottom: $pr-font-size;
+    color: $pr-color4;
+    line-height: 1;
+    text-align: left;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: all #{$pr-animation-time}ms ease 0s;
+
+    .mdi {
+      display: inline-block;
+      margin-top: -8px;
+      height: $pr-font-size;
+      font-size: 125%;
+      vertical-align: middle;
+    }
+  }
+
+  .pr-btn__frame {
+    display: block;
+    padding: 8px 10px;
+    background: $pr-background2;
+  }
+
+}

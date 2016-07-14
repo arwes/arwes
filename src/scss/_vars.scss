@@ -4,9 +4,19 @@
 
 $pr-font-size: 1.05rem !default;
 $pr-line-height: 1.6 !default;
-$pr-radius: 1px !default;
+$pr-radius: 0 !default;
+$pr-border: 1px !default;
 $pr-animation-time: 400 !default;
 $pr-color-variation: 15% !default;
+
+$pr-headers-sizes: (
+  h1: 2.2rem,
+  h2: 1.75rem,
+  h3: 1.5rem,
+  h4: 1.25rem,
+  h5: 1.1rem,
+  h6: 1rem
+) !default;
 
 //
 // Fonts
@@ -42,7 +52,7 @@ $pr-color4: #00ffff !default;
 $pr-color4-active: #00ffff !default;
 
 // Delimitator
-$pr-color5: #0a83ea !default;
+$pr-color5: #06c3c3 !default;  // #0a83ea
 $pr-color5-active: smart-scale($pr-color5, $pr-color-variation) !default;
 
 // Delimitator secondary
@@ -85,10 +95,18 @@ $pr-background1-active: #021114 !default;
 $pr-background2: #000 !default;
 $pr-background2-active: #000 !default;
 
-// Highlighted
-$pr-background3: #1e1e24 !default;
-$pr-background3-active: #1e1e24 !default;
+// Box
+$pr-background3: #061b1a !default;
+$pr-background3-active: #061b1a !default;
 
 // Code
 $pr-background4: #242038 !default;
 $pr-background4-active: #242038 !default;
+
+// Loading
+$pr-background5: #161616 !default;
+$pr-background5-active: #161616 !default;
+
+// Modal
+$pr-background6: #161616 !default;
+$pr-background6-active: #161616 !default;

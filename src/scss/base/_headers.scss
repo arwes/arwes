@@ -13,16 +13,7 @@
     transition: all #{$pr-animation-time}ms ease 0s;
   }
 
-  $pr-headers-fs: (
-    h1: 2.2rem,
-    h2: 1.75rem,
-    h3: 1.5rem,
-    h4: 1.25rem,
-    h5: 1.1rem,
-    h6: 1rem
-  );
-
-  @each $header, $size in $pr-headers-fs {
+  @each $header, $size in $pr-headers-sizes {
     #{$header} {
       font-size: $size;
       a {

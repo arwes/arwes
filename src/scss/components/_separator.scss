@@ -1,0 +1,43 @@
+@mixin pr-separator {
+
+  .pr-separator {
+    display: block;
+    width: 100%;
+    height: 5px;
+
+    &.pr-separator_anim {
+      .pr-separator__gear {
+        background: $pr-color5;
+        box-shadow: 0px 0px 10px 1px rgba($pr-color5, 0.7);
+        animation: pr-anim-separator #{$pr-animation-time*3}ms ease-out;
+      }
+    }
+  }
+
+  .pr-separator__content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .pr-separator__gear {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 2px 0;
+    width: 100%;
+    height: 1px;
+  }
+
+  @keyframes pr-anim-separator {
+    0% {
+      width: 0;
+      left: 50%;
+    }
+    100% {
+      left: 0;
+      width: 100%;
+    }
+  }
+
+}
