@@ -15,16 +15,14 @@ const Btn = React.createClass({
     const icon = <i className={`mdi mdi-${props.icon}`} />;
 
     return (
-      <a href={props.href}>
-        <div className='pr-btn'>
-          <Box small={true}>
-            <div className='pr-btn__frame'>
-              {icon}
-              {' '}
-              {this.props.children}
-            </div>
-          </Box>
-        </div>
+      <a className='pr-btn' href={props.href}>
+        <Box small={true}>
+          <div className='pr-btn__frame'>
+            {icon}
+            {' '}
+            {this.props.children}
+          </div>
+        </Box>
       </a>
     );
   }
