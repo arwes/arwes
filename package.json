@@ -1,6 +1,6 @@
 {
   "name": "prhone-gui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "PRHONE Graphical User Interface",
   "repository": {
     "type": "git",
@@ -22,9 +22,7 @@
   "peerDependencies": {
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
-    "lodash": "^4.13.1"
-  },
-  "dependencies": {
+    "lodash": "^4.13.1",
     "foundation-sites": "^6.2.3",
     "normalize.css": "^4.2.0"
   },
