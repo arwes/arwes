@@ -1,0 +1,37 @@
+@mixin pr-table {
+
+  table {
+    display: block;
+    margin: 0 0 $pr-font-size 0;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+  }
+
+  caption {
+    padding-bottom: $pr-font-size;
+    color: $pr-color2;
+    text-align: left;
+  }
+
+  th, td {
+    padding: 6px 12px;
+  }
+  th {
+    text-align: left;
+    border-bottom: 1px dashed $pr-color6;
+  }
+  td {}
+
+  thead,
+  tfoot {
+    font-weight: bold;
+  }
+
+  thead {}
+
+  tbody {}
+
+  tfoot {}
+
+}

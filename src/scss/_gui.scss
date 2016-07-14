@@ -1,0 +1,33 @@
+@import './foundation';
+
+@import './vars';
+
+@import './base/general';
+@import './base/headers';
+@import './base/text';
+@import './base/lists';
+@import './base/link';
+@import './base/table';
+@import './base/form';
+@import './base/media';
+
+@mixin pr-all {
+
+  @include foundation-flex-grid;
+  @include foundation-visibility-classes;
+  @include foundation-float-classes;
+  @include foundation-flex-classes;
+
+  @include pr-general;
+  @include pr-headers;
+  @include pr-text;
+  @include pr-lists;
+  @include pr-link;
+  @include pr-table;
+  @include pr-form;
+  @include pr-media;
+
+}
+
+// DEBUG:
+@include pr-all;

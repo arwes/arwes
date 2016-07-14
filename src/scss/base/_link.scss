@@ -1,0 +1,15 @@
+@mixin pr-link {
+
+  a {
+    text-decoration: none;
+    color: $pr-color3;
+    transition: all #{$pr-animation-time}ms ease 0s;
+  }
+
+  a:hover,
+  a:focus,
+  a:active {
+    color: $pr-color3-active;
+  }
+
+}
