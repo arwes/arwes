@@ -1,7 +1,7 @@
 {
   "name": "prhone-gui",
-  "version": "0.1.3",
-  "description": "PRHONE Graphical User Interface",
+  "version": "0.1.4",
+  "description": "Sci-Fi Graphical User Interface",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/romelperez/prhone-gui.git"
