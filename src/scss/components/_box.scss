@@ -5,11 +5,19 @@
     border: 1px solid darken($pr-color5, 10%);
     border-radius: $pr-radius;
     background-color: $pr-background3;
+    transition: border-color #{$pr-animation-time}ms ease-out;
 
     &.pr-box_small {
       .pr-box__corner {
         width: 8px;
         height: 8px;
+      }
+    }
+    &:hover {
+      border-color: lighten($pr-color5, 10%);
+
+      .pr-box__corner {
+        border-color: lighten($pr-color5, 20%);
       }
     }
   }
@@ -26,6 +34,7 @@
     border-style: solid;
     width: 20px;
     height: 20px;
+    transition: border-color #{$pr-animation-time}ms ease-out;
   }
   .pr-box__corner1 {
     left: -1px;

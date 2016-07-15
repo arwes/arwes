@@ -2,6 +2,11 @@
 
   .pr-img {
     position: relative;
+    margin-bottom: $pr-font-size;
+
+    .pr-img__frame {
+      background: $pr-background2;
+    }
 
     .pr-img__cover {
       z-index: 5;
@@ -13,6 +18,10 @@
       opacity: 0;
       background-color: rgba($pr-color5, 0.5);
       animation: pr-anim-img-cover #{$pr-animation-time*3}ms ease-out alternate;
+
+      &:hover + img {
+        border-color: lighten($pr-color5, 20%);
+      }
     }
 
     img {
@@ -20,29 +29,15 @@
       position: relative;
       max-width: 100%;
       max-height: 100%;
-      border-radius: $pr-radius;
-      border: 1px solid $pr-color5;
-      animation: pr-anim-img #{$pr-animation-time*3}ms ease-out alternate;
     }
   }
 
   @keyframes pr-anim-img-cover {
   	0% {
-      transform: scale(0.5);
       opacity: 1;
     }
   	100% {
-      transform: scale(1);
       opacity: 0;
-    }
-  }
-
-  @keyframes pr-anim-img {
-  	0% {
-      transform: scale(0.5);
-    }
-  	100% {
-      transform: scale(1);
     }
   }
 

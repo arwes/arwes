@@ -38,6 +38,11 @@
     border-radius: $pr-radius;
     border: 1px solid $pr-color4;
     cursor: pointer;
+    transition: border-color #{$pr-animation-time}ms ease-out;
+
+    &:hover {
+      border-color: lighten($pr-color4, 20%);
+    }
   }
 
 }
