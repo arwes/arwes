@@ -4,11 +4,20 @@
     z-index: 1000;
     position: absolute;;
     left: 0;
-    right: 0;
     top: 0;
-    bottom: 0;
+    width: 100%;
+    height: 100%;
     background: $pr-background5;
-    transition: all #{$pr-animation-time}ms ease 0s;
+    transition: all #{$pr-animation-time}ms ease 0ms;
+
+    &.pr-loading_done {
+      width: 0;
+      height: 0;
+      opacity: 0;
+      transition: opacity #{$pr-animation-time}ms ease 0ms,
+                  height 0ms ease #{$pr-animation-time}ms,
+                  width 0ms ease #{$pr-animation-time}ms;
+    }
 
     &.pr-loading_success {
       background: rgba($pr-color-success, 0.1);

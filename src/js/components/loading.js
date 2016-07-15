@@ -4,6 +4,7 @@ const Loading = React.createClass({
 
   getDefaultProps () {
     return {
+      done: false,
       status: ''
     };
   },
@@ -11,7 +12,8 @@ const Loading = React.createClass({
   render () {
     const props = this.props;
     const status = props.status ? `pr-loading_${props.status}` : '';
-    const cls = `pr-loading ${status}`;
+    const done = props.done ? 'pr-loading_done' : '';
+    const cls = `pr-loading ${status} ${done}`;
     return (
       <div className={cls}>
         <div className='pr-loading__content'>
