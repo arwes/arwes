@@ -20,8 +20,9 @@
     }
 
     &.pr-loading_success {
-      background: rgba($pr-color-success, 0.1);
-
+      .pr-loading__frame {
+        background: rgba($pr-color-success, 0.1);
+      }
       .pr-loading__circle1 {
         border-top-color: $pr-color-success;
         border-bottom-color: $pr-color-success;
@@ -35,8 +36,9 @@
     }
 
     &.pr-loading_error {
-      background: rgba($pr-color-error, 0.1);
-
+      .pr-loading__frame {
+        background: rgba($pr-color-error, 0.1);
+      }
       .pr-loading__circle1 {
         border-top-color: $pr-color-error;
         border-bottom-color: $pr-color-error;
@@ -48,6 +50,13 @@
         box-shadow: 0 0 15px $pr-color-error;
       }
     }
+  }
+
+  .pr-loading__frame {
+    width: 100%;
+    height: 100%;
+    background: $pr-background5;
+    transition: all #{$pr-animation-time}ms ease 0ms;
   }
 
   .pr-loading__content {
