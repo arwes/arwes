@@ -5,12 +5,12 @@
     z-index: 100;
     display: inline-block;
     margin-bottom: $pr-font-size;
-    min-width: 100px;
 
     color: $pr-color4;
     line-height: 1;
     text-align: left;
     vertical-align: middle;
+    white-space: nowrap;
     cursor: pointer;
 
     ul {
@@ -29,6 +29,7 @@
       background: $pr-background2;
     }
     li {
+      overflow: hidden;
       display: block;
       padding: 8px 10px;
 
@@ -61,6 +62,8 @@
   .pr-selector__frame {
     display: block;
     padding: 8px 10px;
+    min-width: calc(#{$pr-font-size} + 16px);
+    min-height: calc(#{$pr-font-size} + 16px);
     background: $pr-background2;
   }
 

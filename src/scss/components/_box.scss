@@ -2,6 +2,7 @@
 
   .pr-box {
     position: relative;
+    margin: 0 auto;
     border: 1px solid darken($pr-color5, 10%);
     border-radius: $pr-radius;
     background-color: $pr-background3;
@@ -25,6 +26,7 @@
   .pr-box__frame {
     position: relative;
     z-index: 5;
+    max-height: 100%;
   }
 
   .pr-box__corner {
