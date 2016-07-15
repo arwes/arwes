@@ -6,6 +6,7 @@ const Btn = React.createClass({
   getDefaultProps () {
     return {
       href: null,
+      target: null,
       icon: ''
     };
   },
@@ -15,7 +16,7 @@ const Btn = React.createClass({
     const icon = <i className={`mdi mdi-${props.icon}`} />;
 
     return (
-      <a className='pr-btn' href={props.href}>
+      <a className='pr-btn' href={props.href} target={props.target}>
         <Box small={true}>
           <div className='pr-btn__frame'>
             {icon}

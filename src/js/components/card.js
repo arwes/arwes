@@ -7,6 +7,7 @@ const Card = React.createClass({
     return {
       title: 'Title',
       href: '',
+      target: null,
       lang: null,
       info: null
     };
@@ -16,7 +17,7 @@ const Card = React.createClass({
     const props = this.props;
 
     const titleText = props.href ?
-      <a href={props.href}>{props.title}</a> :
+      <a href={props.href} target={props.target}>{props.title}</a> :
       props.title;
 
     const titleCls = props.info ?
