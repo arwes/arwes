@@ -9,7 +9,7 @@
       .pr-separator__gear {
         background: $pr-color5;
         box-shadow: 0px 0px 10px 1px rgba($pr-color5, 0.7);
-        animation: pr-anim-separator #{$pr-animation-time*3}ms ease-out;
+        animation: pr-anim-separator #{$pr-animation-time*2}ms ease-out;
       }
     }
   }
