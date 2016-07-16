@@ -7,6 +7,7 @@ const Card = React.createClass({
     return {
       title: 'Title',
       href: '',
+      style: null,
       target: null,
       lang: null,
       info: null
@@ -35,7 +36,7 @@ const Card = React.createClass({
       null;
 
     return (
-      <article className='pr-card' lang={props.lang}>
+      <article className='pr-card' lang={props.lang} style={props.style}>
         <Box>
           <div className='pr-card__frame'>
             <div className='row align-justify'>
