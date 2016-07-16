@@ -7,14 +7,19 @@ const Img = React.createClass({
     return {
       src: '',
       alt: null,
-      small: false
+      small: false,
+      anim: true
     };
   },
 
   render () {
+
     const props = this.props;
+    const anim = props.anim ? 'pr-img_anim' : '';
+    const cls = `pr-img ${anim}`;
+
     return (
-      <div className='pr-img'>
+      <div className={cls}>
         <Box small={props.small}>
           <div className='pr-img__frame'>
             <div className='pr-img__cover'></div>
