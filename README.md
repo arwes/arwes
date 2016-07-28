@@ -1,4 +1,4 @@
-# [PRHONE GUI](http://romelperez.com/projects/gui)
+# PRHONE GUI
 
 > Sci-Fi Graphical User Interface.
 
