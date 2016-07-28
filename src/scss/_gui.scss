@@ -1,5 +1,6 @@
 @import './vars';
 
+@import './normalize';
 @import './foundation';
 
 @import './base/general';
@@ -21,6 +22,8 @@
 @import './components/btn';
 
 @mixin pr-all {
+
+  @include normalize;
 
   @include foundation-flex-grid;
   @include foundation-visibility-classes;
