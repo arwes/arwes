@@ -1,0 +1,13 @@
+// Sass utilities
+@import 'foundation-sites/scss/util/util';
+
+// Global variables and styles
+@import 'foundation-sites/scss/global';
+
+// Components
+@import 'foundation-sites/scss/grid/grid';
+@import 'foundation-sites/scss/components/visibility';
+@import 'foundation-sites/scss/components/float';
+@import 'foundation-sites/scss/components/flex';
+
+$global-flexbox: true !global;

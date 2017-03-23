@@ -1,6 +1,6 @@
-@import './vars';
+@import './settings';
 
-@import './normalize';
+@import 'normalize-scss/sass/normalize';
 @import './foundation';
 
 @import './base/general';
@@ -21,32 +21,32 @@
 @import './components/selector';
 @import './components/btn';
 
-@mixin pr-all {
+@mixin gui-all {
 
-  @include normalize;
+  @include normalize();
 
   @include foundation-flex-grid;
   @include foundation-visibility-classes;
   @include foundation-float-classes;
   @include foundation-flex-classes;
 
-  @include pr-general;
-  @include pr-headers;
-  @include pr-text;
-  @include pr-lists;
-  @include pr-link;
-  @include pr-table;
-  @include pr-form;
-  @include pr-media;
+  @include gui-general;
+  @include gui-headers;
+  @include gui-text;
+  @include gui-lists;
+  @include gui-link;
+  @include gui-table;
+  @include gui-form;
+  @include gui-media;
 
-  @include pr-blink;
-  @include pr-box;
-  @include pr-btn;
-  @include pr-card;
-  @include pr-img;
-  @include pr-loading;
-  @include pr-selector;
-  @include pr-separator;
-  @include pr-table;
+  @include gui-blink;
+  @include gui-box;
+  @include gui-btn;
+  @include gui-card;
+  @include gui-img;
+  @include gui-loading;
+  @include gui-selector;
+  @include gui-separator;
+  @include gui-table;
 
 }
