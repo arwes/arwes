@@ -1,24 +1,51 @@
+# gitignore
+
+##
+## BASE
+##
+
 node_modules
+jspm_packages
+bower_components
 logs
 pids
 lib-cov
 coverage
-build/Release
-test
-demo
-doc
-vendor
+nbproject
 
 *.log
 *.pid
 *.seed
 
-.gitignore
-.npmignore
-.editorconfig
-.jshintrc
+*~
+*#
 .grunt
 .lock-wscript
+.tmp
+.sass-cache
+.DS_STORE
+.netbeans
+.idea
+.npm
+.node_history
+.node_repl_history
+.vagrant
+.eslintcache
+
+Thumbs.db
+dump.rdb
+npm-debug.log
+
+##
+## PROJECT
+##
+
+demos
+.editorconfig
+.eslintignore
+.eslintrc
 gulpfile.js
 karma.conf.js
-.travis.yml
+styleguide.config.js
+webpack.base.js
+webpack.config.js
