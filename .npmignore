@@ -44,8 +44,10 @@ demos
 .editorconfig
 .eslintignore
 .eslintrc
+.babelrc
 gulpfile.js
 karma.conf.js
 styleguide.config.js
 webpack.base.js
-webpack.config.js
+webpack.demos.js
+demos.js
