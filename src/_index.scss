@@ -1,0 +1,22 @@
+@import './settings';
+
+@import '../vendor/normalize';
+
+@import './design/general';
+@import './design/typography';
+@import './design/table';
+@import './design/media';
+@import './design/form';
+
+@import './components/Frame/index';
+@import './components/Line/index';
+@import './components/Button/index';
+@import './components/Image/index';
+@import './components/Card/index';
+@import './components/Input/index';
+@import './components/Select/index';
+@import './components/Loading/index';
+
+@mixin gui-all () {
+  @include normalize();
+}
