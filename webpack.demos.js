@@ -25,7 +25,7 @@ module.exports = Object.assign({}, webpackBase, {
     app3: './demos/app3/index.js',
   },
   output: {
-    path: './demos/',
+    path: './demos/js/',
     filename: '[name].js'
   },
   devtool: dev ? 'inline-source-map' : undefined,

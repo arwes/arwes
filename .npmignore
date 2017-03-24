@@ -46,6 +46,7 @@ demos
 .eslintrc
 .babelrc
 gulpfile.js
+gulpfile.demos.js
 karma.conf.js
 styleguide.config.js
 webpack.base.js

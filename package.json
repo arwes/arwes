@@ -22,12 +22,17 @@
   "homepage": "https://github.com/romelperez/prhone-gui",
   "main": "dist/index.js",
   "scripts": {
-    "bundle": "rimraf ./dist/* && npm run bundle-js && npm run bundle-css",
-    "bundle-js": "babel js --out-dir dist",
-    "bundle-css": "NODE_ENV=production gulp sass",
     "test": "karma start karma.conf.js",
+    "docs": "styleguidist build",
+    "bundle": "rimraf ./dist/* && npm run bundle-js && npm run bundle-css",
+    "bundle-js": "NODE_ENV=production babel js --out-dir dist",
+    "bundle-css": "NODE_ENV=production gulp sass",
     "demos": "node demos.js",
-    "demos-build": "webpack --config webpack.demos.js"
+    "demos-build": "npm run demos-js && npm run demos-css",
+    "demos-js": "NODE_ENV=production webpack --config webpack.demos.js",
+    "demos-js:watch": "webpack --config webpack.demos.js -w",
+    "demos-css": "NODE_ENV=production gulp --gulpfile gulpfile.demos.js sass",
+    "demos-css:watch": "gulp --gulpfile gulpfile.demos.js"
   },
   "peerDependencies": {
     "react": "*",
@@ -64,14 +69,19 @@
     "gulp-util": "^3.0.7",
     "karma": "^1.5.0",
     "karma-chai": "^0.1.0",
+    "karma-chai-sinon": "^0.1.5",
     "karma-mocha": "^1.3.0",
     "karma-mocha-reporter": "^2.2.3",
     "karma-phantomjs-launcher": "^1.0.4",
+    "karma-sinon": "^1.0.5",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.3",
     "mocha": "^3.2.0",
     "node-sass": "^3.8.0",
+    "react-styleguidist": "^4.6.3",
     "rimraf": "^2.6.1",
+    "sinon": "^2.1.0",
+    "sinon-chai": "^2.9.0",
     "webpack": "^1.14.0"
   }
 }
