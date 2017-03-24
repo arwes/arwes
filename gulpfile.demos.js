@@ -8,9 +8,8 @@ const sourcemaps = require('gulp-sourcemaps');
 const postcss = require('gulp-postcss');
 const livereload = require('gulp-livereload');
 
-const dev = process.env.NODE_ENV !== 'production';
-
 const settings = {
+  dev: process.env.NODE_ENV !== 'production',
   sass: {
     includePaths: ['./'],
     files: ['./demos/**/*.scss'],
@@ -25,7 +24,7 @@ const postcssList = [
   ]})
 ];
 
-if (!dev) {
+if (!settings.dev) {
   postcssList.push(cssnano({
      safe: true
   }));
@@ -35,20 +34,20 @@ gulp.task('sass', function () {
   return gulp.
     src(settings.sass.files).
     pipe(
-      gif(dev, sourcemaps.init())
+      gif(settings.dev, sourcemaps.init())
     ).
     pipe(
       sass({
         includePaths: settings.sass.includePaths,
-        outputStyle: dev ? 'nested' : 'compressed',
-        sourceMap: dev,
-        sourceComments: dev,
-        sourceMapEmbed: dev
+        outputStyle: settings.dev ? 'nested' : 'compressed',
+        sourceMap: settings.dev,
+        sourceComments: settings.dev,
+        sourceMapEmbed: settings.dev
       }).
       on('error', sass.logError)
     ).
     pipe(
-      gif(dev, sourcemaps.write(undefined, { sourceRoot: null }))
+      gif(settings.dev, sourcemaps.write(undefined, { sourceRoot: null }))
     ).
     pipe(
       postcss(postcssList)
@@ -60,12 +59,12 @@ gulp.task('sass', function () {
       gulp.dest(settings.sass.output, { overwrite: true })
     ).
     pipe(
-      gif(dev, livereload())
+      gif(settings.dev, livereload())
     );
 });
 
 gulp.task('watch', function () {
-  if (dev) {
+  if (settings.dev) {
     livereload.listen();
     gulp.watch(settings.sass.files, ['sass']);
   }
