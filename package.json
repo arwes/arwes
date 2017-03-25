@@ -1,7 +1,7 @@
 {
-  "name": "prhone-gui",
-  "version": "1.0.0-beta",
-  "description": "Sci-Fi Graphical User Interface",
+  "name": "arwes",
+  "version": "1.0.0-alpha",
+  "description": "Sci-Fi Graphical User Interface Framework",
   "keywords": [
     "gui",
     "ui",
@@ -12,14 +12,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/romelperez/prhone-gui.git"
+    "url": "git+https://github.com/romelperez/arwes.git"
   },
   "bugs": {
-    "url": "https://github.com/romelperez/prhone-gui/issues"
+    "url": "https://github.com/romelperez/arwes/issues"
   },
   "author": "Romel Pérez (romelperez.com)",
   "license": "MIT",
-  "homepage": "https://github.com/romelperez/prhone-gui",
+  "homepage": "https://github.com/romelperez/arwes",
   "main": "dist/index.js",
   "scripts": {
     "test": "npm run test-lint && npm run test-unit",

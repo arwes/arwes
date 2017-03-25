@@ -52,3 +52,8 @@ styleguide.config.js
 webpack.base.js
 webpack.demos.js
 demos.js
+
+# TODO:
+src
+dist
+vendor
