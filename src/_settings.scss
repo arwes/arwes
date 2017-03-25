@@ -1,0 +1,71 @@
+/**
+ * Normalize and typography
+ */
+
+// The font size set on the root html element.
+$base-font-size: 16px !default;
+
+// The base line height determines the basic unit of vertical rhythm.
+$base-line-height: 1.5 !default;
+
+// The length unit in which to output vertical rhythm values.
+// Supported values: px, em, rem.
+$base-unit: 'rem' !default;
+
+// Fonts.
+$base-font-family: Roboto, sans-serif !default;
+$base-header-font-family: Roboto, sans-serif !default;
+$base-code-font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace !default;
+
+// The font sizes for h1-h6.
+$h1-font-size: 2    * $base-font-size !default;
+$h2-font-size: 1.5  * $base-font-size !default;
+$h3-font-size: 1.17 * $base-font-size !default;
+$h4-font-size: 1    * $base-font-size !default;
+$h5-font-size: 0.83 * $base-font-size !default;
+$h6-font-size: 0.67 * $base-font-size !default;
+
+// The amount lists and blockquotes are indented.
+$indent-amount: 2rem !default;
+
+
+/**
+ * Colors
+ */
+
+$color-variation: 10% !default;
+
+// default
+$color1: #fff !default;
+$color1-light: lighten($color1, $color-variation) !default;
+$color1-dark: darken($color1, $color-variation) !default;
+
+// header
+$color2: #fff !default;
+$color2-light: lighten($color2, $color-variation) !default;
+$color2-dark: darken($color2, $color-variation) !default;
+
+// primary
+$color3: #fff !default;
+
+// alert
+$color-alert: #f00 !default;
+
+// success
+$color-success: #0f0 !default;
+
+// disabled
+$color-disabled: #777 !default;
+
+$color-background1: #000 !default; // body
+$color-background2: #000 !default; // header
+$color-background3: #000 !default; // content
+$color-background4: #000 !default; // emergent
+
+// TODO: Controls (forms...)?
+
+/**
+ * Box
+ */
+$global-margin: 1rem !default;
+$global-padding: 1rem !default;
