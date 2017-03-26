@@ -1,0 +1,44 @@
+@mixin placeholder-color ($color) {
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: $color;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: $color;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: $color;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: $color;
+  }
+}
+
+@mixin selection-color ($background, $color) {
+  ::selection {
+    background: $background; /* WebKit/Blink Browsers */
+    color: $color;
+  }
+  ::-moz-selection {
+    background: $background; /* Gecko Browsers */
+    color: $color;
+  }
+}
+
+@mixin scrollbar-design ($background, $border-color) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background-color: $background;
+  }
+  ::-webkit-scrollbar-track {
+    //
+  }
+  ::-webkit-scrollbar-thumb {
+    border: 1px solid $border-color;
+    cursor: pointer;
+
+    &:hover {
+      border-color: lighten($border-color, 20%);
+    }
+  }
+}

@@ -1,12 +1,11 @@
 @import './settings';
+@import './mixins';
 
 @import '../vendor/normalize';
 
-@import './design/general';
-@import './design/typography';
-@import './design/table';
-@import './design/media';
-@import './design/form';
+@import './base/general';
+@import './base/table';
+@import './base/form';
 
 @import './components/Frame/index';
 @import './components/Line/index';
@@ -19,4 +18,5 @@
 
 @mixin arwes-all () {
   @include normalize();
+  @include arwes-general();
 }

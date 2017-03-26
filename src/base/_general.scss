@@ -1,0 +1,100 @@
+@mixin arwes-general () {
+
+  @include scrollbar-design($color-background1, $color1);
+  @include placeholder-color($color1);
+  @include selection-color($color1, $color-background1);
+
+  html {
+    box-sizing: border-box;
+    line-height: $html-line-height;
+    font-size: $html-font-size;
+  }
+
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+  html, body {
+    background-color: $color-background1;
+    font-family: $body-font-family;
+    color: $color1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 $global-margin;
+    font-family: $head-font-family;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 0 4px rgba($color2, $color-alpha);
+    color: $color2;
+    transition: all $anim-time ease-out;
+  }
+
+  @each $header, $size in $headers-sizes {
+    #{$header} {
+      font-size: $size;
+    }
+  }
+
+  p {
+    margin: 0 0 $global-margin;
+    font-size: $text-font-size;
+  }
+
+  small {
+    //
+  }
+
+  sub, sub {
+    //
+  }
+
+  ul, ol {
+    //
+  }
+  li {
+    //
+  }
+
+  // TODO: Highlight.
+  a {
+    color: $color1;
+    text-shadow: 0 0 4px rgba($color1-light, $color-alpha);
+    transition: all $anim-time ease-out;
+    text-decoration: none;
+
+    &:hover {
+      color: $color1-light;
+    }
+  }
+
+  hr {
+    position: relative;
+    display: block;
+    margin: 0 0 $global-margin;
+    border-style: solid;
+    border-color: $color1-dark;
+    border-width: 0 0 1px;
+
+    &:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: -1px;
+      display: block;
+      width: 3px;
+      height: 3px;
+      background: $color1-dark;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      top: -1px;
+      right: 0;
+      display: block;
+      width: 3px;
+      height: 3px;
+      background: $color1-dark;
+    }
+  }
+}
