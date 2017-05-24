@@ -1,6 +1,6 @@
 {
   "name": "arwes",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-alpha.2",
   "description": "Sci-Fi Graphical User Interface Framework",
   "keywords": [
     "gui",
@@ -40,11 +40,6 @@
     "react": "*",
     "react-dom": "*"
   },
-  "dependencies": {
-    "foundation-sites": "^6.3.0",
-    "lodash": "^4.17.4",
-    "normalize-scss": "^6.0.0"
-  },
   "devDependencies": {
     "autoprefixer": "^6.7.7",
     "babel-cli": "^6.24.0",
@@ -60,6 +55,7 @@
     "eslint": "^3.18.0",
     "eslint-plugin-react": "^6.10.3",
     "express": "^4.15.2",
+    "foundation-sites": "^6.3.1",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-if": "^2.0.2",
