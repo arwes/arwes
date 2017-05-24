@@ -1,0 +1,37 @@
+@mixin arwes-arwes () {
+  .arwes {
+    background-image: url($arwes-resource-background1);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    .arwes__pattern {
+      min-height: 1000px;
+      min-height: 100vh;
+      background-image: url($arwes-resource-pattern1);
+      background-repeat: repeat;
+      background-position: center top;
+      background-attachment: fixed;
+    }
+    .arwes__intern {
+      position: fixed;
+      z-index: 5;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+    .arwes__main {
+      position: relative;
+      z-index: 10;
+    }
+    .arwes__puff {
+      position: absolute;
+      display: block;
+      width: 1px;
+      height: 1px;
+      box-shadow: 0 0 10px 10px rgba($arwes-color1, 0.5);
+      border-radius: 50%;
+    }
+  }
+}

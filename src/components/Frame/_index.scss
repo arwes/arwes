@@ -1,0 +1,105 @@
+@mixin arwes-frame () {
+  .arwes-frame {
+    display: block;
+    margin: $arwes-global-margin auto;
+    width: 100%;
+
+    text-align: left;
+    font-size: 1.125rem;
+
+    .arwes-frame__box {
+      position: relative;
+      border-style: solid;
+      border-color: $arwes-color1;
+      border-width: 1px;
+      box-shadow: 0 0 4px rgba($arwes-color1, $arwes-color-alpha);
+    }
+    .arwes-frame__corner {
+      z-index: 1;
+      position: absolute;
+      border-style: solid;
+      border-color: $arwes-color1;
+    }
+    .arwes-frame__content {
+      z-index: 2;
+      position: relative;
+      background-color: rgba($arwes-color-background2, 0.9);
+    }
+
+    &.arwes-frame--corners1 {
+      padding: 1px;
+
+      .arwes-frame__corner {
+        width: 15px;
+        height: 15px;
+      }
+      .arwes-frame__lt {
+        left: -2px;
+        top: -2px;
+        border-width: 1px 0 0 1px;
+      }
+      .arwes-frame__lb {
+        left: -2px;
+        bottom: -2px;
+        border-width: 0 0 1px 1px;
+      }
+      .arwes-frame__rt {
+        right: -2px;
+        top: -2px;
+        border-width: 1px 1px 0 0;
+      }
+      .arwes-frame__rb {
+        right: -2px;
+        bottom: -2px;
+        border-width: 0 1px 1px 0;
+      }
+    }
+    &.arwes-frame--corners2 {
+      padding: 3px;
+
+      .arwes-frame__corner {
+        width: 30px;
+        height: 30px;
+      }
+      .arwes-frame__lt {
+        left: -3px;
+        top: -3px;
+        border-width: 2px 0 0 2px;
+      }
+      .arwes-frame__lb {
+        left: -3px;
+        bottom: -3px;
+        border-width: 0 0 2px 2px;
+      }
+      .arwes-frame__rt {
+        right: -3px;
+        top: -3px;
+        border-width: 2px 2px 0 0;
+      }
+      .arwes-frame__rb {
+        right: -3px;
+        bottom: -3px;
+        border-width: 0 2px 2px 0;
+      }
+    }
+    &.arwes-frame--extended {
+      margin: 0 auto;
+      max-width: none;
+    }
+    &.arwes-frame--content {
+      .arwes-frame__content {
+        padding: $arwes-global-padding;
+      }
+    }
+    &.arwes-frame--border-down {
+      .arwes-frame__box {
+        border-width: 0 0 4px 0;
+      }
+    }
+    &.arwes-frame--border-up {
+      .arwes-frame__box {
+        border-width: 1px 0 0 0;
+      }
+    }
+  }
+}
