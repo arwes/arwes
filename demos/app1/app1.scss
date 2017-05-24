@@ -1,0 +1,114 @@
+@import 'src/index';
+
+@include arwes-all();
+
+.arwes {
+  background-image: url(/img/background1.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
+  .arwes__pattern {
+    min-height: 1000px;
+    min-height: 100vh;
+    background-image: url(/img/glow.png);
+    background-repeat: repeat;
+    background-position: center top;
+    background-attachment: fixed;
+  }
+  .arwes__intern {
+    position: fixed;
+    z-index: 5;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  .arwes__main {
+    position: relative;
+    z-index: 10;
+  }
+  .arwes__puff {
+    position: absolute;
+    display: block;
+    width: 1px;
+    height: 1px;
+    box-shadow: 0 0 10px 10px rgba($color1, 0.5);
+    border-radius: 50%;
+  }
+}
+
+.box {
+  display: block;
+  margin: #{$global-margin * 2} auto;
+  width: 100%;
+  max-width: 800px;
+
+  border-style: solid;
+  border-color: $color1;
+  border-width: 1px 1px 1px 1px;
+  box-shadow: 0 0 4px rgba($color1, $color-alpha);
+
+  text-align: left;
+  font-size: 1.125rem;
+
+  .box-frame {
+    position: relative;
+  }
+  .box-m {
+    z-index: 1;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-style: solid;
+    border-color: $color1;
+  }
+  .box-lt {
+    left: -3px;
+    top: -3px;
+    border-width: 2px 0 0 2px;
+  }
+  .box-lb {
+    left: -3px;
+    bottom: -3px;
+    border-width: 0 0 2px 2px;
+  }
+  .box-rt {
+    right: -3px;
+    top: -3px;
+    border-width: 2px 2px 0 0;
+  }
+  .box-rb {
+    right: -3px;
+    bottom: -3px;
+    border-width: 0 2px 2px 0;
+  }
+  .box-c {
+    z-index: 2;
+    position: relative;
+    padding: $global-padding;
+    background-color: rgba($color-background2, 0.9);
+  }
+
+  &.box--stretched {
+    margin: 0 auto;
+    max-width: none;
+
+    .box-c {
+      min-height: 100px;
+    }
+  }
+  &.box--down {
+    border-width: 0 0 4px 0;
+  }
+  &.box--up {
+    border-width: 1px 0 0 0;
+  }
+}
+
+img {
+  display: block;
+  margin: 0 0 $global-margin;
+  width: 100%;
+  border: 1px solid $color1-dark;
+}
