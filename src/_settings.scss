@@ -1,10 +1,18 @@
 /**
+ * Resources
+ */
+
+$arwes-resource-background1: '/img/background1.jpg';
+$arwes-resource-pattern1: '/img/glow.png';
+
+
+/**
  * General
  */
 
-$color-accent: 15% !default;
-$anim-time: 200ms !default;
-$color-alpha: 0.75 !default;
+$arwes-color-accent: 15% !default;
+$arwes-anim-time: 200ms !default;
+$arwes-color-alpha: 0.75 !default;
 
 
 /**
@@ -12,40 +20,40 @@ $color-alpha: 0.75 !default;
  */
 
 // primary
-$color1: #26dafd !default;
-$color1-light: lighten($color1, $color-accent) !default;
-$color1-dark: darken($color1, $color-accent) !default;
+$arwes-color1: #26dafd !default;
+$arwes-color1-light: lighten($arwes-color1, $arwes-color-accent) !default;
+$arwes-color1-dark: darken($arwes-color1, $arwes-color-accent) !default;
 
 // secondary
-$color2: #acf9fb !default;
-$color2-light: lighten($color2, $color-accent) !default;
-$color2-dark: darken($color2, $color-accent) !default;
+$arwes-color2: #acf9fb !default;
+$arwes-color2-light: lighten($arwes-color2, $arwes-color-accent) !default;
+$arwes-color2-dark: darken($arwes-color2, $arwes-color-accent) !default;
 
 // tertiary
-$color3: #fff !default;
-$color3-light: lighten($color3, $color-accent) !default;
-$color3-dark: darken($color3, $color-accent) !default;
+$arwes-color3: #fff !default;
+$arwes-color3-light: lighten($arwes-color3, $arwes-color-accent) !default;
+$arwes-color3-dark: darken($arwes-color3, $arwes-color-accent) !default;
 
 // alert
-$color-alert: #ff1a1d !default;
-$color-alert-light: lighten($color-alert, $color-accent) !default;
-$color-alert-dark: darken($color-alert, $color-accent) !default;
+$arwes-color-alert: #ff1a1d !default;
+$arwes-color-alert-light: lighten($arwes-color-alert, $arwes-color-accent) !default;
+$arwes-color-alert-dark: darken($arwes-color-alert, $arwes-color-accent) !default;
 
 // success
-$color-success: #0f0 !default;
-$color-success-light: lighten($color-success, $color-accent) !default;
-$color-success-dark: darken($color-success, $color-accent) !default;
+$arwes-color-success: #0f0 !default;
+$arwes-color-success-light: lighten($arwes-color-success, $arwes-color-accent) !default;
+$arwes-color-success-dark: darken($arwes-color-success, $arwes-color-accent) !default;
 
 // disabled
-$color-disabled: #999 !default;
-$color-disabled-light: lighten($color-disabled, $color-accent) !default;
-$color-disabled-dark: darken($color-disabled, $color-accent) !default;
+$arwes-color-disabled: #999 !default;
+$arwes-color-disabled-light: lighten($arwes-color-disabled, $arwes-color-accent) !default;
+$arwes-color-disabled-dark: darken($arwes-color-disabled, $arwes-color-accent) !default;
 
 // backgrounds
-$color-background1: #021114 !default;
-$color-background2: lighten($color-background1, 1.5%) !default;
-$color-background3: lighten($color-background1, 3%) !default;
-$color-background4: lighten($color-background1, 4.5%) !default;
+$arwes-color-background1: #021114 !default;
+$arwes-color-background2: lighten($arwes-color-background1, 1.5%) !default;
+$arwes-color-background3: lighten($arwes-color-background1, 3%) !default;
+$arwes-color-background4: lighten($arwes-color-background1, 4.5%) !default;
 
 // TODO: Controls (forms...)?
 
@@ -54,11 +62,12 @@ $color-background4: lighten($color-background1, 4.5%) !default;
  * Typography
  */
 
+// Normalize
 $html-line-height: 1.5 !default;
 $html-font-size: 16px !default;
 $text-font-size: 1.3125rem !default;
 
-$headers-sizes: (
+$arwes-headers-sizes: (
   h1: 2rem,
   h2: 1.75rem,
   h3: 1.5rem,
@@ -67,14 +76,14 @@ $headers-sizes: (
   h6: 1rem,
 ) !default;
 
-$head-font-family: 'Electrolize', sans-serif !default;
-$body-font-family: 'Titillium Web', sans-serif !default;
-$code-font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace !default;
+$arwes-head-font-family: 'Electrolize', sans-serif !default;
+$arwes-body-font-family: 'Titillium Web', sans-serif !default;
+$arwes-code-font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace !default;
 
 
 /**
  * Box
  */
 
-$global-margin: 20px !default;
-$global-padding: 20px !default;
+$arwes-global-margin: 20px !default;
+$arwes-global-padding: 20px !default;

@@ -4,19 +4,34 @@
 @import '../vendor/normalize';
 
 @import './base/general';
-@import './base/table';
 @import './base/form';
 
-@import './components/Frame/index';
-@import './components/Line/index';
+@import './components/Arwes/index';
 @import './components/Button/index';
-@import './components/Image/index';
 @import './components/Card/index';
+@import './components/Frame/index';
+@import './components/Image/index';
 @import './components/Input/index';
-@import './components/Select/index';
+@import './components/Line/index';
 @import './components/Loading/index';
+@import './components/Select/index';
+@import './components/Table/index';
 
 @mixin arwes-all () {
+
   @include normalize();
+
   @include arwes-general();
+  @include arwes-form();
+
+  @include arwes-arwes();
+  @include arwes-button();
+  @include arwes-card();
+  @include arwes-frame();
+  @include arwes-image();
+  @include arwes-input();
+  @include arwes-line();
+  @include arwes-loading();
+  @include arwes-select();
+  @include arwes-table();
 }

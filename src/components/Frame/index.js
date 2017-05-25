@@ -10,7 +10,6 @@ export default class Frame extends Component {
   render () {
 
     const {
-      extended,
       border,
       corners,
       content,
@@ -20,7 +19,6 @@ export default class Frame extends Component {
     } = this.props;
 
     const cls = classNames('arwes-frame', {
-      'arwes-frame--extended': extended,
       'arwes-frame--content': content,
       'arwes-frame--border-up': border === 'up',
       'arwes-frame--border-down': border === 'down',
@@ -28,13 +26,15 @@ export default class Frame extends Component {
       'arwes-frame--corners2': corners === 2,
     }, className);
 
+    const clsCorners = classNames('arwes-frame__corner', `arwes-frame__corner--l${corners}`);
+
     return (
       <div className={cls} {...rest}>
         <div className='arwes-frame__box'>
-          { !!corners && <div className='arwes-frame__corner arwes-frame__lt'></div> }
-          { !!corners && <div className='arwes-frame__corner arwes-frame__lb'></div> }
-          { !!corners && <div className='arwes-frame__corner arwes-frame__rt'></div> }
-          { !!corners && <div className='arwes-frame__corner arwes-frame__rb'></div> }
+          { !!corners && <div className={`${clsCorners} arwes-frame__lt`}></div> }
+          { !!corners && <div className={`${clsCorners} arwes-frame__lb`}></div> }
+          { !!corners && <div className={`${clsCorners} arwes-frame__rt`}></div> }
+          { !!corners && <div className={`${clsCorners} arwes-frame__rb`}></div> }
           <div className='arwes-frame__content'>
             {children}
           </div>
@@ -45,13 +45,11 @@ export default class Frame extends Component {
 }
 
 Frame.propTypes = {
-  extended: PropTypes.bool,
   border: PropTypes.oneOf(['up', 'down']),
   corners: PropTypes.number,
 };
 
 Frame.defaultProps = {
-  extended: false,
   border: null,
   corners: 0,
 };

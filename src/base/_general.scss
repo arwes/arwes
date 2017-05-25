@@ -1,8 +1,8 @@
 @mixin arwes-general () {
 
-  @include scrollbar-design($color-background1, $color1);
-  @include placeholder-color($color1);
-  @include selection-color($color1, $color-background1);
+  @include arwes-scrollbar-design($arwes-color-background1, $arwes-color1);
+  @include arwes-placeholder-color($arwes-color1);
+  @include arwes-selection-color($arwes-color1, $arwes-color-background1);
 
   html {
     box-sizing: border-box;
@@ -15,30 +15,36 @@
   }
 
   html, body {
-    background-color: $color-background1;
-    font-family: $body-font-family;
-    color: $color1;
+    background-color: $arwes-color-background1;
+    font-family: $arwes-body-font-family;
+    color: $arwes-color1;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    margin: 0 0 $global-margin;
-    font-family: $head-font-family;
+    margin: 0 0 $arwes-global-margin;
+    font-family: $arwes-head-font-family;
     font-weight: bold;
     text-transform: uppercase;
-    text-shadow: 0 0 4px rgba($color2, $color-alpha);
-    color: $color2;
-    transition: all $anim-time ease-out;
+    text-shadow: 0 0 4px rgba($arwes-color2, $arwes-color-alpha);
+    color: $arwes-color2;
+    transition: all $arwes-anim-time ease-out;
   }
 
-  @each $header, $size in $headers-sizes {
-    #{$header} {
-      font-size: $size;
+  @each $arwes-header, $arwes-size in $arwes-headers-sizes {
+    #{$arwes-header} {
+      font-size: $arwes-size;
+    }
+    * #{$arwes-header}:last-child {
+      margin-bottom: 0;
     }
   }
 
   p {
-    margin: 0 0 $global-margin;
+    margin: 0 0 $arwes-global-margin;
     font-size: $text-font-size;
+  }
+  * p:last-child {
+    margin-bottom: 0;
   }
 
   small {
@@ -58,22 +64,22 @@
 
   // TODO: Highlight.
   a {
-    color: $color1;
-    text-shadow: 0 0 4px rgba($color1-light, $color-alpha);
-    transition: all $anim-time ease-out;
+    color: $arwes-color1;
+    text-shadow: 0 0 4px rgba($arwes-color1-light, $arwes-color-alpha);
+    transition: all $arwes-anim-time ease-out;
     text-decoration: none;
 
     &:hover {
-      color: $color1-light;
+      color: $arwes-color1-light;
     }
   }
 
   hr {
     position: relative;
     display: block;
-    margin: 0 0 $global-margin;
+    margin: 0 0 $arwes-global-margin;
     border-style: solid;
-    border-color: $color1-dark;
+    border-color: $arwes-color1-dark;
     border-width: 0 0 1px;
 
     &:before {
@@ -84,7 +90,7 @@
       display: block;
       width: 3px;
       height: 3px;
-      background: $color1-dark;
+      background: $arwes-color1-dark;
     }
     &:after {
       content: "";
@@ -94,7 +100,7 @@
       display: block;
       width: 3px;
       height: 3px;
-      background: $color1-dark;
+      background: $arwes-color1-dark;
     }
   }
 }

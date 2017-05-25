@@ -1,4 +1,4 @@
-@mixin placeholder-color ($color) {
+@mixin arwes-placeholder-color ($color) {
   ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: $color;
   }
@@ -13,7 +13,7 @@
   }
 }
 
-@mixin selection-color ($background, $color) {
+@mixin arwes-selection-color ($background, $color) {
   ::selection {
     background: $background; /* WebKit/Blink Browsers */
     color: $color;
@@ -24,7 +24,7 @@
   }
 }
 
-@mixin scrollbar-design ($background, $border-color) {
+@mixin arwes-scrollbar-design ($background, $border-color) {
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
