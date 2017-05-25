@@ -12,7 +12,10 @@ const settings = {
   dev: process.env.NODE_ENV !== 'production',
   sass: {
     includePaths: ['./'],
-    files: ['./demos/**/*.scss'],
+    files: [
+      './src/**/*.scss',
+      './demos/**/*.scss'
+    ],
     output: './demos/css',
   }
 };
