@@ -1,16 +1,28 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import docReady from 'doc-ready';
 
 export default class Arwes extends Component {
 
   constructor () {
     super(...arguments);
+    this.state = {
+      ready: false,
+    };
+  }
+
+  componentDidMount () {
+    docReady(() => {
+      this.setState({ ready: true });
+    });
   }
 
   render () {
 
     const { className, children, ...rest } = this.props;
-    const cls = classNames('arwes', className);
+    const cls = classNames('arwes', {
+      'arwes--ready': this.state.ready,
+    }, className);
 
     return (
       <div className={cls} {...rest}>

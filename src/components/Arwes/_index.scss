@@ -1,6 +1,5 @@
 @mixin arwes-arwes () {
   .arwes {
-    background-image: url($arwes-resource-background1);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -8,7 +7,6 @@
     .arwes__pattern {
       min-height: 1000px;
       min-height: 100vh;
-      background-image: url($arwes-resource-pattern1);
       background-repeat: repeat;
       background-position: center top;
       background-attachment: fixed;
@@ -33,6 +31,22 @@
       height: 1px;
       box-shadow: 0 0 10px 10px rgba($arwes-color1, 0.5);
       border-radius: 50%;
+    }
+
+    &.arwes--ready {
+      background-image: url($arwes-resource-background1);
+
+      @media screen and (min-width: $arwes-breakpoint-medium) {
+        background-image: url($arwes-resource-background1-medium);
+      }
+
+      @media screen and (min-width: $arwes-breakpoint-large) {
+        background-image: url($arwes-resource-background1-large);
+      }
+
+      .arwes__pattern {
+        background-image: url($arwes-resource-pattern1);
+      }
     }
   }
 }

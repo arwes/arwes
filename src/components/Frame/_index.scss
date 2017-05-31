@@ -7,16 +7,18 @@
 
     .arwes-frame__box {
       position: relative;
+      border-width: 1px;
       border-style: solid;
       border-color: $arwes-color1;
-      border-width: 1px;
       box-shadow: 0 0 4px rgba($arwes-color1, $arwes-color-alpha);
+      transition: all $arwes-anim-time ease-out;
     }
     .arwes-frame__corner {
       z-index: 1;
       position: absolute;
       border-style: solid;
       border-color: $arwes-color1;
+      transition: all $arwes-anim-time ease-out;
 
       &.arwes-frame__corner--l1 {
         width: 15px;
@@ -74,6 +76,7 @@
       position: relative;
       background-color: rgba($arwes-color-background2, 0.9);
       overflow: hidden;
+      transition: all $arwes-anim-time ease-out;
     }
 
     &.arwes-frame--corners1 {

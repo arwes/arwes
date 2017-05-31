@@ -2,8 +2,10 @@
  * Resources
  */
 
-$arwes-resource-background1: '/img/background1.jpg';
-$arwes-resource-pattern1: '/img/glow.png';
+$arwes-resource-background1: '/img/background.jpg' !default;
+$arwes-resource-background1-medium: '/img/background-medium.jpg' !default;
+$arwes-resource-background1-large: '/img/background-large.jpg' !default;
+$arwes-resource-pattern1: '/img/glow.png' !default;
 
 
 /**
@@ -87,3 +89,11 @@ $arwes-code-font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", T
 
 $arwes-global-margin: 20px !default;
 $arwes-global-padding: 20px !default;
+
+
+/**
+ * Dimentions
+ */
+
+$arwes-breakpoint-medium: 640px !default;
+$arwes-breakpoint-large: 1024px !default;

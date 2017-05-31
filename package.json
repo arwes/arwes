@@ -40,6 +40,9 @@
     "react": "*",
     "react-dom": "*"
   },
+  "dependencies": {
+    "doc-ready": "^1.0.4"
+  },
   "devDependencies": {
     "autoprefixer": "^6.7.7",
     "babel-cli": "^6.24.0",
