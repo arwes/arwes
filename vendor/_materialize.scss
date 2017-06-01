@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+@import "materialize/variables";
+@import "materialize/grid";
+
+@mixin materialize () {
+  @include materialize-grid();
+}
