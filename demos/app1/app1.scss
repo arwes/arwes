@@ -4,10 +4,6 @@
 
 .arwes-frame {
   margin-bottom: $arwes-global-margin;
-
-  h3 {
-    margin: 0;
-  }
 }
 * .arwes-frame:last-child {
   margin-bottom: 0;
@@ -17,6 +13,14 @@
   display: block;
   margin: 0 auto 20px;
   max-width: 800px;
+}
+h1.title {
+  margin: 20px 0 10px;
+  line-height: 1;
+}
+.content-title {
+  @extend h3;
+  margin: 0 0 #{$arwes-global-margin / 2};
 }
 .header,
 .footer {
