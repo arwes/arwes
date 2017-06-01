@@ -21,7 +21,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    margin: 0 0 $arwes-global-margin;
+    margin: 0 0 $arwes-margin;
     font-family: $arwes-head-font-family;
     font-weight: bold;
     text-transform: uppercase;
@@ -40,7 +40,7 @@
   }
 
   p {
-    margin: 0 0 $arwes-global-margin;
+    margin: 0 0 $arwes-margin;
     font-size: $text-font-size;
   }
   * p:last-child {
@@ -77,7 +77,7 @@
   hr {
     position: relative;
     display: block;
-    margin: 0 0 $arwes-global-margin;
+    margin: 0 0 $arwes-margin;
     border-style: solid;
     border-color: $arwes-color1-dark;
     border-width: 0 0 1px;

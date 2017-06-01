@@ -36,11 +36,11 @@
     &.arwes--ready {
       background-image: url($arwes-resource-background1);
 
-      @media screen and (min-width: $arwes-breakpoint-medium) {
+      @media #{$small-and-up} {
         background-image: url($arwes-resource-background1-medium);
       }
 
-      @media screen and (min-width: $arwes-breakpoint-large) {
+      @media #{$medium-and-up} {
         background-image: url($arwes-resource-background1-large);
       }
 

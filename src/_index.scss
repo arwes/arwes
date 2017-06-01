@@ -2,9 +2,11 @@
 @import './mixins';
 
 @import '../vendor/normalize';
+@import '../vendor/materialize';
 
 @import './base/general';
 @import './base/form';
+@import './base/grid';
 
 @import './components/Arwes/index';
 @import './components/Button/index';
@@ -20,9 +22,11 @@
 @mixin arwes-all () {
 
   @include normalize();
+  @include materialize();
 
   @include arwes-general();
   @include arwes-form();
+  @include arwes-grid();
 
   @include arwes-arwes();
   @include arwes-button();
