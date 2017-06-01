@@ -69,9 +69,20 @@ $arwes-color-background4: lighten($arwes-color-background1, 4.5%) !default;
 // Normalize
 $html-line-height: 1.5 !default;
 $html-font-size: 16px !default;
-$text-font-size: 1.3125rem !default;
+$text-font-size: 1.125rem !default;
+
+$arwes-text-font-size-medium: 1.3125rem !default;
 
 $arwes-headers-sizes: (
+  h1: 1.75rem,
+  h2: 1.5rem,
+  h3: 1.3125rem,
+  h4: 1.125rem,
+  h5: 1.0625rem,
+  h6: 1rem,
+) !default;
+
+$arwes-headers-sizes-medium: (
   h1: 2rem,
   h2: 1.75rem,
   h3: 1.5rem,

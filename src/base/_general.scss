@@ -34,8 +34,13 @@
     #{$arwes-header} {
       font-size: $arwes-size;
     }
-    * #{$arwes-header}:last-child {
-      margin-bottom: 0;
+  }
+
+  @media #{$medium-and-up} {
+    @each $arwes-header, $arwes-size in $arwes-headers-sizes-medium {
+      #{$arwes-header} {
+        font-size: $arwes-size;
+      }
     }
   }
 
@@ -45,6 +50,12 @@
   }
   * p:last-child {
     margin-bottom: 0;
+  }
+
+  @media #{$medium-and-up} {
+    p {
+      font-size: $arwes-text-font-size-medium;
+    }
   }
 
   small {
@@ -64,13 +75,13 @@
 
   // TODO: Highlight.
   a {
-    color: $arwes-color1;
-    text-shadow: 0 0 4px rgba($arwes-color1-light, $arwes-color-alpha);
+    color: $arwes-color2;
+    text-shadow: 0 0 4px rgba($arwes-color2-light, $arwes-color-alpha);
     transition: all $arwes-anim-time ease-out;
     text-decoration: none;
 
     &:hover {
-      color: $arwes-color1-light;
+      color: $arwes-color2-light;
     }
   }
 

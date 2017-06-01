@@ -36,11 +36,11 @@
     &.arwes--ready {
       background-image: url($arwes-resource-background1);
 
-      @media #{$small-and-up} {
+      @media #{$medium-and-up} {
         background-image: url($arwes-resource-background1-medium);
       }
 
-      @media #{$medium-and-up} {
+      @media #{$large-and-up} {
         background-image: url($arwes-resource-background1-large);
       }
 
