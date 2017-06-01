@@ -18,6 +18,7 @@
       position: absolute;
       border-style: solid;
       border-color: $arwes-color1;
+      box-shadow: 0 0 4px rgba($arwes-color1, $arwes-color-alpha);
       transition: all $arwes-anim-time ease-out;
 
       &.arwes-frame__corner--l1 {
