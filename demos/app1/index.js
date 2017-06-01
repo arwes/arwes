@@ -36,22 +36,38 @@ const data = [{
 function App () {
   return (
     <Arwes>
-      <Frame content border='down' className='header' component='header'>
-        <div className='container'>
-          <h1 className='title'>Romel Pérez</h1>
+      <Frame border='down' className='header' component='header'>
+        <div className='row'>
+          <div className='col s12'>
+            <h1 className='title'>Romel Pérez</h1>
+          </div>
         </div>
       </Frame>
-      <div className='container'>
-        { data.reverse().map(item => (
-          <Frame key={item.id} content corners={2} component='article'>
-            <h1 className='content-title'>{item.name}</h1>
-            <p>{item.description}</p>
+      <div className='row'>
+        <div className='col s12'>
+          <Frame content>
+            <p>The page is a demo of the frame containers components to layout content in an application implementing Arwes.</p>
           </Frame>
-        )) }
+          <Frame content corners={1}>
+            <p>If you want to create more customized containers you should use the frame inside a wrapper component with the custom designs.</p>
+          </Frame>
+        </div>
       </div>
-      <Frame content border='up' className='footer' component='footer'>
-        <div className='container'>
-          <p>Copyright 2017 Romel Pérez</p>
+      <div className='row'>
+        <div className='col s12'>
+          { data.reverse().map(item => (
+            <Frame key={item.id} content corners={2} component='article'>
+              <h1 className='content-title'>{item.name}</h1>
+              <p>{item.description}</p>
+            </Frame>
+          )) }
+        </div>
+      </div>
+      <Frame border='up' className='footer' component='footer'>
+        <div className='row'>
+          <div className='col s12'>
+            <p>Copyright 2017 Romel Pérez</p>
+          </div>
         </div>
       </Frame>
     </Arwes>
