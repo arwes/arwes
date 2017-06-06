@@ -9,8 +9,8 @@
       position: relative;
       border-width: 1px;
       border-style: solid;
-      border-color: $arwes-color1;
-      box-shadow: 0 0 4px rgba($arwes-color1, $arwes-color-alpha);
+      border-color: $arwes-color1-dark;
+      box-shadow: 0 0 4px rgba($arwes-color1-dark, $arwes-color-alpha);
       transition: all $arwes-anim-time ease-out;
     }
     .arwes-frame__corner {
@@ -93,11 +93,13 @@
     }
     &.arwes-frame--border-down {
       .arwes-frame__box {
+        border-color: $arwes-color1;
         border-width: 0 0 4px 0;
       }
     }
     &.arwes-frame--border-up {
       .arwes-frame__box {
+        border-color: $arwes-color1;
         border-width: 1px 0 0 0;
       }
     }
@@ -106,7 +108,7 @@
       color: $arwes-color-success;
 
       .arwes-frame__box {
-        border-color: $arwes-color-success;
+        border-color: $arwes-color-success-dark;
         box-shadow: 0 0 4px rgba($arwes-color-success, $arwes-color-alpha);
       }
       .arwes-frame__corner {
@@ -123,7 +125,7 @@
       color: $arwes-color-alert;
 
       .arwes-frame__box {
-        border-color: $arwes-color-alert;
+        border-color: $arwes-color-alert-dark;
         box-shadow: 0 0 4px rgba($arwes-color-alert, $arwes-color-alpha);
       }
       .arwes-frame__corner {
@@ -140,7 +142,7 @@
       color: $arwes-color-disabled;
 
       .arwes-frame__box {
-        border-color: $arwes-color-disabled;
+        border-color: $arwes-color-disabled-dark;
         box-shadow: 0 0 4px rgba($arwes-color-disabled, $arwes-color-alpha);
       }
       .arwes-frame__corner {

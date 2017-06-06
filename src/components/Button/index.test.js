@@ -9,9 +9,9 @@ const shallowEl = (props, children) => (
 describe('Components', function () {
   describe('Button', function () {
 
-    it('Element is "button.button"', function () {
+    it('Element is "button.arwes-button"', function () {
       const el = shallowEl();
-      expect(el.is('button.button')).to.be.true;
+      expect(el.is('button.arwes-button')).to.be.true;
     });
 
   });
