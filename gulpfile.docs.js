@@ -14,9 +14,9 @@ const settings = {
     includePaths: ['./'],
     files: [
       './src/**/*.scss',
-      './demos/**/*.scss'
+      './docs/**/*.scss'
     ],
-    output: './demos/css',
+    output: './docs/css',
   }
 };
 

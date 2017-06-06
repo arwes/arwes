@@ -6,7 +6,7 @@
 
 > I am currently working on this project.
 
-Sci-Fi Graphical User Interface Framework.
+Front-end framework to build web apps user interfaces based on sci-fi and futuristic concepts.
 
 ## License
 

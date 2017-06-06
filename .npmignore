@@ -40,15 +40,15 @@ npm-debug.log
 ## PROJECT
 ##
 
-demos
+docs
 .editorconfig
 .eslintignore
 .eslintrc
 .babelrc
-demos.js
+docs.js
 build-css.js
-gulpfile.demos.js
+gulpfile.docs.js
 karma.conf.js
 styleguide.config.js
 webpack.base.js
-webpack.demos.js
+webpack.docs.js

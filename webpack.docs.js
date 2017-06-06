@@ -20,12 +20,12 @@ if (!dev) {
 
 module.exports = Object.assign({}, webpackBase, {
   entry: {
-    app1: './demos/app1/index.js',
-    app2: './demos/app2/index.js',
-    app3: './demos/app3/index.js',
+    app1: './docs/app1/index.js',
+    app2: './docs/app2/index.js',
+    app3: './docs/app3/index.js',
   },
   output: {
-    path: './demos/js/',
+    path: './docs/js/',
     filename: '[name].js'
   },
   devtool: dev ? 'inline-source-map' : undefined,

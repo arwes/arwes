@@ -1,9 +1,11 @@
 const express = require('express');
+const morgan = require('morgan');
 
 const app = express();
 const port = process.env.PORT || 7000;
 
-app.use(express.static(`${process.cwd()}/demos`));
+app.use(morgan('common'));
+app.use(express.static(`${process.cwd()}/docs`));
 app.use(express.static(`${process.cwd()}/dist`));
 
 app.listen(port, function (err) {
