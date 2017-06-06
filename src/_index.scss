@@ -6,6 +6,7 @@
 
 @import './base/general';
 @import './base/media';
+@import './base/code';
 @import './base/form';
 @import './base/grid';
 
@@ -27,6 +28,7 @@
 
   @include arwes-general();
   @include arwes-media();
+  @include arwes-code();
   @include arwes-form();
   @include arwes-grid();
 

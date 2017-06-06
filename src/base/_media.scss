@@ -5,4 +5,20 @@
     margin: 0 auto $arwes-margin;
     max-width: 100%;
   }
+
+  figure {
+    display: block;
+    margin: 0 auto $arwes-margin;
+  }
+  figcaption {
+    display: block;
+    margin: 0;
+    text-align: center;
+  }
+
+  video {
+    display: block;
+    border: 1px solid $arwes-color1-dark;
+    margin: 0 auto $arwes-margin;
+  }
 }

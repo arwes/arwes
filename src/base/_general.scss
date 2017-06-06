@@ -36,37 +36,30 @@
     }
   }
 
-  @media #{$medium-and-up} {
-    @each $arwes-header, $arwes-size in $arwes-headers-sizes-medium {
-      #{$arwes-header} {
-        font-size: $arwes-size;
-      }
-    }
-  }
-
   p {
     margin: 0 0 $arwes-margin;
-    font-size: $text-font-size;
   }
   * p:last-child {
     margin-bottom: 0;
   }
 
-  @media #{$medium-and-up} {
-    p {
-      font-size: $arwes-text-font-size-medium;
-    }
-  }
-
   small {
-    // TODO:
+    font-size: 80%;
   }
 
-  sub, sub {
-    // TODO:
+  cite {
+    font-style: italic;
+  }
+
+  blockquote {
+    display: block;
+    border-left: 4px solid $arwes-color1;
+    margin: 0 0 $arwes-margin $arwes-margin;
+    padding: 0 0 0 #{$arwes-padding / 2};
   }
 
   dl, ul, ol {
+    display: block;
     margin: 0 0 $arwes-margin $arwes-margin;
     padding: 0;
 
@@ -88,15 +81,16 @@
   }
 
   ul {
-    margin-left: #{$arwes-margin + 10px};
+    margin-left: #{$arwes-margin + ($arwes-padding / 2)};
 
     li {
+      display: block;
       list-style: none;
       padding-left: #{$arwes-padding};
     }
     li:before {
       position: relative;
-      left: -10px;
+      left: #{- $arwes-padding / 2};
       margin-left: #{-$arwes-padding};
       content: ">>";
       color: $arwes-color1-light;
@@ -109,12 +103,6 @@
 
     ol {
       margin-left: 0;
-    }
-  }
-
-  @media #{$medium-and-up} {
-    dl, ul, ol {
-      font-size: $arwes-text-font-size-medium;
     }
   }
 
@@ -156,6 +144,19 @@
       width: 3px;
       height: 3px;
       background: $arwes-color1-dark;
+    }
+  }
+
+  @media #{$medium-and-up} {
+
+    @each $arwes-header, $arwes-size in $arwes-headers-sizes-medium {
+      #{$arwes-header} {
+        font-size: $arwes-size;
+      }
+    }
+
+    p, dl, ul, ol, blockquote {
+      font-size: $arwes-text-font-size-medium;
     }
   }
 }
