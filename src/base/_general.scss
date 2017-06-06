@@ -25,8 +25,8 @@
     font-family: $arwes-head-font-family;
     font-weight: bold;
     text-transform: uppercase;
-    text-shadow: 0 0 4px rgba($arwes-color2, $arwes-color-alpha);
-    color: $arwes-color2;
+    text-shadow: 0 0 4px rgba($arwes-color1-light, $arwes-color-alpha);
+    color: $arwes-color1-light;
     transition: all $arwes-anim-time ease-out;
   }
 
@@ -59,24 +59,68 @@
   }
 
   small {
-    //
+    // TODO:
   }
 
   sub, sub {
-    //
+    // TODO:
   }
 
-  ul, ol {
-    //
-  }
-  li {
-    //
+  dl, ul, ol {
+    margin: 0 0 $arwes-margin $arwes-margin;
+    padding: 0;
+
+    & dl,
+    & ul,
+    & ol {
+      margin-bottom: 0;
+    }
   }
 
-  // TODO: Highlight.
+  dl {
+    dt {
+      font-style: italic;
+      font-weight: bold;
+    }
+    dd {
+      margin-left: $text-font-size;
+    }
+  }
+
+  ul {
+    margin-left: #{$arwes-margin + 10px};
+
+    li {
+      list-style: none;
+      padding-left: #{$arwes-padding};
+    }
+    li:before {
+      position: relative;
+      left: -10px;
+      margin-left: #{-$arwes-padding};
+      content: ">>";
+      color: $arwes-color1-light;
+    }
+  }
+
+  ol {
+    margin-left: $arwes-padding;
+    padding-left: $text-font-size;
+
+    ol {
+      margin-left: 0;
+    }
+  }
+
+  @media #{$medium-and-up} {
+    dl, ul, ol {
+      font-size: $arwes-text-font-size-medium;
+    }
+  }
+
   a {
     color: $arwes-color2;
-    text-shadow: 0 0 4px rgba($arwes-color2-light, $arwes-color-alpha);
+    text-shadow: 0 0 4px rgba($arwes-color2, $arwes-color-alpha);
     transition: all $arwes-anim-time ease-out;
     text-decoration: none;
 

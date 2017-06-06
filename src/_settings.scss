@@ -14,7 +14,7 @@ $arwes-resource-pattern1: '/img/glow.png' !default;
 
 $arwes-margin: 20px !default;
 $arwes-padding: 20px !default;
-$arwes-color-accent: 15% !default;
+$arwes-color-accent: 20% !default;
 $arwes-color-alpha: 0.75 !default;
 $arwes-anim-time: 100ms !default;
 
@@ -39,7 +39,7 @@ $arwes-color3-light: lighten($arwes-color3, $arwes-color-accent) !default;
 $arwes-color3-dark: darken($arwes-color3, $arwes-color-accent) !default;
 
 // alert
-$arwes-color-alert: #ff1a1d !default;
+$arwes-color-alert: #f00 !default;
 $arwes-color-alert-light: lighten($arwes-color-alert, $arwes-color-accent) !default;
 $arwes-color-alert-dark: darken($arwes-color-alert, $arwes-color-accent) !default;
 
@@ -58,8 +58,6 @@ $arwes-color-background1: #021114 !default;
 $arwes-color-background2: lighten($arwes-color-background1, 1.5%) !default;
 $arwes-color-background3: lighten($arwes-color-background1, 3%) !default;
 $arwes-color-background4: lighten($arwes-color-background1, 4.5%) !default;
-
-// TODO: Controls (forms...)?
 
 
 /**

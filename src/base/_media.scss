@@ -1,0 +1,8 @@
+@mixin arwes-media () {
+  img {
+    display: block;
+    border: 1px solid $arwes-color1-dark;
+    margin: 0 auto $arwes-margin;
+    max-width: 100%;
+  }
+}

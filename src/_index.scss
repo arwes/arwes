@@ -5,6 +5,7 @@
 @import '../vendor/materialize';
 
 @import './base/general';
+@import './base/media';
 @import './base/form';
 @import './base/grid';
 
@@ -25,6 +26,7 @@
   @include materialize();
 
   @include arwes-general();
+  @include arwes-media();
   @include arwes-form();
   @include arwes-grid();
 

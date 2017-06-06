@@ -14,6 +14,7 @@ export default class Frame extends Component {
       border,
       corners,
       content,
+      theme,
       className,
       children,
       ...rest
@@ -31,7 +32,7 @@ export default class Frame extends Component {
 
     return React.createElement(
       component,
-      { className: cls, ...rest },
+      { className: cls, 'data-theme': theme, ...rest },
       <div className='arwes-frame__box'>
         { !!corners && <div className={`${clsCorners} arwes-frame__lt`}></div> }
         { !!corners && <div className={`${clsCorners} arwes-frame__lb`}></div> }
@@ -48,11 +49,13 @@ export default class Frame extends Component {
 Frame.propTypes = {
   component: PropTypes.string,
   border: PropTypes.oneOf(['up', 'down']),
+  theme: PropTypes.oneOf(['success', 'alert', 'disabled']),
   corners: PropTypes.number,
 };
 
 Frame.defaultProps = {
   component: 'div',
   border: null,
+  theme: null,
   corners: 0,
 };

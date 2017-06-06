@@ -101,5 +101,56 @@
         border-width: 1px 0 0 0;
       }
     }
+
+    &[data-theme='success'] {
+      color: $arwes-color-success;
+
+      .arwes-frame__box {
+        border-color: $arwes-color-success;
+        box-shadow: 0 0 4px rgba($arwes-color-success, $arwes-color-alpha);
+      }
+      .arwes-frame__corner {
+        border-color: $arwes-color-success;
+        box-shadow: 0 0 4px rgba($arwes-color-success, $arwes-color-alpha);
+      }
+      h1, h2, h3, h4, h5, h6 {
+        color: $arwes-color-success-light;
+        text-shadow: 0 0 4px rgba($arwes-color-success-light, $arwes-color-alpha);
+      }
+    }
+
+    &[data-theme='alert'] {
+      color: $arwes-color-alert;
+
+      .arwes-frame__box {
+        border-color: $arwes-color-alert;
+        box-shadow: 0 0 4px rgba($arwes-color-alert, $arwes-color-alpha);
+      }
+      .arwes-frame__corner {
+        border-color: $arwes-color-alert;
+        box-shadow: 0 0 4px rgba($arwes-color-alert, $arwes-color-alpha);
+      }
+      h1, h2, h3, h4, h5, h6 {
+        color: $arwes-color-alert-light;
+        text-shadow: 0 0 4px rgba($arwes-color-alert-light, $arwes-color-alpha);
+      }
+    }
+
+    &[data-theme='disabled'] {
+      color: $arwes-color-disabled;
+
+      .arwes-frame__box {
+        border-color: $arwes-color-disabled;
+        box-shadow: 0 0 4px rgba($arwes-color-disabled, $arwes-color-alpha);
+      }
+      .arwes-frame__corner {
+        border-color: $arwes-color-disabled;
+        box-shadow: 0 0 4px rgba($arwes-color-disabled, $arwes-color-alpha);
+      }
+      h1, h2, h3, h4, h5, h6 {
+        color: $arwes-color-disabled-light;
+        text-shadow: 0 0 4px rgba($arwes-color-disabled-light, $arwes-color-alpha);
+      }
+    }
   }
 }

@@ -19,8 +19,9 @@ export default class Arwes extends Component {
 
   render () {
 
-    const { className, children, ...rest } = this.props;
+    const { resources, className, children, ...rest } = this.props;
     const cls = classNames('arwes', {
+      'arwes--resources': resources,
       'arwes--ready': this.state.ready,
     }, className);
 
@@ -37,6 +38,10 @@ export default class Arwes extends Component {
   }
 }
 
-Arwes.propTypes = {};
+Arwes.propTypes = {
+  resources: PropTypes.bool,
+};
 
-Arwes.defaultProps = {};
+Arwes.defaultProps = {
+  resources: false,
+};
