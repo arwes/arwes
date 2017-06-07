@@ -1,0 +1,17 @@
+@import 'src/index';
+
+@include arwes-all();
+
+.app-content {
+  margin: 40px auto;
+}
+
+.row {
+  max-width: 800px;
+}
+
+.footer {
+  .row {
+    margin: 20px auto;
+  }
+}
