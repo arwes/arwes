@@ -38,7 +38,7 @@
     cursor: pointer;
 
     &:hover {
-      border-color: lighten($border-color, 20%);
+      border-color: lighten($border-color, $arwes-color-accent);
     }
   }
 }

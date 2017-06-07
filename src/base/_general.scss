@@ -53,9 +53,23 @@
 
   blockquote {
     display: block;
-    border-left: 4px solid $arwes-color1;
+    border-left: 4px solid $arwes-color1-light;
     margin: 0 0 $arwes-margin $arwes-margin;
     padding: 0 0 0 #{$arwes-padding / 2};
+    color: $arwes-color1-light;
+
+    &[data-theme='alert'] {
+      border-color: $arwes-color-alert-light;
+      color: $arwes-color-alert-light;
+    }
+    &[data-theme='success'] {
+      border-color: $arwes-color-success-light;
+      color: $arwes-color-success-light;
+    }
+    &[data-theme='disabled'] {
+      border-color: $arwes-color-disabled-light;
+      color: $arwes-color-disabled-light;
+    }
   }
 
   dl, ul, ol {
@@ -155,7 +169,7 @@
       }
     }
 
-    p, dl, ul, ol, blockquote {
+    p, dl, ul, ol, blockquote, figcaption {
       font-size: $arwes-text-font-size-medium;
     }
   }
