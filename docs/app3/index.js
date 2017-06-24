@@ -11,7 +11,8 @@ function App () {
           <Frame content corners={2}>
             <h1>Application structure</h1>
             <p>Demo of structure of an application and the organization of the components.</p>
-            <p>Copyright 2017 <a href="http://romelperez.com">Romel Pérez</a></p>
+            <hr />
+            <p>Copyright 2017 <a href="https://romelperez.com">Romel Pérez</a></p>
           </Frame>
         </div>
       </div>

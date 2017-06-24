@@ -9,56 +9,65 @@ function App () {
       <Frame border='down' className='header' component='header'>
         <div className='row'>
           <div className='col s12'>
-            <h1 className='title'>Romel Pérez</h1>
+            <h1 className='title'>Arwes Project</h1>
           </div>
         </div>
       </Frame>
       <div className='row'>
         <div className='col s12'>
           <Frame content>
-            <p>The page is a demo of the frame containers components to layout content in an application implementing Arwes.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis laboris nisi ut aliquip ex. Duis aute irure.</p>
           </Frame>
           <Frame content corners={1}>
-            <p>If you want to create more customized containers you should use the frame inside a wrapper component with the custom designs.</p>
+            <p>Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa mollit anim id est laborum ea commodo consequat.</p>
           </Frame>
         </div>
       </div>
       <div className='row'>
         <div className='col s12'>
           <Frame content corners={2} component='article'>
-            <h1 className='content-title'>BucaramangaJS Website</h1>
-            <p>Official website for the meetup community BucaramangaJS, an intention to share the JavaScript knownledge and expertise with the Bucaramanga community.</p>
+            <h1 className='content-title'>Velit esse cillum dolore</h1>
+            <p>Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa mollit anim id est laborum ea commodo consequat.</p>
           </Frame>
           <Frame content corners={2} component='article'>
-            <h1 className='content-title'>Asiste</h1>
-            <p>Web platform to manage social and business events. It lets you control users, organizations, their portfolios and conversions in the event. You can also contact them publicly. It is a Progressive Web Application.</p>
+          <h1 className='content-title'>Consectetur adipisicing elit</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis laboris nisi ut aliquip ex. Duis aute irure.</p>
           </Frame>
           <Frame content corners={2} component='article'>
-            <h1 className='content-title'>Calumet Realtime</h1>
-            <p>Real-Time communication framework for the project COMA of Grupo Calumet. RealTime is a web server based on Node.js, Express.js, Socket.io and Waterline to integrate with the existing platform of users.</p>
+            <h1 className='content-title'>Dolor in reprehenderit in voluptate</h1>
+            <p>Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa mollit anim id est laborum ea commodo consequat.</p>
           </Frame>
           <Frame content corners={2} component='article'>
-            <h1 className='content-title'>Chrome DevTools</h1>
-            <p>Talk about the Developer Tools (DevTools) of the browser Google Chrome for programmers and designers working with web technologies. Inspect the DOM, track errors, review resources and much more.</p>
+          <h1 className='content-title'>Quis laboris nisi ut aliquip</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis laboris nisi ut aliquip ex. Duis aute irure.</p>
           </Frame>
           <Frame content corners={2} component='article' theme='success'>
-            <h1 className='content-title'>React / Redux Examples</h1>
-            <p>A serie of examples to learn the tools based on React and Redux libraries. The examples were used in workshops to teach and learn about the React ecosystem.</p>
+            <h1 className='content-title'>Est laborum ea commodo consequat</h1>
+            <p>Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa mollit anim id est laborum ea commodo consequat.</p>
           </Frame>
           <Frame content corners={2} component='article' theme='alert'>
-            <h1 className='content-title'>Real-Time Web con WebSocket</h1>
-            <p>Talk about real-time applications implementing technologies based on WebSocket, an standard to create simultaneous bidirectional communication in web platforms.</p>
+          <h1 className='content-title'>Ut enim ad minim veniam, quis laboris nisi ut aliquip ex</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis laboris nisi ut aliquip ex. Duis aute irure.</p>
           </Frame>
           <Frame content corners={2} component='article' theme='disabled'>
-            <h1 className='content-title'>Katherine Navarro Website</h1>
-            <p>Katherine Navarro's personal website with basic information and social media links.</p>
+            <h1 className='content-title'>Velit esse cillum dolore eu fugiat nulla pariatur</h1>
+            <p>Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa mollit anim id est laborum ea commodo consequat.</p>
           </Frame>
         </div>
       </div>
       <Frame border='up' className='footer' component='footer'>
         <div className='row'>
           <div className='col s12'>
-            <p>Copyright 2017 Romel Pérez</p>
+            <p>Copyright 2017 <a href="https://romelperez.com">Romel Pérez</a></p>
           </div>
         </div>
       </Frame>
