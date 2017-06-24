@@ -23,11 +23,12 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "TRAVIS=true npm run test-lint && TRAVIS=true npm run test-unit",
-    "test-lint": "eslint --cache --quiet ./js",
+    "test-lint": "eslint --cache --quiet ./src",
     "test-unit": "karma start karma.conf.js",
     "bundle": "rimraf ./dist/* && npm run bundle-js && npm run bundle-css",
     "bundle-js": "NODE_ENV=production babel src --out-dir dist --ignore index.test.js",
     "bundle-css": "NODE_ENV=production node build-css.js",
+    "docs": "NODE_ENV=production styleguidist build",
     "docs-deploy": "pm2 startOrRestart deploy.json --env production",
     "docs-server": "node docs.js",
     "docs-build": "npm run docs-js && npm run docs-css",
@@ -86,9 +87,10 @@
     "react-addons-test-utils": "^15.5.1",
     "react-dom": "^15.5.4",
     "react-test-renderer": "^15.5.4",
+    "react-styleguidist": "^5.4.8",
     "rimraf": "^2.6.1",
     "sinon": "^2.1.0",
     "sinon-chai": "^2.9.0",
-    "webpack": "^1.14.0"
+    "webpack": "^2.6.1"
   }
 }

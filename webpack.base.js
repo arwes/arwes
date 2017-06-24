@@ -1,20 +1,25 @@
 module.exports = {
   resolve: {
-    fallback: process.cwd()
+    modules: [
+      './',
+      'node_modules'
+    ],
   },
+  devtool: 'inline-source-map',
   module: {
-    loaders: [{
-      loader: 'babel',
-      test: /\.js$/,
-      include: process.cwd(),
+    rules: [{
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            'react',
+            'es2015',
+            'stage-1'
+          ]
+        }
+      },
+      test: /.js$/,
       exclude: /(node_modules)/,
-      query: {
-        presets: [
-          'react',
-          'es2015',
-          'stage-1'
-        ]
-      }
     }]
   }
 };

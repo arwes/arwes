@@ -13,12 +13,6 @@ const webpackConf = Object.assign({}, webpackBase, {
   }
 });
 
-// Delete `include` property in loaders because karma is already in charge of
-// that task.
-webpackConf.module.loaders.forEach(loader => {
-  delete loader.include;
-});
-
 module.exports = function (config) {
   config.set({
 

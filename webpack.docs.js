@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const path = require('path');
 const webpackBase = require('./webpack.base.js');
 
 const dev = process.env.NODE_ENV !== 'production';
@@ -25,7 +26,7 @@ module.exports = Object.assign({}, webpackBase, {
     app3: './docs/app3/index.js',
   },
   output: {
-    path: './docs/js/',
+    path: path.resolve(process.cwd(), './docs/js/'),
     filename: '[name].js'
   },
   devtool: dev ? 'inline-source-map' : undefined,
