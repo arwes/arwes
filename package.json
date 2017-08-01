@@ -29,9 +29,9 @@
     "bundle-js": "NODE_ENV=production babel src --out-dir dist --ignore index.test.js",
     "bundle-css": "NODE_ENV=production node build-css.js",
     "docs": "NODE_ENV=production styleguidist build",
-    "docs-deploy": "pm2 startOrRestart deploy.json --env production",
+    "docs-deploy": "git pull origin master && pm2 startOrRestart deploy.json --env production",
     "docs-server": "node docs.js",
-    "docs-build": "npm run docs-js && npm run docs-css",
+    "docs-build": "NODE_ENV=production npm run docs-js && NODE_ENV=production npm run docs-css",
     "docs-js": "NODE_ENV=production webpack --config webpack.docs.js",
     "docs-js:watch": "webpack --config webpack.docs.js -w",
     "docs-css": "NODE_ENV=production gulp --gulpfile gulpfile.docs.js sass",
@@ -42,7 +42,8 @@
     "react-dom": "*"
   },
   "dependencies": {
-    "doc-ready": "^1.0.4"
+    "doc-ready": "^1.0.4",
+    "prop-types": "*"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.7",

@@ -55,7 +55,7 @@
     "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2,
     "block-scoped-var": [0],
-    "brace-style": [2, "stroustrup", {"allowSingleLine": true}],
+    "brace-style": [0],
     "camelcase": [0],
     "comma-dangle": [0],
     "comma-spacing": [2],
