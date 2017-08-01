@@ -4,11 +4,17 @@ import Arwes from 'src/components/Arwes';
 import Frame from 'src/components/Frame';
 
 function App () {
+
+  const resources = {
+    bg: '/img/background-large.jpg',
+    pattern: '/img/glow.png',
+  };
+
   return (
-    <Arwes resources>
+    <Arwes resources={resources}>
       <div className='row app-content'>
         <div className='col s12'>
-          <Frame content corners={2}>
+          <Frame border content corners={2} level={1}>
 
             <h1>Awesome random title</h1>
             <p>Lorem ipsum <abbr title='A random title'>dolor sit amet</abbr>, <b>consectetur adipisicing elit</b>, sed do eiusmod <a href='#'>tempor incididunt ut labore et</a> dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse <b>cillum dolore eu fugiat nulla pariatur</b>. Excepteur sint occaecat cupidatat <i>non proident, sunt in culpa</i> qui officia deserunt mollit anim id est laborum.</p>
