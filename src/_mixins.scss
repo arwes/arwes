@@ -17,10 +17,12 @@
   ::selection {
     background: $background; /* WebKit/Blink Browsers */
     color: $color;
+    text-shadow: none;
   }
   ::-moz-selection {
     background: $background; /* Gecko Browsers */
     color: $color;
+    text-shadow: none;
   }
 }
 

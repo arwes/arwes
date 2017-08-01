@@ -1,5 +1,6 @@
 @mixin arwes-arwes () {
   .arwes {
+    display: block;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -34,21 +35,13 @@
     }
 
     &.arwes--ready {
-      &.arwes--resources {
-        background-image: url($arwes-resource-background1);
-
-        @media #{$medium-and-up} {
-          background-image: url($arwes-resource-background1-medium);
-        }
-
-        @media #{$large-and-up} {
-          background-image: url($arwes-resource-background1-large);
-        }
-
-        .arwes__pattern {
-          background-image: url($arwes-resource-pattern1);
-        }
-      }
+      //
+    }
+    &.arwes--anim {
+      //
+    }
+    &.arwes--resources {
+      //
     }
   }
 }
