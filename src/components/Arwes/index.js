@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import docReady from 'doc-ready';
+import getDims from '../../tools/get-dims';
 import responsive from '../../tools/responsive';
+
+// How often to create new puffs. Should be greater than 4 seconds.
+const ARWES_PUFFS_INTERVAL = 5000;
 
 /**
  * Application container.
@@ -11,9 +15,8 @@ export default class Arwes extends Component {
 
   constructor () {
     super(...arguments);
+
     this.state = {
-      bg: null,
-      pattern: null,
       ready: false,
     };
   }
@@ -22,13 +25,12 @@ export default class Arwes extends Component {
 
     docReady(() => this.setState({ ready: true }));
 
-    this.onUpdateBG();
+    this.puffInterval = setInterval(this.onPuffs, ARWES_PUFFS_INTERVAL);
   }
 
-  componentDidUpdate (prevProps) {
-    if (prevProps.resources !== this.props.resources) {
-      this.onupdate();
-    }
+  componentWillUnmount () {
+    clearInterval(this.puffInterval);
+    clearTimeout(this.puffTimeout);
   }
 
   render () {
@@ -39,16 +41,31 @@ export default class Arwes extends Component {
       'arwes--resources': resources,
       'arwes--anim': anim,
     }, className);
-    const { pattern } = resources || {};
 
-    const bg = this.state.bg;
-    const bgStyle = bg && { backgroundImage: `url(${bg})` };
-    const patternStyle = pattern && { backgroundImage: `url(${pattern})` };
+    const { pattern: patternImage, bg } = resources || {};
+
+    let patternStyle;
+    if (this.state.ready && patternImage) {
+      patternStyle = { backgroundImage: `url(${patternImage})` };
+    }
+
+    let bgImage;
+    let bgStyle;
+    if (typeof bg === 'string') {
+      bgImage = bg;
+    } else if (bg) {
+      const dims = responsive.get();
+      bgImage = dims.small ? bg.small : dims.medium ? bg.medium : bg.large;
+    }
+    if (this.state.ready && bgImage) {
+      bgStyle = { backgroundImage: `url(${bgImage})` };
+    }
 
     return (
       <div className={cls} style={bgStyle} {...rest}>
         <div className="arwes__pattern" style={patternStyle}>
-          <div className="arwes__intern"></div>
+          <div className="arwes__intern" ref={el => (this.elIntern = el)}>
+          </div>
           <div className="arwes__main">
             {children}
           </div>
@@ -58,25 +75,43 @@ export default class Arwes extends Component {
   }
 
   /**
-   * Update the background image based on viewport and provided resources.
+   * Create a random set of puffs on the back of the container.
    */
-  onUpdateBG () {
+  onPuffs = () => {
 
-    const { resources } = this.props;
-    let bgs = resources && resources.bg;
-
-    responsive.off(this.onBgChange);
-
-    if (bgs) {
-      if (typeof bgs === 'string') {
-        this.setState({ bg: bgs });
-      } else {
-        this.onBgChange = responsive.on(dims => {
-          const bg = dims.small ? bgs.small : dims.medium ? bgs.medium : bgs.large;
-          this.setState({ bg });
-        });
-      }
+    let puffs = [];
+    for (let i = 0; i < 10; i++) {
+      puffs.push(this.createPuff());
     }
+
+    puffs.forEach(puff => this.elIntern.appendChild(puff));
+
+    this.puffTimeout = setTimeout(() => {
+      puffs.forEach(puff => puff.remove());
+    }, ARWES_PUFFS_INTERVAL - 100);
+  }
+
+  /**
+   * Create a puff with random valid properties.
+   * @return  {DOMElement}
+   */
+  createPuff () {
+
+    const el = document.createElement('div');
+    el.setAttribute('class', 'arwes__puff');
+
+    if (Math.round(Math.random())) {
+      el.setAttribute('class', 'arwes__puff arwes__puff--1');
+    }
+
+    const time = 1000 + Math.round(Math.random() * 3000);
+    el.style.animationDuration = time + 'ms';
+
+    const { width, height } = getDims();
+    el.style.left = (50 + Math.round(Math.random() * width - 100)) + 'px';
+    el.style.top = (100 + Math.round(Math.random() * height - 200)) + 'px';
+
+    return el;
   }
 }
 

@@ -1,8 +1,8 @@
 @mixin arwes-general () {
 
-  @include arwes-scrollbar-design($arwes-color-background1, $arwes-color1);
-  @include arwes-placeholder-color($arwes-color1);
-  @include arwes-selection-color($arwes-color1, $arwes-color-background1);
+  @include arwes-scrollbar-design($arwes-color-background0, $arwes-color0);
+  @include arwes-placeholder-color($arwes-color0);
+  @include arwes-selection-color($arwes-color0, $arwes-color-background0);
 
   html {
     box-sizing: border-box;
@@ -15,9 +15,9 @@
   }
 
   html, body {
-    background-color: $arwes-color-background1;
+    background-color: $arwes-color-background0;
     font-family: $arwes-body-font-family;
-    color: $arwes-color1;
+    color: $arwes-color0;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -25,8 +25,8 @@
     font-family: $arwes-head-font-family;
     font-weight: bold;
     text-transform: uppercase;
-    text-shadow: 0 0 4px rgba($arwes-color1-light, $arwes-color-alpha);
-    color: $arwes-color1-light;
+    text-shadow: 0 0 4px rgba($arwes-color0-light, $arwes-color-alpha);
+    color: $arwes-color0-light;
     transition: all $arwes-anim-time ease-out;
   }
 
@@ -53,10 +53,10 @@
 
   blockquote {
     display: block;
-    border-left: 4px solid $arwes-color1-light;
+    border-left: 4px solid $arwes-color0-light;
     margin: 0 0 $arwes-margin $arwes-margin;
     padding: 0 0 0 #{$arwes-padding / 2};
-    color: $arwes-color1-light;
+    color: $arwes-color0-light;
 
     &[data-theme='alert'] {
       border-color: $arwes-color-alert-light;
@@ -107,7 +107,7 @@
       left: #{- $arwes-padding / 2};
       margin-left: #{-$arwes-padding};
       content: ">>";
-      color: $arwes-color1-light;
+      color: $arwes-color0-light;
     }
   }
 
@@ -121,13 +121,13 @@
   }
 
   a {
-    color: $arwes-color2;
-    text-shadow: 0 0 4px rgba($arwes-color2, $arwes-color-alpha);
+    color: $arwes-color1;
+    text-shadow: 0 0 4px rgba($arwes-color1, $arwes-color-alpha);
     transition: all $arwes-anim-time ease-out;
     text-decoration: none;
 
     &:hover {
-      color: $arwes-color2-light;
+      color: $arwes-color1-light;
     }
   }
 
@@ -136,7 +136,7 @@
     display: block;
     margin: 0 0 $arwes-margin;
     border-style: solid;
-    border-color: $arwes-color1-dark;
+    border-color: $arwes-color0-dark;
     border-width: 0 0 1px;
 
     &:before {
@@ -147,7 +147,7 @@
       display: block;
       width: 3px;
       height: 3px;
-      background: $arwes-color1-dark;
+      background: $arwes-color0-dark;
     }
     &:after {
       content: "";
@@ -157,7 +157,7 @@
       display: block;
       width: 3px;
       height: 3px;
-      background: $arwes-color1-dark;
+      background: $arwes-color0-dark;
     }
   }
 

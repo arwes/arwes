@@ -1,6 +1,14 @@
 @mixin arwes-arwes () {
   .arwes {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
     display: block;
+    overflow-y: auto;
+
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -30,8 +38,16 @@
       display: block;
       width: 1px;
       height: 1px;
-      box-shadow: 0 0 10px 10px rgba($arwes-color1, 0.5);
+      background-color: rgba($arwes-color0, 0.5);
+      box-shadow: 0 0 7px 7px rgba($arwes-color0, 0.5);
       border-radius: 50%;
+      opacity: 0;
+      animation: arwes-puff 1000ms ease-out 0s 1;
+
+      &.arwes__puff--1 {
+        box-shadow: 0 0 10px 10px rgba($arwes-color0, 0.5);
+        animation: arwes-puff-1 1000ms ease-out 0s 1;
+      }
     }
 
     &.arwes--ready {
@@ -43,5 +59,33 @@
     &.arwes--resources {
       //
     }
+  }
+}
+
+@keyframes arwes-puff {
+  0% {
+    transform: scale(0.5, 0.5) translate(0, 30px);
+    opacity: 0.25;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5, 1.5) translate(0, -30px);
+    opacity: 0;
+  }
+}
+
+@keyframes arwes-puff-1 {
+  0% {
+    transform: scale(0.5, 0.5) translate(0, 50px);
+    opacity: 0.25;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5, 1.5) translate(0, -50px);
+    opacity: 0;
   }
 }

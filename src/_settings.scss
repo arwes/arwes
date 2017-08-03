@@ -14,19 +14,19 @@ $arwes-anim-time: 100ms !default;
  */
 
 // primary
-$arwes-color1: #26dafd !default;
+$arwes-color0: #26dafd !default;
+$arwes-color0-light: lighten($arwes-color0, $arwes-color-accent) !default;
+$arwes-color0-dark: darken($arwes-color0, $arwes-color-accent) !default;
+
+// secondary
+$arwes-color1: #acf9fb !default;
 $arwes-color1-light: lighten($arwes-color1, $arwes-color-accent) !default;
 $arwes-color1-dark: darken($arwes-color1, $arwes-color-accent) !default;
 
-// secondary
-$arwes-color2: #acf9fb !default;
+// tertiary
+$arwes-color2: #fff !default;
 $arwes-color2-light: lighten($arwes-color2, $arwes-color-accent) !default;
 $arwes-color2-dark: darken($arwes-color2, $arwes-color-accent) !default;
-
-// tertiary
-$arwes-color3: #fff !default;
-$arwes-color3-light: lighten($arwes-color3, $arwes-color-accent) !default;
-$arwes-color3-dark: darken($arwes-color3, $arwes-color-accent) !default;
 
 // alert
 $arwes-color-alert: #f00 !default;
@@ -44,10 +44,10 @@ $arwes-color-disabled-light: lighten($arwes-color-disabled, $arwes-color-accent)
 $arwes-color-disabled-dark: darken($arwes-color-disabled, $arwes-color-accent) !default;
 
 // backgrounds
-$arwes-color-background1: #021114 !default;
-$arwes-color-background2: lighten($arwes-color-background1, 1.5%) !default;
-$arwes-color-background3: lighten($arwes-color-background1, 3%) !default;
-$arwes-color-background4: lighten($arwes-color-background1, 4.5%) !default;
+$arwes-color-background0: #021114 !default;
+$arwes-color-background1: lighten($arwes-color-background0, 1.5%) !default;
+$arwes-color-background2: lighten($arwes-color-background0, 3%) !default;
+$arwes-color-background3: lighten($arwes-color-background0, 4.5%) !default;
 
 
 /**

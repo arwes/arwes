@@ -12,8 +12,8 @@
       z-index: 1;
       position: absolute;
       border-style: solid;
-      border-color: $arwes-color1;
-      box-shadow: 0 0 4px rgba($arwes-color1, $arwes-color-alpha);
+      border-color: $arwes-color0;
+      box-shadow: 0 0 4px rgba($arwes-color0, $arwes-color-alpha);
       transition: all $arwes-anim-time ease-out;
 
       &.arwes-frame__corner--l1 {
@@ -83,7 +83,7 @@
     .arwes-frame__content {
       z-index: 2;
       position: relative;
-      background-color: rgba($arwes-color-background1, 0.9);
+      background-color: rgba($arwes-color-background0, 0.9);
       overflow: hidden;
       transition: all $arwes-anim-time ease-out;
     }
@@ -98,24 +98,24 @@
       .arwes-frame__box {
         border-width: 1px;
         border-style: solid;
-        border-color: $arwes-color1-dark;
-        box-shadow: 0 0 4px rgba($arwes-color1-dark, $arwes-color-alpha);
+        border-color: $arwes-color0-dark;
+        box-shadow: 0 0 4px rgba($arwes-color0-dark, $arwes-color-alpha);
       }
     }
 
     &.arwes-frame--level1 {
       .arwes-frame__content {
-        background-color: rgba($arwes-color-background2, 0.9);
+        background-color: rgba($arwes-color-background1, 0.9);
       }
     }
     &.arwes-frame--level2 {
       .arwes-frame__content {
-        background-color: rgba($arwes-color-background3, 0.9);
+        background-color: rgba($arwes-color-background2, 0.9);
       }
     }
     &.arwes-frame--level3 {
       .arwes-frame__content {
-        background-color: rgba($arwes-color-background4, 0.9);
+        background-color: rgba($arwes-color-background3, 0.9);
       }
     }
 

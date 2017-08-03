@@ -1,7 +1,26 @@
 import settings from '../settings';
 import getDims from './get-dims';
 
-export default {
+const responsive = {
+
+  /**
+   * Get the current responsive stats.
+   * @return {Object} { small: Boolean, medium: Boolean, large: Boolean }
+   */
+  get () {
+
+    const { width } = getDims();
+    const { small, medium } = settings.responsive;
+
+    if (width <= small) {
+      return { small: true };
+    }
+    else if (width <= medium) {
+      return { medium: true };
+    }
+
+    return { large: true };
+  },
 
   /**
    * Register a on resize window callback to know the current browser viewport
@@ -13,19 +32,8 @@ export default {
   on (callback) {
 
     const onChange = function () {
-
-      const { width } = getDims();
-      const { small, medium } = settings.responsive;
-
-      if (width <= small) {
-        callback({ small: true });
-      }
-      else if (width <= medium) {
-        callback({ medium: true });
-      }
-      else {
-        callback({ large: true });
-      }
+      const stats = responsive.get();
+      callback(stats);
     };
 
     window.addEventListener('resize', onChange);
@@ -44,3 +52,5 @@ export default {
   },
 
 };
+
+export default responsive;
