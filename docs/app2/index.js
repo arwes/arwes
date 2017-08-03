@@ -11,7 +11,7 @@ function App () {
   };
 
   return (
-    <Arwes resources={resources}>
+    <Arwes anim resources={resources}>
       <div className='row app-content'>
         <div className='col s12'>
           <Frame border content corners={2} level={1}>

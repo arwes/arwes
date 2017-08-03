@@ -11,7 +11,7 @@ function App () {
   };
 
   return (
-    <Arwes resources={resources}>
+    <Arwes anim resources={resources}>
       <Frame className='header' node='header' border='0 0 4px' level={2}>
         <div className='row'>
           <div className='col s12'>
