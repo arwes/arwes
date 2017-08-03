@@ -12,6 +12,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
@@ -26,6 +30,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+/**
+ * Base container.
+ */
 var Frame = function (_Component) {
   _inherits(Frame, _Component);
 
@@ -39,28 +46,33 @@ var Frame = function (_Component) {
     key: 'render',
     value: function render() {
       var _props = this.props,
-          component = _props.component,
+          node = _props.node,
           border = _props.border,
+          level = _props.level,
           corners = _props.corners,
           content = _props.content,
           theme = _props.theme,
           className = _props.className,
           children = _props.children,
-          rest = _objectWithoutProperties(_props, ['component', 'border', 'corners', 'content', 'theme', 'className', 'children']);
+          rest = _objectWithoutProperties(_props, ['node', 'border', 'level', 'corners', 'content', 'theme', 'className', 'children']);
 
       var cls = (0, _classnames2.default)('arwes-frame', {
         'arwes-frame--content': content,
-        'arwes-frame--border-up': border === 'up',
-        'arwes-frame--border-down': border === 'down',
+        'arwes-frame--border': border,
+        'arwes-frame--level1': level === 1,
+        'arwes-frame--level2': level === 2,
+        'arwes-frame--level3': level === 3,
         'arwes-frame--corners1': corners === 1,
-        'arwes-frame--corners2': corners === 2
+        'arwes-frame--corners2': corners === 2,
+        'arwes-frame--corners3': corners === 3
       }, className);
 
       var clsCorners = (0, _classnames2.default)('arwes-frame__corner', 'arwes-frame__corner--l' + corners);
+      var boxStyle = border && { borderWidth: border === true ? '1px' : border };
 
-      return _react2.default.createElement(component, _extends({ className: cls, 'data-theme': theme }, rest), _react2.default.createElement(
+      return _react2.default.createElement(node, _extends({ className: cls, 'data-theme': theme }, rest), _react2.default.createElement(
         'div',
-        { className: 'arwes-frame__box' },
+        { className: 'arwes-frame__box', style: boxStyle },
         !!corners && _react2.default.createElement('div', { className: clsCorners + ' arwes-frame__lt' }),
         !!corners && _react2.default.createElement('div', { className: clsCorners + ' arwes-frame__lb' }),
         !!corners && _react2.default.createElement('div', { className: clsCorners + ' arwes-frame__rt' }),
@@ -81,15 +93,17 @@ exports.default = Frame;
 
 
 Frame.propTypes = {
-  component: _react.PropTypes.string,
-  border: _react.PropTypes.oneOf(['up', 'down']),
-  theme: _react.PropTypes.oneOf(['success', 'alert', 'disabled']),
-  corners: _react.PropTypes.number
+  node: _propTypes2.default.string,
+  border: _propTypes2.default.oneOfType([_propTypes2.default.bool, _propTypes2.default.string]),
+  level: _propTypes2.default.oneOf([0, 1, 2, 3]),
+  corners: _propTypes2.default.oneOf([0, 1, 2, 3]),
+  theme: _propTypes2.default.oneOf(['success', 'alert', 'disabled'])
 };
 
 Frame.defaultProps = {
-  component: 'div',
+  node: 'div',
   border: null,
-  theme: null,
-  corners: 0
+  level: 1,
+  corners: 0,
+  theme: null
 };
