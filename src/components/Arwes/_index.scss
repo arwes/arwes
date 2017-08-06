@@ -1,37 +1,35 @@
 @mixin arwes-arwes () {
   .arwes {
     position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    left: 0; right: 0;
+    top: 0; bottom: 0;
 
     display: block;
-    overflow-y: auto;
-
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
 
     .arwes__pattern {
-      min-height: 1000px;
-      min-height: 100vh;
+      position: absolute;
+      left: 0; right: 0;
+      top: 0; bottom: 0;
       background-repeat: repeat;
       background-position: center top;
       background-attachment: fixed;
     }
     .arwes__intern {
-      position: fixed;
+      position: absolute;
       z-index: 5;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
+      left: 0; right: 0;
+      top: 0; bottom: 0;
     }
     .arwes__main {
-      position: relative;
+      position: absolute;
       z-index: 10;
-      overflow: hidden;
+      left: 0; right: 0;
+      top: 0; bottom: 0;
+
+      display: block;
+      overflow-y: auto;
     }
     .arwes__puff {
       position: absolute;

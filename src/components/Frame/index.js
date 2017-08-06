@@ -25,9 +25,12 @@ export default class Frame extends Component {
       ...rest
     } = this.props;
 
+    const bVals = border === true ? [1] : Array.isArray(border) ? border.slice(0, 4) : [];
+    const bLength = bVals.length;
     const cls = classNames('arwes-frame', {
       'arwes-frame--content': content,
-      'arwes-frame--border': border,
+      'arwes-frame--border': bLength,
+      'arwes-frame--level-1': level === -1,
       'arwes-frame--level1': level === 1,
       'arwes-frame--level2': level === 2,
       'arwes-frame--level3': level === 3,
@@ -37,7 +40,20 @@ export default class Frame extends Component {
     }, className);
 
     const clsCorners = classNames('arwes-frame__corner', `arwes-frame__corner--l${corners}`);
-    const boxStyle = border && { borderWidth: border === true ? '1px' : border };
+
+    let boxStyle;
+    if (bLength) {
+      const [b1, b2, b3] = bVals;
+      boxStyle = bLength === 1
+        ? [b1, b1, b1, b1]
+        : bLength === 2
+          ? [b1, b2, b1, b2]
+          : bLength === 3
+            ? [b1, b2, b3, b2]
+            : bVals;
+      boxStyle = boxStyle.map(el => el + 'px').join(' ');
+      boxStyle = boxStyle && { borderWidth: boxStyle };
+    }
 
     return React.createElement(
       node,
@@ -59,16 +75,16 @@ Frame.propTypes = {
   node: PropTypes.string,
   border: PropTypes.oneOfType([
     PropTypes.bool,
-    PropTypes.string
+    PropTypes.arrayOf(PropTypes.number)
   ]),
-  level: PropTypes.oneOf([0, 1, 2, 3]),
+  level: PropTypes.oneOf([-1, 0, 1, 2, 3]),
   corners: PropTypes.oneOf([0, 1, 2, 3]),
   theme: PropTypes.oneOf(['success', 'alert', 'disabled']),
 };
 
 Frame.defaultProps = {
   node: 'div',
-  border: null,
+  border: false,
   level: 1,
   corners: 0,
   theme: null,

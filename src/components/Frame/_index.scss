@@ -103,6 +103,11 @@
       }
     }
 
+    &.arwes-frame--level-1 {
+      .arwes-frame__content {
+        background-color: rgba(0,0,0,0);
+      }
+    }
     &.arwes-frame--level1 {
       .arwes-frame__content {
         background-color: rgba($arwes-color-background1, 0.9);
