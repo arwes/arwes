@@ -39,7 +39,8 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-dom": "*"
+    "react-dom": "*",
+    "fecha": "2.x.x"
   },
   "dependencies": {
     "doc-ready": "^1.0.4",
