@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -56,9 +58,12 @@ var Frame = function (_Component) {
           children = _props.children,
           rest = _objectWithoutProperties(_props, ['node', 'border', 'level', 'corners', 'content', 'theme', 'className', 'children']);
 
+      var bVals = border === true ? [1] : Array.isArray(border) ? border.slice(0, 4) : [];
+      var bLength = bVals.length;
       var cls = (0, _classnames2.default)('arwes-frame', {
         'arwes-frame--content': content,
-        'arwes-frame--border': border,
+        'arwes-frame--border': bLength,
+        'arwes-frame--level-1': level === -1,
         'arwes-frame--level1': level === 1,
         'arwes-frame--level2': level === 2,
         'arwes-frame--level3': level === 3,
@@ -68,7 +73,20 @@ var Frame = function (_Component) {
       }, className);
 
       var clsCorners = (0, _classnames2.default)('arwes-frame__corner', 'arwes-frame__corner--l' + corners);
-      var boxStyle = border && { borderWidth: border === true ? '1px' : border };
+
+      var boxStyle = void 0;
+      if (bLength) {
+        var _bVals = _slicedToArray(bVals, 3),
+            b1 = _bVals[0],
+            b2 = _bVals[1],
+            b3 = _bVals[2];
+
+        boxStyle = bLength === 1 ? [b1, b1, b1, b1] : bLength === 2 ? [b1, b2, b1, b2] : bLength === 3 ? [b1, b2, b3, b2] : bVals;
+        boxStyle = boxStyle.map(function (el) {
+          return el + 'px';
+        }).join(' ');
+        boxStyle = boxStyle && { borderWidth: boxStyle };
+      }
 
       return _react2.default.createElement(node, _extends({ className: cls, 'data-theme': theme }, rest), _react2.default.createElement(
         'div',
@@ -94,15 +112,15 @@ exports.default = Frame;
 
 Frame.propTypes = {
   node: _propTypes2.default.string,
-  border: _propTypes2.default.oneOfType([_propTypes2.default.bool, _propTypes2.default.string]),
-  level: _propTypes2.default.oneOf([0, 1, 2, 3]),
+  border: _propTypes2.default.oneOfType([_propTypes2.default.bool, _propTypes2.default.arrayOf(_propTypes2.default.number)]),
+  level: _propTypes2.default.oneOf([-1, 0, 1, 2, 3]),
   corners: _propTypes2.default.oneOf([0, 1, 2, 3]),
   theme: _propTypes2.default.oneOf(['success', 'alert', 'disabled'])
 };
 
 Frame.defaultProps = {
   node: 'div',
-  border: null,
+  border: false,
   level: 1,
   corners: 0,
   theme: null
