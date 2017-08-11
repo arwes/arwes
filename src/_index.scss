@@ -12,7 +12,7 @@
 
 @import './components/Arwes/index';
 @import './components/Button/index';
-@import './components/Card/index';
+@import './components/CardProject/index';
 @import './components/Frame/index';
 @import './components/Image/index';
 @import './components/Input/index';
@@ -34,7 +34,7 @@
 
   @include arwes-arwes();
   @include arwes-button();
-  @include arwes-card();
+  @include arwes-card-project();
   @include arwes-frame();
   @include arwes-image();
   @include arwes-input();
