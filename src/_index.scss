@@ -15,11 +15,7 @@
 @import './components/CardProject/index';
 @import './components/Frame/index';
 @import './components/Image/index';
-@import './components/Input/index';
-@import './components/Line/index';
 @import './components/Loading/index';
-@import './components/Select/index';
-@import './components/Table/index';
 
 @mixin arwes-all () {
 
@@ -37,9 +33,5 @@
   @include arwes-card-project();
   @include arwes-frame();
   @include arwes-image();
-  @include arwes-input();
-  @include arwes-line();
   @include arwes-loading();
-  @include arwes-select();
-  @include arwes-table();
 }
