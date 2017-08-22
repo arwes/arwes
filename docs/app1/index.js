@@ -13,55 +13,21 @@ function App () {
 
   return (
     <Arwes anim resources={resources}>
+
       <Frame className='header' node='header' border={[0, 0, 4]} level={2}>
         <div className='row'>
-          <div className='col s12'>
-            <h1 className='title'>Arwes Project</h1>
+          <div className='col s12 m2'>
+            <img src='/img/photo.jpg' />
+          </div>
+          <div className='col s12 m10'>
+            <h1>Romel Pérez</h1>
+            <p>Software engineering autodidact</p>
           </div>
         </div>
       </Frame>
+
       <div className='row'>
         <div className='col s12'>
-          <CardProject
-            name='Testing in JavaScript with Mocha and Chai'
-            type='talk'
-            stars={1}
-            type={{
-              name: 'Talk',
-              icon: 'account-multiple'
-            }}
-            date={new Date(2017, 6, 20)}
-            lang='es'
-          >
-            Talk and walkthrough about software testing in web applications based in
-            JavaScript with Mocha and Chai. The tutorial is focused on unit testing
-            using the methodology Behaviour-Driven Development (BDD) on Node.js.
-          </CardProject>
-          <CardProject
-            name='Arwes Project'
-            type={{
-              name: 'Code',
-              icon: 'code-array'
-            }}
-            date={new Date(2017, 4, 20)}
-            stars={2}
-          >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis laboris nisi ut aliquip ex. Duis aute irure.
-          </CardProject>
-          <CardProject
-            name='BucaramangaJS Website'
-            type={{
-              name: 'Guide',
-              icon: 'book'
-            }}
-            date={new Date(2017, 3, 20)}
-            stars={3}
-            lang='es'
-          >
-            Official website for the meetup community BucaramangaJS, an intention
-            to share the JavaScript knownledge and expertise with the Bucaramanga community.
-          </CardProject>
           <Frame content border level={0}>
             <h1 className='content-title'>level 0, corners 0</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -84,6 +50,7 @@ function App () {
           </Frame>
         </div>
       </div>
+
       <div className='row'>
         <div className='col s12'>
           <Frame content border corners={2} node='article'>
@@ -108,6 +75,54 @@ function App () {
           </Frame>
         </div>
       </div>
+
+      <div className='row'>
+        <div className='col s12'>
+          <CardProject
+            name='Project, Officia deserunt anim id est laborum'
+            type='talk'
+            stars={1}
+            type={{
+              name: 'Talk',
+              icon: 'account-multiple'
+            }}
+            date={new Date(2017, 6, 20)}
+            lang='es'
+          >
+            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+            in reprehenderit.
+          </CardProject>
+          <CardProject
+            name='Project, Ut enim ad minim veniam'
+            type={{
+              name: 'Code',
+              icon: 'code-array'
+            }}
+            date={new Date(2017, 4, 20)}
+            stars={2}
+          >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis laboris nisi ut aliquip ex. Duis aute irure.
+          </CardProject>
+          <CardProject
+            name='Project, Sunt in culpa qui officia'
+            type={{
+              name: 'Guide',
+              icon: 'book'
+            }}
+            date={new Date(2017, 3, 20)}
+            stars={3}
+            lang='es'
+          >
+            Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
+          </CardProject>
+        </div>
+      </div>
+
       <Frame className='footer' node='footer' border={[1, 0, 0]} level={2}>
         <div className='row'>
           <div className='col s12'>
@@ -115,6 +130,7 @@ function App () {
           </div>
         </div>
       </Frame>
+
     </Arwes>
   );
 }

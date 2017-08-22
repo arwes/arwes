@@ -24,17 +24,26 @@
   .row {
     padding: #{$arwes-padding * 2} 0;
   }
+  img {
+    display: block;
+    float: left;
+    margin: 0 1rem 0 0;
+    height: 70px;
+  }
+  h1 {
+    display: inline-block;
+    margin: 0 0 0.5rem;
+    line-height: 1;
+  }
+  p {
+    margin: 0;
+  }
 }
 
 .footer {
   .row {
     padding: $arwes-padding 0;
   }
-}
-
-h1.title {
-  margin: 0;
-  line-height: 1;
 }
 
 .content-title {
