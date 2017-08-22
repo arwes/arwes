@@ -2,12 +2,11 @@
 
 [![npm version](https://badge.fury.io/js/arwes.svg)](https://badge.fury.io/js/arwes)
 [![Build Status](https://travis-ci.org/romelperez/arwes.svg?branch=master)](https://travis-ci.org/romelperez/arwes)
+[![license](https://img.shields.io/github/license/romelperez/arwes.svg?maxAge=2592000)](./LICENSE)
 [![prhone](https://img.shields.io/badge/prhone-project-1b38a9.svg)](http://romelperez.com)
 
-> I am currently working on this project [here](http://arwes.romelperez.com)
+> This project is currently under development
 
-Front-end framework to build web apps user interfaces based on sci-fi and futuristic concepts.
+Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for Web Apps.
 
-## License
-
-[MIT](./LICENSE)
+[arwes.romelperez.com](http://arwes.romelperez.com)

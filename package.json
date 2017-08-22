@@ -1,12 +1,16 @@
 {
   "name": "arwes",
   "version": "1.0.0-alpha.2",
-  "description": "Front-end framework to build web apps user interfaces based on sci-fi and futuristic concepts",
+  "description": "Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for Web Apps",
   "keywords": [
     "gui",
     "ui",
-    "sci-fi",
+    "interface",
+    "interfaces",
     "futuristic",
+    "sci-fi",
+    "cyberpunk",
+    "high-tech",
     "browser",
     "prhone"
   ],

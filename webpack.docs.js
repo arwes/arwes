@@ -23,7 +23,6 @@ module.exports = Object.assign({}, webpackBase, {
   entry: {
     app1: './docs/app1/index.js',
     app2: './docs/app2/index.js',
-    app3: './docs/app3/index.js',
   },
   output: {
     path: path.resolve(process.cwd(), './docs/js/'),
