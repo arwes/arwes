@@ -22,13 +22,14 @@
 
 .header {
   .row {
-    padding: #{$arwes-padding * 2} 0;
+    padding: #{$arwes-padding * 1.5} 0;
   }
   img {
     display: block;
     float: left;
-    margin: 0 1rem 0 0;
-    height: 70px;
+    margin: 0;
+    height: 60px;
+    border: none;
   }
   h1 {
     display: inline-block;
@@ -37,6 +38,15 @@
   }
   p {
     margin: 0;
+  }
+
+  @media #{$medium-and-up} {
+    .row {
+      padding: #{$arwes-padding * 2} 0;
+    }
+    img {
+      height: 70px;
+    }
   }
 }
 

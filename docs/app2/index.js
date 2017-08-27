@@ -65,7 +65,7 @@ function App () {
             <p>Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             <hr />
 
-            <p>Copyright 2017 <a href="https://romelperez.com">Romel Pérez</a></p>
+            <p>Copyright &copy; 2017 <a href="https://romelperez.com">Romel Pérez</a></p>
 
           </Frame>
         </div>

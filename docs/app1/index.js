@@ -16,12 +16,12 @@ function App () {
 
       <Frame className='header' node='header' border={[0, 0, 4]} level={2}>
         <div className='row'>
-          <div className='col s12 m2'>
-            <img src='/img/photo.jpg' />
+          <div className='col'>
+            <img src='/img/logo.png' />
           </div>
-          <div className='col s12 m10'>
-            <h1>Romel Pérez</h1>
-            <p>Software engineering autodidact</p>
+          <div className='col'>
+            <h1>Arwes</h1>
+            <p>Cyberpunk GUI Framework</p>
           </div>
         </div>
       </Frame>
@@ -126,7 +126,7 @@ function App () {
       <Frame className='footer' node='footer' border={[1, 0, 0]} level={2}>
         <div className='row'>
           <div className='col s12'>
-            <p>Copyright 2017 <a href="https://romelperez.com">Romel Pérez</a></p>
+            <p>Copyright &copy; 2017 <a href="https://romelperez.com">Romel Pérez</a></p>
           </div>
         </div>
       </Frame>
