@@ -8,7 +8,7 @@
  *
  * @return {Object} { Number width, Number height }
  */
-export default function getDims (wMin, hMin, wMax, hMax) {
+export default function (wMin, hMin, wMax, hMax) {
 
   var getSize = function (Name) {
 
