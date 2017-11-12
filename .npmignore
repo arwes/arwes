@@ -40,15 +40,10 @@ npm-debug.log
 ## PROJECT
 ##
 
-docs
+play
+karma.conf.js
+webpack.config.js
 .editorconfig
 .eslintignore
 .eslintrc
 .babelrc
-docs.js
-build-css.js
-gulpfile.docs.js
-karma.conf.js
-styleguide.config.js
-webpack.base.js
-webpack.docs.js

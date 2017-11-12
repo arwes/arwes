@@ -1,17 +1,6 @@
 // Karma configuration
 
-const webpackBase = require('./webpack.base.js');
-
 const isCI = process.env.TRAVIS;
-const webpackConf = Object.assign({}, webpackBase, {
-  devtool: 'inline-source-map',
-  externals: {
-    'cheerio': 'window',
-    'react/addons': true,
-    'react/lib/ExecutionEnvironment': true,
-    'react/lib/ReactContext': true,
-  }
-});
 
 module.exports = function (config) {
   config.set({
@@ -27,6 +16,7 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
+      './node_modules/babel-polyfill/dist/polyfill.min.js',
       'src/**/*.test.js'
     ],
 
@@ -82,7 +72,34 @@ module.exports = function (config) {
 
 
     // Webpack
-    webpack: webpackConf,
+    webpack: {
+      resolve: {
+        modules: ['node_modules']
+      },
+      module: {
+        rules: [{
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                'es2015',
+                'stage-1',
+                'react'
+              ]
+            }
+          },
+          test: /.js$/,
+          exclude: /(node_modules)/,
+        }]
+      },
+      devtool: 'inline-source-map',
+      externals: {
+        'cheerio': 'window',
+        'react/addons': true,
+        'react/lib/ExecutionEnvironment': true,
+        'react/lib/ReactContext': true,
+      }
+    },
     webpackServer: {
       noInfo: true
     },
