@@ -4,7 +4,7 @@ import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 import Navigo from 'navigo';
 
 import * as arwes from '../src';
-import { ThemeProvider } from '../src';
+import { ThemeProvider, createTheme } from '../src';
 import components from './components';
 
 class App extends Component {
@@ -32,17 +32,14 @@ class App extends Component {
   }
 
   render () {
-
-    const { selectedComponentName } = this.state;
-    const selectedComponent = components.find(el => el.name === selectedComponentName);
-
+    const { name, component } = this.getSelected();
     return (
       <div className='play'>
         <div className='play-header'>
           <div className='play-header-title'>Arwes</div>
           <select
             className='play-header-select'
-            value={selectedComponentName}
+            value={name}
             onChange={ev => this.onChange(ev.target.value)}
           >
             <option value=''>-- select --</option>
@@ -53,20 +50,20 @@ class App extends Component {
           </select>
         </div>
         <div className='play-content'>
-          {!selectedComponent && (
+          {!component && (
             <p className='play-content-msg'>Select a component to play with.</p>
           )}
-          {!!selectedComponent && (
-          <LiveProvider
-            noInline
-            code={selectedComponent.code}
-            scope={arwes}
-            className='play-content-live'
-          >
-            <LiveEditor className='play-content-editor' />
-            <LiveError className='play-content-error' />
-            <LivePreview className='play-content-preview' />
-          </LiveProvider>
+          {!!component && (
+            <LiveProvider
+              noInline
+              code={component.code}
+              scope={arwes}
+              className='play-content-live'
+            >
+              <LiveEditor className='play-content-editor' />
+              <LiveError className='play-content-error' />
+              <LivePreview className='play-content-preview' />
+            </LiveProvider>
           )}
         </div>
       </div>
@@ -76,10 +73,16 @@ class App extends Component {
   onChange = (selectedComponentName) => {
     this.router.navigate(selectedComponentName);
   }
+
+  getSelected = () => {
+    const { selectedComponentName } = this.state;
+    const selectedComponent = components.find(el => el.name === selectedComponentName);
+    return { name: selectedComponentName, component: selectedComponent };
+  }
 }
 
 ReactDOM.render(
-  <ThemeProvider theme={arwes.theme}>
+  <ThemeProvider theme={createTheme()}>
     <App />
   </ThemeProvider>,
   document.querySelector('#app')

@@ -27,7 +27,7 @@ html, body {
   width: 100%;
   height: 50px;
   border-bottom: 1px solid #00ffff;
-  background-color: #222222;
+  background-color: #111111;
 }
 
 .play-header-title {
@@ -79,14 +79,28 @@ html, body {
 
 .play-content-editor {
   overflow-x: auto;
+  border-bottom: 1px solid #00ffff;
+  max-width: 100vw;
   font-size: 14px;
+  max-height: 40vh;
 }
 
 .play-content-preview {
   flex: 1;
   position: relative;
   padding: 20px;
-  min-height: 300px;
+  min-height: 40vh;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 1px solid #00ffff;
+  cursor: pointer;
 }
 
 .arwes {
