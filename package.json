@@ -41,9 +41,11 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "doc-ready": "^1.0.4",
+    "extend": "^3.0.1",
     "polished": "^1.8.1",
     "prop-types": "*",
-    "react-jss": "^7.2.0"
+    "react-jss": "^7.2.0",
+    "react-transition-group": "^2.2.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.0",
