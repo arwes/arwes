@@ -25,24 +25,24 @@ const position0000 = {
 };
 
 export default (theme) => {
-
   return {
     root: {
       ...position0000,
       position: 'fixed',
       overflow: 'hidden',
       display: 'block',
-      boxSizing: 'borderBox',
-      lineHeight: theme.lineHeight,
-      fontFamily: theme.fontFamily,
-      fontSize: theme.fontSize,
-      color: theme.color0,
+      boxSizing: 'border-box',
+      lineHeight: theme.typography.lineHeight,
+      fontFamily: theme.typography.fontFamily,
+      fontSize: theme.typography.fontSize,
+      color: theme.color.primary.base,
+      transition: `all ${theme.animTime}ms ease-out`,
 
-      ...mapPropsDescName(placeholder(theme, theme.color0)),
-      ...mapPropsDescName(scrollbar(theme, theme.colorBackground0, theme.color0)),
-      ...mapPropsDescName(selection(theme, theme.color0, theme.colorBackground0)),
+      ...mapPropsDescName(placeholder(theme, theme.color.primary.base)),
+      ...mapPropsDescName(scrollbar(theme, theme.background.primary.level0, theme.color.primary.base)),
+      ...mapPropsDescName(selection(theme, theme.color.primary.base, theme.background.primary.level0)),
 
-      ...mapPropsDescFontSize(theme.headerSizes),
+      ...mapPropsDescFontSize(theme.typography.headerSizes),
 
       '& *, & *:before, & *:after': {
         boxSizing: 'inherit',
@@ -50,18 +50,18 @@ export default (theme) => {
 
       '& h1, & h2, & h3, & h4, & h5, & h6': {
         margin: [0, 0, theme.margin],
-        fontFamily: theme.headerFontFamily,
+        fontFamily: theme.typography.headerFontFamily,
         fontWeight: 'bold',
         textTransform: 'uppercase',
-        textShadow: '0 0 4px ' + rgba(theme.color0Light, theme.colorAlpha),
-        color: theme.color0Light,
+        textShadow: `0 0 ${theme.shadowLength}px ` + rgba(theme.color.header.base, theme.alpha),
+        color: theme.color.header.base,
         transition: `all ${theme.animTime}ms ease-out`,
       },
 
       '& p': {
         margin: [0, 0, theme.margin],
       },
-      '& p:lastChild': {
+      '& p:last-of-type': {
         marginBottom: 0,
       },
 
@@ -75,22 +75,22 @@ export default (theme) => {
 
       '& blockquote': {
         display: 'block',
-        borderLeft: '4px solid ' + theme.color0Light,
+        borderLeft: '4px solid ' + theme.color.primary.light,
         margin: [0, 0, theme.margin, theme.margin],
         padding: [0, 0, 0, theme.padding / 2],
-        color: theme.color0Light,
+        color: theme.color.primary.light,
 
-        '&[dataTheme="alert"]': {
-          borderColor: theme.colorAlertLight,
-          color: theme.colorAlertLight,
+        '&[data-theme="alert"]': {
+          borderColor: theme.color.alert.light,
+          color: theme.color.alert.light,
         },
-        '&[dataTheme="success"]': {
-          borderColor: theme.colorSuccessLight,
-          color: theme.colorSuccessLight
+        '&[data-theme="success"]': {
+          borderColor: theme.color.success.light,
+          color: theme.color.success.light
         },
-        '&[dataTheme="disabled"]': {
-          borderColor: theme.colorDisabledLight,
-          color: theme.colorDisabledLight
+        '&[data-theme="disabled"]': {
+          borderColor: theme.color.disabled.light,
+          color: theme.color.disabled.light
         },
       },
 
@@ -110,7 +110,7 @@ export default (theme) => {
           fontWeight: 'bold',
         },
         '& dd': {
-          marginLeft: theme.fontSize,
+          marginLeft: theme.typography.fontSize,
         },
       },
 
@@ -127,13 +127,13 @@ export default (theme) => {
           left: -(theme.padding / 2),
           marginLeft: -theme.padding,
           content: '>>',
-          color: theme.color0Light,
+          color: theme.color.primary.light,
         },
       },
 
       '& ol': {
         marginLeft: theme.padding,
-        paddingLeft: theme.fontSize,
+        paddingLeft: theme.typography.fontSize,
 
         '& ol': {
           marginLeft: 0,
@@ -141,13 +141,13 @@ export default (theme) => {
       },
 
       '& a': {
-        color: theme.color1,
-        textShadow: '0 0 4px ' + rgba(theme.color1, theme.colorAlpha),
+        color: theme.color.control.base,
+        textShadow: `0 0 ${theme.shadowLength}px ` + rgba(theme.color.control.base, theme.alpha),
         transition: `all ${theme.animTime}ms ease-out`,
         textDecoration: 'none',
 
         '&:hover': {
-          color: theme.color1Light,
+          color: theme.color.control.light,
         },
       },
 
@@ -156,7 +156,7 @@ export default (theme) => {
         display: 'block',
         margin: [0, 0, theme.margin],
         borderStyle: 'solid',
-        borderColor: theme.color0Dark,
+        borderColor: theme.color.primary.dark,
         borderWidth: [0, 0, 1],
 
         '&:before': {
@@ -167,7 +167,7 @@ export default (theme) => {
           display: 'block',
           width: 3,
           height: 3,
-          background: theme.color0Dark,
+          background: theme.color.primary.dark,
         },
         '&:after': {
           content: '',
@@ -177,13 +177,13 @@ export default (theme) => {
           display: 'block',
           width: 3,
           height: 3,
-          background: theme.color0Dark,
+          background: theme.color.primary.dark,
         },
       },
 
       '& img': {
         display: 'block',
-        border: '1px solid ' + theme.color0Dark,
+        border: '1px solid ' + theme.color.primary.dark,
         margin: [0, 'auto', theme.margin],
         maxWidth: '100%',
       },
@@ -200,21 +200,17 @@ export default (theme) => {
 
       '& video': {
         display: 'block',
-        border: '1px solid ' + theme.color0Dark,
+        border: '1px solid ' + theme.color.primary.dark,
         margin: [0, 'auto', theme.margin],
       },
-
-      [`@media screen and (min-width: ${theme.responsive.small + 1}px)`]: {
-        fontSize: theme.fontSizeMedium,
-        ...mapPropsDescFontSize(theme.headerSizesMedium),
-      },
     },
-    isReady: {},
-    isAnimated: {},
+    isReady: {
+      //
+    },
     isShowResources: {
       '&$isReady': {
         '& $background, & $pattern': {
-          animation: `arwes-background ${theme.animTime * 2}ms ease-out 0s 1`,
+          opacity: 1,
         }
       },
     },
@@ -223,7 +219,9 @@ export default (theme) => {
       zIndex: 1,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-      backgroundColor: theme.background0,
+      backgroundColor: theme.background.primary.level0,
+      transition: `all ${theme.animTime}ms ease-out`,
+      opacity: 0,
     },
     pattern: {
       ...position0000,
@@ -231,8 +229,10 @@ export default (theme) => {
       backgroundRepeat: 'repeat',
       backgroundPosition: 'center top',
       backgroundAttachment: 'fixed',
+      transition: `all ${theme.animTime}ms ease-out`,
+      opacity: 0,
     },
-    intern: {
+    puffs: {
       ...position0000,
       zIndex: 3,
     },
@@ -242,55 +242,19 @@ export default (theme) => {
       display: 'block',
       overflowY: 'auto',
     },
-    puff: {
-      position: 'absolute',
-      display: 'block',
-      width: 1,
-      height: 1,
-      backgroundColor: rgba(theme.color0, 0.5),
-      boxShadow: '0 0 7px 7px ' + rgba(theme.color0, 0.5),
-      borderRadius: '50%',
+    entering: {
+      opacity: 1,
+    },
+    entered: {
+      visibility: 'visible',
+      opacity: 1,
+    },
+    exiting: {
       opacity: 0,
-      animation: 'arwes-puff 1000ms ease-out 0s 1',
-
-      '&.puff1': {
-        boxShadow: '0 0 10px 10px ' + rgba(theme.color0, 0.5),
-        animation: 'arwes-puff-1 1000ms ease-out 0s 1',
-      }
     },
-    '@keyframes arwes-background': {
-      '0%': {
-        opacity: 0.1,
-      },
-      '100%': {
-        opacity: 1,
-      }
-    },
-    '@keyframes arwes-puff': {
-      '0%': {
-        transform: 'scale(0.5, 0.5) translate(0, 30px)',
-        opacity: 0.25,
-      },
-      '75%': {
-        opacity: 1,
-      },
-      '100%': {
-        transform: 'scale(1.5, 1.5) translate(0, -30px)',
-        opacity: 0,
-      }
-    },
-    '@keyframes arwes-puff-1': {
-      '0%': {
-        transform: 'scale(0.5, 0.5) translate(0, 50px)',
-        opacity: 0.25,
-      },
-      '75%': {
-        opacity: 1,
-      },
-      '100%': {
-        transform: 'scale(1.5, 1.5) translate(0, -50px)',
-        opacity: 0,
-      },
+    exited: {
+      visibility: 'hidden',
+      opacity: 0,
     },
   };
 };

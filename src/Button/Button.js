@@ -2,61 +2,83 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
+import Animation from '../Animation';
+import Highlight from '../Highlight';
+import Frame from '../Frame';
+
 export default class Button extends Component {
 
   static propTypes = {
-    mode: PropTypes.oneOf(['', 'success', 'alert']),
+    theme: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired,
+    animate: PropTypes.bool,
+    show: PropTypes.bool,
+    layer: PropTypes.oneOf(['primary', 'success', 'alert']),
+    disabled: PropTypes.bool,
+    buttonProps: PropTypes.object,
     children: PropTypes.any,
   }
 
   static defaultProps = {
-    mode: '',
+    animate: false,
+    show: true,
+    layer: 'primary',
+    disabled: false,
     children: '',
-  }
-
-  constructor () {
-    super(...arguments);
-  }
-
-  componentWillUnmount () {
-    clearTimeout(this.clickTimeout);
   }
 
   render () {
 
-    const { mode, disabled, classes, className, children, ...etc } = this.props;
-    const cls = cx('button', classes.root, {
-      [classes.success]: mode === 'success',
-      [classes.alert]: mode === 'alert',
-    }, className);
+    const {
+      theme,
+      classes,
+      animate,
+      show,
+      layer,
+      disabled,
+      className,
+      buttonProps,
+      children,
+      ...etc
+    } = this.props;
+    const cls = cx(classes.root, classes[layer], className);
 
     return (
-      <div className={cls} ref={el => (this.element = el)} {...etc}>
-        <button
-          className={classes.button}
-          disabled={disabled}
+      <Animation show={show} animate={animate} timeout={theme.animTime}>
+        {anim => (
+        <div
+          className={cx(cls, classes[disabled ? 'disabled' : anim.status])}
           onClick={this.onClick}
+          {...etc}
         >
-          {children}
-        </button>
-      </div>
+          <Frame
+            hover
+            animate={animate}
+            show={show}
+            corners={1}
+            level={2}
+            layer={disabled ? 'disabled' : layer}
+            disabled={disabled}
+          >
+            <Highlight layer={layer} disabled={disabled}>
+              <button
+                className={classes.button}
+                disabled={disabled}
+                {...buttonProps}
+              >
+                {children}
+              </button>
+            </Highlight>
+          </Frame>
+        </div>
+        )}
+      </Animation>
     );
   }
 
-  onClick = () => {
-
-    const { disabled, classes, theme } = this.props;
-
-    if (!disabled) {
-
-      if (this.clickEl) this.clickEl.remove();
-      clearTimeout(this.clickTimeout);
-
-      this.clickEl = document.createElement('div');
-      this.clickEl.setAttribute('class', classes.click);
-      this.element.appendChild(this.clickEl);
-
-      this.clickTimeout = setTimeout(() => this.clickEl.remove(), theme.animTime * 3);
+  onClick = (ev) => {
+    if (!this.props.disabled) {
+      this.props.onClick && this.props.onClick(ev);
     }
   }
 }

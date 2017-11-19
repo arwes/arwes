@@ -1,10 +1,10 @@
 import React from 'react';
 import testSetup from '../test-setup';
-import Arwes from './index';
+import Frame from './index';
 
-const { mount } = testSetup(Arwes);
+const { mount } = testSetup(Frame);
 
-describe('Arwes', function () {
+describe('Frame', function () {
 
   it('Should render without crashing', function () {
     mount();

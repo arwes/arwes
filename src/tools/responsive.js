@@ -1,5 +1,10 @@
 import getDimensions from './get-dimensions';
 
+/**
+ * Create a handler for responsive functionalities.
+ * @param  {Function} getTheme - Inject the theme settings.
+ * @return {Object} - Handler.
+ */
 export default (getTheme) => {
   return {
 

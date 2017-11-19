@@ -1,6 +1,6 @@
 import React from 'react';
 import testSetup from '../test-setup';
-import Button from './Button';
+import Button from './index';
 
 const { mount } = testSetup(Button);
 

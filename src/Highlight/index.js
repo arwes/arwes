@@ -1,5 +1,5 @@
 import withStyles from 'react-jss/lib/injectSheet';
-import Button from './Button';
+import Highlight from './Highlight';
 import styles from './styles';
 
-export default withStyles(styles)(Button);
+export default withStyles(styles)(Highlight);

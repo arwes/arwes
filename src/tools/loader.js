@@ -1,3 +1,8 @@
+/**
+ * Load a provided image by URL.
+ * @param  {String} url
+ * @return {Promise}
+ */
 export const loadImage = (url) => {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -7,6 +12,11 @@ export const loadImage = (url) => {
   });
 };
 
+/**
+ * Load a provided sound by URL.
+ * @param  {String} url
+ * @return {Promise}
+ */
 export const loadSound = (url) => {
   return new Promise((resolve, reject) => {
     const sound = new Audio();
@@ -15,3 +25,5 @@ export const loadSound = (url) => {
     sound.src = url;
   });
 };
+
+export default { loadImage, loadSound };

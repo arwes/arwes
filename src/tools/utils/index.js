@@ -1,3 +1,10 @@
+/**
+ * Map the name and the properties in an object.
+ * This is used to map CSS rules as plain objects.
+ * @param  {Object} obj - The props.
+ * @param  {Function} map - The mapper.
+ * @return {Object}
+ */
 export const mapProps = (obj, map = () => {}) => {
 
   const newObj = {};

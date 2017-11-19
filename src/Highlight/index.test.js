@@ -1,10 +1,10 @@
 import React from 'react';
 import testSetup from '../test-setup';
-import Arwes from './index';
+import Highlight from './index';
 
-const { mount } = testSetup(Arwes);
+const { mount } = testSetup(Highlight);
 
-describe('Arwes', function () {
+describe('Highlight', function () {
 
   it('Should render without crashing', function () {
     mount();

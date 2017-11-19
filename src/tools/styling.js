@@ -4,19 +4,19 @@ export const placeholder = (theme, color) => {
   return {
     /* Chrome/Opera/Safari */
     '::-webkit-input-placeholder': {
-      color: color,
+      color,
     },
     /* Firefox 19+ */
     '::-moz-placeholder': {
-      color: color,
+      color,
     },
     /* IE 10+ */
     ':-ms-input-placeholder': {
-      color: color,
+      color,
     },
     /* Firefox 18- */
     ':-moz-placeholder': {
-      color: color,
+      color,
     }
   };
 };
@@ -25,14 +25,14 @@ export const selection = (theme, backgroundColor, color) => {
   return {
     /* WebKit/Blink Browsers */
     '::selection': {
-      background: backgroundColor,
-      color: color,
+      backgroundColor,
+      color,
       textShadow: 'none',
     },
     /* Gecko Browsers */
     '::-moz-selection': {
-      background: backgroundColor,
-      color: color,
+      backgroundColor,
+      color,
       textShadow: 'none',
     }
   };
@@ -50,7 +50,7 @@ export const scrollbar = (theme, backgroundColor, borderColor) => {
       cursor: 'pointer',
 
       '&:hover': {
-        borderColor: lighten(theme.colorAccent, borderColor),
+        borderColor: lighten(theme.accent, borderColor),
       }
     }
   };
