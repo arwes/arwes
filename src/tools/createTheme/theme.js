@@ -18,15 +18,15 @@ export default {
   margin: 20,
   padding: 20,
   shadowLength: 4,
-  animTime: 200,
+  animTime: 250,
   alpha: 0.75,
   accent,
 
   color: {
     primary: generateColor('#26dafd'),
     secondary: generateColor('#df9527'),
-    control: generateColor('#acf9fb'),
     header: generateColor('#a1ecfb'),
+    control: generateColor('#acf9fb'),
     success: generateColor('#00ff00'),
     alert: generateColor('#ff0000'),
     disabled: generateColor('#999999'),
@@ -34,6 +34,9 @@ export default {
 
   background: {
     primary: generateBackground('#021114'),
+    secondary: generateBackground('#180f02'),
+    header: generateBackground('#032026'),
+    control: generateBackground('#041e1f'),
     success: generateBackground('#081402'),
     alert: generateBackground('#140202'),
     disabled: generateBackground('#141414'),
