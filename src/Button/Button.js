@@ -13,7 +13,7 @@ export default class Button extends Component {
     classes: PropTypes.object.isRequired,
     animate: PropTypes.bool,
     show: PropTypes.bool,
-    layer: PropTypes.oneOf(['primary', 'success', 'alert']),
+    layer: PropTypes.oneOf(['primary', 'secondary', 'header', 'control', 'success', 'alert', 'disabled']),
     disabled: PropTypes.bool,
     buttonProps: PropTypes.object,
     children: PropTypes.any,
@@ -22,7 +22,7 @@ export default class Button extends Component {
   static defaultProps = {
     animate: false,
     show: true,
-    layer: 'primary',
+    layer: 'control',
     disabled: false,
     children: '',
   }

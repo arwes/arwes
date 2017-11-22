@@ -152,33 +152,11 @@ export default (theme) => {
       },
 
       '& hr': {
-        position: 'relative',
         display: 'block',
         margin: [0, 0, theme.margin],
         borderStyle: 'solid',
         borderColor: theme.color.primary.dark,
         borderWidth: [0, 0, 1],
-
-        '&:before': {
-          content: '',
-          position: 'absolute',
-          left: 0,
-          top: -1,
-          display: 'block',
-          width: 3,
-          height: 3,
-          background: theme.color.primary.dark,
-        },
-        '&:after': {
-          content: '',
-          position: 'absolute',
-          top: -1,
-          right: 0,
-          display: 'block',
-          width: 3,
-          height: 3,
-          background: theme.color.primary.dark,
-        },
       },
 
       '& img': {

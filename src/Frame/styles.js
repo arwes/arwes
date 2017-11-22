@@ -55,7 +55,7 @@ export default (theme) => {
         },
         '& $corner': {
           borderColor: props => theme.color[props.layer].light,
-          boxShadow: props => `0 0 ${theme.shadowLength}px ` + rgba(theme.color[props.layer].light, theme.alpha),
+          boxShadow: props => `0 0 ${theme.shadowLength}px -${theme.shadowLength / 2}px ` + rgba(theme.color[props.layer].light, theme.alpha),
         },
       },
     },
@@ -120,7 +120,7 @@ export default (theme) => {
       transition: `all ${theme.animTime}ms ease-in`,
       borderStyle: 'solid',
       borderColor: props => theme.color[props.layer].base,
-      boxShadow: props => `0 0 ${theme.shadowLength}px ` + rgba(theme.color[props.layer].base, theme.alpha),
+      boxShadow: props => `0 0 ${theme.shadowLength}px -${theme.shadowLength / 2}px ` + rgba(theme.color[props.layer].base, theme.alpha),
       opacity: 1,
     },
     cornerLT: {

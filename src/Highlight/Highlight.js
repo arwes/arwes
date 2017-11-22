@@ -8,7 +8,7 @@ export default class Highlight extends Component {
     theme: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     animate: PropTypes.bool,
-    layer: PropTypes.oneOf(['primary', 'success', 'alert', 'disabled']),
+    layer: PropTypes.oneOf(['primary', 'secondary', 'header', 'control', 'success', 'alert', 'disabled']),
   };
 
   static defaultProps = {
@@ -57,6 +57,11 @@ export default class Highlight extends Component {
       this.clickEl = document.createElement('div');
       this.clickEl.setAttribute('class', classes.click);
       this.element.appendChild(this.clickEl);
+
+      // Enable click animation
+      setTimeout(() => {
+        this.clickEl.setAttribute('class', classes.click + ' ' + classes.clickPressed);
+      }, 0);
 
       this.clickTimeout = setTimeout(() => this.clickEl.remove(), theme.animTime);
     }

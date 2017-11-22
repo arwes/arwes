@@ -56,7 +56,7 @@ Frame.propTypes = {
   classes: PropTypes.object.isRequired,
   animate: PropTypes.bool,
   show: PropTypes.bool,
-  layer: PropTypes.oneOf(['primary', 'success', 'alert', 'disabled']),
+  layer: PropTypes.oneOf(['primary', 'secondary', 'header', 'control', 'success', 'alert', 'disabled']),
   level: PropTypes.oneOf([0, 1, 2, 3]),
   corners: PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6]),
   disabled: PropTypes.bool,

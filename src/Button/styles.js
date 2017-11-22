@@ -47,9 +47,5 @@ export default (theme) => {
         cursor: 'auto',
       }
     },
-    entering: {},
-    entered: {},
-    exiting: {},
-    exited: {},
   };
 };
