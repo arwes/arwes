@@ -1,6 +1,6 @@
 import React from 'react';
 import testSetup from '../test-setup';
-import Highlight from './index';
+import Highlight from './Highlight';
 
 const { mount } = testSetup(Highlight);
 

@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import Animation from '../Animation';
+import AnimationComponent from '../Animation';
 
 export default function Frame (props) {
 
   const {
+    Animation,
     theme,
     classes,
     animate,
@@ -52,6 +53,7 @@ export default function Frame (props) {
 }
 
 Frame.propTypes = {
+  Animation: PropTypes.any.isRequired,
   theme: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   animate: PropTypes.bool,
@@ -64,6 +66,7 @@ Frame.propTypes = {
 };
 
 Frame.defaultProps = {
+  Animation: AnimationComponent,
   animate: false,
   show: true,
   layer: 'primary',

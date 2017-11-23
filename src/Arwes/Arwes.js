@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import docReady from 'doc-ready';
 
-import Animation from '../Animation';
-import Puffs from '../Puffs';
+import AnimationComponent from '../Animation';
+import PuffsComponent from '../Puffs';
 import loader from '../tools/loader';
 import responsive from '../tools/responsive';
 
 export default class Arwes extends Component {
 
   static propTypes = {
+    Animation: PropTypes.any.isRequired,
+    Puffs: PropTypes.any.isRequired,
     theme: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     animate: PropTypes.bool,
@@ -47,6 +49,8 @@ export default class Arwes extends Component {
   };
 
   static defaultProps = {
+    Animation: AnimationComponent,
+    Puffs: PuffsComponent,
     animate: false,
     show: true,
     resources: null,
@@ -91,6 +95,8 @@ export default class Arwes extends Component {
   render () {
 
     const {
+      Animation,
+      Puffs,
       theme,
       classes,
       animate,

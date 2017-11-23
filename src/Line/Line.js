@@ -2,11 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import Animation from '../Animation';
+import AnimationComponent from '../Animation';
 
 export default function Line (props) {
 
-  const { theme, classes, animate, show, layer, className, ...etc } = props;
+  const {
+    theme,
+    classes,
+    Animation,
+    animate,
+    show,
+    layer,
+    className,
+    ...etc
+  } = props;
   const cls = cx(classes.root, className);
 
   return (
@@ -23,6 +32,7 @@ export default function Line (props) {
 }
 
 Line.propTypes = {
+  Animation: PropTypes.any.isRequired,
   theme: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   animate: PropTypes.bool,
@@ -31,6 +41,7 @@ Line.propTypes = {
 };
 
 Line.defaultProps = {
+  Animation: AnimationComponent,
   animate: false,
   show: true,
   layer: 'primary',

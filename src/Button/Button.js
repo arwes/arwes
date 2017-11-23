@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import Animation from '../Animation';
-import Highlight from '../Highlight';
-import Frame from '../Frame';
+import AnimationComponent from '../Animation';
+import HighlightComponent from '../Highlight';
+import FrameComponent from '../Frame';
 
 export default class Button extends Component {
 
   static propTypes = {
+    Animation: PropTypes.any.isRequired,
+    Highlight: PropTypes.any.isRequired,
+    Frame: PropTypes.any.isRequired,
     theme: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     animate: PropTypes.bool,
@@ -20,6 +23,9 @@ export default class Button extends Component {
   }
 
   static defaultProps = {
+    Animation: AnimationComponent,
+    Highlight: HighlightComponent,
+    Frame: FrameComponent,
     animate: false,
     show: true,
     layer: 'control',
@@ -30,6 +36,9 @@ export default class Button extends Component {
   render () {
 
     const {
+      Animation,
+      Highlight,
+      Frame,
       theme,
       classes,
       animate,

@@ -1,6 +1,6 @@
 import React from 'react';
 import testSetup from '../test-setup';
-import Animation from './index';
+import Animation from './Animation';
 
 const { mount } = testSetup(Animation);
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import testSetup from '../test-setup';
-import Button from './index';
+import Puffs from './Puffs';
 
-const { mount } = testSetup(Button);
+const { mount } = testSetup(Puffs);
 
-describe('Button', function () {
+describe('Puffs', function () {
 
   it('Should render without crashing', function () {
     mount();

@@ -1,13 +1,16 @@
 import React from 'react';
 import testSetup from '../test-setup';
-import Arwes from './index';
+import Arwes from './Arwes';
 
 const { mount } = testSetup(Arwes);
 
 describe('Arwes', function () {
 
   it('Should render without crashing', function () {
-    mount();
+    mount({
+      Animation: ({ children }) => children({}),
+      Puffs: ({ children }) => <div>{children}</div>,
+    });
   });
 
 });
