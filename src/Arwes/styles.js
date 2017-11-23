@@ -158,29 +158,6 @@ export default (theme) => {
         borderColor: theme.color.primary.dark,
         borderWidth: [0, 0, 1],
       },
-
-      '& img': {
-        display: 'block',
-        border: '1px solid ' + theme.color.primary.dark,
-        margin: [0, 'auto', theme.margin],
-        maxWidth: '100%',
-      },
-
-      '& figure': {
-        display: 'block',
-        margin: [0, 'auto', theme.margin],
-      },
-      '& figcaption': {
-        display: 'block',
-        margin: 0,
-        textAlign: 'center',
-      },
-
-      '& video': {
-        display: 'block',
-        border: '1px solid ' + theme.color.primary.dark,
-        margin: [0, 'auto', theme.margin],
-      },
     },
     isReady: {
       //
