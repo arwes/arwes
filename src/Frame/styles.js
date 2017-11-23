@@ -39,8 +39,6 @@ export default (theme) => {
         '& $corner': {
           width: 0,
           height: 0,
-        },
-        '& $corner, & $border': {
           opacity: 0,
         },
         '& $box': {
