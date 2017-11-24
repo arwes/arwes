@@ -2,6 +2,7 @@ import Arwes from './Arwes';
 import Frame from './Frame';
 import Button from './Button';
 import Line from './Line';
+import Loading from './Loading';
 import Image from './Image';
 import Animation from './Animation';
 import Highlight from './Highlight';
@@ -19,6 +20,7 @@ export {
   Frame,
   Button,
   Line,
+  Loading,
   Image,
   Animation,
   Highlight,
