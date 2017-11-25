@@ -7,7 +7,7 @@ render(
             </p>
             <Image
                 animate
-                src='/img/wallpaper.jpg'
+                resources='/img/wallpaper.jpg'
                 caption='The vast universe around us'
             />
             <p>

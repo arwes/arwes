@@ -10,13 +10,20 @@ export default (theme) => {
       minHeight: 1,
 
       '&$entering, &$exiting, &$exited': {
-        '& $img, & $caption': {
+        '& $caption': {
           opacity: 0,
         },
         '& $separator': {
           width: 0,
         }
       },
+    },
+    holder: {
+      position: 'relative',
+      display: 'flex',
+      flexDirection: 'column',
+      transition: `all ${theme.animTime}ms ease-out`,
+      minHeight: 200,
     },
     img: {
       display: 'block',
@@ -28,7 +35,7 @@ export default (theme) => {
       verticalAlign: 'top',
       boxShadow: 'none',
       transition: `all ${theme.animTime}ms ease-in`,
-      opacity: 1,
+      opacity: 0,
     },
     separator: {
       position: 'absolute',
@@ -50,6 +57,15 @@ export default (theme) => {
       backgroundColor: props => theme.background[props.layer].level1,
       transition: `opacity ${theme.animTime}ms ease-in`,
       opacity: 1,
+    },
+
+    ready: {
+      '& $holder': {
+        minHeight: 'auto',
+      },
+      '& $img': {
+        opacity: 1,
+      },
     },
 
     entering: {},

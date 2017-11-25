@@ -10,7 +10,8 @@ describe('Image', function () {
     mount({
       Animation: ({ children }) => children({}),
       Frame: ({ children }) => <div>{children}</div>,
-      src: '/img/wallpaper.jpg'
+      Loading: ({ children }) => <div>{children}</div>,
+      resources: '/img/wallpaper.jpg'
     });
   });
 
