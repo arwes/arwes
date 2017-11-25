@@ -18,8 +18,11 @@ export default class Button extends Component {
     show: PropTypes.bool,
     layer: PropTypes.oneOf(['primary', 'secondary', 'header', 'control', 'success', 'alert', 'disabled']),
     disabled: PropTypes.bool,
+
+    /**
+     * Props to pass down to the `<button />` element.
+     */
     buttonProps: PropTypes.object,
-    children: PropTypes.any,
   }
 
   static defaultProps = {
@@ -30,7 +33,6 @@ export default class Button extends Component {
     show: true,
     layer: 'control',
     disabled: false,
-    children: '',
   }
 
   render () {

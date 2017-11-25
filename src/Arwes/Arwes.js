@@ -4,14 +4,17 @@ import cx from 'classnames';
 
 import AnimationComponent from '../Animation';
 import PuffsComponent from '../Puffs';
-import loader from '../tools/loader';
-import responsive from '../tools/responsive';
+import { getResponsiveResource } from '../tools/utils';
+import createLoaderModule from '../tools/loader';
+import createResponsiveModule from '../tools/responsive';
 
 export default class Arwes extends Component {
 
   static propTypes = {
     Animation: PropTypes.any.isRequired,
     Puffs: PropTypes.any.isRequired,
+    createResponsive: PropTypes.any.isRequired,
+    createLoader: PropTypes.any.isRequired,
     theme: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     animate: PropTypes.bool,
@@ -26,9 +29,9 @@ export default class Arwes extends Component {
       bg: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({
-          small: PropTypes.string,
-          medium: PropTypes.string,
-          large: PropTypes.string,
+          small: PropTypes.string.isRequired,
+          medium: PropTypes.string.isRequired,
+          large: PropTypes.string.isRequired,
         }),
       ]),
       pattern: PropTypes.string,
@@ -40,7 +43,7 @@ export default class Arwes extends Component {
     showResources: PropTypes.bool,
 
     /**
-     * Properties to pass down to Puffs component.
+     * Properties to pass down to `<Puffs />` component.
      */
     puffsProps: PropTypes.object,
   };
@@ -48,6 +51,8 @@ export default class Arwes extends Component {
   static defaultProps = {
     Animation: AnimationComponent,
     Puffs: PuffsComponent,
+    createResponsive: createResponsiveModule,
+    createLoader: createLoaderModule,
     animate: false,
     show: true,
     resources: null,
@@ -62,7 +67,10 @@ export default class Arwes extends Component {
       readyResources: false
     };
 
-    this.responsive = responsive(() => this.props.theme);
+    this.loader = this.props.createLoader();
+    this.responsive = this.props.createResponsive({
+      getTheme: () => this.props.theme
+    });
   }
 
   componentDidMount () {
@@ -80,6 +88,8 @@ export default class Arwes extends Component {
     const {
       Animation,
       Puffs,
+      createResponsive,
+      createLoader,
       theme,
       classes,
       animate,
@@ -139,18 +149,13 @@ export default class Arwes extends Component {
    */
   getActiveResources () {
 
-    const { bg: bgs, pattern } = this.props.resources || {};
-    let bg;
+    const { bg, pattern } = this.props.resources || {};
+    const responsive = this.responsive.get();
 
-    if (typeof bgs === 'string') {
-      bg = bgs;
-    }
-    else if (bgs) {
-      const { small, medium } = this.responsive.get();
-      bg = small ? bgs.small : medium ? bgs.medium : bgs.large;
-    }
-
-    return { bg, pattern };
+    return {
+      bg: getResponsiveResource(bg, responsive),
+      pattern: getResponsiveResource(pattern, responsive)
+    };
   }
 
   /**
@@ -167,10 +172,11 @@ export default class Arwes extends Component {
 
     this.setState({ readyResources: false });
 
-    Promise.all([
-      bg && loader.loadImage(bg),
-      pattern && loader.loadImage(pattern)
-    ]).then(() => {
+    const images = [];
+    bg && images.push(bg);
+    pattern && images.push(pattern);
+
+    this.loader.load({ images }).then(() => {
       this.setState({ readyResources: true });
     });
   }

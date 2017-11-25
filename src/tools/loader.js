@@ -27,29 +27,39 @@ export const loadSound = (url) => {
 };
 
 /**
- * Load a list of image and audio resources.
- * @param  {Object} resources
- * @param  {String[]} resources.images
- * @param  {String[]} resources.sounds
- * @param  {Object} opts - Optional options.
- * @param  {Number} [opts.timeout=30000] - Maximum duration to load. If this time
- * is reached and resources are not loaded, the promise is rejected.
- * @return {Promise}
+ * Create handler for loader functionalities.
+ * @param  {Object} deps - Depencencies.
+ * @param  {Function} loadImage
+ * @param  {Function} loadSound
+ * @return {Object}
  */
-export const load = (resources, opts) => {
+export default (deps = { loadImage, loadSound }) => {
+  return {
 
-  const { images = [], sounds = [] } = resources || {};
-  const options = Object.assign({
-    timeout: 30000
-  }, opts);
+    /**
+     * Load a list of image and audio resources.
+     * @param  {Object} resources
+     * @param  {String[]} resources.images
+     * @param  {String[]} resources.sounds
+     * @param  {Object} opts - Optional options.
+     * @param  {Number} [opts.timeout=30000] - Maximum duration to load. If this time
+     * is reached and resources are not loaded, the promise is rejected.
+     * @return {Promise}
+     */
+    load: (resources, opts) => {
 
-  return new Promise((resolve, reject) => {
-    setTimeout(reject, options.timeout);
-    Promise.all([
-      ...images.map(image => loadImage(image)),
-      ...sounds.map(sound => loadSound(sound))
-    ]).then(resolve, reject);
-  });
+      const { images = [], sounds = [] } = resources || {};
+      const options = Object.assign({
+        timeout: 30000
+      }, opts);
+
+      return new Promise((resolve, reject) => {
+        setTimeout(reject, options.timeout);
+        Promise.all([
+          ...images.map(image => deps.loadImage(image)),
+          ...sounds.map(sound => deps.loadSound(sound))
+        ]).then(resolve, reject);
+      });
+    }
+  };
 };
-
-export default { loadImage, loadSound, load };

@@ -2,10 +2,11 @@ import getDimensions from './get-dimensions';
 
 /**
  * Create a handler for responsive functionalities.
- * @param  {Function} getTheme - Inject the theme settings.
+ * @param  {Object} deps - Depencencies.
+ * @param  {Function} deps.getTheme - Inject the theme settings.
  * @return {Object} - Handler.
  */
-export default (getTheme) => {
+export default (deps) => {
   return {
 
     /**
@@ -14,7 +15,7 @@ export default (getTheme) => {
      */
     get () {
 
-      const theme = getTheme();
+      const theme = deps.getTheme();
       const { width } = getDimensions();
       const { small, medium } = theme.responsive;
 

@@ -25,3 +25,29 @@ export const mapProps = (obj, map = () => {}) => {
 
   return newObj;
 };
+
+/**
+ * Get active resource from responsive list.
+ * @param  {String|Object} resources - The path to the resource or the resources
+ * by responsiveness.
+ * @param  {Object} responsive - The current responsive status.
+ * @return {String} - The selected resource.
+ */
+export const getResponsiveResource = (resources, responsive = {}) => {
+
+  let resource = null;
+
+  if (typeof resources === 'string') {
+    resource = resources;
+  }
+  else if (resources) {
+    const { small, medium } = responsive;
+    resource = small
+      ? resources.small
+      : medium
+        ? resources.medium
+        : resources.large;
+  }
+
+  return resource;
+};

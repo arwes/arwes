@@ -171,7 +171,7 @@ export default (theme) => {
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundColor: theme.background.primary.level0,
-      transition: `all ${theme.animTime}ms ease-out`,
+      transition: `all ${theme.animTime}ms ease-in`,
       opacity: 0,
     },
     pattern: {
@@ -180,7 +180,7 @@ export default (theme) => {
       backgroundRepeat: 'repeat',
       backgroundPosition: 'center top',
       backgroundAttachment: 'fixed',
-      transition: `all ${theme.animTime}ms ease-out`,
+      transition: `all ${theme.animTime}ms ease-in`,
       opacity: 0,
     },
     puffs: {

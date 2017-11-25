@@ -1,6 +1,7 @@
-import { mapProps } from './index';
+import { mapProps, getResponsiveResource } from './index';
 
 describe('Utils', function () {
+
   describe('mapProps()', function () {
 
     it('Should return empty object with no params', function () {
@@ -22,4 +23,46 @@ describe('Utils', function () {
     });
 
   });
+
+  describe('getResponsiveResource()', function () {
+
+    it('Should return null when no parameters provided', function () {
+      const actual = getResponsiveResource();
+      const expected = null;
+      expect(actual).to.equal(expected);
+    });
+
+    it('Should return resource string when it was the only provided', function () {
+      const resource = '/img/path.png';
+      const actual = getResponsiveResource(resource);
+      const expected = resource;
+      expect(actual).to.equal(expected);
+    });
+
+    it('Should return resource small when responsive is small', function () {
+      const resources = { small: '1.png', medium: '2.png', large: '3.png' };
+      const responsive = { small: 1 };
+      const actual = getResponsiveResource(resources, responsive);
+      const expected = resources.small;
+      expect(actual).to.equal(expected);
+    });
+
+    it('Should return resource medium when responsive is medium', function () {
+      const resources = { small: '1.png', medium: '2.png', large: '3.png' };
+      const responsive = { medium: 1 };
+      const actual = getResponsiveResource(resources, responsive);
+      const expected = resources.medium;
+      expect(actual).to.equal(expected);
+    });
+
+    it('Should return resource large when responsive is large', function () {
+      const resources = { small: '1.png', medium: '2.png', large: '3.png' };
+      const responsive = { large: 1 };
+      const actual = getResponsiveResource(resources, responsive);
+      const expected = resources.large;
+      expect(actual).to.equal(expected);
+    });
+
+  });
+
 });
