@@ -25,15 +25,12 @@ export default (theme) => {
       borderRadius: '50%',
       opacity: 0,
       animation: `arwes-puff ${duration}ms ease-out 0ms 1`,
-
-      '&$puffLong': {
-        boxShadow: `0 0 ${shadow2}px ${shadow2}px ` + rgba(theme.color.primary.base, colorAlpha),
-        animation: `arwes-puff-1 ${duration}ms ease-out 0ms 1`,
-      }
     },
     puffLong: {
-      //
+      boxShadow: `0 0 ${shadow2}px ${shadow2}px ` + rgba(theme.color.primary.base, colorAlpha),
+      animation: `arwes-puff-1 ${duration}ms ease-out 0ms 1`,
     },
+
     '@keyframes arwes-puff': {
       '0%': {
         transform: 'scale(0.5, 0.5) translate(0, 30px)',

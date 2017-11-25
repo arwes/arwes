@@ -51,6 +51,7 @@ export default (theme) => {
       transition: `opacity ${theme.animTime}ms ease-in`,
       opacity: 1,
     },
+
     entering: {},
     entered: {},
     exiting: {},

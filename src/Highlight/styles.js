@@ -16,14 +16,10 @@ export default (theme) => {
       opacity: 1,
       backgroundColor: props => darken(0.3, theme.color[props.layer].base),
       transition: `all ${theme.animTime}ms ease-out`,
-
-      '&$clickPressed': {
-        opacity: 0,
-        backgroundColor: 'transparent',
-      },
     },
     clickPressed: {
-      //
+      opacity: 0,
+      backgroundColor: 'transparent',
     },
     children: {
       zIndex: 2,

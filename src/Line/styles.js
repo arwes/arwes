@@ -50,6 +50,7 @@ export default (theme) => {
       opacity: 1,
       transition: `all ${(theme.animTime / 4) * 3}ms ease-out ${theme.animTime / 4}ms`,
     },
+
     entering: {},
     entered: {},
     exiting: {},

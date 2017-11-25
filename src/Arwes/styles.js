@@ -159,6 +159,7 @@ export default (theme) => {
         borderWidth: [0, 0, 1],
       },
     },
+
     isReady: {
       //
     },
@@ -197,6 +198,7 @@ export default (theme) => {
       display: 'block',
       overflowY: 'auto',
     },
+
     entering: {
       opacity: 1,
     },
