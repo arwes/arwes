@@ -26,4 +26,30 @@ export const loadSound = (url) => {
   });
 };
 
-export default { loadImage, loadSound };
+/**
+ * Load a list of image and audio resources.
+ * @param  {Object} resources
+ * @param  {String[]} resources.images
+ * @param  {String[]} resources.sounds
+ * @param  {Object} opts - Optional options.
+ * @param  {Number} [opts.timeout=30000] - Maximum duration to load. If this time
+ * is reached and resources are not loaded, the promise is rejected.
+ * @return {Promise}
+ */
+export const load = (resources, opts) => {
+
+  const { images = [], sounds = [] } = resources || {};
+  const options = Object.assign({
+    timeout: 30000
+  }, opts);
+
+  return new Promise((resolve, reject) => {
+    setTimeout(reject, options.timeout);
+    Promise.all([
+      ...images.map(image => loadImage(image)),
+      ...sounds.map(sound => loadSound(sound))
+    ]).then(resolve, reject);
+  });
+};
+
+export default { loadImage, loadSound, load };

@@ -40,8 +40,8 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "doc-ready": "^1.0.4",
     "extend": "^3.0.1",
+    "howler": "^2.0.5",
     "polished": "^1.8.1",
     "prop-types": "*",
     "react-jss": "^7.2.0",
