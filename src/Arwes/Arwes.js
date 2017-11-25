@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import docReady from 'doc-ready';
 
 import AnimationComponent from '../Animation';
 import PuffsComponent from '../Puffs';
@@ -17,13 +16,13 @@ export default class Arwes extends Component {
     classes: PropTypes.object.isRequired,
     animate: PropTypes.bool,
     show: PropTypes.bool,
+    loadResources: PropTypes.bool,
 
     /**
-     * Resources to render.
+     * The resources to load. In this case it is the background image on
+     * the back and the pattern image in the middle.
      */
     resources: PropTypes.shape({
-
-      // Background
       bg: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({
@@ -32,20 +31,18 @@ export default class Arwes extends Component {
           large: PropTypes.string,
         }),
       ]),
-
-      // Pattern
       pattern: PropTypes.string,
     }),
 
     /**
-     * Show resources on interface when loaded.
+     * If to show the resources when they are loaded.
      */
     showResources: PropTypes.bool,
 
     /**
-     * How often to create new puffs, this is passed down to <Puffs />.
+     * Properties to pass down to Puffs component.
      */
-    puffInterval: PropTypes.number,
+    puffsProps: PropTypes.object,
   };
 
   static defaultProps = {
@@ -54,41 +51,27 @@ export default class Arwes extends Component {
     animate: false,
     show: true,
     resources: null,
+    loadResources: true,
     showResources: true,
-    puffInterval: 5000,
   }
 
   constructor () {
     super(...arguments);
 
     this.state = {
-      documentReady: false,
-      resourcesReady: false,
-      ready: false,
+      readyResources: false
     };
 
     this.responsive = responsive(() => this.props.theme);
   }
 
   componentDidMount () {
-
-    docReady(() => {
-      this.setState({ documentReady: true });
-    });
-
     this.loadResources();
   }
 
-  componentDidUpdate (prevProps, prevState) {
-
+  componentDidUpdate (prevProps) {
     if (prevProps.resources !== this.props.resources) {
       this.loadResources();
-    }
-
-    const { documentReady, resourcesReady } = this.state;
-    const ready = documentReady && resourcesReady;
-    if (prevState.ready !== ready) {
-      this.setState({ ready });
     }
   }
 
@@ -101,28 +84,32 @@ export default class Arwes extends Component {
       classes,
       animate,
       show,
-      showResources,
       resources,
-      puffInterval,
+      loadResources,
+      showResources,
+      puffsProps,
       className,
       children,
       ...rest
     } = this.props;
 
-    const { ready } = this.state;
-    const cls = cx('arwes', classes.root, {
-      [classes.isReady]: show && ready,
-      [classes.isShowResources]: show && showResources,
-    }, className);
+    // Resources are rendered when animation allows it, the component receives
+    // the signal to render them and they are loaded.
     const { bg, pattern } = this.getActiveResources();
+    const resourcesReadyToShow = (animate ? show : true)
+      && showResources && this.state.readyResources;
+
+    const cls = cx('arwes', classes.root, {
+      [classes.resourcesReadyToShow]: resourcesReadyToShow
+    }, className);
 
     let backgroundStyle;
-    if (show && ready && showResources && bg) {
+    if (resourcesReadyToShow && bg) {
       backgroundStyle = { backgroundImage: `url(${bg})` };
     }
 
     let patternStyle;
-    if (show && ready && showResources && pattern) {
+    if (resourcesReadyToShow && pattern) {
       patternStyle = { backgroundImage: `url(${pattern})` };
     }
 
@@ -133,9 +120,9 @@ export default class Arwes extends Component {
           <div className={classes.background} style={backgroundStyle} />
           <div className={classes.pattern} style={patternStyle} />
           <Puffs
+            {...puffsProps}
             className={classes.puffs}
             animate={show && animate}
-            puffInterval={puffInterval}
           />
           <div className={classes.main}>
             {children}
@@ -167,20 +154,24 @@ export default class Arwes extends Component {
   }
 
   /**
-   * Load active resources.
-   * @return {Promise}
+   * Load active resources if they can be loaded.
+   * Doesn't return the state, it only loads the data.
    */
   loadResources () {
 
+    if (!this.props.loadResources) {
+      return;
+    }
+
     const { bg, pattern } = this.getActiveResources();
 
-    this.setState({ resourcesReady: false });
+    this.setState({ readyResources: false });
 
-    return Promise.all([
+    Promise.all([
       bg && loader.loadImage(bg),
       pattern && loader.loadImage(pattern)
     ]).then(() => {
-      this.setState({ resourcesReady: true });
+      this.setState({ readyResources: true });
     });
   }
 }

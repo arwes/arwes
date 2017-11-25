@@ -3,7 +3,7 @@ const resources = {
     pattern: '/img/glow.png',
 };
 render(
-    <Arwes show={true} animate={true} resources={resources}>
+    <Arwes animate resources={resources}>
         <h2>Cyberpunk</h2>
         <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod

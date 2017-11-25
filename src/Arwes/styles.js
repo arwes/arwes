@@ -37,6 +37,11 @@ export default (theme) => {
       fontSize: theme.typography.fontSize,
       color: theme.color.primary.base,
       transition: `all ${theme.animTime}ms ease-out`,
+      opacity: 1,
+
+      '&$entering, &$exiting, &$exited': {
+        opacity: 0,
+      },
 
       ...mapPropsDescName(placeholder(theme, theme.color.primary.base)),
       ...mapPropsDescName(scrollbar(theme, theme.background.primary.level0, theme.color.primary.base)),
@@ -160,16 +165,6 @@ export default (theme) => {
       },
     },
 
-    isReady: {
-      //
-    },
-    isShowResources: {
-      '&$isReady': {
-        '& $background, & $pattern': {
-          opacity: 1,
-        }
-      },
-    },
     background: {
       ...position0000,
       zIndex: 1,
@@ -199,19 +194,15 @@ export default (theme) => {
       overflowY: 'auto',
     },
 
-    entering: {
-      opacity: 1,
+    resourcesReadyToShow: {
+      '& $background, & $pattern': {
+        opacity: 1,
+      }
     },
-    entered: {
-      visibility: 'visible',
-      opacity: 1,
-    },
-    exiting: {
-      opacity: 0,
-    },
-    exited: {
-      visibility: 'hidden',
-      opacity: 0,
-    },
+
+    entering: {},
+    entered: {},
+    exiting: {},
+    exited: {},
   };
 };
