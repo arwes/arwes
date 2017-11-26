@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 import Navigo from 'navigo';
@@ -7,12 +8,29 @@ import * as arwes from '../src';
 import { ThemeProvider, createTheme } from '../src';
 import componentsList from './components';
 
+class PlayLive extends Component {
+  static propTypes = {
+    error: PropTypes.bool.isRequired,
+    onError: PropTypes.func.isRequired
+  }
+  componentDidCatch () {
+    this.props.onError();
+  }
+  render () {
+    if (this.props.error) {
+      return <p>An error occurred</p>;
+    }
+    return this.props.children;
+  }
+}
+
 class App extends Component {
 
   constructor () {
     super(...arguments);
 
     this.state = {
+      error: false,
       selectedComponentName: '',
     };
 
@@ -65,9 +83,17 @@ class App extends Component {
               scope={arwes}
               className='play-content-live'
             >
-              <LiveEditor className='play-content-editor' />
+              <LiveEditor
+                className='play-content-editor'
+                onChange={this.onCodeChange}
+              />
               <LiveError className='play-content-error' />
-              <LivePreview className='play-content-preview' />
+              <PlayLive
+                error={this.state.error}
+                onError={this.onError}
+              >
+                <LivePreview className='play-content-preview' />
+              </PlayLive>
             </LiveProvider>
           )}
         </div>
@@ -77,6 +103,14 @@ class App extends Component {
 
   onChange = (selectedComponentName) => {
     this.router.navigate(selectedComponentName);
+  }
+
+  onCodeChange = () => {
+    this.setState({ error: false });
+  }
+
+  onError = () => {
+    this.setState({ error: true });
   }
 
   getSelected = () => {
