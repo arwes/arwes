@@ -2,4 +2,6 @@ A loading animation component to inform of a progress taking course. The compone
 can take full space of a positioned parent element or be as small to fit inside
 content.
 
-    <Loading animate />
+```js
+<Loading animate />
+```

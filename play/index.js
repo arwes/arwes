@@ -5,7 +5,7 @@ import Navigo from 'navigo';
 
 import * as arwes from '../src';
 import { ThemeProvider, createTheme } from '../src';
-import components from './components';
+import componentsList from './components';
 
 class App extends Component {
 
@@ -15,6 +15,11 @@ class App extends Component {
     this.state = {
       selectedComponentName: '',
     };
+
+    this.components = componentsList.map(component => {
+      const code = this.getComponentCode(component.code);
+      return { ...component, code };
+    });
   }
 
   componentDidMount () {
@@ -24,7 +29,7 @@ class App extends Component {
       this.setState({ selectedComponentName: '' });
     });
 
-    components.forEach(component => {
+    this.components.forEach(component => {
       this.router.on(component.name, () => {
         this.setState({ selectedComponentName: component.name });
       }).resolve();
@@ -43,7 +48,7 @@ class App extends Component {
             onChange={ev => this.onChange(ev.target.value)}
           >
             <option value=''>-- select --</option>
-            {components.map((el, index) => {
+            {this.components.map((el, index) => {
               if (!el) return null;
               return <option key={index} value={el.name}>{el.name}</option>;
             })}
@@ -76,8 +81,15 @@ class App extends Component {
 
   getSelected = () => {
     const { selectedComponentName } = this.state;
-    const selectedComponent = components.find(el => el.name === selectedComponentName);
+    const selectedComponent = this.components.find(el => el.name === selectedComponentName);
     return { name: selectedComponentName, component: selectedComponent };
+  }
+
+  getComponentCode (source) {
+    const code = source
+      .replace(/^\s*\`\`\`.*[\r\n]/gm, '')
+      .replace(/^\s*[\r\n]/gm, '');
+    return code;
   }
 }
 

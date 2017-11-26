@@ -1,3 +1,4 @@
+```js
 class Example extends React.Component {
     constructor () {
         super(...arguments);
@@ -28,3 +29,4 @@ class Example extends React.Component {
     }
 }
 render(<Example />);
+```

@@ -1,3 +1,4 @@
+```js
 const resources = {
     bg: '/img/background.jpg',
     pattern: '/img/glow.png',
@@ -15,3 +16,4 @@ render(
         </p>
     </Arwes>
 );
+```

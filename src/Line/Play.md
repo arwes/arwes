@@ -1,3 +1,4 @@
+```js
 render(
     <div>
         <Line animate />
@@ -5,3 +6,4 @@ render(
         <Line animate layer='alert' />
     </div>
 );
+```

@@ -1,3 +1,4 @@
+```js
 const baseStyles = {
     display: 'block',
     width: '100%',
@@ -38,3 +39,4 @@ class Example extends React.Component {
     }
 }
 render(<Example />);
+```

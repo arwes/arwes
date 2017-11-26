@@ -1,3 +1,4 @@
+```js
 const style = { display: 'inline-block' };
 const Example = () => <div style={{ padding: '20px' }}>Cyberpunk</div>;
 render(
@@ -11,3 +12,4 @@ render(
         <Highlight layer='alert' style={style}><Example /></Highlight>
     </Arwes>
 );
+```

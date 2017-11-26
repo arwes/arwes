@@ -1,3 +1,4 @@
+```js
 render(
     <div>
         <Loading animate />
@@ -7,3 +8,4 @@ render(
         </div>
     </div>
 );
+```
