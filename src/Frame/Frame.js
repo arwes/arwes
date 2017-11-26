@@ -43,7 +43,7 @@ export default function Frame (props) {
 
         <div className={classes.box}>
           <div className={classes.children}>
-            {children}
+            {typeof children === 'function' ? children(anim) : children}
           </div>
         </div>
       </div>

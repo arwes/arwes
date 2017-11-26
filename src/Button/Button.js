@@ -77,7 +77,7 @@ export default class Button extends Component {
                 disabled={disabled}
                 {...buttonProps}
               >
-                {children}
+                {typeof children === 'function' ? children(anim) : children}
               </button>
             </Highlight>
           </Frame>

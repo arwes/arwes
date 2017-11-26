@@ -37,11 +37,6 @@ export default class Image extends Component {
     ]).isRequired,
 
     /**
-     * A small description of the image to display below it.
-     */
-    caption: PropTypes.any,
-
-    /**
      * Props to pass down to the `<img />` element.
      */
     imgProps: PropTypes.object,
@@ -103,9 +98,9 @@ export default class Image extends Component {
       layer,
       loadResources,
       resources,
-      caption,
       imgProps,
       className,
+      children,
       ...etc
     } = this.props;
 
@@ -138,12 +133,14 @@ export default class Image extends Component {
                   />
                 )}
               </div>
-              {!!caption && (
+              {!!children && (
                 <div className={classes.separator} />
               )}
-              {!!caption && (
-                <figcaption className={classes.caption}>
-                  <small>{caption}</small>
+              {!!children && (
+                <figcaption className={classes.children}>
+                  <small>
+                    {typeof children === 'function' ? children(anim) : children}
+                  </small>
                 </figcaption>
               )}
             </Frame>

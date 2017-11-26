@@ -135,7 +135,7 @@ export default class Arwes extends Component {
             animate={show && animate}
           />
           <div className={classes.main}>
-            {children}
+            {typeof children === 'function' ? children(anim) : children}
           </div>
         </div>
         )}

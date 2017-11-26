@@ -10,12 +10,12 @@ export default (theme) => {
       minHeight: 1,
 
       '&$entering, &$exiting, &$exited': {
-        '& $caption': {
-          opacity: 0,
-        },
         '& $separator': {
           width: 0,
-        }
+        },
+        '& $img, & $children': {
+          opacity: 0,
+        },
       },
     },
     holder: {
@@ -49,7 +49,7 @@ export default (theme) => {
       borderWidth: '0 0 1px',
       transition: `all ${theme.animTime}ms ease-in`,
     },
-    caption: {
+    children: {
       display: 'block',
       margin: 0,
       padding: theme.padding / 2,
