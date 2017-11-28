@@ -1,4 +1,5 @@
 import Arwes from './Arwes';
+import Words from './Words';
 import Frame from './Frame';
 import Button from './Button';
 import Line from './Line';
@@ -15,6 +16,7 @@ import loader from './tools/loader';
 
 export {
   Arwes,
+  Words,
   Frame,
   Button,
   Line,

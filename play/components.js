@@ -1,4 +1,5 @@
 import Arwes from '../src/Arwes/Play.md';
+import Words from '../src/Words/Play.md';
 import Frame from '../src/Frame/Play.md';
 import Button from '../src/Button/Play.md';
 import Line from '../src/Line/Play.md';
@@ -10,6 +11,7 @@ import Puffs from '../src/Puffs/Play.md';
 
 const components = [
   { name: 'Arwes', code: Arwes },
+  { name: 'Words', code: Words },
   { name: 'Frame', code: Frame },
   { name: 'Button', code: Button },
   { name: 'Line', code: Line },
