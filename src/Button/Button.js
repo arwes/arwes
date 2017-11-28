@@ -20,6 +20,11 @@ export default class Button extends Component {
     disabled: PropTypes.bool,
 
     /**
+     * The inside `<Frame />` level.
+     */
+    level: PropTypes.number,
+
+    /**
      * Props to pass down to the `<button />` element.
      */
     buttonProps: PropTypes.object,
@@ -32,6 +37,7 @@ export default class Button extends Component {
     animate: false,
     show: true,
     layer: 'control',
+    level: 2,
     disabled: false,
   }
 
@@ -46,6 +52,7 @@ export default class Button extends Component {
       animate,
       show,
       layer,
+      level,
       disabled,
       className,
       buttonProps,
@@ -58,7 +65,7 @@ export default class Button extends Component {
       <Animation show={show} animate={animate} timeout={theme.animTime}>
         {anim => (
         <div
-          className={cx(cls, classes[disabled ? 'disabled' : anim.status])}
+          className={cx(cls, classes[anim.status], disabled && classes.disabled)}
           onClick={this.onClick}
           {...etc}
         >
@@ -67,7 +74,7 @@ export default class Button extends Component {
             animate={animate}
             show={show}
             corners={1}
-            level={2}
+            level={level}
             layer={disabled ? 'disabled' : layer}
             disabled={disabled}
           >

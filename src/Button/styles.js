@@ -3,7 +3,12 @@ export default (theme) => {
     root: {
       display: 'inline-block',
       position: 'relative',
-      backgroundColor: theme.background.primary.level0,
+      backgroundColor: props => theme.background[props.layer]['level' + props.level],
+      lineHeight: 1,
+
+      '&$entering, &$exiting, &$exited': {
+        backgroundColor: 'transparent',
+      },
     },
     button: {
       position: 'relative',
@@ -14,8 +19,10 @@ export default (theme) => {
       background: 'transparent',
       border: 'none',
 
-      color: theme.color.control.base,
+      color: props => theme.color[props.disabled ? 'disabled' : props.layer].base,
       fontSize: theme.typography.fontSize * 0.75,
+      lineHeight: 1,
+      verticalAlign: 'top',
 
       transition: `all ${theme.animTime}ms ease-out`,
       userSelect: 'none',
@@ -31,21 +38,15 @@ export default (theme) => {
         verticalAlign: 'middle',
       },
     },
-    success: {
-      '& $button:not([disabled])': {
-        color: theme.color.success.base,
-      },
-    },
-    alert: {
-      '& $button:not([disabled])': {
-        color: theme.color.alert.base,
-      },
-    },
     disabled: {
       '& $button': {
-        color: theme.color.disabled.base,
         cursor: 'auto',
       }
     },
+
+    entering: {},
+    entered: {},
+    exiting: {},
+    exited: {},
   };
 };

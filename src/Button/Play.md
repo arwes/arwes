@@ -2,15 +2,15 @@
 render(
     <Arwes>
         <div style={{ padding: '20px' }}>
-            <Button disabled>Futuristic</Button>
+            <Button animate disabled>Futuristic</Button>
             {' '}
-            <Button>Cyberpunk</Button>
+            <Button animate>Cyberpunk</Button>
             {' '}
-            <Button layer='success'>
+            <Button animate layer='success'>
               <i className='mdi mdi-chemical-weapon' /> Sci Fi
             </Button>
             {' '}
-            <Button layer='alert'>
+            <Button animate layer='alert'>
               High Tech <i className='mdi mdi-robot' />
             </Button>
         </div>

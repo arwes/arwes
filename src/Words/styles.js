@@ -3,7 +3,7 @@ export default (theme) => {
     root: {
       position: 'relative',
       display: 'inline-block',
-      color: props => theme.color[props.layer].base,
+      color: props => theme.color[props.layer] && theme.color[props.layer].base,
     },
     children: {
       display: 'inline-block',
@@ -37,7 +37,7 @@ export default (theme) => {
 
     '@keyframes arwes-words-blink': {
       '0%, 100%': {
-        color: 'rgba(0,0,0,0)',
+        color: 'transparent',
       },
       '50%': {
         color: 'inherit',

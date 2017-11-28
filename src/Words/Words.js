@@ -9,7 +9,7 @@ export default class Words extends Component {
     classes: PropTypes.object.isRequired,
     animate: PropTypes.bool,
     show: PropTypes.bool,
-    layer: PropTypes.oneOf(['primary', 'secondary', 'header', 'control', 'success', 'alert', 'disabled']),
+    layer: PropTypes.oneOf(['', 'primary', 'secondary', 'header', 'control', 'success', 'alert', 'disabled']),
     blinkText: PropTypes.string,
     animationMaxDuration: PropTypes.number,
     children: PropTypes.string.isRequired,
@@ -18,7 +18,7 @@ export default class Words extends Component {
   static defaultProps = {
     animate: false,
     show: true,
-    layer: 'primary',
+    layer: '',
     blinkText: '&#9611;',
     animationMaxDuration: 2000,
   };
@@ -92,10 +92,10 @@ export default class Words extends Component {
         <span className={classes.children}>
           {children}
           {animating && (
-            <span
-              className={classes.space}
-              dangerouslySetInnerHTML={{ __html: blinkText }}
-            />
+          <span
+            className={classes.space}
+            dangerouslySetInnerHTML={{ __html: blinkText }}
+          />
           )}
         </span>
         {animating && (

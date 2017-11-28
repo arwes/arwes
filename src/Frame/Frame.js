@@ -27,7 +27,7 @@ export default function Frame (props) {
   }, className);
 
   return (
-    <Animation show={show} animate={!disabled && animate} timeout={theme.animTime}>
+    <Animation show={show} animate={animate} timeout={theme.animTime}>
       {anim => (
       <div className={cx(cls, classes[anim.status])} {...etc}>
 
