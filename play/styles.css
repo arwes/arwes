@@ -58,6 +58,11 @@ html, body {
   color: #00ffff;
 }
 
+.play-header-select option {
+  background-color: #000000;
+  color: #00ffff;
+}
+
 .play-content {
   display: flex;
   flex: 1;
