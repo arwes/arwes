@@ -8,18 +8,19 @@ export default (theme) => {
     children: {
       display: 'inline-block',
     },
-    space: {
-      visibility: 'hidden',
-      opacity: 0,
-    },
     text: {
       position: 'absolute',
       left: 0,
+      right: 0,
       top: 0,
+      overflow: 'hidden',
       display: 'inline-block',
       opacity: 0,
     },
     blink: {
+      position: 'relative',
+      width: 0,
+      height: 0,
       display: 'inline-block',
       animation: `arwes-words-blink ${theme.animTime}ms step-end infinite`,
     },

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
+import '../tools/request-animation-frame';
+
 export default class Words extends Component {
 
   static propTypes = {
@@ -22,6 +24,9 @@ export default class Words extends Component {
     blinkText: '&#9611;',
     animationMaxDuration: 2000,
   };
+
+  // Current animation frame identifier.
+  currentAnimationFrame = null;
 
   constructor () {
     super(...arguments);
@@ -91,12 +96,6 @@ export default class Words extends Component {
       <span className={cx(cls)} {...etc}>
         <span className={classes.children}>
           {children}
-          {animating && (
-          <span
-            className={classes.space}
-            dangerouslySetInnerHTML={{ __html: blinkText }}
-          />
-          )}
         </span>
         {animating && (
         <span className={classes.text}>
