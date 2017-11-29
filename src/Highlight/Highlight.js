@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
+const ON_ANIMATION_END = [
+  'webkitAnimationEnd',
+  'mozAnimationEnd',
+  'MSAnimationEnd',
+  'oanimationend',
+  'animationend'
+];
+
 export default class Highlight extends Component {
 
   static propTypes = {
@@ -20,14 +28,7 @@ export default class Highlight extends Component {
   element = null;
 
   // Last click element created.
-  clickEl = null;
-
-  // Last click timeout animation.
-  clickTimeout = null;
-
-  componentWillUnmount () {
-    clearTimeout(this.clickTimeout);
-  }
+  clickElement = null;
 
   render () {
 
@@ -45,25 +46,21 @@ export default class Highlight extends Component {
 
   onClick = () => {
 
-    const { animate, classes, theme } = this.props;
+    const { animate, classes } = this.props;
 
     if (animate) {
 
-      if (this.clickEl) {
-        this.clickEl.remove();
+      if (this.clickElement) {
+        this.clickElement.remove();
       }
-      clearTimeout(this.clickTimeout);
 
-      this.clickEl = document.createElement('div');
-      this.clickEl.setAttribute('class', classes.click);
-      this.element.appendChild(this.clickEl);
+      this.clickElement = document.createElement('div');
+      this.clickElement.setAttribute('class', classes.click);
+      this.element.appendChild(this.clickElement);
 
-      // Enable click animation
-      setTimeout(() => {
-        this.clickEl.setAttribute('class', classes.click + ' ' + classes.clickPressed);
-      }, 0);
-
-      this.clickTimeout = setTimeout(() => this.clickEl.remove(), theme.animTime);
+      ON_ANIMATION_END.forEach(event => {
+        this.clickElement.addEventListener(event, () => this.clickElement.remove());
+      });
     }
   }
 }

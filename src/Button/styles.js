@@ -15,9 +15,9 @@ export default (theme) => {
       zIndex: 2,
       display: 'inline-block',
       margin: 0,
+      border: 'none',
       padding: [theme.padding / 2, theme.padding],
       background: 'transparent',
-      border: 'none',
 
       color: props => theme.color[props.disabled ? 'disabled' : props.layer].base,
       fontSize: theme.typography.fontSize * 0.75,
@@ -26,10 +26,15 @@ export default (theme) => {
 
       transition: `all ${theme.animTime}ms ease-out`,
       userSelect: 'none',
+      outline: 'none',
       cursor: 'pointer',
 
       '&:focus': {
         outline: 'none',
+      },
+
+      '&::-moz-focus-inner': {
+        border: 'none',
       },
 
       '& .mdi, & .icon': {

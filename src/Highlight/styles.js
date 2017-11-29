@@ -13,18 +13,23 @@ export default (theme) => {
       right: 0,
       top: 0,
       bottom: 0,
-      opacity: 1,
       backgroundColor: props => darken(0.3, theme.color[props.layer].base),
-      transition: `all ${theme.animTime}ms ease-out`,
-    },
-    clickPressed: {
-      opacity: 0,
-      backgroundColor: 'transparent',
+      animation: `arwes-highlight-click ${theme.animTime}ms ease-out 0ms 1`,
     },
     children: {
       zIndex: 2,
       position: 'relative',
       display: 'block',
+    },
+
+    '@keyframes arwes-highlight-click': {
+      '0%': {
+        opacity: 1,
+      },
+      '100%': {
+        opacity: 0,
+        backgroundColor: 'transparent',
+      },
     },
   };
 };
