@@ -12,7 +12,8 @@ import Puffs from './Puffs';
 import { ThemeProvider } from 'theming';
 import withStyles from 'react-jss/lib/injectSheet';
 import createTheme from './tools/createTheme';
-import loader from './tools/loader';
+import createLoader from './tools/loader';
+import createResponsive from './tools/responsive';
 
 export {
   Arwes,
@@ -29,5 +30,6 @@ export {
   ThemeProvider,
   withStyles,
   createTheme,
-  loader,
+  createLoader,
+  createResponsive,
 };
