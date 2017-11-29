@@ -55,6 +55,7 @@ export default (theme) => {
       padding: theme.padding / 2,
       textAlign: 'center',
       backgroundColor: props => theme.background[props.layer].level1,
+      color: props => theme.color[props.layer].dark,
       transition: `opacity ${theme.animTime}ms ease-in`,
       opacity: 1,
     },
