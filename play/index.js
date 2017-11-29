@@ -10,15 +10,21 @@ import componentsList from './components';
 
 class PlayLive extends Component {
   static propTypes = {
-    error: PropTypes.bool.isRequired,
+    error: PropTypes.any.isRequired,
     onError: PropTypes.func.isRequired
   }
-  componentDidCatch () {
-    this.props.onError();
+  componentDidCatch (error) {
+    this.props.onError(error.message);
   }
   render () {
     if (this.props.error) {
-      return <p>An error occurred</p>;
+      const error = String(this.props.error).replace(/[\r\n]/gm, '<br />');
+      return (
+        <p
+          className='play-content-error'
+          dangerouslySetInnerHTML={{ __html: error }}
+        />
+      );
     }
     return this.props.children;
   }
@@ -109,8 +115,8 @@ class App extends Component {
     this.setState({ error: false });
   }
 
-  onError = () => {
-    this.setState({ error: true });
+  onError = (error) => {
+    this.setState({ error });
   }
 
   getSelected = () => {

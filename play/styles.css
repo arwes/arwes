@@ -90,6 +90,14 @@ html, body {
   max-height: 40vh;
 }
 
+.play-content-error {
+  display: block;
+  width: auto;
+  margin: 20px;
+  font-family: Monaco, Terminal, monospace;
+  color: #ff0000;
+}
+
 .play-content-preview {
   flex: 1;
   position: relative;
