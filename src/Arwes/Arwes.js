@@ -32,9 +32,18 @@ export default class Arwes extends Component {
           small: PropTypes.string.isRequired,
           medium: PropTypes.string.isRequired,
           large: PropTypes.string.isRequired,
+          xlarge: PropTypes.string.isRequired,
         }),
       ]),
-      pattern: PropTypes.string,
+      pattern: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+          small: PropTypes.string.isRequired,
+          medium: PropTypes.string.isRequired,
+          large: PropTypes.string.isRequired,
+          xlarge: PropTypes.string.isRequired,
+        }),
+      ]),
     }),
 
     /**

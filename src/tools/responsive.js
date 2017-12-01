@@ -2,11 +2,17 @@ import getDimensions from './get-dimensions';
 
 /**
  * Create a handler for responsive functionalities.
- * @param  {Object} deps - Depencencies.
- * @param  {Function} deps.getTheme - Inject the theme settings.
+ * @param  {Object} depencencies - Depencencies.
+ * @param  {Function} depencencies.getTheme - Inject the theme settings.
+ * @param  {Function} depencencies.getDimensions - Inject the get dimensions tool.
  * @return {Object} - Handler.
  */
-export default (deps) => {
+export default (depencencies) => {
+  const deps = {
+    getTheme: () => ({}),
+    getDimensions,
+    ...depencencies
+  };
   return {
 
     /**
@@ -17,7 +23,7 @@ export default (deps) => {
 
       const theme = deps.getTheme();
       const { width } = getDimensions();
-      const { small, medium } = theme.responsive;
+      const { small, medium, large } = theme.responsive;
 
       if (width <= small) {
         return { small: true };
@@ -25,8 +31,11 @@ export default (deps) => {
       else if (width <= medium) {
         return { medium: true };
       }
+      else if (width <= large) {
+        return { large: true };
+      }
 
-      return { large: true };
+      return { xlarge: true };
     },
 
     /**

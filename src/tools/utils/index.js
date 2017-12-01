@@ -41,12 +41,14 @@ export const getResponsiveResource = (resources, responsive = {}) => {
     resource = resources;
   }
   else if (resources) {
-    const { small, medium } = responsive;
+    const { small, medium, large } = responsive;
     resource = small
       ? resources.small
       : medium
         ? resources.medium
-        : resources.large;
+        : large
+          ? resources.large
+          : resources.xlarge;
   }
 
   return resource;

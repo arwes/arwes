@@ -40,7 +40,7 @@ describe('Utils', function () {
     });
 
     it('Should return resource small when responsive is small', function () {
-      const resources = { small: '1.png', medium: '2.png', large: '3.png' };
+      const resources = { small: '1', medium: '2', large: '3', xlarge: '4' };
       const responsive = { small: 1 };
       const actual = getResponsiveResource(resources, responsive);
       const expected = resources.small;
@@ -48,7 +48,7 @@ describe('Utils', function () {
     });
 
     it('Should return resource medium when responsive is medium', function () {
-      const resources = { small: '1.png', medium: '2.png', large: '3.png' };
+      const resources = { small: '1', medium: '2', large: '3', xlarge: '4' };
       const responsive = { medium: 1 };
       const actual = getResponsiveResource(resources, responsive);
       const expected = resources.medium;
@@ -56,10 +56,18 @@ describe('Utils', function () {
     });
 
     it('Should return resource large when responsive is large', function () {
-      const resources = { small: '1.png', medium: '2.png', large: '3.png' };
+      const resources = { small: '1', medium: '2', large: '3', xlarge: '4' };
       const responsive = { large: 1 };
       const actual = getResponsiveResource(resources, responsive);
       const expected = resources.large;
+      expect(actual).to.equal(expected);
+    });
+
+    it('Should return resource xlarge when responsive is xlarge', function () {
+      const resources = { small: '1', medium: '2', large: '3', xlarge: '4' };
+      const responsive = { xlarge: 1 };
+      const actual = getResponsiveResource(resources, responsive);
+      const expected = resources.xlarge;
       expect(actual).to.equal(expected);
     });
 

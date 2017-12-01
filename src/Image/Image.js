@@ -33,6 +33,7 @@ export default class Image extends Component {
         small: PropTypes.string.isRequired,
         medium: PropTypes.string.isRequired,
         large: PropTypes.string.isRequired,
+        xlarge: PropTypes.string.isRequired,
       })
     ]).isRequired,
 
