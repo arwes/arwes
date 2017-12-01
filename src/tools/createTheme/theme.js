@@ -22,6 +22,7 @@ export default {
   alpha: 0.75,
   accent,
 
+  // Every color has a `base`, `light` and `dark` variation.
   color: {
     primary: generateColor('#26dafd'),
     secondary: generateColor('#df9527'),
@@ -32,6 +33,8 @@ export default {
     disabled: generateColor('#999999'),
   },
 
+  // Every background color has level colors from 0 until 3
+  // as `level0`, `level1`...
   background: {
     primary: generateBackground('#021114'),
     secondary: generateBackground('#180f02'),
@@ -58,6 +61,11 @@ export default {
     codeFontFamily: 'Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace',
   },
 
+  // Number of columns inside a row
+  grid: 12,
+
+  // Until the number in device screen width the breakpoint is taken,
+  // after `large` one it is `xlarge`.
   responsive: {
     small: 600,
     medium: 992,

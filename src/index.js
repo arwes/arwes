@@ -1,35 +1,17 @@
-import Arwes from './Arwes';
-import Words from './Words';
-import Frame from './Frame';
-import Button from './Button';
-import Line from './Line';
-import Loading from './Loading';
-import Image from './Image';
-import Animation from './Animation';
-import Highlight from './Highlight';
-import Puffs from './Puffs';
+export Arwes from './Arwes';
+export Words from './Words';
+export Frame from './Frame';
+export Button from './Button';
+export Line from './Line';
+export Loading from './Loading';
+export Image from './Image';
+export Animation from './Animation';
+export Highlight from './Highlight';
+export Puffs from './Puffs';
+export Grid, { Row, Col } from './Grid';
 
-import { ThemeProvider } from 'theming';
-import withStyles from 'react-jss/lib/injectSheet';
-import createTheme from './tools/createTheme';
-import createLoader from './tools/loader';
-import createResponsive from './tools/responsive';
-
-export {
-  Arwes,
-  Words,
-  Frame,
-  Button,
-  Line,
-  Loading,
-  Image,
-  Animation,
-  Highlight,
-  Puffs,
-
-  ThemeProvider,
-  withStyles,
-  createTheme,
-  createLoader,
-  createResponsive,
-};
+export { ThemeProvider } from 'theming';
+export withStyles from 'react-jss/lib/injectSheet';
+export createTheme from './tools/createTheme';
+export createLoader from './tools/loader';
+export createResponsive from './tools/responsive';
