@@ -1,4 +1,4 @@
-import getDimensions from './get-dimensions';
+import getDimensions from '../get-dimensions';
 
 /**
  * Create a handler for responsive functionalities.
@@ -22,7 +22,7 @@ export default (depencencies) => {
     get () {
 
       const theme = deps.getTheme();
-      const { width } = getDimensions();
+      const { width } = deps.getDimensions();
       const { small, medium, large } = theme.responsive;
 
       if (width <= small) {
@@ -52,9 +52,7 @@ export default (depencencies) => {
         callback(stats);
       };
 
-      window.addEventListener('resize', onChange);
-
-      onChange();
+      window.addEventListener('resize', onChange, false);
 
       return onChange;
     },
@@ -64,7 +62,7 @@ export default (depencencies) => {
      * @param  {Function} - The event callback.
      */
     off (onChange) {
-      window.removeEventListener('resize', onChange);
+      window.removeEventListener('resize', onChange, false);
     },
 
   };
