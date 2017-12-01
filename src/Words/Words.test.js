@@ -7,9 +7,7 @@ const { mount } = testSetup(Words);
 describe('Words', function () {
 
   it('Should render without crashing', function () {
-    mount({
-      Animation: ({ children }) => children({})
-    }, 'Random text');
+    mount({}, 'Random text');
   });
 
 });
