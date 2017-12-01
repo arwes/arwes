@@ -28,12 +28,17 @@ export const loadSound = (url) => {
 
 /**
  * Create handler for loader functionalities.
- * @param  {Object} deps - Depencencies.
- * @param  {Function} loadImage
- * @param  {Function} loadSound
+ * @param  {Object} depencencies
+ * @param  {Function} depencencies.loadImage
+ * @param  {Function} depencencies.loadSound
  * @return {Object}
  */
-export default (deps = { loadImage, loadSound }) => {
+export default (depencencies) => {
+  const deps = {
+    loadImage,
+    loadSound,
+    ...depencencies
+  };
   return {
 
     /**
