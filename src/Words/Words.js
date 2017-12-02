@@ -22,7 +22,6 @@ export default class Words extends Component {
     show: true,
     layer: '',
     blinkText: '&#9611;',
-    animationMaxDuration: 2000,
   };
 
   // Current animation frame identifier.
@@ -130,7 +129,8 @@ export default class Words extends Component {
   }
 
   startAnimation (isIn) {
-    const { theme, children, animationMaxDuration } = this.props;
+    const { theme, children } = this.props;
+    const animationMaxDuration = this.props.animationMaxDuration || theme.animTime;
 
     if (children.length === 0) return;
 
