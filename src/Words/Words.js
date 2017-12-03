@@ -11,9 +11,9 @@ export default class Words extends Component {
     classes: PropTypes.object.isRequired,
     animate: PropTypes.bool,
     show: PropTypes.bool,
+    timeoutEnter: PropTypes.number,
     layer: PropTypes.oneOf(['', 'primary', 'secondary', 'header', 'control', 'success', 'alert', 'disabled']),
     blinkText: PropTypes.string,
-    animationMaxDuration: PropTypes.number,
     children: PropTypes.string.isRequired,
   };
 
@@ -76,9 +76,9 @@ export default class Words extends Component {
       classes,
       animate,
       show,
+      timeoutEnter,
       layer,
       blinkText,
-      animationMaxDuration,
       className,
       children,
       ...etc
@@ -130,7 +130,7 @@ export default class Words extends Component {
 
   startAnimation (isIn) {
     const { theme, children } = this.props;
-    const animationMaxDuration = this.props.animationMaxDuration || theme.animTime;
+    const timeoutEnter = this.props.timeoutEnter || theme.animTime;
 
     if (children.length === 0) return;
 
@@ -141,9 +141,9 @@ export default class Words extends Component {
     // The time it will take to add/remove a character per frame
     const realDuration = interval * children.length;
 
-    // Duration, min is theme.animTime and max is props.animationMaxDuration
+    // Duration, min is theme.animTime and max is props.timeoutEnter
     const duration = isIn
-      ? Math.max(Math.min(realDuration, animationMaxDuration), theme.animTime)
+      ? Math.max(Math.min(realDuration, timeoutEnter), theme.animTime)
       : theme.animTime;
 
     this.cancelNextAnimation();
