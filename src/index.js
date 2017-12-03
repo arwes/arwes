@@ -5,10 +5,11 @@ export Button from './Button';
 export Line from './Line';
 export Loading from './Loading';
 export Image from './Image';
+export Project from './Project';
+export Grid, { Row, Col } from './Grid';
 export Animation from './Animation';
 export Highlight from './Highlight';
 export Puffs from './Puffs';
-export Grid, { Row, Col } from './Grid';
 
 export { ThemeProvider } from 'theming';
 export withStyles from 'react-jss/lib/injectSheet';
