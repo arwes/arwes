@@ -5,6 +5,7 @@ import Button from '../src/Button/Play.md';
 import Line from '../src/Line/Play.md';
 import Loading from '../src/Loading/Play.md';
 import Project from '../src/Project/Play.md';
+import Footer from '../src/Footer/Play.md';
 import Image from '../src/Image/Play.md';
 import Grid from '../src/Grid/Play.md';
 import Animation from '../src/Animation/Play.md';
@@ -19,6 +20,7 @@ const components = [
   { name: 'Line', code: Line },
   { name: 'Loading', code: Loading },
   { name: 'Project', code: Project },
+  { name: 'Footer', code: Footer },
   { name: 'Image', code: Image },
   { name: 'Grid', code: Grid },
   { name: 'Animation', code: Animation },
