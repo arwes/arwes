@@ -6,7 +6,7 @@ export default (theme) => {
       backgroundColor: props => theme.background[props.layer]['level' + props.level],
       lineHeight: 1,
 
-      '&$entering, &$exiting, &$exited': {
+      '&$exiting, &$exited': {
         backgroundColor: 'transparent',
       },
     },

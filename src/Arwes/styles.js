@@ -39,7 +39,7 @@ export default (theme) => {
       transition: `all ${theme.animTime}ms ease-out`,
       opacity: 1,
 
-      '&$entering, &$exiting, &$exited': {
+      '&$exiting, &$exited': {
         opacity: 0,
       },
 

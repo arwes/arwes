@@ -7,7 +7,7 @@ export default (theme) => {
       width: '100%',
       height: 1,
 
-      '&$entering, &$exiting, &$exited': {
+      '&$exiting, &$exited': {
         '& $line': {
           width: '0%',
         },

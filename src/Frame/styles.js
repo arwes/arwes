@@ -29,7 +29,7 @@ export default (theme) => {
       position: 'relative',
       padding: '1px',
 
-      '&$entering, &$exiting, &$exited': {
+      '&$exiting, &$exited': {
         '& $borderLeft, & $borderRight': {
           height: '0%',
         },
@@ -62,7 +62,9 @@ export default (theme) => {
       position: 'relative',
       display: 'block',
       transition: `all ${theme.animTime}ms ease-in`,
-      backgroundColor: props => rgba(theme.background[props.layer]['level' + props.level], theme.alpha),
+      backgroundColor: props => props.noBackground
+        ? 'transparent'
+        : rgba(theme.background[props.layer]['level' + props.level], theme.alpha),
     },
     children: {
       display: 'block',

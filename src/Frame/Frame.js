@@ -17,6 +17,7 @@ export default function Frame (props) {
     corners,
     disabled,
     hover,
+    noBackground,
     className,
     children,
     ...etc
@@ -63,6 +64,7 @@ Frame.propTypes = {
   corners: PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6]),
   disabled: PropTypes.bool,
   hover: PropTypes.bool,
+  noBackground: PropTypes.bool,
 };
 
 Frame.defaultProps = {
@@ -74,4 +76,5 @@ Frame.defaultProps = {
   corners: 0,
   disabled: false,
   hover: false,
+  noBackground: false,
 };

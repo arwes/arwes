@@ -9,7 +9,7 @@ export default (theme) => {
       width: '100%',
       minHeight: 1,
 
-      '&$entering, &$exiting, &$exited': {
+      '&$exiting, &$exited': {
         '& $separator': {
           width: 0,
         },

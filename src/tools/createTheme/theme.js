@@ -48,11 +48,11 @@ export default {
   typography: {
     lineHeight: 1.5,
     headerSizes: {
-      h1: 32,
-      h2: 28,
-      h3: 24,
-      h4: 21,
-      h5: 18,
+      h1: 28,
+      h2: 24,
+      h3: 21,
+      h4: 18,
+      h5: 16,
       h6: 16,
     },
     fontSize: 21,
