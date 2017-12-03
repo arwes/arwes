@@ -6,6 +6,7 @@ export Line from './Line';
 export Loading from './Loading';
 export Image from './Image';
 export Project from './Project';
+export Header from './Header';
 export Footer from './Footer';
 export Grid, { Row, Col } from './Grid';
 export Animation from './Animation';
