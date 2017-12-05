@@ -10,7 +10,9 @@ describe('Project', function () {
     mount({
       Animation: ({ children }) => children({}),
       Frame: ({ children }) => <div>{children}</div>,
-    });
+      Words: ({ children }) => <div>{children}</div>,
+      header: 'Header',
+    }, 'Children');
   });
 
 });

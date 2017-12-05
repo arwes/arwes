@@ -20,9 +20,8 @@ export default function Project (props) {
     header,
     headerSize,
     icon,
-    body,
-    footer,
     className,
+    children,
     ...etc
   } = props;
   const cls = cx(classes.root, className);
@@ -48,22 +47,17 @@ export default function Project (props) {
           >
             {frameAnim => (
               <div>
-                <div className={classes.header}>
+                <header className={classes.header}>
                   <h1>
                     <Words animate={animate} show={frameAnim.entered}>
                       {header}
                     </Words>
                   </h1>
                   <div className={classes.icon}>{icon}</div>
-                </div>
+                </header>
                 <div className={classes.separator} />
-                <div className={classes.content}>
-                  <div className={classes.body}>
-                    {typeof body === 'function' ? body(frameAnim) : body}
-                  </div>
-                  {!!footer && <div className={classes.footer}>
-                    {typeof footer === 'function' ? footer(frameAnim) : footer}
-                  </div>}
+                <div className={classes.children}>
+                  {typeof children === 'function' ? children(frameAnim) : children}
                 </div>
               </div>
             )}
@@ -86,8 +80,6 @@ Project.propTypes = {
   header: PropTypes.string.isRequired,
   headerSize: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
   icon: PropTypes.any,
-  body: PropTypes.any.isRequired,
-  footer: PropTypes.any,
 };
 
 Project.defaultProps = {

@@ -6,7 +6,7 @@ export default (theme) => {
       display: 'block',
 
       '&$exiting, &$exited': {
-        '& $header, & $content': {
+        '& $header, & $children': {
           backgroundColor: 'transparent',
         },
         '& $icon': {
@@ -51,15 +51,10 @@ export default (theme) => {
       transition: `all ${theme.animTime}ms ease-out`,
       opacity: 1,
     },
-    content: {
+    children: {
       transition: `all ${theme.animTime}ms ease-out`,
       backgroundColor: rgba(theme.background.primary.level0, theme.alpha),
-    },
-    body: {
       padding: theme.padding,
-    },
-    footer: {
-      padding: [0, theme.padding, theme.padding],
     },
 
     entering: {},

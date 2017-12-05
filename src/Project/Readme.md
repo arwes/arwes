@@ -5,11 +5,8 @@ and the `<Words />` for the header title animation.
 The theme is the primary and the title has the header theme, this is not configurable.
 
 ```js
-<Project
-    header='Arwes'
-    body={`
-        Futuristic Sci-Fi and Cyberpunk Graphical User Interface
-        Framework for Web Apps
-    `}
-/>
+<Project animate header='Arwes'>
+    Futuristic Sci-Fi and Cyberpunk Graphical
+    User Interface Framework for Web Apps
+</Project>
 ```
