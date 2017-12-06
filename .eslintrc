@@ -17,7 +17,8 @@
   "globals": {
     "chai": true,
     "assert": true,
-    "expect": true
+    "expect": true,
+    "Prism": true
   },
 
   "plugins": [
