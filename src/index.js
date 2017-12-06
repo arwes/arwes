@@ -5,6 +5,7 @@ export Button from './Button';
 export Line from './Line';
 export Loading from './Loading';
 export Image from './Image';
+export Code from './Code';
 export Project from './Project';
 export Header from './Header';
 export Footer from './Footer';

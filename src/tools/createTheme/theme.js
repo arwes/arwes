@@ -58,7 +58,20 @@ export default {
     fontSize: 21,
     headerFontFamily: '"Electrolize", "sans-serif"',
     fontFamily: '"Titillium Web", "sans-serif"',
-    codeFontFamily: 'Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace',
+  },
+
+  code: {
+    fontSize: 14,
+    fontFamily: 'Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace',
+    background: '#000000',
+    color: '#3aafff',
+    comment: '#4a5f78',
+    keyword: '#bB7Dbf',
+    operator: '#0075e8',
+    function: '#8b6ccf',
+    variable: '#3aafff',
+    selector: '#3aafff',
+    value: '#05d48e',
   },
 
   // Number of columns inside a row
