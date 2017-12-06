@@ -43,6 +43,7 @@
     "extend": "^3.0.1",
     "howler": "^2.0.5",
     "polished": "^1.8.1",
+    "prismjs": "^1.8.4",
     "prop-types": "*",
     "react-jss": "^7.2.0",
     "react-transition-group": "^2.2.1"
