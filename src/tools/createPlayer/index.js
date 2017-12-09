@@ -1,5 +1,15 @@
 import howler from 'howler';
 
+/**
+ * Create handler for sound player functionalities.
+ * This uses the `howler` package to create a player.
+ * @param  {Object} depencencies
+ * @param  {Function} depencencies.Howl
+ * @param  {Object} conf - Player configuration
+ * @param  {Object} conf.sound - Configuration passed to `howler.Howl`.
+ * @param  {Object} conf.settings - Sound settings
+ * @return {Howl}
+ */
 export default (depencencies, conf) => {
   const deps = {
     Howl: howler.Howl,
