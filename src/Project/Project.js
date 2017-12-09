@@ -11,6 +11,7 @@ export default function Project (props) {
   const {
     theme,
     classes,
+    sounds,
     Animation,
     Frame,
     Words,
@@ -44,6 +45,7 @@ export default function Project (props) {
             corners={4}
             hover
             noBackground
+            onClick={() => sounds.click && sounds.click.play()}
           >
             {frameAnim => (
               <div>
@@ -74,6 +76,7 @@ Project.propTypes = {
   Words: PropTypes.any.isRequired,
   theme: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
+  sounds: PropTypes.object,
   animate: PropTypes.bool,
   show: PropTypes.bool,
   node: PropTypes.string,
@@ -88,6 +91,7 @@ Project.defaultProps = {
   Words: WordsComponent,
   animate: false,
   show: true,
+  sounds: {},
   node: 'article',
   headerSize: 'h2',
   icon: <i className='mdi mdi-package' />,

@@ -14,6 +14,7 @@ export default class Button extends Component {
     Frame: PropTypes.any.isRequired,
     theme: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
+    sounds: PropTypes.object,
     animate: PropTypes.bool,
     show: PropTypes.bool,
     layer: PropTypes.oneOf(['primary', 'secondary', 'header', 'control', 'success', 'alert', 'disabled']),
@@ -34,6 +35,7 @@ export default class Button extends Component {
     Animation: AnimationComponent,
     Highlight: HighlightComponent,
     Frame: FrameComponent,
+    sounds: {},
     animate: false,
     show: true,
     layer: 'control',
@@ -49,6 +51,7 @@ export default class Button extends Component {
       Frame,
       theme,
       classes,
+      sounds,
       animate,
       show,
       layer,
@@ -95,8 +98,14 @@ export default class Button extends Component {
   }
 
   onClick = (ev) => {
-    if (!this.props.disabled) {
-      this.props.onClick && this.props.onClick(ev);
+    const { disabled, onClick, animate, sounds } = this.props;
+
+    if (!disabled) {
+      onClick && onClick(ev);
+
+      if (animate) {
+        sounds.click && sounds.click.play();
+      }
     }
   }
 }

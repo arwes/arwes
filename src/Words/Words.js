@@ -9,6 +9,7 @@ export default class Words extends Component {
   static propTypes = {
     theme: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
+    sounds: PropTypes.object,
     animate: PropTypes.bool,
     show: PropTypes.bool,
     timeoutEnter: PropTypes.number,
@@ -18,6 +19,7 @@ export default class Words extends Component {
   };
 
   static defaultProps = {
+    sounds: {},
     animate: false,
     show: true,
     layer: '',
@@ -74,6 +76,7 @@ export default class Words extends Component {
     const {
       theme,
       classes,
+      sounds,
       animate,
       show,
       timeoutEnter,
@@ -122,6 +125,11 @@ export default class Words extends Component {
   stopAnimation () {
     this.cancelNextAnimation();
     this.setState({ animating: false });
+
+    const { animate, sounds } = this.props;
+    if (animate) {
+      sounds.typing && sounds.typing.stop();
+    }
   }
 
   cancelNextAnimation () {
@@ -129,10 +137,16 @@ export default class Words extends Component {
   }
 
   startAnimation (isIn) {
-    const { theme, children } = this.props;
+    const { theme, children, animate, sounds } = this.props;
     const timeoutEnter = this.props.timeoutEnter || theme.animTime;
 
-    if (children.length === 0) return;
+    if (children.length === 0) {
+      return;
+    }
+
+    if (animate) {
+      sounds.typing && sounds.typing.play();
+    }
 
     // 1s / frames per second (FPS)
     // 60 FPS are the default in requestAnimationFrame
