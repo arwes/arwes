@@ -22,5 +22,6 @@ export SoundsProvider from './SoundsProvider';
 export withSounds from './tools/withSounds';
 export createSounds from './tools/createSounds';
 
-export createLoader from './tools/loader';
-export createResponsive from './tools/responsive';
+export createLoader from './tools/createLoader';
+export createResponsive from './tools/createResponsive';
+export createPlayer from './tools/createPlayer';

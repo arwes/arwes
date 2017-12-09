@@ -5,8 +5,8 @@ import cx from 'classnames';
 import AnimationComponent from '../Animation';
 import PuffsComponent from '../Puffs';
 import { getResponsiveResource } from '../tools/utils';
-import createLoaderModule from '../tools/loader';
-import createResponsiveModule from '../tools/responsive';
+import createLoaderModule from '../tools/createLoader';
+import createResponsiveModule from '../tools/createResponsive';
 
 export default class Arwes extends Component {
 

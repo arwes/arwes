@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import createPlayerModule from '../tools/player';
+import createPlayerModule from '../tools/createPlayer';
 
 export default class SoundsProvider extends Component {
 
