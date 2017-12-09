@@ -6,10 +6,10 @@ export default (depencencies, conf) => {
     ...depencencies,
   };
 
-  const { howl = {}, settings = {} } = conf || {};
-  const player = new deps.Howl(howl);
+  const { sound = {}, settings = {} } = conf || {};
+  const player = new deps.Howl(sound);
 
-  if (settings.oneAtTheTime) {
+  if (settings.oneAtATime) {
     const play = player.play.bind(player);
     let lastPlay;
     player.play = function (...args) {

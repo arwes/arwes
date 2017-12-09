@@ -12,16 +12,16 @@ describe('createPlayer', function () {
   it('Should create a player with config', function () {
     class Howl {
       constructor (config) {
-        this.howl = config;
+        this.config = config;
       }
     }
-    const howl = 10;
-    const player = createPlayer({ Howl }, { howl });
-    expect(player.howl).to.equal(howl);
+    const sound = 10;
+    const player = createPlayer({ Howl }, { sound });
+    expect(player.config).to.equal(sound);
   });
 
   it('Should create a player to play the sound only once a time', function () {
-    const play = sinon.stub().returns(1);
+    const play = sinon.stub().returns(100);
     const stop = sinon.spy();
     class Howl {
       constructor () {
@@ -29,13 +29,13 @@ describe('createPlayer', function () {
         this.stop = stop;
       }
     }
-    const player = createPlayer({ Howl }, { settings: { oneAtTheTime: true } });
+    const player = createPlayer({ Howl }, { settings: { oneAtATime: true } });
 
     const lastPlayId = player.play();
     player.play();
 
-    expect(stop.callCount).to.equal(1);
-    expect(stop.calledWith(lastPlayId)).to.be.true;
+    expect(stop).to.have.callCount(1);
+    expect(stop).to.have.been.calledWith(lastPlayId);
   });
 
 });

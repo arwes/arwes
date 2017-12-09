@@ -11,7 +11,7 @@ describe('withSounds', function () {
 
   it('Should create a component with sounds by provider', function () {
     // These sounds are provided
-    const sounds = { start: 1, end: 2 };
+    const sounds = { thesounds: 1 };
 
     // A provider mock
     class Provider extends React.Component {
@@ -29,7 +29,7 @@ describe('withSounds', function () {
     const MyComp = (props) => {
       // Assert the provided sounds are the same
       expect(props.sounds).to.equal(sounds);
-      return <div>My Comp</div>;
+      return <div />;
     };
     const MyCompWithSounds = withSounds()(MyComp);
 
