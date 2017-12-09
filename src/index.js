@@ -17,5 +17,10 @@ export Puffs from './Puffs';
 export { ThemeProvider } from 'theming';
 export withStyles from 'react-jss/lib/injectSheet';
 export createTheme from './tools/createTheme';
+
+export SoundsProvider from './SoundsProvider';
+export withSounds from './tools/withSounds';
+export createSounds from './tools/createSounds';
+
 export createLoader from './tools/loader';
 export createResponsive from './tools/responsive';

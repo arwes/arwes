@@ -5,8 +5,32 @@ import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 import Navigo from 'navigo';
 
 import * as arwes from '../src';
-import { ThemeProvider, createTheme } from '../src';
+import {
+  ThemeProvider,
+  createTheme,
+  SoundsProvider,
+  createSounds
+} from '../src';
 import componentsList from './components';
+
+const sounds = {
+  shared: {
+    volume: 1,
+  },
+  players: {
+    click: {
+      sound: { src: ['/sound/click.mp3'] }
+    },
+    typing: {
+      sound: { src: ['/sound/typing.mp3'] },
+      settings: { oneAtATime: true }
+    },
+    deploy: {
+      sound: { src: ['/sound/deploy.mp3'] },
+      settings: { oneAtATime: true }
+    },
+  }
+};
 
 class PlayLive extends Component {
   static propTypes = {
@@ -135,7 +159,9 @@ class App extends Component {
 
 ReactDOM.render(
   <ThemeProvider theme={createTheme()}>
-    <App />
+    <SoundsProvider sounds={createSounds(sounds)}>
+      <App />
+    </SoundsProvider>
   </ThemeProvider>,
   document.querySelector('#app')
 );
