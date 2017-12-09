@@ -60,13 +60,47 @@ export default function Grid (props) {
 Grid.propTypes = {
   theme: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
+
+  /**
+   * If component is a row.
+   */
   row: PropTypes.bool,
+
+  /**
+   * If row is nested inside another one.
+   */
   nested: PropTypes.bool,
+
+  /**
+   * If component is a column.
+   */
   col: PropTypes.bool,
+
+  /**
+   * The number of columns in small breakpoint.
+   */
   s: PropTypes.number,
+
+  /**
+   * The number of columns in medium breakpoint.
+   */
   m: PropTypes.number,
+
+  /**
+   * The number of columns in large breakpoint.
+   */
   l: PropTypes.number,
+
+  /**
+   * The number of columns in extra large breakpoint.
+   */
   xl: PropTypes.number,
+
+  /**
+   * A list of offset definitions for each breakpoint.
+   * Example: `['m4', 'l2']` creates an offset of 4 columns
+   * on medium breakpoint and an offset of 2 columns on large breakpoint.
+   */
   offset: PropTypes.arrayOf(PropTypes.string),
 };
 

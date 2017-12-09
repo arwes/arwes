@@ -13,3 +13,6 @@ render(
     </div>
 );
 ```
+
+It is possible to create a component which is a row and a column at the same time,
+you can pass `row` and `column` as `true` at the same time.
