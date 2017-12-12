@@ -26,9 +26,9 @@
   "homepage": "https://github.com/romelperez/arwes",
   "main": "lib/index.js",
   "scripts": {
-    "test": "npm run test-lint && TRAVIS=true npm run test-unit",
+    "test": "npm run test-lint && TRAVIS=true npm run test-dev",
     "test-lint": "eslint --cache --quiet ./src",
-    "test-unit": "karma start",
+    "test-dev": "karma start",
     "bundle": "npm run bundle-clean && npm run bundle-run",
     "bundle-clean": "rimraf ./lib/*",
     "bundle-run": "NODE_ENV=production babel src --out-dir lib",
