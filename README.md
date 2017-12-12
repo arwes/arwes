@@ -71,10 +71,11 @@ This project has many inspiration sources, some of them:
 - [x] Design, animations and sounds guidelines
 - [x] Playground for development
 - [x] Base API for components and tools
+- [ ] Support for server-side rendering
 - [ ] Define logo
 - [ ] Get started docs
+- [ ] Create component live documentation
 - [ ] Create example implementations
-- [ ] Create a playground in docs
 - [ ] Best test coverege
 
 ## License
