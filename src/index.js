@@ -14,8 +14,8 @@ export Animation from './Animation';
 export Highlight from './Highlight';
 export Puffs from './Puffs';
 
-export { ThemeProvider } from 'theming';
-export withStyles from 'react-jss/lib/injectSheet';
+export ThemeProvider from './ThemeProvider';
+export withStyles from './tools/withStyles';
 export createTheme from './tools/createTheme';
 
 export SoundsProvider from './SoundsProvider';
