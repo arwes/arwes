@@ -24,9 +24,15 @@ for code highlighting.
 
 > Currently is under development with an alpha version available on npm. API may change.
 
+## Install
+
+```bash
+npm install --save arwes@next
+```
+
 ## Documentation
 
-Get started, API, playground and examples can be found at [arwes.romelperez.com](https://arwes.romelperez.com).
+See [arwes.romelperez.com](https://arwes.romelperez.com).
 
 ## Need help?
 
