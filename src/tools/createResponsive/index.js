@@ -1,3 +1,4 @@
+import isNode from 'detect-node';
 import getDimensions from '../get-dimensions';
 
 /**
@@ -52,7 +53,9 @@ export default (depencencies) => {
         callback(stats);
       };
 
-      window.addEventListener('resize', onChange, false);
+      if (!isNode) {
+        window.addEventListener('resize', onChange, false);
+      }
 
       return onChange;
     },
@@ -62,7 +65,9 @@ export default (depencencies) => {
      * @param  {Function} - The event callback.
      */
     off (onChange) {
-      window.removeEventListener('resize', onChange, false);
+      if (!isNode) {
+        window.removeEventListener('resize', onChange, false);
+      }
     },
 
   };

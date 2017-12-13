@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "detect-node": "^2.0.3",
     "extend": "^3.0.1",
     "hoist-non-react-statics": "^2.3.1",
     "howler": "^2.0.5",
@@ -47,7 +48,8 @@
     "prismjs": "^1.8.4",
     "prop-types": "*",
     "react-jss": "^7.2.0",
-    "react-transition-group": "^2.2.1"
+    "react-transition-group": "^2.2.1",
+    "theming": "^1.2.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.0",
