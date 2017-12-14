@@ -61,7 +61,9 @@ export default class Header extends Component {
       <Animation animate={animate} show={show} timeout={theme.animTime}>
         {anim => (
           <div className={cx(cls, classes[anim.status])} {...etc}>
-            <div className={classes.children}>{children}</div>
+            <div className={classes.children}>
+              {typeof children === 'function' ? children(anim) : children}
+            </div>
             <div className={classes.separator} />
           </div>
         )}
