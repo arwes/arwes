@@ -58,6 +58,10 @@ export default (theme) => {
       marginRight: -(theme.margin / 2),
     },
 
+    noMargin: {
+      marginBottom: 0,
+    },
+
     col: {
       float: 'left',
       boxSizing: 'border-box',

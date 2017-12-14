@@ -9,6 +9,7 @@ export default function Grid (props) {
     classes,
     row,
     nested,
+    noMargin,
     col,
     s,
     m,
@@ -20,7 +21,6 @@ export default function Grid (props) {
     ...etc
   } = props;
 
-  const isRow = row && !col;
   const isCol = !row && col;
   const isRowCol = row && col;
 
@@ -41,7 +41,8 @@ export default function Grid (props) {
 
   const cls = cx(
     baseClass,
-    isRow && nested && [classes.nested],
+    noMargin && [classes.noMargin],
+    nested && [classes.nested],
     isCol && colClasses,
     className
   );
@@ -70,6 +71,11 @@ Grid.propTypes = {
    * If row is nested inside another one.
    */
   nested: PropTypes.bool,
+
+  /**
+   * Don't add margin bottom to the row.
+   */
+  noMargin: PropTypes.bool,
 
   /**
    * If component is a column.

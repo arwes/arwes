@@ -37,7 +37,7 @@ render(
         </Row>
         <Row>
             <Col s={12}>
-                <Row nested>
+                <Row nested noMargin>
                     <Col s={6}><Item n={6} /></Col>
                     <Col s={6}><Item n={7} /></Col>
                 </Row>
