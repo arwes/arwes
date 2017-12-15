@@ -49,6 +49,7 @@ build
 karma.conf.js
 webpack.config.js
 next.config.js
+deploy.json
 
 CHANGELOG.md
 CODE_OF_CONDUCT.md

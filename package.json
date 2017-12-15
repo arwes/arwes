@@ -35,7 +35,8 @@
     "play": "webpack-dev-server",
     "site:dev": "next -p 7000",
     "site:build": "next build",
-    "site:start": "next start"
+    "site:start": "next start -p 17000",
+    "site:deploy": "pm2 startOrRestart deploy.json --env production"
   },
   "peerDependencies": {
     "react": "*",

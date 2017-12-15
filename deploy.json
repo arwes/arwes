@@ -1,0 +1,14 @@
+{
+  "apps": {
+    "name": "arwes",
+    "script": "./node_modules/.bin/next",
+    "args": ["start", "-p", "17000"],
+    "max_memory_restart": "300M",
+    "instances" : 0,
+    "exec_mode" : "cluster",
+    "env_production": {
+      "NODE_ENV": "production",
+      "PORT": 17000
+    }
+  }
+}
