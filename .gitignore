@@ -12,6 +12,7 @@ pids
 lib-cov
 coverage
 nbproject
+.next
 
 *.log
 *.pid
@@ -42,3 +43,4 @@ package-lock.json
 ##
 
 lib
+build

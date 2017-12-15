@@ -12,6 +12,7 @@ pids
 lib-cov
 coverage
 nbproject
+.next
 
 *.log
 *.pid
@@ -42,8 +43,17 @@ package-lock.json
 ##
 
 play
+pages
+static
+build
 karma.conf.js
 webpack.config.js
+next.config.js
+
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+
 .editorconfig
 .eslintignore
 .eslintrc

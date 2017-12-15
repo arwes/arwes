@@ -1,6 +1,6 @@
 {
   "name": "arwes",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for Web Apps",
   "keywords": [
     "gui",
@@ -32,7 +32,10 @@
     "bundle": "npm run bundle-clean && npm run bundle-run",
     "bundle-clean": "rimraf ./lib/*",
     "bundle-run": "NODE_ENV=production babel src --out-dir lib",
-    "play": "webpack-dev-server"
+    "play": "webpack-dev-server",
+    "site:dev": "next -p 7000",
+    "site:build": "next build",
+    "site:start": "next start"
   },
   "peerDependencies": {
     "react": "*",
@@ -47,7 +50,7 @@
     "polished": "^1.8.1",
     "prismjs": "^1.8.4",
     "prop-types": "*",
-    "react-jss": "^7.2.0",
+    "react-jss": "^8.1.0",
     "react-transition-group": "^2.2.1",
     "theming": "^1.2.1"
   },
@@ -76,6 +79,7 @@
     "karma-webpack": "^2.0.6",
     "mocha": "^4.0.1",
     "navigo": "^5.3.3",
+    "next": "^4.2.1",
     "raw-loader": "^0.5.1",
     "react": "^16.1.1",
     "react-addons-test-utils": "^15.5.1",

@@ -9,7 +9,10 @@ module.exports = {
     filename: '[name].js'
   },
   devServer: {
-    contentBase: path.join(__dirname, 'play'),
+    contentBase: [
+      path.join(__dirname, 'play'),
+      path.join(__dirname, 'static')
+    ],
     port: 7100,
   },
   resolve: {
