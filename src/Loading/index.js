@@ -1,4 +1,4 @@
-import withStyles from 'react-jss/lib/injectSheet';
+import withStyles from '../tools/withStyles';
 import Loading from './Loading';
 import styles from './styles';
 

@@ -1,4 +1,4 @@
-import withStyles from 'react-jss/lib/injectSheet';
+import withStyles from '../tools/withStyles';
 import Puffs from './Puffs';
 import styles from './styles';
 

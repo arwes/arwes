@@ -1,4 +1,4 @@
-import withStyles from 'react-jss/lib/injectSheet';
+import withStyles from '../tools/withStyles';
 import withSounds from '../tools/withSounds';
 import Footer from './Footer';
 import styles from './styles';

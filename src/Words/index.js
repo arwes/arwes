@@ -1,4 +1,4 @@
-import withStyles from 'react-jss/lib/injectSheet';
+import withStyles from '../tools/withStyles';
 import withSounds from '../tools/withSounds';
 import Words from './Words';
 import styles from './styles';

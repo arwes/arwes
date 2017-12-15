@@ -1,5 +1,5 @@
 import React from 'react';
-import withStyles from 'react-jss/lib/injectSheet';
+import withStyles from '../tools/withStyles';
 import Grid from './Grid';
 import styles from './styles';
 
