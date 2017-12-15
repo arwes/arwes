@@ -24,6 +24,7 @@ export default class Words extends Component {
     show: true,
     layer: '',
     blinkText: '&#9611;',
+    children: '',
   };
 
   // Current animation frame identifier.
