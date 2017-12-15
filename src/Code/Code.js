@@ -9,6 +9,7 @@ export default class Code extends Component {
 
   static propTypes = {
     Animation: PropTypes.any.isRequired,
+    animation: PropTypes.object,
     theme: PropTypes.any.isRequired,
     classes: PropTypes.any.isRequired,
     animate: PropTypes.bool,
@@ -36,6 +37,7 @@ export default class Code extends Component {
 
     const {
       Animation,
+      animation,
       theme,
       classes,
       animate,
@@ -50,7 +52,12 @@ export default class Code extends Component {
     const cls = cx(classes.root, className);
 
     return (
-      <Animation animate={animate} show={show} timeout={theme.animTime}>
+      <Animation
+        animate={animate}
+        show={show}
+        timeout={theme.animTime}
+        {...animation}
+      >
         {anim => (
           <span className={cx(cls, classes[anim.status])} {...etc}>
             <Wrapper

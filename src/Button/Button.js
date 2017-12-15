@@ -12,6 +12,7 @@ export default class Button extends Component {
     Animation: PropTypes.any.isRequired,
     Highlight: PropTypes.any.isRequired,
     Frame: PropTypes.any.isRequired,
+    animation: PropTypes.object,
     theme: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     sounds: PropTypes.object,
@@ -52,6 +53,7 @@ export default class Button extends Component {
       theme,
       classes,
       sounds,
+      animation,
       animate,
       show,
       layer,
@@ -65,7 +67,12 @@ export default class Button extends Component {
     const cls = cx(classes.root, classes[layer], className);
 
     return (
-      <Animation show={show} animate={animate} timeout={theme.animTime}>
+      <Animation
+        show={show}
+        animate={animate}
+        timeout={theme.animTime}
+        {...animation}
+      >
         {anim => (
         <div
           className={cx(cls, classes[anim.status], disabled && classes.disabled)}

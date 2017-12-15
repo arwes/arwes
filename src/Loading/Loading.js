@@ -9,6 +9,7 @@ export default function Loading (props) {
   const {
     theme,
     classes,
+    animation,
     Animation,
     animate,
     show,
@@ -24,7 +25,12 @@ export default function Loading (props) {
   }, className);
 
   return (
-    <Animation animate={animate} show={show} timeout={theme.animTime}>
+    <Animation
+      animate={animate}
+      show={show}
+      timeout={theme.animTime}
+      {...animation}
+    >
       {anim => (
         <div className={cx(cls, classes[anim.status])} {...etc}>
           { !small && <div className={cx(classes.circle, classes.circle1)} /> }
@@ -39,6 +45,7 @@ Loading.propTypes = {
   Animation: PropTypes.any.isRequired,
   theme: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
+  animation: PropTypes.object,
   animate: PropTypes.bool,
   show: PropTypes.bool,
   layer: PropTypes.oneOf(['primary', 'secondary', 'header', 'control', 'success', 'alert', 'disabled']),

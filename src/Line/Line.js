@@ -10,6 +10,7 @@ export default function Line (props) {
     theme,
     classes,
     Animation,
+    animation,
     animate,
     show,
     layer,
@@ -19,7 +20,12 @@ export default function Line (props) {
   const cls = cx(classes.root, className);
 
   return (
-    <Animation animate={animate} show={show} timeout={theme.animTime}>
+    <Animation
+      animate={animate}
+      show={show}
+      timeout={theme.animTime}
+      {...animation}
+    >
       {anim => (
         <div className={cx(cls, classes[anim.status])} {...etc}>
           <div className={classes.line} />
@@ -33,6 +39,7 @@ export default function Line (props) {
 
 Line.propTypes = {
   Animation: PropTypes.any.isRequired,
+  animation: PropTypes.object,
   theme: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   animate: PropTypes.bool,

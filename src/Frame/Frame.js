@@ -8,6 +8,7 @@ export default class Frame extends Component {
 
   static propTypes = {
     Animation: PropTypes.any.isRequired,
+    animation: PropTypes.object,
     theme: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     sounds: PropTypes.object,
@@ -58,6 +59,7 @@ export default class Frame extends Component {
   render () {
     const {
       Animation,
+      animation,
       theme,
       classes,
       sounds,
@@ -79,7 +81,12 @@ export default class Frame extends Component {
     }, className);
 
     return (
-      <Animation show={show} animate={animate} timeout={theme.animTime}>
+      <Animation
+        show={show}
+        animate={animate}
+        timeout={theme.animTime}
+        {...animation}
+      >
         {anim => (
         <div className={cx(cls, classes[anim.status])} {...etc}>
 

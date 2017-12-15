@@ -8,6 +8,7 @@ export default class Footer extends Component {
 
   static propTypes = {
     Animation: PropTypes.any.isRequired,
+    animation: PropTypes.object,
     theme: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     sounds: PropTypes.object,
@@ -48,6 +49,7 @@ export default class Footer extends Component {
       theme,
       classes,
       Animation,
+      animation,
       sounds,
       animate,
       show,
@@ -58,7 +60,12 @@ export default class Footer extends Component {
     const cls = cx(classes.root, className);
 
     return (
-      <Animation animate={animate} show={show} timeout={theme.animTime}>
+      <Animation
+        animate={animate}
+        show={show}
+        timeout={theme.animTime}
+        {...animation}
+      >
         {anim => (
           <div className={cx(cls, classes[anim.status])} {...etc}>
             <div className={classes.separator} />

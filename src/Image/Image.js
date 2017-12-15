@@ -17,6 +17,7 @@ export default class Image extends Component {
     Loading: PropTypes.any.isRequired,
     createLoader: PropTypes.any.isRequired,
     createResponsive: PropTypes.any.isRequired,
+    animation: PropTypes.object,
     theme: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     animate: PropTypes.bool,
@@ -92,6 +93,7 @@ export default class Image extends Component {
       Loading,
       createLoader,
       createResponsive,
+      animation,
       theme,
       classes,
       animate,
@@ -112,7 +114,12 @@ export default class Image extends Component {
     }, className);
 
     return (
-      <Animation animate={animate} show={show} timeout={theme.animTime}>
+      <Animation
+        animate={animate}
+        show={show}
+        timeout={theme.animTime}
+        {...animation}
+      >
         {anim => (
           <figure className={cx(cls, classes[anim.status])} {...etc}>
             <Frame animate={animate} show={show} layer={layer}>

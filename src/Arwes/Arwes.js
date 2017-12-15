@@ -15,6 +15,7 @@ export default class Arwes extends Component {
     Puffs: PropTypes.any.isRequired,
     createResponsive: PropTypes.any.isRequired,
     createLoader: PropTypes.any.isRequired,
+    animation: PropTypes.object,
     theme: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     animate: PropTypes.bool,
@@ -101,6 +102,7 @@ export default class Arwes extends Component {
       createLoader,
       theme,
       classes,
+      animation,
       animate,
       show,
       resources,
@@ -133,7 +135,12 @@ export default class Arwes extends Component {
     }
 
     return (
-      <Animation show={show} animate={animate} timeout={theme.animTime}>
+      <Animation
+        show={show}
+        animate={animate}
+        timeout={theme.animTime}
+        {...animation}
+      >
         {anim => (
         <div className={cx(cls, classes[anim.status])} {...rest}>
           <div className={classes.background} style={backgroundStyle} />

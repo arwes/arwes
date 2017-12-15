@@ -15,6 +15,7 @@ export default function Project (props) {
     Animation,
     Frame,
     Words,
+    animation,
     animate,
     show,
     node,
@@ -28,7 +29,12 @@ export default function Project (props) {
   const cls = cx(classes.root, className);
 
   return (
-    <Animation animate={animate} show={show} timeout={theme.animTime}>
+    <Animation
+      animate={animate}
+      show={show}
+      timeout={theme.animTime}
+      {...animation}
+    >
       {anim => (
         React.createElement(
           node,
@@ -74,6 +80,7 @@ Project.propTypes = {
   Animation: PropTypes.any.isRequired,
   Frame: PropTypes.any.isRequired,
   Words: PropTypes.any.isRequired,
+  animation: PropTypes.object,
   theme: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   sounds: PropTypes.object,
