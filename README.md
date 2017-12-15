@@ -1,5 +1,5 @@
 <h1 align="center">
-  <a href='http://arwes.romelperez.com'>Arwes</a>
+  Arwes
 </h1>
 
 <p align="center" style="font-size: 1.2rem;">
@@ -27,7 +27,7 @@ for code highlighting.
 ## Install
 
 ```bash
-npm install --save arwes@next
+npm install --save arwes
 ```
 
 ## Documentation
@@ -71,7 +71,7 @@ This project has many inspiration sources, some of them:
 - [x] Design, animations and sounds guidelines
 - [x] Playground for development
 - [x] Base API for components and tools
-- [ ] Support for server-side rendering
+- [x] Support for server-side rendering
 - [ ] Define logo
 - [ ] Get started docs
 - [ ] Create component live documentation
