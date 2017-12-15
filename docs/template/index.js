@@ -52,6 +52,9 @@ class Wrapper extends React.Component {
   }
 
   setGA () {
+
+    if (!location.origin.includes('arwes')) return;
+
     const gaScript = document.createElement('script');
     gaScript.async = true;
     gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=UA-50433259-2';
