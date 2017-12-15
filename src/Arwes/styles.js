@@ -66,9 +66,6 @@ export default (theme) => {
       '& p': {
         margin: [0, 0, theme.margin],
       },
-      '& p:last-of-type': {
-        marginBottom: 0,
-      },
 
       '& small': {
         fontSize: '80%',
