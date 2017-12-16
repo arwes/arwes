@@ -33,10 +33,10 @@
     "bundle-clean": "rimraf ./lib/*",
     "bundle-run": "NODE_ENV=production babel src --out-dir lib",
     "play": "webpack-dev-server",
-    "site:dev": "next -p 7000",
-    "site:build": "next build",
-    "site:start": "next start -p 17000",
-    "site:deploy": "pm2 startOrRestart deploy.json --env production"
+    "site-dev": "next -p 7000",
+    "site-build": "next build",
+    "site-start": "next start -p 17000",
+    "site-deploy": "pm2 startOrRestart deploy.json --env production"
   },
   "peerDependencies": {
     "react": "*",
@@ -44,6 +44,8 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "d3-path": "^1.0.5",
+    "d3-shape": "^1.2.0",
     "detect-node": "^2.0.3",
     "extend": "^3.0.1",
     "hoist-non-react-statics": "^2.3.1",
