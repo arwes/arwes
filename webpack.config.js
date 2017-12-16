@@ -14,6 +14,7 @@ module.exports = {
       path.join(__dirname, 'static')
     ],
     port: 7100,
+    host: '0.0.0.0',
   },
   resolve: {
     modules: ['node_modules']
@@ -38,4 +39,7 @@ module.exports = {
     }]
   },
   devtool: 'inline-source-map',
+  watchOptions: {
+    poll: true
+  },
 };
