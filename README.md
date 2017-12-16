@@ -1,5 +1,8 @@
 <h1 align="center">
+  <img src='./static/img/logo-invert.png' alt='Arwes' height='100' />
+  <br />
   Arwes
+  <br />
 </h1>
 
 <p align="center" style="font-size: 1.2rem;">
@@ -16,8 +19,10 @@ _____________
 Arwes is a web framework to build user interfaces for
 web applications based on science fiction and cyberpunk styles guidelines, animations
 and sounds effects. The idea is to provide an user experience as if you were using
-futuristic out of a movie interfaces for your project. The tools are based on
-[React](https://reactjs.org) for components, [JSS](http://cssinjs.org) for styles,
+futuristic out of a movie interfaces for your project.
+
+The tools are based on [React](https://reactjs.org) for components,
+[JSS](http://cssinjs.org) for styles,
 [react-transition-group](https://reactcommunity.org/react-transition-group/) for
 animations, [Howler](https://howlerjs.com/) for sounds and [Prism](http://prismjs.com)
 for code highlighting.
@@ -72,7 +77,7 @@ This project has many inspiration sources, some of them:
 - [x] Playground for development
 - [x] Base API for components and tools
 - [x] Support for server-side rendering
-- [ ] Define logo
+- [x] Define logo
 - [ ] Get started docs
 - [ ] Create component live documentation
 - [ ] Create example implementations

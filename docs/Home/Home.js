@@ -4,6 +4,8 @@ import Arwes from '../../src/Arwes';
 import Loading from '../../src/Loading';
 import Words from '../../src/Words';
 import Button from '../../src/Button';
+import Logo from '../../src/Logo';
+
 import { getResponsiveResource } from '../../src/tools/utils';
 import createLoader from '../../src/tools/createLoader';
 import createResponsive from '../../src/tools/createResponsive';
@@ -57,6 +59,7 @@ export default class Home extends React.Component {
           {anim => (
             <div className={classes.root}>
               <main className={classes.main}>
+                <Logo animate show={anim.entered} layer='header' />
                 <h1><Words animate show={anim.entered}>
                   Arwes
                 </Words></h1>
