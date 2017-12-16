@@ -13,6 +13,7 @@ export Grid, { Row, Col } from './Grid';
 export Animation from './Animation';
 export Highlight from './Highlight';
 export Puffs from './Puffs';
+export Logo from './Logo';
 
 export ThemeProvider from './ThemeProvider';
 export withStyles from './tools/withStyles';

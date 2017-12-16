@@ -13,6 +13,7 @@ import Grid from '../src/Grid/Play.md';
 import Animation from '../src/Animation/Play.md';
 import Highlight from '../src/Highlight/Play.md';
 import Puffs from '../src/Puffs/Play.md';
+import Logo from '../src/Logo/Play.md';
 
 const components = [
   { name: 'Arwes', code: Arwes },
@@ -30,6 +31,7 @@ const components = [
   { name: 'Animation', code: Animation },
   { name: 'Highlight', code: Highlight },
   { name: 'Puffs', code: Puffs },
+  { name: 'Logo', code: Logo },
 ];
 
 export default components;
