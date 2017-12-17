@@ -1,7 +1,8 @@
 export default (theme) => {
   return {
     root: {
-      display: 'inline-block',
+      display: props => props.type === 'code' ? 'inline-block' : 'block',
+      margin: props => '0 0 ' + (props.type === 'code' ? 0 : theme.margin) + 'px',
       verticalAlign: 'top',
       transition: `all ${theme.animTime}ms ease-out`,
       opacity: 1,

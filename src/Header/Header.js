@@ -67,12 +67,12 @@ export default class Header extends Component {
         {...animation}
       >
         {anim => (
-          <div className={cx(cls, classes[anim.status])} {...etc}>
+          <header className={cx(cls, classes[anim.status])} {...etc}>
             <div className={classes.children}>
               {typeof children === 'function' ? children(anim) : children}
             </div>
             <div className={classes.separator} />
-          </div>
+          </header>
         )}
       </Animation>
     );

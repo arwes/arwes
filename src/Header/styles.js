@@ -29,7 +29,6 @@ export default (theme) => {
     },
     children: {
       display: 'block',
-      padding: theme.padding,
     },
 
     entering: {},

@@ -67,12 +67,12 @@ export default class Footer extends Component {
         {...animation}
       >
         {anim => (
-          <div className={cx(cls, classes[anim.status])} {...etc}>
+          <footer className={cx(cls, classes[anim.status])} {...etc}>
             <div className={classes.separator} />
             <div className={classes.children}>
               {typeof children === 'function' ? children(anim) : children}
             </div>
-          </div>
+          </footer>
         )}
       </Animation>
     );

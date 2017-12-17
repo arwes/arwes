@@ -17,9 +17,17 @@ export default {
 
   margin: 20,
   padding: 20,
+
+  // Base box or text shadow length.
   shadowLength: 4,
+
+  // Base animation duration in ms.
   animTime: 250,
+
+  // The opacity to apply to elements when needed.
   alpha: 0.75,
+
+  // The color variation.
   accent,
 
   // Every color has a `base`, `light` and `dark` variation.
@@ -77,8 +85,9 @@ export default {
   // Number of columns inside a row
   grid: 12,
 
-  // Until the number in device screen width the breakpoint is taken,
-  // after `large` one it is `xlarge`.
+  // Until the number in device screen width the breakpoint is taken.
+  // E.g. Until the `small` number is viewport small, from `small + 1` is medium.
+  // After `large` one it is `xlarge`.
   responsive: {
     small: 600,
     medium: 992,
