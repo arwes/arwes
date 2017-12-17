@@ -1,4 +1,161 @@
-import template from '../docs/template';
-import Home from '../docs/Home';
+import React from 'react';
+import cx from 'classnames';
 
-export default template(Home);
+import withStyles from '../src/tools/withStyles';
+import Arwes from '../src/Arwes';
+import Words from '../src/Words';
+import Button from '../src/Button';
+import Logo from '../src/Logo';
+
+import withTemplate from '../site/withTemplate';
+import { getTitle } from '../site/utils';
+import Link from '../site/components/Link';
+
+const styles = (theme) => {
+  return {
+    root: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+      display: 'flex',
+      flexDirection: 'column',
+
+      '& h1': {
+        margin: [0, 0, theme.margin / 2],
+        fontSize: 40,
+      },
+      '& p': {
+        margin: [0, 0, theme.margin],
+        maxWidth: 500,
+      },
+      '& $option + $option': {
+        marginLeft: theme.padding / 2,
+      },
+    },
+    main: {
+      flex: 1,
+      display: 'flex',
+    },
+    content: {
+      margin: 'auto',
+      padding: [0, theme.padding],
+      textAlign: 'center',
+    },
+    option: {
+      display: 'inline-block',
+    },
+    footer: {
+      opacity: theme.alpha / 2,
+    },
+    footerContent: {
+      display: 'flex',
+      padding: theme.padding / 2,
+      fontSize: '80%',
+    },
+    footerLeft: {
+      flex: '1 1 auto',
+    },
+    footerRight: {
+      flex: '1 1 auto',
+      textAlign: 'right',
+    },
+  };
+};
+
+class Home extends React.Component {
+
+  constructor () {
+    super(...arguments);
+    this.state = { show: false };
+  }
+
+  componentDidMount () {
+    this.setState({ show: true });
+    window.document.title = getTitle(window.location.pathname);
+  }
+
+  render () {
+    const { classes, resources } = this.props;
+    const { show } = this.state;
+
+    return (
+      <Arwes
+        animate
+        show={show}
+        showResources={show}
+        resources={resources}
+      >
+        {anim => (
+        <div className={classes.root}>
+
+          <main className={classes.main}>
+            <div className={classes.content}>
+
+              <Logo animate show={anim.entered} layer='header' />
+              <h1><Words animate show={anim.entered}>
+                Arwes
+              </Words></h1>
+              <p><Words animate show={anim.entered}>
+                Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for Web Apps
+              </Words></p>
+
+              <Link className={classes.option} href='/docs' onLink={this.onLink}>
+                <Button animate show={anim.entered}>
+                  {btnAnim => (
+                    <Words animate show={btnAnim.entered}>Docs</Words>
+                  )}
+                </Button>
+              </Link>
+              {' '}
+              <Link className={classes.option} href='/api' onLink={this.onLink}>
+                <Button animate show={anim.entered}>
+                  {btnAnim => (
+                    <Words animate show={btnAnim.entered}>API</Words>
+                  )}
+                </Button>
+              </Link>
+              {' '}
+              <Link className={classes.option} href='/play' onLink={this.onLink}>
+                <Button animate show={anim.entered}>
+                  {btnAnim => (
+                    <Words animate show={btnAnim.entered}>Play</Words>
+                  )}
+                </Button>
+              </Link>
+
+            </div>
+          </main>
+
+          <footer className={classes.footer}>
+            <div className={classes.footerContent}>
+              <div className={classes.footerLeft}>
+                <Link href='https://github.com/romelperez/arwes' onLink={this.onLink}>
+                  <i className={cx('mdi mdi-github-circle anim', anim.entered && 'animEntered')} />
+                  {' '}
+                  <Words animate show={anim.entered}>GitHub</Words>
+                </Link>
+              </div>
+              <div className={classes.footerRight}>
+                <Link href='https://romelperez.com' onLink={this.onLink}>
+                  <i className={cx('mdi mdi-copyright anim', anim.entered && 'animEntered')} />
+                  {' '}
+                  <Words animate show={anim.entered}>2017 Romel Pérez</Words>
+                </Link>
+              </div>
+            </div>
+          </footer>
+
+        </div>
+        )}
+      </Arwes>
+    );
+  }
+
+  onLink = () => {
+    this.setState({ show: false });
+  }
+}
+
+export default withTemplate(withStyles(styles)(Home));

@@ -80,6 +80,7 @@
     "karma-sinon": "^1.0.5",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.6",
+    "marksy": "^6.0.1",
     "mocha": "^4.0.1",
     "navigo": "^5.3.3",
     "next": "^4.2.1",
