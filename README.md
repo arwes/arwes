@@ -18,8 +18,8 @@ _____________
 
 Arwes is a web framework to build user interfaces for
 web applications based on science fiction and cyberpunk styles guidelines, animations
-and sounds effects. The idea is to provide an user experience as if you were using
-futuristic out of a movie interfaces for your project.
+and sounds effects. The idea is to **provide an user experience as if you were using
+futuristic out of a movie interfaces** for your project.
 
 The tools are based on [React](https://reactjs.org) for components,
 [JSS](http://cssinjs.org) for styles,
