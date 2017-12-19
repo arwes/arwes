@@ -71,7 +71,7 @@ class Docs extends React.Component {
   }
 
   render () {
-    const { classes, resources, title, App } = this.props;
+    const { classes, resources, App } = this.props;
     const { show, framed } = this.state;
 
     return (
@@ -91,7 +91,7 @@ class Docs extends React.Component {
             animation={{
               onEntered: () => this.setState({ framed: true })
             }}
-            title={title}
+            title='Docs'
             onLink={this.onLink}
           />
 
