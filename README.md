@@ -32,7 +32,7 @@ for code highlighting.
 ## Install
 
 ```bash
-npm install --save arwes
+$ npm install --save arwes
 ```
 
 ## Documentation
@@ -45,7 +45,20 @@ Open [a GitHub issue](https://github.com/romelperez/arwes/issues/new).
 
 ## Want to contribute?
 
-See [contributing guidelines](./CONTRIBUTING.md). All contributions of any kind are welcome!
+See [contributing guidelines](https://github.com/romelperez/arwes/blob/master/CONTRIBUTING.md).
+All contributions of any kind are welcome!
+
+## Inspiration
+
+This project has many inspiration sources, some of them:
+
+- [Orbit SciFi UI Kit](https://creativemarket.com/dannehr/163951-Orbit-SciFi-UI-Kit)
+- [Hi-Tech Interface Builder Pack](https://www.behance.net/gallery/19051971/Hi-Tech-Interface-Builder-Pack)
+- [Star Citizen](http://robertsspaceindustries.com)
+- [Halo](https://www.halowaypoint.com/en-us/games/halo-2)
+- [UXBERT High Tech Sci-Fi UX Dashboards, Infographics, Visual UI Elements](https://www.youtube.com/watch?v=NGIJDM2Xf4w)
+- [TRON: Legacy](http://www.imdb.com/title/tt1104001/)
+- [Ghost in the Shell](http://www.imdb.com/title/tt1219827/)
 
 ## Contributors
 
@@ -60,17 +73,6 @@ Contributors END -->
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors)
 specification.
 
-## Inspiration
-
-This project has many inspiration sources, some of them:
-
-- [Orbit SciFi UI Kit](https://creativemarket.com/dannehr/163951-Orbit-SciFi-UI-Kit)
-- [Hi-Tech Interface Builder Pack](https://www.behance.net/gallery/19051971/Hi-Tech-Interface-Builder-Pack)
-- [Star Citizen](http://robertsspaceindustries.com)
-- [UXBERT High Tech Sci-Fi UX Dashboards, Infographics, Visual UI Elements](https://www.youtube.com/watch?v=NGIJDM2Xf4w)
-- [TRON: Legacy](http://www.imdb.com/title/tt1104001/)
-- [Ghost in the Shell](http://www.imdb.com/title/tt1219827/)
-
 ## Next steps
 
 - [x] Design, animations and sounds guidelines
@@ -78,7 +80,7 @@ This project has many inspiration sources, some of them:
 - [x] Base API for components and tools
 - [x] Support for server-side rendering
 - [x] Define logo
-- [ ] Get started docs
+- [ ] Documentation
 - [ ] Create component live documentation
 - [ ] Create example implementations
 - [ ] Best test coverege
