@@ -127,8 +127,9 @@ export default (theme) => {
         '& li:before': {
           position: 'relative',
           left: -(theme.padding / 2),
+          display: 'inline-block',
           marginLeft: -theme.padding,
-          content: '>>',
+          content: '">>"',
           color: theme.color.primary.light,
         },
       },
