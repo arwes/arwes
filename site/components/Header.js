@@ -104,19 +104,21 @@ const Header = props => {
           </Col>
 
           <Col s={12} m={6} className={classes.links}>
-            {linksList.map((linkItem, index) => (
-            <Link
-              key={index}
-              className={cx(classes.link, 'anim', anim.entered && 'animEntered')}
-              href={linkItem.href}
-              onLink={onLink}
-            >
-              <Highlight className={classes.button} animate layer='header'>
-                <i className={`mdi mdi-${linkItem.icon}`}></i>
-                <Words animate show={anim.entered}>{linkItem.name}</Words>
-              </Highlight>
-            </Link>
-            ))}
+            <nav>
+              {linksList.map((linkItem, index) => (
+              <Link
+                key={index}
+                className={cx(classes.link, 'anim', anim.entered && 'animEntered')}
+                href={linkItem.href}
+                onLink={onLink}
+              >
+                <Highlight className={classes.button} animate layer='header'>
+                  <i className={`mdi mdi-${linkItem.icon}`}></i>
+                  <Words animate show={anim.entered}>{linkItem.name}</Words>
+                </Highlight>
+              </Link>
+              ))}
+            </nav>
           </Col>
 
         </Row>

@@ -27,7 +27,7 @@ const App = () => (
 ReactDOM.render(<App />, document.querySelector('#root'));
 \`\`\`
 
-The main component which every application should have is the \`Arwes\` component.
+The main component which every application should have is the \`<Arwes />\` component.
 It wraps the application with global styles and animations.
 
 \`\`\`javascript
@@ -74,7 +74,7 @@ variations named \`level0\`, \`level1\`, \`level2\` and \`level3\`, each more
 lighted. By default the increment in light is by 1.5% (0.015).
 
 Most components have the ability to get a \`layer\` to define its color/background.
-For example, the \`Button\` by default takes the \`control\` layer. We can change it
+For example, the \`<Button />\` by default takes the \`control\` layer. We can change it
 to any other:
 
 \`\`\`javascript

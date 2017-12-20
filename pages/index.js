@@ -2,10 +2,14 @@ import React from 'react';
 import cx from 'classnames';
 
 import withStyles from '../src/tools/withStyles';
+import { getResponsiveResource } from '../src/tools/utils';
+import createLoader from '../src/tools/createLoader';
+import createResponsive from '../src/tools/createResponsive';
 import Arwes from '../src/Arwes';
 import Words from '../src/Words';
 import Button from '../src/Button';
 import Logo from '../src/Logo';
+import Loading from '../src/Loading';
 
 import withTemplate from '../site/withTemplate';
 import { getTitle } from '../site/utils';
@@ -68,89 +72,122 @@ class Home extends React.Component {
 
   constructor () {
     super(...arguments);
-    this.state = { show: false };
+    this.state = {
+      show: false,
+      loaded: false
+    };
+
+    this.loader = createLoader();
+    this.responsive = createResponsive({
+      getTheme: () => this.props.theme
+    });
   }
 
   componentDidMount () {
-    this.setState({ show: true });
     window.document.title = getTitle(window.location.pathname);
+    this.startLoading();
   }
 
   render () {
     const { classes, resources } = this.props;
-    const { show } = this.state;
+    const { show, loaded } = this.state;
 
     return (
-      <Arwes
-        animate
-        show={show}
-        showResources={show}
-        resources={resources}
-      >
-        {anim => (
-        <div className={classes.root}>
+      <div>
+        <Loading
+          full
+          animate
+          show={!show && !loaded}
+          animation={{
+            unmountOnExit: true
+          }}
+        />
+        <Arwes
+          animate
+          show={show}
+          showResources={show}
+          resources={resources}
+        >
+          {anim => (
+          <div className={classes.root}>
 
-          <main className={classes.main}>
-            <div className={classes.content}>
+            <div className={classes.main}>
+              <div className={classes.content}>
 
-              <Logo animate show={anim.entered} layer='header' />
-              <h1><Words animate show={anim.entered}>
-                Arwes
-              </Words></h1>
-              <p><Words animate show={anim.entered}>
-                Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for Web Apps
-              </Words></p>
+                <Logo animate show={anim.entered} layer='header' />
+                <header>
+                  <h1><Words animate show={anim.entered}>
+                    Arwes
+                  </Words></h1>
+                </header>
+                <main>
+                  <p><Words animate show={anim.entered}>
+                    Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for Web Apps
+                  </Words></p>
+                </main>
 
-              <Link className={classes.option} href='/docs' onLink={this.onLink}>
-                <Button animate show={anim.entered}>
-                  {btnAnim => (
-                    <Words animate show={btnAnim.entered}>Docs</Words>
-                  )}
-                </Button>
-              </Link>
-              {' '}
-              <Link className={classes.option} href='/api' onLink={this.onLink}>
-                <Button animate show={anim.entered}>
-                  {btnAnim => (
-                    <Words animate show={btnAnim.entered}>API</Words>
-                  )}
-                </Button>
-              </Link>
-              {' '}
-              <Link className={classes.option} href='/play' onLink={this.onLink}>
-                <Button animate show={anim.entered}>
-                  {btnAnim => (
-                    <Words animate show={btnAnim.entered}>Play</Words>
-                  )}
-                </Button>
-              </Link>
-
-            </div>
-          </main>
-
-          <footer className={classes.footer}>
-            <div className={classes.footerContent}>
-              <div className={classes.footerLeft}>
-                <Link href='https://github.com/romelperez/arwes' onLink={this.onLink}>
-                  <i className={cx('mdi mdi-github-circle anim', anim.entered && 'animEntered')} />
+                <nav>
+                  <Link className={classes.option} href='/docs' onLink={this.onLink}>
+                    <Button animate show={anim.entered}>
+                      {btnAnim => (
+                        <Words animate show={btnAnim.entered}>Docs</Words>
+                      )}
+                    </Button>
+                  </Link>
                   {' '}
-                  <Words animate show={anim.entered}>GitHub</Words>
-                </Link>
-              </div>
-              <div className={classes.footerRight}>
-                <Link href='https://romelperez.com' onLink={this.onLink}>
-                  <i className={cx('mdi mdi-copyright anim', anim.entered && 'animEntered')} />
+                  <Link className={classes.option} href='/api' onLink={this.onLink}>
+                    <Button animate show={anim.entered}>
+                      {btnAnim => (
+                        <Words animate show={btnAnim.entered}>API</Words>
+                      )}
+                    </Button>
+                  </Link>
                   {' '}
-                  <Words animate show={anim.entered}>2017 Romel Pérez</Words>
-                </Link>
+                  <Link className={classes.option} href='/play' onLink={this.onLink}>
+                    <Button animate show={anim.entered}>
+                      {btnAnim => (
+                        <Words animate show={btnAnim.entered}>Play</Words>
+                      )}
+                    </Button>
+                  </Link>
+                </nav>
+
               </div>
             </div>
-          </footer>
 
-        </div>
-        )}
-      </Arwes>
+            <footer className={classes.footer}>
+              <div className={classes.footerContent}>
+                <div className={classes.footerLeft}>
+                  <Link href='https://github.com/romelperez/arwes' onLink={this.onLink}>
+                    <i className={cx('mdi mdi-github-circle anim', anim.entered && 'animEntered')} />
+                    {' '}
+                    <Words animate show={anim.entered}>GitHub</Words>
+                  </Link>
+                </div>
+                <div className={classes.footerRight}>
+                  <Link href='https://romelperez.com' onLink={this.onLink}>
+                    <i className={cx('mdi mdi-copyright anim', anim.entered && 'animEntered')} />
+                    {' '}
+                    <Words animate show={anim.entered}>2017 Romel Pérez</Words>
+                  </Link>
+                </div>
+              </div>
+            </footer>
+
+          </div>
+          )}
+        </Arwes>
+      </div>
     );
+  }
+
+  startLoading () {
+    const responsive = this.responsive.get();
+    const bg = getResponsiveResource(this.props.resources.bg, responsive);
+
+    this.loader.load({ images: [bg] }, { timeout: 5 * 1000 }).
+      then(() => {}, () => {}).
+      then(() => this.setState({ show: true, loaded: true }));
   }
 
   onLink = () => {
