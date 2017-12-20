@@ -111,8 +111,10 @@ const myTheme = {
 const App = () => (
   <ThemeProvider theme={createTheme(myTheme)}>
     <Arwes>
-      <h1>My App</h1>
-      <p>A SciFi Project</p>
+      <div style={{ padding: 20 }}>
+        <h1>My App</h1>
+        <p>A SciFi Project</p>
+      </div>
     </Arwes>
   </ThemeProvider>
 );
@@ -120,6 +122,44 @@ const App = () => (
 
 You can see the complete list of styles to define in the Arwes file
 [/src/tools/createTheme/theme.js](https://github.com/romelperez/arwes/blob/master/src/tools/createTheme/theme.js).
+
+## Customize your components
+
+You can use the \`withStyles\` HOC to get the theme and set the styles using the
+[JSS](http://cssinjs.org) HOC underneat. Read its docs for more details in how
+it works. For example:
+
+\`\`\`javascript
+import { ThemeProvider, createTheme, withStyles, Arwes } from 'arwes';
+
+const styles = theme => ({
+  root: {
+    padding: [theme.padding, 0],
+    background: theme.background.primary.level0
+  },
+  title: {
+    textDecoration: 'underline'
+  }
+});
+
+const MyHeader = withStyles(styles)(({ classes, children }) => (
+  <header className={classes.root}>
+    <h1 className={classes.title}>{children}</h1>
+  </header>
+));
+
+const App = () => (
+  <ThemeProvider theme={createTheme()}>
+    <Arwes>
+      <MyHeader>Arwes Project</MyHeader>
+      <p>A SciFi Project</p>
+    </Arwes>
+  </ThemeProvider>
+);
+\`\`\`
+
+You can use the theme provided by the \`<ThemeProvider />\` in the components
+as expected so you can build your own Arwes components.
 
       `).tree}
     </div>
