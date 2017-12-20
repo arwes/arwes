@@ -28,8 +28,26 @@ export default function Animation (props) {
 }
 
 Animation.propTypes = {
+
+  /**
+   * Enable the animation for this component and its children.
+   */
   animate: PropTypes.bool,
+
+  /**
+   * If animatable, should component start its animation or not.
+   */
   show: PropTypes.bool,
+
+  /**
+   * A function to render the children. It will receive an object parameter
+   * with information about the animation status, with the following properties:
+   * - `status: string` - The `<Transition />` received status parameter.
+   * - `entering: bool` - Started to be shown.
+   * - `entered: bool` - Animation is completed and now is shown.
+   * - `exiting: bool` - Started to be hidden.
+   * - `exited: bool` - Animation is completed and now is hidden.
+   */
   children: PropTypes.func.isRequired,
 
   /**
@@ -38,7 +56,7 @@ Animation.propTypes = {
   appear: PropTypes.bool,
 
   /**
-   * Animation in and out duration.
+   * Animation in and out duration in ms.
    */
   timeout: PropTypes.oneOfType([
     PropTypes.number,

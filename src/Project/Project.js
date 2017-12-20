@@ -90,6 +90,11 @@ Project.propTypes = {
   header: PropTypes.string.isRequired,
   headerSize: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
   icon: PropTypes.any,
+
+  /**
+   * If function, receives the animation status object.
+   */
+  children: PropTypes.any,
 };
 
 Project.defaultProps = {

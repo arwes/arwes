@@ -20,6 +20,11 @@ export default class Frame extends Component {
     disabled: PropTypes.bool,
     hover: PropTypes.bool,
     noBackground: PropTypes.bool,
+
+    /**
+     * If function, receives the animation status object.
+     */
+    children: PropTypes.any,
   }
 
   static defaultProps = {

@@ -42,6 +42,11 @@ export default class Image extends Component {
      * Props to pass down to the `<img />` element.
      */
     imgProps: PropTypes.object,
+
+    /**
+     * If function, receives the animation status object.
+     */
+    children: PropTypes.any,
   }
 
   static defaultProps = {

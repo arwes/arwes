@@ -30,6 +30,11 @@ export default class Button extends Component {
      * Props to pass down to the `<button />` element.
      */
     buttonProps: PropTypes.object,
+
+    /**
+     * If function, receives the animation status object.
+     */
+    children: PropTypes.any,
   }
 
   static defaultProps = {

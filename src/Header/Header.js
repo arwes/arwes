@@ -14,6 +14,11 @@ export default class Header extends Component {
     sounds: PropTypes.object,
     animate: PropTypes.bool,
     show: PropTypes.bool,
+
+    /**
+     * If function, receives the animation status object.
+     */
+    children: PropTypes.any,
   }
 
   static defaultProps = {

@@ -56,6 +56,11 @@ export default class Arwes extends Component {
      * Properties to pass down to `<Puffs />` component.
      */
     puffsProps: PropTypes.object,
+
+    /**
+     * If function, receives the animation status object.
+     */
+    children: PropTypes.any,
   };
 
   static defaultProps = {
