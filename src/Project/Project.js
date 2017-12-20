@@ -83,7 +83,12 @@ Project.propTypes = {
   animation: PropTypes.object,
   theme: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
+
+  /**
+   * It uses the `click` player.
+   */
   sounds: PropTypes.object,
+
   animate: PropTypes.bool,
   show: PropTypes.bool,
   node: PropTypes.string,

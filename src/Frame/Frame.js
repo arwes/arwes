@@ -11,7 +11,12 @@ export default class Frame extends Component {
     animation: PropTypes.object,
     theme: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
+
+    /**
+     * It uses the `deploy` player.
+     */
     sounds: PropTypes.object,
+
     animate: PropTypes.bool,
     show: PropTypes.bool,
     layer: PropTypes.oneOf(['primary', 'secondary', 'header', 'control', 'success', 'alert', 'disabled']),

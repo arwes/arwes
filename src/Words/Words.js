@@ -9,7 +9,12 @@ export default class Words extends Component {
   static propTypes = {
     theme: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
+
+    /**
+     * It uses the `typing` player.
+     */
     sounds: PropTypes.object,
+
     animate: PropTypes.bool,
     show: PropTypes.bool,
     timeoutEnter: PropTypes.number,
