@@ -126,8 +126,8 @@ You can see the complete list of styles to define in the Arwes file
 ## Customize your components
 
 You can use the \`withStyles\` HOC to get the theme and set the styles using the
-[JSS](http://cssinjs.org) HOC underneat. Read its docs for more details in how
-it works. For example:
+[React JSS](http://cssinjs.org/react-jss) HOC underneat. Read its docs for more
+details in how it works. For example:
 
 \`\`\`javascript
 import { ThemeProvider, createTheme, withStyles, Arwes } from 'arwes';
