@@ -83,7 +83,7 @@ export default {
   },
 
   // Number of columns inside a row
-  grid: 12,
+  columns: 12,
 
   // Until the number in device screen width the breakpoint is taken.
   // E.g. Until the `small` number is viewport small, from `small + 1` is medium.

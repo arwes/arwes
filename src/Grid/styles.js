@@ -9,8 +9,8 @@ const columnBaseStyles = (theme, size) => {
   let styles = {};
   let width;
 
-  for (let index = 1; index <= theme.grid; index++) {
-    width = 100 / (theme.grid / index) + '%';
+  for (let index = 1; index <= theme.columns; index++) {
+    width = 100 / (theme.columns / index) + '%';
     styles = {
       ...styles,
       [size + index]: columnStyles(width),
@@ -24,8 +24,8 @@ const columnExtraStyles = (theme, size) => {
   let styles = {};
   let width;
 
-  for (let index = 1; index <= theme.grid; index++) {
-    width = 100 / (theme.grid / index) + '%';
+  for (let index = 1; index <= theme.columns; index++) {
+    width = 100 / (theme.columns / index) + '%';
     styles = {
       ...styles,
       [`offset-${size}${index}`]: {
