@@ -24,7 +24,7 @@ const state = responsive.get();
 // \`{ medium: true, status: 'medium' }\`
 // if device is on medium breakpoint, for example.
 
-// To listen for viewport changes:
+// To listen for breakpoint changes:
 const listener = responsive.on(state => console.log(state));
 
 // To turn it off:
