@@ -27,30 +27,36 @@ export default (depencencies) => {
       const { small, medium, large } = theme.responsive;
 
       if (width <= small) {
-        return { small: true };
+        return { small: true, status: 'small' };
       }
       else if (width <= medium) {
-        return { medium: true };
+        return { medium: true, status: 'medium' };
       }
       else if (width <= large) {
-        return { large: true };
+        return { large: true, status: 'large' };
       }
 
-      return { xlarge: true };
+      return { xlarge: true, status: 'xlarge' };
     },
 
     /**
-     * Register a on resize window callback to know the current browser viewport
-     * dimentions.
-     * @param  {Function} callback - It's called on every window resize and receives
-     * and object defining the current viewport size.
-     * @return {Function} The event callback.
+     * Register a on resize window callback to know when the current browser viewport
+     * dimentions make the breakpoint change.
+     * @param  {Function} callback - It's called on every change on the breakpoint
+     * and receives and object defining the current viewport size.
+     * @return {Function} The event listener.
      */
     on (callback) {
 
+      const current = this.get();
+      let state = current.status;
+
       const onChange = () => {
         const stats = this.get();
-        callback(stats);
+        if (stats.status !== state) {
+          callback(stats);
+          state = stats.status;
+        }
       };
 
       if (!isNode) {
