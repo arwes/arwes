@@ -1,5 +1,7 @@
+script: npm test
 language: node_js
 node_js:
   - "6.0"
   - "8.0"
-script: npm test
+addons:
+  chrome: stable

@@ -58,7 +58,7 @@ module.exports = function (config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['ChromeHeadless'],
 
 
     // Continuous Integration mode
@@ -98,7 +98,10 @@ module.exports = function (config) {
         'react/addons': true,
         'react/lib/ExecutionEnvironment': true,
         'react/lib/ReactContext': true,
-      }
+      },
+      watchOptions: {
+        poll: true
+      },
     },
     webpackServer: {
       noInfo: true
