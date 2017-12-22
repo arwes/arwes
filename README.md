@@ -80,7 +80,7 @@ specification.
 - [x] Base API for components and tools
 - [x] Support for server-side rendering
 - [x] Define logo
-- [ ] Documentation
+- [x] Documentation
 - [ ] Create component live documentation
 - [ ] Create example implementations
 - [ ] Best test coverege
