@@ -1,5 +1,5 @@
 import React from 'react';
-import testSetup from '../test-setup';
+import testSetup from '../setup.test.js';
 import Grid from './Grid';
 
 const { mount } = testSetup(Grid);

@@ -32,6 +32,8 @@ nbproject
 .node_repl_history
 .vagrant
 .eslintcache
+.travis.yml
+.gitattributes
 
 Thumbs.db
 dump.rdb
