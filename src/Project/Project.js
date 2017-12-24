@@ -80,20 +80,33 @@ Project.propTypes = {
   Animation: PropTypes.any.isRequired,
   Frame: PropTypes.any.isRequired,
   Words: PropTypes.any.isRequired,
+  animate: PropTypes.bool,
+  show: PropTypes.bool,
   animation: PropTypes.object,
-  theme: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired,
 
   /**
    * It uses the `click` player.
    */
   sounds: PropTypes.object,
 
-  animate: PropTypes.bool,
-  show: PropTypes.bool,
+  /**
+   * The HTML tag element to use.
+   */
   node: PropTypes.string,
+
+  /**
+   * The HTML header used for the title.
+   */
   header: PropTypes.string.isRequired,
+
+  /**
+   * The actual font size to use for the HTML header.
+   */
   headerSize: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
+
+  /**
+   * The icon to decorate the project.
+   */
   icon: PropTypes.any,
 
   /**
@@ -106,7 +119,6 @@ Project.defaultProps = {
   Animation: AnimationComponent,
   Frame: FrameComponent,
   Words: WordsComponent,
-  animate: false,
   show: true,
   sounds: {},
   node: 'article',

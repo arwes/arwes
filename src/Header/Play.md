@@ -1,4 +1,4 @@
-```js
+```javascript
 const resources = {
     bg: '/img/background.jpg',
     pattern: '/img/glow.png',

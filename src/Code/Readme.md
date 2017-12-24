@@ -1,7 +1,7 @@
 This is the replacement for code HTML tags. It works as inline `<code />` or
 block `<pre />` tags.
 
-```js
+```javascript
 <Code animate>window.requestAnimationFrame(this.nextFrame);</Code>
 ```
 

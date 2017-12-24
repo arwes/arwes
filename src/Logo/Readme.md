@@ -1,5 +1,5 @@
 The Arwes project logo.
 
-```js
+```javascript
 <Logo animate />
 ```

@@ -1,4 +1,4 @@
-```js
+```javascript
 render(
     <Arwes>
         <div style={{ margin: '0 auto', padding: 20, maxWidth: 600 }}>

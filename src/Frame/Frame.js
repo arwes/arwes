@@ -8,22 +8,37 @@ export default class Frame extends Component {
 
   static propTypes = {
     Animation: PropTypes.any.isRequired,
+    animate: PropTypes.bool,
+    show: PropTypes.bool,
     animation: PropTypes.object,
-    theme: PropTypes.object.isRequired,
-    classes: PropTypes.object.isRequired,
 
     /**
      * It uses the `deploy` player.
      */
     sounds: PropTypes.object,
 
-    animate: PropTypes.bool,
-    show: PropTypes.bool,
     layer: PropTypes.oneOf(['primary', 'secondary', 'header', 'control', 'success', 'alert', 'disabled']),
+
+    /**
+     * The background color level. The bigger the brighter.
+     */
     level: PropTypes.oneOf([0, 1, 2, 3]),
+
+    /**
+     * The corners size.
+     */
     corners: PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6]),
+
     disabled: PropTypes.bool,
+
+    /**
+     * If component should be animated on mouse hover.
+     */
     hover: PropTypes.bool,
+
+    /**
+     * Prevent background to be shown.
+     */
     noBackground: PropTypes.bool,
 
     /**
@@ -35,14 +50,10 @@ export default class Frame extends Component {
   static defaultProps = {
     Animation: AnimationComponent,
     sounds: {},
-    animate: false,
     show: true,
     layer: 'primary',
     level: 0,
     corners: 0,
-    disabled: false,
-    hover: false,
-    noBackground: false,
   }
 
   componentDidMount () {

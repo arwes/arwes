@@ -24,6 +24,11 @@ export default (theme) => {
         color: theme.color.header.base,
         whiteSpace: 'nowrap',
       },
+      '& tbody': {
+        '& p, & ul, & ol, & dl, & blockquote': {
+          marginBottom: 0,
+        },
+      },
       '& tr': {
         borderBottom: '1px solid ' + rgba(theme.color.primary.dark, theme.alpha / 2),
       },
@@ -34,9 +39,6 @@ export default (theme) => {
       '& td': {
         padding: theme.padding / 4,
         verticalAlign: 'top',
-      },
-      '& p, & ul, & ol, & dl, & blockquote': {
-        marginBottom: 0,
       },
     },
 

@@ -1,4 +1,4 @@
-```js
+```javascript
 render(
     <Arwes>
         <h3><Words animate>A cyberpunk UI project</Words></h3>

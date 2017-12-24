@@ -1,4 +1,4 @@
-```js
+```javascript
 render(
     <Arwes>
         <div style={{ padding: 20 }}>

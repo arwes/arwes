@@ -59,9 +59,6 @@ export default function Grid (props) {
 }
 
 Grid.propTypes = {
-  theme: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired,
-
   /**
    * If component is a row.
    */

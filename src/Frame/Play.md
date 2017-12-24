@@ -1,4 +1,4 @@
-```js
+```javascript
 class Example extends React.Component {
     constructor () {
         super(...arguments);

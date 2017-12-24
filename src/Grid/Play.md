@@ -1,4 +1,4 @@
-```js
+```javascript
 const Item = withStyles(theme => ({
     root: {
         marginBottom: 20,

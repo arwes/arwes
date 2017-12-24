@@ -8,12 +8,14 @@ export default class Footer extends Component {
 
   static propTypes = {
     Animation: PropTypes.any.isRequired,
-    animation: PropTypes.object,
-    theme: PropTypes.object.isRequired,
-    classes: PropTypes.object.isRequired,
-    sounds: PropTypes.object,
     animate: PropTypes.bool,
     show: PropTypes.bool,
+    animation: PropTypes.object,
+
+    /**
+     * It uses the `deploy` player.
+     */
+    sounds: PropTypes.object,
 
     /**
      * If function, receives the animation status object.
@@ -24,7 +26,6 @@ export default class Footer extends Component {
   static defaultProps = {
     Animation: AnimationComponent,
     sounds: {},
-    animate: false,
     show: true,
   }
 

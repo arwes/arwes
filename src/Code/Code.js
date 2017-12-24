@@ -9,12 +9,18 @@ export default class Code extends Component {
 
   static propTypes = {
     Animation: PropTypes.any.isRequired,
-    animation: PropTypes.object,
-    theme: PropTypes.any.isRequired,
-    classes: PropTypes.any.isRequired,
     animate: PropTypes.bool,
     show: PropTypes.bool,
+    animation: PropTypes.object,
+
+    /**
+     * If the code snippet is inline or block type.
+     */
     type: PropTypes.oneOf(['code', 'pre']),
+
+    /**
+     * The programming language. Supported by [Prism](http://prismjs.com/).
+     */
     language: PropTypes.string,
   };
 

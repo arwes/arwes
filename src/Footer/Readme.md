@@ -1,6 +1,6 @@
 A basic footer component. Not theme contomizable.
 
-```js
+```javascript
 <Footer animate>
     <p>Arwes details</p>
 </Footer>

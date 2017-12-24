@@ -15,11 +15,13 @@ export default class Arwes extends Component {
     Puffs: PropTypes.any.isRequired,
     createResponsive: PropTypes.any.isRequired,
     createLoader: PropTypes.any.isRequired,
-    animation: PropTypes.object,
-    theme: PropTypes.object.isRequired,
-    classes: PropTypes.object.isRequired,
     animate: PropTypes.bool,
     show: PropTypes.bool,
+    animation: PropTypes.object,
+
+    /**
+     * If the component should load the resources.
+     */
     loadResources: PropTypes.bool,
 
     /**
@@ -68,9 +70,7 @@ export default class Arwes extends Component {
     Puffs: PuffsComponent,
     createResponsive: createResponsiveModule,
     createLoader: createLoaderModule,
-    animate: false,
     show: true,
-    resources: null,
     loadResources: true,
     showResources: true,
   }

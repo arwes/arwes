@@ -13,8 +13,6 @@ const ON_ANIMATION_END = [
 export default class Highlight extends Component {
 
   static propTypes = {
-    theme: PropTypes.object.isRequired,
-    classes: PropTypes.object.isRequired,
     animate: PropTypes.bool,
     layer: PropTypes.oneOf(['primary', 'secondary', 'header', 'control', 'success', 'alert', 'disabled']),
   };

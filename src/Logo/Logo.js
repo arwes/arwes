@@ -127,18 +127,19 @@ export default function Logo (props) {
 
 Logo.propTypes = {
   Animation: PropTypes.any.isRequired,
-  animation: PropTypes.object,
-  theme: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired,
   animate: PropTypes.bool,
   show: PropTypes.bool,
+  animation: PropTypes.object,
   layer: PropTypes.oneOf(['primary', 'secondary', 'header', 'control', 'success', 'alert', 'disabled']),
+
+  /**
+   * Since it is a square, the width and height of the container.
+   */
   size: PropTypes.number,
 };
 
 Logo.defaultProps = {
   Animation: AnimationComponent,
-  animate: false,
   show: true,
   layer: 'primary',
   size: 100,

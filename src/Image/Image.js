@@ -17,16 +17,20 @@ export default class Image extends Component {
     Loading: PropTypes.any.isRequired,
     createLoader: PropTypes.any.isRequired,
     createResponsive: PropTypes.any.isRequired,
-    animation: PropTypes.object,
-    theme: PropTypes.object.isRequired,
-    classes: PropTypes.object.isRequired,
+
     animate: PropTypes.bool,
     show: PropTypes.bool,
+    animation: PropTypes.object,
+
     layer: PropTypes.oneOf(['primary', 'secondary', 'header', 'control', 'success', 'alert', 'disabled']),
+
+    /**
+     * If the resources should be loaded.
+     */
     loadResources: PropTypes.bool,
 
     /**
-     * The image resource or the images resources according to device.
+     * The image resource or the images resources according to device viewport.
      */
     resources: PropTypes.oneOfType([
       PropTypes.string,
@@ -55,7 +59,6 @@ export default class Image extends Component {
     Loading: LoadingComponent,
     createLoader: createLoaderModule,
     createResponsive: createResponsiveModule,
-    animate: false,
     show: true,
     layer: 'primary',
     loadResources: true,
@@ -163,6 +166,10 @@ export default class Image extends Component {
     );
   }
 
+  /**
+   * If enabled, load the resources provided.
+   * It doesn't return the state of the loading, it will update the state.
+   */
   loadResource () {
     const { resources, loadResources } = this.props;
 

@@ -5,8 +5,6 @@ import cx from 'classnames';
 export default class Puffs extends Component {
 
   static propTypes = {
-    theme: PropTypes.object.isRequired,
-    classes: PropTypes.object.isRequired,
     animate: PropTypes.bool,
 
     /**
@@ -21,7 +19,7 @@ export default class Puffs extends Component {
   };
 
   static defaultProps = {
-    animate: false,
+    animate: true,
     puffInterval: 5000,
     quantity: 8,
   };

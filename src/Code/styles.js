@@ -1,3 +1,5 @@
+import { rgba } from 'polished';
+
 export default (theme) => {
   return {
     root: {
@@ -28,7 +30,7 @@ export default (theme) => {
         mozHyphens: 'none',
         msHyphens: 'none',
         hyphens: 'none',
-        background: theme.code.background,
+        background: rgba(theme.code.background, theme.alpha),
         color: theme.code.color,
       },
       '& pre[class*="language-"]': {

@@ -1,5 +1,5 @@
 Main user control action for the user.
 
-```js
+```javascript
 <Button animate layer='success'>Arwes</Button>
 ```

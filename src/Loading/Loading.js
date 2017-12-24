@@ -43,11 +43,9 @@ export default function Loading (props) {
 
 Loading.propTypes = {
   Animation: PropTypes.any.isRequired,
-  theme: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired,
-  animation: PropTypes.object,
   animate: PropTypes.bool,
   show: PropTypes.bool,
+  animation: PropTypes.object,
   layer: PropTypes.oneOf(['primary', 'secondary', 'header', 'control', 'success', 'alert', 'disabled']),
 
   /**
@@ -65,9 +63,6 @@ Loading.propTypes = {
 
 Loading.defaultProps = {
   Animation: AnimationComponent,
-  animate: false,
   show: true,
   layer: 'primary',
-  small: false,
-  full: false,
 };

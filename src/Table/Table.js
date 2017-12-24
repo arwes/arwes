@@ -67,11 +67,9 @@ export default function Table (props) {
 
 Table.propTypes = {
   Animation: PropTypes.any.isRequired,
-  animation: PropTypes.object,
-  theme: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired,
   animate: PropTypes.bool,
   show: PropTypes.bool,
+  animation: PropTypes.object,
 
   /**
    * List of heading titles.
@@ -98,7 +96,6 @@ Table.propTypes = {
 
 Table.defaultProps = {
   Animation: AnimationComponent,
-  animate: false,
   show: true,
   headers: [],
   dataset: [],

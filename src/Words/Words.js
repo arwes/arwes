@@ -7,25 +7,37 @@ import '../tools/request-animation-frame';
 export default class Words extends Component {
 
   static propTypes = {
-    theme: PropTypes.object.isRequired,
-    classes: PropTypes.object.isRequired,
+    animate: PropTypes.bool,
+    show: PropTypes.bool,
 
     /**
      * It uses the `typing` player.
      */
     sounds: PropTypes.object,
 
-    animate: PropTypes.bool,
-    show: PropTypes.bool,
+    /**
+     * The max duration the animation on enter can take.
+     */
     timeoutEnter: PropTypes.number,
+
+    /**
+     * Can have disabled the layer by providing `''`.
+     */
     layer: PropTypes.oneOf(['', 'primary', 'secondary', 'header', 'control', 'success', 'alert', 'disabled']),
+
+    /**
+     * The character to print when typing animation.
+     */
     blinkText: PropTypes.string,
+
+    /**
+     * Plain text to render and animate if enabled.
+     */
     children: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
     sounds: {},
-    animate: false,
     show: true,
     layer: '',
     blinkText: '&#9611;',

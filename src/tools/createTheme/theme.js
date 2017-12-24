@@ -25,7 +25,7 @@ export default {
   animTime: 250,
 
   // The opacity to apply to elements when needed.
-  alpha: 0.75,
+  alpha: 0.65,
 
   // The color variation.
   accent,

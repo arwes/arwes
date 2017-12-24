@@ -1,4 +1,4 @@
-```js
+```javascript
 const baseStyles = {
     display: 'block',
     width: '100%',

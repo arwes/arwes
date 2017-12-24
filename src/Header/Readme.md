@@ -1,6 +1,6 @@
 A basic header component. Not theme contomizable.
 
-```js
+```javascript
 <Header animate>
     <p>Arwes details</p>
 </Header>

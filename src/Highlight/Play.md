@@ -1,4 +1,4 @@
-```js
+```javascript
 const style = { display: 'inline-block' };
 const Example = () => <div style={{ padding: '20px' }}>Cyberpunk</div>;
 render(

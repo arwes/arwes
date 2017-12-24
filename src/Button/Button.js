@@ -12,17 +12,15 @@ export default class Button extends Component {
     Animation: PropTypes.any.isRequired,
     Highlight: PropTypes.any.isRequired,
     Frame: PropTypes.any.isRequired,
+    animate: PropTypes.bool,
+    show: PropTypes.bool,
     animation: PropTypes.object,
-    theme: PropTypes.object.isRequired,
-    classes: PropTypes.object.isRequired,
 
     /**
      * It uses the `click` player.
      */
     sounds: PropTypes.object,
 
-    animate: PropTypes.bool,
-    show: PropTypes.bool,
     layer: PropTypes.oneOf(['primary', 'secondary', 'header', 'control', 'success', 'alert', 'disabled']),
     disabled: PropTypes.bool,
 
@@ -47,11 +45,9 @@ export default class Button extends Component {
     Highlight: HighlightComponent,
     Frame: FrameComponent,
     sounds: {},
-    animate: false,
     show: true,
     layer: 'control',
     level: 2,
-    disabled: false,
   }
 
   render () {

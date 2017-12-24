@@ -1,4 +1,4 @@
-```js
+```javascript
 render(
     <div>
         <Loading animate />
