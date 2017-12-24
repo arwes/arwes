@@ -1,4 +1,24 @@
-export const titles = {
+module.exports.components = [
+  'Arwes',
+  'Grid',
+  'Frame',
+  'Header',
+  'Footer',
+  'Project',
+  'Words',
+  'Code',
+  'Table',
+  'Image',
+  'Line',
+  'Button',
+  'Loading',
+  'Animation',
+  'Highlight',
+  'Puffs',
+  'Logo',
+];
+
+module.exports.titles = {
   '/docs/design-system': 'Design System | Arwes',
   '/docs/animations-system': 'Animations System | Arwes',
   '/docs/sounds-system': 'Sounds System | Arwes',
@@ -10,3 +30,5 @@ export const titles = {
   '/api': 'API | Arwes',
   '/play': 'Play | Arwes',
 };
+
+module.exports.default = {};

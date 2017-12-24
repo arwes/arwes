@@ -45,7 +45,7 @@ const styles = (theme) => {
   };
 };
 
-class Docs extends React.Component {
+class Content extends React.Component {
 
   constructor () {
     super(...arguments);
@@ -71,7 +71,7 @@ class Docs extends React.Component {
   }
 
   render () {
-    const { classes, resources, App } = this.props;
+    const { classes, resources, markdown, html } = this.props;
     const { show, framed } = this.state;
 
     return (
@@ -91,7 +91,7 @@ class Docs extends React.Component {
             animation={{
               onEntered: () => this.setState({ framed: true })
             }}
-            title='Docs'
+            title='Arwes'
             onLink={this.onLink}
           />
 
@@ -111,7 +111,7 @@ class Docs extends React.Component {
                       anim2.entered && 'animEntered'
                     )}
                   >
-                    {<App compile={this.compile} />}
+                    {html ? html : this.compile(markdown).tree}
                   </div>
                   )}
                 </Frame>
@@ -137,4 +137,4 @@ class Docs extends React.Component {
   }
 }
 
-export default withTemplate(withStyles(styles)(Docs));
+export default withTemplate(withStyles(styles)(Content));

@@ -1,27 +1,12 @@
-import React from 'react';
+import withContent from '../../site/withContent';
+import { components } from '../../site/settings';
+import markdown from '../../site/api/index.md';
 
-import withStyles from '../../src/tools/withStyles';
-import Arwes from '../../src/Arwes';
+const list = components.
+  map(name => {
+    const nameLower = name.toLowerCase();
+    return `- [${name}](/api/${nameLower})`;
+  }).
+  join('\n');
 
-import withTemplate from '../../site/withTemplate';
-import Link from '../../site/components/Link';
-
-class Api extends React.Component {
-  render () {
-    const { classes, resources } = this.props;
-    return (
-      <Arwes
-        animate
-        show
-        resources={resources}
-      >
-        <div className={classes.root}>
-          <p>Work in progress.</p>
-          <p><Link href='/'>Go Home</Link></p>
-        </div>
-      </Arwes>
-    );
-  }
-}
-
-export default withTemplate(withStyles()(Api));
+export default withContent({ markdown: markdown + '\n' + list });

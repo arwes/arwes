@@ -1,8 +1,9 @@
 import React from 'react';
 import marksy from 'marksy';
 import Code from '../src/Code';
+import Table from '../src/Table';
 
-export default ({ elements }) => {
+export default ({ elements } = {}) => {
   return marksy({
     createElement: React.createElement,
     elements: {
@@ -11,6 +12,9 @@ export default ({ elements }) => {
       },
       codespan: ({ children }) => {
         return <Code type='code'>{children}</Code>;
+      },
+      table: ({ children }) => {
+        return <Table>{children}</Table>;
       },
       ...elements,
     },

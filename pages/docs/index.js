@@ -1,5 +1,4 @@
-import React from 'react';
-import withDocs from '../../site/withDocs';
+import withContent from '../../site/withContent';
 import markdown from '../../site/docs/index.md';
 
-export default withDocs(({ compile }) => compile(markdown).tree);
+export default withContent({ markdown });
