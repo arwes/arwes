@@ -73,7 +73,7 @@ Contributors END -->
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors)
 specification.
 
-## Next steps
+## Roadmap
 
 - [x] Design, animations and sounds guidelines
 - [x] Playground for development
@@ -84,6 +84,8 @@ specification.
 - [ ] Create component live documentation
 - [ ] Create example implementations
 - [ ] Best test coverege
+- [ ] Add navigation components
+- [ ] Add form components
 
 ## License
 
