@@ -80,6 +80,10 @@ Project.propTypes = {
   Animation: PropTypes.any.isRequired,
   Frame: PropTypes.any.isRequired,
   Words: PropTypes.any.isRequired,
+
+  theme: PropTypes.any.isRequired,
+  classes: PropTypes.any.isRequired,
+
   animate: PropTypes.bool,
   show: PropTypes.bool,
   animation: PropTypes.object,

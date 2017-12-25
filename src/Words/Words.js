@@ -7,6 +7,9 @@ import '../tools/request-animation-frame';
 export default class Words extends Component {
 
   static propTypes = {
+    theme: PropTypes.any.isRequired,
+    classes: PropTypes.any.isRequired,
+
     animate: PropTypes.bool,
     show: PropTypes.bool,
 

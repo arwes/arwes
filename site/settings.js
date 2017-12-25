@@ -1,4 +1,6 @@
 module.exports.components = [
+  'ThemeProvider',
+  'SoundsProvider',
   'Arwes',
   'Grid',
   'Frame',

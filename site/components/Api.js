@@ -27,11 +27,13 @@ export default ({ component }) => {
 
       {compile(component.readme).tree}
 
+      {!!component.api && !!component.api.props && (
       <Table
         headers={['Prop name', 'Type', 'Default', 'Description']}
         dataset={getComponentPropsItems(component.api.props)}
         minWidth={700}
       />
+      )}
 
       <p>
         <small>

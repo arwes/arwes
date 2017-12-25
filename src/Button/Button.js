@@ -12,6 +12,10 @@ export default class Button extends Component {
     Animation: PropTypes.any.isRequired,
     Highlight: PropTypes.any.isRequired,
     Frame: PropTypes.any.isRequired,
+
+    theme: PropTypes.any.isRequired,
+    classes: PropTypes.any.isRequired,
+
     animate: PropTypes.bool,
     show: PropTypes.bool,
     animation: PropTypes.object,

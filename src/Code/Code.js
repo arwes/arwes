@@ -9,6 +9,10 @@ export default class Code extends Component {
 
   static propTypes = {
     Animation: PropTypes.any.isRequired,
+
+    theme: PropTypes.any.isRequired,
+    classes: PropTypes.any.isRequired,
+
     animate: PropTypes.bool,
     show: PropTypes.bool,
     animation: PropTypes.object,

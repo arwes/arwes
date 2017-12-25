@@ -5,6 +5,9 @@ import cx from 'classnames';
 export default class Puffs extends Component {
 
   static propTypes = {
+    theme: PropTypes.any.isRequired,
+    classes: PropTypes.any.isRequired,
+
     animate: PropTypes.bool,
 
     /**

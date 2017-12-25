@@ -15,6 +15,10 @@ export default class Arwes extends Component {
     Puffs: PropTypes.any.isRequired,
     createResponsive: PropTypes.any.isRequired,
     createLoader: PropTypes.any.isRequired,
+
+    theme: PropTypes.any.isRequired,
+    classes: PropTypes.any.isRequired,
+
     animate: PropTypes.bool,
     show: PropTypes.bool,
     animation: PropTypes.object,

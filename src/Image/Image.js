@@ -18,6 +18,9 @@ export default class Image extends Component {
     createLoader: PropTypes.any.isRequired,
     createResponsive: PropTypes.any.isRequired,
 
+    theme: PropTypes.any.isRequired,
+    classes: PropTypes.any.isRequired,
+
     animate: PropTypes.bool,
     show: PropTypes.bool,
     animation: PropTypes.object,

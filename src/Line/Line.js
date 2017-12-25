@@ -39,9 +39,14 @@ export default function Line (props) {
 
 Line.propTypes = {
   Animation: PropTypes.any.isRequired,
+
+  theme: PropTypes.any.isRequired,
+  classes: PropTypes.any.isRequired,
+
   animate: PropTypes.bool,
   show: PropTypes.bool,
   animation: PropTypes.object,
+
   layer: PropTypes.oneOf(['primary', 'secondary', 'header', 'control', 'success', 'alert', 'disabled']),
 };
 

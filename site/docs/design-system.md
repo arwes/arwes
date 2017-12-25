@@ -152,3 +152,7 @@ const App = () => (
 
 You can use the theme provided by the `<ThemeProvider />` in the components
 as expected so you can build your own Arwes components.
+
+All children components using `withStyles()` will receive the processed `theme`
+and the `classes` generated. The built-in Arwes components have already this
+HOC, but you can overwrite the styles provided if you need to.

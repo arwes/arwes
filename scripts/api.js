@@ -19,19 +19,23 @@ components.
     const folderPath = 'src/' + name;
     const nameLower = name.toLowerCase();
 
-    const componentPath = path.resolve(process.cwd(), folderPath, name + '.js');
-    const componentSrc = fs.readFileSync(componentPath, { encoding });
-    const api = docgen.parse(componentSrc);
-
     const readmePath = path.resolve(process.cwd(), folderPath, readmeFileName);
     const readme = fs.readFileSync(readmePath, { encoding });
+
+    // Get component API if existing.
+    let api;
+    const componentPath = path.resolve(process.cwd(), folderPath, name + '.js');
+    if (fs.existsSync(componentPath)) {
+      const componentSrc = fs.readFileSync(componentPath, { encoding });
+      api = docgen.parse(componentSrc);
+    }
 
     // Generate the component defintion content to import in the page.
     const componentContent = JSON.stringify({
       name,
+      readme,
       path: folderPath,
       api,
-      readme
     });
 
     fs.writeFileSync(
