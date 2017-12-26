@@ -1,25 +1,56 @@
 import React from 'react';
-
 import Table from '../../src/Table';
-
-import createCompiler from '../createCompiler';
+import Code from '../../src/Code';
 import Link from './Link';
 
-const compile = createCompiler();
+const getType = (prop) => {
+  return prop.flowType || prop.type;
+};
 
-const getComponentPropsItems = (props) => {
+const renderType = prop => {
+  const type = getType(prop);
+
+  if (!type) {
+		return 'unknown';
+	}
+
+  const { name } = type;
+
+	switch (name) {
+		case 'arrayOf':
+			return `${type.value.name}[]`;
+		case 'objectOf':
+			return `{${renderType(type.value)}}`;
+		case 'instanceOf':
+			return type.value;
+		default:
+			return name;
+	}
+};
+
+const renderDefault = prop => {
+  if (prop.defaultValue) {
+    return <Code>{prop.defaultValue.value}</Code>;
+  }
+  if (prop.required) {
+    return <i>Required</i>;
+  }
+  return '';
+};
+
+const getComponentPropsItems = (props, compile) => {
   return Object.keys(props).map(key => {
     const prop = props[key];
     return [
       key,
-      prop.type && prop.type.name,
-      prop.defaultValue && prop.defaultValue.value,
+      renderType(prop),
+      renderDefault(prop),
       compile(prop.description).tree
     ];
   });
 };
 
-export default ({ component }) => {
+export default ({ component, compile }) => {
   return (
     <div>
 
@@ -30,7 +61,7 @@ export default ({ component }) => {
       {!!component.api && !!component.api.props && (
       <Table
         headers={['Prop name', 'Type', 'Default', 'Description']}
-        dataset={getComponentPropsItems(component.api.props)}
+        dataset={getComponentPropsItems(component.api.props, compile)}
         minWidth={700}
       />
       )}

@@ -1,9 +1,9 @@
-import React from 'react';
 import withContent from './withContent';
 import Api from './components/Api';
 
 export default (props) => {
   return withContent({
-    html: <Api {...props} />
+    App: Api,
+    appProps: props,
   });
 };

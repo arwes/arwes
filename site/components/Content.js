@@ -37,7 +37,7 @@ const styles = (theme) => {
       padding: [theme.margin, 0],
     },
     content: {
-      padding: theme.padding,
+      padding: [theme.padding, theme.padding, 0],
     },
     footer: {
       zIndex: 2,
@@ -71,7 +71,7 @@ class Content extends React.Component {
   }
 
   render () {
-    const { classes, resources, markdown, html } = this.props;
+    const { classes, resources, markdown, App, appProps } = this.props;
     const { show, framed } = this.state;
 
     return (
@@ -111,7 +111,14 @@ class Content extends React.Component {
                       anim2.entered && 'animEntered'
                     )}
                   >
-                    {html ? html : this.compile(markdown).tree}
+                    {App ? (
+                      <App
+                        compile={this.compile}
+                        {...appProps}
+                      />
+                    ) : (
+                      this.compile(markdown).tree
+                    )}
                   </div>
                   )}
                 </Frame>

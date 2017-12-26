@@ -1,1 +1,2 @@
-Reference to the general theming provider solution for JSS apps.
+Reference to the `<ThemeProvider />` solution for JSS apps at
+[cssinjs/theming](https://github.com/cssinjs/theming).
