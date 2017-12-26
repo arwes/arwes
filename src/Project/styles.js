@@ -55,6 +55,10 @@ export default (theme) => {
       transition: `all ${theme.animTime}ms ease-out`,
       backgroundColor: rgba(theme.background.primary.level0, theme.alpha),
       padding: theme.padding,
+
+      '& p, & ul, & ol, & dl, & blockquote': {
+        marginBottom: 0,
+      },
     },
 
     entering: {},

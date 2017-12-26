@@ -14,14 +14,20 @@ export default class Words extends Component {
     show: PropTypes.bool,
 
     /**
+     * Animation settings.
+     */
+    animation: PropTypes.shape({
+
+      /**
+       * Animation duration in ms.
+       */
+      timeout: PropTypes.number,
+    }),
+
+    /**
      * It uses the `typing` player.
      */
     sounds: PropTypes.object,
-
-    /**
-     * The max duration the animation on enter can take.
-     */
-    timeoutEnter: PropTypes.number,
 
     /**
      * Can have disabled the layer by providing `''`.
@@ -158,8 +164,7 @@ export default class Words extends Component {
   }
 
   startAnimation (isIn) {
-    const { theme, children, animate, sounds } = this.props;
-    const timeoutEnter = this.props.timeoutEnter || theme.animTime;
+    const { theme, children, animate, sounds, animation } = this.props;
 
     if (children.length === 0) {
       return;
@@ -176,10 +181,8 @@ export default class Words extends Component {
     // The time it will take to add/remove a character per frame
     const realDuration = interval * children.length;
 
-    // Duration, min is theme.animTime and max is props.timeoutEnter
-    const duration = isIn
-      ? Math.max(Math.min(realDuration, timeoutEnter), theme.animTime)
-      : theme.animTime;
+    const { timeout = theme.animTime } = animation || {};
+    const duration = Math.min(realDuration, timeout);
 
     this.cancelNextAnimation();
 
