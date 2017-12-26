@@ -13,8 +13,7 @@ export default (theme) => {
         opacity: 0,
       },
 
-      [`& code[class*="language-"],
-        & pre[class*="language-"]`]: {
+      'code&, pre&': {
         fontFamily: theme.code.fontFamily,
         fontSize: theme.code.fontSize,
         lineHeight: '1.375',
@@ -33,13 +32,10 @@ export default (theme) => {
         background: rgba(theme.code.background, theme.alpha),
         color: theme.code.color,
       },
-      '& pre[class*="language-"]': {
+      'pre&': {
         padding: theme.padding / 2,
         margin: '0',
         overflow: 'auto'
-      },
-      '& :not(pre) > code[class*="language-"]': {
-        padding: 2,
       },
       [`& .token.comment,
         & .token.prolog,
@@ -64,10 +60,10 @@ export default (theme) => {
         & .token.atrule-id`]: {
         color: theme.code.selector,
       },
-      [`& code.language-css,
-        & pre.language-css,
-        & code.language-scss,
-        & pre.language-scss,
+      [`code&.language-css,
+        pre&.language-css,
+        code&.language-scss,
+        pre&.language-scss,
         & .token.boolean,
         & .token.string,
         & .token.number,

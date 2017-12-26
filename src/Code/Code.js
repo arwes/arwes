@@ -69,14 +69,13 @@ export default class Code extends Component {
         {...animation}
       >
         {anim => (
-          <span className={cx(cls, classes[anim.status])} {...etc}>
-            <Wrapper
-              className={cx(classes.wrapper, 'language-' + language)}
-              ref={el => (this.wrapper = el)}
-            >
-              {children}
-            </Wrapper>
-          </span>
+          <Wrapper
+            className={cx(cls, classes[anim.status], 'language-' + language)}
+            {...etc}
+            ref={el => (this.wrapper = el)}
+          >
+            {children}
+          </Wrapper>
         )}
       </Animation>
     );
