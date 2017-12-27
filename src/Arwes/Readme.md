@@ -4,7 +4,16 @@ content. It uses `<Puffs />` component to display an animation between the child
 and the background.
 
 ```javascript
-<Arwes animate>
+<Arwes
+    animate
+    pattern='/img/glow.png'
+    background={{
+        small: '/img/small.jpg',
+        medium: '/img/medium.jpg',
+        large: '/img/large.jpg',
+        xlarge: '/img/xlarge.jpg'
+    }}
+>
     <p>Application elements</p>
 </Arwes>
 ```
