@@ -1,34 +1,34 @@
 import React from 'react';
+import Group from 'react-group';
+
 import Table from '../../src/Table';
 import Code from '../../src/Code';
 import Link from './Link';
 
-const getType = (prop) => {
+function getType (prop) {
   return prop.flowType || prop.type;
-};
+}
 
-const renderType = prop => {
-  const type = getType(prop);
-
+function renderType (type) {
   if (!type) {
-		return 'unknown';
-	}
+    return 'unknown';
+  }
 
   const { name } = type;
 
-	switch (name) {
-		case 'arrayOf':
-			return `${type.value.name}[]`;
-		case 'objectOf':
-			return `{${renderType(type.value)}}`;
-		case 'instanceOf':
-			return type.value;
-		default:
-			return name;
-	}
-};
+  switch (name) {
+    case 'arrayOf':
+      return `${type.value.name}[]`;
+    case 'objectOf':
+      return `{${renderType(type.value)}}`;
+    case 'instanceOf':
+      return type.value;
+    default:
+      return name;
+  }
+}
 
-const renderDefault = prop => {
+function renderDefault (prop) {
   if (prop.defaultValue) {
     return <Code>{prop.defaultValue.value}</Code>;
   }
@@ -36,19 +36,113 @@ const renderDefault = prop => {
     return <i>Required</i>;
   }
   return '';
-};
+}
 
-const getComponentPropsItems = (props, compile) => {
+function renderEnum (prop) {
+  if (!Array.isArray(getType(prop).value)) {
+    return <div>{getType(prop).value}</div>;
+  }
+
+  const values = getType(prop).value.map(({ value }) => (
+    <Code key={value}>{value}</Code>
+  ));
+
+  return (
+    <div>
+      One of:{' '}
+      <Group separator=', ' inline>
+        {values}
+      </Group>
+    </div>
+  );
+}
+
+function renderUnion (prop) {
+  if (!Array.isArray(getType(prop).value)) {
+    return <div>{getType(prop).value}</div>;
+  }
+
+  const values = getType(prop).value.map((value, index) => (
+    <Code key={`${value.name}-${index}`}>{renderType(value)}</Code>
+  ));
+
+  return (
+    <div>
+      One of type:{' '}
+      <Group separator=', ' inline>
+        {values}
+      </Group>
+    </div>
+  );
+}
+
+function renderShape (props) {
+  const rows = [];
+  for (const name in props) {
+    const prop = props[name];
+    const defaultValue = renderDefault(prop);
+    rows.push(
+      <div key={name}>
+        <Code>{name}</Code>
+        {': '}
+        <Code>{renderType(prop)}</Code>
+        {defaultValue && ' — '}
+        {defaultValue}
+      </div>
+    );
+  }
+  return rows;
+}
+
+function renderExtra (prop) {
+  const type = getType(prop);
+
+  if (!type) {
+    return null;
+  }
+
+  switch (type.name) {
+    case 'enum':
+      return renderEnum(prop);
+    case 'union':
+      return renderUnion(prop);
+    case 'shape':
+      return renderShape(prop.type.value);
+    case 'arrayOf':
+      if (type.value.name === 'shape') {
+        return renderShape(prop.type.value.value);
+      }
+      return null;
+    case 'objectOf':
+      if (type.value.name === 'shape') {
+        return renderShape(prop.type.value.value);
+      }
+      return null;
+    default:
+      return null;
+  }
+}
+
+function renderDescription (prop, compile) {
+  return (
+    <div>
+      {compile(prop.description).tree}
+      {renderExtra(prop)}
+    </div>
+  );
+}
+
+function getComponentPropsItems (props, compile) {
   return Object.keys(props).map(key => {
     const prop = props[key];
     return [
       key,
-      renderType(prop),
+      renderType(getType(prop)),
       renderDefault(prop),
-      compile(prop.description).tree
+      renderDescription(prop, compile)
     ];
   });
-};
+}
 
 export default ({ component, compile }) => {
   return (
@@ -68,11 +162,11 @@ export default ({ component, compile }) => {
 
       <p>
         <small>
-        Source code:
-        {' '}
-        <Link href={'https://github.com/romelperez/arwes/blob/master/' + component.path}>
-          <code>{component.path}</code>
-        </Link>
+          Source code:
+          {' '}
+          <Link href={'https://github.com/romelperez/arwes/blob/master/' + component.path}>
+            <code>{component.path}</code>
+          </Link>
         </small>
       </p>
 
