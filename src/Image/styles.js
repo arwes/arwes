@@ -37,6 +37,12 @@ export default (theme) => {
       transition: `all ${theme.animTime}ms ease-in`,
       opacity: 0,
     },
+    error: {
+      display: 'block',
+      margin: 'auto',
+      textAlign: 'center',
+      color: theme.color.alert.base,
+    },
     separator: {
       position: 'absolute',
       top: 'auto',

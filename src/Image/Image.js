@@ -46,6 +46,13 @@ export default class Image extends Component {
     ]).isRequired,
 
     /**
+     * i18n messages.
+     */
+    i18n: PropTypes.shape({
+      error: PropTypes.string,
+    }),
+
+    /**
      * Props to pass down to the `<img />` element.
      */
     imgProps: PropTypes.object,
@@ -65,6 +72,9 @@ export default class Image extends Component {
     show: true,
     layer: 'primary',
     loadResources: true,
+    i18n: {
+      error: 'Image error',
+    },
     imgProps: {},
   }
 
@@ -113,6 +123,7 @@ export default class Image extends Component {
       loadResources,
       resources,
       imgProps,
+      i18n,
       className,
       children,
       ...etc
@@ -141,9 +152,9 @@ export default class Image extends Component {
                   src={resource}
                 />
                 {error && (
-                  <p>An error has ocurred</p>
+                  <div className={classes.error}>{i18n.error}</div>
                 )}
-                {!ready && (
+                {!ready && !error && (
                   <Loading
                     full
                     animate={animate}
