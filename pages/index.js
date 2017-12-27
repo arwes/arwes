@@ -106,7 +106,8 @@ class Home extends React.Component {
           animate
           show={show}
           showResources={show}
-          resources={resources}
+          background={resources.background}
+          pattern={resources.pattern}
         >
           {anim => (
           <div className={classes.root}>

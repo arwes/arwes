@@ -52,11 +52,13 @@ Animation.propTypes = {
 
   /**
    * Do the animation on first mount.
+   * Passed down to `<Transition />`.
    */
   appear: PropTypes.bool,
 
   /**
-   * Animation in and out duration in ms.
+   * Animation enter and exit duration in ms.
+   * Passed down to `<Transition />`.
    */
   timeout: PropTypes.oneOfType([
     PropTypes.number,

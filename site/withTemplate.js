@@ -8,7 +8,7 @@ import createSounds from '../src/tools/createSounds';
 import Template from './components/Template';
 
 const resources = {
-  bg: {
+  background: {
     small: '/static/img/background.jpg',
     medium: '/static/img/background-medium.jpg',
     large: '/static/img/background-large.jpg',

@@ -1,11 +1,7 @@
 ```javascript
-const resources = {
-    bg: '/img/background.jpg',
-    pattern: '/img/glow.png',
-};
 render(
-    <Arwes animate resources={resources}>
-        <h2>Cyberpunk</h2>
+    <Arwes animate background='/img/background.jpg' pattern='/img/glow.png'>
+        <h2>SciFi UI Framework</h2>
         <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,

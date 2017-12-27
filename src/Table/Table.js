@@ -96,6 +96,12 @@ Table.propTypes = {
     PropTypes.number,
     PropTypes.string
   ]),
+
+  /**
+   * If the actual HTML `<table />` is provided, the `headers` and `dataset`
+   * are ignored.
+   */
+  children: PropTypes.any,
 };
 
 Table.defaultProps = {

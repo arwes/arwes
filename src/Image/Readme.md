@@ -6,3 +6,16 @@ an image placeholder which will show the image when loaded and an optional capti
     The vast universe around us
 </Image>
 ```
+
+Providing resources according to viewport:
+
+```javascript
+<Image animate resources={{
+    small: '/img/small.jpg',
+    medium: '/img/medium.jpg',
+    large: '/img/large.jpg',
+    xlarge: '/img/xlarge.jpg'
+}}>
+    The vast universe around us
+</Image>
+```

@@ -49,11 +49,13 @@ export default (theme) => {
       '&$hover:hover': {
         '& $border': {
           borderColor: props => theme.color[props.layer].base,
-          boxShadow: props => `0 0 ${theme.shadowLength}px ` + rgba(theme.color[props.layer].base, theme.alpha),
+          boxShadow: props => `0 0 ${theme.shadowLength}px `
+            + rgba(theme.color[props.layer].base, theme.alpha),
         },
         '& $corner': {
           borderColor: props => theme.color[props.layer].light,
-          boxShadow: props => `0 0 ${theme.shadowLength}px -${theme.shadowLength / 2}px ` + rgba(theme.color[props.layer].light, theme.alpha),
+          boxShadow: props => `0 0 ${theme.shadowLength}px -${theme.shadowLength / 2}px `
+            + rgba(theme.color[props.layer].light, theme.alpha),
         },
       },
     },
