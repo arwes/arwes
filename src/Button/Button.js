@@ -114,6 +114,10 @@ export default class Button extends Component {
     );
   }
 
+  /**
+   * Internal click event listener.
+   * @param  {Event} ev
+   */
   onClick = (ev) => {
     const { disabled, onClick, animate, sounds } = this.props;
 

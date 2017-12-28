@@ -108,7 +108,7 @@ export default class Puffs extends Component {
 
   /**
    * Create a puff with random valid properties.
-   * @return {DOMElement}
+   * @return {HTMLElement}
    */
   createPuff () {
 

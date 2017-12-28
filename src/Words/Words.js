@@ -149,6 +149,9 @@ export default class Words extends Component {
     this.startAnimation(false);
   }
 
+  /**
+   * Stop current animation and sounds.
+   */
   stopAnimation () {
     this.cancelNextAnimation();
     this.setState({ animating: false });
@@ -163,6 +166,10 @@ export default class Words extends Component {
     window.cancelAnimationFrame(this.currentAnimationFrame);
   }
 
+  /**
+   * Start animating the words and playing sounds.
+   * @param  {Boolean} isIn - If entering.
+   */
   startAnimation (isIn) {
     const { theme, children, animate, sounds, animation } = this.props;
 

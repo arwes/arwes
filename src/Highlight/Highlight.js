@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
+// HTMLElement animation end event names.
 const ON_ANIMATION_END = [
   'webkitAnimationEnd',
   'mozAnimationEnd',
@@ -42,6 +43,9 @@ export default class Highlight extends Component {
     );
   }
 
+  /**
+   * Click event on element. Reproduces the animation.
+   */
   onClick = () => {
 
     const { animate, classes } = this.props;
