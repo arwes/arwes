@@ -1,9 +1,20 @@
 import React from 'react';
 import Group from 'react-group';
 
+import withStyles from '../../src/tools/withStyles';
 import Table from '../../src/Table';
 import Code from '../../src/Code';
 import Link from './Link';
+
+const Markdown = withStyles({
+  root: {
+    '& p': {
+      display: 'inline-block',
+    },
+  },
+})(({ classes, children, ...etc }) => (
+  <span className={classes.root} {...etc}>{children}</span>
+));
 
 function getType (prop) {
   return prop.flowType || prop.type;
@@ -144,6 +155,42 @@ function getComponentPropsItems (props, compile) {
   });
 }
 
+function renderArgument (arg, compile) {
+  return (
+    <span>
+      {!!arg.name && <Code>{arg.name}</Code>}
+      {!!arg.name && !!arg.type && ':'}
+      {!!arg.type && <Code>{arg.type.name}</Code>}
+      {!!arg.description && (
+        <span>
+          {' — '}
+          <Markdown>{compile(arg.description).tree}</Markdown>
+        </span>
+      )}
+    </span>
+  );
+}
+
+function getComponentMethodsItems (methods, compile) {
+  return methods.map(method => {
+    const { name, params = [], description, returns } = method;
+    return [
+      name,
+      params.map((param, index) => (
+        <div key={index}>
+          {renderArgument(param, compile)}
+        </div>
+      )),
+      <div>
+        {!!description && compile(description).tree}
+        {!!returns && (
+          <div>Returns {renderArgument(returns, compile)}</div>
+        )}
+      </div>
+    ];
+  });
+}
+
 export default ({ component, compile }) => {
   return (
     <div>
@@ -156,6 +203,14 @@ export default ({ component, compile }) => {
       <Table
         headers={['Prop name', 'Type', 'Default', 'Description']}
         dataset={getComponentPropsItems(component.api.props, compile)}
+        minWidth={700}
+      />
+      )}
+
+      {!!component.api && !!component.api.methods && !!component.api.methods.length && (
+      <Table
+        headers={['Method name', 'Parameters', 'Description']}
+        dataset={getComponentMethodsItems(component.api.methods, compile)}
         minWidth={700}
       />
       )}
