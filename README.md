@@ -81,7 +81,7 @@ specification.
 - [x] Support for server-side rendering
 - [x] Define logo
 - [x] Documentation
-- [ ] Create component live documentation
+- [x] Create component live documentation
 - [ ] Create example implementations
 - [ ] Best test coverege
 - [ ] Add navigation components
