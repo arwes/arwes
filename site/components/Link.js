@@ -10,6 +10,7 @@ const Link = props => {
   const {
     theme,
     classes,
+    context,
     sounds,
     href,
     target,

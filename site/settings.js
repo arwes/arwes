@@ -1,23 +1,43 @@
-module.exports.components = [
+module.exports.componentsProviders = [
   'ThemeProvider',
-  'SoundsProvider',
+  'SoundsProvider'
+];
+
+module.exports.componentsContainers = [
   'Arwes',
   'Grid',
   'Frame',
   'Header',
   'Footer',
-  'Project',
+  'Project'
+];
+
+module.exports.componentsContents = [
   'Words',
   'Code',
   'Table',
   'Image',
   'Line',
+  'Logo'
+];
+
+module.exports.componentsControls = [
   'Button',
-  'Loading',
+  'Loading'
+];
+
+module.exports.componentsAnimations = [
   'Animation',
   'Highlight',
-  'Puffs',
-  'Logo',
+  'Puffs'
+];
+
+module.exports.components = [
+  ...module.exports.componentsProviders,
+  ...module.exports.componentsContainers,
+  ...module.exports.componentsContents,
+  ...module.exports.componentsControls,
+  ...module.exports.componentsAnimations
 ];
 
 module.exports.titles = {

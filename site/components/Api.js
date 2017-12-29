@@ -99,6 +99,8 @@ function renderShape (props) {
         <Code>{renderType(prop)}</Code>
         {defaultValue && ' — '}
         {defaultValue}
+        {!!prop.description && ' — '}
+        {!!prop.description && prop.description}
       </div>
     );
   }
@@ -191,7 +193,12 @@ function getComponentMethodsItems (methods, compile) {
   });
 }
 
-export default ({ component, compile }) => {
+export default withStyles({
+  option: {
+    display: 'inline-block',
+    whiteSpace: 'nowrap',
+  }
+})(({ classes, component, compile }) => {
   return (
     <div>
 
@@ -216,15 +223,23 @@ export default ({ component, compile }) => {
       )}
 
       <p>
-        <small>
+        <small className={classes.option}>
           Source code:
           {' '}
           <Link href={'https://github.com/romelperez/arwes/blob/master/' + component.path}>
             <code>{component.path}</code>
           </Link>
         </small>
+        {' '}
+        <small className={classes.option}>
+          Open in:
+          {' '}
+          <Link href={'/play/#' + component.name.toLowerCase()}>
+            Playground
+          </Link>
+        </small>
       </p>
 
     </div>
   );
-};
+});
