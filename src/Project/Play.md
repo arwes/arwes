@@ -1,10 +1,6 @@
 ```javascript
-const resources = {
-    bg: '/img/background.jpg',
-    pattern: '/img/glow.png',
-}
 render(
-    <Arwes resources={resources}>
+    <Arwes background='/img/background.jpg' pattern='/img/glow.png'>
         <div style={{ padding: 20 }}>
             <Project
                 animate
