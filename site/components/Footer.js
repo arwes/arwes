@@ -60,7 +60,7 @@ const Footer = props => {
                 <i className={cx('mdi mdi-copyright anim', anim.entered && 'animEntered')} />
                 {' '}
                 <Words animate show={anim.entered}>
-                  2017 Romel Pérez
+                  2018 Romel Pérez
                 </Words>
               </Link>
             </div>
