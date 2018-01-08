@@ -28,6 +28,7 @@ module.exports.componentsControls = [
 
 module.exports.componentsAnimations = [
   'Animation',
+  'Appear',
   'Highlight',
   'Puffs'
 ];
@@ -52,5 +53,7 @@ module.exports.titles = {
   '/api': 'API | Arwes',
   '/play': 'Play | Arwes',
 };
+
+module.exports.googleAnalytics = 'UA-50433259-2';
 
 module.exports.default = {};

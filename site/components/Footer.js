@@ -5,6 +5,7 @@ import withStyles from '../../src/tools/withStyles';
 import ArwesFooter from '../../src/Footer';
 import Words from '../../src/Words';
 import { Row } from '../../src/Grid';
+import Appear from '../../src/Appear';
 
 import Wrap from './Wrap';
 import Link from './Link';
@@ -25,6 +26,9 @@ const styles = (theme) => ({
   right: {
     flex: '1 1 auto',
     textAlign: 'right',
+    '& a': {
+      textAlign: 'left',
+    },
   },
 });
 
@@ -47,7 +51,7 @@ const Footer = props => {
 
             <div className={classes.left}>
               <Link href='https://github.com/romelperez/arwes' onLink={onLink}>
-                <i className={cx('mdi mdi-github-circle anim', anim.entered && 'animEntered')} />
+                <Appear className='mdi mdi-github-circle' animate show={anim.entered} />
                 {' '}
                 <Words animate show={anim.entered}>
                   GitHub
@@ -57,7 +61,7 @@ const Footer = props => {
 
             <div className={classes.right}>
               <Link href='https://romelperez.com' onLink={onLink}>
-                <i className={cx('mdi mdi-copyright anim', anim.entered && 'animEntered')} />
+                <Appear className='mdi mdi-copyright' animate show={anim.entered} />
                 {' '}
                 <Words animate show={anim.entered}>
                   2018 Romel Pérez

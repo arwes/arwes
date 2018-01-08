@@ -1,5 +1,4 @@
 import React from 'react';
-import cx from 'classnames';
 
 import withStyles from '../src/tools/withStyles';
 import { getResponsiveResource } from '../src/tools/utils';
@@ -10,6 +9,7 @@ import Words from '../src/Words';
 import Button from '../src/Button';
 import Logo from '../src/Logo';
 import Loading from '../src/Loading';
+import Appear from '../src/Appear';
 
 import withTemplate from '../site/withTemplate';
 import { getTitle } from '../site/utils';
@@ -64,6 +64,9 @@ const styles = (theme) => {
     footerRight: {
       flex: '1 1 auto',
       textAlign: 'right',
+      '& a': {
+        textAlign: 'left',
+      },
     },
   };
 };
@@ -160,14 +163,14 @@ class Home extends React.Component {
               <div className={classes.footerContent}>
                 <div className={classes.footerLeft}>
                   <Link href='https://github.com/romelperez/arwes' onLink={this.onLink}>
-                    <i className={cx('mdi mdi-github-circle anim', anim.entered && 'animEntered')} />
+                    <Appear className='mdi mdi-github-circle' animate show={anim.entered} />
                     {' '}
                     <Words animate show={anim.entered}>GitHub</Words>
                   </Link>
                 </div>
                 <div className={classes.footerRight}>
                   <Link href='https://romelperez.com' onLink={this.onLink}>
-                    <i className={cx('mdi mdi-copyright anim', anim.entered && 'animEntered')} />
+                    <Appear className='mdi mdi-copyright' animate show={anim.entered} />
                     {' '}
                     <Words animate show={anim.entered}>2018 Romel Pérez</Words>
                   </Link>
@@ -184,7 +187,7 @@ class Home extends React.Component {
 
   startLoading () {
     const responsive = this.responsive.get();
-    const bg = getResponsiveResource(this.props.resources.bg, responsive);
+    const bg = getResponsiveResource(this.props.resources.background, responsive);
 
     this.loader.load({ images: [bg] }, { timeout: 5 * 1000 }).
       then(() => {}, () => {}).

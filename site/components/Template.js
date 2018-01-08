@@ -1,19 +1,7 @@
 import React from 'react';
-import withStyles from '../../src/tools/withStyles';
+import { googleAnalytics } from '../settings';
 
-const styles = theme => ({
-  '@global': {
-    '.anim': {
-      opacity: 0,
-    },
-    '.animEntered': {
-      opacity: 1,
-      transition: `all ${theme.animTime}ms ease-out`,
-    },
-  },
-});
-
-class Template extends React.Component {
+export default class Template extends React.Component {
 
   componentDidMount () {
     this.removeServerStyles();
@@ -35,7 +23,7 @@ class Template extends React.Component {
 
     const gaScript = document.createElement('script');
     gaScript.async = true;
-    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=UA-50433259-2';
+    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + googleAnalytics;
     document.body.appendChild(gaScript);
 
     const gaBody = document.createElement('script');
@@ -43,10 +31,8 @@ class Template extends React.Component {
       window.dataLayer = window.dataLayer || [];
       function gtag () {dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'UA-50433259-2');
+      gtag('config', '${googleAnalytics}');
     `;
     document.body.appendChild(gaBody);
   }
 }
-
-export default withStyles(styles)(Template);

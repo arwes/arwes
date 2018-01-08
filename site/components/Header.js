@@ -7,6 +7,7 @@ import Logo from '../../src/Logo';
 import Words from '../../src/Words';
 import Highlight from '../../src/Highlight';
 import { Row, Col } from '../../src/Grid';
+import Appear from '../../src/Appear';
 
 import Wrap from './Wrap';
 import Link from './Link';
@@ -108,12 +109,13 @@ const Header = props => {
               {linksList.map((linkItem, index) => (
               <Link
                 key={index}
-                className={cx(classes.link, 'anim', anim.entered && 'animEntered')}
+                className={classes.link}
                 href={linkItem.href}
                 onLink={onLink}
               >
                 <Highlight className={classes.button} animate layer='header'>
-                  <i className={`mdi mdi-${linkItem.icon}`}></i>
+                  <Appear className={`mdi mdi-${linkItem.icon}`} animate show={anim.entered} />
+                  {' '}
                   <Words animate show={anim.entered}>{linkItem.name}</Words>
                 </Highlight>
               </Link>

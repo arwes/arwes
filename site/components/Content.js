@@ -1,10 +1,10 @@
 import React from 'react';
-import cx from 'classnames';
 
 import withStyles from '../../src/tools/withStyles';
 import Arwes from '../../src/Arwes';
 import Frame from '../../src/Frame';
 import { Row } from '../../src/Grid';
+import Appear from '../../src/Appear';
 
 import withTemplate from '../withTemplate';
 import { getTitle } from '../utils';
@@ -37,6 +37,7 @@ const styles = (theme) => {
       padding: [theme.margin, 0],
     },
     content: {
+      display: 'block',
       padding: [theme.padding, theme.padding, 0],
     },
     footer: {
@@ -105,12 +106,10 @@ class Content extends React.Component {
                   corners={4}
                 >
                   {anim2 => (
-                  <div
-                    className={cx(
-                      classes.content,
-                      'anim',
-                      anim2.entered && 'animEntered'
-                    )}
+                  <Appear
+                    className={classes.content}
+                    animate
+                    show={anim2.entered}
                   >
                     {App ? (
                       <App
@@ -120,7 +119,7 @@ class Content extends React.Component {
                     ) : (
                       this.compile(markdown).tree
                     )}
-                  </div>
+                  </Appear>
                   )}
                 </Frame>
               </Row>

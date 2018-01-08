@@ -1,3 +1,5 @@
+import React from 'react';
+import { Row, Col } from '../../src/Grid';
 import withContent from '../../site/withContent';
 import markdown from '../../site/api/index.md';
 import {
@@ -13,11 +15,25 @@ const makeList = (header, items) => {
   return `\n## ${header}\n${list}\n`;
 };
 
-export default withContent({
-  markdown: markdown
-    + makeList('Providers', componentsProviders)
-    + makeList('Containers', componentsContainers)
-    + makeList('Contents', componentsContents)
-    + makeList('Controls', componentsControls)
-    + makeList('Animations', componentsAnimations)
-});
+const groups = [
+  makeList('Providers', componentsProviders),
+  makeList('Containers', componentsContainers),
+  makeList('Contents', componentsContents),
+  makeList('Controls', componentsControls),
+  makeList('Animations', componentsAnimations)
+];
+
+const App = ({ compile }) => (
+  <div>
+    {compile(markdown).tree}
+    <Row nested>
+      {groups.map((group, index) => (
+        <Col key={index} s={12} m={6} l={4}>
+          {compile(group).tree}
+        </Col>
+      ))}
+    </Row>
+  </div>
+);
+
+export default withContent({ App });
