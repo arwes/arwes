@@ -12,6 +12,7 @@ export Header from './Header';
 export Footer from './Footer';
 export Grid, { Row, Col } from './Grid';
 export Animation from './Animation';
+export Appear from './Appear';
 export Highlight from './Highlight';
 export Puffs from './Puffs';
 export Logo from './Logo';
