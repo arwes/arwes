@@ -62,6 +62,7 @@ export default (theme) => {
     box: {
       zIndex: 3,
       position: 'relative',
+      overflow: 'hidden',
       display: 'block',
       transition: `all ${theme.animTime}ms ease-in`,
       backgroundColor: props => props.noBackground
