@@ -69,6 +69,10 @@ export default (theme) => {
       minHeight: 1,
     },
 
+    noGutter: {
+      padding: 0,
+    },
+
     ...columnBaseStyles(theme, 's'),
     ...columnExtraStyles(theme, 's'),
 

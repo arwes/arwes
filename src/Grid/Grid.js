@@ -9,6 +9,7 @@ export default function Grid (props) {
     classes,
     row,
     nested,
+    noGutter,
     noMargin,
     col,
     s,
@@ -29,6 +30,7 @@ export default function Grid (props) {
   const baseClass = row ? classes.row : classes.col;
 
   const colClasses = {
+    [classes.noGutter]: noGutter,
     [classes['s' + s]]: s,
     [classes['m' + m]]: m,
     [classes['l' + l]]: l,
@@ -81,6 +83,11 @@ Grid.propTypes = {
    * If component is a column.
    */
   col: PropTypes.bool,
+
+  /**
+   * Don't add lateral paddings to column.
+   */
+  noGutter: PropTypes.bool,
 
   /**
    * The number of columns in small breakpoint.
