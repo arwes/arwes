@@ -1,6 +1,6 @@
 ```javascript
 render(
-    <Arwes animate background='/img/background.jpg' pattern='/img/glow.png'>
+    <Arwes animate background='/static/img/background.jpg' pattern='/static/img/glow.png'>
         <h2>SciFi UI Framework</h2>
         <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod

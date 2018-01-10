@@ -5,28 +5,22 @@ import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 import Navigo from 'navigo';
 
 import * as arwes from '../src';
-import {
-  ThemeProvider,
-  createTheme,
-  SoundsProvider,
-  createSounds
-} from '../src';
+import { ThemeProvider, createTheme, SoundsProvider, createSounds } from '../src';
 import componentsList from './components';
 
 const sounds = {
-  shared: {
-    volume: 1,
-  },
+  shared: { volume: 1 },
   players: {
     click: {
-      sound: { src: ['/sound/click.mp3'] }
+      sound: { src: ['/static/sound/click.mp3'] },
+      settings: { oneAtATime: true }
     },
     typing: {
-      sound: { src: ['/sound/typing.mp3'] },
+      sound: { src: ['/static/sound/typing.mp3'] },
       settings: { oneAtATime: true }
     },
     deploy: {
-      sound: { src: ['/sound/deploy.mp3'] },
+      sound: { src: ['/static/sound/deploy.mp3'] },
       settings: { oneAtATime: true }
     },
   }
@@ -150,9 +144,7 @@ class App extends Component {
   }
 
   getComponentCode (source) {
-    const code = source
-      .replace(/^\s*\`\`\`.*[\r\n]/gm, '')
-      .replace(/^\s*[\r\n]/gm, '');
+    const code = source.replace(/^\s*\`\`\`.*[\r\n]/gm, '');
     return code;
   }
 }

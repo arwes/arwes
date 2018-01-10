@@ -11,7 +11,7 @@ describe('Image', function () {
       Animation: ({ children }) => children({}),
       Frame: ({ children }) => <div>{children}</div>,
       Loading: ({ children }) => <div>{children}</div>,
-      resources: '/img/wallpaper.jpg'
+      resources: '/static/img/wallpaper.jpg'
     });
   });
 

@@ -11,7 +11,7 @@ module.exports = {
   devServer: {
     contentBase: [
       path.join(__dirname, 'play'),
-      path.join(__dirname, 'static')
+      __dirname
     ],
     port: 7100,
     host: '0.0.0.0',

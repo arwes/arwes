@@ -6,12 +6,12 @@ and the background.
 ```javascript
 <Arwes
     animate
-    pattern='/img/glow.png'
+    pattern='/static/img/glow.png'
     background={{
-        small: '/img/small.jpg',
-        medium: '/img/medium.jpg',
-        large: '/img/large.jpg',
-        xlarge: '/img/xlarge.jpg'
+        small: '/static/img/small.jpg',
+        medium: '/static/img/medium.jpg',
+        large: '/static/img/large.jpg',
+        xlarge: '/static/img/xlarge.jpg'
     }}
 >
     <p>Application elements</p>

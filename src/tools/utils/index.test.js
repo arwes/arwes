@@ -33,7 +33,7 @@ describe('Utils', function () {
     });
 
     it('Should return resource string when it was the only provided', function () {
-      const resource = '/img/path.png';
+      const resource = '/static/img/path.png';
       const actual = getResponsiveResource(resource);
       const expected = resource;
       expect(actual).to.equal(expected);

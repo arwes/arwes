@@ -44,6 +44,7 @@ html, body {
   float: left;
   display: inline-block;
   margin: 10px 0;
+  padding-right: 10px;
   height: 30px;
   border: none;
   border-bottom: 1px solid #00ffff;

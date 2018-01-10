@@ -11,12 +11,13 @@ const Player = withSounds()(props => (
 ));
 
 const sounds = {
+    shared: { volume: 1 },
     players: {
-        information: { sound: { src: ['/sound/information.mp3'] } },
-        ask: { sound: { src: ['/sound/ask.mp3'] } },
-        warning: { sound: { src: ['/sound/warning.mp3'] } },
-        error: { sound: { src: ['/sound/error.mp3'] } },
-    }
+        information: { sound: { src: ['/static/sound/information.mp3'] } },
+        ask: { sound: { src: ['/static/sound/ask.mp3'] } },
+        warning: { sound: { src: ['/static/sound/warning.mp3'] } },
+        error: { sound: { src: ['/static/sound/error.mp3'] } },
+    },
 };
 
 render(

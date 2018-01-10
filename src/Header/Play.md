@@ -1,7 +1,7 @@
 ```javascript
 const resources = {
-    bg: '/img/background.jpg',
-    pattern: '/img/glow.png',
+    bg: '/static/img/background.jpg',
+    pattern: '/static/img/glow.png',
 };
 render(
     <Arwes resources={resources}>

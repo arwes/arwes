@@ -1,6 +1,6 @@
 ```javascript
 render(
-    <Arwes background='/img/background.jpg' pattern='/img/glow.png'>
+    <Arwes background='/static/img/background.jpg' pattern='/static/img/glow.png'>
         <div style={{ padding: 20 }}>
             <Project
                 animate

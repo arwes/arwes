@@ -6,7 +6,7 @@ render(
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua.
             </p>
-            <Image animate resources='/img/wallpaper.jpg'>
+            <Image animate resources='/static/img/wallpaper.jpg'>
                 The vast universe around us
             </Image>
             <p>
