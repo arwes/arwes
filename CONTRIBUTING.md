@@ -18,21 +18,32 @@ in all your interactions with the project.
 
 ## Development
 
+### Install
+
 This package uses React v16. To install repository dependencies:
 
 ```bash
-npm install
+$ npm install
 ```
+
+### Playground
 
 [react-live](https://react-live.philpl.com/) is used to play with the components.
 To start the playground to experiment with them:
 
 ```bash
-npm run play
+$ npm run play
 ```
 
 It will start a server at [`http://127.0.0.1:7100`](http://127.0.0.1:7100)
 to list all components to play with.
+
+The playground application is run with the app in `/play`. Each component
+sandbox is defined in each component folder with the file `Play.md` where the
+code snippet will be passed to react-live to execute it. The assets in the
+`/static` folder are used.
+
+### Testing
 
 To test the components and modules [karma](http://karma-runner.github.io),
 [chai](http://chaijs.com), [sinon](http://sinonjs.org) and [enzyme](http://airbnb.io/enzyme/)
@@ -40,10 +51,27 @@ are used. Run them using:
 
 ```bash
 # run linter and tests once
-npm run test
+$ npm run test
 # or with watcher
-npm run test-dev
+$ npm run test-dev
 ```
+
+### Site
+
+[next.js](https://github.com/zeit/next.js/) is used with support to read Markdown
+files as `text/plain`. The pages are in `/pages`, the components and utilities
+for the website are in `/site` and static files are served from `/static`.
+
+The script `/script/api.js` (run with `$ npm run script-api`) creates the
+documentation definitions for the components to be used in the site.
+
+Run the website with:
+
+```bash
+$ npm run site-dev
+```
+
+It will open a server at [`http://127.0.0.1:7000`](http://127.0.0.1:7000).
 
 ## Guidelines
 
