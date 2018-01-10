@@ -158,9 +158,9 @@ export default class Arwes extends Component {
           <div className={classes.background} style={backgroundStyle} />
           <div className={classes.pattern} style={patternStyle} />
           <Puffs
-            {...puffsProps}
-            className={classes.puffs}
+            className={cx(classes.puffs, puffsProps && puffsProps.className)}
             animate={!!(show && animate)}
+            {...puffsProps}
           />
           <div className={classes.main}>
             {typeof children === 'function' ? children(anim) : children}
