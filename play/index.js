@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 import Navigo from 'navigo';
+import escape from 'lodash/escape';
 
 import * as arwes from '../src';
 import { ThemeProvider, createTheme, SoundsProvider, createSounds } from '../src';
-import componentsList from './components';
+import sandboxes from './sandboxes';
 
 const sounds = {
   shared: { volume: 1 },
@@ -36,7 +37,9 @@ class PlayLive extends Component {
   }
   render () {
     if (this.props.error) {
-      const error = String(this.props.error).replace(/[\r\n]/gm, '<br />');
+      const error = escape(this.props.error).
+        replace(/[\r\n]/gm, '<br/>').
+        replace(/\s/g, '&nbsp;');
       return (
         <p
           className='play-content-error'
@@ -57,11 +60,6 @@ class App extends Component {
       error: false,
       selectedComponentName: '',
     };
-
-    this.components = componentsList.map(component => {
-      const code = this.getComponentCode(component.code);
-      return { ...component, code };
-    });
   }
 
   componentDidMount () {
@@ -71,7 +69,7 @@ class App extends Component {
       this.setState({ selectedComponentName: '' });
     });
 
-    this.components.forEach(component => {
+    sandboxes.forEach(component => {
       this.router.on(component.name, () => {
         this.setState({ selectedComponentName: component.name });
       }).resolve();
@@ -90,7 +88,7 @@ class App extends Component {
             onChange={ev => this.onChange(ev.target.value)}
           >
             <option value=''>-- select --</option>
-            {this.components.map((el, index) => {
+            {sandboxes.map((el, index) => {
               if (!el) return null;
               return <option key={index} value={el.name}>{el.name}</option>;
             })}
@@ -139,13 +137,8 @@ class App extends Component {
 
   getSelected = () => {
     const { selectedComponentName } = this.state;
-    const selectedComponent = this.components.find(el => el.name === selectedComponentName);
+    const selectedComponent = sandboxes.find(el => el.name === selectedComponentName);
     return { name: selectedComponentName, component: selectedComponent };
-  }
-
-  getComponentCode (source) {
-    const code = source.replace(/^\s*\`\`\`.*[\r\n]/gm, '');
-    return code;
   }
 }
 

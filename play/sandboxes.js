@@ -19,7 +19,7 @@ import Highlight from '../src/Highlight/Play.md';
 import Puffs from '../src/Puffs/Play.md';
 import Logo from '../src/Logo/Play.md';
 
-const components = [
+let sandboxes = [
   { name: 'ThemeProvider', code: ThemeProvider },
   { name: 'SoundsProvider', code: SoundsProvider },
   { name: 'Arwes', code: Arwes },
@@ -42,4 +42,11 @@ const components = [
   { name: 'Logo', code: Logo },
 ];
 
-export default components;
+sandboxes = sandboxes.map(item => {
+  return {
+    ...item,
+    code: item.code.replace(/^\s*\`\`\`.*[\r\n]/gm, '')
+  };
+});
+
+export default sandboxes;
