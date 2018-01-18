@@ -85,6 +85,7 @@ export default (theme) => {
         color: theme.code.keyword,
       },
       [`& .token.placeholder,
+        & .token.attr-name,
         & .token.variable`]: {
         color: theme.code.variable,
       },

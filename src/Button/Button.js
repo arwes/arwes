@@ -27,6 +27,7 @@ export default class Button extends Component {
 
     layer: PropTypes.oneOf(['primary', 'secondary', 'header', 'control', 'success', 'alert', 'disabled']),
     disabled: PropTypes.bool,
+    active: PropTypes.bool,
 
     /**
      * The inside `<Frame />` level.
@@ -69,6 +70,7 @@ export default class Button extends Component {
       layer,
       level,
       disabled,
+      active,
       className,
       buttonProps,
       children,
@@ -86,8 +88,8 @@ export default class Button extends Component {
         {anim => (
         <div
           className={cx(cls, classes[anim.status], disabled && classes.disabled)}
-          onClick={this.onClick}
           {...etc}
+          onClick={this.onClick}
         >
           <Frame
             hover

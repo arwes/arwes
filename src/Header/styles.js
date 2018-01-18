@@ -6,6 +6,7 @@ export default (theme) => {
       display: 'block',
       position: 'relative',
       backgroundColor: rgba(theme.background.primary.level0, theme.alpha),
+      paddingBottom: 4,
 
       '&$exiting, &$exited': {
         backgroundColor: 'transparent',
@@ -17,7 +18,7 @@ export default (theme) => {
     },
     separator: {
       position: 'absolute',
-      top: 'auto',
+      bottom: 0,
       left: '50%',
       transform: 'translateX(-50%)',
       display: 'block',

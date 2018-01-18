@@ -1,10 +1,16 @@
+import { lighten } from 'polished';
+
 export default (theme) => {
   return {
     root: {
       display: 'inline-block',
       position: 'relative',
-      backgroundColor: props => theme.background[props.layer]['level' + props.level],
+      backgroundColor: props => lighten(
+        props.active ? theme.accent : 0,
+        theme.background[props.layer]['level' + props.level]
+      ),
       lineHeight: 1,
+      transition: `background-color ${theme.animTime}ms ease-out`,
 
       '&$exiting, &$exited': {
         backgroundColor: 'transparent',
