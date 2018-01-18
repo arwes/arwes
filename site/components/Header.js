@@ -3,44 +3,21 @@ import cx from 'classnames';
 
 import withStyles from '../../src/tools/withStyles';
 import ArwesHeader from '../../src/Header';
-import Logo from '../../src/Logo';
-import Words from '../../src/Words';
-import Highlight from '../../src/Highlight';
 import { Row, Col } from '../../src/Grid';
-import Appear from '../../src/Appear';
 
 import Wrap from './Wrap';
-import Link from './Link';
+import Brand from './Brand';
+import Navigation from './Navigation';
 
 const styles = theme => ({
   root: {
     textAlign: 'center',
-
-    '& h1': {
-      display: 'inline-block',
-      margin: [5, 0, 0, theme.padding / 2],
-      verticalAlign: 'top',
-    },
   },
   wrap: {
     padding: [theme.padding, 0],
   },
   links: {
     marginTop: theme.padding / 2,
-  },
-  link: {
-    display: 'inline-block',
-    lineHeight: '45px',
-    fontSize: 21,
-
-    '& i': {
-      marginRight: theme.padding / 2,
-      fontSize: 24,
-    },
-  },
-  button: {
-    padding: [0, theme.padding / 2],
-    textAlign: 'left',
   },
 
   [`@media (min-width: ${theme.responsive.small + 1}px)`]: {
@@ -54,29 +31,13 @@ const styles = theme => ({
   },
 });
 
-const linksList = [{
-  name: 'Docs',
-  icon: 'note-outline',
-  href: '/docs'
-}, {
-  name: 'API',
-  icon: 'code-brackets',
-  href: '/api'
-}, {
-  name: 'Play',
-  icon: 'beaker',
-  href: '/play'
-}];
-
 const Header = props => {
   const {
     onLink,
-    title,
     classes,
     className,
     ...etc
   } = props;
-
   const cls = cx(classes.root, className);
 
   return (
@@ -87,42 +48,12 @@ const Header = props => {
       {anim => (
       <Wrap className={classes.wrap}>
         <Row noMargin>
-
           <Col s={12} m={6}>
-            <Link href='/' onLink={onLink}>
-              <Logo
-                animate
-                show={anim.entered}
-                size={45}
-                layer='header'
-              />
-              <h1>
-                <Words animate show={anim.entered}>
-                  {title}
-                </Words>
-              </h1>
-            </Link>
+            <Brand show={anim.entered} onLink={onLink} />
           </Col>
-
           <Col s={12} m={6} className={classes.links}>
-            <nav>
-              {linksList.map((linkItem, index) => (
-              <Link
-                key={index}
-                className={classes.link}
-                href={linkItem.href}
-                onLink={onLink}
-              >
-                <Highlight className={classes.button} animate layer='header'>
-                  <Appear className={`mdi mdi-${linkItem.icon}`} animate show={anim.entered} />
-                  {' '}
-                  <Words animate show={anim.entered}>{linkItem.name}</Words>
-                </Highlight>
-              </Link>
-              ))}
-            </nav>
+            <Navigation show={anim.entered} onLink={onLink} />
           </Col>
-
         </Row>
       </Wrap>
       )}

@@ -3,12 +3,11 @@ import cx from 'classnames';
 
 import withStyles from '../../src/tools/withStyles';
 import ArwesFooter from '../../src/Footer';
-import Words from '../../src/Words';
 import { Row } from '../../src/Grid';
-import Appear from '../../src/Appear';
 
 import Wrap from './Wrap';
-import Link from './Link';
+import FooterGitHub from './FooterGitHub';
+import FooterAuthor from './FooterAuthor';
 
 const styles = (theme) => ({
   root: {
@@ -48,27 +47,12 @@ const Footer = props => {
       <Wrap className={classes.wrap}>
         <Row noMargin col s={12}>
           <div className={classes.content}>
-
             <div className={classes.left}>
-              <Link href='https://github.com/romelperez/arwes' onLink={onLink}>
-                <Appear className='mdi mdi-github-circle' animate show={anim.entered} />
-                {' '}
-                <Words animate show={anim.entered}>
-                  GitHub
-                </Words>
-              </Link>
+              <FooterGitHub show={anim.entered} onLink={onLink} />
             </div>
-
             <div className={classes.right}>
-              <Link href='https://romelperez.com' onLink={onLink}>
-                <Appear className='mdi mdi-copyright' animate show={anim.entered} />
-                {' '}
-                <Words animate show={anim.entered}>
-                  2018 Romel Pérez
-                </Words>
-              </Link>
+              <FooterAuthor show={anim.entered} onLink={onLink} />
             </div>
-
           </div>
         </Row>
       </Wrap>

@@ -9,11 +9,12 @@ import Words from '../src/Words';
 import Button from '../src/Button';
 import Logo from '../src/Logo';
 import Loading from '../src/Loading';
-import Appear from '../src/Appear';
 
 import withTemplate from '../site/withTemplate';
 import { getTitle } from '../site/utils';
 import Link from '../site/components/Link';
+import FooterGitHub from '../site/components/FooterGitHub';
+import FooterAuthor from '../site/components/FooterAuthor';
 
 const styles = (theme) => {
   return {
@@ -162,18 +163,10 @@ class Home extends React.Component {
             <footer className={classes.footer}>
               <div className={classes.footerContent}>
                 <div className={classes.footerLeft}>
-                  <Link href='https://github.com/romelperez/arwes' onLink={this.onLink}>
-                    <Appear className='mdi mdi-github-circle' animate show={anim.entered} />
-                    {' '}
-                    <Words animate show={anim.entered}>GitHub</Words>
-                  </Link>
+                  <FooterGitHub show={anim.entered} onLink={this.onLink} />
                 </div>
                 <div className={classes.footerRight}>
-                  <Link href='https://romelperez.com' onLink={this.onLink}>
-                    <Appear className='mdi mdi-copyright' animate show={anim.entered} />
-                    {' '}
-                    <Words animate show={anim.entered}>2018 Romel Pérez</Words>
-                  </Link>
+                  <FooterAuthor show={anim.entered} onLink={this.onLink} />
                 </div>
               </div>
             </footer>
