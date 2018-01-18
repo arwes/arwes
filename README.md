@@ -81,11 +81,11 @@ specification.
 - [x] Support for server-side rendering
 - [x] Define logo
 - [x] Documentation
-- [x] Create component live documentation
-- [ ] Create example implementations
-- [ ] Best test coverege
-- [ ] Add navigation components
+- [x] Create component API docs
+- [x] Create website playground
 - [ ] Add form components
+- [ ] Add navigation components
+- [ ] Best test coverege
 
 ## License
 
