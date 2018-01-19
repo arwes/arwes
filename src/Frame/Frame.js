@@ -34,6 +34,7 @@ export default class Frame extends Component {
     corners: PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6]),
 
     disabled: PropTypes.bool,
+    active: PropTypes.bool,
 
     /**
      * If component should be animated on mouse hover.
@@ -94,6 +95,7 @@ export default class Frame extends Component {
       level,
       corners,
       disabled,
+      active,
       hover,
       noBackground,
       className,

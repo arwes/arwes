@@ -1,4 +1,4 @@
-import { rgba } from 'polished';
+import { rgba, lighten } from 'polished';
 
 const cornerLength = corners => {
   switch (corners) {
@@ -21,6 +21,14 @@ const cornerWidth = corners => {
     default: return 3;
   }
 };
+
+const getColor = (theme, props, level) => (
+  theme.color[props.disabled ? 'disabled' : props.layer][level]
+);
+
+const getBg = (theme, props) => (
+  theme.background[props.disabled ? 'disabled' : props.layer]['level' + props.level]
+);
 
 export default (theme) => {
   return {
@@ -48,14 +56,14 @@ export default (theme) => {
 
       '&$hover:hover': {
         '& $border': {
-          borderColor: props => theme.color[props.layer].base,
+          borderColor: props => getColor(theme, props, 'base'),
           boxShadow: props => `0 0 ${theme.shadowLength}px `
-            + rgba(theme.color[props.layer].base, theme.alpha),
+            + rgba(getColor(theme, props, 'base'), theme.alpha),
         },
         '& $corner': {
-          borderColor: props => theme.color[props.layer].light,
+          borderColor: props => getColor(theme, props, 'light'),
           boxShadow: props => `0 0 ${theme.shadowLength}px -${theme.shadowLength / 2}px `
-            + rgba(theme.color[props.layer].light, theme.alpha),
+            + rgba(getColor(theme, props, 'light'), theme.alpha),
         },
       },
     },
@@ -64,10 +72,12 @@ export default (theme) => {
       position: 'relative',
       overflow: 'hidden',
       display: 'block',
-      transition: `all ${theme.animTime}ms ease-in`,
+      transition: `background-color ${theme.animTime}ms ease-in`,
       backgroundColor: props => props.noBackground
         ? 'transparent'
-        : rgba(theme.background[props.layer]['level' + props.level], theme.alpha),
+        : props.active
+          ? rgba(lighten(theme.accent, getBg(theme, props)), theme.alpha)
+          : rgba(getBg(theme, props), theme.alpha),
     },
     children: {
       display: 'block',
@@ -80,8 +90,9 @@ export default (theme) => {
       position: 'absolute',
       borderStyle: 'solid',
       transition: `all ${theme.animTime}ms ease-in`,
-      borderColor: props => theme.color[props.layer].dark,
-      boxShadow: props => `0 0 ${theme.shadowLength}px ` + rgba(theme.color[props.layer].dark, theme.alpha),
+      borderColor: props => getColor(theme, props, 'dark'),
+      boxShadow: props => `0 0 ${theme.shadowLength}px `
+        + rgba(getColor(theme, props, 'dark'), theme.alpha),
       opacity: 1,
     },
     borderLeft: {
@@ -122,8 +133,9 @@ export default (theme) => {
       height: props => cornerLength(props.corners),
       transition: `all ${theme.animTime}ms ease-in`,
       borderStyle: 'solid',
-      borderColor: props => theme.color[props.layer].base,
-      boxShadow: props => `0 0 ${theme.shadowLength}px -${theme.shadowLength / 2}px ` + rgba(theme.color[props.layer].base, theme.alpha),
+      borderColor: props => getColor(theme, props, 'base'),
+      boxShadow: props => `0 0 ${theme.shadowLength}px -${theme.shadowLength / 2}px `
+        + rgba(getColor(theme, props, 'base'), theme.alpha),
       opacity: 1,
     },
     cornerLT: {

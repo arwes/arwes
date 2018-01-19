@@ -56,7 +56,6 @@ export default class Button extends Component {
   }
 
   render () {
-
     const {
       Animation,
       Highlight,
@@ -87,7 +86,7 @@ export default class Button extends Component {
       >
         {anim => (
         <div
-          className={cx(cls, classes[anim.status], disabled && classes.disabled)}
+          className={cx(cls, disabled && classes.disabled)}
           {...etc}
           onClick={this.onClick}
         >
@@ -99,8 +98,9 @@ export default class Button extends Component {
             level={level}
             layer={disabled ? 'disabled' : layer}
             disabled={disabled}
+            active={active}
           >
-            <Highlight layer={layer} disabled={disabled}>
+            <Highlight animate={!disabled} layer={layer}>
               <button
                 className={classes.button}
                 disabled={disabled}
