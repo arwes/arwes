@@ -26,7 +26,6 @@ const styles = (theme) => {
       bottom: 0,
       display: 'flex',
       flexDirection: 'column',
-
       '& h1': {
         margin: [0, 0, theme.margin / 2],
         fontSize: 40,
