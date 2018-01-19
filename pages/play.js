@@ -231,6 +231,7 @@ class Play extends React.Component {
                     animate
                     show={anim2.entered}
                     layer='header'
+                    disabled={!component}
                     active={tabs.editor}
                     onClick={() => this.onTabChange('editor')}
                   >
@@ -241,6 +242,7 @@ class Play extends React.Component {
                     animate
                     show={anim2.entered}
                     layer='header'
+                    disabled={!component}
                     active={tabs.playground}
                     onClick={() => this.onTabChange('playground')}
                   >
@@ -331,14 +333,17 @@ class Play extends React.Component {
 
   onTabChange = (tab) => {
     const tabs = { ...this.state.tabs, [tab]: !this.state.tabs[tab] };
-    const atLeastOneSelected = Object.values(tabs).reduce((a, b) => a || b, false);
+    const atLeastOneSelected = Object.keys(tabs).reduce((total, key) => {
+      return total || tabs[key];
+    }, false);
     if (atLeastOneSelected) {
       this.setState({ tabs });
     }
   }
 
   getTabsNumber = () => {
-    return Object.values(this.state.tabs).filter(val => val).length;
+    const { tabs } = this.state;
+    return Object.keys(tabs).filter(key => tabs[key]).length;
   }
 }
 
