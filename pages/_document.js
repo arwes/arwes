@@ -31,12 +31,35 @@ export default class AppDocument extends Document {
     const title = getTitle(this.props.pathname);
 
     return (
-      <html>
+      <html lang='en'>
         <Head>
           <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0' />
           <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' />
-          <meta name='theme-color' content='#000000' />
           <title>{title}</title>
+
+          <meta name='description' content='Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for Web Apps' />
+          <meta name='keywords' content='arwes, arwesjs, scifi, sci-fi, cyberpunk, ui, framework, javascript, reactjs, react.js' />
+          <meta name='robots' content='index, follow' />
+
+          <meta property='og:title' content='Arwes' />
+          <meta property='og:site_name' content='Arwes' />
+          <meta property='og:description' content='Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for Web Apps' />
+          <meta property='og:type' content='website' />
+          <meta property='og:url' content='https://arwes.romelperez.com' />
+          <meta property='og:image' content='https://arwes.romelperez.com/static/img/arwes.jpg' />
+
+          <meta name='twitter:card' content='summary_large_image' />
+          <meta name='twitter:title' content='Arwes' />
+          <meta name='twitter:description' content='Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for Web Apps' />
+          <meta name='twitter:site' content='@romelperez07' />
+          <meta name='twitter:creator' content='@romelperez07' />
+          <meta name='twitter:image' content='https://arwes.romelperez.com/static/img/arwes.jpg' />
+
+          <meta name='theme-color' content='#000000' />
+          <meta name='apple-mobile-web-app-capable' content='yes' />
+          <meta name='apple-mobile-web-app-title' content='Arwes' />
+          <meta name='apple-mobile-web-app-status-bar-style' content='#000000' />
+          <meta name='msapplication-TileColor' content='#000000' />
 
           <link rel='shortcut icon' href='/static/favicon.ico' />
           <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Titillium+Web:400,600' />
