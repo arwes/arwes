@@ -1,20 +1,32 @@
-<h1 align="center">
+<div align="center">
   <img src='./static/img/logo-invert.png' alt='Arwes' height='100' />
-  <br />
-  Arwes
-  <br />
-</h1>
+</div>
+
+<h1 align="center">Arwes</h1>
 
 <p align="center" style="font-size: 1.2rem;">
   Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for Web Apps
 </p>
 
-_____________
+<div align="center">
+  <a href="https://npmjs.org/package/arwes">
+    <img src="https://img.shields.io/npm/v/arwes.svg" alt="version" />
+  </a>
+  <a href="https://travis-ci.org/romelperez/arwes">
+    <img src="https://img.shields.io/travis/romelperez/arwes.svg" alt="travis" />
+  </a>
+  <a href="https://github.com/romelperez/arwes/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/romelperez/arwes.svg?maxAge=2592000" alt="license" />
+  </a>
+  <a href="https://npmjs.org/package/arwes">
+    <img src="https://img.shields.io/npm/dm/arwes.svg" alt="downloads" />
+  </a>
+  <a href="https://github.com/romelperez/arwes">
+    <img src="https://img.shields.io/github/stars/romelperez/arwes.svg?style=social&label=stars" alt="github stars" />
+  </a>
+</div>
 
-[![npm version](https://badge.fury.io/js/arwes.svg)](https://badge.fury.io/js/arwes)
-[![Build Status](https://travis-ci.org/romelperez/arwes.svg?branch=master)](https://travis-ci.org/romelperez/arwes)
-[![license](https://img.shields.io/github/license/romelperez/arwes.svg?maxAge=2592000)](./LICENSE)
-[![prhone](https://img.shields.io/badge/prhone-project-1b38a9.svg)](http://romelperez.com)
+_______________
 
 Arwes is a web framework to build user interfaces for
 web applications based on science fiction and cyberpunk styles guidelines, animations
@@ -52,12 +64,12 @@ All contributions of any kind are welcome!
 
 This project has many inspiration sources, some of them:
 
+- [TRON: Legacy](http://www.imdb.com/title/tt1104001/)
+- [Halo Games](https://www.halowaypoint.com/en-us/games/halo-2)
+- [Star Citizen](http://robertsspaceindustries.com)
 - [Orbit SciFi UI Kit](https://creativemarket.com/dannehr/163951-Orbit-SciFi-UI-Kit)
 - [Hi-Tech Interface Builder Pack](https://www.behance.net/gallery/19051971/Hi-Tech-Interface-Builder-Pack)
-- [Star Citizen](http://robertsspaceindustries.com)
-- [Halo](https://www.halowaypoint.com/en-us/games/halo-2)
 - [UXBERT High Tech Sci-Fi UX Dashboards, Infographics, Visual UI Elements](https://www.youtube.com/watch?v=NGIJDM2Xf4w)
-- [TRON: Legacy](http://www.imdb.com/title/tt1104001/)
 - [Ghost in the Shell](http://www.imdb.com/title/tt1219827/)
 
 ## Contributors
