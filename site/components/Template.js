@@ -1,4 +1,5 @@
 import React from 'react';
+import Router from 'next/router';
 import { googleAnalytics } from '../settings';
 
 export default class Template extends React.Component {
@@ -21,18 +22,18 @@ export default class Template extends React.Component {
 
     if (!location.origin.includes('arwes')) return;
 
-    const gaScript = document.createElement('script');
-    gaScript.async = true;
-    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + googleAnalytics;
-    document.body.appendChild(gaScript);
+    /* eslint-disable */
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    /* eslint-enable */
 
-    const gaBody = document.createElement('script');
-    gaBody.innerHTML = `
-      window.dataLayer = window.dataLayer || [];
-      function gtag () {dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '${googleAnalytics}');
-    `;
-    document.body.appendChild(gaBody);
+    window.ga('create', googleAnalytics, 'auto');
+    window.ga('send', 'pageview');
+
+    Router.onRouteChangeStart = url => {
+      window.ga('send', 'pageview', url);
+    };
   }
 }
