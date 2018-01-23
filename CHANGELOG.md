@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v1.0.0-alpha.3 / 2018-01-22
+
+- [fix] components props and styles
+- [fix] Arwes puff props
+- [fix] Image component error handle
+- [feat] add Grid support to remove gutter
+- [feat] add Appear component
+- [feat] add Table component
+
 ## v1.0.0-alpha.2 / 2017-12-21
 
 - [fix] components styles and tags
