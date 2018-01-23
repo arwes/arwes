@@ -91,6 +91,7 @@
     "react-addons-test-utils": "^15.5.1",
     "react-docgen": "^2.20.0",
     "react-dom": "^16.1.1",
+    "react-ga": "^2.4.1",
     "react-group": "^1.0.5",
     "react-live": "^1.7.1",
     "react-test-renderer": "^15.6.2",

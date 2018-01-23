@@ -1,5 +1,6 @@
 import React from 'react';
 import Router from 'next/router';
+import GA from 'react-ga';
 import { googleAnalytics } from '../settings';
 
 export default class Template extends React.Component {
@@ -22,18 +23,17 @@ export default class Template extends React.Component {
 
     if (!location.origin.includes('arwes')) return;
 
-    /* eslint-disable */
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    /* eslint-enable */
+    if (!window.GA_INITIALIZED) {
+      GA.initialize(googleAnalytics);
 
-    window.ga('create', googleAnalytics, 'auto');
-    window.ga('send', 'pageview');
+      const { pathname, search } = window.location;
+      GA.pageview(pathname + search);
 
-    Router.onRouteChangeStart = url => {
-      window.ga('send', 'pageview', url);
-    };
+      Router.onRouteChangeStart = url => {
+        GA.pageview(url);
+      };
+
+      window.GA_INITIALIZED = true;
+    }
   }
 }
