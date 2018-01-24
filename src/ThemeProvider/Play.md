@@ -5,7 +5,7 @@ const MyColor = withStyles(theme => ({
     root: {
         width: 300,
         height: 120,
-        transition: 'background-color 200ms ease-out',
+        transition: `background-color ${theme.animTime}ms ease-out`,
         backgroundColor: theme.color.primary.base,
     },
 }))(props => (
@@ -15,16 +15,12 @@ const MyColor = withStyles(theme => ({
 class MyApp extends React.Component {
     constructor () {
         super(...arguments);
-        this.state = { color: '#22179a' };
+        const color = '#22179a';
+        this.state = { color, theme: this.getTheme(color) };
         this.onChange = this.onChange.bind(this);
     }
     render () {
-        const { color } = this.state;
-        const theme = createTheme({
-            color: {
-                primary: { base: color }
-            }
-        });
+        const { color, theme } = this.state;
         return (
             <ThemeProvider theme={theme}>
                 <div>
@@ -40,7 +36,16 @@ class MyApp extends React.Component {
         );
     }
     onChange (ev) {
-        this.setState({ color: ev.target.value });
+        const color = ev.target.value;
+        const theme = this.getTheme(color);
+        this.setState({ color, theme });
+    }
+    getTheme (color) {
+        return createTheme({
+            color: {
+                primary: { base: color }
+            }
+        });
     }
 }
 
