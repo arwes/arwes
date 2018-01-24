@@ -7,7 +7,6 @@ import { Row } from '../../src/Grid';
 import Appear from '../../src/Appear';
 
 import withTemplate from '../withTemplate';
-import { getTitle } from '../utils';
 import createCompiler from '../createCompiler';
 import Header from './Header';
 import Footer from './Footer';
@@ -68,7 +67,6 @@ class Content extends React.Component {
 
   componentDidMount () {
     this.setState({ show: true });
-    document.title = getTitle(location.pathname);
   }
 
   render () {

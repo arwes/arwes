@@ -41,15 +41,15 @@ export default class AppDocument extends Document {
           <meta name='keywords' content='arwes, arwesjs, scifi, sci-fi, cyberpunk, ui, framework, javascript, reactjs, react.js' />
           <meta name='robots' content='index, follow' />
 
-          <meta property='og:title' content='Arwes' />
-          <meta property='og:site_name' content='Arwes' />
+          <meta property='og:title' content={title} />
+          <meta property='og:site_name' content={title} />
           <meta property='og:description' content='Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for Web Apps' />
           <meta property='og:type' content='website' />
           <meta property='og:url' content='https://arwes.romelperez.com' />
           <meta property='og:image' content='https://arwes.romelperez.com/static/img/arwes.jpg' />
 
           <meta name='twitter:card' content='summary_large_image' />
-          <meta name='twitter:title' content='Arwes' />
+          <meta name='twitter:title' content={title} />
           <meta name='twitter:description' content='Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for Web Apps' />
           <meta name='twitter:site' content='@romelperez07' />
           <meta name='twitter:creator' content='@romelperez07' />
@@ -57,7 +57,7 @@ export default class AppDocument extends Document {
 
           <meta name='theme-color' content='#000000' />
           <meta name='apple-mobile-web-app-capable' content='yes' />
-          <meta name='apple-mobile-web-app-title' content='Arwes' />
+          <meta name='apple-mobile-web-app-title' content={title} />
           <meta name='apple-mobile-web-app-status-bar-style' content='#000000' />
           <meta name='msapplication-TileColor' content='#000000' />
 

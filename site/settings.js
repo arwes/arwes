@@ -41,18 +41,29 @@ module.exports.components = [
   ...module.exports.componentsAnimations
 ];
 
-module.exports.titles = {
-  '/docs/design-system': 'Design System | Arwes',
-  '/docs/animations-system': 'Animations System | Arwes',
-  '/docs/sounds-system': 'Sounds System | Arwes',
-  '/docs/grid-system': 'Grid System | Arwes',
-  '/docs/responsive-tool': 'Responsive Tool | Arwes',
-  '/docs/loader-tool': 'Loader Tool | Arwes',
-  '/docs/player-tool': 'Player Tool | Arwes',
-  '/docs': 'Docs | Arwes',
-  '/api': 'API | Arwes',
-  '/play': 'Play | Arwes',
-};
+const baseTitle = 'Arwes - SciFi UI Framework';
+const componentsTitles = {};
+module.exports.components.forEach(name => {
+  componentsTitles[`/api/${name.toLowerCase()}`] = `${name} | API | ${baseTitle}`;
+});
+module.exports.titles = Object.assign(
+  {
+    '/docs/design-system': `Design System | ${baseTitle}`,
+    '/docs/animations-system': `Animations System | ${baseTitle}`,
+    '/docs/sounds-system': `Sounds System | ${baseTitle}`,
+    '/docs/grid-system': `Grid System | ${baseTitle}`,
+    '/docs/responsive-tool': `Responsive Tool | ${baseTitle}`,
+    '/docs/loader-tool': `Loader Tool | ${baseTitle}`,
+    '/docs/player-tool': `Player Tool | ${baseTitle}`,
+    '/docs': `Docs | ${baseTitle}`,
+  },
+  componentsTitles,
+  {
+    '/api': `API | ${baseTitle}`,
+    '/play': `Play | ${baseTitle}`,
+    '/': baseTitle,
+  }
+);
 
 module.exports.googleAnalytics = 'UA-50433259-2';
 

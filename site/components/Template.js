@@ -1,13 +1,16 @@
 import React from 'react';
 import Router from 'next/router';
 import GA from 'react-ga';
+
 import { googleAnalytics } from '../settings';
+import { getTitle } from '../utils';
 
 export default class Template extends React.Component {
 
   componentDidMount () {
     this.removeServerStyles();
     this.setGA();
+    this.setTitle();
   }
 
   render () {
@@ -35,5 +38,9 @@ export default class Template extends React.Component {
 
       window.GA_INITIALIZED = true;
     }
+  }
+
+  setTitle () {
+    document.title = getTitle(location.pathname);
   }
 }
