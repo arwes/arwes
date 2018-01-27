@@ -33,6 +33,11 @@ export default class Frame extends Component {
      */
     corners: PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6]),
 
+    /**
+     * If border should be shown.
+     */
+    border: PropTypes.bool,
+
     disabled: PropTypes.bool,
     active: PropTypes.bool,
 
@@ -59,6 +64,7 @@ export default class Frame extends Component {
     layer: 'primary',
     level: 0,
     corners: 0,
+    border: true,
   }
 
   componentDidMount () {
@@ -94,6 +100,7 @@ export default class Frame extends Component {
       layer,
       level,
       corners,
+      border,
       disabled,
       active,
       hover,
@@ -117,10 +124,10 @@ export default class Frame extends Component {
         {anim => (
         <div className={cx(cls, classes[anim.status])} {...etc}>
 
-          <div className={cx(classes.border, classes.borderLeft)} />
-          <div className={cx(classes.border, classes.borderRight)} />
-          <div className={cx(classes.border, classes.borderTop)} />
-          <div className={cx(classes.border, classes.borderBottom)} />
+          {border && <div className={cx(classes.border, classes.borderLeft)} />}
+          {border && <div className={cx(classes.border, classes.borderRight)} />}
+          {border && <div className={cx(classes.border, classes.borderTop)} />}
+          {border && <div className={cx(classes.border, classes.borderBottom)} />}
 
           { !!corners && <div className={cx(classes.corner, classes.cornerLT)} />}
           { !!corners && <div className={cx(classes.corner, classes.cornerLB)} />}
