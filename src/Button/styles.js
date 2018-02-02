@@ -4,6 +4,7 @@ export default (theme) => {
       display: 'inline-block',
       position: 'relative',
       lineHeight: 1,
+      verticalAlign: 'middle',
     },
     button: {
       position: 'relative',
@@ -17,7 +18,7 @@ export default (theme) => {
       color: props => theme.color[props.disabled ? 'disabled' : props.layer].base,
       fontSize: theme.typography.fontSize * 0.75,
       lineHeight: 1,
-      verticalAlign: 'top',
+      verticalAlign: 'middle',
 
       transition: `all ${theme.animTime}ms ease-out`,
       userSelect: 'none',

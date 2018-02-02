@@ -4,6 +4,7 @@ export default (theme) => {
   return {
     root: {
       display: 'inline-block',
+      verticalAlign: 'middle',
       fontFamily: theme.code.fontFamily,
       fontSize: theme.code.fontSize,
       lineHeight: '1.375',

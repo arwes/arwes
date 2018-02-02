@@ -4,6 +4,7 @@ export default (theme) => {
   return {
     root: {
       display: 'block',
+      verticalAlign: 'middle',
 
       '&$exiting, &$exited': {
         '& $header, & $children': {

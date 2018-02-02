@@ -8,6 +8,7 @@ export default (theme) => {
       margin: [0, 0, theme.margin],
       width: '100%',
       minHeight: 1,
+      verticalAlign: 'middle',
 
       '&$exiting, &$exited': {
         '& $separator': {
