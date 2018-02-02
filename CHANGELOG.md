@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v1.0.0-alpha.4 / 2018-02-02
+
+- [update] package export utils
+- [fix] components align styles
+- [update] add Frame property to disable border
+
 ## v1.0.0-alpha.3 / 2018-01-22
 
 - [fix] components props and styles
