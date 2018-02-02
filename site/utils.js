@@ -5,5 +5,5 @@ export const getTitle = currentPath => {
     keys(titles).
     find(path => currentPath.indexOf(path) === 0);
 
-  return titles[pagePath] || 'Arwes';
+  return titles[pagePath || '/'];
 };
