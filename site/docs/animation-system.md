@@ -43,6 +43,9 @@ its children would be left without effects. This is so you can animate them the
 way you like. For example, the `<Button />` would have the button frame hidden
 but its content would be left open for your own animations.
 
+Since the components are rendered but hidden, they are SEO compatible so you can
+create complete animations without losing crawler visibility.
+
 Normally, the components have the same duration to be animated when shown and hidden.
 They use the setting `animTime` (time in ms) in the **theme** provided by
 `<ThemeProvider />`.
