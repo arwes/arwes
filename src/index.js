@@ -28,3 +28,6 @@ export createSounds from './tools/createSounds';
 export createLoader from './tools/createLoader';
 export createResponsive from './tools/createResponsive';
 export createPlayer from './tools/createPlayer';
+
+import * as toolsUtils from './tools/utils';
+export const utils = toolsUtils;
