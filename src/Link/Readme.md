@@ -1,0 +1,1 @@
+A HTML `<a />` element.

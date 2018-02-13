@@ -5,6 +5,7 @@ import cx from 'classnames';
 import AnimationComponent from '../Animation';
 import FrameComponent from '../Frame';
 import WordsComponent from '../Words';
+import HeadingComponent from '../Heading';
 
 export default function Project (props) {
 
@@ -15,6 +16,7 @@ export default function Project (props) {
     Animation,
     Frame,
     Words,
+    Heading,
     animation,
     animate,
     show,
@@ -56,11 +58,11 @@ export default function Project (props) {
             {frameAnim => (
               <div>
                 <header className={classes.header}>
-                  <h1>
+                  <Heading node='h1'>
                     <Words animate={animate} show={frameAnim.entered}>
                       {header}
                     </Words>
-                  </h1>
+                  </Heading>
                   <div className={classes.icon}>{icon}</div>
                 </header>
                 <div className={classes.separator} />
@@ -80,6 +82,7 @@ Project.propTypes = {
   Animation: PropTypes.any.isRequired,
   Frame: PropTypes.any.isRequired,
   Words: PropTypes.any.isRequired,
+  Heading: PropTypes.any.isRequired,
 
   theme: PropTypes.any.isRequired,
   classes: PropTypes.any.isRequired,
@@ -123,6 +126,7 @@ Project.defaultProps = {
   Animation: AnimationComponent,
   Frame: FrameComponent,
   Words: WordsComponent,
+  Heading: HeadingComponent,
   show: true,
   sounds: {},
   node: 'article',

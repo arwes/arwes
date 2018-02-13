@@ -106,7 +106,7 @@ export default class Words extends Component {
       sounds,
       animate,
       show,
-      timeoutEnter,
+      animation,
       layer,
       blinkText,
       className,

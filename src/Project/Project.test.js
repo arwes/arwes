@@ -11,6 +11,7 @@ describe('Project', function () {
       Animation: ({ children }) => children({}),
       Frame: ({ children }) => <div>{children}</div>,
       Words: ({ children }) => <div>{children}</div>,
+      Heading: ({ children }) => <div>{children}</div>,
       header: 'Header',
     }, 'Children');
   });

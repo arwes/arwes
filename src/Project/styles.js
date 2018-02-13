@@ -66,7 +66,7 @@ export default (theme) => {
       padding: theme.padding,
 
       '& p, & ul, & ol, & dl, & blockquote': {
-        marginBottom: 0,
+        margin: 0,
       },
     },
 
