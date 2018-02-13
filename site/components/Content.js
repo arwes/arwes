@@ -2,6 +2,7 @@ import React from 'react';
 
 import withStyles from '../../src/tools/withStyles';
 import Arwes from '../../src/Arwes';
+import ArwesContent from '../../src/Content';
 import Frame from '../../src/Frame';
 import { Row } from '../../src/Grid';
 import Appear from '../../src/Appear';
@@ -82,7 +83,7 @@ class Content extends React.Component {
         pattern={resources.pattern}
       >
         {anim => (
-        <div className={classes.root}>
+        <ArwesContent className={classes.root}>
 
           <Header
             className={classes.header}
@@ -131,7 +132,7 @@ class Content extends React.Component {
             onLink={this.onLink}
           />
 
-        </div>
+        </ArwesContent>
         )}
       </Arwes>
     );

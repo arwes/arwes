@@ -14,6 +14,12 @@ module.exports.componentsContainers = [
 
 module.exports.componentsContents = [
   'Words',
+  'Heading',
+  'Paragraph',
+  'Link',
+  'Blockquote',
+  'List',
+  'Content',
   'Code',
   'Table',
   'Image',

@@ -5,6 +5,7 @@ import { getResponsiveResource } from '../src/tools/utils';
 import createLoader from '../src/tools/createLoader';
 import createResponsive from '../src/tools/createResponsive';
 import Arwes from '../src/Arwes';
+import ArwesContent from '../src/Content';
 import Words from '../src/Words';
 import Button from '../src/Button';
 import Logo from '../src/Logo';
@@ -113,7 +114,7 @@ class Home extends React.Component {
           pattern={resources.pattern}
         >
           {anim => (
-          <div className={classes.root}>
+          <ArwesContent className={classes.root}>
 
             <div className={classes.main}>
               <div className={classes.content}>
@@ -170,7 +171,7 @@ class Home extends React.Component {
               </div>
             </footer>
 
-          </div>
+          </ArwesContent>
           )}
         </Arwes>
       </div>

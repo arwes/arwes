@@ -2,6 +2,7 @@ import React from 'react';
 
 import withStyles from '../src/tools/withStyles';
 import Arwes from '../src/Arwes';
+import ArwesContent from '../src/Content';
 import Words from '../src/Words';
 import Line from '../src/Line';
 
@@ -29,16 +30,16 @@ const Error = props => {
       pattern={resources.pattern}
     >
       {anim => (
-        <div className={classes.root}>
-          <Line animate show={anim.entered} layer='header' />
-          <h1 className={classes.title}>
-            <Words animate show={anim.entered}>Transmission error</Words>
-          </h1>
-          <Line animate show={anim.entered} layer='header' />
-          <p><a href='/'>
-            <Words animate show={anim.entered}>Go to Start</Words>
-          </a></p>
-        </div>
+      <ArwesContent className={classes.root}>
+        <Line animate show={anim.entered} layer='header' />
+        <h1 className={classes.title}>
+          <Words animate show={anim.entered}>Transmission error</Words>
+        </h1>
+        <Line animate show={anim.entered} layer='header' />
+        <p><a href='/'>
+          <Words animate show={anim.entered}>Go to Start</Words>
+        </a></p>
+      </ArwesContent>
       )}
     </Arwes>
   );

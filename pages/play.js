@@ -6,6 +6,7 @@ import Navigo from 'navigo';
 import * as arwes from '../src';
 import withStyles from '../src/tools/withStyles';
 import Arwes from '../src/Arwes';
+import ArwesContent from '../src/Content';
 import { Row, Col } from '../src/Grid';
 import Header from '../src/Header';
 import Words from '../src/Words';
@@ -197,7 +198,7 @@ class Play extends React.Component {
         puffsProps={{ animate: false }}
       >
         {anim => (
-        <div className={classes.root}>
+        <ArwesContent className={classes.root}>
 
           <Header animate show={anim.entered} className={classes.header}>
             {anim2 => (
@@ -304,7 +305,7 @@ class Play extends React.Component {
             />
           </div>
 
-        </div>
+        </ArwesContent>
         )}
       </Arwes>
     );

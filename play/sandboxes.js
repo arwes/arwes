@@ -2,6 +2,12 @@ import ThemeProvider from '../src/ThemeProvider/Play.md';
 import SoundsProvider from '../src/SoundsProvider/Play.md';
 import Arwes from '../src/Arwes/Play.md';
 import Words from '../src/Words/Play.md';
+import Heading from '../src/Heading/Play.md';
+import Paragraph from '../src/Paragraph/Play.md';
+import Link from '../src/Link/Play.md';
+import Blockquote from '../src/Blockquote/Play.md';
+import List from '../src/List/Play.md';
+import Content from '../src/Content/Play.md';
 import Frame from '../src/Frame/Play.md';
 import Button from '../src/Button/Play.md';
 import Line from '../src/Line/Play.md';
@@ -24,6 +30,12 @@ let sandboxes = [
   { name: 'SoundsProvider', code: SoundsProvider },
   { name: 'Arwes', code: Arwes },
   { name: 'Words', code: Words },
+  { name: 'Heading', code: Heading },
+  { name: 'Paragraph', code: Paragraph },
+  { name: 'Link', code: Link },
+  { name: 'Blockquote', code: Blockquote },
+  { name: 'List', code: List },
+  { name: 'Content', code: Content },
   { name: 'Frame', code: Frame },
   { name: 'Button', code: Button },
   { name: 'Line', code: Line },
