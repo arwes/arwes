@@ -106,3 +106,5 @@ AUTHORS text
 *.woff binary
 *.pyc binary
 *.pdf binary
+package-lock.json binary
+yarn.lock binary

@@ -39,6 +39,7 @@ Thumbs.db
 dump.rdb
 npm-debug.log
 package-lock.json
+yarn.lock
 
 ##
 ## PROJECT
