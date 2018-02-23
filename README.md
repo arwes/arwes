@@ -95,6 +95,7 @@ specification.
 - [x] Documentation
 - [x] Create component API docs
 - [x] Create website playground
+- [ ] Create resources to learn JSS / React (In Progress)
 - [ ] Add form components
 - [ ] Add navigation components
 - [ ] Best test coverege
