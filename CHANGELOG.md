@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## v1.0.0-alpha.5 / 2018-02-26
+
+- [update] simplify Button component props
+- [feat] add content components: Content, Heading, Paragraph, Link, List, Blockquote
+
+### Breaking Changes
+
+Now the `Content` component will give styles to children static elements:
+
+- `h1`, `h2`, `h3`, `h4`, `h5`, `h6`
+- `ul`, `ol`, `dl`
+- `blockquote`
+- `p`
+- `a`
+
+And the `Arwes` component will not set those styles.
+
 ## v1.0.0-alpha.4 / 2018-02-02
 
 - [update] package export utils
