@@ -6,6 +6,7 @@ import {
   componentsProviders,
   componentsContainers,
   componentsContents,
+  componentsStatics,
   componentsControls,
   componentsAnimations
 } from '../../site/settings';
@@ -19,6 +20,7 @@ const groups = [
   makeList('Providers', componentsProviders),
   makeList('Containers', componentsContainers),
   makeList('Contents', componentsContents),
+  makeList('Statics', componentsStatics),
   makeList('Controls', componentsControls),
   makeList('Animations', componentsAnimations)
 ];

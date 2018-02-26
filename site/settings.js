@@ -13,18 +13,21 @@ module.exports.componentsContainers = [
 ];
 
 module.exports.componentsContents = [
-  'Words',
-  'Heading',
-  'Paragraph',
-  'Link',
-  'Blockquote',
-  'List',
   'Content',
+  'Words',
   'Code',
   'Table',
   'Image',
   'Line',
   'Logo'
+];
+
+module.exports.componentsStatics = [
+  'Heading',
+  'Paragraph',
+  'Link',
+  'Blockquote',
+  'List'
 ];
 
 module.exports.componentsControls = [
@@ -43,6 +46,7 @@ module.exports.components = [
   ...module.exports.componentsProviders,
   ...module.exports.componentsContainers,
   ...module.exports.componentsContents,
+  ...module.exports.componentsStatics,
   ...module.exports.componentsControls,
   ...module.exports.componentsAnimations
 ];

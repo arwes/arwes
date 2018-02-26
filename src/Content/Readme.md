@@ -1,12 +1,18 @@
-Block container of HTML in-line content. Headings, paragraphs, lists and more.
+Block container to give styles to HTML static content elements.
 
-If you need to use specific elements you can refer to their components.
+If you need to use specific elements you can refer to the
+[Arwes static components](/api).
 
 ```javascript
 <Content>
     <h1>Arwes</h1>
-    <p>Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for Web Apps</p>
+    <p>Futuristic Sci-Fi and Cyberpunk Graphical User
+    Interface Framework for Web Apps</p>
 </Content>
 ```
 
-Global styles are still applied by `<Arwes />` component.
+This component is useful as article content containers so you don't
+have to use specify React components for content elements such as headings
+or paragraphs.
+
+General styles are still applied by `<Arwes />`.
