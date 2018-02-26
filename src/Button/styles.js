@@ -23,7 +23,7 @@ export default (theme) => {
       transition: `all ${theme.animTime}ms ease-out`,
       userSelect: 'none',
       outline: 'none',
-      cursor: 'pointer',
+      cursor: props => props.disabled ? 'auto' : 'pointer',
 
       '&:focus': {
         outline: 'none',
@@ -38,11 +38,6 @@ export default (theme) => {
         fontSize: '140%',
         verticalAlign: 'middle',
       },
-    },
-    disabled: {
-      '& $button': {
-        cursor: 'auto',
-      }
     },
   };
 };

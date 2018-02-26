@@ -75,7 +75,7 @@ export default class Button extends Component {
       children,
       ...etc
     } = this.props;
-    const cls = cx(classes.root, classes[layer], className);
+    const cls = cx(classes.root, className);
 
     return (
       <Animation
@@ -86,7 +86,7 @@ export default class Button extends Component {
       >
         {anim => (
         <div
-          className={cx(cls, disabled && classes.disabled)}
+          className={cls}
           {...etc}
           onClick={this.onClick}
         >
