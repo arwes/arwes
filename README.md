@@ -29,17 +29,17 @@
 _______________
 
 Arwes is a web framework to build user interfaces for
-web applications based on science fiction and cyberpunk styles guidelines, animations
-and sounds effects. The idea is to **provide an user experience as if you were using
-futuristic out of a movie interfaces** for your project.
+web applications based on science fiction and cyberpunk styles guidelines,
+animations and sounds effects. The idea is to let you create realistic
+futuristic user experiences for your projects.
 
 The tools are based on [React](https://reactjs.org) for components,
-[JSS](http://cssinjs.org) for styles,
+[JSS](http://cssinjs.org) for styles ([learn more about CSSinJS](https://medium.com/jobsity/css-in-javascript-with-jss-and-react-54cdd2720222)),
 [react-transition-group](https://reactcommunity.org/react-transition-group/) for
 animations, [Howler](https://howlerjs.com/) for sounds and [Prism](http://prismjs.com)
 for code highlighting.
 
-> Currently is under development with an alpha version available on npm. API may change.
+> Currently is under development with an alpha version available on npm. Modules and components are under test and their API may change.
 
 ## Install
 
@@ -70,6 +70,7 @@ This project has many inspiration sources, some of them:
 - [Orbit SciFi UI Kit](https://creativemarket.com/dannehr/163951-Orbit-SciFi-UI-Kit)
 - [Hi-Tech Interface Builder Pack](https://www.behance.net/gallery/19051971/Hi-Tech-Interface-Builder-Pack)
 - [UXBERT High Tech Sci-Fi UX Dashboards, Infographics, Visual UI Elements](https://www.youtube.com/watch?v=NGIJDM2Xf4w)
+- [SciFi HUD Pack](https://videohive.net/item/hud/14206389)
 - [Ghost in the Shell](http://www.imdb.com/title/tt1219827/)
 
 ## Contributors
@@ -95,7 +96,8 @@ specification.
 - [x] Documentation
 - [x] Create component API docs
 - [x] Create website playground
-- [ ] Create resources to learn JSS / React (In Progress)
+- [x] Create resources to learn JSS / React
+- [ ] Standardize core components (In Progress)
 - [ ] Add form components
 - [ ] Add navigation components
 - [ ] Best test coverege
