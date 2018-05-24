@@ -28,8 +28,8 @@
 
 _______________
 
-Arwes is a web framework to build user interfaces for
-web applications based on science fiction and cyberpunk styles guidelines,
+[Arwes](https://arwes.romelperez.com) is a web framework to build user interfaces
+for web applications based on science fiction and cyberpunk styles guidelines,
 animations and sounds effects. The idea is to let you create realistic
 futuristic user experiences for your projects.
 
@@ -97,6 +97,7 @@ specification.
 - [x] Create component API docs
 - [x] Create website playground
 - [x] Create resources to learn JSS / React
+- [ ] Refactor project architecture (In Progress)
 - [ ] Standardize core components (In Progress)
 - [ ] Add form components
 - [ ] Add navigation components

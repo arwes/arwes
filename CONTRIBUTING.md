@@ -16,6 +16,13 @@ of this repository before making a change.
 Please note we have a [code of conduct](./CODE_OF_CONDUCT.md), please follow it
 in all your interactions with the project.
 
+## Guidelines
+
+The Airbnb [JavaScript Style Guide](https://github.com/airbnb/javascript) is used.
+
+Install [editorconfig](http://editorconfig.org) and [eslint](https://eslint.org)
+in your editor/IDE and follow the conventions established by them.
+
 ## Development
 
 ### Install
@@ -72,10 +79,3 @@ $ npm run site-dev
 ```
 
 It will open a server at [`http://127.0.0.1:7000`](http://127.0.0.1:7000).
-
-## Guidelines
-
-The Airbnb [JavaScript Style Guide](https://github.com/airbnb/javascript) is used.
-
-Install [editorconfig](http://editorconfig.org) and [eslint](https://eslint.org)
-in your editor/IDE and follow the conventions established by them.
