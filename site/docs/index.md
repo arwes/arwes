@@ -32,9 +32,9 @@ $ cd example
 $ npm install --save arwes
 ```
 
-Images and sounds are not provided, if you want to use the implemented in the docs,
+Images and sounds are not provided, if you want to use the assets implemented in the docs,
 download them from the static folder in the
-[repository in GitHub](https://github.com/romelperez/arwes).
+[GitHub repository](https://github.com/romelperez/arwes).
 
 Once installed, enter to the folder and empty the `src/index.js` to start
 from scratch.
