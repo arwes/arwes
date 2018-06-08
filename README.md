@@ -1,16 +1,14 @@
 <div align="center">
-  <img src='./static/img/logo-invert.png' alt='Arwes' height='100' />
+  <img src="./arwes.gif" alt="Arwes" />
 </div>
 
-<h1 align="center">Arwes</h1>
-
-<p align="center" style="font-size: 1.2rem;">
+<p align="center" style="margin-top: 16px; font-size: 1.2rem;">
   Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for Web Apps
 </p>
 
 <div align="center">
-  <a href="https://npmjs.org/package/arwes">
-    <img src="https://img.shields.io/npm/v/arwes.svg" alt="version" />
+  <a href="https://npmjs.org/package/@arwes/arwes">
+    <img src="https://img.shields.io/npm/v/@arwes/arwes.svg" alt="version" />
   </a>
   <a href="https://travis-ci.org/arwesjs/arwes">
     <img src="https://img.shields.io/travis/arwesjs/arwes.svg" alt="travis" />
@@ -18,11 +16,17 @@
   <a href="https://github.com/arwesjs/arwes/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/arwesjs/arwes.svg?maxAge=2592000" alt="license" />
   </a>
-  <a href="https://npmjs.org/package/arwes">
-    <img src="https://img.shields.io/npm/dm/arwes.svg" alt="downloads" />
+  <a href="https://github.com/prettier/prettier">
+    <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" alt="code style: prettier">
+  </a>
+  <a href="https://npmjs.org/package/@arwes/arwes">
+    <img src="https://img.shields.io/npm/dm/@arwes/arwes.svg" alt="downloads" />
   </a>
   <a href="https://github.com/arwesjs/arwes">
     <img src="https://img.shields.io/github/stars/arwesjs/arwes.svg?style=social&label=stars" alt="github stars" />
+  </a>
+  <a href="https://discord.gg/s5sbTkw">
+    <img src="https://img.shields.io/badge/chat-discord-blue.svg" alt="chat on discord">
   </a>
 </div>
 
@@ -34,9 +38,9 @@ animations and sounds effects. The idea is to let you create realistic
 futuristic user experiences for your projects.
 
 The tools are based on [React](https://reactjs.org) for components,
-[JSS](http://cssinjs.org) for styles ([learn more about CSSinJS](https://medium.com/jobsity/css-in-javascript-with-jss-and-react-54cdd2720222)),
-[react-transition-group](https://reactcommunity.org/react-transition-group/) for
-animations, [Howler](https://howlerjs.com/) for sounds and [Prism](http://prismjs.com)
+[JSS](http://cssinjs.org) for styles ([CSSinJS](https://medium.com/jobsity/css-in-javascript-with-jss-and-react-54cdd2720222)),
+[react-transition-group](https://reactcommunity.org/react-transition-group) for
+animations, [Howler](https://howlerjs.com) for sounds, and [Prism](http://prismjs.com)
 for code highlighting.
 
 > Currently is under development with an alpha version available on npm. Modules and components are under test and their API may change.
@@ -44,7 +48,7 @@ for code highlighting.
 ## Install
 
 ```bash
-$ npm install --save arwes
+$ npm install --save @arwes/arwes
 ```
 
 ## Documentation
@@ -53,7 +57,7 @@ See [arwesjs.org](https://arwesjs.org).
 
 ## Need help?
 
-Open [a GitHub issue](https://github.com/arwesjs/arwes/issues/new).
+Open [a GitHub issue](https://github.com/arwesjs/arwes/issues/new) or let's chat on [Discord](https://discord.gg/s5sbTkw).
 
 ## Want to contribute?
 
@@ -88,20 +92,6 @@ This project has many inspiration sources:
 - [Sci-Fi Designs Board](https://co.pinterest.com/romelperez07/sci-fi-design/)
 - [Sci-Fi Game Designs Board](https://co.pinterest.com/romelperez07/sci-fi-games/)
 
-## Contributors
-
-<!-- Contributors START
-Romel_Perez romelperez https://romelperez.com code doc tutorial answers
-Nick_West njwest https://nickwe.st doc
-Contributors END -->
-<!-- Contributors table START -->
-| [<img src="https://avatars.githubusercontent.com/romelperez?s=100" width="100" alt="Romel Perez" /><br /><sub>Romel Perez</sub>](https://romelperez.com)<br />[💻](git@github.com:arwesjs/arwes/commits?author=romelperez) [📖](git@github.com:arwesjs/arwes/commits?author=romelperez) ✅ 💁 | [<img src="https://avatars.githubusercontent.com/njwest?s=100" width="100" alt="Nick West" /><br /><sub>Nick West</sub>](https://nickwe.st)<br />[📖](git@github.com:arwesjs/arwes/commits?author=njwest) |
-| :---: | :---: |
-<!-- Contributors table END -->
-
-This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors)
-specification.
-
 ## Roadmap
 
 - [x] Design, animations and sounds guidelines
@@ -118,6 +108,20 @@ specification.
 - [ ] Add form components
 - [ ] Add navigation components
 - [ ] Best test coverege
+
+## Contributors
+
+<!-- Contributors START
+Romel_Perez romelperez https://romelperez.com code doc tutorial answers
+Nick_West njwest https://nickwe.st doc
+Contributors END -->
+<!-- Contributors table START -->
+| [<img src="https://avatars.githubusercontent.com/romelperez?s=100" width="100" alt="Romel Perez" /><br /><sub>Romel Perez</sub>](https://romelperez.com)<br />[💻](git@github.com:arwesjs/arwes/commits?author=romelperez) [📖](git@github.com:arwesjs/arwes/commits?author=romelperez) ✅ 💁 | [<img src="https://avatars.githubusercontent.com/njwest?s=100" width="100" alt="Nick West" /><br /><sub>Nick West</sub>](https://nickwe.st)<br />[📖](git@github.com:arwesjs/arwes/commits?author=njwest) |
+| :---: | :---: |
+<!-- Contributors table END -->
+
+This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors)
+specification.
 
 ## License
 

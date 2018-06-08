@@ -1,1 +1,0 @@
-A heading HTML element.
