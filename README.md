@@ -12,17 +12,17 @@
   <a href="https://npmjs.org/package/arwes">
     <img src="https://img.shields.io/npm/v/arwes.svg" alt="version" />
   </a>
-  <a href="https://travis-ci.org/romelperez/arwes">
-    <img src="https://img.shields.io/travis/romelperez/arwes.svg" alt="travis" />
+  <a href="https://travis-ci.org/arwesjs/arwes">
+    <img src="https://img.shields.io/travis/arwesjs/arwes.svg" alt="travis" />
   </a>
-  <a href="https://github.com/romelperez/arwes/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/romelperez/arwes.svg?maxAge=2592000" alt="license" />
+  <a href="https://github.com/arwesjs/arwes/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/arwesjs/arwes.svg?maxAge=2592000" alt="license" />
   </a>
   <a href="https://npmjs.org/package/arwes">
     <img src="https://img.shields.io/npm/dm/arwes.svg" alt="downloads" />
   </a>
-  <a href="https://github.com/romelperez/arwes">
-    <img src="https://img.shields.io/github/stars/romelperez/arwes.svg?style=social&label=stars" alt="github stars" />
+  <a href="https://github.com/arwesjs/arwes">
+    <img src="https://img.shields.io/github/stars/arwesjs/arwes.svg?style=social&label=stars" alt="github stars" />
   </a>
 </div>
 
@@ -53,11 +53,11 @@ See [arwesjs.org](https://arwesjs.org).
 
 ## Need help?
 
-Open [a GitHub issue](https://github.com/romelperez/arwes/issues/new).
+Open [a GitHub issue](https://github.com/arwesjs/arwes/issues/new).
 
 ## Want to contribute?
 
-See [contributing guidelines](https://github.com/romelperez/arwes/blob/master/CONTRIBUTING.md).
+See [contributing guidelines](https://github.com/arwesjs/arwes/blob/master/CONTRIBUTING.md).
 All contributions of any kind are welcome!
 
 ## Inspiration

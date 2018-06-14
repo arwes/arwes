@@ -226,7 +226,7 @@ export default withStyles({
         <small className={classes.option}>
           Source code:
           {' '}
-          <Link href={'https://github.com/romelperez/arwes/blob/master/' + component.path}>
+          <Link href={'https://github.com/arwesjs/arwes/blob/master/' + component.path}>
             <code>{component.path}</code>
           </Link>
         </small>

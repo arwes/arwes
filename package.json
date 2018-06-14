@@ -16,14 +16,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/romelperez/arwes.git"
+    "url": "git+https://github.com/arwesjs/arwes.git"
   },
   "bugs": {
-    "url": "https://github.com/romelperez/arwes/issues"
+    "url": "https://github.com/arwesjs/arwes/issues"
   },
   "author": "Romel Pérez (romelperez.com)",
   "license": "MIT",
-  "homepage": "https://github.com/romelperez/arwes",
+  "homepage": "https://github.com/arwesjs/arwes",
   "main": "lib/index.js",
   "scripts": {
     "test": "npm run test-lint && TRAVIS=true npm run test-dev",

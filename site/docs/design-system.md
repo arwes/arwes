@@ -113,7 +113,7 @@ const App = () => (
 ```
 
 You can see the complete list of styles to define in the Arwes file
-[/src/tools/createTheme/theme.js](https://github.com/romelperez/arwes/blob/master/src/tools/createTheme/theme.js).
+[/src/tools/createTheme/theme.js](https://github.com/arwesjs/arwes/blob/master/src/tools/createTheme/theme.js).
 
 ## Customize your components
 
