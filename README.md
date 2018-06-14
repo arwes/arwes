@@ -28,7 +28,7 @@
 
 _______________
 
-[Arwes](https://arwes.romelperez.com) is a web framework to build user interfaces
+[Arwes](https://arwesjs.org) is a web framework to build user interfaces
 for web applications based on science fiction and cyberpunk styles guidelines,
 animations and sounds effects. The idea is to let you create realistic
 futuristic user experiences for your projects.
@@ -49,7 +49,7 @@ $ npm install --save arwes
 
 ## Documentation
 
-See [arwes.romelperez.com](https://arwes.romelperez.com).
+See [arwesjs.org](https://arwesjs.org).
 
 ## Need help?
 
@@ -77,10 +77,11 @@ This project has many inspiration sources, some of them:
 
 <!-- Contributors START
 Romel_Perez romelperez https://romelperez.com code doc tutorial answers
+Nick_West njwest https://nickwe.st doc
 Contributors END -->
 <!-- Contributors table START -->
-| [<img src="https://avatars.githubusercontent.com/romelperez?s=100" width="100" alt="Romel Perez" /><br /><sub>Romel Perez</sub>](https://romelperez.com)<br />[💻](git@github.com:romelperez/arwes/commits?author=romelperez) [📖](git@github.com:romelperez/arwes/commits?author=romelperez) ✅ 💁 |
-| :---: |
+| [<img src="https://avatars.githubusercontent.com/romelperez?s=100" width="100" alt="Romel Perez" /><br /><sub>Romel Perez</sub>](https://romelperez.com)<br />[💻](git@github.com:arwesjs/arwes/commits?author=romelperez) [📖](git@github.com:arwesjs/arwes/commits?author=romelperez) ✅ 💁 | [<img src="https://avatars.githubusercontent.com/njwest?s=100" width="100" alt="Nick West" /><br /><sub>Nick West</sub>](https://nickwe.st)<br />[📖](git@github.com:arwesjs/arwes/commits?author=njwest) |
+| :---: | :---: |
 <!-- Contributors table END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors)

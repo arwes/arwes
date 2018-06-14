@@ -45,15 +45,15 @@ export default class AppDocument extends Document {
           <meta property='og:site_name' content={title} />
           <meta property='og:description' content='Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for Web Apps' />
           <meta property='og:type' content='website' />
-          <meta property='og:url' content='https://arwes.romelperez.com' />
-          <meta property='og:image' content='https://arwes.romelperez.com/static/img/arwes.jpg' />
+          <meta property='og:url' content='https://arwesjs.org' />
+          <meta property='og:image' content='https://arwesjs.org/static/img/arwes.jpg' />
 
           <meta name='twitter:card' content='summary_large_image' />
           <meta name='twitter:title' content={title} />
           <meta name='twitter:description' content='Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for Web Apps' />
           <meta name='twitter:site' content='@romelperez07' />
           <meta name='twitter:creator' content='@romelperez07' />
-          <meta name='twitter:image' content='https://arwes.romelperez.com/static/img/arwes.jpg' />
+          <meta name='twitter:image' content='https://arwesjs.org/static/img/arwes.jpg' />
 
           <meta name='theme-color' content='#000000' />
           <meta name='apple-mobile-web-app-capable' content='yes' />
