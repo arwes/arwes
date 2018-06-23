@@ -7,7 +7,9 @@
     "format": "prettier --write \"packages/*/src/**/*.js\"",
     "test": "jest",
     "test-dev": "jest --watch",
-    "test-ci": "npm i -g lerna && lerna bootstrap && npm test"
+    "test-ci": "npm i -g lerna && lerna bootstrap && npm test",
+    "changelog": "auto-changelog --output CHANGELOG.md --commit-limit false",
+    "release-git": "bash release-git.sh"
   },
   "devDependencies": {
     "auto-changelog": "^1.7.1",

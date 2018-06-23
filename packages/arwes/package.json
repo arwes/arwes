@@ -33,8 +33,7 @@
     "compile-pre": "rm -rf ./lib/",
     "compile-build": "NODE_ENV=production babel src --out-dir lib --ignore '*.test.js'",
     "compile-copyfiles": "cp package.json lib/package.json && cp README.md lib/README.md",
-    "changelog": "auto-changelog --output CHANGELOG.md --commit-limit false",
-    "release": "npm run changelog && npm run compile && npm publish lib"
+    "release": "npm run compile && npm publish lib"
   },
   "dependencies": {
     "classnames": "^2.2.5",
