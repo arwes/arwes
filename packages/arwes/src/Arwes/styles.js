@@ -20,7 +20,6 @@ export default theme => {
   return {
     root: {
       ...position0000,
-      position: 'fixed',
       overflow: 'hidden',
       display: 'block',
       boxSizing: 'border-box',

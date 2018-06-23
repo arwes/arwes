@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "playground": "webpack-dev-server --config playground.js",
     "lint": "eslint --cache --quiet ./packages/*/src",
     "format": "prettier --write \"packages/*/src/**/*.js\"",
     "test": "jest",
@@ -17,6 +18,7 @@
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
     "babel-jest": "^23.0.1",
+    "babel-loader": "^7.1.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-export-extensions": "^6.22.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -31,11 +33,16 @@
     "glob": "^7.1.2",
     "jest": "^23.1.0",
     "lerna": "^2.11.0",
+    "navigo": "^7.1.2",
     "prettier": "^1.13.5",
     "prettier-eslint": "^8.8.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-jss": "^8.6.0",
     "regenerator-runtime": "^0.11.1",
-    "sinon": "^6.0.0"
+    "sinon": "^6.0.0",
+    "webpack": "^4.12.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4"
   }
 }

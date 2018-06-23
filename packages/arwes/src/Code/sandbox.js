@@ -1,14 +1,16 @@
-```javascript
-render(
-    <Arwes>
-        <p>
-            This is an inline
-            <Code animate>const id = x => x;</Code>
-            code rendered.
-        </p>
-        <p>But we can also render a full example:</p>
-        <Code animate type='pre' language='javascript'>{
-`// An arbitrary example
+import React from 'react';
+import Arwes from '../Arwes';
+import Code from './index';
+
+export default () => (
+  <Arwes>
+    <p>
+      This is an inline
+      <Code animate>const id = x => x;</Code>
+      code rendered.
+    </p>
+    <p>But we can also render a full example:</p>
+    <Code animate type="pre" language="javascript">{`// An arbitrary example
 class Code extends Component {
     constructor () {
         super(...arguments);
@@ -25,11 +27,9 @@ class Code extends Component {
       const result = 100.45 + 71.25 / 10;
       return true ? newObj : false;
     }
-}`
-        }</Code>
-        <p>And another example with more details:</p>
-        <Code animate type='pre' language='css'>{
-`/* Some global classes */
+}`}</Code>
+    <p>And another example with more details:</p>
+    <Code animate type="pre" language="css">{`/* Some global classes */
 html {
   box-sizing: border-box;
 }
@@ -48,9 +48,7 @@ html, body {
   flex-direction: column;
   background-color: #000000;
   color: #00ffff;
-}`
-        }</Code>
-        <p>Where the code is more complete.</p>
-    </Arwes>
+}`}</Code>
+    <p>Where the code is more complete.</p>
+  </Arwes>
 );
-```

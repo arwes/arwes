@@ -19,6 +19,9 @@
   <a href="https://github.com/prettier/prettier">
     <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" alt="code style: prettier">
   </a>
+  <a href="https://lernajs.io">
+    <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="lerna" />
+  </a>
   <a href="https://npmjs.org/package/@arwes/arwes">
     <img src="https://img.shields.io/npm/dm/@arwes/arwes.svg" alt="downloads" />
   </a>
@@ -43,7 +46,13 @@ The tools are based on [React](https://reactjs.org) for components,
 animations, [Howler](https://howlerjs.com) for sounds, and [Prism](http://prismjs.com)
 for code highlighting.
 
-> Currently is under development with an alpha version available on npm. Modules and components are under test and their API may change.
+> **Currently the project is under development with an alpha version available on
+npm. Modules and components are being tested and their API may change.**
+
+> **The website [arwesjs.org](https://arwesjs.org) works for the package `arwes`.
+Check out [arwes@1.0.0-alpha.5 source code](https://github.com/arwesjs/arwes/tree/f318a66b889eb5525d78da10efafc67d5f619194)
+for working version. Current development is at the package `@arwes/arwes` which
+has major breaking changes.**
 
 ## Install
 
@@ -94,16 +103,7 @@ This project has many inspiration sources:
 
 ## Roadmap
 
-- [x] Design, animations and sounds guidelines
-- [x] Playground for development
-- [x] Base API for components and tools
-- [x] Support for server-side rendering
-- [x] Define logo
-- [x] Documentation
-- [x] Create component API docs
-- [x] Create website playground
-- [x] Create resources to learn JSS / React
-- [ ] Refactor project architecture (In Progress)
+- [x] Refactor project architecture
 - [ ] Standardize core components (In Progress)
 - [ ] Add form components
 - [ ] Add navigation components
