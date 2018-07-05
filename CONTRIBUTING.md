@@ -15,92 +15,20 @@ make [via issue](https://github.com/arwesjs/arwes/issues/new) with the owners
 of this repository before making a change.
 
 Please note we have a [code of conduct](./CODE_OF_CONDUCT.md), please follow it
-in all your interactions with the project.
+in all your interactions.
 
 ## Guidelines
 
 The Airbnb [JavaScript Style Guide](https://github.com/airbnb/javascript) is used.
 
-In your editor or IDE, install the following tools plugins/packages:
+For code style and code formatting, in your editor or IDE, install the following
+tools plugins/packages:
 
 - [editorconfig](http://editorconfig.org)
 - [eslint](https://eslint.org)
 - [prettier](https://prettier.io)
 
-So the code style is code formatting of the project is followed.
-
-## Development
-
-This is a monorepo maintained with [lerna](https://lernajs.io) for bootstrapping,
-but we don't used it for publishing. Each package is published independently.
-
-### Install and setup
-
-To install repository dependencies and bootstrap repository packages:
-
-```bash
-$ npm install
-$ npm i -g lerna
-$ lerna bootstrap
-```
-
-### Testing and code guidelines
-
-To test the components and modules [jest](https://facebook.github.io/jest/),
-[sinon](http://sinonjs.org), and [enzyme](http://airbnb.io/enzyme/) are used.
-Run them using:
-
-```bash
-# test all packages once
-$ npm run test
-
-# tests with watcher
-$ npm run test-dev
-
-# run linter
-$ npm run lint
-
-# format code when needed
-$ npm run format
-```
-
-### Git commit messages
-
-For Git commit messages we use the following format:
-
-- `feat: add a new feature with tests`
-- `update: improve a current feature with tests`
-- `fix: resolve a bugfix or issue`
-- `refactor: change code structure with possibly breaking changes`
-- `chore: changes in building, playing, testing, or any other process`
-- `docs: update documentation either in code or markdown`
-
-_The syntax `[change] message` is now deprecated in this repo._
-
-### Playground
-
-All components should have a playground, where the integrated components
-can be tested in development.
-
-This is a `webpack-dev-server` importing the list of components sandboxes and
-letting the user choose which one to render.
-
-```text
-/playground/
-    /img/
-    /sound/
-    index.html
-    playground.js - Playground application
-    sandboxes.js - Define list of components sandboxes
-```
-
-Each component sandbox should `export default` a React component with the
-components tests.
-
-```bash
-# run plaground at http://localhost:9000
-$ npm run playground
-```
+The conventions followed are defined in their respective settings.
 
 ## Architecture
 
@@ -125,10 +53,11 @@ in the same package.
 ```js
 // packages/jungle/src/Hawk/Hawk.js
 import React from 'react';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 import WingsComponent from '../Wings';
 export default function Hawk(props) {
-    const { theme, classes, Wings, className, children, ...etc } = props;
+    const { Wings, theme, classes, className, children, ...etc } = props;
     const cls = cx(classes.root, className);
     return (
         <div className={cls} {...etc}>
@@ -149,8 +78,8 @@ Hawk.defaultProps = {
 };
 
 // packages/jungle/src/Hawk/styles.js
-export default theme => ({
-    root: { ... }, // CSSinJS
+export default theme => ({ // CSSinJS
+    root: { ... },
     head: { ... },
     body: { ... },
     wings: { ... },
@@ -170,7 +99,7 @@ export default withStyles(styles)(Hawk);
 down as props so the testing is easier.
 - By default, all styled components using JSS receive `theme` and `classes`
 so they can be handled in component code.
-- Components main class should be named "root" using JSS.
+- Components styles main class should be named "root" using JSS.
 
 ### Tools makers
 
@@ -222,6 +151,80 @@ purpose, mostly for testing.
 - When using the browser APIs, always reference the `window` object. e.g.
 `window.document`, `window.localStorage`, `window.URL`...
 - There should not be any call to either node or browser APIs on imports.
+
+## Development
+
+This is a monorepo maintained with [lerna](https://lernajs.io) for bootstrapping,
+but we don't used it for publishing. Each package is published independently.
+
+### Install and setup
+
+To install repository dependencies and bootstrap repository packages:
+
+```bash
+$ npm install
+$ npm i -g lerna
+$ lerna bootstrap
+```
+
+### Testing and code guidelines
+
+To test the components and modules [jest](https://facebook.github.io/jest/),
+[sinon](http://sinonjs.org), and [enzyme](http://airbnb.io/enzyme/) are used.
+Run them using:
+
+```bash
+# test all packages once
+$ npm run test
+
+# tests with watcher
+$ npm run test-dev
+
+# run linter
+$ npm run lint
+
+# format code when needed
+$ npm run format
+```
+
+### Git commit messages
+
+For Git commit messages we use the following format:
+
+- `feat: add a new feature with tests`
+- `update: improve a current feature with tests`
+- `fix: resolve a bugfix or issue`
+- `refactor: change code structure with possibly breaking changes`
+- `docs: update documentation either in code or markdown`
+- `chore: changes in building, playing, testing, or any other process`
+- `release: release project breakpoint`
+
+_The syntax `[type] message` is now deprecated in this repo._
+
+### Playground
+
+All components should have a playground, where the integrated components
+can be tested in development.
+
+This is a `webpack-dev-server` importing the list of components sandboxes and
+letting the user choose which one to render.
+
+```text
+/playground/
+    /img/
+    /sound/
+    index.html
+    playground.js - Playground application
+    sandboxes.js - Define list of components sandboxes
+```
+
+Each component sandbox should `export default` a React component with the
+components tests.
+
+```bash
+# run plaground at http://localhost:9000
+$ npm run playground
+```
 
 ## Releasing
 
