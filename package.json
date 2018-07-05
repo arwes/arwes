@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "playground": "webpack-dev-server --config playground.js",
+    "playground": "webpack-dev-server --config playground.config.js",
     "lint": "eslint --cache --quiet ./packages/*/src",
     "format": "prettier --write \"packages/*/src/**/*.js\"",
     "test": "jest",
