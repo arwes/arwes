@@ -36,21 +36,16 @@
 _______________
 
 [Arwes](https://arwesjs.org) is a web framework to build user interfaces
-for web applications based on science fiction and cyberpunk styles guidelines,
-animations and sounds effects. The idea is to let you create realistic
-futuristic user experiences for your projects.
-
-The tools are based on [React](https://reactjs.org) for components,
-[JSS](http://cssinjs.org) for styles ([CSSinJS](https://medium.com/jobsity/css-in-javascript-with-jss-and-react-54cdd2720222)),
-[react-transition-group](https://reactcommunity.org/react-transition-group) for
-animations, [Howler](https://howlerjs.com) for sounds, and [Prism](http://prismjs.com)
-for code highlighting.
+for web applications based on futuristic science fiction and cyberpunk styles,
+animations, and sounds effects. The idea is to let you create realistic
+futuristic user experiences in your projects. The concepts behind are opinionated
+and try to inspire advanced space technology and alien influence.
 
 > **Currently the project is under development with an alpha version available on
 npm. Modules and components are being tested and their API may change.**
 
 > **The website [arwesjs.org](https://arwesjs.org) works for the package `arwes`.
-Check out [arwes@1.0.0-alpha.5 source code](https://github.com/arwesjs/arwes/tree/f318a66b889eb5525d78da10efafc67d5f619194)
+Check out [arwes@1.0.0-alpha.5](https://github.com/arwesjs/arwes/tree/f318a66b889eb5525d78da10efafc67d5f619194)
 for working version. Current development is at the package `@arwes/arwes` which
 has major breaking changes.**
 
@@ -62,49 +57,37 @@ $ npm install --save @arwes/arwes
 
 ## Documentation
 
-See [arwesjs.org](https://arwesjs.org).
+See **[arwesjs.org](https://arwesjs.org)**.
 
 ## Need help?
 
 Open [a GitHub issue](https://github.com/arwesjs/arwes/issues/new) or let's chat on [Discord](https://discord.gg/s5sbTkw).
 
+## Inspirations
+
+This project has many sources of inspiration. Some of them:
+
+- [Star Citizen](http://robertsspaceindustries.com)
+- [Orbit SciFi UI Kit](https://creativemarket.com/dannehr/163951-Orbit-SciFi-UI-Kit)
+- [Futuristic HUD UI Pack](https://videohive.net/item/hud-ui-pack-700/19326628)
+- [TRON: Legacy](http://www.imdb.com/title/tt1104001)
+- [Boom Sci-Fi Designed](https://soundcloud.com/boom-library/sci-fi-designed)
+
+## Guidelines
+
+Check out [Design, Animations, and Effects guidelines](./guidelines) for detailed
+information about the concepts behind Arwes.
+
 ## Want to contribute?
 
-See [contributing guidelines](https://github.com/arwesjs/arwes/blob/master/CONTRIBUTING.md).
+See [how to contribute](https://github.com/arwesjs/arwes/blob/master/CONTRIBUTING.md).
 All contributions of any kind are welcome!
-
-## Inspiration
-
-This project has many inspiration sources:
-
-### Movies
-
-- [TRON: Legacy](http://www.imdb.com/title/tt1104001/)
-- [Ghost in the Shell](http://www.imdb.com/title/tt1219827/)
-
-### Videogames
-
-- [Halo Games](https://www.halowaypoint.com/en-us/games/halo-2)
-- [Star Citizen](http://robertsspaceindustries.com)
-- [Cyberpunk 2077](https://www.cyberpunk.net)
-
-### Videos
-
-- [Sci-Fi Designs Playlist](https://www.youtube.com/playlist?list=PLAIjpj9Un1BDevmUZSDrLIYxF3Cl5LspY)
-- [Sci-Fi Ambient Music Playlist](https://www.youtube.com/playlist?list=PLmGEbmwqAA4IYqCuH3bHzTVVtdpG6N4IJ)
-
-### Designs
-
-- [Hi-Tech Interface Builder Pack](https://www.behance.net/gallery/19051971/Hi-Tech-Interface-Builder-Pack)
-- [Orbit SciFi UI Kit](https://creativemarket.com/dannehr/163951-Orbit-SciFi-UI-Kit)
-- [SciFi HUD Pack](https://videohive.net/item/hud/14206389)
-- [Sci-Fi Designs Board](https://co.pinterest.com/romelperez07/sci-fi-design/)
-- [Sci-Fi Game Designs Board](https://co.pinterest.com/romelperez07/sci-fi-games/)
 
 ## Roadmap
 
 - [x] Refactor project architecture
-- [ ] Standardize core components (In Progress)
+- [ ] Define guidelines (In Progress)
+- [ ] Standardize core components
 - [ ] Add form components
 - [ ] Add navigation components
 - [ ] Best test coverege
