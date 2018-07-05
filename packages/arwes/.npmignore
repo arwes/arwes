@@ -1,8 +1,4 @@
-# gitignore
-
-##
-## BASE
-##
+# npmignore
 
 node_modules
 jspm_packages
@@ -34,17 +30,11 @@ nbproject
 .eslintcache
 .travis.yml
 .gitattributes
+.gitignore
+.babelrc
 
 Thumbs.db
 dump.rdb
 npm-debug.log
 package-lock.json
 yarn.lock
-
-##
-## PROJECT
-##
-
-.gitignore
-.babelrc
-CHANGELOG.md
