@@ -1,8 +1,11 @@
 # Arwes Guidelines
 
-Arwes Design, Animation, and Effects Guidelines.
+Arwes Design, Animation, and Effects Guidelines. These are the core concepts
+and ideas behind the project Arwes.
 
 > Contributions are welcome!
+
+-------
 
 ## Inspiration
 
@@ -31,7 +34,27 @@ Some other multimedia compilations of projects:
 
 ## Purpose
 
-TODO
+Arwes is an intent to materialize futuristic science fiction concepts in a toolset
+to let you create interfaces that inspire advanced technology, especially spatial,
+influenced by alien conceptions.
+
+Connected, augmented, and energized are the feelings sought in the experiences
+provided with projects built with Arwes. So the interfaces are intensive and rich.
+
+But building modular, configurable, heavy animated and interconnected interface
+components for web applications from both design and functional perspectives
+it's not easy. Since there are plenty of ideas where to get inspiration, the
+concepts used here are opinionated and focus on certain aspects to experience.
+
+These are the main fundamental ideas behind this project.
+
+### Advanced Alien Technology
+
+### Sleek and Clean
+
+### Functional
+
+### Energetic and Vibrant
 
 -------
 
