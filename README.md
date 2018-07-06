@@ -65,11 +65,13 @@ Open [a GitHub issue](https://github.com/arwesjs/arwes/issues/new) or let's chat
 
 ## Inspirations
 
-This project has many sources of inspiration. Some of them:
+This project has many sources of inspiration. Some of the main influences are:
 
 - [Star Citizen](http://robertsspaceindustries.com)
 - [Orbit SciFi UI Kit](https://creativemarket.com/dannehr/163951-Orbit-SciFi-UI-Kit)
 - [Futuristic HUD UI Pack](https://videohive.net/item/hud-ui-pack-700/19326628)
+- [Hi-Tech Interface Builder Pack](https://www.behance.net/gallery/19051971/Hi-Tech-Interface-Builder-Pack)
+- [SciFi HUD Pack](https://videohive.net/item/hud/14206389)
 - [TRON: Legacy](http://www.imdb.com/title/tt1104001)
 - [Boom Sci-Fi Designed](https://soundcloud.com/boom-library/sci-fi-designed)
 
