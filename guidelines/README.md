@@ -1,9 +1,7 @@
 # Arwes Guidelines
 
-Arwes Design, Animation, and Effects Guidelines. These are the core concepts
-and ideas behind the project Arwes.
-
-> Contributions are welcome!
+Arwes Design, Animation, and Effects Guidelines. It's a living guide. These are
+the core concepts and ideas behind the project Arwes.
 
 -------
 
@@ -19,7 +17,7 @@ Main sources of inspiration come from these awesome projects:
 - [TRON: Legacy](http://www.imdb.com/title/tt1104001)
 - [Boom Sci-Fi Designed](https://soundcloud.com/boom-library/sci-fi-designed)
 
-Some other multimedia compilations of projects:
+Some other multimedia projects compilations:
 
 - [Futuristic Sci-Fi Designs Board](https://co.pinterest.com/romelperez07/futuristic-sci-fi-design)
 - [Futuristic Sci-Fi Designs Playlist](https://www.youtube.com/playlist?list=PLAIjpj9Un1BDevmUZSDrLIYxF3Cl5LspY)
@@ -43,18 +41,52 @@ provided with projects built with Arwes. So the interfaces are intensive and ric
 
 But building modular, configurable, heavy animated and interconnected interface
 components for web applications from both design and functional perspectives
-it's not easy. Since there are plenty of ideas where to get inspiration, the
+it's not easy. Since there are plenty of ideas where to get inspiration from, the
 concepts used here are opinionated and focus on certain aspects to experience.
 
 These are the main fundamental ideas behind this project.
 
 ### Advanced Alien Technology
 
-### Sleek and Clean
+The elements should looks like they were made with advanced technology based on
+many fundamentally new scientific theories and created by developed alien
+civilizations or human societies millennia away in the future.
+
+But written and spoken language with letters and numbers is still used to communicate.
+And mechanical interactions are still needed to manipulate the controls.
+
+The design could be used in displays, virtual reality, augmented reality, and
+even holograms, and it should give the impression user is controlling futuristic
+sophisticated devices.
+
+### Clean and Sleek
+
+It doesn't have to be cryptic to feel advanced. Elements should be shown clearly
+enough to express the ideas without getting lost in visual effects.
+
+Sizes and spacing should be well used to convey the messages. Controls and structural
+elements should not be too big to mean importance. Content should be legible and
+not convoluted or obfuscated.
+
+The interfaces should look polished and sophisticated.
 
 ### Functional
 
+The elements in the experience should exist for a purpose, not just for display.
+But they can be elaborated. These elements should express they have a function.
+
+All components in an experience, should feel they are interconnected as a whole,
+so it is not just functional but intelligent. Actions in one place, can echo the
+other places or even broadcast it to the whole system.
+
 ### Energetic and Vibrant
+
+All components should connect with the user visually and aurally. They should
+feel being assembled, evolved and decomposed. Using them should be an experience
+as a creator and as an explorer.
+
+Elements glowing should inspire energy and animation should activate it. User
+should feel connected with the system.
 
 -------
 
