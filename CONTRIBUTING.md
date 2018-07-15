@@ -163,8 +163,6 @@ To install repository dependencies and bootstrap repository packages:
 
 ```bash
 $ npm install
-$ npm i -g lerna
-$ lerna bootstrap
 ```
 
 ### Testing and code guidelines
