@@ -9,9 +9,9 @@ the core concepts and ideas behind the project Arwes.
 
 Main sources of inspiration come from these awesome projects:
 
-- [Star Citizen](http://robertsspaceindustries.com)
-- [Orbit SciFi UI Kit](https://creativemarket.com/dannehr/163951-Orbit-SciFi-UI-Kit)
+- [Star Citizen](http://robertsspaceindustries.com) ([Starmap](https://robertsspaceindustries.com/starmap))
 - [Futuristic HUD UI Pack](https://videohive.net/item/hud-ui-pack-700/19326628)
+- [Orbit SciFi UI Kit](https://creativemarket.com/dannehr/163951-Orbit-SciFi-UI-Kit)
 - [Hi-Tech Interface Builder Pack](https://www.behance.net/gallery/19051971/Hi-Tech-Interface-Builder-Pack)
 - [SciFi HUD Pack](https://videohive.net/item/hud/14206389)
 - [TRON: Legacy](http://www.imdb.com/title/tt1104001)
@@ -76,14 +76,15 @@ The elements in the experience should exist for a purpose, not just for display.
 But they can be elaborated. These elements should express they have a function.
 
 All components in an experience, should feel they are interconnected as a whole,
-so it is not just functional but intelligent. Actions in one place, can echo the
+so it is not just functional but intelligent. Actions in one place, can echo in
 other places or even broadcast it to the whole system.
 
 ### Energetic and Vibrant
 
-All components should connect with the user visually and aurally. They should
-feel being assembled, evolved and decomposed. Using them should be an experience
-as a creator and as an explorer.
+All components should connect with the user visually and aurally. By navigating,
+things don't just appear or disappear. They should feel being assembled, evolved
+and decomposed. Using them should be an experience as an explorer and also as a
+creator.
 
 Elements glowing should inspire energy and animation should activate it. User
 should feel connected with the system.
@@ -92,13 +93,32 @@ should feel connected with the system.
 
 ## Design System
 
+Arwes is a _framework_ to create UIs. Ideally most settings should be configurable.
+So many of these guidelines should be flexible enough to adapt to the implementation
+desired.
+
 ### Colors
 
-Main monochromatic color palette.
+Futuristic designs tend to be dark. Arwes is not an exception, it is specially
+designed for dark backgrounds and light elements. But it could be configured
+any way it is required.
 
-![Color Palette](./design-system/color-palette.png)
+#### Color Palette
+
+TODO
+
+#### Color Usage
+
+TODO
 
 ### Fonts
+
+The typographies tend to be rectangular and maybe oblique with techno influence.
+
+Arwes defines two main typographies. One for the content and one for the headings
+with more emphasis. All text should have the ability to "glow".
+
+#### Scales
 
 TODO
 
@@ -118,13 +138,21 @@ TODO
 
 TODO
 
-### Navigation
-
-TODO
-
 -------
 
 ## Animation System
+
+TODO
+
+### Persisting
+
+TODO
+
+### Interactions
+
+TODO
+
+### Transitions
 
 TODO
 
@@ -134,8 +162,26 @@ TODO
 
 TODO
 
--------
+### Backgrounds
 
-## Best Practices
+TODO
+
+### Line
+
+TODO
+
+### Frame
+
+TODO
+
+### Words
+
+TODO
+
+### Lists
+
+TODO
+
+### Tables
 
 TODO
