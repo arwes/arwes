@@ -28,7 +28,7 @@
   "homepage": "https://arwesjs.org",
   "main": "lib/index.js",
   "dependencies": {
-    "@arwes/sounds": "1.0.0-alpha.1",
+    "@arwes/sounds": "^1.0.0-alpha.1",
     "classnames": "^2.2.5",
     "d3-path": "^1.0.5",
     "d3-shape": "^1.2.0",
