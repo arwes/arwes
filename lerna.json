@@ -6,8 +6,8 @@
   "version": "independent",
   "command": {
     "publish": {
-      "allowBranch": "master",
-      "message": "release: %s"
+      "skipGit": true,
+      "allowBranch": "master"
     }
   }
 }
