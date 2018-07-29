@@ -1,8 +1,8 @@
 /* eslint-disable */
 
 export default [
+  { name: 'sounds/SoundsProvider', component: require('../packages/sounds/src/SoundsProvider/sandbox.js').default },
   { name: 'arwes/ThemeProvider', component: require('../packages/arwes/src/ThemeProvider/sandbox.js').default },
-  { name: 'arwes/SoundsProvider', component: require('../packages/arwes/src/SoundsProvider/sandbox.js').default },
   { name: 'arwes/Arwes', component: require('../packages/arwes/src/Arwes/sandbox.js').default },
   { name: 'arwes/Words', component: require('../packages/arwes/src/Words/sandbox.js').default },
   { name: 'arwes/Heading', component: require('../packages/arwes/src/Heading/sandbox.js').default },

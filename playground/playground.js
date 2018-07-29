@@ -4,9 +4,9 @@ import withStyles from 'react-jss';
 import Navigo from 'navigo';
 
 import createTheme from '../packages/arwes/src/tools/createTheme';
-import createSounds from '../packages/arwes/src/tools/createSounds';
 import ThemeProvider from '../packages/arwes/src/ThemeProvider';
-import SoundsProvider from '../packages/arwes/src/SoundsProvider';
+import createSounds from '../packages/sounds/src/createSounds';
+import SoundsProvider from '../packages/sounds/src/SoundsProvider';
 import sandboxes from './sandboxes';
 
 const theme = createTheme();
@@ -38,9 +38,7 @@ const styles = {
     'html, body': {
       margin: 0,
       padding: 0,
-      fontFamily: 'Monaco, Terminal, monospace',
-      backgroundColor: '#000',
-      color: '#0ff'
+      backgroundColor: '#000'
     }
   },
   root: {
@@ -58,7 +56,9 @@ const styles = {
     width: '100%',
     height: 40,
     borderBottom: '1px solid #0ff',
-    backgroundColor: '#111'
+    backgroundColor: '#111',
+    fontFamily: 'Monaco, Terminal, monospace',
+    color: '#0ff'
   },
   headerTitle: {
     display: 'inline-block',
