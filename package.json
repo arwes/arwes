@@ -1,7 +1,4 @@
 {
-  "name": "arwes-project",
-  "version": "0.0.0",
-  "private": true,
   "scripts": {
     "postinstall": "lerna bootstrap",
     "playground": "webpack-dev-server --config playground.config.js",
@@ -10,8 +7,8 @@
     "test": "jest",
     "test-dev": "jest --watch",
     "test-ci": "npm i -g lerna && lerna bootstrap && npm test",
-    "changelog": "auto-changelog --output CHANGELOG.md --commit-limit false",
-    "release-git": "bash release-git.sh"
+    "compile": "sh compile.sh",
+    "changelog": "auto-changelog --output CHANGELOG.md --commit-limit false"
   },
   "devDependencies": {
     "auto-changelog": "^1.7.1",
@@ -40,6 +37,8 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-jss": "^8.6.0",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
     "regenerator-runtime": "^0.11.1",
     "sinon": "^6.0.0",
     "webpack": "^4.12.1",
