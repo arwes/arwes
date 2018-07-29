@@ -1,9 +1,5 @@
 # gitignore
 
-##
-## BASE
-##
-
 node_modules
 jspm_packages
 bower_components
@@ -39,11 +35,4 @@ dump.rdb
 npm-debug.log
 yarn-error.log
 
-##
-## PROJECT
-##
-
-lib
-build
-site/api-components/*
-!site/api-components/.gitkeep
+lib/

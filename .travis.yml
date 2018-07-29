@@ -1,8 +1,8 @@
-script: npm test
+script: npm run test-ci
 language: node_js
 node_js:
-  - "6.0"
-  - "8.0"
+  - "8.11"
+  - "10.6"
 addons:
   chrome: stable
 sudo: required

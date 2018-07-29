@@ -1,0 +1,44 @@
+{
+  "name": "@arwes/arwes",
+  "version": "1.0.0-alpha.8",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for Web Apps",
+  "keywords": [
+    "arwes",
+    "ui",
+    "interfaces",
+    "futuristic",
+    "sci-fi",
+    "cyberpunk",
+    "high-tech",
+    "react",
+    "jss"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arwesjs/arwes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/arwesjs/arwes/issues"
+  },
+  "author": "Romel Pérez (romelperez.com)",
+  "license": "MIT",
+  "homepage": "https://arwesjs.org",
+  "main": "lib/index.js",
+  "dependencies": {
+    "@arwes/sounds": "^1.0.0-alpha.1",
+    "classnames": "^2.2.5",
+    "d3-path": "^1.0.5",
+    "d3-shape": "^1.2.0",
+    "detect-node": "^2.0.3",
+    "extend": "^3.0.1",
+    "polished": "^1.8.1",
+    "prismjs": "^1.8.4",
+    "prop-types": "*",
+    "react-jss": "^8.3.3",
+    "react-transition-group": "^2.2.1",
+    "theming": "^1.3.0"
+  }
+}
