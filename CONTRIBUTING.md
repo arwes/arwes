@@ -154,8 +154,7 @@ purpose, mostly for testing.
 
 ## Development
 
-This is a monorepo maintained with [lerna](https://lernajs.io) for bootstrapping,
-but we don't used it for publishing. Each package is published independently.
+This is a monorepo maintained with [lerna](https://lernajs.io).
 
 ### Install and setup
 
@@ -226,36 +225,31 @@ $ npm run playground
 
 ## Releasing
 
-Before releasing, please make sure all tests pass and code format and styles
-are ok.
-
-Lerna is not used for releasing.
-
-### NPM
-
-Each package has to be compiled and released to npm independently.
-
-In each package `/packages/[packageName]/` you wish to release, update their
-`package.json` versions accordingly and run:
+Before releasing, please make sure all tests pass, code format and styles are ok,
+and compile the packages:
 
 ```bash
+$ npm run test
+$ npm run format
 $ npm run compile
-$ npm run release
 ```
 
-### Git
-
-We use the `master` branch to release the packages. Other branches are used
-for development.
-
-To release to Git in GitHub, in the `master` branch, use the npm command:
+In the `master` branch, at root path, run lerna publishing command:
 
 ```bash
-$ npm run release-git
+$ lerna publish
 ```
 
-It will update the [CHANGELOG.md](./CHANGELOG.md) file, create a commit and
-a tag with the version of the `@arwes/arwes` package and push it to GitHub.
+Lerna will take care of publishing to NPM and adding a new git commit for the
+changes in the release.
+
+To update the [CHANGELOG.md](./CHANGELOG.md) file:
+
+```bash
+$ npm run changelog
+```
+
+And commit the changes.
 
 -------
 
