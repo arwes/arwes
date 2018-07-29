@@ -15,6 +15,7 @@ export default class Example extends React.Component {
           <Frame
             show={this.state.show}
             animate={true}
+            hover={true}
             level={3}
             corners={4}
             layer="primary"

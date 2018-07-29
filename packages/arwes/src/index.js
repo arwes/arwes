@@ -27,13 +27,8 @@ export ThemeProvider from './ThemeProvider';
 export withStyles from './tools/withStyles';
 export createTheme from './tools/createTheme';
 
-export SoundsProvider from './SoundsProvider';
-export withSounds from './tools/withSounds';
-export createSounds from './tools/createSounds';
-
 export createLoader from './tools/createLoader';
 export createResponsive from './tools/createResponsive';
-export createPlayer from './tools/createPlayer';
 
 import * as toolsUtils from './tools/utils';
 export const utils = toolsUtils;
