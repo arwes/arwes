@@ -225,12 +225,12 @@ $ npm run playground
 
 ## Releasing
 
-Before releasing, please make sure all tests pass, code format and styles are ok,
+Before releasing, please make sure code format and styles are ok, all tests pass,
 and compile the packages:
 
 ```bash
+$ npm run lint
 $ npm run test
-$ npm run format
 $ npm run compile
 ```
 
@@ -240,16 +240,12 @@ In the `master` branch, at root path, run lerna publishing command:
 $ lerna publish
 ```
 
-Lerna will take care of publishing to NPM and adding a new git commit for the
-changes in the release.
-
-To update the [CHANGELOG.md](./CHANGELOG.md) file:
+Lerna will take care of publishing to NPM but to update the git tag and update the
+changelog, you have to run:
 
 ```bash
-$ npm run changelog
+$ npm run release-git
 ```
-
-And commit the changes.
 
 -------
 

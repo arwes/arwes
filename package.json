@@ -8,6 +8,7 @@
     "test-dev": "jest --watch",
     "test-ci": "npm i -g lerna && lerna bootstrap && npm test",
     "compile": "sh compile.sh",
+    "release-git": "sh release-git.sh",
     "changelog": "auto-changelog --output CHANGELOG.md --commit-limit false"
   },
   "devDependencies": {
