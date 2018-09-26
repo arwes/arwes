@@ -41,6 +41,9 @@ animations, and sounds effects. The idea is to let you create realistic
 futuristic user experiences in your projects. The concepts behind are opinionated
 and try to inspire advanced space technology and alien influence.
 
+> **Due to medical reasons, the author has paused the project for a few months.
+But there are tons of ideas being cooked for the next iteration. Stay tuned!**
+
 > **Currently the project is under development with an alpha version available on
 npm. Modules and components are being tested and their API may change.**
 
