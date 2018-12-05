@@ -34,7 +34,7 @@ $ npm install --save arwes
 
 Images and sounds are not provided, if you want to use the implemented in the docs,
 download them from the static folder in the
-[repository in GitHub](https://github.com/romelperez/arwes).
+[repository in GitHub](https://github.com/romelperez/arwes) and copy them into the public folder (ex: `your-project/public/sound/ask.mp3`).
 
 Once installed, enter to the folder and empty the `src/index.js` to start
 from scratch.
