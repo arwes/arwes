@@ -7,11 +7,20 @@
 </p>
 
 <div align="center">
-  <a href="https://npmjs.org/package/@arwes/arwes">
-    <img src="https://img.shields.io/npm/v/@arwes/arwes.svg" alt="version" />
+  <a href="https://npmjs.org/package/arwes">
+    <img src="https://img.shields.io/npm/v/arwes.svg" alt="version" />
   </a>
   <a href="https://travis-ci.org/arwesjs/arwes">
     <img src="https://img.shields.io/travis/arwesjs/arwes.svg" alt="travis" />
+  </a>
+  <a href="https://npmjs.org/package/arwes">
+    <img src="https://img.shields.io/npm/dm/arwes.svg" alt="downloads" />
+  </a>
+  <a href="https://github.com/arwesjs/arwes">
+    <img src="https://img.shields.io/github/stars/arwesjs/arwes.svg?style=social&label=stars" alt="github stars" />
+  </a>
+  <a href="https://discord.gg/s5sbTkw">
+    <img src="https://img.shields.io/badge/chat-discord-blue.svg" alt="chat on discord">
   </a>
   <a href="https://github.com/arwesjs/arwes/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/arwesjs/arwes.svg?maxAge=2592000" alt="license" />
@@ -21,15 +30,6 @@
   </a>
   <a href="https://lernajs.io">
     <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="lerna" />
-  </a>
-  <a href="https://npmjs.org/package/@arwes/arwes">
-    <img src="https://img.shields.io/npm/dm/@arwes/arwes.svg" alt="downloads" />
-  </a>
-  <a href="https://github.com/arwesjs/arwes">
-    <img src="https://img.shields.io/github/stars/arwesjs/arwes.svg?style=social&label=stars" alt="github stars" />
-  </a>
-  <a href="https://discord.gg/s5sbTkw">
-    <img src="https://img.shields.io/badge/chat-discord-blue.svg" alt="chat on discord">
   </a>
 </div>
 
@@ -41,21 +41,24 @@ animations, and sounds effects. The idea is to let you create realistic
 futuristic user experiences in your projects. The concepts behind are opinionated
 and try to inspire advanced space technology and alien influence.
 
-> **Due to medical reasons, the author has paused the project for a few months.
-But there are tons of ideas being cooked for the next iteration. Stay tuned!**
+The project has a working version with the package [`arwes`](https://npmjs.org/package/arwes)
+and the documentation with the website [arwesjs.org](https://arwesjs.org).
+This is an _alpha_ release. Modules and components are being tested and their
+API may change. Check out the source code at
+**[`version1-breakpoint1`](https://github.com/arwesjs/arwes/tree/version1-breakpoint1)**
+branch where you can find the components and the website.
 
-> **Currently the project is under development with an alpha version available on
-npm. Modules and components are being tested and their API may change.**
-
-> **The website [arwesjs.org](https://arwesjs.org) works for the package `arwes`.
-Check out [arwes@1.0.0-alpha.5](https://github.com/arwesjs/arwes/tree/f318a66b889eb5525d78da10efafc67d5f619194)
-for working version. Current development is at the package `@arwes/arwes` which
-has major breaking changes.**
+Currently, the development is at [`master`](https://github.com/arwesjs/arwes) branch
+with the package [`@arwes/arwes`](https://npmjs.org/package/@arwes/arwes). It is
+not a working version yet. It has major breaking changes and it is going through
+many refactors. The website will be worked once the core new version is released
+in the repository [arwesjs.org repository](https://github.com/arwesjs/arwesjs.org).
+See Roadmap.
 
 ## Install
 
 ```bash
-$ npm install --save @arwes/arwes
+$ npm install --save arwes
 ```
 
 ## Documentation
@@ -80,22 +83,42 @@ This project has many sources of inspiration. Some of the main influences are:
 
 ## Guidelines
 
-Check out [Design, Animations, and Effects guidelines](./guidelines) for detailed
-information about the concepts behind Arwes.
+Check out [Arwes Guidelines](./guidelines) for detailed information about
+the concepts behind the framework.
+
+## Roadmap
+
+For 2018 the project was released in alpha versions where the main ideas have
+been tested out in real-world projects. Though many features are limited, have
+little support or extensibility. The plan was to gather enough insight to decide
+and build the foundation of the framework.
+
+For 2019 the plan is to work on the project by more granular sections. An ideal
+_beta release_ would be by the end of the year.
+
+- [x] Project definition
+- Guidelines
+    - [ ] Design guildelines
+    - [ ] Animation and Sound guildelines
+    - [ ] User Experience guildelines
+- Tools
+    - [ ] Design tools
+    - [ ] Animation tools
+    - [ ] Sounds tools
+    - [ ] Resources tools
+    - [ ] Platform tools
+- Components
+    - [ ] Content components
+    - [ ] Shape components
+    - [ ] Control components
+    - [ ] Navigation components
+
+The website will be worked on the [arwesjs.org repository](https://github.com/arwesjs/arwesjs.org).
 
 ## Want to contribute?
 
 See [how to contribute](https://github.com/arwesjs/arwes/blob/master/CONTRIBUTING.md).
 All contributions of any kind are welcome!
-
-## Roadmap
-
-- [x] Refactor project architecture
-- [ ] Define guidelines (In Progress)
-- [ ] Standardize core components
-- [ ] Add form components
-- [ ] Add navigation components
-- [ ] Best test coverege
 
 ## Contributors
 
@@ -110,7 +133,3 @@ Contributors END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors)
 specification.
-
-## License
-
-[MIT](./LICENSE)
