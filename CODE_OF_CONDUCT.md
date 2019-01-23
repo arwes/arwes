@@ -55,7 +55,7 @@ further defined and clarified by project maintainers.
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported by contacting the project team using a message at [@romelperez07](https://twitter.com/romelperez07).
+reported by contacting the project team using a message at [Discord](https://discordapp.com/channels/457381046497968128/457381046497968131).
 All complaints will be reviewed and investigated and will result in a response that
 is deemed necessary and appropriate to the circumstances. The project team is
 obligated to maintain confidentiality with regard to the reporter of an incident.
