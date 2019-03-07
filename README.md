@@ -35,14 +35,14 @@
 
 _______________
 
-[Arwes](https://arwesjs.org) is a web framework to build user interfaces
+[Arwes](https://arwes.dev) is a web framework to build user interfaces
 for web applications based on futuristic science fiction and cyberpunk styles,
 animations, and sounds effects. The idea is to let you create realistic
 futuristic user experiences in your projects. The concepts behind are opinionated
 and try to inspire advanced space technology and alien influence.
 
 The project has a working version with the package [`arwes`](https://npmjs.org/package/arwes)
-and the documentation with the website [arwesjs.org](https://arwesjs.org).
+and the documentation with the website [arwes.dev](https://arwes.dev).
 This is an _alpha_ release. Modules and components are being tested and their
 API may change. Check out the source code at
 **[`version1-breakpoint1`](https://github.com/arwesjs/arwes/tree/version1-breakpoint1)**
@@ -52,7 +52,7 @@ Currently, the development is at [`master`](https://github.com/arwesjs/arwes) br
 with the package [`@arwes/arwes`](https://npmjs.org/package/@arwes/arwes). It is
 not a working version yet. It has major breaking changes and it is going through
 many refactors. The website will be worked once the core new version is released
-in the repository [arwesjs.org repository](https://github.com/arwesjs/arwesjs.org).
+in the repository [arwes.dev repository](https://github.com/arwesjs/arwes.dev).
 See Roadmap.
 
 ## Install
@@ -63,7 +63,7 @@ $ npm install --save arwes
 
 ## Documentation
 
-See **[arwesjs.org](https://arwesjs.org)**.
+See **[arwes.dev](https://arwes.dev)**.
 
 ## Need help?
 
@@ -113,7 +113,7 @@ _beta release_ would be by the end of the year.
     - [ ] Control components
     - [ ] Navigation components
 
-The website will be worked on the [arwesjs.org repository](https://github.com/arwesjs/arwesjs.org).
+The website will be worked on the [arwes.dev repository](https://github.com/arwesjs/arwes.dev).
 
 ## Want to contribute?
 

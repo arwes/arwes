@@ -25,7 +25,7 @@
   },
   "author": "Romel Pérez (romelperez.com)",
   "license": "MIT",
-  "homepage": "https://arwesjs.org",
+  "homepage": "https://arwes.dev",
   "main": "lib/index.js",
   "dependencies": {
     "@arwes/sounds": "^1.0.0-alpha.1",
