@@ -97,6 +97,7 @@ For 2019 the plan is to work on the project by more granular sections. An ideal
 _beta release_ would be by the end of the year.
 
 - [x] Project definition
+- [ ] **Research and playground with [soulextract.com](https://github.com/soulextract/soulextract.com)**
 - Guidelines
     - [ ] Design guildelines
     - [ ] Animation and Sound guildelines
