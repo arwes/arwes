@@ -1,3 +1,5 @@
+/* eslint-env jest */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import Enzyme, { mount } from 'enzyme';
@@ -10,15 +12,15 @@ import withSounds from './index';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('withSounds()', () => {
-  it('Should return a function', () => {
+  test('Should return a function', () => {
     const actual = withSounds();
     expect(typeof actual).toBe('function');
   });
 
-  it('Should set final component displayName', () => {
+  test('Should set final component displayName', () => {
     class MyComp {
       displayName = 'MyComp';
-      render() {
+      render () {
         return <div />;
       }
     }
@@ -26,22 +28,22 @@ describe('withSounds()', () => {
     expect(actual.displayName).toBe('Sounds(MyComp)');
   });
 
-  it('Should create a component with sounds by provider', () => {
+  test('Should create a component with sounds by provider', () => {
     const render = jest.fn();
     const sounds = { a: 1, b: 2 };
     class Provider extends React.Component {
       static childContextTypes = {
         sounds: PropTypes.object
       };
-      getChildContext() {
+      getChildContext () {
         return { sounds };
       }
-      render() {
-        return this.props.children;
+      render () {
+        return this.props.children; // eslint-disable-line react/prop-types
       }
     }
     const MyComp = props => {
-      expect(props.sounds).toBe(sounds);
+      expect(props.sounds).toBe(sounds); // eslint-disable-line react/prop-types
       render();
       return <div />;
     };
@@ -55,21 +57,21 @@ describe('withSounds()', () => {
     expect(render).toHaveBeenCalled();
   });
 
-  it('Should create a component without default sounds', () => {
+  test('Should create a component without default sounds', () => {
     const sounds = { a: 1, b: 2 };
     class Provider extends React.Component {
       static childContextTypes = {
         sounds: PropTypes.object
       };
-      getChildContext() {
+      getChildContext () {
         return { sounds };
       }
-      render() {
-        return this.props.children;
+      render () {
+        return this.props.children; // eslint-disable-line react/prop-types
       }
     }
     const MyComp = props => {
-      expect(props.sounds).toBe(sounds);
+      expect(props.sounds).toBe(sounds); // eslint-disable-line react/prop-types
       return <div />;
     };
     MyComp.defaultProps = {
@@ -84,7 +86,7 @@ describe('withSounds()', () => {
     );
   });
 
-  it('Should work properly with another HOC (react-redux)', () => {
+  test('Should work properly with another HOC (react-redux)', () => {
     const state = 100;
     const reducer = () => state;
     const store = redux.createStore(reducer);
@@ -94,16 +96,16 @@ describe('withSounds()', () => {
       static childContextTypes = {
         sounds: PropTypes.object
       };
-      getChildContext() {
+      getChildContext () {
         return { sounds };
       }
-      render() {
-        return this.props.children;
+      render () {
+        return this.props.children; // eslint-disable-line react/prop-types
       }
     }
     const MyComp = props => {
-      expect(props.data).toBe(state);
-      expect(props.sounds).toBe(sounds);
+      expect(props.data).toBe(state); // eslint-disable-line react/prop-types
+      expect(props.sounds).toBe(sounds); // eslint-disable-line react/prop-types
       return <div />;
     };
 

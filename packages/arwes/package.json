@@ -16,19 +16,22 @@
     "react",
     "jss"
   ],
+  "homepage": "https://arwes.dev",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arwesjs/arwes.git"
+    "url": "git+https://github.com/arwes/arwes.git"
   },
   "bugs": {
-    "url": "https://github.com/arwesjs/arwes/issues"
+    "url": "https://github.com/arwes/arwes/issues"
   },
-  "author": "Romel Pérez (romelperez.com)",
   "license": "MIT",
-  "homepage": "https://arwes.dev",
+  "files": [
+    "lib"
+  ],
   "main": "lib/index.js",
   "dependencies": {
     "@arwes/sounds": "^1.0.0-alpha.1",
+    "@babel/runtime": "^7.4.3",
     "classnames": "^2.2.5",
     "d3-path": "^1.0.5",
     "d3-shape": "^1.2.0",
@@ -40,5 +43,8 @@
     "react-jss": "^8.3.3",
     "react-transition-group": "^2.2.1",
     "theming": "^1.3.0"
+  },
+  "peerDependencies": {
+    "react": "16.x"
   }
 }

@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Compile all the specified packages JavaScript source code with Babel.
+# They compile from "packages/[name]/src" to "packages/[name]/lib".
+
 alias babel='./node_modules/.bin/babel'
 
 log() {
@@ -10,7 +13,7 @@ build() {
   log "\nCompiling $1..."
   NODE_ENV=production
   rm -rf ./packages/$1/lib/
-  babel ./packages/$1/src --out-dir ./packages/$1/lib/ --ignore '*.test.js'
+  babel --config-file ./babel.config.js --ignore ./packages/**/*.test.js --verbose ./packages/$1/src/ --out-dir ./packages/$1/lib/
 }
 
 log "Compiling Arwes packages."

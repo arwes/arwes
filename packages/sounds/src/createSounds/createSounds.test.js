@@ -1,13 +1,15 @@
+/* eslint-env jest */
+
 import createSounds, { SOUNDS_DEFAULT } from './createSounds';
 
 describe('createSounds()', () => {
-  it('Should return default values when no settings were provided', () => {
+  test('Should return default values when no settings were provided', () => {
     const actual = createSounds();
     const expected = SOUNDS_DEFAULT;
     expect(actual).toEqual(expected);
   });
 
-  it('Should return extended settings when provided', () => {
+  test('Should return extended settings when provided', () => {
     const actual = createSounds({
       galaxy: 50,
       shared: {

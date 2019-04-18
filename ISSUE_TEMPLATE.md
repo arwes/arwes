@@ -4,18 +4,19 @@ Describe your issue here.
 
 ### Your environment
 
-- Which browser and its version is affected.
-- Which node and npm are used.
+- OS versions.
+- Browser versions.
+- Node.js and NPM versions.
 
 ### Steps to reproduce
 
 Tell us how to reproduce this issue. Please provide a working demo, for example
 using [plnkr.co](http://next.plnkr.co).
 
-### Expected behaviour
+### Expected behavior
 
 Tell us what should happen.
 
-### Actual behaviour
+### Actual behavior
 
 Tell us what happens instead.

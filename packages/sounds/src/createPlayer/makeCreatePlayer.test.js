@@ -1,21 +1,23 @@
+/* eslint-env jest */
+
 import makeCreatePlayer from './makeCreatePlayer';
 
 describe('makeCreatePlayer()', () => {
-  it('Should return a function', () => {
+  test('Should return a function', () => {
     const createPlayer = makeCreatePlayer({});
     expect(typeof createPlayer).toBe('function');
   });
 
-  it('Should create a player with default config', () => {
+  test('Should create a player with default config', () => {
     class Howl {}
     const createPlayer = makeCreatePlayer({ Howl });
     const player = createPlayer();
     expect(player instanceof Howl).toBeTruthy();
   });
 
-  it('Should create a player sound with config', () => {
+  test('Should create a player sound with config', () => {
     class Howl {
-      constructor(config) {
+      constructor (config) {
         this.config = config;
       }
     }
@@ -27,11 +29,11 @@ describe('makeCreatePlayer()', () => {
     expect(player.config).toBe(sound);
   });
 
-  it('Should create a player to play the sound only once a time', () => {
+  test('Should create a player to play the sound only once a time', () => {
     const play = jest.fn().mockReturnValue(100);
     const stop = jest.fn();
     class Howl {
-      constructor() {
+      constructor () {
         this.play = play;
         this.stop = stop;
       }

@@ -1,5 +1,3 @@
-import extend from 'extend';
-
 export const SOUNDS_DEFAULT = {
   shared: {
     preload: true,
@@ -8,6 +6,13 @@ export const SOUNDS_DEFAULT = {
   players: {}
 };
 
-export default function createSounds(overwrite) {
-  return extend(true, {}, SOUNDS_DEFAULT, overwrite);
+export default function createSounds (overwrite = {}) {
+  return {
+    ...SOUNDS_DEFAULT,
+    ...overwrite,
+    shared: {
+      ...SOUNDS_DEFAULT.shared,
+      ...overwrite.shared
+    }
+  };
 }

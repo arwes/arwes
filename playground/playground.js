@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import Navigo from 'navigo';
 
@@ -14,15 +15,15 @@ const sounds = createSounds({
   shared: { volume: 1 },
   players: {
     click: {
-      sound: { src: ['/sound/click.mp3'] },
+      sound: { src: ['/sounds/click.mp3'] },
       settings: { oneAtATime: true }
     },
     typing: {
-      sound: { src: ['/sound/typing.mp3'] },
+      sound: { src: ['/sounds/typing.mp3'] },
       settings: { oneAtATime: true }
     },
     deploy: {
-      sound: { src: ['/sound/deploy.mp3'] },
+      sound: { src: ['/sounds/deploy.mp3'] },
       settings: { oneAtATime: true }
     }
   }
@@ -96,7 +97,11 @@ const styles = {
 };
 
 class PlaygroundSource extends React.Component {
-  constructor() {
+  static propTypes = {
+    classes: PropTypes.object.isRequired
+  };
+
+  constructor () {
     super(...arguments);
 
     this.state = {
@@ -104,7 +109,7 @@ class PlaygroundSource extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.router = new Navigo(null, true);
 
     this.router.on('/', () => {
@@ -123,7 +128,7 @@ class PlaygroundSource extends React.Component {
     this.router.navigate(sandboxName);
   };
 
-  render() {
+  render () {
     const { classes } = this.props;
     const { sandboxName } = this.state;
 
@@ -138,7 +143,7 @@ class PlaygroundSource extends React.Component {
             value={sandboxName}
             onChange={this.onChange}
           >
-            <option value="">-- Select component --</option>
+            <option value=''>-- Select component --</option>
             {sandboxes.map((item, index) => (
               <option key={index} value={item.name}>
                 {item.name}

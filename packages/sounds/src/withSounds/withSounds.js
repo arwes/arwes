@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 
-export default function withSounds() {
+export default function withSounds () {
   return Inner => {
     const displayName = Inner.displayName || Inner.name || 'Component';
 
@@ -16,7 +16,7 @@ export default function withSounds() {
         sounds: PropTypes.object
       };
 
-      render() {
+      render () {
         const { props, context } = this;
         return <Inner sounds={context.sounds} {...props} />;
       }

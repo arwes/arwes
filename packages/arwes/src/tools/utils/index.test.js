@@ -29,7 +29,7 @@ describe('Utils', function() {
     });
 
     it('Should return resource string when it was the only provided', function() {
-      const resource = '/static/img/path.png';
+      const resource = '/static/images/path.png';
       const actual = getResponsiveResource(resource);
       const expected = resource;
       expect(actual).toBe(expected);

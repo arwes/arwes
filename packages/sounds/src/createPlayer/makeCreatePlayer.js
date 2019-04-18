@@ -1,5 +1,5 @@
-export default function makeCreatePlayer({ Howl }) {
-  return function createPlayer(conf) {
+export default function makeCreatePlayer ({ Howl }) {
+  return function createPlayer (conf) {
     const { sound = {}, settings = {} } = conf || {};
     const player = new Howl(sound);
 
@@ -8,7 +8,7 @@ export default function makeCreatePlayer({ Howl }) {
     if (settings.oneAtATime) {
       const play = player.play.bind(player);
       let lastPlay;
-      player.play = function(...args) {
+      player.play = function (...args) {
         if (lastPlay) {
           this.stop(lastPlay);
         }

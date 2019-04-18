@@ -1,4 +1,5 @@
 const path = require('path');
+const babelConfig = require('./babel.config');
 
 module.exports = {
   mode: 'development',
@@ -14,14 +15,7 @@ module.exports = {
         exclude: /(node_modules)/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['es2015', 'react'],
-            plugins: [
-              'transform-object-rest-spread',
-              'transform-class-properties',
-              'transform-export-extensions'
-            ]
-          }
+          options: babelConfig
         }
       }
     ]

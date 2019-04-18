@@ -1,29 +1,34 @@
 {
   "name": "@arwes/sounds",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.8",
   "publishConfig": {
     "access": "public"
   },
-  "description": "Arwes Sounds Tools",
+  "description": "Arwes Sound Tools",
   "keywords": [
     "arwes",
     "sounds",
     "react"
   ],
+  "homepage": "https://arwes.dev",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arwesjs/arwes.git"
+    "url": "git+https://github.com/arwes/arwes.git"
   },
   "bugs": {
-    "url": "https://github.com/arwesjs/arwes/issues"
+    "url": "https://github.com/arwes/arwes/issues"
   },
-  "author": "Romel Pérez (romelperez.com)",
   "license": "MIT",
-  "homepage": "https://arwes.dev",
+  "files": [
+    "lib"
+  ],
   "main": "lib/index.js",
   "dependencies": {
-    "extend": "^3.0.2",
-    "hoist-non-react-statics": "^3.0.0-rc.1",
-    "howler": "^2.0.14"
+    "@babel/runtime": "^7.4.3",
+    "hoist-non-react-statics": "^3.3.0",
+    "howler": "^2.1.1"
+  },
+  "peerDependencies": {
+    "react": "16.x"
   }
 }

@@ -1,3 +1,5 @@
+/* eslint-env jest */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import Enzyme, { mount } from 'enzyme';
@@ -7,8 +9,8 @@ import SoundsProvider from './SoundsProvider';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('SoundsProvider', function() {
-  it('Should render children as they come', function() {
+describe('SoundsProvider', () => {
+  test('Should render children as they come', () => {
     const sounds = { shared: {}, players: {} };
     const createPlayer = () => null;
     const el = mount(
@@ -22,7 +24,7 @@ describe('SoundsProvider', function() {
     expect(actual).toBe(expected);
   });
 
-  it('Should be able to create a sounds provider', function() {
+  test('Should be able to create a sounds provider', () => {
     const sounds = { shared: {}, players: { click: {} } };
     class Howl {}
     const createPlayer = () => new Howl();
@@ -31,7 +33,7 @@ describe('SoundsProvider', function() {
       static contextTypes = {
         sounds: PropTypes.object
       };
-      render() {
+      render () {
         expect(this.context.sounds.click).toBeTruthy();
         expect(this.context.sounds.click instanceof Howl).toBeTruthy();
         return <div />;
@@ -45,13 +47,13 @@ describe('SoundsProvider', function() {
     );
   });
 
-  it('Should be able to define players with shared config', function() {
+  test('Should be able to define players with shared config', () => {
     const sounds = {
       shared: { volume: 0.75 },
       players: { click: { sound: { loop: true } } }
     };
     class Howl {
-      constructor(config) {
+      constructor (config) {
         this.config = config;
       }
     }
@@ -61,7 +63,7 @@ describe('SoundsProvider', function() {
       static contextTypes = {
         sounds: PropTypes.object
       };
-      render() {
+      render () {
         expect(this.context.sounds.click.config).toEqual({
           volume: 0.75,
           loop: true

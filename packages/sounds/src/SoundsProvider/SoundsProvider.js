@@ -6,7 +6,8 @@ import createPlayerModule from '../createPlayer';
 export default class SoundsProvider extends React.Component {
   static propTypes = {
     sounds: PropTypes.object.isRequired,
-    createPlayer: PropTypes.func.isRequired
+    createPlayer: PropTypes.func.isRequired,
+    children: PropTypes.any
   };
 
   static defaultProps = {
@@ -17,7 +18,7 @@ export default class SoundsProvider extends React.Component {
     sounds: PropTypes.object
   };
 
-  getChildContext() {
+  getChildContext () {
     const { sounds, createPlayer } = this.props;
     const { shared, players } = sounds;
 
@@ -38,7 +39,7 @@ export default class SoundsProvider extends React.Component {
     return { sounds: soundsPlayers };
   }
 
-  render() {
+  render () {
     return React.Children.only(this.props.children);
   }
 }
