@@ -2,14 +2,19 @@
   "scripts": {
     "postinstall": "npm run bootstrap && npm run compile",
     "bootstrap": "lerna bootstrap",
+    "clean": "lerna clean",
     "playground": "webpack-dev-server --config playground.config.js",
     "lint": "eslint ./packages/*/src",
     "test": "jest",
     "test-dev": "jest --watch",
+    "test-cov": "jest --coverage",
+    "test-list": "jest --listTests",
     "test-ci": "npm run bootstrap && npm run compile && npm run lint && npm test",
     "compile": "sh compile.sh",
     "release": "npm run test-ci && lerna publish",
-    "changelog": "auto-changelog --output CHANGELOG.md --commit-limit false"
+    "changelog": "auto-changelog --output CHANGELOG.md --commit-limit false",
+    "contributors-add": "all-contributors add",
+    "contributors-generate": "all-contributors generate"
   },
   "husky": {
     "hooks": {
@@ -25,6 +30,7 @@
     "@babel/preset-env": "^7.4.2",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.4.2",
+    "all-contributors-cli": "^6.3.1",
     "auto-changelog": "^1.12.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^8.2.6",

@@ -1,0 +1,37 @@
+{
+  "projectName": "arwes",
+  "projectOwner": "arwes",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "romelperez",
+      "name": "Romel Pérez",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1393135?v=4",
+      "profile": "https://RomelPerez.com",
+      "contributions": [
+        "projectManagement",
+        "code",
+        "doc",
+        "question"
+      ]
+    },
+    {
+      "login": "njwest",
+      "name": "Nick West 眨眼龙",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/3742496?v=4",
+      "profile": "https://nickwe.st",
+      "contributions": [
+        "doc",
+        "ideas"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
