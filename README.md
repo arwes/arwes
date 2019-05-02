@@ -65,28 +65,38 @@ See [Roadmap](./ROADMAP.md) for more details.
 
 ### [`@arwes/arwes`](https://www.npmjs.com/package/@arwes/arwes)
 
-<img src="https://img.shields.io/npm/dm/@arwes/arwes.svg" alt="downloads" />
-<img alt="npm bundle size (version)" src="https://img.shields.io/bundlephobia/minzip/@arwes/arwes/1.0.0-alpha.9.svg">
+<div>
+    <img src="https://img.shields.io/npm/dm/@arwes/arwes.svg" alt="downloads" />
+    <img alt="npm bundle size (version)" src="https://img.shields.io/bundlephobia/minzip/@arwes/arwes/1.0.0-alpha.9.svg">
+</div>
 
 ### [`@arwes/sounds`](https://www.npmjs.com/package/@arwes/sounds)
 
-<img src="https://img.shields.io/npm/dm/@arwes/sounds.svg" alt="downloads" />
-<img alt="npm bundle size (version)" src="https://img.shields.io/bundlephobia/minzip/@arwes/sounds/1.0.0-alpha.9.svg">
+<div>
+    <img src="https://img.shields.io/npm/dm/@arwes/sounds.svg" alt="downloads" />
+    <img alt="npm bundle size (version)" src="https://img.shields.io/bundlephobia/minzip/@arwes/sounds/1.0.0-alpha.9.svg">
+</div>
 
 ### [`@arwes/animation`](https://www.npmjs.com/package/@arwes/animation)
 
-<img src="https://img.shields.io/npm/dm/@arwes/animation.svg" alt="downloads" />
-<img alt="npm bundle size (version)" src="https://img.shields.io/bundlephobia/minzip/@arwes/animation/1.0.0-alpha.9.svg">
+<div>
+    <img src="https://img.shields.io/npm/dm/@arwes/animation.svg" alt="downloads" />
+    <img alt="npm bundle size (version)" src="https://img.shields.io/bundlephobia/minzip/@arwes/animation/1.0.0-alpha.9.svg">
+</div>
 
 ### [`@arwes/design`](https://www.npmjs.com/package/@arwes/design)
 
-<img src="https://img.shields.io/npm/dm/@arwes/design.svg" alt="downloads" />
-<img alt="npm bundle size (version)" src="https://img.shields.io/bundlephobia/minzip/@arwes/design/1.0.0-alpha.9.svg">
+<div>
+    <img src="https://img.shields.io/npm/dm/@arwes/design.svg" alt="downloads" />
+    <img alt="npm bundle size (version)" src="https://img.shields.io/bundlephobia/minzip/@arwes/design/1.0.0-alpha.9.svg">
+</div>
 
 ### [`@arwes/platform`](https://www.npmjs.com/package/@arwes/platform)
 
-<img src="https://img.shields.io/npm/dm/@arwes/platform.svg" alt="downloads" />
-<img alt="npm bundle size (version)" src="https://img.shields.io/bundlephobia/minzip/@arwes/platform/1.0.0-alpha.9.svg">
+<div>
+    <img src="https://img.shields.io/npm/dm/@arwes/platform.svg" alt="downloads" />
+    <img alt="npm bundle size (version)" src="https://img.shields.io/bundlephobia/minzip/@arwes/platform/1.0.0-alpha.9.svg">
+</div>
 
 ## Documentation
 
