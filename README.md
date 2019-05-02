@@ -28,9 +28,6 @@
 </div>
 
 <div align="center">
-    <a href="https://npmjs.org/package/@arwes/arwes">
-        <img src="https://img.shields.io/npm/dm/@arwes/arwes.svg" alt="downloads" />
-    </a>
     <a href="https://github.com/arwes/arwes">
         <img src="https://img.shields.io/github/stars/arwes/arwes.svg?style=social&label=stars" alt="github stars" />
     </a>
@@ -63,6 +60,33 @@ not a working version yet. It has major breaking changes and it is going through
 many refactors. The website will be worked on once the core new version is released
 in the repository [arwes.dev repository](https://github.com/arwes/arwes.dev).
 See [Roadmap](./ROADMAP.md) for more details.
+
+## Packages
+
+### [`@arwes/arwes`](https://www.npmjs.com/package/@arwes/arwes)
+
+<img src="https://img.shields.io/npm/dm/@arwes/arwes.svg" alt="downloads" />
+<img alt="npm bundle size (version)" src="https://img.shields.io/bundlephobia/minzip/@arwes/arwes/1.0.0-alpha.9.svg">
+
+### [`@arwes/sounds`](https://www.npmjs.com/package/@arwes/sounds)
+
+<img src="https://img.shields.io/npm/dm/@arwes/sounds.svg" alt="downloads" />
+<img alt="npm bundle size (version)" src="https://img.shields.io/bundlephobia/minzip/@arwes/sounds/1.0.0-alpha.9.svg">
+
+### [`@arwes/animation`](https://www.npmjs.com/package/@arwes/animation)
+
+<img src="https://img.shields.io/npm/dm/@arwes/animation.svg" alt="downloads" />
+<img alt="npm bundle size (version)" src="https://img.shields.io/bundlephobia/minzip/@arwes/animation/1.0.0-alpha.9.svg">
+
+### [`@arwes/design`](https://www.npmjs.com/package/@arwes/design)
+
+<img src="https://img.shields.io/npm/dm/@arwes/design.svg" alt="downloads" />
+<img alt="npm bundle size (version)" src="https://img.shields.io/bundlephobia/minzip/@arwes/design/1.0.0-alpha.9.svg">
+
+### [`@arwes/platform`](https://www.npmjs.com/package/@arwes/platform)
+
+<img src="https://img.shields.io/npm/dm/@arwes/platform.svg" alt="downloads" />
+<img alt="npm bundle size (version)" src="https://img.shields.io/bundlephobia/minzip/@arwes/platform/1.0.0-alpha.9.svg">
 
 ## Documentation
 

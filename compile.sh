@@ -20,5 +20,8 @@ log "Compiling Arwes packages."
 
 build "arwes"
 build "sounds"
+build "animation"
+build "design"
+build "platform"
 
 log "\nCompilation completed."
