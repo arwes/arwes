@@ -4,6 +4,7 @@ An ideal Arwes project _beta_ release would be for **2020 Q1**.
 
 - The order in the lists don't represent priority.
 - Active items are represented with **bold**.
+- Specifications tasks are listed in [the project boards](https://github.com/arwes/arwes/projects).
 
 ----
 
