@@ -39,7 +39,7 @@
     </a>
 </div>
 
-_______________
+----
 
 [Arwes](https://arwes.dev) is a web framework to build user interfaces
 for web applications based on futuristic science fiction and cyberpunk styles,
@@ -63,48 +63,80 @@ See [Roadmap](./ROADMAP.md) for more details.
 
 ## Packages
 
-### [`@arwes/arwes`](https://www.npmjs.com/package/@arwes/arwes)
+### Functional
+
+The main functionalities which power the UI component system.
+
+#### [`@arwes/design`](./packages/design)
 
 <div>
-    <img src="https://img.shields.io/npm/dm/@arwes/arwes.svg" alt="downloads" />
-    <img alt="npm bundle size (version)" src="https://img.shields.io/bundlephobia/minzip/@arwes/arwes/1.0.0-alpha.9.svg">
-</div>
-
-### [`@arwes/sounds`](https://www.npmjs.com/package/@arwes/sounds)
-
-<div>
-    <img src="https://img.shields.io/npm/dm/@arwes/sounds.svg" alt="downloads" />
-    <img alt="npm bundle size (version)" src="https://img.shields.io/bundlephobia/minzip/@arwes/sounds/1.0.0-alpha.9.svg">
-</div>
-
-### [`@arwes/animation`](https://www.npmjs.com/package/@arwes/animation)
-
-<div>
-    <img src="https://img.shields.io/npm/dm/@arwes/animation.svg" alt="downloads" />
-    <img alt="npm bundle size (version)" src="https://img.shields.io/bundlephobia/minzip/@arwes/animation/1.0.0-alpha.9.svg">
-</div>
-
-### [`@arwes/design`](https://www.npmjs.com/package/@arwes/design)
-
-<div>
+    <img src="https://img.shields.io/badge/status-in%20concept-999999.svg" alt="status">
     <img src="https://img.shields.io/npm/dm/@arwes/design.svg" alt="downloads" />
-    <img alt="npm bundle size (version)" src="https://img.shields.io/bundlephobia/minzip/@arwes/design/1.0.0-alpha.9.svg">
 </div>
 
-### [`@arwes/platform`](https://www.npmjs.com/package/@arwes/platform)
+Tools to use [JSS](https://cssinjs.org) with React components.
+
+#### [`@arwes/animation`](./packages/animation)
 
 <div>
-    <img src="https://img.shields.io/npm/dm/@arwes/platform.svg" alt="downloads" />
-    <img alt="npm bundle size (version)" src="https://img.shields.io/bundlephobia/minzip/@arwes/platform/1.0.0-alpha.9.svg">
+    <img src="https://img.shields.io/badge/status-in%20concept-999999.svg" alt="status">
+    <img src="https://img.shields.io/npm/dm/@arwes/animation.svg" alt="downloads" />
 </div>
+
+Assemble and disassemble user interfaces using animations from React components.
+
+#### [`@arwes/sounds`](./packages/sounds)
+
+<div>
+    <img src="https://img.shields.io/badge/status-in%20planning-blue.svg" alt="status">
+    <img src="https://img.shields.io/npm/dm/@arwes/sounds.svg" alt="downloads" />
+</div>
+
+Define, manage and control interactive sound effects from React components.
+
+#### [`@arwes/platform`](./packages/platform)
+
+<div>
+    <img src="https://img.shields.io/badge/status-in%20concept-999999.svg" alt="status">
+    <img src="https://img.shields.io/npm/dm/@arwes/platform.svg" alt="downloads" />
+</div>
+
+Resource loading, responsive control, and general browser API tools.
+
+#### [`@arwes/core`](./packages/core)
+
+<div>
+    <img src="https://img.shields.io/badge/status-in%20concept-999999.svg" alt="status">
+    <img src="https://img.shields.io/npm/dm/@arwes/core.svg" alt="downloads" />
+</div>
+
+Core UI React components.
+
+### Design
+
+Using the core functionalities and based on the guidelines, these are
+design system or design component implementations.
+
+#### [`@arwes/arwes`](./packages/arwes)
+
+<div>
+    <img src="https://img.shields.io/badge/status-in%20concept-999999.svg" alt="status">
+    <img src="https://img.shields.io/npm/dm/@arwes/arwes.svg" alt="downloads" />
+</div>
+
+Arwes design system React components.
 
 ## Documentation
 
-See **[arwes.dev](https://arwes.dev)**.
+**[arwes.dev](https://arwes.dev)** is for version `1.0.0-alpha.5`.
+
+Latest version is a currently a work in progress.
 
 ## Need help?
 
 Open [a GitHub issue](https://github.com/arwes/arwes/issues/new) or let's chat on [Discord](https://discord.gg/s5sbTkw).
+
+Review [Frequently Asked Questions](./FAQ.md).
 
 Also, read the [project code of conduct](./CODE_OF_CONDUCT.md).
 

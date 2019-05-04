@@ -12,6 +12,29 @@ An ideal Arwes project _beta_ release would be for **2020 Q1**.
 
 A stable version is expected to be released anytime in **2020**.
 
+See [roadmap](./ROADMAP.md) for more details.
+
+## What is the status of the development?
+
+Arwes is being worked on packages. The functional packages can be developed
+in parallel, except for `@arwes/core` which depends on the other functional
+ones.
+
+The guidelines are the main concepts used for all design implementations and
+can be worked in parallel with the functional packages.
+
+Once the functional packages and the guidelines are ready, the `@arwes/arwes`
+package can be started. And later the documentation and the website.
+
+In the packages information there is a badge indicating its status.
+
+- In Concept: The package is not yet specified.
+- In Planning: The package is in definition and specification.
+- In Development: The package is currently on development.
+- In Production: The package is ready for use.
+
+See [roadmap](./ROADMAP.md) for more details.
+
 ## [arwes.dev](https://arwes.dev) website is outdated and where is the source code?
 
 Currently, the website shows the documentation for **Arwes v1.0.0-alpha.5** with
