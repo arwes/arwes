@@ -33,7 +33,7 @@ depth.
 When a system transitions out, all elements regardless of their level of depth,
 should start transitioning out at the same time and should take the same duration.
 
-## Persisting
+## Persistency
 
 In a system, once it is created and shown, it can run randomly subtle passive
 animations on its elements every dozen seconds with very optional sounds.
