@@ -1,6 +1,6 @@
 # Roadmap
 
-An ideal Arwes project _beta_ release would be for the **2020 Q1**.
+An ideal Arwes project _beta_ release would be for **2020 Q1**.
 
 - The order in the lists don't represent priority.
 - Active items are represented with **bold**.
@@ -10,9 +10,9 @@ An ideal Arwes project _beta_ release would be for the **2020 Q1**.
 ## 2014 - 2018
 
 From 2014 to 2018 the project was released in alpha versions where the main
-ideas have been tested out in real-world projects. Though many features were
-limited, have little support / extensibility, or buggy. The plan was to
-gather enough insight to decide and build the foundation of the framework.
+ideas have been tested out in projects. Though many features were limited, have
+little support / extensibility, or buggy. The plan was to gather enough insight
+to decide and build the foundation of the framework.
 
 ----
 
@@ -20,34 +20,37 @@ gather enough insight to decide and build the foundation of the framework.
 
 ### Q1
 
-- [x] Project re-definition
+- [x] Project definition
 - [x] Project setup
 - [x] Research and playground with [soulextract.com](https://github.com/soulextract/soulextract.com)
 
 ### Q2
 
-- Tools
-    - [ ] **Sounds tools**
-    - [ ] Animation tools
-- Guidelines
-    - [ ] Animation and Sound guildelines
+- [ ] **2019 Q2 Specifications**
+- [ ] Contribution guidelines update
+- [ ] Animation and Sound guidelines
+- [ ] `@arwes/sounds`
+- [ ] `@arwes/animation`
 
 ### Q3
 
-- Tools
-    - [ ] Design tools
-    - [ ] Resources tools
-    - [ ] Platform tools
+- [ ] 2019 Q3 Specifications
+- [ ] Design guidelines
+- [ ] User Experience guidelines
+- [ ] `@arwes/design`
+- [ ] `@arwes/platform`
 
 ### Q4
 
-- Guidelines
-    - [ ] Design guildelines
-    - [ ] User Experience guildelines
-- Components
-    - [ ] Content components
-    - [ ] Shape components
-    - [ ] Control components
+- [ ] 2019 Q4 Specifications
+- [ ] `@arwes/core`
+    - [ ] Text component
+    - [ ] Link component
+- [ ] `@arwes/arwes`
+    - [ ] Frame/Container/Structure components
+    - [ ] Static/Content components
+    - [ ] Shape/Icon components
+    - [ ] Control/Form components
     - [ ] Navigation components
 
 ----
@@ -55,3 +58,7 @@ gather enough insight to decide and build the foundation of the framework.
 ## 2020
 
 ### Q1
+
+- [ ] 2020 Q1 Specifications
+- [ ] Documentation
+- [ ] Website

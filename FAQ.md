@@ -50,6 +50,10 @@ technologies.
 Though the project may offer support for other environments in major future
 versions.
 
+You can use tools to embed the web apps into other environments such as
+mobile with [Apache Cordova](https://cordova.apache.org) or [Electron](https://electronjs.org)
+in desktop, or simply make it a [PWA](https://developers.google.com/web/progressive-web-apps).
+
 ## What about Arwes for AR/VR?
 
 Since we can build AR/VR apps for the web, Arwes can be used for such projects.
@@ -80,16 +84,16 @@ Read more:
 - [CSS in JavaScript with JSS and React](https://medium.com/jobsity/css-in-javascript-with-jss-and-react-54cdd2720222).
 - Check how [material-ui](https://material-ui.com) (the world's most popular UI React framework) uses JSS for its [customization](https://material-ui.com/customization/css-in-js) strategy.
 
-## What about SSR or the JAMStack?
+## What about SSR or the [JAMstack](https://jamstack.org)?
 
 Arwes is built in tools that can be easily setup for server-side rendering (SSR)
-or used as static generated markup/JavaScript sites as the [JAMStack](https://jamstack.org),
+or used as static generated markup/JavaScript sites as the [JAMstack](https://jamstack.org),
 so definitely you can use Arwes with [Gatsby](http://gatsbyjs.org) or [Next](https://nextjs.org).
 
 But Arwes requires a few more setup steps to make it work for such requirements
 due to its design, sound and animation systems.
 
-There is a plan to document complete examples in the [roadmap](./ROADMAP.md).
+There is a plan to document complete examples.
 
 ## Can I build SEO-friendly sites with Arwes?
 
@@ -97,4 +101,9 @@ Arwes is a framework with rich sound and animations effects so there are a few
 extra considerations to take for SEO sites/apps. But definitely, the sites built
 with Arwes can be SEO-friendly.
 
-There is a plan to document these in the [roadmap](./ROADMAP.md).
+There is a plan to document these.
+
+## Is there a plan to build grid tools?
+
+An idea is to create an implementation of a grid system in flexbox with JSS.
+It is still in definition not yet confirmed.
