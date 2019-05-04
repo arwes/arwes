@@ -9,6 +9,11 @@ import { getResponsiveResource } from '../tools/utils';
 import createLoaderModule from '../tools/createLoader';
 import createResponsiveModule from '../tools/createResponsive';
 
+// TODO:
+// - Set sizing props (loading should adjust)
+// - Allow style and props customization for deep elements like the Loading.
+// - Filters (set a image filter over the photo).
+
 export default class Image extends Component {
   static propTypes = {
     Animation: PropTypes.any.isRequired,

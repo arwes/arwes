@@ -1,6 +1,9 @@
 import isNode from 'detect-node';
 import getDimensions from '../get-dimensions';
 
+// TODO: There should be a way to define the default viewport size when rendering
+// from server-side or any other env.
+
 /**
  * Create a handler for responsive functionalities.
  * @param  {Object} depencencies - Depencencies.

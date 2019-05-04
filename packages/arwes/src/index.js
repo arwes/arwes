@@ -1,3 +1,8 @@
+// TODO:
+// - Proposal / Global Settings:
+//   - Color layers
+//   - Default viewport (1024px)
+
 export Arwes from './Arwes';
 export Words from './Words';
 export Heading from './Heading';

@@ -7,6 +7,9 @@ import FrameComponent from '../Frame';
 import WordsComponent from '../Words';
 import HeadingComponent from '../Heading';
 
+// TODO:
+// - Add a "featured" prop to highligh item.
+
 export default function Project(props) {
   const {
     theme,
