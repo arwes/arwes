@@ -74,7 +74,7 @@ The main functionalities which power the UI component system.
     <img src="https://img.shields.io/npm/dm/@arwes/design.svg" alt="downloads" />
 </div>
 
-Tools to use [JSS](https://cssinjs.org) with React components.
+Styling tools using [JSS](https://cssinjs.org) with React components.
 
 #### [`@arwes/animation`](./packages/animation)
 
