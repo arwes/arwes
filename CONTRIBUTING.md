@@ -1,5 +1,7 @@
 # How to contribute
 
+> This document is outdated. It is planned to be updated.
+
 The Arwes project would love to welcome your contributions :blue_heart:
 
 There are many ways to help out:
