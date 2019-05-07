@@ -23,5 +23,6 @@ build "sounds"
 build "animation"
 build "design"
 build "platform"
+build "core"
 
 log "\nCompilation completed."
