@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./arwes.gif" alt="Arwes" />
+  <img src="./assets/arwes.gif" alt="Arwes" />
 </div>
 
 <p align="center" style="margin-top: 16px; font-size: 1.2rem;">
@@ -139,6 +139,25 @@ Open [a GitHub issue](https://github.com/arwes/arwes/issues/new) or let's chat o
 Review [Frequently Asked Questions](./FAQ.md).
 
 Also, read the [project code of conduct](./CODE_OF_CONDUCT.md).
+
+## Showcase
+
+### [SoulExtract.com](https://soulextract.com)
+
+[![SoulExtract.com](./assets/soulextract.gif)](https://soulextract.com)
+
+Alternative Rock injected with electronic and cinematic elements.
+Proud member of the [FiXT](https://www.fixtonline.com) roster.
+
+Repository: [soulextract/soulextract.com](https://github.com/soulextract/soulextract.com)
+
+### [RomelPerez.com](https://romelperez.com)
+
+[![RomelPerez.com](./assets/romelperez.gif)](https://romelperez.com)
+
+Romel Pérez's personal website.
+
+Repository: [romelperez/romelperez.com](https://github.com/romelperez/romelperez.com)
 
 ## Guidelines
 
