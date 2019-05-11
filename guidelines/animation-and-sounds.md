@@ -36,6 +36,8 @@ then structural frames, then containers, and finally content. All nodes in
 the same depth start transitioning in at the same time and should take the
 same duration.
 
+The duration of a transition should be around 200 milliseconds.
+
 A system can take as many levels as needed. It is recommended to have as few as
 possible. A typical system can take 5 levels of depth.
 

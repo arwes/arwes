@@ -29,7 +29,7 @@ to decide and build the foundation of the framework.
 
 - [ ] **2019 Q2 Specifications**
 - [ ] Contribution guidelines update
-- [ ] Animation and Sound guidelines
+- [ ] **Animation and Sound guidelines**
 - [ ] `@arwes/sounds`
 - [ ] `@arwes/animation`
 
