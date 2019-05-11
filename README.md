@@ -130,7 +130,7 @@ Arwes design system React components.
 
 **[arwes.dev](https://arwes.dev)** is for version `1.0.0-alpha.5`.
 
-Latest version is a currently a work in progress.
+**[docs](./docs)** is a _work in progress_ of the latest version.
 
 ## Need help?
 

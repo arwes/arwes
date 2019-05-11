@@ -1,0 +1,3 @@
+# Arwes Docs
+
+- [Animation](./animation)

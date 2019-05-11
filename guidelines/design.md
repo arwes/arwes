@@ -1,4 +1,4 @@
-# Design System
+# Design Guidelines
 
 > This document is a draft. It is subject to changes in the future.
 
