@@ -18,12 +18,17 @@ implemented from React components.
     - `exited` - Transitioned out. The animation is completed and the component
     is hidden.
 - A node can only have the following changes between flow states:
-    - From `entered` to `exiting`.
-    - From `exited` to `entering`.
-    - From `entering` or `exiting` or vice-versa.
+
+![Animation Node Flow State](./animation-node-flow-state.png)
+
 - The animation flow enters from parent nodes to children nodes.
 - The animation flow exits from a root node to all its descendant nodes at
 the same time.
+- By default, a system nodes are exited and when activated, the nodes start
+begin entering level by level.
+
+![Animation System Flow](./animation-system-flow.png)
+
 - By default a node is animated. If a node is not animated, its descendant nodes
 will not be animated.
 
