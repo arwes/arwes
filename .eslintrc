@@ -1,6 +1,7 @@
 {
   "extends": [
     "standard",
+    "standard-flow",
     "standard-react"
   ],
 
