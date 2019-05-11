@@ -103,7 +103,7 @@ with Arwes can be SEO-friendly.
 
 There is a plan to document these.
 
-## Is there a plan to build grid tools?
+## Is there a plan to build specific tools?
 
-An idea is to create an implementation of a grid system in flexbox with JSS.
-It is still in definition not yet confirmed.
+There are plans to add _grid layout_, _graph_, and _map_ tools with Arwes
+customization but not for version 1.0.
