@@ -54,10 +54,19 @@ animation node or `root`. Otherwise this component animation will be controlled
 by its parent component, not this prop.
 - `duration: (number|Object)` - Duration of entering and exiting animations in
 milliseconds. If number, it only specifies `enter` and `exit` times.
-  - `enter: number` - The duration the component lasts entering.
-  - `exit: number` - The duration the component lasts exiting.
-  - `stagger: number` - The duration to start animating between nodes in a list.
-- `onChange: Function(flowStatus: string)` - Get notified when flow state changes.
+    - `enter: number` - The duration the component lasts entering.
+    - `exit: number` - The duration the component lasts exiting.
+    - `stagger: number` - The duration to start animating between nodes in a list.
+    - `delay: number = 0` - Time to delay before transitioning from `exited` to `entering`.
+    It does not apply from `exiting`. It adds to the total `enter` duration if
+    calculated.
+- `onUpdate: Function(flowStatus: string)` - Get notified when flow state changes.
+
+This component offers the following methods:
+
+- `updateDuration(duration: number | Object)` - It can update the animation duration
+processed of the component. But it should only be called before the node
+is going to transition from one state to another.
 
 ## `AnimationProvider`
 
@@ -102,14 +111,17 @@ object prop named `animation`.
 And inside the component, it will receive the following props:
 
 - `animation: Object` - A copy of the animation settings processed for the component.
-The priority of settings is: 1) Provider 2) HOC 3) Component.
+The priority of settings is: 1) Provider 2) HOC 3) Component. But also some new
+properties.
+    - `updateDuration: Function` - A reference to the `Animation` component method.
+    It can be called on `componentDidMount`.
 - `flow: Object` - The animation flow state. It indicates in what point of the
 animation flow the component is.
-  - `status: string` - One of `entering`, `entered`, `exiting`, `exited`.
-  - `entering: boolean`
-  - `entered: boolean`
-  - `exiting: boolean`
-  - `exited: boolean`
+    - `status: string` - One of `entering`, `entered`, `exiting`, `exited`.
+    - `entering: boolean`
+    - `entered: boolean`
+    - `exiting: boolean`
+    - `exited: boolean`
 
 ```js
 class MyComponent extends React.PureComponent {
