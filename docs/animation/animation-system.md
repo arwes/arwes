@@ -28,7 +28,7 @@ entering level by level.
 - For a node to enter, either it is a "root node" and it is activated to enter,
 or its parent was changed to `entered`.
 - The animation flow "exits" from a root node to all its descendant nodes at
-the same time.
+the same time. So it is recommended to have the same exit duration for all nodes.
 - Flow "exits" in a node when it changes from `entered` to `exiting` to `exited`.
 
 ![Animation System Flow](./animation-system-flow.png)
@@ -75,6 +75,9 @@ milliseconds.
 processed of the component. But it should only be called before the node
 is going to transition from one state to another. It will not have effect when
 `duration.stable = true`.
+- `getDurationIn(): number` - Get the duration the node lasts entering,
+including `delay`.
+- `getDurationOut(); number` - Get the duration the node lasts exiting.
 
 ## `AnimationProvider`
 
@@ -167,3 +170,50 @@ const MyNode = withAnimation()(MyComponent);
 The node component should use these methods or the flow states to animate
 the component elements. The actual animation functionalities are up to the
 component to use.
+
+## `Secuence`
+
+The `Secuence` virtual component can be used to handle serial flow changes in
+a list of nodes.
+
+This component behaves as a node.
+
+By default, when the `Secuence` enters in the flow, its children nodes will start
+animating in serial. For example, once the component's first child changes to
+`entered`, the second child will change from `exited` to `entering`, and so on.
+
+The first item will enter in the flow right away when the `Secuence` is ready
+to enter. If the `Secuence`'s parent it `entered` or it is a `root`, then
+its first child will start entering if applicable.
+
+### Props
+
+It receives the same props as `Animation` and the following:
+
+- `stagger: boolean` - If enabled, the flow in the list will stagger given
+the `duration.stagger` duration. So if `duration.stagger = 75`, then the first
+item will start at 0ms, the second at 75ms, the third at 150ms, and so on.
+
+### Methods
+
+It has the same props as `Animation`.
+
+### Example
+
+Animate a list of nodes using a staggering strategy with 100ms between them.
+
+```js
+<ul className='list'>
+    <Secuence stagger duration={{ stagger: 100 }}>
+        <li className='item'>
+            <MyNode />
+        </li>
+        <li className='item'>
+            <MyNode />
+        </li>
+        <li className='item'>
+            <MyNode />
+        </li>
+    </Secuence>
+</ul>
+```
