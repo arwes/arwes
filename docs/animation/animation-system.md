@@ -210,7 +210,7 @@ if they can be enter the flow or not. Nodes will change of state according to th
 new results. The new changes will take work the same way with the serial or
 staggering flow animation strategy used.
 
-### Example
+### Example 1
 
 Animate a list of nodes using a staggering strategy with 100ms between them.
 
@@ -228,4 +228,35 @@ Animate a list of nodes using a staggering strategy with 100ms between them.
         </li>
     </Secuence>
 </ul>
+```
+
+### Example 2
+
+```js
+// Assuming there is a method `isVisible()` of all children components
+// to determine if they are visible on viewport. This will activate
+// hidden elements and deactivate shown elements.
+const onCheckActivation = component => component.isVisible();
+
+let secuence;
+let container;
+
+...
+<Secuence
+    ref={ref => (secuence = ref)}
+    onCheckActivation={onCheckActivation}
+>
+    <div ref={ref => (container = ref)}>
+        <MyNode />
+        <MyNode />
+        <MyNode />
+        <MyNode />
+    </div>
+</Secuence>
+...
+
+// Assuming the `<MyNode />` elements are visible according to the container's
+// scroll. So, whenever is a change in the container's scroll, check
+// the nodes elements visibility and update their activation.
+container.addEventListener('scroll', () => secuence.checkActivation());
 ```
