@@ -67,7 +67,9 @@ milliseconds.
     It does not apply from `exiting`.
     - `stable: boolean` - If a component is stable, its duration can not be changed
     after definition. It should be used to determine how long animations last.
-- `onUpdate: Function(flowStatus: string)` - Get notified when flow state changes.
+- `merge: boolean` - If enabled and it is not a root node, the node will enter
+in the flow when its parent changes to `entering`.
+- `onUpdate: Function(flow)` - Get notified when flow state changes.
 
 ### Methods
 
@@ -184,19 +186,29 @@ animating in serial. For example, once the component's first child changes to
 
 The first item will enter in the flow right away when the `Secuence` is ready
 to enter. If the `Secuence`'s parent it `entered` or it is a `root`, then
-its first child will start entering if applicable.
+its first child will change to `entering` if applicable.
 
 ### Props
 
 It receives the same props as `Animation` and the following:
 
-- `stagger: boolean` - If enabled, the flow in the list will stagger given
-the `duration.stagger` duration. So if `duration.stagger = 75`, then the first
-item will start at 0ms, the second at 75ms, the third at 150ms, and so on.
+- `stagger: boolean` - If `true`, the flow in the list will stagger given the
+`duration.stagger` duration. So if `duration.stagger = 75`, then the first item
+will enter at 0ms, the second at 75ms, the third at 150ms, and so on.
+- `onCheckActivation: Function((component, index: number) => boolean = true)` -
+Called before a children node is going to transition to `entering`. If it
+returns `false`, that component is not activated. If activated, it will be done
+when its component time of activation is calculated.
 
 ### Methods
 
-It has the same props as `Animation`.
+- `getDurationIn(): number` - Get the duration all children nodes last entering.
+- `getDurationOut(); number` - Get the duration the first children node lasts
+exiting.
+- `checkActivation()` - Re-run `onCheckActivation` on each children node to determine
+if they can be enter the flow or not. Nodes will change of state according to the
+new results. The new changes will take work the same way with the serial or
+staggering flow animation strategy used.
 
 ### Example
 
