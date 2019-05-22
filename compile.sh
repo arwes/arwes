@@ -13,7 +13,7 @@ build() {
   log "\nCompiling $1..."
   NODE_ENV=production
   rm -rf ./packages/$1/lib/
-  babel --config-file ./babel.config.js --ignore ./packages/**/*.test.js --verbose ./packages/$1/src/ --out-dir ./packages/$1/lib/
+  babel --config-file ./babel.config.js --ignore ./packages/**/*.test.js,./packages/**/*.sandbox.js --verbose ./packages/$1/src/ --out-dir ./packages/$1/lib/
 }
 
 log "Compiling Arwes packages."
