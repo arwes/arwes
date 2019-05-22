@@ -260,3 +260,8 @@ let container;
 // the nodes elements visibility and update their activation.
 container.addEventListener('scroll', () => secuence.checkActivation());
 ```
+
+## Animation Tools
+
+A recommended tool to make animations using the animation flow in the components
+is [animejs](https://animejs.com). But any other library can be used.

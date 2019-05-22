@@ -1,7 +1,6 @@
 # Animation and Sounds Guidelines
 
-A system is a tree of nodes with only one parent. There is only a root node in
-a system.
+A system is a tree of nodes with only one parent.
 
 Any node in a system can use animations for many purposes, as individual
 nodes or sub-systems of nodes.
@@ -9,7 +8,7 @@ nodes or sub-systems of nodes.
 A node can be animated or not. An animated node should animate its children.
 A non-animated node should not animate its children.
 
-Sounds can be played when animations run.
+If a node is animated, it can play sounds. Otherwise, it should not play sounds.
 
 When multiple nodes play the same sound at the same time, the sound can be played
 only once. If a sound is playing and another node tries to play it again,
@@ -52,21 +51,23 @@ should not have transition animations.
 In a system, once it is assembled and shown, it can run randomly subtle passive
 animations on its nodes regularly with very optional sounds.
 
-Lines in a rectangular container can glow momentary once in a while in a system.
-A background can be animated the whole time with subtle changes, and low dim music
-can be played in the duration of the system.
+Lines in a rectangular container can glow momentary in a system. A background
+can be animated the whole time with subtle changes, and low dim music can be
+played in the duration of the system.
 
-But these animations shouldn't be intrusive. User shouldn't be distracted from primary
-content.
+But these animations should not be intrusive. User should not be distracted from
+primary content.
 
 ## Interactions
 
-When a user interacts with nodes in the system, the nodes can affect themselves,
-such as a toggle (changing from on to off and vice-versa), or they can affect a sub-system,
-such as expanding information on hover or transitioning to another system.
+When an external factor interacts with nodes in the system (such as user mouse
+or keyboard, or real time notification), the nodes can affect themselves, such
+as a toggle (changing from on to off and vice-versa), or they can affect a
+sub-system, such as expanding information on hover or transitioning to another
+system.
 
 For subtle interactions, like hovering a node or typing a key, subtle animations
-and sounds can be played. These shouldn't bring too much attention.
+and sounds can be played. These should not bring too much attention.
 
 For decisive interactions, like selecting an option or typing enter, more concise
 animations and sounds can be played. These should bring attention.
