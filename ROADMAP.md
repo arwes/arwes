@@ -4,7 +4,7 @@ An ideal Arwes project _beta_ release would be for **2020 Q1**.
 
 - The order in the lists don't represent priority.
 - Active items are represented with **bold**.
-- Specifications tasks are listed in [the project boards](https://github.com/arwes/arwes/projects).
+- Tasks are listed in the [project boards](https://github.com/arwes/arwes/projects).
 
 ----
 
@@ -21,38 +21,40 @@ to decide and build the foundation of the framework.
 
 ### Q1
 
-- [x] Project definition
-- [x] Project setup
-- [x] Research and playground with [soulextract.com](https://github.com/soulextract/soulextract.com)
+- [x] Define and implement a new project architecture to improve organization, simplify tooling, and facilitate developers contributions.
+- [x] Complete started animation and sounds guidelines. These guidelines will establish the ground concepts for the framework to work.
+- [x] Research and playground new ideas and concepts to implement in the project with the [soulextract.com](https://github.com/soulextract/soulextract.com) side project. The results are going to be used in Arwes.
 
 ### Q2
 
-- [ ] **2019 Q2 Specifications**
-- [ ] Contribution guidelines update
-- [ ] **Animation and Sound guidelines**
-- [ ] `@arwes/sounds`
-- [ ] `@arwes/animation`
+- [ ] Update contribution guidelines to allow developers to know what are the technical guidelines, architectures, workflow tasks, and communication and management details, in the project, to contribute in it.
+- [ ] Complete started purpose guideline document. This will clarify what is the vision of the project.
+- Animation System.
+    - [ ] **Create an animation specification to define the animation system architecture.**
+    - [x] Document React components APIs to create animation systems.
+    - [ ] Research SEO and SSR strategies to standardize recommended animation setups and settings.
+    - [ ] Develop the `@arwes/animation` package with the animation system APIs.
+- Sounds System.
+    - [ ] **Create a sounds specification to define the sound system architecture.**
+    - [x] Document React components APIs to create sounds systems.
+    - [ ] Research browser sound API supports and compatibility to standardize recommended sound setups and settings.
+    - [ ] Develop the `@arwes/sounds` package with the sounds system APIs.
 
 ### Q3
 
-- [ ] 2019 Q3 Specifications
-- [ ] Design guidelines
-- [ ] User Experience guidelines
-- [ ] `@arwes/design`
-- [ ] `@arwes/platform`
+- [ ] Design Guidelines.
+- [ ] User Experience Guidelines.
+- [ ] Design System.
+- [ ] Platform Tools.
 
 ### Q4
 
-- [ ] 2019 Q4 Specifications
-- [ ] `@arwes/core`
-    - [ ] Text component
-    - [ ] Link component
-- [ ] `@arwes/arwes`
-    - [ ] Frame/Container/Structure components
-    - [ ] Static/Content components
-    - [ ] Shape/Icon components
-    - [ ] Control/Form components
-    - [ ] Navigation components
+- Arwes core components.
+    - [ ] Frame/Container/Structure components.
+    - [ ] Static/Content components.
+    - [ ] Shape/Icon components.
+    - [ ] Control/Form components.
+    - [ ] Navigation components.
 
 ----
 
@@ -60,6 +62,5 @@ to decide and build the foundation of the framework.
 
 ### Q1
 
-- [ ] 2020 Q1 Specifications
-- [ ] Documentation
-- [ ] Website
+- [ ] User Guides.
+- [ ] Website.
