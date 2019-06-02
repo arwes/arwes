@@ -1,7 +1,7 @@
 script: npm run test-ci
 language: node_js
 node_js:
-  - "10.15"
+  - "10.0"
 addons:
   chrome: stable
 sudo: required
