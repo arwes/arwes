@@ -1,33 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { render } from 'react-dom';
 import withStyles from 'react-jss';
 import Navigo from 'navigo';
 
-import createTheme from '../packages/arwes/src/tools/createTheme';
-import ThemeProvider from '../packages/arwes/src/ThemeProvider';
-import createSounds from '../packages/sounds/src/createSounds';
-import SoundsProvider from '../packages/sounds/src/SoundsProvider';
 import sandboxes from './sandboxes';
 
-const theme = createTheme();
-const sounds = createSounds({
-  shared: { volume: 1 },
-  players: {
-    click: {
-      sound: { src: ['/sounds/click.mp3'] },
-      settings: { oneAtATime: true }
-    },
-    typing: {
-      sound: { src: ['/sounds/typing.mp3'] },
-      settings: { oneAtATime: true }
-    },
-    deploy: {
-      sound: { src: ['/sounds/deploy.mp3'] },
-      settings: { oneAtATime: true }
-    }
-  }
-});
 const styles = {
   '@global': {
     html: {
@@ -96,73 +73,51 @@ const styles = {
   }
 };
 
-class PlaygroundSource extends React.Component {
-  static propTypes = {
-    classes: PropTypes.object.isRequired
-  };
+let router;
 
-  constructor () {
-    super(...arguments);
+const Playground = withStyles(styles)(({ classes }) => { // eslint-disable-line react/prop-types
+  const [sandboxName, setSandboxName] = useState('/');
+  const sandbox = sandboxes.find(item => item.name === sandboxName);
 
-    this.state = {
-      sandboxName: ''
-    };
-  }
+  useEffect(() => {
+    router = new Navigo(null, true);
 
-  componentDidMount () {
-    this.router = new Navigo(null, true);
+    router.on('/', () => setSandboxName('/'));
 
-    this.router.on('/', () => {
-      this.setState({ sandboxName: '' });
+    sandboxes.forEach(item => {
+      router.on(item.name, () => setSandboxName(item.name)).resolve();
     });
+  }, []);
 
-    sandboxes.forEach(sandbox => {
-      this.router
-        .on(sandbox.name, () => this.setState({ sandboxName: sandbox.name }))
-        .resolve();
-    });
-  }
-
-  onChange = ev => {
+  function onChange (ev) {
     const sandboxName = ev.target.value;
-    this.router.navigate(sandboxName);
-  };
-
-  render () {
-    const { classes } = this.props;
-    const { sandboxName } = this.state;
-
-    const sandbox = sandboxes.find(item => item.name === sandboxName);
-
-    return (
-      <div className={classes.root}>
-        <header className={classes.header}>
-          <h1 className={classes.headerTitle}>Arwes Playground</h1>
-          <select
-            className={classes.headerSelect}
-            value={sandboxName}
-            onChange={this.onChange}
-          >
-            <option value=''>-- Select component --</option>
-            {sandboxes.map((item, index) => (
-              <option key={index} value={item.name}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-        </header>
-        <main className={classes.content}>
-          <ThemeProvider theme={theme}>
-            <SoundsProvider sounds={sounds}>
-              <div>{!!sandbox && <sandbox.component />}</div>
-            </SoundsProvider>
-          </ThemeProvider>
-        </main>
-      </div>
-    );
+    router.navigate(sandboxName);
   }
-}
 
-const Playground = withStyles(styles)(PlaygroundSource);
+  return (
+    <div className={classes.root}>
+      <header className={classes.header}>
+        <h1 className={classes.headerTitle}>Arwes Playground</h1>
+        <select
+          className={classes.headerSelect}
+          value={sandboxName}
+          onChange={onChange}
+        >
+          <option value='/'>
+            -- Select component --
+          </option>
+          {sandboxes.map((item, index) => (
+            <option key={index} value={item.name}>
+              {item.name}
+            </option>
+          ))}
+        </select>
+      </header>
+      <main className={classes.content}>
+        {!!sandbox && <sandbox.component />}
+      </main>
+    </div>
+  );
+});
 
-ReactDOM.render(<Playground />, document.querySelector('#root'));
+render(<Playground />, document.querySelector('#root'));
