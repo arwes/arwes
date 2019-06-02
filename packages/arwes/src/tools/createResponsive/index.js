@@ -22,16 +22,18 @@ export default depencencies => {
      * Get the current responsive stats.
      * @return {Object} { small: Boolean, medium: Boolean, large: Boolean }
      */
-    get() {
+    get () {
       const theme = deps.getTheme();
       const { width } = deps.getDimensions();
       const { small, medium, large } = theme.responsive;
 
       if (width <= small) {
         return { small: true, status: 'small' };
-      } else if (width <= medium) {
+      }
+      else if (width <= medium) {
         return { medium: true, status: 'medium' };
-      } else if (width <= large) {
+      }
+      else if (width <= large) {
         return { large: true, status: 'large' };
       }
 
@@ -45,7 +47,7 @@ export default depencencies => {
      * and receives and object defining the current viewport size.
      * @return {Function} The event listener.
      */
-    on(callback) {
+    on (callback) {
       const current = this.get();
       let state = current.status;
 
@@ -68,7 +70,7 @@ export default depencencies => {
      * Turns off a window on resize callback previously created.
      * @param  {Function} - The event callback.
      */
-    off(onChange) {
+    off (onChange) {
       if (!isNode) {
         window.removeEventListener('resize', onChange, false);
       }

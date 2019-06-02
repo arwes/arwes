@@ -9,7 +9,7 @@ const getStatuses = status => ({
   exited: status === 'exited'
 });
 
-export default function Animation(props) {
+export default function Animation (props) {
   const { animate, show, appear, timeout, children, ...rest } = props;
   return (
     <Transition

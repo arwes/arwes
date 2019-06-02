@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-export default function List(props) {
+export default function List (props) {
   const { theme, classes, node, className, children, ...etc } = props;
   const cls = cx(classes.root, className);
   return React.createElement(node, { className: cls, ...etc }, children);
@@ -11,6 +11,8 @@ export default function List(props) {
 List.propTypes = {
   theme: PropTypes.any.isRequired,
   classes: PropTypes.any.isRequired,
+  children: PropTypes.any,
+  className: PropTypes.any,
 
   /**
    * The list node type, e.g. ul.

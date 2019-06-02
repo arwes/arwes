@@ -23,7 +23,9 @@ export default class Footer extends Component {
     /**
      * If function, receives the animation status object.
      */
-    children: PropTypes.any
+    children: PropTypes.any,
+
+    className: PropTypes.any
   };
 
   static defaultProps = {
@@ -32,28 +34,28 @@ export default class Footer extends Component {
     show: true
   };
 
-  componentDidMount() {
+  componentDidMount () {
     const { animate, show, sounds } = this.props;
     if (animate && show) {
       sounds.deploy && sounds.deploy.play();
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     const { animate, show, sounds } = this.props;
     if (animate && prevProps.show !== show) {
       sounds.deploy && sounds.deploy.play();
     }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     const { animate, sounds } = this.props;
     if (animate) {
       sounds.deploy && sounds.deploy.stop();
     }
   }
 
-  render() {
+  render () {
     const {
       theme,
       classes,

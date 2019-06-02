@@ -1,5 +1,2 @@
 node_modules
 packages/*/lib
-
-# TODO: Remove once migration is done.
-packages/arwes

@@ -20,11 +20,11 @@ const styles = {
 };
 
 export default class Example extends React.Component {
-  constructor() {
+  constructor () {
     super(...arguments);
     this.state = { show: true };
   }
-  render() {
+  render () {
     return (
       <div>
         <button onClick={() => this.onToggle()}>Toggle</button>
@@ -38,7 +38,7 @@ export default class Example extends React.Component {
       </div>
     );
   }
-  onToggle() {
+  onToggle () {
     this.setState({ show: !this.state.show });
   }
 }

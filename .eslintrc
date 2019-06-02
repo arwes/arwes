@@ -1,7 +1,6 @@
 {
   "extends": [
     "standard",
-    "standard-flow",
     "standard-react"
   ],
 
@@ -17,6 +16,8 @@
   },
 
   "rules": {
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "brace-style": ["error", "stroustrup"],
+    "prefer-promise-reject-errors": [0]
   }
 }

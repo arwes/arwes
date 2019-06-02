@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 import AnimationComponent from '../Animation';
 
-export default function Appear(props) {
+export default function Appear (props) {
   const {
     theme,
     classes,
@@ -35,6 +35,9 @@ export default function Appear(props) {
 }
 
 Appear.propTypes = {
+  className: PropTypes.any,
+  children: PropTypes.any,
+
   Animation: PropTypes.any.isRequired,
 
   theme: PropTypes.any.isRequired,

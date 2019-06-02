@@ -66,7 +66,9 @@ export default class Arwes extends Component {
     /**
      * If function, receives the animation status object.
      */
-    children: PropTypes.any
+    children: PropTypes.any,
+
+    className: PropTypes.any
   };
 
   static defaultProps = {
@@ -79,7 +81,7 @@ export default class Arwes extends Component {
     showResources: true
   };
 
-  constructor() {
+  constructor () {
     super(...arguments);
 
     this.state = {
@@ -92,11 +94,11 @@ export default class Arwes extends Component {
     });
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.loadResources();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     if (
       prevProps.background !== this.props.background ||
       prevProps.pattern !== this.props.pattern
@@ -105,7 +107,7 @@ export default class Arwes extends Component {
     }
   }
 
-  render() {
+  render () {
     const {
       Animation,
       Puffs,
@@ -180,7 +182,7 @@ export default class Arwes extends Component {
    * Get active resources from resources props.
    * @return {Object}
    */
-  getActiveResources() {
+  getActiveResources () {
     const { background, pattern } = this.props;
     const responsive = this.responsive.get();
 
@@ -194,7 +196,7 @@ export default class Arwes extends Component {
    * Load active resources if they can be loaded.
    * Doesn't return the state, it only loads the data.
    */
-  loadResources() {
+  loadResources () {
     if (!this.props.loadResources) {
       return;
     }

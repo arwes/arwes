@@ -38,9 +38,7 @@ const getColor = (theme, props, level) =>
   theme.color[props.disabled ? 'disabled' : props.layer][level];
 
 const getBg = (theme, props) =>
-  theme.background[props.disabled ? 'disabled' : props.layer][
-    'level' + props.level
-  ];
+  theme.background[props.disabled ? 'disabled' : props.layer]['level' + props.level];
 
 export default theme => {
   return {

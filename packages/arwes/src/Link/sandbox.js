@@ -5,7 +5,7 @@ import Link from './index';
 export default () => (
   <Arwes>
     <div style={{ padding: 20 }}>
-      This is an <Link href="#">Intergalactic Link</Link>.
+      This is an <Link href='#'>Intergalactic Link</Link>.
     </div>
   </Arwes>
 );

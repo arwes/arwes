@@ -4,9 +4,9 @@ import Words from '../Words';
 import Project from './index';
 
 export default () => (
-  <Arwes background="/images/background.jpg" pattern="/images/glow.png">
+  <Arwes background='/images/background.jpg' pattern='/images/glow.png'>
     <div style={{ padding: 20 }}>
-      <Project animate header="PROJECT, OFFICIA DESERUNT ANIM ID EST LABORUM">
+      <Project animate header='PROJECT, OFFICIA DESERUNT ANIM ID EST LABORUM'>
         {anim => (
           <p>
             <Words animate show={anim.entered}>

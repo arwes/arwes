@@ -3,22 +3,22 @@ import Arwes from '../Arwes';
 import Frame from './index';
 
 export default class Example extends React.Component {
-  constructor() {
+  constructor () {
     super(...arguments);
     this.state = { show: true };
   }
-  render() {
+  render () {
     return (
       <Arwes>
         <button onClick={() => this.onToggle()}>Show/Hide</button>
         <div style={{ display: 'inline-block', padding: '20px' }}>
           <Frame
             show={this.state.show}
-            animate={true}
-            hover={true}
+            animate
+            hover
             level={3}
             corners={4}
-            layer="primary"
+            layer='primary'
           >
             <div style={{ padding: '20px 40px', fontSize: '32px' }}>
               Cyberpunk
@@ -28,7 +28,7 @@ export default class Example extends React.Component {
       </Arwes>
     );
   }
-  onToggle() {
+  onToggle () {
     this.setState({ show: !this.state.show });
   }
 }

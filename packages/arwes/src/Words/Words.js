@@ -1,3 +1,5 @@
+/* eslint-env browser */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -56,7 +58,9 @@ export default class Words extends Component {
     /**
      * Plain text to render and animate if enabled.
      */
-    children: PropTypes.string.isRequired
+    children: PropTypes.string,
+
+    className: PropTypes.any
   };
 
   static defaultProps = {
@@ -70,7 +74,7 @@ export default class Words extends Component {
   // Current animation frame identifier.
   currentAnimationFrame = null;
 
-  constructor() {
+  constructor () {
     super(...arguments);
 
     this.state = {
@@ -79,13 +83,13 @@ export default class Words extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount () {
     if (this.props.animate && this.props.show) {
       this.animateIn();
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     const { animate, show, children } = this.props;
 
     const animateChanged = animate !== prevProps.animate;
@@ -96,7 +100,8 @@ export default class Words extends Component {
     if (animate) {
       if (showChanged) {
         show ? this.animateIn() : this.animateOut();
-      } else if (childrenChanged) {
+      }
+      else if (childrenChanged) {
         this.animateIn();
       }
     }
@@ -107,11 +112,11 @@ export default class Words extends Component {
     }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.stopAnimation();
   }
 
-  render() {
+  render () {
     const {
       theme,
       classes,
@@ -153,12 +158,12 @@ export default class Words extends Component {
     );
   }
 
-  animateIn() {
+  animateIn () {
     this.cancelNextAnimation();
     this.startAnimation(true);
   }
 
-  animateOut() {
+  animateOut () {
     this.cancelNextAnimation();
     this.startAnimation(false);
   }
@@ -166,7 +171,7 @@ export default class Words extends Component {
   /**
    * Stop current animation and sounds.
    */
-  stopAnimation() {
+  stopAnimation () {
     this.cancelNextAnimation();
     this.setState({ animating: false });
 
@@ -176,7 +181,7 @@ export default class Words extends Component {
     }
   }
 
-  cancelNextAnimation() {
+  cancelNextAnimation () {
     window.cancelAnimationFrame(this.currentAnimationFrame);
   }
 
@@ -184,7 +189,7 @@ export default class Words extends Component {
    * Start animating the words and playing sounds.
    * @param  {Boolean} isIn - If entering.
    */
-  startAnimation(isIn) {
+  startAnimation (isIn) {
     const { theme, children, animate, sounds, animation } = this.props;
 
     if (children.length === 0) {
@@ -239,7 +244,8 @@ export default class Words extends Component {
         this.currentAnimationFrame = window.requestAnimationFrame(
           nextAnimation
         );
-      } else {
+      }
+      else {
         this.stopAnimation();
       }
     };

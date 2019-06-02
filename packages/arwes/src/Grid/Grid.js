@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-export default function Grid(props) {
+export default function Grid (props) {
   const {
     theme,
     classes,
@@ -113,7 +113,10 @@ Grid.propTypes = {
    * Example: `['m4', 'l2']` creates an offset of 4 columns
    * on medium breakpoint and an offset of 2 columns on large breakpoint.
    */
-  offset: PropTypes.arrayOf(PropTypes.string)
+  offset: PropTypes.arrayOf(PropTypes.string),
+
+  children: PropTypes.any,
+  className: PropTypes.any
 };
 
 Grid.defaultProps = {

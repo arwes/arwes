@@ -13,6 +13,10 @@ const ON_ANIMATION_END = [
 
 export default class Highlight extends Component {
   static propTypes = {
+    theme: PropTypes.any,
+    classes: PropTypes.any,
+    className: PropTypes.any,
+    children: PropTypes.any,
     animate: PropTypes.bool,
     layer: PropTypes.oneOf([
       'primary',
@@ -36,7 +40,7 @@ export default class Highlight extends Component {
   // Last click element created.
   clickElement = null;
 
-  render() {
+  render () {
     const {
       theme,
       classes,

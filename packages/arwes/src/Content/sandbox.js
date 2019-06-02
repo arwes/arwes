@@ -18,22 +18,22 @@ export default () => (
       </p>
 
       <p>
-        <a href="#">Intergalactic Link</a>
+        <a href='#'>Intergalactic Link</a>
       </p>
 
       <blockquote>
         Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for
         Web Apps
       </blockquote>
-      <blockquote data-layer="success">
+      <blockquote data-layer='success'>
         Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for
         Web Apps
       </blockquote>
-      <blockquote data-layer="alert">
+      <blockquote data-layer='alert'>
         Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for
         Web Apps
       </blockquote>
-      <blockquote data-layer="disabled">
+      <blockquote data-layer='disabled'>
         Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for
         Web Apps
       </blockquote>

@@ -13,7 +13,7 @@
     <a href="https://travis-ci.org/arwes/arwes">
         <img src="https://img.shields.io/travis/arwes/arwes.svg" alt="travis" />
     </a>
-    <a href="https://standardjs.com" alt="npm bundle size (version)">
+    <a href="https://standardjs.com">
         <img src="https://img.shields.io/badge/code_style-standardjs-d2bb09.svg?style=flat-square" alt="code style: standardjs">
     </a>
     <a href="https://jestjs.io">

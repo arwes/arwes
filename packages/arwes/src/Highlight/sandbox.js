@@ -13,10 +13,10 @@ export default () => (
     <Highlight style={style}>
       <Example />
     </Highlight>{' '}
-    <Highlight layer="success" style={style}>
+    <Highlight layer='success' style={style}>
       <Example />
     </Highlight>{' '}
-    <Highlight layer="alert" style={style}>
+    <Highlight layer='alert' style={style}>
       <Example />
     </Highlight>
   </Arwes>

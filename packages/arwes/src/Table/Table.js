@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 import AnimationComponent from '../Animation';
 
-export default function Table(props) {
+export default function Table (props) {
   const {
     theme,
     classes,
@@ -92,7 +92,9 @@ Table.propTypes = {
    * If the actual HTML `<table />` is provided, the `headers` and `dataset`
    * are ignored.
    */
-  children: PropTypes.any
+  children: PropTypes.any,
+
+  className: PropTypes.any
 };
 
 Table.defaultProps = {

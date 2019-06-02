@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-export default function Link(props) {
+export default function Link (props) {
   const { theme, classes, className, children, ...etc } = props;
   const cls = cx(classes.root, className);
   return (
@@ -14,5 +14,7 @@ export default function Link(props) {
 
 Link.propTypes = {
   theme: PropTypes.any.isRequired,
-  classes: PropTypes.any.isRequired
+  classes: PropTypes.any.isRequired,
+  children: PropTypes.any,
+  className: PropTypes.any
 };

@@ -1,7 +1,4 @@
-// TODO:
-// - Proposal / Global Settings:
-//   - Color layers
-//   - Default viewport (1024px)
+import * as toolsUtils from './tools/utils';
 
 export Arwes from './Arwes';
 export Words from './Words';
@@ -35,5 +32,4 @@ export createTheme from './tools/createTheme';
 export createLoader from './tools/createLoader';
 export createResponsive from './tools/createResponsive';
 
-import * as toolsUtils from './tools/utils';
 export const utils = toolsUtils;

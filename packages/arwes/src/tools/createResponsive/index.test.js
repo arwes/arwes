@@ -1,8 +1,10 @@
+/* eslint-env jest,browser */
+
 import sinon from 'sinon';
 import createResponsive from './index';
 
 describe('createResponsive', () => {
-  it('Should get small width when available', () => {
+  test('Should get small width when available', () => {
     const responsive = createResponsive({
       getTheme: () => ({ responsive: { small: 100, medium: 200, large: 300 } }),
       getDimensions: () => ({ width: 75, height: 0 })
@@ -12,7 +14,7 @@ describe('createResponsive', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('Should get medium width when available', () => {
+  test('Should get medium width when available', () => {
     const responsive = createResponsive({
       getTheme: () => ({ responsive: { small: 100, medium: 200, large: 300 } }),
       getDimensions: () => ({ width: 150, height: 0 })
@@ -22,7 +24,7 @@ describe('createResponsive', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('Should get large width when available', () => {
+  test('Should get large width when available', () => {
     const responsive = createResponsive({
       getTheme: () => ({ responsive: { small: 100, medium: 200, large: 300 } }),
       getDimensions: () => ({ width: 250, height: 0 })
@@ -32,7 +34,7 @@ describe('createResponsive', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('Should get xlarge width when available', () => {
+  test('Should get xlarge width when available', () => {
     const responsive = createResponsive({
       getTheme: () => ({ responsive: { small: 100, medium: 200, large: 300 } }),
       getDimensions: () => ({ width: 350, height: 0 })
@@ -43,7 +45,7 @@ describe('createResponsive', () => {
   });
 
   // TODO: Enable test case.
-  xit('Should be able to listen for changes only when breakpoint has changed', () => {
+  xtest('Should be able to listen for changes only when breakpoint has changed', () => {
     let width = 150;
     const responsive = createResponsive({
       getTheme: () => ({ responsive: { small: 100, medium: 200, large: 300 } }),
@@ -68,7 +70,7 @@ describe('createResponsive', () => {
   });
 
   // TODO: Enable test case.
-  xit('Should be able to subscribe and unsubscribe to resize events', () => {
+  xtest('Should be able to subscribe and unsubscribe to resize events', () => {
     let width = 150;
     const responsive = createResponsive({
       getTheme: () => ({ responsive: { small: 100, medium: 200, large: 300 } }),

@@ -37,7 +37,8 @@ export const getResponsiveResource = (resources, responsive = {}) => {
 
   if (typeof resources === 'string') {
     resource = resources;
-  } else if (resources) {
+  }
+  else if (resources) {
     const { small, medium, large } = responsive;
     resource = small
       ? resources.small

@@ -72,7 +72,9 @@ export default class Image extends Component {
     /**
      * If function, receives the animation status object.
      */
-    children: PropTypes.any
+    children: PropTypes.any,
+
+    className: PropTypes.any
   };
 
   static defaultProps = {
@@ -90,7 +92,7 @@ export default class Image extends Component {
     imgProps: {}
   };
 
-  getDefaultState() {
+  getDefaultState () {
     return {
       ready: false, // if active resource is loaded
       error: false, // if resource had an error
@@ -98,7 +100,7 @@ export default class Image extends Component {
     };
   }
 
-  constructor() {
+  constructor () {
     super(...arguments);
 
     this.state = this.getDefaultState();
@@ -109,17 +111,17 @@ export default class Image extends Component {
     });
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.loadResource();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     if (this.props.resources !== prevProps.resources) {
       this.loadResource();
     }
   }
 
-  render() {
+  render () {
     const {
       Animation,
       Frame,
@@ -168,10 +170,9 @@ export default class Image extends Component {
                   src={resource}
                 />
                 {error && <div className={classes.error}>{i18n.error}</div>}
-                {!ready &&
-                  !error && (
-                    <Loading full animate={animate} show={show} layer={layer} />
-                  )}
+                {!ready && !error && (
+                  <Loading full animate={animate} show={show} layer={layer} />
+                )}
               </div>
               {!!children && <div className={classes.separator} />}
               {!!children && (
@@ -192,7 +193,7 @@ export default class Image extends Component {
    * If enabled, load the resources provided.
    * It doesn't return the state of the loading, it will update the state.
    */
-  loadResource() {
+  loadResource () {
     const { resources, loadResources } = this.props;
 
     if (!loadResources) {
