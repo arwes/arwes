@@ -35,10 +35,10 @@ to decide and build the foundation of the framework.
     - [ ] Research SEO and SSR strategies to standardize recommended animation setups and settings.
     - [ ] Develop the `@arwes/animation` package with the animation system APIs.
 - Sounds System.
-    - [ ] **Create a sounds specification to define the sound system architecture.**
+    - [x] Create a sounds specification to define the sound system architecture.
     - [x] Document React components APIs to create sounds systems.
     - [ ] Research browser sound API supports and compatibility to standardize recommended sound setups and settings.
-    - [ ] Develop the `@arwes/sounds` package with the sounds system APIs.
+    - [ ] **Develop the `@arwes/sounds` package with the sounds system APIs.**
 
 ### Q3
 
