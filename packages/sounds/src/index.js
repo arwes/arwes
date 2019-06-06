@@ -1,3 +1,3 @@
-export SoundsContext from './SoundsContext';
-export SoundsProvider from './SoundsProvider';
-export withSounds from './withSounds';
+export * from './SoundsContext';
+export * from './SoundsProvider';
+export * from './withSounds';
