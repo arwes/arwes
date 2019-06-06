@@ -1,1 +1,1 @@
-export { default } from './SoundsProvider';
+export * from './SoundsProvider';

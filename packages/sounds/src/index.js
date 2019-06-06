@@ -1,4 +1,3 @@
-export createPlayer from './createPlayer';
-export createSounds from './createSounds';
-export withSounds from './withSounds';
+export SoundsContext from './SoundsContext';
 export SoundsProvider from './SoundsProvider';
+export withSounds from './withSounds';

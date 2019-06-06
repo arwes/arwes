@@ -1,5 +1,5 @@
 /* eslint-disable */
 
 export default [
-  { name: 'sounds/SoundsProvider', component: require('../packages/sounds/src/SoundsProvider/SoundsProvider.sandbox.js').default }
+  { name: 'sounds/withSounds', component: require('../packages/sounds/src/withSounds/withSounds.sandbox.js').default }
 ];

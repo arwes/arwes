@@ -1,125 +1,88 @@
 /* eslint-env jest */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import * as redux from 'redux';
-import * as reactRedux from 'react-redux';
+import { render, cleanup } from '@testing-library/react';
+import { SoundsProvider } from '../SoundsProvider';
+import { withSounds } from './withSounds';
 
-import withSounds from './index';
+afterEach(cleanup);
 
-Enzyme.configure({ adapter: new Adapter() });
-
-describe('withSounds()', () => {
-  test('Should return a function', () => {
-    const actual = withSounds();
-    expect(typeof actual).toBe('function');
+test('Should receive "players" and "audio" as empty objects if no provider is found', () => {
+  const Player = withSounds()(props => {
+    expect(props).toEqual({ players: {}, audio: {} });
+    return <div />;
   });
+  render(<Player />);
+});
 
-  test('Should set final component displayName', () => {
-    class MyComp {
-      displayName = 'MyComp';
-      render () {
-        return <div />;
-      }
-    }
-    const actual = withSounds()(MyComp);
-    expect(actual.displayName).toBe('Sounds(MyComp)');
+test('Should receive "players" and "audio" from provider', () => {
+  const Player = withSounds()(props => {
+    expect(props).toEqual({
+      players: { a: 1 },
+      audio: { b: 2 }
+    });
+    return <div />;
   });
+  render(
+    <SoundsProvider players={{ a: 1 }} audio={{ b: 2 }}>
+      <Player />
+    </SoundsProvider>
+  );
+});
 
-  test('Should create a component with sounds by provider', () => {
-    const render = jest.fn();
-    const sounds = { a: 1, b: 2 };
-    class Provider extends React.Component {
-      static childContextTypes = {
-        sounds: PropTypes.object
-      };
-      getChildContext () {
-        return { sounds };
-      }
-      render () {
-        return this.props.children; // eslint-disable-line react/prop-types
-      }
-    }
-    const MyComp = props => {
-      expect(props.sounds).toBe(sounds); // eslint-disable-line react/prop-types
-      render();
+test('Should allow props overwrite from HOC', () => {
+  const Player = withSounds({
+    players: { a: 7, x: 8 },
+    audio: { y: 9 }
+  })(props => {
+    expect(props).toEqual({
+      players: { a: 7, x: 8 },
+      audio: { b: 2, y: 9 }
+    });
+    return <div />;
+  });
+  render(
+    <SoundsProvider players={{ a: 1 }} audio={{ b: 2 }}>
+      <Player />
+    </SoundsProvider>
+  );
+});
+
+test('Should allow props overwrite from component', () => {
+  const Player = withSounds({
+    players: { b: 4 },
+    audio: { z: 6 }
+  })(props => {
+    expect(props).toEqual({
+      players: { a: 1, b: 9, c: 10 },
+      audio: { x: 1, y: 3, z: 4 }
+    });
+    return <div />;
+  });
+  render(
+    <SoundsProvider
+      players={{ a: 1, b: 2 }}
+      audio={{ x: 1, y: 2 }}
+    >
+      <Player
+        players={{ b: 9, c: 10 }}
+        audio={{ y: 3, z: 4 }}
+      />
+    </SoundsProvider>
+  );
+});
+
+test('Should forward reference', () => {
+  class PlayerSource extends React.Component {
+    render () {
       return <div />;
-    };
-    const MyCompWithSounds = withSounds()(MyComp);
-
-    mount(
-      <Provider>
-        <MyCompWithSounds />
-      </Provider>
-    );
-    expect(render).toHaveBeenCalled();
-  });
-
-  test('Should create a component without default sounds', () => {
-    const sounds = { a: 1, b: 2 };
-    class Provider extends React.Component {
-      static childContextTypes = {
-        sounds: PropTypes.object
-      };
-      getChildContext () {
-        return { sounds };
-      }
-      render () {
-        return this.props.children; // eslint-disable-line react/prop-types
-      }
     }
-    const MyComp = props => {
-      expect(props.sounds).toBe(sounds); // eslint-disable-line react/prop-types
-      return <div />;
-    };
-    MyComp.defaultProps = {
-      sounds: { c: 3, d: 4 }
-    };
-    const MyCompWithSounds = withSounds()(MyComp);
-
-    mount(
-      <Provider>
-        <MyCompWithSounds />
-      </Provider>
-    );
-  });
-
-  test('Should work properly with another HOC (react-redux)', () => {
-    const state = 100;
-    const reducer = () => state;
-    const store = redux.createStore(reducer);
-
-    const sounds = { a: 1, b: 2 };
-    class SoundsProvider extends React.Component {
-      static childContextTypes = {
-        sounds: PropTypes.object
-      };
-      getChildContext () {
-        return { sounds };
-      }
-      render () {
-        return this.props.children; // eslint-disable-line react/prop-types
-      }
+    greet () {
+      return 'hello!';
     }
-    const MyComp = props => {
-      expect(props.data).toBe(state); // eslint-disable-line react/prop-types
-      expect(props.sounds).toBe(sounds); // eslint-disable-line react/prop-types
-      return <div />;
-    };
-
-    const mapStateToProps = data => ({ data });
-    const MyCompWithSounds = withSounds()(
-      reactRedux.connect(mapStateToProps)(MyComp)
-    );
-
-    mount(
-      <reactRedux.Provider store={store}>
-        <SoundsProvider>
-          <MyCompWithSounds />
-        </SoundsProvider>
-      </reactRedux.Provider>
-    );
-  });
+  }
+  const Player = withSounds()(PlayerSource);
+  let componentRef;
+  render(<Player ref={ref => (componentRef = ref)} />);
+  expect(componentRef.greet()).toBe('hello!');
 });

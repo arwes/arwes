@@ -24,11 +24,9 @@
   ],
   "main": "lib/index.js",
   "dependencies": {
-    "@babel/runtime": "^7.4.4",
-    "hoist-non-react-statics": "^3.3.0",
-    "howler": "^2.1.2"
+    "@babel/runtime": "^7.4.5"
   },
   "peerDependencies": {
-    "react": "16.x"
+    "react": "*"
   }
 }
