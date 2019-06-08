@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { SoundsContext } from '../SoundsContext';
 
 function withSounds (options = {}) {
-  return function hoc (Inner) {
+  return function hoc (Component) {
     function Sounds (props, ref) {
       let {
         players = {},
@@ -22,7 +22,7 @@ function withSounds (options = {}) {
       };
 
       return (
-        <Inner
+        <Component
           {...props}
           ref={ref}
           players={players}
@@ -31,7 +31,7 @@ function withSounds (options = {}) {
       );
     }
 
-    const soundsDisplayName = Inner.displayName || Inner.name;
+    const soundsDisplayName = Component.displayName || Component.name;
     Sounds.displayName = `withSounds(${soundsDisplayName})`;
 
     return React.forwardRef(Sounds);
