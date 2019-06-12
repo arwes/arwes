@@ -1,8 +1,8 @@
 # Purpose
 
-Arwes intends to materialize futuristic science fiction concepts in a toolset
-you may use to create interfaces inspired by advanced technology, especially spatial,
-influenced by alien conceptions.
+Arwes intends to materialize futuristic science fiction and cyberpunk concepts
+in a toolset you may use to create user experiences inspired by advanced technology
+and alien engineering.
 
 Connected, augmented, and energized are the feelings sought in the experiences
 provided by projects built with Arwes, so Arwes interfaces are intensive and rich.
@@ -17,8 +17,8 @@ These are the main fundamental ideas behind this project:
 ## Advanced Alien Technology
 
 Arwes elements should looks like they were made with advanced technology based on
-many fundamentally new scientific theories and created by developed alien
-civilizations or human societies millennia away in the future.
+fundamentally new scientific theories and created by developed alien civilizations
+or human societies hundreds of years in the future.
 
 But written and spoken languages with letters and numbers are still the primary
 means of communication, and mechanical interactions are still needed to manipulate
@@ -30,12 +30,11 @@ sophisticated futuristic devices.
 
 ## Clean and Sleek
 
-Design doesn't have to be cryptic to feel advanced. Elements should be shown clearly
+Design does not have to be cryptic to feel advanced. Elements should be shown clearly
 enough to express ideas without getting lost in visual effects.
 
-Sizes and spacing should be used properly to convey messages clearly. Controls and structural
-elements should not be too big just because they are important. Content should be legible and
-not convoluted or obfuscated.
+Sizes and spacing should be used properly to convey messages clearly.
+Content should be legible and not convoluted or obfuscated by fonts or colors.
 
 Arwes interfaces should look polished and sophisticated.
 
@@ -51,9 +50,9 @@ other places or even broadcast to the whole system.
 ## Energetic and Vibrant
 
 All components should connect with the user visually and aurally. By navigating,
-things shouldn't just appear or disappear; they should feel as if they are being
+things should not just appear or disappear; they should feel as if they are being
 assembled, evolved, and decomposed. The experience of using them should be that
-of an explorer and also a creator.
+of an explorer or a creator.
 
 Glowing elements should inspire energy and animation should activate it. Users
 should feel connected with the system.

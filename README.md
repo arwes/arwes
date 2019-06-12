@@ -43,9 +43,10 @@
 
 [Arwes](https://arwes.dev) is a web framework to build user interfaces
 for web applications based on futuristic science fiction and cyberpunk styles,
-animations, and sounds effects. The idea is to let you create realistic
-futuristic user experiences in your projects. The concepts behind are opinionated
-and try to inspire advanced space technology and alien influence.
+animations, and sound effects. The concepts behind are opinionated
+and try to inspire advanced space technology and alien influence. It is built
+on top of [React](https://reactjs.org), [JSS](https://cssinjs.org), [Anime](https://animejs.com),
+and [Howler](https://howlerjs.com).
 
 The project has a working version with the package [`arwes`](https://npmjs.org/package/arwes)
 and the documentation with the website [arwes.dev](https://arwes.dev).
@@ -55,10 +56,10 @@ API may change. Check out the source code at
 branch where you can find the components and the website.
 
 Currently, the development is at [`master`](https://github.com/arwes/arwes) branch
-with the package [`@arwes/arwes`](https://npmjs.org/package/@arwes/arwes). It is
-not a working version yet. It has major breaking changes and it is going through
-many refactors. The website will be worked on once the core new version is released
-in the repository [arwes.dev repository](https://github.com/arwes/arwes.dev).
+with the packages `@arwes/[package]`. They are not a working version yet,
+and they have major breaking changes with the `arwes` package.
+The website will be worked on once the new version is released in the repository
+[arwes.dev repository](https://github.com/arwes/arwes.dev).
 See [Roadmap](./ROADMAP.md) for more details.
 
 ## Packages
