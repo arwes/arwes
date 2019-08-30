@@ -70,6 +70,10 @@ milliseconds.
 - `merge: boolean` - If enabled and it is not a root node, the node will enter
 in the flow when its parent changes to `entering`.
 - `onUpdate: Function(flow)` - Get notified when flow state changes.
+- `onUpdateCheck: Function(({ component, prev: flow, next: flow }) => boolean)` -
+Called before the node is going to transition. If `false` is returned,
+the node is not transitioned. If `true` is returned, the transition will be
+transitioned. This converts the node partially to a `root` node.
 
 ### Methods
 
@@ -80,6 +84,9 @@ is going to transition from one state to another. It will not have effect when
 - `getDurationIn(): number` - Get the duration the node lasts entering,
 including `delay`.
 - `getDurationOut(); number` - Get the duration the node lasts exiting.
+- `hasEntered(): boolean` - If the node has entered in the system flow at least once.
+- `hasExited(): boolean` - If the node has exited in the system flow at least once.
+- `checkUpdate()` - If `onUpdateCheck` is defined, run it.
 
 ## `AnimationProvider`
 
@@ -195,20 +202,20 @@ It receives the same props as `Animation` and the following:
 - `stagger: boolean` - If `true`, the flow in the list will stagger given the
 `duration.stagger` duration. So if `duration.stagger = 75`, then the first item
 will enter at 0ms, the second at 75ms, the third at 150ms, and so on.
-- `onCheckActivation: Function((component, index: number) => boolean = true)` -
-Called before a children node is going to transition to `entering`. If it
-returns `false`, that component is not activated. If activated, it will be done
-when its component time of activation is calculated.
+- `onUpdateCheck: Function(({ component, prev: flow, next: flow, index: number }) => boolean)` -
+Called before a children node is going to transition. If `false` is returned,
+that node is not transitioned. If `true` is returned, the transition will be
+executed when its calculated time was decided. So it will work the same way with
+the serial or staggering flow animation strategy used. This converts the node
+partially to a `root` node.
 
 ### Methods
 
 - `getDurationIn(): number` - Get the duration all children nodes last entering.
 - `getDurationOut(); number` - Get the duration the first children node lasts
 exiting.
-- `checkActivation()` - Re-run `onCheckActivation` on each children node to determine
-if they can be enter the flow or not. Nodes will change of state according to the
-new results. The new changes will take work the same way with the serial or
-staggering flow animation strategy used.
+- `checkUpdate()` - If `onUpdateCheck` is defined, run it on each
+children node.
 
 ### Example 1
 
@@ -234,9 +241,10 @@ Animate a list of nodes using a staggering strategy with 100ms between them.
 
 ```js
 // Assuming there is a method `isVisible()` of all children components
-// to determine if they are visible on viewport. This will activate
-// hidden elements and deactivate shown elements.
-const onCheckActivation = component => component.isVisible();
+// to determine if they are visible on viewport.
+// This will only allow to show the elements if they are visible.
+const onUpdateCheck = ({ component, next }) =>
+    next.entering ? component.isVisible() : true;
 
 let secuence;
 let container;
@@ -244,7 +252,7 @@ let container;
 ...
 <Secuence
     ref={ref => (secuence = ref)}
-    onCheckActivation={onCheckActivation}
+    onUpdateCheck={onUpdateCheck}
 >
     <div ref={ref => (container = ref)}>
         <MyNode />
@@ -258,7 +266,7 @@ let container;
 // Assuming the `<MyNode />` elements are visible according to the container's
 // scroll. So, whenever is a change in the container's scroll, check
 // the nodes elements visibility and update their activation.
-container.addEventListener('scroll', () => secuence.checkActivation());
+container.addEventListener('scroll', () => secuence.checkUpdate());
 ```
 
 ## Animation Tools
