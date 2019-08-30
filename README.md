@@ -58,7 +58,7 @@ branch where you can find the components and the website.
 Currently, the development is at [`master`](https://github.com/arwes/arwes) branch
 with the packages `@arwes/[package]`. They are not a working version yet,
 and they have major breaking changes with the `arwes` package.
-The website will be worked on once the new version is released in the repository
+The website will be worked on once the new version is released in the
 [arwes.dev repository](https://github.com/arwes/arwes.dev).
 See [Roadmap](./ROADMAP.md) for more details.
 

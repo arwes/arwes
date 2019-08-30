@@ -1,6 +1,6 @@
 # Roadmap
 
-An ideal Arwes project _beta_ release would be for **2020 Q1**.
+An ideal Arwes project _beta_ release would be for **2020 Q2**.
 
 - The order in the lists don't represent priority.
 - Active items are represented with **bold**.
@@ -21,40 +21,63 @@ to decide and build the foundation of the framework.
 
 ### Q1
 
-- [x] Define and implement a new project architecture to improve organization, simplify tooling, and facilitate developers contributions.
-- [x] Complete started animation and sounds guidelines. These guidelines will establish the ground concepts for the framework to work.
-- [x] Research and playground new ideas and concepts to implement in the project with the [soulextract.com](https://github.com/soulextract/soulextract.com) side project. The results are going to be used in Arwes.
+- [x] Define and implement a new project architecture to improve organization,
+simplify tooling, and facilitate developers contributions.
+- [x] Complete started animation and sounds guidelines. These guidelines will
+establish the ground concepts for the framework to work.
+- [x] Research and playground new ideas and concepts to implement in the project
+with the [soulextract.com](https://github.com/soulextract/soulextract.com) side
+project. The results are going to be used in Arwes.
 
 ### Q2
 
-- [ ] Update contribution guidelines to allow developers to know what are the technical guidelines, architectures, workflow tasks, and communication and management details, in the project, to contribute in it.
-- [ ] Complete started purpose guideline document. This will clarify what is the vision of the project.
 - Animation System.
-    - [ ] **Create an animation specification to define the animation system architecture.**
+    - [x] Create an animation specification to define the animation system architecture.
     - [x] Document React components APIs to create animation systems.
-    - [ ] Research SEO and SSR strategies to standardize recommended animation setups and settings.
-    - [ ] Develop the `@arwes/animation` package with the animation system APIs.
 - Sounds System.
     - [x] Create a sounds specification to define the sound system architecture.
+    - [x] Develop the `@arwes/sounds` package with the sounds system APIs.
     - [x] Document React components APIs to create sounds systems.
-    - [ ] Research browser sound API supports and compatibility to standardize recommended sound setups and settings.
-    - [ ] **Develop the `@arwes/sounds` package with the sounds system APIs.**
 
 ### Q3
 
+- [ ] Complete started purpose guideline document. This will clarify what
+the vision of the project is.
+- [ ] Update contribution guidelines to allow developers to know what are the
+technical guidelines, architectures, workflow tasks, and communication and
+management details, in the project, to contribute in it.
+- Animation System.
+    - [ ] **Update animation system architecture specification with complex
+    animation flow scenearios.**
+    - [ ] Research SEO and SSR strategies to standardize recommended animation
+    setups and settings.
+    - [ ] Develop the `@arwes/animation` package with the animation system APIs.
+
+### Q4
+
+- Sounds System.
+    - [ ] Research browser sound API supports and compatibility to standardize
+    recommended sound setups and settings.
 - Design System.
     - [ ] Create a design specification to define the design tools architecture.
     - [ ] Create a design system for Arwes UI components.
     - [ ] Create a user experience specification for Arwes applications.
     - [ ] Develop the `@arwes/design` package with the design system APIs.
 - General Tools.
-    - [ ] Define general purpose tools and browser API tools to modularize.
+    - [ ] Define general purpose tools and browser API tools to modularize. It will
+    include tools for asset loading, viewport dimension, user-browser activity,
+    and any other general need.
     - [ ] Develop the `@arwes/platform` package with the general tools APIs.
 
-### Q4
+----
+
+## 2020
+
+### Q1
 
 - Arwes core components.
-    - [ ] Define the core UI components to modularize, independent of the design system variation used with the Arwes UI components.
+    - [ ] Define the core UI components to modularize, independent of the design
+    system variation used with the Arwes UI components.
     - [ ] Develop the `@arwes/core` package with the core UI components.
 - Arwes UI components.
     - [ ] Define the UI components to implement the specified Arwes design system.
@@ -65,12 +88,9 @@ to decide and build the foundation of the framework.
         - [ ] Define the Navigation UI components.
     - [ ] Develop the `@arwes/arwes` package with the UI components.
 
-----
-
-## 2020
-
-### Q1
+### Q2
 
 - [ ] Arwes UI components integration testing.
 - [ ] Create user guides documents where to specify how to use the framework.
-- [ ] Develop the website _arwes.dev_ for Arwes v1.0 to document the project vision, guidelines, documentation, APIs, and UI component playground.
+- [ ] Develop the website _arwes.dev_ for Arwes v1.0 to document the project
+vision, guidelines, documentation, APIs, and UI component playground.

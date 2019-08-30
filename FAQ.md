@@ -8,7 +8,7 @@
 Arwes is currently in _alpha_ version. It means there is ongoing development,
 APIs and guidelines can change and have breaking changes.
 
-An ideal Arwes project _beta_ release would be for **2020 Q1**.
+An ideal Arwes project _beta_ release would be for **2020 Q2**.
 
 A stable version is expected to be released anytime in **2020**.
 
