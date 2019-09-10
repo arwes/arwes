@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Howl } from 'howler';
 import { SoundsProvider } from '../SoundsProvider';
 import { withSounds } from './index';
 
-const PlayerSource = ({ players, audio, name }) => ( // eslint-disable-line react/prop-types
+const PlayerSource = ({ players, audio, name }) => (
   <button onClick={() => !audio.mute && players[name].play()}>
     Play {name}
   </button>
 );
+
+PlayerSource.propTypes = {
+  players: PropTypes.object,
+  audio: PropTypes.object,
+  name: PropTypes.string
+};
 
 const Player = withSounds()(PlayerSource);
 
