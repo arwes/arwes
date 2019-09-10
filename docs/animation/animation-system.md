@@ -51,42 +51,38 @@ This component is not used directly, instead it is used by a HOC (High Order Com
 ### Props
 
 - `animate: boolean = true` - Enable animations.
-- `root: boolean` - Animation operates independently from the rest of
-the system as a sub-system.
-- `activate: boolean = true` - Activate animation flow if it is a parent root
-animation node or `root` is enabled. Otherwise this component animation will
-be controlled by its parent component, not this prop.
+- `root: boolean` - Animation operates independently from its parent node,
+making it a root node. (Any node is root if it does not have a parent node.)
+- `activate: boolean = true` - Activate animation flow if it is a root node.
+Otherwise this component animation will be controlled by its parent component,
+not this prop.
 - `duration: number | Object` - Duration settings for this node. If number is
 provided, it only specifies `enter` and `exit` times. Any duration is set in
 milliseconds.
     - `enter: number = 200` - The duration the component lasts entering.
     - `exit: number = 200` - The duration the component lasts exiting.
-    - `stagger: number = 50` - The duration to start animating between nodes in a list
-    if applicable.
-    - `delay: number = 0` - Time to delay before transitioning from `exited` to `entering`.
-    It does not apply from `exiting`.
-    - `stable: boolean` - If a component is stable, its duration can not be changed
-    after definition. It should be used to determine how long animations last.
+    - `stagger: number = 50` - The duration to start animating between nodes
+    in a list if applicable.
+    - `delay: number = 0` - Time to delay only before transitioning from
+    `exited` to `entering`.
 - `merge: boolean` - If enabled and it is not a root node, the node will enter
 in the flow when its parent changes to `entering`.
-- `onUpdate: Function(flow)` - Get notified when flow state changes.
-- `onUpdateCheck: Function(({ component, prev: flow, next: flow }) => boolean)` -
+- `onUpdateFlow: Function(flow)` - Get notified when flow state changes.
+- `onUpdateFlowCheck: Function(({ component: Element, prev: flow, next: flow }) => boolean)` -
 Called before the node is going to transition. If `false` is returned,
-the node is not transitioned. If `true` is returned, the transition will be
-transitioned. This converts the node partially to a `root` node.
+the node is not transitioned. Otherwise, the transition takes place.
 
 ### Methods
 
-- `updateDuration(duration: number | Object)` - It can update the animation duration
-processed of the component. But it should only be called before the node
-is going to transition from one state to another. It will not have effect when
-`duration.stable = true`.
+- `getFlow(): flow` - Returns the current node flow state.
+- `updateFlow(flow)` - Receives the new flow state and transitions the node.
+- `updateDuration(duration: number | Object)` - It can update the animation
+duration processed of the component.
 - `getDurationIn(): number` - Get the duration the node lasts entering,
 including `delay`.
 - `getDurationOut(); number` - Get the duration the node lasts exiting.
 - `hasEntered(): boolean` - If the node has entered in the system flow at least once.
 - `hasExited(): boolean` - If the node has exited in the system flow at least once.
-- `checkUpdate()` - If `onUpdateCheck` is defined, run it.
 
 ## `AnimationProvider`
 
@@ -108,8 +104,8 @@ The descendant nodes will extend those props if available and defined.
 ## `withAnimation`
 
 Any component can be wired to the animation flow using a HOC named `withAnimation`.
-This will convert a component into a node in the system. It uses the `Animation`
-component under the hood.
+This will convert a component into an animation node in the system. It uses the
+`Animation` component under the hood.
 
 ### Options
 
@@ -138,11 +134,8 @@ object prop named `animation`.
 
 And the node component will receive the following props:
 
-- `animation: Object` - A copy of the animation settings processed for the component.
-But also some new properties.
-    - `updateDuration: Function` - A reference to the `Animation` component method
-    of the same name. It can be called on `componentDidMount`.
-- `flow: Object` - The animation flow state. It indicates in what point of the
+- `animationRef: Animation` - A reference to the `<Animation />` component instance.
+- `flow: Object` - The animation flow state. It indicates in which point of the
 animation flow the component is.
     - `status: string` - One of `entering`, `entered`, `exiting`, `exited`.
     - `entering: boolean`
@@ -151,12 +144,10 @@ animation flow the component is.
     - `exited: boolean`
 
 ```js
-class MyComponent extends React.PureComponent {
-    static propTypes = {
-        animation: PropTypes.object.isRequired,
-        flow: PropTypes.object.isRequired,
-        ...
-    }
+MyComponent.propTypes = {
+    animationRef: PropTypes.element.isRequired,
+    flow: PropTypes.object.isRequired,
+    ...
 }
 const MyNode = withAnimation()(MyComponent);
 ```
@@ -178,44 +169,39 @@ const MyNode = withAnimation()(MyComponent);
 
 The node component should use these methods or the flow states to animate
 the component elements. The actual animation functionalities are up to the
-component to use.
+component to implement.
 
 ## `Secuence`
 
 The `Secuence` virtual component can be used to handle serial flow changes in
 a list of nodes.
 
-This component behaves as a node.
+This component behaves the same way as the `Animation` component.
 
-By default, when the `Secuence` enters in the flow, its children nodes will start
-animating in serial. For example, once the component's first child changes to
-`entered`, the second child will change from `exited` to `entering`, and so on.
+By default, when the `Secuence` enters in the flow, its children nodes will [stagger](https://css-tricks.com/staggering-animations/)
+in the animation. For example, if the `duration.stagger = 50`, the first node
+will transition to `entering` at `0ms`, the second at `50ms`, the third at `100ms`,
+and so on.
 
-The first item will enter in the flow right away when the `Secuence` is ready
-to enter. If the `Secuence`'s parent it `entered` or it is a `root`, then
-its first child will change to `entering` if applicable.
+The first item node will enter in the flow right away when the `Secuence` enters.
 
 ### Props
 
 It receives the same props as `Animation` and the following:
 
-- `stagger: boolean` - If `true`, the flow in the list will stagger given the
-`duration.stagger` duration. So if `duration.stagger = 75`, then the first item
-will enter at 0ms, the second at 75ms, the third at 150ms, and so on.
-- `onUpdateCheck: Function(({ component, prev: flow, next: flow, index: number }) => boolean)` -
+- `serial: boolean = false` - If `true`, the nodes will transition to `entering`
+one after the previous one finishes. The first one will transition at `0ms`.
+- `onUpdateFlowCheck: Function(({ component: Element, prev: flow, next: flow, index: number }) => boolean)` -
 Called before a children node is going to transition. If `false` is returned,
-that node is not transitioned. If `true` is returned, the transition will be
-executed when its calculated time was decided. So it will work the same way with
-the serial or staggering flow animation strategy used. This converts the node
-partially to a `root` node.
+that node is not transitioned. If `true` is returned, the transition will take place.
 
 ### Methods
 
 - `getDurationIn(): number` - Get the duration all children nodes last entering.
 - `getDurationOut(); number` - Get the duration the first children node lasts
 exiting.
-- `checkUpdate()` - If `onUpdateCheck` is defined, run it on each
-children node.
+- `getAnimations(): Animation[]` - Get the animation components in the list.
+- `getComponents(): Element[]` - Get the animated components in the list.
 
 ### Example 1
 
@@ -223,7 +209,7 @@ Animate a list of nodes using a staggering strategy with 100ms between them.
 
 ```js
 <ul className='list'>
-    <Secuence stagger duration={{ stagger: 100 }}>
+    <Secuence duration={{ stagger: 100 }}>
         <li className='item'>
             <MyNode />
         </li>
@@ -239,22 +225,30 @@ Animate a list of nodes using a staggering strategy with 100ms between them.
 
 ### Example 2
 
-```js
-// Assuming there is a method `isVisible()` of all children components
-// to determine if they are visible on viewport.
-// This will only allow to show the elements if they are visible.
-const onUpdateCheck = ({ component, next }) =>
-    next.entering ? component.isVisible() : true;
+TODO: Strategy is inefficient.
 
-let secuence;
-let container;
+```js
+// Assuming there is a method `isVisible()` of `<MyNode />` elements
+// to determine if they are visible on viewport.
+
+const onUpdateFlowCheck = ({ component, next }) => {
+    // Only if the component is entering and it has not, we check if it is visible
+    // to let it enter.
+    if (next.entering && !component.hasEntered()) {
+        return component.isVisible();
+    }
+    return true;
+};
+
+const secuenceRef = createRef();
+const containerRef = createRef();
 
 ...
 <Secuence
-    ref={ref => (secuence = ref)}
-    onUpdateCheck={onUpdateCheck}
+    ref={secuenceRef}
+    onUpdateFlowCheck={onUpdateFlowCheck}
 >
-    <div ref={ref => (container = ref)}>
+    <div ref={containerRef}>
         <MyNode />
         <MyNode />
         <MyNode />
@@ -264,9 +258,14 @@ let container;
 ...
 
 // Assuming the `<MyNode />` elements are visible according to the container's
-// scroll. So, whenever is a change in the container's scroll, check
+// scroll. So, whenever there is a change in the container's scroll, check
 // the nodes elements visibility and update their activation.
-container.addEventListener('scroll', () => secuence.checkUpdate());
+containerRef.current.addEventListener('scroll', () => {
+    const animationRefs = secuenceRef.current.getAnimations();
+    animationRefs.map(animationRef => {
+        animationRef.updateFlow({ entering: true });
+    });
+});
 ```
 
 ## Animation Tools
