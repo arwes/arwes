@@ -2,12 +2,12 @@
 
 The Arwes Animation System is composed by a set of tools which follow the
 [Arwes Animation and Sounds Guidelines](../../guidelines/animation-and-sounds.md)
-implemented from React components.It goes hand in hand with the [Sounds System](../sounds/sounds-system.md).
+implemented from React components. It goes hand in hand with the [Sounds System](../sounds/sounds-system.md).
 
 ## Nodes
 
 - An animated component is a "node".
-- An application is a "system". A tree of nodes with one root.
+- An application is a "system". A tree of nodes with a root.
 - A sub-system is a branch of the system. Starting from a node as root.
 - The animation is a "flow" of states in the nodes.
 - A node can have one of the following four animation flow states:
@@ -33,8 +33,7 @@ the same time. So it is recommended to have the same exit duration for all nodes
 
 ![Animation System Flow](./animation-system-flow.png)
 
-- By default a node is animated. If a node is not animated, its descendant nodes
-will not be animated.
+- By default a node is animated.
 - A node is added to the system as `exited` if animation is enabled. If it is a
 root and activated, or its direct parent is `entered`, it should start `entering`.
 Otherwise it stays as `exited`.
@@ -54,8 +53,7 @@ This component is not used directly, instead it is used by a HOC (High Order Com
 - `root: boolean` - Animation operates independently from its parent node,
 making it a root node. (Any node is root if it does not have a parent node.)
 - `activate: boolean = true` - Activate animation flow if it is a root node.
-Otherwise this component animation will be controlled by its parent component,
-not this prop.
+Otherwise this component animation will be controlled externally, not this prop.
 - `duration: number | Object` - Duration settings for this node. If number is
 provided, it only specifies `enter` and `exit` times. Any duration is set in
 milliseconds.
@@ -67,22 +65,20 @@ milliseconds.
     `exited` to `entering`.
 - `merge: boolean` - If enabled and it is not a root node, the node will enter
 in the flow when its parent changes to `entering`.
-- `onUpdateFlow: Function(flow)` - Get notified when flow state changes.
-- `onUpdateFlowCheck: Function(({ component: Element, prev: flow, next: flow }) => boolean)` -
-Called before the node is going to transition. If `false` is returned,
-the node is not transitioned. Otherwise, the transition takes place.
+- `onActivate: Function(boolean)` - Get notified when the node is activated or
+deactivated.
 
 ### Methods
 
 - `getFlow(): flow` - Returns the current node flow state.
-- `updateFlow(flow)` - Receives the new flow state and transitions the node.
-- `updateDuration(duration: number | Object)` - It can update the animation
-duration processed of the component.
+- `hasEntered(): boolean` - If the node has entered in the system flow at least once.
+- `hasExited(): boolean` - If the node has exited in the system flow at least once.
 - `getDurationIn(): number` - Get the duration the node lasts entering,
 including `delay`.
 - `getDurationOut(); number` - Get the duration the node lasts exiting.
-- `hasEntered(): boolean` - If the node has entered in the system flow at least once.
-- `hasExited(): boolean` - If the node has exited in the system flow at least once.
+- `updateDuration(duration: number | Object)` - Update the animation duration.
+
+> To access these APIs, you would use an object referenced as `AnimationInterface`.
 
 ## `AnimationProvider`
 
@@ -92,6 +88,8 @@ default animation settings to all descendant nodes.
 The available props are: `animate` and `duration`.
 
 The descendant nodes will extend those props if available and defined.
+
+The providers can be stacked and their props will be merged.
 
 ### Example
 
@@ -134,7 +132,8 @@ object prop named `animation`.
 
 And the node component will receive the following props:
 
-- `animationRef: Animation` - A reference to the `<Animation />` component instance.
+- `animation: AnimationInterface` - An interface to access the `Animation`
+component instance API.
 - `flow: Object` - The animation flow state. It indicates in which point of the
 animation flow the component is.
     - `status: string` - One of `entering`, `entered`, `exiting`, `exited`.
@@ -145,7 +144,7 @@ animation flow the component is.
 
 ```js
 MyComponent.propTypes = {
-    animationRef: PropTypes.element.isRequired,
+    animation: PropTypes.object.isRequired,
     flow: PropTypes.object.isRequired,
     ...
 }
@@ -174,7 +173,7 @@ component to implement.
 ## `Secuence`
 
 The `Secuence` virtual component can be used to handle serial flow changes in
-a list of nodes.
+a list of nodes. The nodes do not necessarily have to be direct children.
 
 This component behaves the same way as the `Animation` component.
 
@@ -190,18 +189,21 @@ The first item node will enter in the flow right away when the `Secuence` enters
 It receives the same props as `Animation` and the following:
 
 - `serial: boolean = false` - If `true`, the nodes will transition to `entering`
-one after the previous one finishes. The first one will transition at `0ms`.
-- `onUpdateFlowCheck: Function(({ component: Element, prev: flow, next: flow, index: number }) => boolean)` -
-Called before a children node is going to transition. If `false` is returned,
-that node is not transitioned. If `true` is returned, the transition will take place.
+one after the previous one finishes. The first one will still transition at `0ms`.
+- `controlledChildren: boolean = true` - If `true`, the component will control
+its children flow state.
 
 ### Methods
 
-- `getDurationIn(): number` - Get the duration all children nodes last entering.
+- `getDurationIn(): number` - According to `serial` value, it sums all
+children duration or calculate the time they take to enter in staggering mode.
 - `getDurationOut(); number` - Get the duration the first children node lasts
 exiting.
-- `getAnimations(): Animation[]` - Get the animation components in the list.
-- `getComponents(): Element[]` - Get the animated components in the list.
+- `activateChildren(Function({ animation: AnimationInterface, component: Element, index: number }): boolean | null)` -
+Iterate over each child node and depending on the returned value, it updates
+the flow state. If boolean is returned, it changes the activation of the child
+node, unless it is the same current value. If no value is returned, the state
+remains the same.
 
 ### Example 1
 
@@ -225,28 +227,34 @@ Animate a list of nodes using a staggering strategy with 100ms between them.
 
 ### Example 2
 
-TODO: Strategy is inefficient.
+There is a long list of animated components inside a container element with scroll.
+Whenever the `Secuence` node is activated/deactivated or the container's scroll
+changes, check the components visibility and show/hide them.
 
 ```js
-// Assuming there is a method `isVisible()` of `<MyNode />` elements
-// to determine if they are visible on viewport.
-
-const onUpdateFlowCheck = ({ component, next }) => {
-    // Only if the component is entering and it has not, we check if it is visible
-    // to let it enter.
-    if (next.entering && !component.hasEntered()) {
-        return component.isVisible();
-    }
-    return true;
-};
+// Assuming there is a method `isVisible` of `MyNode`
+// to determine if they are visible on browser viewport.
 
 const secuenceRef = createRef();
 const containerRef = createRef();
 
+const updateChildrenFlow = () => {
+    const secuenceFlow = secuenceRef.current.getFlow();
+    const isSecuenceActivated = secuenceFlow.entering || secuenceFlow.entered;
+
+    secuenceRef.current.activateChildren(({ component }) => {
+        if (isSecuenceActivated && component.isVisible()) {
+            return true;
+        }
+        return false;
+    });
+};
+
 ...
 <Secuence
     ref={secuenceRef}
-    onUpdateFlowCheck={onUpdateFlowCheck}
+    controlledChildren={false}
+    onActivate={updateChildrenFlow}
 >
     <div ref={containerRef}>
         <MyNode />
@@ -257,15 +265,7 @@ const containerRef = createRef();
 </Secuence>
 ...
 
-// Assuming the `<MyNode />` elements are visible according to the container's
-// scroll. So, whenever there is a change in the container's scroll, check
-// the nodes elements visibility and update their activation.
-containerRef.current.addEventListener('scroll', () => {
-    const animationRefs = secuenceRef.current.getAnimations();
-    animationRefs.map(animationRef => {
-        animationRef.updateFlow({ entering: true });
-    });
-});
+containerRef.current.addEventListener('scroll', updateChildrenFlow);
 ```
 
 ## Animation Tools
