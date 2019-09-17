@@ -28,10 +28,11 @@ package can be started. And later the documentation and the website.
 
 In the packages information there is a badge indicating its status.
 
-- In Concept: The package is not yet specified.
-- In Planning: The package is in definition and specification.
-- In Development: The package is currently on development.
-- In Production: The package is ready for use.
+- In Concept
+- In Specification
+- In Development
+- In Testing
+- In Production
 
 See [roadmap](./ROADMAP.md) for more details.
 

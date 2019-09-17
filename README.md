@@ -80,7 +80,7 @@ Styling tools using [JSS](https://cssinjs.org) with React components.
 #### [`@arwes/animation`](./packages/animation)
 
 <div>
-    <img src="https://img.shields.io/badge/status-in%20planning-blue.svg" alt="status">
+    <img src="https://img.shields.io/badge/status-in%20specification-blue.svg" alt="status">
     <img src="https://img.shields.io/npm/dm/@arwes/animation.svg" alt="downloads" />
 </div>
 
