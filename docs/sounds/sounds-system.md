@@ -45,6 +45,8 @@ developer and used by the components however it is required.
 </SoundsProvider>
 ```
 
+The providers can be stacked and their props will be merged.
+
 ## `withSounds`
 
 A component can be converted in a node using the High Order Component (HOC)
