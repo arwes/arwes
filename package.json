@@ -5,6 +5,7 @@
     "clean": "lerna clean",
     "playground": "webpack-dev-server --config playground.config.js",
     "lint": "eslint ./packages/*/src",
+    "lint-fix": "eslint --fix ./packages/*/src",
     "test": "jest",
     "test-dev": "jest --watch",
     "test-cov": "jest --coverage",
