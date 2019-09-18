@@ -2,7 +2,7 @@
 
 An ideal Arwes project _beta_ release would be for **2020 Q2**.
 
-- The order in the lists don't represent priority.
+- The order in the lists does not represent priority.
 - Active items are represented with **bold**.
 - Tasks are listed in the [project boards](https://github.com/arwes/arwes/projects).
 
@@ -41,17 +41,17 @@ project. The results are going to be used in Arwes.
 
 ### Q3
 
-- [ ] Complete started purpose guideline document. This will clarify what
-the vision of the project is.
+- [ ] **Complete started purpose guideline document. This will clarify what
+the vision of the project is.**
 - [ ] Update contribution guidelines to allow developers to know what are the
 technical guidelines, architectures, workflow tasks, and communication and
 management details, in the project, to contribute in it.
 - Animation System.
-    - [ ] **Update animation system architecture specification with complex
-    animation flow scenearios.**
+    - [x] Update animation system architecture specification with complex
+    animation flow scenearios.
     - [ ] Research SEO and SSR strategies to standardize recommended animation
     setups and settings.
-    - [ ] Develop the `@arwes/animation` package with the animation system APIs.
+    - [ ] **Develop the `@arwes/animation` package with the animation system APIs.**
 
 ### Q4
 
