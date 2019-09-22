@@ -127,6 +127,11 @@ design system or design component implementations.
 
 Arwes design system React components.
 
+## Guidelines
+
+Check out [Arwes Guidelines](./guidelines) for detailed information about
+the concepts and inspiration projects behind the framework.
+
 ## Documentation
 
 **[arwes.dev](https://arwes.dev)** is for version `1.0.0-alpha.5`.
@@ -159,11 +164,6 @@ Repository: [soulextract/soulextract.com](https://github.com/soulextract/soulext
 Romel Pérez's personal website.
 
 Repository: [romelperez/romelperez.com](https://github.com/romelperez/romelperez.com)
-
-## Guidelines
-
-Check out [Arwes Guidelines](./guidelines) for detailed information about
-the concepts and inspiration projects behind the framework.
 
 ## Roadmap
 

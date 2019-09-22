@@ -1,8 +1,8 @@
 # Purpose
 
 Arwes intends to materialize futuristic science fiction and cyberpunk concepts
-in a toolset you may use to create user experiences inspired by advanced technology
-and alien engineering.
+in a web toolset you may use to create user experiences inspired by advanced
+technology and alien engineering.
 
 Connected, augmented, and energized are the feelings sought in the experiences
 provided by projects built with Arwes, so Arwes interfaces are intensive and rich.
@@ -28,6 +28,16 @@ Arwes design could be used in displays, virtual reality, augmented reality, and
 even holograms, and it should give users the impression that they are controlling
 sophisticated futuristic devices.
 
+## Energetic and Vibrant
+
+All components should connect with the user visually and aurally. By navigating,
+things should not just appear or disappear; they should feel as if they are being
+assembled, evolved, and decomposed. The experience of using them should be that
+of an explorer or a creator.
+
+Glowing elements should inspire energy and animation should activate it. Users
+should feel connected with the system.
+
 ## Clean and Sleek
 
 Design does not have to be cryptic to feel advanced. Elements should be shown clearly
@@ -46,13 +56,3 @@ But they can be elaborated. These elements should express that they have a funct
 All components in an experience should feel they are interconnected as a whole,
 so the experience is not just functional, but intelligent. Actions in one place can echo in
 other places or even broadcast to the whole system.
-
-## Energetic and Vibrant
-
-All components should connect with the user visually and aurally. By navigating,
-things should not just appear or disappear; they should feel as if they are being
-assembled, evolved, and decomposed. The experience of using them should be that
-of an explorer or a creator.
-
-Glowing elements should inspire energy and animation should activate it. Users
-should feel connected with the system.

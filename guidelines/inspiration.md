@@ -4,7 +4,7 @@ Main sources of inspiration come from these awesome projects:
 
 - [Star Citizen](http://robertsspaceindustries.com) ([Starmap](https://robertsspaceindustries.com/starmap))
 - [TRON: Legacy](http://www.imdb.com/title/tt1104001)
-- [Halo Games](https://www.halowaypoint.com/en-us/games/halo-2)
+- [Halo Games](https://www.halowaypoint.com/en-us/games)
 - [Futuristic HUD UI Pack](https://videohive.net/item/hud-ui-pack-700/19326628)
 - [Orbit SciFi UI Kit](https://creativemarket.com/dannehr/163951-Orbit-SciFi-UI-Kit)
 - [Boom Sci-Fi Designed](https://soundcloud.com/boom-library/sci-fi-designed)

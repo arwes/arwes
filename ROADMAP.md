@@ -41,8 +41,8 @@ project. The results are going to be used in Arwes.
 
 ### Q3
 
-- [ ] **Complete started purpose guideline document. This will clarify what
-the vision of the project is.**
+- [x] Complete started purpose guideline document. This will clarify what
+the vision of the project is.
 - [ ] Update contribution guidelines to allow developers to know what are the
 technical guidelines, architectures, workflow tasks, and communication and
 management details, in the project, to contribute in it.
