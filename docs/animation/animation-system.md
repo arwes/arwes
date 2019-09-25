@@ -40,9 +40,9 @@ Otherwise it stays as `exited`.
 - If a node is removed from the system and it is as `entered` or `entering`,
 it should start `exiting` and completely removed from the DOM when `exited`.
 
-## `Animation`
+## `Energy`
 
-The `Animation` component is an interface used to control the animation flow
+The `Energy` component is an interface used to control the animation flow
 in a component. It represents a node in the system.
 
 This component is not used directly, instead it is used by a HOC (High Order Component).
@@ -78,7 +78,7 @@ including `delay`.
 - `getDurationOut(); number` - Get the duration the node lasts exiting.
 - `updateDuration(duration: number | Object)` - Update the animation duration.
 
-> To access these APIs, you would use an object referenced as `AnimationInterface`.
+> To access these APIs, you would use an object referenced as `EnergyInterface`.
 
 ## `AnimationProvider`
 
@@ -103,7 +103,7 @@ The providers can be stacked and their props will be merged.
 
 Any component can be wired to the animation flow using a HOC named `withAnimation`.
 This will convert a component into an animation node in the system. It uses the
-`Animation` component under the hood.
+`Energy` component under the hood.
 
 ### Options
 
@@ -132,11 +132,11 @@ object prop named `animation`.
 
 And the node component will receive the following props:
 
-- `animation: AnimationInterface` - An interface to access the `Animation`
+- `energy: EnergyInterface` - An interface to access the `Energy`
 component instance API.
 - `flow: Object` - The animation flow state. It indicates in which point of the
 animation flow the component is.
-    - `status: string` - One of `entering`, `entered`, `exiting`, `exited`.
+    - `value: string` - One of `entering`, `entered`, `exiting`, `exited`.
     - `entering: boolean`
     - `entered: boolean`
     - `exiting: boolean`
@@ -144,7 +144,7 @@ animation flow the component is.
 
 ```js
 MyComponent.propTypes = {
-    animation: PropTypes.object.isRequired,
+    energy: PropTypes.object.isRequired,
     flow: PropTypes.object.isRequired,
     ...
 }
@@ -175,7 +175,7 @@ component to implement.
 The `Secuence` virtual component can be used to handle serial flow changes in
 a list of nodes. The nodes do not necessarily have to be direct children.
 
-This component behaves the same way as the `Animation` component.
+This component behaves the same way as the `Energy` component.
 
 By default, when the `Secuence` enters in the flow, its children nodes will [stagger](https://css-tricks.com/staggering-animations/)
 in the animation. For example, if the `duration.stagger = 50`, the first node
@@ -186,7 +186,7 @@ The first item node will enter in the flow right away when the `Secuence` enters
 
 ### Props
 
-It receives the same props as `Animation` and the following:
+It receives the same props as `Energy` and the following:
 
 - `serial: boolean = false` - If `true`, the nodes will transition to `entering`
 one after the previous one finishes. The first one will still transition at `0ms`.
@@ -199,7 +199,7 @@ its children flow state.
 children duration or calculate the time they take to enter in staggering mode.
 - `getDurationOut(); number` - Get the duration the first children node lasts
 exiting.
-- `activateChildren(Function({ animation: AnimationInterface, component: Element, index: number }): boolean | null)` -
+- `activateChildren(Function({ animation: EnergyInterface, component: Element, index: number }): boolean | null)` -
 Iterate over each child node and depending on the returned value, it updates
 the flow state. If boolean is returned, it changes the activation of the child
 node, unless it is the same current value. If no value is returned, the state
