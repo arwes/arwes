@@ -34,7 +34,7 @@ const styles = {
     width: '100%',
     height: 40,
     borderBottom: '1px solid #0ff',
-    backgroundColor: '#111',
+    backgroundColor: '#222',
     fontFamily: 'Monaco, Terminal, monospace',
     color: '#0ff'
   },
