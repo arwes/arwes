@@ -1,6 +1,5 @@
 /* eslint-env jest,browser */
 
-import sinon from 'sinon';
 import createResponsive from './index';
 
 describe('createResponsive', () => {
@@ -52,21 +51,21 @@ describe('createResponsive', () => {
       getDimensions: () => ({ width })
     });
 
-    const spy = sinon.spy();
+    const spy = jest.fn();
     responsive.on(spy);
 
     window.dispatchEvent(new Event('resize'));
     window.dispatchEvent(new Event('resize'));
 
     // The breakpoint has not changed.
-    expect(spy.callCount).toBe(0);
+    expect(spy).toHaveBeenCalledTimes(0);
 
     width = 250;
     window.dispatchEvent(new Event('resize'));
     window.dispatchEvent(new Event('resize'));
 
     // The breakpoint has changed once.
-    expect(spy.callCount).toBe(1);
+    expect(spy).toHaveBeenCalledTimes(1);
   });
 
   // TODO: Enable test case.
@@ -77,13 +76,13 @@ describe('createResponsive', () => {
       getDimensions: () => ({ width })
     });
 
-    const spy = sinon.spy();
+    const spy = jest.fn();
     const listener = responsive.on(spy);
 
     width = 250;
     window.dispatchEvent(new Event('resize'));
 
-    expect(spy.callCount).toBe(1);
+    expect(spy).toHaveBeenCalledTimes(1);
 
     responsive.off(listener);
 
@@ -91,6 +90,6 @@ describe('createResponsive', () => {
     window.dispatchEvent(new Event('resize'));
 
     // It shouldn't have been called again.
-    expect(spy.callCount).toBe(1);
+    expect(spy).toHaveBeenCalledTimes(1);
   });
 });
