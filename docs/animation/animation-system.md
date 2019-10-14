@@ -59,8 +59,6 @@ provided, it only specifies `enter` and `exit` times. Any duration is set in
 milliseconds.
     - `enter: number = 200` - The duration the component lasts entering.
     - `exit: number = 200` - The duration the component lasts exiting.
-    - `stagger: number = 50` - The duration to start animating between nodes
-    in a list if applicable.
     - `delay: number = 0` - Time to delay only before transitioning from
     `exited` to `entering`.
 - `merge: boolean` - If enabled and it is not a root node, the node will enter
@@ -99,16 +97,16 @@ The providers can be stacked and their props will be merged.
 </AnimationProvider>
 ```
 
-## `withAnimation`
+## `withEnergy`
 
-Any component can be wired to the animation flow using a HOC named `withAnimation`.
+Any component can be wired to the animation flow using a HOC named `withEnergy`.
 This will convert a component into an animation node in the system. It uses the
 `Energy` component under the hood.
 
 ### Options
 
 The HOC can receive options as an object defining the default options the
-nodes will take: `animate`, `root`, `activate`, and `duration`. It can also
+nodes will take: `animate`, `root`, `merge`, and `duration`. It can also
 take the following options:
 
 - `cycles: boolean = true` - If the component should enable the flow actions on
@@ -116,16 +114,16 @@ this component: `enter` and `exit` methods will be required on the component.
 
 ```js
 const options = { cycles: false, root: true, duration: { delay: 1000 } };
-const MyNode = withAnimation(options)(MyComponent);
+const MyNode = withEnergy(options)(MyComponent);
 ```
 
 ### Component Props Provided
 
 When a component uses the HOC, it can receive the animation settings by the
-object prop named `animation`.
+object prop named `energy`.
 
 ```js
-<MyNode animation={{ root: true, activate: false }} />
+<MyNode energy={{ root: true, activate: false }} />
 ```
 
 ### Component Props Received
@@ -134,36 +132,34 @@ And the node component will receive the following props:
 
 - `energy: EnergyInterface` - An interface to access the `Energy`
 component instance API.
-- `flow: Object` - The animation flow state. It indicates in which point of the
-animation flow the component is.
-    - `value: string` - One of `entering`, `entered`, `exiting`, `exited`.
-    - `entering: boolean`
-    - `entered: boolean`
-    - `exiting: boolean`
-    - `exited: boolean`
+    - `flow: Object` - The animation flow state. It indicates in which point
+    of the animation flow the component is.
+        - `value: string` - One of `entering`, `entered`, `exiting`, `exited`.
+        - `entering: boolean`
+        - `entered: boolean`
+        - `exiting: boolean`
+        - `exited: boolean`
 
 ```js
 MyComponent.propTypes = {
-    energy: PropTypes.object.isRequired,
-    flow: PropTypes.object.isRequired,
+    energy: PropTypes.object.isRequired
     ...
 }
-const MyNode = withAnimation()(MyComponent);
+const MyNode = withEnergy()(MyComponent);
 ```
 
 ### Cycles
 
 The node component should implement two methods, `enter` and `exit`, unless
-the HOC receives option `cycles = false`. The methods will be called when
-the node in the flow has to enter or exit. They will not be called if the node
-has `animate = false`.
+the HOC receives option `cycles = false` or `animate = false`. The methods
+will be called when the node in the flow has to enter or exit.
 
 ```js
 class MyComponent extends React.PureComponent {
     enter () { /* Run animations on entering. */ }
     exit () { /* Run animations on exiting. */ }
 }
-const MyNode = withAnimation()(MyComponent);
+const MyNode = withEnergy()(MyComponent);
 ```
 
 The node component should use these methods or the flow states to animate
@@ -182,8 +178,6 @@ in the animation. For example, if the `duration.stagger = 50`, the first node
 will transition to `entering` at `0ms`, the second at `50ms`, the third at `100ms`,
 and so on.
 
-The first item node will enter in the flow right away when the `Secuence` enters.
-
 ### Props
 
 It receives the same props as `Energy` and the following:
@@ -192,14 +186,18 @@ It receives the same props as `Energy` and the following:
 one after the previous one finishes. The first one will still transition at `0ms`.
 - `controlledChildren: boolean = true` - If `true`, the component will control
 its children flow state.
+- `duration: Object`
+    - `stagger: number = 50` - The duration to start animating between nodes
+    in a list if staggering is enabled.
+- _`merge` - It is not available._
 
 ### Methods
 
-- `getDurationIn(): number` - According to `serial` value, it sums all
-children duration or calculate the time they take to enter in staggering mode.
+- `getDurationIn(): number` - If `serial`, it sums all children duration,
+otherwise it calculates the time they take to enter in staggering mode.
 - `getDurationOut(); number` - Get the duration the first children node lasts
 exiting.
-- `activateChildren(Function({ animation: EnergyInterface, component: Element, index: number }): boolean | null)` -
+- `activateChildren(Function({ energy: EnergyInterface, component: Element, index: number }): boolean | null)` -
 Iterate over each child node and depending on the returned value, it updates
 the flow state. If boolean is returned, it changes the activation of the child
 node, unless it is the same current value. If no value is returned, the state
