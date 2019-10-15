@@ -49,11 +49,11 @@ test('Should provide "duration" with enter/exit values if defined with number', 
 test('Should provide "duration" with defined values', () => {
   function Animated () {
     const { duration } = useContext(AnimationContext);
-    expect(duration).toEqual({ enter: 150 });
+    expect(duration).toEqual({ enter: 150, delay: 50 });
     return <div />;
   }
   render(
-    <AnimationProvider duration={{ enter: 150 }}>
+    <AnimationProvider duration={{ enter: 150, delay: 50 }}>
       <Animated />
     </AnimationProvider>
   );

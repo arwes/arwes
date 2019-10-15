@@ -19,9 +19,12 @@ class Component extends React.PureComponent {
       PropTypes.number,
       PropTypes.shape({
         enter: PropTypes.number,
-        exit: PropTypes.number
+        exit: PropTypes.number,
+        delay: PropTypes.number
       })
     ]),
+    merge: PropTypes.bool,
+    onActivate: PropTypes.func,
     animationContext: PropTypes.any,
     parentEnergyContext: PropTypes.any,
     children: PropTypes.any
@@ -43,12 +46,16 @@ class Component extends React.PureComponent {
     }
   }
 
-  componentDidUpdate (prevProps, prevState) {
+  componentDidUpdate () {
     const animate = this.isAnimate();
     const activated = this.isActivated();
 
     if (animate && activated !== this.activated) {
       this.activated = activated;
+
+      if (this.props.onActivate) {
+        this.props.onActivate(activated);
+      }
 
       if (activated) {
         this.enter();
@@ -119,7 +126,7 @@ class Component extends React.PureComponent {
   }
 
   getDuration () {
-    const defaultDuration = { enter: 200, exit: 200 };
+    const defaultDuration = { enter: 200, exit: 200, delay: 0 };
 
     const providedDuration = this.props.animationContext.duration;
 
@@ -145,21 +152,30 @@ class Component extends React.PureComponent {
       return true;
     }
     else {
-      return !!this.props.parentEnergyContext.flow.entered;
+      const parentFlow = this.props.parentEnergyContext.flow;
+      if (this.props.merge) {
+        return !!(parentFlow.entering || parentFlow.entered);
+      }
+      else {
+        return !!parentFlow.entered;
+      }
     }
   }
 
   enter () {
-    this.schedule(0, () => {
-      const flowValue = this.state.flow.value;
+    const flowValue = this.state.flow.value;
 
-      if (flowValue === ENTERING || flowValue === ENTERED) {
-        return;
-      }
+    if (flowValue === ENTERING || flowValue === ENTERED) {
+      return;
+    }
+
+    const duration = this.getDuration();
+    const delay = flowValue === EXITED ? duration.delay : 0;
+
+    this.schedule(delay, () => {
+      const duration = this.getDuration();
 
       this.setFlowValue(ENTERING);
-
-      const duration = this.getDuration();
       this.schedule(duration.enter, () => this.setFlowValue(ENTERED));
     });
   }
@@ -167,14 +183,13 @@ class Component extends React.PureComponent {
   exit () {
     this.schedule(0, () => {
       const flowValue = this.state.flow.value;
+      const duration = this.getDuration();
 
       if (flowValue === EXITING || flowValue === EXITED) {
         return;
       }
 
       this.setFlowValue(EXITING);
-
-      const duration = this.getDuration();
       this.schedule(duration.exit, () => this.setFlowValue(EXITED));
     });
   }

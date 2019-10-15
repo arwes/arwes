@@ -39,7 +39,8 @@ AnimationProvider.propTypes = {
     PropTypes.number,
     PropTypes.shape({
       enter: PropTypes.number,
-      exit: PropTypes.number
+      exit: PropTypes.number,
+      delay: PropTypes.number
     })
   ]),
   children: PropTypes.any

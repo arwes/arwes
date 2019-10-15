@@ -75,10 +75,10 @@ describe('isRoot()', () => {
 });
 
 describe('getDuration()', () => {
-  test('Should return 200ms for enter/exit by default', () => {
+  test('Should return 200ms for enter/exit and 0ms for delay by default', () => {
     let energy;
     render(<Energy ref={r => (energy = r)} />);
-    expect(energy.getDuration()).toMatchObject({ enter: 200, exit: 200 });
+    expect(energy.getDuration()).toMatchObject({ enter: 200, exit: 200, delay: 0 });
   });
 
   test('Should duration be extended by animation context', () => {
@@ -94,11 +94,11 @@ describe('getDuration()', () => {
   test('Should duration be extended by animation context and prop', () => {
     let energy;
     render(
-      <AnimationProvider duration={{ enter: 700, exit: 500 }}>
+      <AnimationProvider duration={{ enter: 700, exit: 500, delay: 50 }}>
         <Energy ref={r => (energy = r)} duration={{ exit: 700 }} />
       </AnimationProvider>
     );
-    expect(energy.getDuration()).toMatchObject({ enter: 700, exit: 700 });
+    expect(energy.getDuration()).toMatchObject({ enter: 700, exit: 700, delay: 50 });
   });
 
   test('Should set enter/exit values with provided number', () => {
