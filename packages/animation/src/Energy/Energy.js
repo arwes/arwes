@@ -8,7 +8,6 @@ const ENTERING = 'entering';
 const ENTERED = 'entered';
 const EXITING = 'exiting';
 const EXITED = 'exited';
-const createFlow = value => ({ value, [value]: true });
 
 class Component extends React.PureComponent {
   static propTypes = {
@@ -32,9 +31,19 @@ class Component extends React.PureComponent {
 
   constructor () {
     super(...arguments);
-    this.activated = false;
-    this.scheduleTimeout = null;
+
     this.state = this.getInitialState();
+    this.flowHasEntered = false;
+    this.flowHasExited = false;
+    this.activated = false;
+    this.customDuration = null;
+    this.scheduleTimeout = null;
+  }
+
+  getInitialState () {
+    const flowValue = this.isAnimate() ? EXITED : ENTERED;
+    const energyInterface = this.getEnergyInterface(flowValue);
+    return { flowValue, energyInterface };
   }
 
   componentDidMount () {
@@ -72,27 +81,43 @@ class Component extends React.PureComponent {
 
   render () {
     return (
-      <EnergyContext.Provider value={this.state}>
+      <EnergyContext.Provider value={this.state.energyInterface}>
         {this.props.children}
       </EnergyContext.Provider>
     );
   }
 
-  getInitialState () {
-    const flowValue = this.isAnimate() ? EXITED : ENTERED;
-    const flow = createFlow(flowValue);
-
-    return { flow };
+  setFlowValue (flowValue) {
+    const energyInterface = this.getEnergyInterface(flowValue);
+    this.setState(
+      state => ({ ...state, flowValue, energyInterface }),
+      () => {
+        if (flowValue === ENTERED) {
+          this.flowHasEntered = true;
+        }
+        else if (flowValue === EXITED) {
+          this.flowHasExited = true;
+        }
+      }
+    );
   }
 
   getFlow () {
-    return this.state.flow;
+    return this.state.energyInterface.flow;
   }
 
-  setFlowValue (flowValue) {
-    const flow = createFlow(flowValue);
+  getEnergyInterface (flowValue) {
+    const { getDuration, getDurationIn, getDurationOut, hasEntered, hasExited } = this;
+    const flow = Object.freeze({ value: flowValue, [flowValue]: true });
 
-    this.setState(state => ({ ...state, flow }));
+    return Object.freeze({
+      getDuration,
+      getDurationIn,
+      getDurationOut,
+      hasEntered,
+      hasExited,
+      flow
+    });
   }
 
   isAnimate () {
@@ -125,7 +150,7 @@ class Component extends React.PureComponent {
     return root;
   }
 
-  getDuration () {
+  getDuration = () => {
     const defaultDuration = { enter: 200, exit: 200, delay: 0 };
 
     const providedDuration = this.props.animationContext.duration;
@@ -138,10 +163,36 @@ class Component extends React.PureComponent {
     const duration = {
       ...defaultDuration,
       ...providedDuration,
-      ...propDuration
+      ...propDuration,
+      ...this.customDuration
     };
 
     return duration;
+  }
+
+  getDurationIn = () => {
+    const duration = this.getDuration();
+    return duration.enter + duration.delay;
+  }
+
+  getDurationOut = () => {
+    const duration = this.getDuration();
+    return duration.exit;
+  }
+
+  updateDuration = duration => {
+    const customDuration = typeof duration === 'number'
+      ? { enter: duration, exit: duration }
+      : duration;
+    this.customDuration = customDuration;
+  }
+
+  hasEntered = () => {
+    return this.flowHasEntered;
+  }
+
+  hasExited = () => {
+    return this.flowHasExited;
   }
 
   isActivated () {
@@ -153,6 +204,7 @@ class Component extends React.PureComponent {
     }
     else {
       const parentFlow = this.props.parentEnergyContext.flow;
+
       if (this.props.merge) {
         return !!(parentFlow.entering || parentFlow.entered);
       }
@@ -163,7 +215,7 @@ class Component extends React.PureComponent {
   }
 
   enter () {
-    const flowValue = this.state.flow.value;
+    const flowValue = this.state.flowValue;
 
     if (flowValue === ENTERING || flowValue === ENTERED) {
       return;
@@ -181,13 +233,14 @@ class Component extends React.PureComponent {
   }
 
   exit () {
-    this.schedule(0, () => {
-      const flowValue = this.state.flow.value;
-      const duration = this.getDuration();
+    const flowValue = this.state.flowValue;
 
-      if (flowValue === EXITING || flowValue === EXITED) {
-        return;
-      }
+    if (flowValue === EXITING || flowValue === EXITED) {
+      return;
+    }
+
+    this.schedule(0, () => {
+      const duration = this.getDuration();
 
       this.setFlowValue(EXITING);
       this.schedule(duration.exit, () => this.setFlowValue(EXITED));
