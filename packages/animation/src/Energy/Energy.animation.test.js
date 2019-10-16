@@ -17,19 +17,19 @@ afterEach(() => {
 test('Should set energy flow as "entered" if no "animate"', () => {
   let energy;
   render(<Energy ref={r => (energy = r)} animate={false} />);
-  expect(energy.state.flow.entered).toBe(true);
+  expect(energy.getFlow().entered).toBe(true);
   jest.advanceTimersByTime(10);
-  expect(energy.state.flow.entered).toBe(true);
+  expect(energy.getFlow().entered).toBe(true);
 });
 
 test('Should delay energy flow from "exited" the "duration.delay" time', () => {
   let energy;
   render(<Energy ref={r => (energy = r)} duration={{ enter: 100, delay: 100 }} />);
-  expect(energy.state.flow.exited).toBe(true);
+  expect(energy.getFlow().exited).toBe(true);
   jest.advanceTimersByTime(90);
-  expect(energy.state.flow.exited).toBe(true);
+  expect(energy.getFlow().exited).toBe(true);
   jest.advanceTimersByTime(20); // 110ms
-  expect(energy.state.flow.entering).toBe(true);
+  expect(energy.getFlow().entering).toBe(true);
 });
 
 test('Should get notified with "onActivate" when activation changes', () => {
@@ -66,9 +66,9 @@ describe('root', () => {
   test('Should set energy flow as "exited" if "activate", and start "entering"', () => {
     let energy;
     render(<Energy ref={r => (energy = r)} />);
-    expect(energy.state.flow.exited).toBe(true);
+    expect(energy.getFlow().exited).toBe(true);
     jest.advanceTimersByTime(10);
-    expect(energy.state.flow.entering).toBe(true);
+    expect(energy.getFlow().entering).toBe(true);
   });
 
   test('Should "activate" set energy flow', () => {
@@ -85,17 +85,17 @@ describe('root', () => {
     setTimeout(() => example.setState({ activate: true }), 50);
     setTimeout(() => example.setState({ activate: false }), 200);
 
-    expect(energy.state.flow.exited).toBe(true);
+    expect(energy.getFlow().exited).toBe(true);
     jest.advanceTimersByTime(10); // 10ms
-    expect(energy.state.flow.exited).toBe(true);
+    expect(energy.getFlow().exited).toBe(true);
     jest.advanceTimersByTime(50); // 60ms
-    expect(energy.state.flow.entering).toBe(true);
+    expect(energy.getFlow().entering).toBe(true);
     jest.advanceTimersByTime(100); // 160ms
-    expect(energy.state.flow.entered).toBe(true);
+    expect(energy.getFlow().entered).toBe(true);
     jest.advanceTimersByTime(100); // 260ms
-    expect(energy.state.flow.exiting).toBe(true);
+    expect(energy.getFlow().exiting).toBe(true);
     jest.advanceTimersByTime(50); // 310ms
-    expect(energy.state.flow.exited).toBe(true);
+    expect(energy.getFlow().exited).toBe(true);
   });
 });
 
@@ -119,11 +119,11 @@ describe('parent energy', () => {
     setTimeout(() => example.setState({ activate: false }), 200);
 
     jest.advanceTimersByTime(10); // 10ms
-    expect(energy.state.flow.exited).toBe(true);
+    expect(energy.getFlow().exited).toBe(true);
     jest.advanceTimersByTime(50); // 60ms
-    expect(energy.state.flow.exited).toBe(true);
+    expect(energy.getFlow().exited).toBe(true);
     jest.advanceTimersByTime(200); // 260ms
-    expect(energy.state.flow.exited).toBe(true);
+    expect(energy.getFlow().exited).toBe(true);
   });
 
   test('Should parent energy context set energy flow', () => {
@@ -147,20 +147,20 @@ describe('parent energy', () => {
     setTimeout(() => example.setState({ flow: { exited: true } }), 600);
 
     jest.advanceTimersByTime(10); // 10ms
-    expect(energy.state.flow.exited).toBe(true);
+    expect(energy.getFlow().exited).toBe(true);
 
     jest.advanceTimersByTime(100); // 110ms
-    expect(energy.state.flow.exited).toBe(true);
+    expect(energy.getFlow().exited).toBe(true);
     jest.advanceTimersByTime(100); // 210ms
-    expect(energy.state.flow.entering).toBe(true);
+    expect(energy.getFlow().entering).toBe(true);
     jest.advanceTimersByTime(100); // 310ms
-    expect(energy.state.flow.entered).toBe(true);
+    expect(energy.getFlow().entered).toBe(true);
 
     // It should be "exiting" when its parent is "exiting".
     jest.advanceTimersByTime(200); // 510ms
-    expect(energy.state.flow.exiting).toBe(true);
+    expect(energy.getFlow().exiting).toBe(true);
     jest.advanceTimersByTime(100); // 610ms
-    expect(energy.state.flow.exited).toBe(true);
+    expect(energy.getFlow().exited).toBe(true);
   });
 
   test('Should parent energy context set energy flow to enter if "entering" or "entered" if "merge=true"', () => {
@@ -184,17 +184,56 @@ describe('parent energy', () => {
     setTimeout(() => example.setState({ flow: { exited: true } }), 500);
 
     jest.advanceTimersByTime(10); // 10ms
-    expect(energy.state.flow.exited).toBe(true);
+    expect(energy.getFlow().exited).toBe(true);
 
     jest.advanceTimersByTime(100); // 110ms
-    expect(energy.state.flow.entering).toBe(true);
+    expect(energy.getFlow().entering).toBe(true);
     jest.advanceTimersByTime(100); // 210ms
-    expect(energy.state.flow.entered).toBe(true);
+    expect(energy.getFlow().entered).toBe(true);
 
     // It should be "exiting" when its parent is "exiting".
     jest.advanceTimersByTime(200); // 410ms
-    expect(energy.state.flow.exiting).toBe(true);
+    expect(energy.getFlow().exiting).toBe(true);
     jest.advanceTimersByTime(100); // 510ms
-    expect(energy.state.flow.exited).toBe(true);
+    expect(energy.getFlow().exited).toBe(true);
+  });
+});
+
+describe('hasEntered()', () => {
+  test('Should return true if it has been in "entered" at least once', () => {
+    let energy;
+    render(<Energy ref={r => (energy = r)} duration={100} />);
+    jest.advanceTimersByTime(10);
+    expect(energy.hasEntered()).toBe(false);
+    jest.advanceTimersByTime(100); // 110ms
+    expect(energy.hasEntered()).toBe(true);
+  });
+});
+
+describe('hasExited()', () => {
+  test('Should return true if it has been in "exited" at least once', () => {
+    let energy;
+    let example;
+    class Example extends React.PureComponent {
+      state = { activate: true };
+      render () {
+        const { activate } = this.state;
+        return <Energy ref={r => (energy = r)} duration={100} activate={activate} />;
+      }
+    }
+    render(<Example ref={r => (example = r)} />);
+    setTimeout(() => example.setState({ activate: false }), 200);
+
+    jest.advanceTimersByTime(10);
+    expect(energy.hasExited()).toBe(false);
+
+    jest.advanceTimersByTime(100); // 110ms
+    expect(energy.hasExited()).toBe(false);
+
+    jest.advanceTimersByTime(100); // 210ms
+    expect(energy.hasExited()).toBe(false);
+
+    jest.advanceTimersByTime(100); // 310ms
+    expect(energy.hasExited()).toBe(true);
   });
 });
