@@ -117,3 +117,27 @@ test('Should not call component methods if "options.cycles=false"', async () => 
   await sleep(60);
   expect(onEnter).not.toHaveBeenCalled();
 });
+
+test('Should set component default props', () => {
+  class ExampleComponent extends React.PureComponent {
+    render () {
+      expect(this.props.energy.getDuration()).toMatchObject({ enter: 700 }); // eslint-disable-line react/prop-types
+      return <div />;
+    }
+  }
+  const options = { duration: { enter: 700 } };
+  const Example = withEnergy(options)(ExampleComponent);
+  render(<Example />);
+});
+
+test('Should set component default props and be extended by provided props', () => {
+  class ExampleComponent extends React.PureComponent {
+    render () {
+      expect(this.props.energy.getDuration()).toMatchObject({ enter: 500 }); // eslint-disable-line react/prop-types
+      return <div />;
+    }
+  }
+  const options = { duration: { enter: 700 } };
+  const Example = withEnergy(options)(ExampleComponent);
+  render(<Example energy={{ duration: { enter: 500 } }} />);
+});
