@@ -8,6 +8,7 @@ function withEnergy (options) {
     cycles: true,
     ...options
   };
+  const { cycles, ...energyOptions } = options;
 
   return function (Inner) {
     function EnergyManager ({ forwardRef, children, ...etc }) {
@@ -15,7 +16,7 @@ function withEnergy (options) {
       const inner = useRef();
 
       useEffect(() => {
-        if (inner && options.cycles) {
+        if (inner && cycles) {
           if (energy.flow.entering) {
             inner.current.enter();
           }
@@ -52,9 +53,14 @@ function withEnergy (options) {
     };
 
     const WithEnergy = React.forwardRef((props, ref) => {
-      const { energy, ...etc } = props;
+      const { energy: energyProvided, ...etc } = props;
+      const energyToConfigure = {
+        ...energyOptions,
+        ...energyProvided
+      };
+
       return (
-        <Energy {...energy}>
+        <Energy {...energyToConfigure}>
           <EnergyManager {...etc} forwardRef={ref} />
         </Energy>
       );
