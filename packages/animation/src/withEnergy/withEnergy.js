@@ -14,6 +14,23 @@ function withEnergy (options) {
     function EnergyManager ({ forwardRef, children, ...etc }) {
       const energy = useEnergy();
       const inner = useRef();
+      const others = {};
+
+      // Only if component requires a reference, add it.
+      // This allows the component to be a function if not.
+      if (cycles || forwardRef) {
+        others.ref = ref => {
+          inner.current = ref;
+          if (forwardRef) {
+            if (typeof forwardRef === 'function') {
+              forwardRef(ref);
+            }
+            else {
+              forwardRef.current = ref;
+            }
+          }
+        };
+      }
 
       useEffect(() => {
         if (inner && cycles) {
@@ -27,21 +44,7 @@ function withEnergy (options) {
       }, [energy.flow.value]);
 
       return (
-        <Inner
-          {...etc}
-          ref={ref => {
-            inner.current = ref;
-            if (forwardRef) {
-              if (typeof forwardRef === 'function') {
-                forwardRef(ref);
-              }
-              else {
-                forwardRef.current = ref;
-              }
-            }
-          }}
-          energy={energy}
-        >
+        <Inner {...etc} {...others} energy={energy}>
           {children}
         </Inner>
       );

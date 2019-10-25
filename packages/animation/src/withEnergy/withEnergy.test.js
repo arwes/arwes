@@ -141,3 +141,10 @@ test('Should set component default props and be extended by provided props', () 
   const Example = withEnergy(options)(ExampleComponent);
   render(<Example energy={{ duration: { enter: 500 } }} />);
 });
+
+test('Should accept functions as components when "cycles=false" and not referenced', () => {
+  const ExampleComponent = () => <div />;
+  const options = { cycles: false };
+  const Example = withEnergy(options)(ExampleComponent);
+  render(<Example />);
+});
