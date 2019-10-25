@@ -34,3 +34,19 @@ test('Should provide "players" and "audio" with provided values', () => {
     </SoundsProvider>
   );
 });
+
+test('Should support nested providers and extend provided values', () => {
+  function Player () {
+    const { players, audio } = useContext(SoundsContext);
+    expect(players).toEqual({ a: 3, b: 4 });
+    expect(audio).toEqual({ x: 2, y: 5 });
+    return <div />;
+  }
+  render(
+    <SoundsProvider players={{ a: 1 }} audio={{ x: 2 }}>
+      <SoundsProvider players={{ a: 3, b: 4 }} audio={{ y: 5 }}>
+        <Player />
+      </SoundsProvider>
+    </SoundsProvider>
+  );
+});
