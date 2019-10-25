@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { SoundsContext } from '../SoundsContext';
 
 function SoundsProvider ({ players, audio, children }) {
+  const parentContext = useContext(SoundsContext) || {};
+  const providedValue = {
+    players: {
+      ...parentContext.players,
+      ...players
+    },
+    audio: {
+      ...parentContext.audio,
+      ...audio
+    }
+  };
+
   return (
-    <SoundsContext.Provider value={{ players, audio }}>
+    <SoundsContext.Provider value={providedValue}>
       {children}
     </SoundsContext.Provider>
   );
