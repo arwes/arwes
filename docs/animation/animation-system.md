@@ -76,7 +76,7 @@ deactivated.
 - `getDuration(): Object` - Get the node duration values.
 - `getDurationIn(): number` - Get the duration the node lasts entering,
 including `delay`.
-- `getDurationOut(); number` - Get the duration the node lasts exiting.
+- `getDurationOut(): number` - Get the duration the node lasts exiting.
 - `updateDuration(duration: number | Object)` - Update the animation duration.
 - `updateActivation(boolean)` -
 Updates the node flow activation with provided value.

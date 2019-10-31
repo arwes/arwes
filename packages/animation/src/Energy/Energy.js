@@ -3,6 +3,13 @@ import PropTypes from 'prop-types';
 import { useAnimation } from '../useAnimation';
 import { EnergyContext } from '../EnergyContext';
 import { useEnergy } from '../useEnergy';
+import { makeIsAnimate } from '../makeIsAnimate';
+import { makeIsRoot } from '../makeIsRoot';
+import { makeIsActivated } from '../makeIsActivated';
+import { makeGetEnergyInterface } from '../makeGetEnergyInterface';
+import { makeDurationManager } from '../makeDurationManager';
+import { makeFlowManager } from '../makeFlowManager';
+import { makeScheduler } from '../makeScheduler';
 
 const ENTERING = 'entering';
 const ENTERED = 'entered';
@@ -10,6 +17,7 @@ const EXITING = 'exiting';
 const EXITED = 'exited';
 
 class Component extends React.PureComponent {
+  /* eslint-disable react/no-unused-prop-types */
   static propTypes = {
     animate: PropTypes.bool,
     root: PropTypes.bool,
@@ -28,55 +36,41 @@ class Component extends React.PureComponent {
     parentEnergyContext: PropTypes.any,
     children: PropTypes.any
   };
+  /* eslint-enable react/no-unused-prop-types */
 
   constructor () {
     super(...arguments);
 
+    this.isAnimate = makeIsAnimate(this);
+    this.isRoot = makeIsRoot(this);
+    this.isActivated = makeIsActivated(this);
+    this.getEnergyInterface = makeGetEnergyInterface(this);
+    this.durationManager = makeDurationManager(this);
+    this.flowManager = makeFlowManager(this);
+    this.scheduler = makeScheduler();
+
     this.state = this.getInitialState();
-    this.flowHasEntered = false;
-    this.flowHasExited = false;
-    this.activated = false;
-    this.customDuration = null;
-    this.scheduleTimeout = null;
+    this._flowHasEntered = false;
+    this._flowHasExited = false;
   }
 
   getInitialState () {
     const flowValue = this.isAnimate() ? EXITED : ENTERED;
     const energyInterface = this.getEnergyInterface(flowValue);
+
     return { flowValue, energyInterface };
   }
 
   componentDidMount () {
-    const animate = this.isAnimate();
-    const activated = this.isActivated();
-
-    if (animate && activated) {
-      this.enter();
-    }
+    this.flowManager.checkMount();
   }
 
   componentDidUpdate () {
-    const animate = this.isAnimate();
-    const activated = this.isActivated();
-
-    if (animate && activated !== this.activated) {
-      this.activated = activated;
-
-      if (this.props.onActivate) {
-        this.props.onActivate(activated);
-      }
-
-      if (activated) {
-        this.enter();
-      }
-      else {
-        this.exit();
-      }
-    }
+    this.flowManager.checkUpdate();
   }
 
   componentWillUnmount () {
-    this.unschedule();
+    this.scheduler.stop();
   }
 
   render () {
@@ -89,14 +83,15 @@ class Component extends React.PureComponent {
 
   setFlowValue (flowValue) {
     const energyInterface = this.getEnergyInterface(flowValue);
+
     this.setState(
       state => ({ ...state, flowValue, energyInterface }),
       () => {
         if (flowValue === ENTERED) {
-          this.flowHasEntered = true;
+          this._flowHasEntered = true;
         }
         else if (flowValue === EXITED) {
-          this.flowHasExited = true;
+          this._flowHasExited = true;
         }
       }
     );
@@ -106,112 +101,30 @@ class Component extends React.PureComponent {
     return this.state.energyInterface.flow;
   }
 
-  getEnergyInterface (flowValue) {
-    const { getDuration, getDurationIn, getDurationOut, hasEntered, hasExited } = this;
-    const flow = Object.freeze({ value: flowValue, [flowValue]: true });
-
-    return Object.freeze({
-      getDuration,
-      getDurationIn,
-      getDurationOut,
-      hasEntered,
-      hasExited,
-      flow
-    });
-  }
-
-  isAnimate () {
-    let animate = true;
-
-    const providedAnimate = this.props.animationContext.animate;
-    if (providedAnimate !== void 0) {
-      animate = providedAnimate;
-    }
-
-    const propAnimate = this.props.animate;
-    if (propAnimate !== void 0) {
-      animate = propAnimate;
-    }
-
-    return animate;
-  }
-
-  isRoot () {
-    let root = true;
-
-    if (this.props.parentEnergyContext) {
-      root = false;
-    }
-
-    if (this.props.root !== void 0) {
-      root = this.props.root;
-    }
-
-    return root;
-  }
-
   getDuration = () => {
-    const defaultDuration = { enter: 200, exit: 200, delay: 0 };
-
-    const providedDuration = this.props.animationContext.duration;
-
-    const propValue = this.props.duration;
-    const propDuration = typeof propValue === 'number'
-      ? { enter: propValue, exit: propValue }
-      : propValue;
-
-    const duration = {
-      ...defaultDuration,
-      ...providedDuration,
-      ...propDuration,
-      ...this.customDuration
-    };
-
-    return duration;
+    return this.durationManager.get();
   }
 
   getDurationIn = () => {
-    const duration = this.getDuration();
+    const duration = this.durationManager.get();
     return duration.enter + duration.delay;
   }
 
   getDurationOut = () => {
-    const duration = this.getDuration();
+    const duration = this.durationManager.get();
     return duration.exit;
   }
 
   updateDuration = duration => {
-    const customDuration = typeof duration === 'number'
-      ? { enter: duration, exit: duration }
-      : duration;
-    this.customDuration = customDuration;
+    this.durationManager.update(duration);
   }
 
   hasEntered = () => {
-    return this.flowHasEntered;
+    return this._flowHasEntered;
   }
 
   hasExited = () => {
-    return this.flowHasExited;
-  }
-
-  isActivated () {
-    if (this.isRoot()) {
-      if (this.props.activate !== void 0) {
-        return this.props.activate;
-      }
-      return true;
-    }
-    else {
-      const parentFlow = this.props.parentEnergyContext.flow;
-
-      if (this.props.merge) {
-        return !!(parentFlow.entering || parentFlow.entered);
-      }
-      else {
-        return !!parentFlow.entered;
-      }
-    }
+    return this._flowHasExited;
   }
 
   enter () {
@@ -224,11 +137,11 @@ class Component extends React.PureComponent {
     const duration = this.getDuration();
     const delay = flowValue === EXITED ? duration.delay : 0;
 
-    this.schedule(delay, () => {
+    this.scheduler.start(delay, () => {
       const duration = this.getDuration();
 
       this.setFlowValue(ENTERING);
-      this.schedule(duration.enter, () => this.setFlowValue(ENTERED));
+      this.scheduler.start(duration.enter, () => this.setFlowValue(ENTERED));
     });
   }
 
@@ -239,21 +152,12 @@ class Component extends React.PureComponent {
       return;
     }
 
-    this.schedule(0, () => {
+    this.scheduler.start(0, () => {
       const duration = this.getDuration();
 
       this.setFlowValue(EXITING);
-      this.schedule(duration.exit, () => this.setFlowValue(EXITED));
+      this.scheduler.start(duration.exit, () => this.setFlowValue(EXITED));
     });
-  }
-
-  unschedule () {
-    clearTimeout(this.scheduleTimeout);
-  }
-
-  schedule (time, callback) {
-    this.unschedule();
-    this.scheduleTimeout = setTimeout(callback, time);
   }
 }
 

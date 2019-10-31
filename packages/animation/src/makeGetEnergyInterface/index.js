@@ -1,0 +1,1 @@
+export { makeGetEnergyInterface } from './makeGetEnergyInterface';

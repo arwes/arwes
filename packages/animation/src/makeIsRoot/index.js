@@ -1,0 +1,1 @@
+export { makeIsRoot } from './makeIsRoot';

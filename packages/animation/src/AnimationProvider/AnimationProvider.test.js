@@ -64,12 +64,12 @@ test('Should extend nested providers settings', () => {
     const context = useContext(AnimationContext);
     expect(context).toEqual({
       animate: true,
-      duration: { enter: 150, exit: 100 }
+      duration: { enter: 150, exit: 100, stagger: 50 }
     });
     return <div />;
   }
   render(
-    <AnimationProvider animate duration={{ enter: 150 }}>
+    <AnimationProvider animate duration={{ enter: 150, stagger: 50 }}>
       <div>
         <AnimationProvider duration={{ exit: 100 }}>
           <Animated />
