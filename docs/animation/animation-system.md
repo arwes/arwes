@@ -63,7 +63,9 @@ milliseconds.
     `exited` to `entering`.
 - `merge: boolean` - If enabled and it is not a root node, the node will enter
 in the flow when its parent changes to `entering`.
-- `onActivate: Function(boolean)` - Get notified when the node is activated or
+- `imperative: boolean = false` - If `true`, the flow state is controlled
+imperatively, not declaratively.
+- `onActivation: Function(boolean)` - Get notified when the node is activated or
 deactivated.
 
 ### Methods
@@ -71,10 +73,14 @@ deactivated.
 - `getFlow(): flow` - Returns the current node flow state.
 - `hasEntered(): boolean` - If the node has entered in the system flow at least once.
 - `hasExited(): boolean` - If the node has exited in the system flow at least once.
+- `getDuration(): Object` - Get the node duration values.
 - `getDurationIn(): number` - Get the duration the node lasts entering,
 including `delay`.
 - `getDurationOut(); number` - Get the duration the node lasts exiting.
 - `updateDuration(duration: number | Object)` - Update the animation duration.
+- `updateActivation(boolean)` -
+Updates the node flow activation with provided value.
+Applicable if: `imperative = true` or children of `Stream`.
 
 > To access these APIs, you would use an object referenced as `EnergyInterface`.
 
@@ -166,14 +172,14 @@ The node component should use these methods or the flow states to animate
 the component elements. The actual animation functionalities are up to the
 component to implement.
 
-## `Secuence`
+## `Stream`
 
-The `Secuence` virtual component can be used to handle serial flow changes in
+The `Stream` virtual component can be used to handle multiple flow changes in
 a list of nodes. The nodes do not necessarily have to be direct children.
 
 This component behaves the same way as the `Energy` component.
 
-By default, when the `Secuence` enters in the flow, its children nodes will [stagger](https://css-tricks.com/staggering-animations/)
+By default, when the `Stream` enters in the flow, its children nodes will [stagger](https://css-tricks.com/staggering-animations/)
 in the animation. For example, if the `duration.stagger = 50`, the first node
 will transition to `entering` at `0ms`, the second at `50ms`, the third at `100ms`,
 and so on.
@@ -184,11 +190,11 @@ It receives the same props as `Energy` and the following:
 
 - `serial: boolean = false` - If `true`, the nodes will transition to `entering`
 one after the previous one finishes. The first one will still transition at `0ms`.
-- `controlledChildren: boolean = true` - If `true`, the component will control
-its children flow state.
 - `duration: Object`
     - `stagger: number = 50` - The duration to start animating between nodes
     in a list if staggering is enabled.
+    - _`enter` - It is not available._
+    - _`exit` - It is not available._
 - _`merge` - It is not available._
 
 ### Methods
@@ -197,7 +203,7 @@ its children flow state.
 otherwise it calculates the time they take to enter in staggering mode.
 - `getDurationOut(); number` - Get the duration the first children node lasts
 exiting.
-- `activateChildren(Function({ energy: EnergyInterface, component: Element, index: number }): boolean | null)` -
+- `updateActivation(Function({ energy: EnergyInterface, component: Element, index: number }): boolean | null)` -
 Iterate over each child node and depending on the returned value, it updates
 the flow state. If boolean is returned, it changes the activation of the child
 node, unless it is the same current value. If no value is returned, the state
@@ -209,7 +215,7 @@ Animate a list of nodes using a staggering strategy with 100ms between them.
 
 ```js
 <ul className='list'>
-    <Secuence duration={{ stagger: 100 }}>
+    <Stream duration={{ stagger: 100 }}>
         <li className='item'>
             <MyNode />
         </li>
@@ -219,29 +225,29 @@ Animate a list of nodes using a staggering strategy with 100ms between them.
         <li className='item'>
             <MyNode />
         </li>
-    </Secuence>
+    </Stream>
 </ul>
 ```
 
 ### Example 2
 
 There is a long list of animated components inside a container element with scroll.
-Whenever the `Secuence` node is activated/deactivated or the container's scroll
+Whenever the `Stream` node is activated/deactivated or the container's scroll
 changes, check the components visibility and show/hide them.
 
 ```js
 // Assuming there is a method `isVisible` of `MyNode`
 // to determine if they are visible on browser viewport.
 
-const secuenceRef = createRef();
+const streamRef = createRef();
 const containerRef = createRef();
 
 const updateChildrenFlow = () => {
-    const secuenceFlow = secuenceRef.current.getFlow();
-    const isSecuenceActivated = secuenceFlow.entering || secuenceFlow.entered;
+    const streamFlow = streamRef.current.getFlow();
+    const isStreamActivated = streamFlow.entering || streamFlow.entered;
 
-    secuenceRef.current.activateChildren(({ component }) => {
-        if (isSecuenceActivated && component.isVisible()) {
+    streamRef.current.updateActivation(({ component }) => {
+        if (isStreamActivated && component.isVisible()) {
             return true;
         }
         return false;
@@ -249,10 +255,10 @@ const updateChildrenFlow = () => {
 };
 
 ...
-<Secuence
-    ref={secuenceRef}
-    controlledChildren={false}
-    onActivate={updateChildrenFlow}
+<Stream
+    ref={streamRef}
+    imperative
+    onActivation={updateChildrenFlow}
 >
     <div ref={containerRef}>
         <MyNode />
@@ -260,7 +266,7 @@ const updateChildrenFlow = () => {
         <MyNode />
         <MyNode />
     </div>
-</Secuence>
+</Stream>
 ...
 
 containerRef.current.addEventListener('scroll', updateChildrenFlow);
