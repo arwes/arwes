@@ -1,10 +1,14 @@
+/* eslint-disable react/prop-types */
+
 import React, { createRef } from 'react';
-import PropTypes from 'prop-types';
 import anime from 'animejs';
 import { AnimationProvider } from '../AnimationProvider';
 import { withEnergy } from './withEnergy';
 
-class ExampleComponent extends React.PureComponent {
+const COLOR_ON = '#0f0';
+const COLOR_OFF = '#f00';
+
+class ItemComponent extends React.PureComponent {
   constructor () {
     super(...arguments);
     this.element = createRef();
@@ -15,7 +19,7 @@ class ExampleComponent extends React.PureComponent {
     return (
       <div
         ref={this.element}
-        style={{ color: '#f00', marginLeft: '10px' }}
+        style={{ backgroundColor: COLOR_OFF, marginLeft: '10px' }}
       >
         <div>{energy.flow.value}</div>
         <div>{children}</div>
@@ -26,8 +30,8 @@ class ExampleComponent extends React.PureComponent {
   enter () {
     anime({
       targets: this.element.current,
-      color: ['#f00', '#0f0'],
-      duration: 500,
+      backgroundColor: [COLOR_OFF, COLOR_ON],
+      duration: this.props.energy.getDuration().enter,
       easing: 'linear'
     });
   }
@@ -35,24 +39,14 @@ class ExampleComponent extends React.PureComponent {
   exit () {
     anime({
       targets: this.element.current,
-      color: ['#0f0', '#f00'],
-      duration: 500,
+      backgroundColor: [COLOR_ON, COLOR_OFF],
+      duration: this.props.energy.getDuration().exit,
       easing: 'linear'
     });
   }
 }
 
-ExampleComponent.propTypes = {
-  energy: PropTypes.any,
-  children: PropTypes.any
-};
-
-const Example = withEnergy()(ExampleComponent);
-
-Example.propTypes = {
-  energy: PropTypes.any,
-  children: PropTypes.any
-};
+const Item = withEnergy()(ItemComponent);
 
 class Sandbox extends React.PureComponent {
   constructor () {
@@ -77,11 +71,11 @@ class Sandbox extends React.PureComponent {
     const { activate } = this.state;
     return (
       <AnimationProvider duration={500}>
-        <Example energy={{ activate }}>
-          <Example>
-            <Example />
-          </Example>
-        </Example>
+        <Item energy={{ activate }}>
+          <Item>
+            <Item />
+          </Item>
+        </Item>
       </AnimationProvider>
     );
   }

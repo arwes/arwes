@@ -63,7 +63,7 @@ test('Should call "enter" on energy flow "entering" if "options.cycles=true" (de
   render(<Example energy={{ duration: 100 }} />);
 
   await sleep(10);
-  expect(onEnter).toHaveBeenCalledTimes(1);
+  expect(onEnter).toHaveBeenCalledTimes(1); // TODO: Racing condition failing test.
 });
 
 test('Should call "exit" on energy flow "exiting" if "options.cycles=true"', async () => {

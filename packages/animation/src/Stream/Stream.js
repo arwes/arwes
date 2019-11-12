@@ -13,7 +13,10 @@ import { makeGetEnergyInterface } from '../makeGetEnergyInterface';
 import { makeDurationManager } from '../makeDurationManager';
 import { makeFlowManager } from '../makeFlowManager';
 import { makeScheduler } from '../makeScheduler';
-import { ENERGY_TYPE, ENTERING, ENTERED, EXITING, EXITED } from '../constants';
+import { STREAM_TYPE, ENTERING, ENTERED, EXITING, EXITED } from '../constants';
+
+const SCHEDULER_ID_TRANSITIONING = 'TRANSITIONING';
+const SCHEDULER_ID_TRANSITIONED = 'TRANSITIONED';
 
 class Component extends React.PureComponent {
   static propTypes = {
@@ -25,11 +28,11 @@ class Component extends React.PureComponent {
       PropTypes.shape({
         enter: PropTypes.number,
         exit: PropTypes.number,
+        stagger: PropTypes.number,
         delay: PropTypes.number
       })
     ]),
-    merge: PropTypes.bool,
-    imperative: PropTypes.bool,
+    serial: PropTypes.bool,
     onActivation: PropTypes.func,
     animationContext: PropTypes.any,
     parentEnergyContext: PropTypes.any,
@@ -48,8 +51,9 @@ class Component extends React.PureComponent {
     this.flowManager = makeFlowManager(this);
     this.scheduler = makeScheduler();
 
-    this.type = ENERGY_TYPE;
+    this.type = STREAM_TYPE;
     this.state = this.getInitialState();
+    this.subscribers = [];
     this._flowHasEntered = false;
     this._flowHasExited = false;
   }
@@ -106,6 +110,35 @@ class Component extends React.PureComponent {
     return this.durationManager.get();
   }
 
+  getDynamicDuration (duration) {
+    let enter = 0;
+
+    if (this.props.serial) {
+      enter = this.subscribers.reduce((total, subscriber) => {
+        const subscriberDuration = subscriber.getDuration();
+        return total + subscriberDuration.delay + subscriberDuration.enter;
+      }, 0);
+    }
+    // Staggering
+    else {
+      this.subscribers.forEach((subscriber, index) => {
+        const subscriberDuration = subscriber.getDuration();
+        const staggerDuration = (duration.stagger * index);
+
+        enter = Math.max(
+          enter,
+          staggerDuration + subscriberDuration.delay + subscriberDuration.enter
+        );
+      });
+    }
+
+    const exit = this.subscribers.reduce((total, subscriber) => (
+      Math.max(total, subscriber.getDuration().exit)
+    ), 0);
+
+    return { enter, exit };
+  }
+
   updateDuration (duration) {
     this.durationManager.update(duration);
   }
@@ -116,6 +149,14 @@ class Component extends React.PureComponent {
 
   hasExited () {
     return this._flowHasExited;
+  }
+
+  _subscribe (component) {
+    this.subscribers.push(component);
+  }
+
+  _unsubscribe (component) {
+    this.subscribers = this.subscribers.filter(item => item !== component);
   }
 
   updateActivation (activated) {
@@ -136,15 +177,52 @@ class Component extends React.PureComponent {
 
     const duration = this.getDuration();
 
-    this.scheduler.start(0, duration.delay, () => {
-      const duration = this.getDuration();
+    this.scheduler.start(
+      SCHEDULER_ID_TRANSITIONING,
+      duration.delay,
+      () => {
+        this.setFlowValue(ENTERING);
 
-      if (this.props.onActivation) {
-        this.props.onActivation(true);
+        if (this.props.onActivation) {
+          this.props.onActivation(true);
+        }
       }
+    );
 
-      this.setFlowValue(ENTERING);
-      this.scheduler.start(0, duration.enter, () => this.setFlowValue(ENTERED));
+    this.scheduler.start(
+      SCHEDULER_ID_TRANSITIONED,
+      duration.delay + duration.enter,
+      () => this.setFlowValue(ENTERED)
+    );
+
+    if (this.props.serial) {
+      this.enterChildrenInSerial();
+    }
+    else {
+      this.enterChildrenInStaggering();
+    }
+  }
+
+  enterChildrenInSerial () {
+    const duration = this.getDuration();
+
+    let acummulation = 0;
+
+    this.subscribers.forEach((subscriber, index) => {
+      const itemTime = duration.delay + acummulation;
+
+      this.scheduler.start(index, itemTime, () => subscriber.updateActivation(true));
+
+      acummulation += subscriber.getDuration().enter;
+    });
+  }
+
+  enterChildrenInStaggering () {
+    const duration = this.getDuration();
+
+    this.subscribers.forEach((subscriber, index) => {
+      const itemTime = duration.delay + (duration.stagger * index);
+      this.scheduler.start(index, itemTime, () => subscriber.updateActivation(true));
     });
   }
 
@@ -155,20 +233,33 @@ class Component extends React.PureComponent {
       return;
     }
 
-    this.scheduler.start(0, 0, () => {
-      const duration = this.getDuration();
+    const duration = this.getDuration();
 
-      if (this.props.onActivation) {
-        this.props.onActivation(false);
+    this.scheduler.start(
+      SCHEDULER_ID_TRANSITIONING,
+      0,
+      () => {
+        this.setFlowValue(EXITING);
+
+        if (this.props.onActivation) {
+          this.props.onActivation(false);
+        }
       }
+    );
 
-      this.setFlowValue(EXITING);
-      this.scheduler.start(0, duration.exit, () => this.setFlowValue(EXITED));
+    this.subscribers.forEach((subscriber, index) => {
+      this.scheduler.start(index, 0, () => subscriber.updateActivation(false));
     });
+
+    this.scheduler.start(
+      SCHEDULER_ID_TRANSITIONED,
+      duration.exit,
+      () => this.setFlowValue(EXITED)
+    );
   }
 }
 
-const Energy = React.forwardRef((props, ref) => {
+const Stream = React.forwardRef((props, ref) => {
   const animationContext = useAnimation();
   const parentEnergyContext = useEnergy();
 
@@ -182,6 +273,6 @@ const Energy = React.forwardRef((props, ref) => {
   );
 });
 
-Energy.displayName = 'Energy';
+Stream.displayName = 'Stream';
 
-export { Component, Energy };
+export { Component, Stream };

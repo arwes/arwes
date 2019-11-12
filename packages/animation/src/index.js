@@ -1,4 +1,6 @@
 export * from './AnimationProvider';
+export * from './Energy';
+export * from './Stream';
 export * from './useAnimation';
-export * from './withEnergy';
 export * from './useEnergy';
+export * from './withEnergy';

@@ -20,8 +20,6 @@ test('Should provide energy interface API as immutable', () => {
         exited: true
       },
       getDuration: expect.any(Function),
-      getDurationIn: expect.any(Function),
-      getDurationOut: expect.any(Function),
       updateDuration: expect.any(Function),
       hasEntered: expect.any(Function),
       hasExited: expect.any(Function)
@@ -48,37 +46,13 @@ describe('getFlow()', () => {
   });
 });
 
-describe('getDuration()', () => {
+describe('duration', () => {
   test('Should get duration', () => {
     let energy;
     render(<Energy ref={r => (energy = r)} duration={100} />);
     expect(energy.getDuration()).toMatchObject({ enter: 100, exit: 100 });
   });
-});
 
-describe('getDurationIn()', () => {
-  test('Should return duration to transition in', () => {
-    let energy;
-    render(<Energy ref={r => (energy = r)} duration={{ enter: 100 }} />);
-    expect(energy.getDurationIn()).toBe(100);
-  });
-
-  test('Should return duration to transition in with delay', () => {
-    let energy;
-    render(<Energy ref={r => (energy = r)} duration={{ enter: 100, delay: 50 }} />);
-    expect(energy.getDurationIn()).toBe(150);
-  });
-});
-
-describe('getDurationOut()', () => {
-  test('Should return duration to transition out', () => {
-    let energy;
-    render(<Energy ref={r => (energy = r)} duration={{ exit: 100 }} />);
-    expect(energy.getDurationOut()).toBe(100);
-  });
-});
-
-describe('updateDuration()', () => {
   test('Should update duration', () => {
     let energy;
     render(<Energy ref={r => (energy = r)} />);

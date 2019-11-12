@@ -4,14 +4,17 @@ function makeFlowManager (component) {
   let isFlowActivated = false;
 
   function checkMount () {
+    if (!component.isAnimate()) {
+      return;
+    }
+
     const { parentEnergyContext } = component.props;
 
-    // TODO: Add tests.
     if (parentEnergyContext && parentEnergyContext.type === STREAM_TYPE) {
       parentEnergyContext._subscribe(component);
     }
 
-    if (!component.isAnimate() || component.isOutsourced()) {
+    if (component.isOutsourced()) {
       return;
     }
 
@@ -39,8 +42,11 @@ function makeFlowManager (component) {
     }
   }
 
-  // TODO: Add tests.
   function checkUnmount () {
+    if (!component.isAnimate()) {
+      return;
+    }
+
     const { parentEnergyContext } = component.props;
 
     if (parentEnergyContext && parentEnergyContext.type === STREAM_TYPE) {

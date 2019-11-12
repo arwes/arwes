@@ -1,8 +1,26 @@
 /* eslint-env jest */
 
 import { makeFlowManager } from './makeFlowManager';
+import { STREAM_TYPE } from '../constants';
 
 describe('checkMount()', () => {
+  test('Should subscribe to parent node if it is a stream and animated', () => {
+    const isAnimate = jest.fn(() => true);
+    const isActivated = jest.fn(() => true);
+    const isOutsourced = jest.fn(() => true);
+    const _subscribe = jest.fn();
+    const component = {
+      props: { parentEnergyContext: { type: STREAM_TYPE, _subscribe } },
+      isAnimate,
+      isActivated,
+      isOutsourced
+    };
+    const flowManager = makeFlowManager(component);
+
+    flowManager.checkMount();
+    expect(_subscribe).toHaveBeenCalledWith(component);
+  });
+
   test('Should do nothing if not animated', () => {
     const isAnimate = jest.fn(() => false);
     const isActivated = jest.fn(() => true);
@@ -95,5 +113,20 @@ describe('checkUpdate()', () => {
     flowManager.checkUpdate();
     expect(enter).not.toHaveBeenCalled();
     expect(exit).not.toHaveBeenCalled();
+  });
+});
+
+describe('checkUnmount()', () => {
+  test('Should unsubscribe if parent node is stream and animated', () => {
+    const isAnimate = jest.fn(() => true);
+    const _unsubscribe = jest.fn();
+    const component = {
+      props: { parentEnergyContext: { type: STREAM_TYPE, _unsubscribe } },
+      isAnimate
+    };
+    const flowManager = makeFlowManager(component);
+
+    flowManager.checkUnmount();
+    expect(_unsubscribe).toHaveBeenCalledWith(component);
   });
 });

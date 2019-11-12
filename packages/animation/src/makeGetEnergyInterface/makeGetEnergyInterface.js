@@ -1,7 +1,5 @@
 const METHODS = [
   'getDuration',
-  'getDurationIn',
-  'getDurationOut',
   'updateDuration',
   'hasEntered',
   'hasExited',

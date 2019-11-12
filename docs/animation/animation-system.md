@@ -59,8 +59,10 @@ provided, it only specifies `enter` and `exit` times. Any duration is set in
 milliseconds.
     - `enter: number = 200` - The duration the component lasts entering.
     - `exit: number = 200` - The duration the component lasts exiting.
-    - `delay: number = 0` - Time to delay only before transitioning from
-    `exited` to `entering`.
+    - `delay: number = 0` - Time to delay before transitioning to `entered`.
+    - `offset: number = 0` - When this node is child of `Stream`, this is the
+    time to delay before transitioning to `entered` from this node and the
+    following nodes.
 - `merge: boolean` - If enabled and it is not a root node, the node will enter
 in the flow when its parent changes to `entering`.
 - `imperative: boolean = false` - If `true`, the flow state is controlled
@@ -74,9 +76,6 @@ deactivated.
 - `hasEntered(): boolean` - If the node has entered in the system flow at least once.
 - `hasExited(): boolean` - If the node has exited in the system flow at least once.
 - `getDuration(): Object` - Get the node duration values.
-- `getDurationIn(): number` - Get the duration the node lasts entering,
-including `delay`.
-- `getDurationOut(): number` - Get the duration the node lasts exiting.
 - `updateDuration(duration: number | Object)` - Update the animation duration.
 - `updateActivation(boolean)` -
 Updates the node flow activation with provided value.
@@ -199,10 +198,6 @@ one after the previous one finishes. The first one will still transition at `0ms
 
 ### Methods
 
-- `getDurationIn(): number` - If `serial`, it sums all children duration,
-otherwise it calculates the time they take to enter in staggering mode.
-- `getDurationOut(); number` - Get the duration the first children node lasts
-exiting.
 - `updateActivation(Function({ energy: EnergyInterface, component: Element, index: number }): boolean | null)` -
 Iterate over each child node and depending on the returned value, it updates
 the flow state. If boolean is returned, it changes the activation of the child

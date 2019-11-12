@@ -18,6 +18,13 @@ function makeDurationManager (component) {
       ...customDuration
     };
 
+    if (component.getDynamicDuration) {
+      return {
+        ...duration,
+        ...component.getDynamicDuration(duration)
+      };
+    }
+
     return duration;
   }
 

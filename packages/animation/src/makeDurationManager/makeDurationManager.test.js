@@ -3,7 +3,7 @@
 import { makeDurationManager } from './makeDurationManager';
 
 describe('get()', () => {
-  test('Should return 200ms for enter/exit and 0ms for delay by default', () => {
+  test('Should get 200ms for enter/exit, 0ms for delay, 50ms for stagger, by default', () => {
     const component = { props: { animationContext: {} } };
     const durationManager = makeDurationManager(component);
     expect(durationManager.get()).toMatchObject({ enter: 200, exit: 200, delay: 0 });
@@ -24,13 +24,29 @@ describe('get()', () => {
     expect(durationManager.get()).toMatchObject({ enter: 700, exit: 700, delay: 50 });
   });
 
-  test('Should set enter/exit values with provided number', () => {
+  test('Should get enter/exit values with provided prop number', () => {
     const component = { props: {
       animationContext: { duration: { enter: 500, exit: 500 } },
       duration: 250
     } };
     const durationManager = makeDurationManager(component);
     expect(durationManager.get()).toMatchObject({ enter: 250, exit: 250 });
+  });
+
+  test('Should get dynamic component duration if available, and it should take priority', () => {
+    const component = {
+      props: {
+        animationContext: { duration: { enter: 500, exit: 500 } },
+        duration: 250
+      },
+      getDynamicDuration (value) {
+        const durationWithoutDynamicValue = { enter: 250, exit: 250 };
+        expect(value).toMatchObject(durationWithoutDynamicValue);
+        return { enter: 700, delay: 900 };
+      }
+    };
+    const durationManager = makeDurationManager(component);
+    expect(durationManager.get()).toMatchObject({ enter: 700, exit: 250, delay: 900 });
   });
 });
 
