@@ -2,8 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { render } from 'react-dom';
 import withStyles from 'react-jss';
 import Navigo from 'navigo';
-
 import sandboxes from './sandboxes';
+
+const sandboxesItems = sandboxes
+  .map(({ name, items }) => items.map(item => {
+    item.category = name;
+    item.key = `${name}/${item.name}`;
+    return item;
+  }))
+  .reduce((total, items) => [...total, ...items], []);
 
 const styles = {
   '@global': {
@@ -36,7 +43,8 @@ const styles = {
     borderBottom: '1px solid #0ff',
     backgroundColor: '#222',
     fontFamily: 'Monaco, Terminal, monospace',
-    color: '#0ff'
+    color: '#0ff',
+    userSelect: 'none'
   },
   headerTitle: {
     display: 'inline-block',
@@ -60,7 +68,7 @@ const styles = {
     fontSize: 14,
     color: '#0ff',
 
-    '& option': {
+    '& option, & optgroup': {
       backgroundColor: '#000',
       color: '#0ff'
     }
@@ -76,22 +84,22 @@ const styles = {
 let router;
 
 const Playground = withStyles(styles)(({ classes }) => { // eslint-disable-line react/prop-types
-  const [sandboxName, setSandboxName] = useState('/');
-  const sandbox = sandboxes.find(item => item.name === sandboxName);
+  const [sandboxKey, setSandboxKey] = useState('/');
+  const sandbox = sandboxesItems.find(({ key }) => key === sandboxKey);
 
   useEffect(() => {
     router = new Navigo(null, true);
 
-    router.on('/', () => setSandboxName('/'));
+    router.on('/', () => setSandboxKey('/'));
 
-    sandboxes.forEach(item => {
-      router.on(item.name, () => setSandboxName(item.name)).resolve();
+    sandboxesItems.forEach(item => {
+      router.on(item.key, () => setSandboxKey(item.key)).resolve();
     });
   }, []);
 
   function onChange (ev) {
-    const sandboxName = ev.target.value;
-    router.navigate(sandboxName);
+    const sandboxKey = ev.target.value;
+    router.navigate(sandboxKey);
   }
 
   return (
@@ -100,16 +108,24 @@ const Playground = withStyles(styles)(({ classes }) => { // eslint-disable-line 
         <h1 className={classes.headerTitle}>Arwes Playground</h1>
         <select
           className={classes.headerSelect}
-          value={sandboxName}
+          value={sandboxKey}
           onChange={onChange}
         >
-          <option value='/'>
-            -- Select component --
-          </option>
-          {sandboxes.map((item, index) => (
-            <option key={index} value={item.name}>
-              {item.name}
-            </option>
+          <option value='/'>-- Select --</option>
+          {sandboxes.map(sandbox => (
+            <optgroup
+              key={sandbox.name}
+              label={sandbox.name}
+            >
+              {sandbox.items.map(item => (
+                <option
+                  key={item.name}
+                  value={`${sandbox.name}/${item.name}`}
+                >
+                  {item.name}
+                </option>
+              ))}
+            </optgroup>
           ))}
         </select>
       </header>

@@ -1,6 +1,16 @@
 /* eslint-disable */
 
 export default [
-  { name: 'sounds/withSounds', component: require('../packages/sounds/src/withSounds/withSounds.sandbox.js').default },
-  { name: 'animation/withEnergy', component: require('../packages/animation/src/withEnergy/withEnergy.sandbox.js').default }
+  {
+    name: 'sounds',
+    items: [
+      { name: 'withSounds', component: require('../packages/sounds/src/withSounds/withSounds.sandbox.js').default }
+    ]
+  },
+  {
+    name: 'animation',
+    items: [
+      { name: 'withEnergy', component: require('../packages/animation/src/withEnergy/withEnergy.sandbox.js').default }
+    ]
+  }
 ];
