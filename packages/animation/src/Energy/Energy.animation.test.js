@@ -32,34 +32,34 @@ test('Should delay energy flow from "exited" the "duration.delay" time', () => {
   expect(energy.getFlow().entering).toBe(true);
 });
 
-test('Should get notified with "onActivate" when activation changes', () => {
+test('Should get notified with "onActivation" when activation changes', () => {
   let example;
-  const onActivate = jest.fn();
+  const onActivation = jest.fn();
   class Example extends React.PureComponent {
     state = { activate: true }
     render () {
       const { activate } = this.state;
-      return <Energy activate={activate} duration={100} onActivate={onActivate} />;
+      return <Energy activate={activate} duration={100} onActivation={onActivation} />;
     }
   }
   render(<Example ref={r => (example = r)} />);
   setTimeout(() => example.setState({ activate: false }), 200);
 
-  expect(onActivate).not.toHaveBeenCalled();
+  expect(onActivation).not.toHaveBeenCalled();
 
   jest.advanceTimersByTime(10);
-  expect(onActivate).toHaveBeenCalledTimes(1);
-  expect(onActivate).toHaveBeenCalledWith(true);
+  expect(onActivation).toHaveBeenCalledTimes(1);
+  expect(onActivation).toHaveBeenCalledWith(true);
 
   jest.advanceTimersByTime(180); // 190ms
-  expect(onActivate).toHaveBeenCalledTimes(1);
+  expect(onActivation).toHaveBeenCalledTimes(1);
 
   jest.advanceTimersByTime(20); // 210ms
-  expect(onActivate).toHaveBeenCalledTimes(2);
-  expect(onActivate).toHaveBeenCalledWith(false);
+  expect(onActivation).toHaveBeenCalledTimes(2);
+  expect(onActivation).toHaveBeenCalledWith(false);
 
   jest.advanceTimersByTime(100); // 310ms
-  expect(onActivate).toHaveBeenCalledTimes(2);
+  expect(onActivation).toHaveBeenCalledTimes(2);
 });
 
 describe('root', () => {

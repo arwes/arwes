@@ -1,16 +1,20 @@
 function makeScheduler () {
-  let timeout;
+  const timeouts = {};
 
-  function stop () {
-    clearTimeout(timeout);
+  function stop (id) {
+    clearTimeout(timeouts[id]);
   }
 
-  function start (time, callback) {
-    stop();
-    timeout = setTimeout(callback, time);
+  function stopAll () {
+    Object.values(timeouts).forEach(clearTimeout);
   }
 
-  return { stop, start };
+  function start (id, time, callback) {
+    stop(id);
+    timeouts[id] = setTimeout(callback, time);
+  }
+
+  return { stop, stopAll, start };
 }
 
 export { makeScheduler };

@@ -1,25 +1,34 @@
+import { STREAM_TYPE } from '../constants';
+
 function makeFlowManager (component) {
   let isFlowActivated = false;
 
   function checkMount () {
-    const animate = component.isAnimate();
-    const activated = component.isActivated();
+    const { parentEnergyContext } = component.props;
 
-    if (animate && activated) {
+    // TODO: Add tests.
+    if (parentEnergyContext && parentEnergyContext.type === STREAM_TYPE) {
+      parentEnergyContext._subscribe(component);
+    }
+
+    if (!component.isAnimate() || component.isOutsourced()) {
+      return;
+    }
+
+    if (component.isActivated()) {
       component.enter();
     }
   }
 
   function checkUpdate () {
-    const animate = component.isAnimate();
+    if (!component.isAnimate() || component.isOutsourced()) {
+      return;
+    }
+
     const activated = component.isActivated();
 
-    if (animate && activated !== isFlowActivated) {
+    if (activated !== isFlowActivated) {
       isFlowActivated = activated;
-
-      if (component.props.onActivate) {
-        component.props.onActivate(activated);
-      }
 
       if (activated) {
         component.enter();
@@ -30,7 +39,16 @@ function makeFlowManager (component) {
     }
   }
 
-  return { checkMount, checkUpdate };
+  // TODO: Add tests.
+  function checkUnmount () {
+    const { parentEnergyContext } = component.props;
+
+    if (parentEnergyContext && parentEnergyContext.type === STREAM_TYPE) {
+      parentEnergyContext._unsubscribe(component);
+    }
+  }
+
+  return { checkMount, checkUpdate, checkUnmount };
 }
 
 export { makeFlowManager };

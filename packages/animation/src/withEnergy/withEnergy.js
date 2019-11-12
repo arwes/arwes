@@ -35,9 +35,15 @@ function withEnergy (options) {
       useEffect(() => {
         if (inner && cycles) {
           if (energy.flow.entering) {
+            if (!inner.current.enter) {
+              throw new Error('"withEnergy" provided component requires "enter" method.');
+            }
             inner.current.enter();
           }
           else if (energy.flow.exiting) {
+            if (!inner.current.exit) {
+              throw new Error('"withEnergy" provided component requires "exit" method.');
+            }
             inner.current.exit();
           }
         }

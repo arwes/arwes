@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unused-prop-types */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useAnimation } from '../useAnimation';
@@ -6,18 +8,14 @@ import { useEnergy } from '../useEnergy';
 import { makeIsAnimate } from '../makeIsAnimate';
 import { makeIsRoot } from '../makeIsRoot';
 import { makeIsActivated } from '../makeIsActivated';
+import { makeIsOutsourced } from '../makeIsOutsourced';
 import { makeGetEnergyInterface } from '../makeGetEnergyInterface';
 import { makeDurationManager } from '../makeDurationManager';
 import { makeFlowManager } from '../makeFlowManager';
 import { makeScheduler } from '../makeScheduler';
-
-const ENTERING = 'entering';
-const ENTERED = 'entered';
-const EXITING = 'exiting';
-const EXITED = 'exited';
+import { ENERGY_TYPE, ENTERING, ENTERED, EXITING, EXITED } from '../constants';
 
 class Component extends React.PureComponent {
-  /* eslint-disable react/no-unused-prop-types */
   static propTypes = {
     animate: PropTypes.bool,
     root: PropTypes.bool,
@@ -31,12 +29,12 @@ class Component extends React.PureComponent {
       })
     ]),
     merge: PropTypes.bool,
-    onActivate: PropTypes.func,
+    imperative: PropTypes.bool,
+    onActivation: PropTypes.func,
     animationContext: PropTypes.any,
     parentEnergyContext: PropTypes.any,
     children: PropTypes.any
   };
-  /* eslint-enable react/no-unused-prop-types */
 
   constructor () {
     super(...arguments);
@@ -44,11 +42,13 @@ class Component extends React.PureComponent {
     this.isAnimate = makeIsAnimate(this);
     this.isRoot = makeIsRoot(this);
     this.isActivated = makeIsActivated(this);
+    this.isOutsourced = makeIsOutsourced(this);
     this.getEnergyInterface = makeGetEnergyInterface(this);
     this.durationManager = makeDurationManager(this);
     this.flowManager = makeFlowManager(this);
     this.scheduler = makeScheduler();
 
+    this.type = ENERGY_TYPE;
     this.state = this.getInitialState();
     this._flowHasEntered = false;
     this._flowHasExited = false;
@@ -70,7 +70,8 @@ class Component extends React.PureComponent {
   }
 
   componentWillUnmount () {
-    this.scheduler.stop();
+    this.flowManager.checkUnmount();
+    this.scheduler.stopAll();
   }
 
   render () {
@@ -101,30 +102,39 @@ class Component extends React.PureComponent {
     return this.state.energyInterface.flow;
   }
 
-  getDuration = () => {
+  getDuration () {
     return this.durationManager.get();
   }
 
-  getDurationIn = () => {
+  getDurationIn () {
     const duration = this.durationManager.get();
     return duration.enter + duration.delay;
   }
 
-  getDurationOut = () => {
+  getDurationOut () {
     const duration = this.durationManager.get();
     return duration.exit;
   }
 
-  updateDuration = duration => {
+  updateDuration (duration) {
     this.durationManager.update(duration);
   }
 
-  hasEntered = () => {
+  hasEntered () {
     return this._flowHasEntered;
   }
 
-  hasExited = () => {
+  hasExited () {
     return this._flowHasExited;
+  }
+
+  updateActivation (activated) {
+    if (this.isOutsourced()) {
+      activated ? this.enter() : this.exit();
+    }
+    else {
+      throw new Error('"updateActivation" can not be called if not outsourced.');
+    }
   }
 
   enter () {
@@ -137,11 +147,15 @@ class Component extends React.PureComponent {
     const duration = this.getDuration();
     const delay = flowValue === EXITED ? duration.delay : 0;
 
-    this.scheduler.start(delay, () => {
+    this.scheduler.start(0, delay, () => {
       const duration = this.getDuration();
 
+      if (this.props.onActivation) {
+        this.props.onActivation(true);
+      }
+
       this.setFlowValue(ENTERING);
-      this.scheduler.start(duration.enter, () => this.setFlowValue(ENTERED));
+      this.scheduler.start(0, duration.enter, () => this.setFlowValue(ENTERED));
     });
   }
 
@@ -152,11 +166,15 @@ class Component extends React.PureComponent {
       return;
     }
 
-    this.scheduler.start(0, () => {
+    this.scheduler.start(0, 0, () => {
       const duration = this.getDuration();
 
+      if (this.props.onActivation) {
+        this.props.onActivation(false);
+      }
+
       this.setFlowValue(EXITING);
-      this.scheduler.start(duration.exit, () => this.setFlowValue(EXITED));
+      this.scheduler.start(0, duration.exit, () => this.setFlowValue(EXITED));
     });
   }
 }

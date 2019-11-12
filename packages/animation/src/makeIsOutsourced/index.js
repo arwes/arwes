@@ -1,0 +1,1 @@
+export { makeIsOutsourced } from './makeIsOutsourced';

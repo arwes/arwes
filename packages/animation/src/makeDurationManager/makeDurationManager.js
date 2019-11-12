@@ -2,7 +2,7 @@ function makeDurationManager (component) {
   let customDuration;
 
   function get () {
-    const defaultDuration = { enter: 200, exit: 200, stagger: 0, delay: 0 };
+    const defaultDuration = { enter: 200, exit: 200, stagger: 50, delay: 0 };
 
     const providedDuration = component.props.animationContext.duration;
 

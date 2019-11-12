@@ -3,11 +3,24 @@
 import { makeFlowManager } from './makeFlowManager';
 
 describe('checkMount()', () => {
-  test('Should do nothing if not animated not activated', () => {
-    const isAnimate = jest.fn();
-    const isActivated = jest.fn();
+  test('Should do nothing if not animated', () => {
+    const isAnimate = jest.fn(() => false);
+    const isActivated = jest.fn(() => true);
+    const isOutsourced = jest.fn(() => false);
     const enter = jest.fn();
-    const component = { isAnimate, isActivated, enter };
+    const component = { props: {}, isAnimate, isActivated, isOutsourced, enter };
+    const flowManager = makeFlowManager(component);
+
+    flowManager.checkMount();
+    expect(enter).not.toHaveBeenCalled();
+  });
+
+  test('Should do nothing if outsourced', () => {
+    const isAnimate = jest.fn(() => true);
+    const isActivated = jest.fn(() => true);
+    const isOutsourced = jest.fn(() => true);
+    const enter = jest.fn();
+    const component = { props: {}, isAnimate, isActivated, isOutsourced, enter };
     const flowManager = makeFlowManager(component);
 
     flowManager.checkMount();
@@ -17,8 +30,9 @@ describe('checkMount()', () => {
   test('Should enter() if animated and activated', () => {
     const isAnimate = jest.fn(() => true);
     const isActivated = jest.fn(() => true);
+    const isOutsourced = jest.fn(() => false);
     const enter = jest.fn();
-    const component = { isAnimate, isActivated, enter };
+    const component = { props: {}, isAnimate, isActivated, isOutsourced, enter };
     const flowManager = makeFlowManager(component);
 
     flowManager.checkMount();
@@ -34,6 +48,7 @@ describe('checkUpdate()', () => {
       props: {},
       isAnimate: jest.fn(() => true),
       isActivated: jest.fn(() => true),
+      isOutsourced: jest.fn(() => false),
       enter,
       exit
     };
@@ -51,6 +66,7 @@ describe('checkUpdate()', () => {
       props: {},
       isAnimate: jest.fn(() => true),
       isActivated: jest.fn(() => true),
+      isOutsourced: jest.fn(() => false),
       enter,
       exit
     };
@@ -63,24 +79,21 @@ describe('checkUpdate()', () => {
     expect(exit).toHaveBeenCalledTimes(1);
   });
 
-  test('Should call onActivate with value when activation changes', () => {
-    const onActivate = jest.fn();
+  test('Should do nothing if outsourced', () => {
     const enter = jest.fn();
     const exit = jest.fn();
     const component = {
-      props: { onActivate },
+      props: { imperative: true },
       isAnimate: jest.fn(() => true),
       isActivated: jest.fn(() => true),
+      isOutsourced: jest.fn(() => true),
       enter,
       exit
     };
     const flowManager = makeFlowManager(component);
 
     flowManager.checkUpdate();
-    expect(onActivate).toHaveBeenCalledWith(true);
-
-    component.isActivated = jest.fn(() => false);
-    flowManager.checkUpdate();
-    expect(onActivate).toHaveBeenCalledWith(false);
+    expect(enter).not.toHaveBeenCalled();
+    expect(exit).not.toHaveBeenCalled();
   });
 });

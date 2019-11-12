@@ -1,26 +1,29 @@
+const METHODS = [
+  'getDuration',
+  'getDurationIn',
+  'getDurationOut',
+  'updateDuration',
+  'hasEntered',
+  'hasExited',
+  '_subscribe',
+  '_unsubscribe'
+];
+
 function makeGetEnergyInterface (component) {
   return function getEnergyInterface (flowValue) {
-    const {
-      getDuration,
-      getDurationIn,
-      getDurationOut,
-      updateDuration,
-      hasEntered,
-      hasExited
-    } = component;
+    const { type } = component;
 
     const flow = Object.freeze({ value: flowValue, [flowValue]: true });
+    const methods = {};
 
-    return Object.freeze({
-      getDuration,
-      getDurationIn,
-      getDurationOut,
-      updateDuration,
-      hasEntered,
-      hasExited,
-      flow
+    METHODS.forEach(methodName => {
+      if (component[methodName]) {
+        methods[methodName] = component[methodName].bind(component);
+      }
     });
+
+    return Object.freeze({ type, flow, ...methods });
   };
 }
 
-export { makeGetEnergyInterface };
+export { METHODS, makeGetEnergyInterface };

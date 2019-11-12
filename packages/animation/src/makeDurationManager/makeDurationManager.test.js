@@ -39,13 +39,13 @@ describe('update()', () => {
     const component = { props: { animationContext: {} } };
     const durationManager = makeDurationManager(component);
     durationManager.update({ enter: 900 });
-    expect(durationManager.get()).toMatchObject({ enter: 900, exit: 200, delay: 0, stagger: 0 });
+    expect(durationManager.get()).toMatchObject({ enter: 900, exit: 200, delay: 0, stagger: 50 });
   });
 
   test('Should update duration with number', () => {
     const component = { props: { animationContext: {} } };
     const durationManager = makeDurationManager(component);
     durationManager.update(700);
-    expect(durationManager.get()).toMatchObject({ enter: 700, exit: 700, delay: 0, stagger: 0 });
+    expect(durationManager.get()).toMatchObject({ enter: 700, exit: 700, delay: 0, stagger: 50 });
   });
 });

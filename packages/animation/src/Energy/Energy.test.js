@@ -33,6 +33,21 @@ test('Should provide energy interface API as immutable', () => {
   render(<Energy><Example /></Energy>);
 });
 
+describe('getFlow()', () => {
+  test('Should return current flow object', () => {
+    let energy;
+    render(<Energy ref={r => (energy = r)} />);
+    expect(energy.getFlow()).toEqual({ value: 'exited', exited: true });
+  });
+
+  test('Should return a frozen flow object', () => {
+    let energy;
+    render(<Energy ref={r => (energy = r)} animate={false} />);
+    const flow = energy.getFlow();
+    expect(() => (flow.value = 'xxx')).toThrow();
+  });
+});
+
 describe('getDuration()', () => {
   test('Should get duration', () => {
     let energy;
@@ -69,20 +84,5 @@ describe('updateDuration()', () => {
     render(<Energy ref={r => (energy = r)} />);
     energy.updateDuration(70);
     expect(energy.getDuration()).toMatchObject({ enter: 70, exit: 70 });
-  });
-});
-
-describe('getFlow()', () => {
-  test('Should return current flow object', () => {
-    let energy;
-    render(<Energy ref={r => (energy = r)} />);
-    expect(energy.getFlow()).toEqual({ value: 'exited', exited: true });
-  });
-
-  test('Should return a frozen flow object', () => {
-    let energy;
-    render(<Energy ref={r => (energy = r)} animate={false} />);
-    const flow = energy.getFlow();
-    expect(() => (flow.value = 'xxx')).toThrow();
   });
 });
