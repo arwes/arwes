@@ -31,7 +31,8 @@ In the packages information there is a badge indicating its status.
 - <img src="https://img.shields.io/badge/status-in%20concept-999999.svg" alt="status">
 - <img src="https://img.shields.io/badge/status-in%20specification-blue.svg" alt="status">
 - <img src="https://img.shields.io/badge/status-in%20development-orange.svg" alt="status">
-- <img src="https://img.shields.io/badge/status-in%20testing-yellow.svg" alt="status">
+- <img src="https://img.shields.io/badge/status-in%20polishing-yellow.svg" alt="status">
+- <img src="https://img.shields.io/badge/status-in%20testing-purple.svg" alt="status">
 - <img src="https://img.shields.io/badge/status-in%20production-green.svg" alt="status">
 
 See [roadmap](./ROADMAP.md) for more details.

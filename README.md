@@ -89,7 +89,7 @@ Assemble and disassemble user interfaces using animations from React components.
 #### [`@arwes/sounds`](./packages/sounds)
 
 <div>
-    <img src="https://img.shields.io/badge/status-in%20development-orange.svg" alt="status">
+    <img src="https://img.shields.io/badge/status-in%20polishing-yellow.svg" alt="status">
     <img src="https://img.shields.io/npm/dm/@arwes/sounds.svg" alt="downloads" />
 </div>
 
