@@ -1,5 +1,5 @@
-export const ENERGY_TYPE = 'energy';
-export const STREAM_TYPE = 'stream';
+export const TYPE_ENERGY = 'energy';
+export const TYPE_STREAM = 'stream';
 export const ENTERING = 'entering';
 export const ENTERED = 'entered';
 export const EXITING = 'exiting';

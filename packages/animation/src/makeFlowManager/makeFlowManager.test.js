@@ -1,7 +1,7 @@
 /* eslint-env jest */
 
 import { makeFlowManager } from './makeFlowManager';
-import { STREAM_TYPE } from '../constants';
+import { TYPE_STREAM } from '../constants';
 
 describe('checkMount()', () => {
   test('Should subscribe to parent node if it is a stream and animated', () => {
@@ -10,7 +10,7 @@ describe('checkMount()', () => {
     const isOutsourced = jest.fn(() => true);
     const _subscribe = jest.fn();
     const component = {
-      props: { parentEnergyContext: { type: STREAM_TYPE, _subscribe } },
+      props: { parentEnergyContext: { type: TYPE_STREAM, _subscribe } },
       isAnimate,
       isActivated,
       isOutsourced
@@ -121,7 +121,7 @@ describe('checkUnmount()', () => {
     const isAnimate = jest.fn(() => true);
     const _unsubscribe = jest.fn();
     const component = {
-      props: { parentEnergyContext: { type: STREAM_TYPE, _unsubscribe } },
+      props: { parentEnergyContext: { type: TYPE_STREAM, _unsubscribe } },
       isAnimate
     };
     const flowManager = makeFlowManager(component);

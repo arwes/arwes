@@ -13,7 +13,7 @@ import { makeGetEnergyInterface } from '../makeGetEnergyInterface';
 import { makeDurationManager } from '../makeDurationManager';
 import { makeFlowManager } from '../makeFlowManager';
 import { makeScheduler } from '../makeScheduler';
-import { ENERGY_TYPE, ENTERING, ENTERED, EXITING, EXITED } from '../constants';
+import { TYPE_ENERGY, ENTERING, ENTERED, EXITING, EXITED } from '../constants';
 
 class Component extends React.PureComponent {
   static propTypes = {
@@ -49,7 +49,7 @@ class Component extends React.PureComponent {
     this.flowManager = makeFlowManager(this);
     this.scheduler = makeScheduler();
 
-    this.type = ENERGY_TYPE;
+    this.type = TYPE_ENERGY;
     this.state = this.getInitialState();
     this._flowHasEntered = false;
     this._flowHasExited = false;

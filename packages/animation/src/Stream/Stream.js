@@ -13,7 +13,7 @@ import { makeGetEnergyInterface } from '../makeGetEnergyInterface';
 import { makeDurationManager } from '../makeDurationManager';
 import { makeFlowManager } from '../makeFlowManager';
 import { makeScheduler } from '../makeScheduler';
-import { STREAM_TYPE, ENTERING, ENTERED, EXITING, EXITED } from '../constants';
+import { TYPE_STREAM, ENTERING, ENTERED, EXITING, EXITED } from '../constants';
 
 const SCHEDULER_ID_TRANSITIONING = 'TRANSITIONING';
 const SCHEDULER_ID_TRANSITIONED = 'TRANSITIONED';
@@ -52,7 +52,7 @@ class Component extends React.PureComponent {
     this.flowManager = makeFlowManager(this);
     this.scheduler = makeScheduler();
 
-    this.type = STREAM_TYPE;
+    this.type = TYPE_STREAM;
     this.state = this.getInitialState();
     this.subscribers = [];
     this._flowHasEntered = false;
