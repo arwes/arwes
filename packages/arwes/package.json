@@ -1,6 +1,6 @@
 {
   "name": "@arwes/arwes",
-  "version": "1.0.0-alpha.13",
+  "version": "1.0.0-alpha.14",
   "publishConfig": {
     "access": "public"
   },
@@ -30,7 +30,7 @@
   ],
   "main": "lib/index.js",
   "dependencies": {
-    "@arwes/sounds": "^1.0.0-alpha.13",
+    "@arwes/sounds": "^1.0.0-alpha.14",
     "@babel/runtime": "^7.7.6",
     "classnames": "^2.2.5",
     "d3-path": "^1.0.9",
