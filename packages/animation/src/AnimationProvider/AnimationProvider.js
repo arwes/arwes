@@ -41,7 +41,8 @@ AnimationProvider.propTypes = {
       enter: PropTypes.number,
       exit: PropTypes.number,
       stagger: PropTypes.number,
-      delay: PropTypes.number
+      delay: PropTypes.number,
+      offset: PropTypes.number
     })
   ]),
   children: PropTypes.any

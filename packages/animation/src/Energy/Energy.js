@@ -25,7 +25,8 @@ class Component extends React.PureComponent {
       PropTypes.shape({
         enter: PropTypes.number,
         exit: PropTypes.number,
-        delay: PropTypes.number
+        delay: PropTypes.number,
+        offset: PropTypes.number
       })
     ]),
     merge: PropTypes.bool,

@@ -3,10 +3,10 @@
 import { makeDurationManager } from './makeDurationManager';
 
 describe('get()', () => {
-  test('Should get 200ms for enter/exit, 0ms for delay, 50ms for stagger, by default', () => {
+  test('Should get 200ms for enter/exit, 0ms for delay, 50ms for stagger, 0ms for offset, by default', () => {
     const component = { props: { animationContext: {} } };
     const durationManager = makeDurationManager(component);
-    expect(durationManager.get()).toMatchObject({ enter: 200, exit: 200, delay: 0 });
+    expect(durationManager.get()).toMatchObject({ enter: 200, exit: 200, delay: 0, offset: 0 });
   });
 
   test('Should duration be extended by animation context', () => {

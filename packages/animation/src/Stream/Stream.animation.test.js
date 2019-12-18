@@ -99,6 +99,52 @@ describe('staggering mode', () => {
     expect(energy3.getFlow().entered).toBeTruthy();
   });
 
+  test('Should enter animate staggering children nodes with duration offsets', () => {
+    let stream, energy1, energy2, energy3;
+    render(
+      <Stream ref={r => (stream = r)} duration={{ stagger: 50 }}>
+        <Energy ref={r => (energy1 = r)} duration={{ enter: 100 }} />
+        <Energy ref={r => (energy2 = r)} duration={{ enter: 100, offset: 100 }} />
+        <Energy ref={r => (energy3 = r)} duration={{ enter: 100 }} />
+      </Stream>
+    );
+
+    expect(stream.getFlow().exited).toBeTruthy();
+    expect(energy1.getFlow().exited).toBeTruthy();
+    expect(energy2.getFlow().exited).toBeTruthy();
+    expect(energy3.getFlow().exited).toBeTruthy();
+
+    jest.advanceTimersByTime(10);
+    expect(stream.getFlow().entering).toBeTruthy();
+    expect(energy1.getFlow().entering).toBeTruthy();
+    expect(energy2.getFlow().exited).toBeTruthy();
+    expect(energy3.getFlow().exited).toBeTruthy();
+
+    jest.advanceTimersByTime(150); // 160ms
+    expect(stream.getFlow().entering).toBeTruthy();
+    expect(energy1.getFlow().entered).toBeTruthy();
+    expect(energy2.getFlow().entering).toBeTruthy();
+    expect(energy3.getFlow().exited).toBeTruthy();
+
+    jest.advanceTimersByTime(50); // 210ms
+    expect(stream.getFlow().entering).toBeTruthy();
+    expect(energy1.getFlow().entered).toBeTruthy();
+    expect(energy2.getFlow().entering).toBeTruthy();
+    expect(energy3.getFlow().entering).toBeTruthy();
+
+    jest.advanceTimersByTime(50); // 260ms
+    expect(stream.getFlow().entering).toBeTruthy();
+    expect(energy1.getFlow().entered).toBeTruthy();
+    expect(energy2.getFlow().entered).toBeTruthy();
+    expect(energy3.getFlow().entering).toBeTruthy();
+
+    jest.advanceTimersByTime(50); // 310ms
+    expect(stream.getFlow().entered).toBeTruthy();
+    expect(energy1.getFlow().entered).toBeTruthy();
+    expect(energy2.getFlow().entered).toBeTruthy();
+    expect(energy3.getFlow().entered).toBeTruthy();
+  });
+
   test('Should enter animate staggering children nodes with node delay and no effect of item delays', () => {
     let stream, energy1, energy2, energy3;
     render(
@@ -193,6 +239,46 @@ describe('serial mode', () => {
     expect(energy3.getFlow().entering).toBeTruthy();
 
     jest.advanceTimersByTime(100); // 310ms
+    expect(stream.getFlow().entered).toBeTruthy();
+    expect(energy1.getFlow().entered).toBeTruthy();
+    expect(energy2.getFlow().entered).toBeTruthy();
+    expect(energy3.getFlow().entered).toBeTruthy();
+  });
+
+  test('Should enter animate serial children nodes with duration offsets', () => {
+    let stream, energy1, energy2, energy3;
+    render(
+      <Stream ref={r => (stream = r)} serial>
+        <Energy ref={r => (energy1 = r)} duration={{ enter: 100 }} />
+        <Energy ref={r => (energy2 = r)} duration={{ enter: 100, offset: 100 }} />
+        <Energy ref={r => (energy3 = r)} duration={{ enter: 100 }} />
+      </Stream>
+    );
+
+    expect(stream.getFlow().exited).toBeTruthy();
+    expect(energy1.getFlow().exited).toBeTruthy();
+    expect(energy2.getFlow().exited).toBeTruthy();
+    expect(energy3.getFlow().exited).toBeTruthy();
+
+    jest.advanceTimersByTime(10);
+    expect(stream.getFlow().entering).toBeTruthy();
+    expect(energy1.getFlow().entering).toBeTruthy();
+    expect(energy2.getFlow().exited).toBeTruthy();
+    expect(energy3.getFlow().exited).toBeTruthy();
+
+    jest.advanceTimersByTime(200); // 210ms
+    expect(stream.getFlow().entering).toBeTruthy();
+    expect(energy1.getFlow().entered).toBeTruthy();
+    expect(energy2.getFlow().entering).toBeTruthy();
+    expect(energy3.getFlow().exited).toBeTruthy();
+
+    jest.advanceTimersByTime(100); // 310ms
+    expect(stream.getFlow().entering).toBeTruthy();
+    expect(energy1.getFlow().entered).toBeTruthy();
+    expect(energy2.getFlow().entered).toBeTruthy();
+    expect(energy3.getFlow().entering).toBeTruthy();
+
+    jest.advanceTimersByTime(100); // 410ms
     expect(stream.getFlow().entered).toBeTruthy();
     expect(energy1.getFlow().entered).toBeTruthy();
     expect(energy2.getFlow().entered).toBeTruthy();

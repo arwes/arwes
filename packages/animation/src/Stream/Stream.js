@@ -29,7 +29,8 @@ class Component extends React.PureComponent {
         enter: PropTypes.number,
         exit: PropTypes.number,
         stagger: PropTypes.number,
-        delay: PropTypes.number
+        delay: PropTypes.number,
+        offset: PropTypes.number
       })
     ]),
     serial: PropTypes.bool,
@@ -116,18 +117,21 @@ class Component extends React.PureComponent {
     if (this.props.serial) {
       enter = this.subscribers.reduce((total, subscriber) => {
         const subscriberDuration = subscriber.getDuration();
-        return total + subscriberDuration.delay + subscriberDuration.enter;
+        return total + subscriberDuration.offset + subscriberDuration.delay + subscriberDuration.enter;
       }, 0);
     }
     // Staggering
     else {
+      let accumulation = 0;
+
       this.subscribers.forEach((subscriber, index) => {
         const subscriberDuration = subscriber.getDuration();
+        accumulation += subscriberDuration.offset;
         const staggerDuration = (duration.stagger * index);
 
         enter = Math.max(
           enter,
-          staggerDuration + subscriberDuration.delay + subscriberDuration.enter
+          staggerDuration + accumulation + subscriberDuration.delay + subscriberDuration.enter
         );
       });
     }
@@ -209,6 +213,8 @@ class Component extends React.PureComponent {
     let acummulation = 0;
 
     this.subscribers.forEach((subscriber, index) => {
+      const itemDuration = subscriber.getDuration();
+      acummulation += itemDuration.offset;
       const itemTime = duration.delay + acummulation;
 
       this.scheduler.start(index, itemTime, () => subscriber.updateActivation(true));
@@ -220,8 +226,13 @@ class Component extends React.PureComponent {
   enterChildrenInStaggering () {
     const duration = this.getDuration();
 
+    let accumulation = 0;
+
     this.subscribers.forEach((subscriber, index) => {
-      const itemTime = duration.delay + (duration.stagger * index);
+      const itemDuration = subscriber.getDuration();
+      accumulation += itemDuration.offset;
+      const itemTime = accumulation + duration.delay + (duration.stagger * index);
+
       this.scheduler.start(index, itemTime, () => subscriber.updateActivation(true));
     });
   }
