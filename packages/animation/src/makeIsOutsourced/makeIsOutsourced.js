@@ -1,4 +1,4 @@
-import { TYPE_STREAM } from '../constants';
+import { STREAM } from '../constants';
 
 function makeIsOutsourced (component) {
   return function isOutsourced () {
@@ -12,7 +12,7 @@ function makeIsOutsourced (component) {
 
     if (
       component.props.parentEnergyContext &&
-      component.props.parentEnergyContext.type === TYPE_STREAM
+      component.props.parentEnergyContext.type === STREAM
     ) {
       return true;
     }

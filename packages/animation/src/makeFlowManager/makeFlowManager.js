@@ -1,4 +1,4 @@
-import { TYPE_STREAM } from '../constants';
+import { STREAM } from '../constants';
 
 function makeFlowManager (component) {
   let isFlowActivated = false;
@@ -10,7 +10,7 @@ function makeFlowManager (component) {
 
     const { parentEnergyContext } = component.props;
 
-    if (parentEnergyContext && parentEnergyContext.type === TYPE_STREAM) {
+    if (parentEnergyContext && parentEnergyContext.type === STREAM) {
       parentEnergyContext._subscribe(component);
     }
 
@@ -49,7 +49,7 @@ function makeFlowManager (component) {
 
     const { parentEnergyContext } = component.props;
 
-    if (parentEnergyContext && parentEnergyContext.type === TYPE_STREAM) {
+    if (parentEnergyContext && parentEnergyContext.type === STREAM) {
       parentEnergyContext._unsubscribe(component);
     }
   }

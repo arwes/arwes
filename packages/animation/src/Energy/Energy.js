@@ -13,7 +13,7 @@ import { makeGetEnergyInterface } from '../makeGetEnergyInterface';
 import { makeDurationManager } from '../makeDurationManager';
 import { makeFlowManager } from '../makeFlowManager';
 import { makeScheduler } from '../makeScheduler';
-import { TYPE_ENERGY, ENTERING, ENTERED, EXITING, EXITED } from '../constants';
+import { ENERGY, ENTERING, ENTERED, EXITING, EXITED } from '../constants';
 
 class Component extends React.PureComponent {
   static propTypes = {
@@ -49,10 +49,10 @@ class Component extends React.PureComponent {
     this.flowManager = makeFlowManager(this);
     this.scheduler = makeScheduler();
 
-    this.type = TYPE_ENERGY;
+    this.type = ENERGY;
     this.state = this.getInitialState();
-    this._flowHasEntered = false;
-    this._flowHasExited = false;
+    this.flowHasEntered = false;
+    this.flowHasExited = false;
   }
 
   getInitialState () {
@@ -90,10 +90,10 @@ class Component extends React.PureComponent {
       state => ({ ...state, flowValue, energyInterface }),
       () => {
         if (flowValue === ENTERED) {
-          this._flowHasEntered = true;
+          this.flowHasEntered = true;
         }
         else if (flowValue === EXITED) {
-          this._flowHasExited = true;
+          this.flowHasExited = true;
         }
       }
     );
@@ -112,11 +112,11 @@ class Component extends React.PureComponent {
   }
 
   hasEntered () {
-    return this._flowHasEntered;
+    return this.flowHasEntered;
   }
 
   hasExited () {
-    return this._flowHasExited;
+    return this.flowHasExited;
   }
 
   updateActivation (activated) {

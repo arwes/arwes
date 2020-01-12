@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import { TYPE_STREAM } from '../constants';
+import { STREAM } from '../constants';
 import { makeIsOutsourced } from './makeIsOutsourced';
 
 test('Should return false by default', () => {
@@ -32,7 +32,7 @@ test('Should return true if imperative', () => {
 
 test('Should return true if parent is stream', () => {
   const component = {
-    props: { parentEnergyContext: { type: TYPE_STREAM } },
+    props: { parentEnergyContext: { type: STREAM } },
     isRoot: jest.fn(() => false)
   };
   const isOutsourced = makeIsOutsourced(component);
