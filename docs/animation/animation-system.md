@@ -25,18 +25,20 @@ implemented from React components. It goes hand in hand with the [Sounds System]
 - By default, a system nodes are `exited` and when activated, the nodes begin
 entering level by level.
 - Flow "enters" in a node when it changes from `exited` to `entering` to `entered`.
-- For a node to enter, either it is a "root node" and it is activated to enter,
-or its parent was changed to `entered`.
+- For a node to enter:
+    - It is a "root node" and it is activated to enter.
+    - Its parent was changed to `entered`.
+    - It is controlled by its parent component.
 - The animation flow "exits" from a root node to all its descendant nodes at
-the same time. So it is recommended to have the same exit duration for all nodes.
+the same time, or it is controlled by its parent. So it is recommended to have
+the same exit duration for all nodes.
 - Flow "exits" in a node when it changes from `entered` to `exiting` to `exited`.
 
 ![Animation System Flow](./animation-system-flow.png)
 
-- By default a node is animated.
-- A node is added to the system as `exited` if animation is enabled. If it is a
-root and activated, or its direct parent is `entered`, it should start `entering`.
-Otherwise it stays as `exited`.
+- By default, a node is animated.
+- A node is added to the system as `exited` if animation is enabled. According
+to its configuration, it could start entering or stay in the same state.
 - If a node is removed from the system and it is as `entered` or `entering`,
 it should start `exiting` and completely removed from the DOM when `exited`.
 
@@ -45,7 +47,7 @@ it should start `exiting` and completely removed from the DOM when `exited`.
 The `Energy` component is an interface used to control the animation flow
 in a component. It represents a node in the system.
 
-This component is not used directly, instead it is used by a HOC (High Order Component).
+> This component is not used directly, instead it is used by a HOC (High Order Component).
 
 ### Props
 
@@ -73,13 +75,12 @@ deactivated.
 ### Methods
 
 - `getFlow(): flow` - Returns the current node flow state.
-- `hasEntered(): boolean` - If the node has entered in the system flow at least once.
-- `hasExited(): boolean` - If the node has exited in the system flow at least once.
+- `hasEntered(): boolean` - If the node has transitioned to `entered` at least once.
+- `hasExited(): boolean` - If the node has transitioned to `exited` at least once.
 - `getDuration(): Object` - Get the node duration values.
 - `updateDuration(duration: number | Object)` - Update the animation duration.
-- `updateActivation(boolean)` -
-Updates the node flow activation with provided value.
-Applicable if: `imperative = true` or children of `Stream`.
+- `updateActivation(boolean)` - Updates the node flow activation with provided
+value. Applicable if: `imperative = true`.
 
 > To access these APIs, you would use an object referenced as `EnergyInterface`.
 
@@ -92,7 +93,7 @@ The available props are: `animate` and `duration`.
 
 The descendant nodes will extend those props if available and defined.
 
-The providers can be stacked and their props will be merged.
+The providers can be stacked and their props will be extended.
 
 ### Example
 
@@ -173,22 +174,20 @@ component to implement.
 
 ## `Stream`
 
-The `Stream` virtual component can be used to handle multiple flow changes in
-a list of nodes. The nodes do not necessarily have to be direct children.
+A stream of energies. The `Stream` virtual component can be used to handle
+multiple flow changes in many node children. The nodes do not necessarily have
+to be direct children.
 
-This component behaves the same way as the `Energy` component.
-
-By default, when the `Stream` enters in the flow, its children nodes will [stagger](https://css-tricks.com/staggering-animations/)
-in the animation. For example, if the `duration.stagger = 50`, the first node
-will transition to `entering` at `0ms`, the second at `50ms`, the third at `100ms`,
-and so on.
+This component is an extension of `Energy` component.
 
 ### Props
 
-It receives the same props as `Energy` and the following:
-
-- `serial: boolean = false` - If `true`, the nodes will transition to `entering`
-one after the previous one finishes. The first one will still transition at `0ms`.
+- `serial: boolean = false` - By default, when the node enters in the flow,
+its children nodes will [stagger](https://css-tricks.com/staggering-animations/)
+in the animation. For example, if `duration.stagger = 50`, the first node
+will transition to `entering` at `0ms`, the second at `50ms`, the third at `100ms`,
+and so on. If `true`, the nodes will transition to `entering` one after the
+previous one finishes. The first one will still transition at `0ms`.
 - `duration: Object`
     - `stagger: number = 50` - The duration to start animating between nodes
     in a list if staggering is enabled.
@@ -198,11 +197,11 @@ one after the previous one finishes. The first one will still transition at `0ms
 
 ### Methods
 
-- `updateActivation(Function({ energy: EnergyInterface, component: Element, index: number }): boolean | null)` -
+- `updateChildrenActivation(Function({ energy: EnergyInterface, component: Element, index: number }): boolean | null)` -
 Iterate over each child node and depending on the returned value, it updates
 the flow state. If boolean is returned, it changes the activation of the child
 node, unless it is the same current value. If no value is returned, the state
-remains the same.
+remains the same. Applicable if: `imperative = true`.
 
 ### Example 1
 
@@ -227,44 +226,42 @@ Animate a list of nodes using a staggering strategy with 100ms between them.
 ### Example 2
 
 There is a long list of animated components inside a container element with scroll.
-Whenever the `Stream` node is activated/deactivated or the container's scroll
-changes, check the components visibility and show/hide them.
+When the `Stream` node is mounted, and the container's scroll changes, check
+the components visibility and show/hide them.
 
 ```js
-// Assuming there is a method `isVisible` of `MyNode`
-// to determine if they are visible on browser viewport.
+class MyComponent extends React.PureComponent () {
+    constructor () {
+        super(...arguments);
+        this.streamRef = React.createRef();
+        this.containerRef = React.createRef();
+    }
 
-const streamRef = createRef();
-const containerRef = createRef();
+    componentDidMount () {
+        this.updateChildrenFlow();
+        containerRef.current.addEventListener('scroll', this.updateChildrenFlow);
+    }
 
-const updateChildrenFlow = () => {
-    const streamFlow = streamRef.current.getFlow();
-    const isStreamActivated = streamFlow.entering || streamFlow.entered;
+    updateChildrenFlow = () => {
+        // Assuming there is a method `isVisible` of `MyNode` to determine
+        // if they are visible on browser viewport.
+        streamRef.current
+            .updateChildrenActivation(({ component }) => component.isVisible());
+    }
 
-    streamRef.current.updateActivation(({ component }) => {
-        if (isStreamActivated && component.isVisible()) {
-            return true;
-        }
-        return false;
-    });
-};
-
-...
-<Stream
-    ref={streamRef}
-    imperative
-    onActivation={updateChildrenFlow}
->
-    <div ref={containerRef}>
-        <MyNode />
-        <MyNode />
-        <MyNode />
-        <MyNode />
-    </div>
-</Stream>
-...
-
-containerRef.current.addEventListener('scroll', updateChildrenFlow);
+    render () {
+        return (
+            <Stream ref={this.streamRef} imperative>
+                <div ref={this.containerRef}>
+                    <MyNode />
+                    <MyNode />
+                    <MyNode />
+                    <MyNode />
+                </div>
+            </Stream>
+        );
+    }
+}
 ```
 
 ## Animation Tools
