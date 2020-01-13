@@ -4,7 +4,7 @@ import { makeFlowManager } from './makeFlowManager';
 import { STREAM } from '../constants';
 
 describe('checkMount()', () => {
-  test('Should subscribe to parent node if it is a stream and animated', () => {
+  test('Should subscribe to parent node if parent is stream, animated, outsourced', () => {
     const isAnimate = jest.fn(() => true);
     const isActivated = jest.fn(() => true);
     const isOutsourced = jest.fn(() => true);
@@ -25,18 +25,6 @@ describe('checkMount()', () => {
     const isAnimate = jest.fn(() => false);
     const isActivated = jest.fn(() => true);
     const isOutsourced = jest.fn(() => false);
-    const enter = jest.fn();
-    const component = { props: {}, isAnimate, isActivated, isOutsourced, enter };
-    const flowManager = makeFlowManager(component);
-
-    flowManager.checkMount();
-    expect(enter).not.toHaveBeenCalled();
-  });
-
-  test('Should do nothing if outsourced', () => {
-    const isAnimate = jest.fn(() => true);
-    const isActivated = jest.fn(() => true);
-    const isOutsourced = jest.fn(() => true);
     const enter = jest.fn();
     const component = { props: {}, isAnimate, isActivated, isOutsourced, enter };
     const flowManager = makeFlowManager(component);

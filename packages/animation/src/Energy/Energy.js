@@ -120,6 +120,8 @@ class Component extends React.PureComponent {
   }
 
   updateActivation (activated) {
+    // TODO: User should not be able to call this function, when this component
+    // is outsourced by being a <Stream />'s child.
     if (this.isOutsourced()) {
       activated ? this.enter() : this.exit();
     }

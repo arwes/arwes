@@ -8,17 +8,12 @@ function makeFlowManager (component) {
       return;
     }
 
-    const { parentEnergyContext } = component.props;
+    const { parentEnergyContext, imperative } = component.props;
 
-    if (parentEnergyContext && parentEnergyContext.type === STREAM) {
+    if (parentEnergyContext && parentEnergyContext.type === STREAM && !imperative) {
       parentEnergyContext._subscribe(component);
     }
-
-    if (component.isOutsourced()) {
-      return;
-    }
-
-    if (component.isActivated()) {
+    else if (component.isActivated()) {
       component.enter();
     }
   }
@@ -47,9 +42,9 @@ function makeFlowManager (component) {
       return;
     }
 
-    const { parentEnergyContext } = component.props;
+    const { parentEnergyContext, imperative } = component.props;
 
-    if (parentEnergyContext && parentEnergyContext.type === STREAM) {
+    if (parentEnergyContext && parentEnergyContext.type === STREAM && !imperative) {
       parentEnergyContext._unsubscribe(component);
     }
   }

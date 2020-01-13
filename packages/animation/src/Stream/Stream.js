@@ -33,6 +33,7 @@ class Component extends React.PureComponent {
         offset: PropTypes.number
       })
     ]),
+    imperative: PropTypes.bool,
     serial: PropTypes.bool,
     onActivation: PropTypes.func,
     animationContext: PropTypes.any,
