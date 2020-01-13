@@ -10,7 +10,11 @@ function makeFlowManager (component) {
 
     const { parentEnergyContext, imperative } = component.props;
 
-    if (parentEnergyContext && parentEnergyContext.type === STREAM && !imperative) {
+    if (parentEnergyContext && parentEnergyContext.type === STREAM) {
+      if (imperative) {
+        return;
+      }
+
       parentEnergyContext._subscribe(component);
     }
     else if (component.isActivated()) {
@@ -44,7 +48,11 @@ function makeFlowManager (component) {
 
     const { parentEnergyContext, imperative } = component.props;
 
-    if (parentEnergyContext && parentEnergyContext.type === STREAM && !imperative) {
+    if (parentEnergyContext && parentEnergyContext.type === STREAM) {
+      if (imperative) {
+        return;
+      }
+
       parentEnergyContext._unsubscribe(component);
     }
   }

@@ -4,16 +4,25 @@ import { makeFlowManager } from './makeFlowManager';
 import { STREAM } from '../constants';
 
 describe('checkMount()', () => {
-  test('Should subscribe to parent node if parent is stream, animated, outsourced', () => {
+  test('Should do nothing if not animated', () => {
+    const isAnimate = jest.fn(() => false);
+    const isActivated = jest.fn(() => true);
+    const enter = jest.fn();
+    const component = { props: {}, isAnimate, isActivated, enter };
+    const flowManager = makeFlowManager(component);
+
+    flowManager.checkMount();
+    expect(enter).not.toHaveBeenCalled();
+  });
+
+  test('Should subscribe to parent node if parent is stream, animated', () => {
     const isAnimate = jest.fn(() => true);
     const isActivated = jest.fn(() => true);
-    const isOutsourced = jest.fn(() => true);
     const _subscribe = jest.fn();
     const component = {
       props: { parentEnergyContext: { type: STREAM, _subscribe } },
       isAnimate,
-      isActivated,
-      isOutsourced
+      isActivated
     };
     const flowManager = makeFlowManager(component);
 
@@ -21,24 +30,26 @@ describe('checkMount()', () => {
     expect(_subscribe).toHaveBeenCalledWith(component);
   });
 
-  test('Should do nothing if not animated', () => {
-    const isAnimate = jest.fn(() => false);
+  test('Should not subscribe to parent node if parent is stream, animated, and imperative', () => {
+    const isAnimate = jest.fn(() => true);
     const isActivated = jest.fn(() => true);
-    const isOutsourced = jest.fn(() => false);
-    const enter = jest.fn();
-    const component = { props: {}, isAnimate, isActivated, isOutsourced, enter };
+    const _subscribe = jest.fn();
+    const component = {
+      props: { imperative: true, parentEnergyContext: { type: STREAM, _subscribe } },
+      isAnimate,
+      isActivated
+    };
     const flowManager = makeFlowManager(component);
 
     flowManager.checkMount();
-    expect(enter).not.toHaveBeenCalled();
+    expect(_subscribe).not.toHaveBeenCalledWith(component);
   });
 
   test('Should enter() if animated and activated', () => {
     const isAnimate = jest.fn(() => true);
     const isActivated = jest.fn(() => true);
-    const isOutsourced = jest.fn(() => false);
     const enter = jest.fn();
-    const component = { props: {}, isAnimate, isActivated, isOutsourced, enter };
+    const component = { props: {}, isAnimate, isActivated, enter };
     const flowManager = makeFlowManager(component);
 
     flowManager.checkMount();
@@ -105,7 +116,7 @@ describe('checkUpdate()', () => {
 });
 
 describe('checkUnmount()', () => {
-  test('Should unsubscribe if parent node is stream and animated', () => {
+  test('Should unsubscribe if parent node is stream, animated', () => {
     const isAnimate = jest.fn(() => true);
     const _unsubscribe = jest.fn();
     const component = {
@@ -116,5 +127,18 @@ describe('checkUnmount()', () => {
 
     flowManager.checkUnmount();
     expect(_unsubscribe).toHaveBeenCalledWith(component);
+  });
+
+  test('Should not unsubscribe if parent node is stream, animated, imperative', () => {
+    const isAnimate = jest.fn(() => true);
+    const _unsubscribe = jest.fn();
+    const component = {
+      props: { imperative: true, parentEnergyContext: { type: STREAM, _unsubscribe } },
+      isAnimate
+    };
+    const flowManager = makeFlowManager(component);
+
+    flowManager.checkUnmount();
+    expect(_unsubscribe).not.toHaveBeenCalledWith(component);
   });
 });
