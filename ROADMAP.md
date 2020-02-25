@@ -51,15 +51,8 @@ the vision of the project is.
 ### Q4
 
 - Animation System.
-    - [ ] **Develop the `@arwes/animation` package with the animation system APIs.**
-- Design System.
-    - [ ] Create a design specification to define the design tools architecture.
-    - [ ] Create a design system for Arwes UI components.
-    - [ ] Create a user experience specification for Arwes applications.
-    - [ ] Develop the `@arwes/design` package with the design system APIs.
-- [ ] Update contribution guidelines to allow developers to know what are the
-technical guidelines, architectures, workflow tasks, and communication and
-management details, in the project, to contribute in it.
+    - [x] Create animation management components.
+    - [x] Create unit and group animation components.
 
 ----
 
@@ -67,40 +60,38 @@ management details, in the project, to contribute in it.
 
 ### Q1
 
+- [ ] Update contribution guidelines to allow developers to know what are the
+technical guidelines, architectures, workflow tasks, and communication and
+management details, in the project, to contribute in it.
+- Animation System.
+    - [ ] Add animation components support for external controlling APIs.
+- Design System.
+    - [ ] Create a design specification to define the design tools architecture.
+    - [ ] Create a design system for Arwes UI components.
+    - [ ] Create a user experience specification for Arwes applications.
+    - [ ] Develop the `@arwes/design` package with the design system APIs.
+- General Tools.
+    - [ ] Define general purpose tools and browser API tools to modularize. It will
+    include tools for asset loading, viewport dimension, user-browser activity,
+    and any other general need.
+    - [ ] Develop the `@arwes/platform` package with the general tools APIs.
+
+### Q2
+
+- Arwes core components.
+    - [ ] Develop the `@arwes/core` package with the core UI components.
+- Arwes UI components.
+    - [ ] Define the UI components to implement the specified Arwes design system.
+    - [ ] Develop the `@arwes/arwes` package with the UI components.
+
+### Q3
+
 - Animation System.
     - [ ] Research SEO and SSR strategies to standardize recommended animation
     setups and settings.
 - Sounds System.
     - [ ] Research browser sound API supports and compatibility to standardize
     recommended sound setups and settings.
-- General Tools.
-    - [ ] Define general purpose tools and browser API tools to modularize. It will
-    include tools for asset loading, viewport dimension, user-browser activity,
-    and any other general need.
-    - [ ] Develop the `@arwes/platform` package with the general tools APIs.
-- Arwes core components.
-    - [ ] Define the core UI components to modularize, independent of the design
-    system variation used with the Arwes UI components.
-    - [ ] Develop the `@arwes/core` package with the core UI components.
-- Arwes UI components.
-    - [ ] Define the UI components to implement the specified Arwes design system.
-        - [ ] Define the Static/Content UI components.
-        - [ ] Define the Frame/Container/Structure UI components.
-        - [ ] Define the Shape/Icon UI components.
-        - [ ] Define the Control/Form UI components.
-        - [ ] Define the Navigation UI components.
-    - [ ] Develop the `@arwes/arwes` package with the UI components.
-
-### Q2
-
-- Arwes core components.
-    - [ ] Define the core UI components to modularize, independent of the design
-    system variation used with the Arwes UI components.
-    - [ ] Develop the `@arwes/core` package with the core UI components.
-- Arwes UI components.
-    - [ ] Define the UI components to implement the specified Arwes design system.
-    - [ ] Develop the `@arwes/arwes` package with the UI components.
-- [ ] Arwes UI components integration testing.
 - [ ] Create user guides documents where to specify how to use the framework.
 - [ ] Develop the website _arwes.dev_ for Arwes v1.0 to document the project
 vision, guidelines, documentation, APIs, and UI component playground.
