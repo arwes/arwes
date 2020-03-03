@@ -1,11 +1,10 @@
-const path = require('path');
-const babelConfig = require('./babel.config');
+const babelConfig = require('../babel.config');
 
 module.exports = {
   mode: 'development',
   entry: './playground/playground.js',
   output: {
-    path: path.resolve(__dirname, 'playground'),
+    path: __dirname,
     filename: 'playground-dist.js'
   },
   module: {
@@ -21,7 +20,7 @@ module.exports = {
     ]
   },
   devServer: {
-    contentBase: path.join(__dirname, 'playground'),
+    contentBase: __dirname,
     watchContentBase: true,
     compress: true,
     port: 9000,
