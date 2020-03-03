@@ -4,7 +4,7 @@ import React, { createRef } from 'react';
 import anime from 'animejs';
 import { withEnergy } from '../withEnergy';
 import { AnimationProvider } from '../AnimationProvider';
-import { Stream } from './Stream';
+import { Stream } from './index';
 
 const COLOR_ON = '#0f0';
 const COLOR_OFF = '#f00';

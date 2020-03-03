@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
-import { Stream } from './Stream';
 import { Energy } from '../Energy';
+import { Stream } from './index';
 
 beforeEach(() => {
   jest.useFakeTimers();

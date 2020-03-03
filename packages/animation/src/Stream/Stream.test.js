@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
-import { Stream } from './Stream';
-import { Energy } from '../Energy';
 import { useEnergy } from '../useEnergy';
+import { Energy } from '../Energy';
+import { Stream } from './index';
 
 afterEach(cleanup);
 

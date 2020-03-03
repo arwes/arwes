@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { AnimationContext } from '../AnimationContext';
 
-function AnimationProvider (props) {
+function Component (props) {
   const parentContext = useContext(AnimationContext);
   const settings = { ...parentContext };
 
@@ -33,7 +33,7 @@ function AnimationProvider (props) {
   );
 }
 
-AnimationProvider.propTypes = {
+Component.propTypes = {
   animate: PropTypes.bool,
   duration: PropTypes.oneOfType([
     PropTypes.number,
@@ -48,4 +48,4 @@ AnimationProvider.propTypes = {
   children: PropTypes.any
 };
 
-export { AnimationProvider };
+export { Component };

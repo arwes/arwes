@@ -3,7 +3,7 @@
 import React, { useContext } from 'react';
 import { render, cleanup } from '@testing-library/react';
 import { AnimationContext } from '../AnimationContext';
-import { AnimationProvider } from './AnimationProvider';
+import { AnimationProvider } from './index';
 
 afterEach(cleanup);
 

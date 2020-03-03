@@ -2,9 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useAnimation } from '../useAnimation';
 import { EnergyContext } from '../EnergyContext';
-import { useEnergy } from '../useEnergy';
 import { makeIsAnimate } from '../makeIsAnimate';
 import { makeIsRoot } from '../makeIsRoot';
 import { makeIsActivated } from '../makeIsActivated';
@@ -171,20 +169,4 @@ class Component extends React.PureComponent {
   }
 }
 
-const Energy = React.forwardRef((props, ref) => {
-  const animationContext = useAnimation();
-  const parentEnergyContext = useEnergy();
-
-  return (
-    <Component
-      {...props}
-      ref={ref}
-      animationContext={animationContext}
-      parentEnergyContext={parentEnergyContext}
-    />
-  );
-});
-
-Energy.displayName = 'Energy';
-
-export { Component, Energy };
+export { Component };

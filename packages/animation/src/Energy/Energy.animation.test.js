@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
-import { Energy } from './Energy';
 import { EnergyContext } from '../EnergyContext';
+import { Energy } from './index';
 
 beforeEach(() => {
   jest.useFakeTimers();

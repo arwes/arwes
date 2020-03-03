@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
-import { Energy } from './Energy';
 import { useEnergy } from '../useEnergy';
+import { Energy } from './index';
 
 afterEach(cleanup);
 

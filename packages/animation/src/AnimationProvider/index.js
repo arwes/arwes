@@ -1,1 +1,1 @@
-export { AnimationProvider } from './AnimationProvider';
+export { Component as AnimationProvider } from './AnimationProvider.component';
