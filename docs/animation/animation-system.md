@@ -47,7 +47,8 @@ it should start `exiting` and completely removed from the DOM when `exited`.
 The `Energy` component is an interface used to control the animation flow
 in a component. It represents a node in the system.
 
-> This component is not used directly, instead it is used by a HOC (High Order Component).
+> This component is not used directly, instead it is used by the HOC
+(High Order Component) `withEnergy`.
 
 ### Props
 
@@ -231,11 +232,8 @@ the components visibility and show/hide them.
 
 ```js
 class MyComponent extends React.PureComponent () {
-    constructor () {
-        super(...arguments);
-        this.streamRef = React.createRef();
-        this.containerRef = React.createRef();
-    }
+    streamRef = React.createRef();
+    containerRef = React.createRef();
 
     componentDidMount () {
         this.updateChildrenFlow();

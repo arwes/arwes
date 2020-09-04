@@ -24,8 +24,6 @@ class Component extends React.PureComponent {
     duration: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.shape({
-        enter: PropTypes.number,
-        exit: PropTypes.number,
         stagger: PropTypes.number,
         delay: PropTypes.number,
         offset: PropTypes.number
@@ -169,6 +167,10 @@ class Component extends React.PureComponent {
     else {
       throw new Error('"updateActivation" can not be called if component is not outsourced.');
     }
+  }
+
+  updateChildrenActivation () {
+    // TODO:
   }
 
   enter () {
