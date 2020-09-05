@@ -1,23 +1,24 @@
 {
+  "root": true,
+  "ignorePatterns": [
+    "node_modules",
+    "packages/*/lib",
+    "packages/arwes"
+  ],
   "extends": [
     "standard",
     "standard-react"
   ],
-
   "parser": "babel-eslint",
-
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module"
   },
-
   "env": {
     "es6": true
   },
-
   "rules": {
     "semi": ["error", "always"],
-    "brace-style": ["error", "stroustrup"],
-    "prefer-promise-reject-errors": [0]
+    "brace-style": ["error", "stroustrup"]
   }
 }

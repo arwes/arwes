@@ -16,7 +16,7 @@
     "test-ci": "npm run bootstrap && npm run compile && npm run lint && npm test",
     "compile": "sh compile.sh",
     "release": "npm run test-ci && lerna publish",
-    "changelog": "auto-changelog --output CHANGELOG.md --commit-limit false",
+    "changelog": "auto-changelog --output ./docs/CHANGELOG.md --commit-limit false",
     "contributors-add": "all-contributors add",
     "contributors-generate": "all-contributors generate"
   },
