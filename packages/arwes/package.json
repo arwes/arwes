@@ -31,18 +31,18 @@
   "main": "lib/index.js",
   "dependencies": {
     "@arwes/sounds": "^1.0.0-alpha.14",
-    "@babel/runtime": "^7.8.4",
-    "classnames": "^2.2.5",
-    "d3-path": "^1.0.9",
-    "d3-shape": "^1.3.7",
-    "detect-node": "^2.0.3",
-    "extend": "^3.0.1",
-    "polished": "^1.8.1",
-    "prismjs": "^1.19.0",
+    "@babel/runtime": "^7.11.2",
+    "classnames": "^2.2.6",
+    "d3-path": "^2.0.0",
+    "d3-shape": "^2.0.0",
+    "detect-node": "^2.0.4",
+    "extend": "^3.0.2",
+    "polished": "^3.6.6",
+    "prismjs": "^1.21.0",
     "prop-types": "*",
-    "react-jss": "^8.3.3",
-    "react-transition-group": "^2.2.1",
-    "theming": "^1.3.0"
+    "react-jss": "^10.4.0",
+    "react-transition-group": "^4.4.1",
+    "theming": "^3.3.0"
   },
   "peerDependencies": {
     "react": "16.x"
