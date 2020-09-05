@@ -1,6 +1,4 @@
-# Design Guidelines
-
-> This document is a draft. It is subject to changes in the future.
+> **THIS DOCUMENT IS AN OUTDATED DRAFT.**
 
 Arwes is a _framework_ to create UIs. Ideally, most settings should be configurable.
 So many of these guidelines should be flexible enough to adapt to the implementation

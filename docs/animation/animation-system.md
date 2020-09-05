@@ -1,7 +1,5 @@
-# Animation System
-
 The Arwes Animation System is composed by a set of tools which follow the
-[Arwes Animation and Sounds Guidelines](../../guidelines/animation-and-sounds.md)
+[Arwes Animation and Sounds Guidelines](../guidelines/animation-and-sounds.md)
 implemented from React components. It goes hand in hand with the [Sounds System](../sounds/sounds-system.md).
 
 ## Nodes
@@ -198,7 +196,8 @@ previous one finishes. The first one will still transition at `0ms`.
 
 ### Methods
 
-- `updateChildrenActivation(Function({ energy: EnergyInterface, component: Element, index: number }): boolean | null)` -
+- `updateChildrenActivation(Function({ energy: EnergyInterface, component: Element,
+index: number }): boolean | null)` -
 Iterate over each child node and depending on the returned value, it updates
 the flow state. If boolean is returned, it changes the activation of the child
 node, unless it is the same current value. If no value is returned, the state

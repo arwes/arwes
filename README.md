@@ -1,5 +1,7 @@
+<!-- markdownlint-disable MD033 MD013 -->
+
 <div align="center">
-  <img src="./assets/arwes.gif" alt="Arwes" />
+  <img src="./docs/static/arwes.gif" alt="Arwes" />
 </div>
 
 <p align="center" style="margin-top: 16px; font-size: 1.2rem;">
@@ -56,11 +58,8 @@ API may change. Check out the source code at
 branch where you can find the components and the website.
 
 Currently, the development is at [`master`](https://github.com/arwes/arwes) branch
-with the packages `@arwes/[package]`. They are not a working version yet,
-and they have major breaking changes with the `arwes` package.
-The website will be worked on once the new version is released in the
-[arwes.dev repository](https://github.com/arwes/arwes.dev).
-See [Roadmap](./ROADMAP.md) for more details.
+with the packages `@arwes/[package]`. They are not a working version yet, and they
+have major breaking changes with the `arwes` package.
 
 ## Packages
 
@@ -127,11 +126,6 @@ design system or design component implementations.
 
 Arwes design system React components.
 
-## Guidelines
-
-Check out [Arwes Guidelines](./guidelines) for detailed information about
-the concepts and inspiration projects behind the framework.
-
 ## Documentation
 
 **[arwes.dev](https://arwes.dev)** is for version `1.0.0-alpha.5`.
@@ -142,39 +136,36 @@ the concepts and inspiration projects behind the framework.
 
 Open [a GitHub issue](https://github.com/arwes/arwes/issues/new) or let's chat on [Discord](https://discord.gg/s5sbTkw).
 
-Review [Frequently Asked Questions](./FAQ.md).
-
-Also, read the [project code of conduct](./CODE_OF_CONDUCT.md).
+Review [frequently asked questions](./docs/FAQ.md) and [code of conduct](./docs/CODE_OF_CONDUCT.md).
 
 ## Showcase
 
 ### [SoulExtract.com](https://soulextract.com)
 
-[![SoulExtract.com](./assets/soulextract.gif)](https://soulextract.com)
+[![SoulExtract.com](./docs/static/soulextractcom.gif)](https://soulextract.com)
 
 Alternative Rock injected with electronic and cinematic elements.
 Proud member of the [FiXT](https://www.fixtonline.com) roster.
 
 Repository: [soulextract/soulextract.com](https://github.com/soulextract/soulextract.com)
 
-### [RomelPerez.com](https://romelperez.com)
+### [RomelPerez.dev](https://romelperez.dev)
 
-[![RomelPerez.com](./assets/romelperez.gif)](https://romelperez.com)
+[![RomelPerez.dev](./docs/static/romelperezdev.gif)](https://romelperez.dev)
 
 Romel Pérez's personal website.
 
-Repository: [romelperez/romelperez.com](https://github.com/romelperez/romelperez.com)
+Repository: [romelperez/romelperez.dev](https://github.com/romelperez/romelperez.dev)
 
 ## Roadmap
 
-Check out [Arwes Roadmap](./ROADMAP.md) for the project planning.
+Check out [Arwes Roadmap](./docs/ROADMAP.md) for the project planning.
 
-See [changelog](./CHANGELOG.md).
+See [changelog](./docs/CHANGELOG.md).
 
 ## Want to contribute?
 
-See [how to contribute](https://github.com/arwes/arwes/blob/master/CONTRIBUTING.md).
-All contributions of any kind are welcome!
+See [how to contribute](./docs/CONTRIBUTING.md). All contributions of any kind are welcome!
 
 Review the [project boards](https://github.com/arwes/arwes/projects).
 

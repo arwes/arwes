@@ -1,5 +1,3 @@
-# Purpose
-
 Arwes intends to materialize futuristic science fiction and cyberpunk concepts
 in a web toolset you may use to create user experiences inspired by advanced
 technology and alien engineering.
@@ -9,8 +7,9 @@ provided by projects built with Arwes, so Arwes interfaces are intensive and ric
 
 But building modular, configurable, heavily animated, and interconnected interface
 components for web applications from both design and functional perspectives
-is not easy. Since there are plenty of places from which we could draw inspiration, the
-concepts implemented in Arwes are opinionated and focused on certain experiential aspects.
+is not easy. Since there are plenty of places from which we could draw
+inspiration, the concepts implemented in Arwes are opinionated and focused on
+certain experiential aspects.
 
 These are the main fundamental ideas behind this project:
 
@@ -54,5 +53,5 @@ The elements in the experience should exist for a purpose, not just for display.
 But they can be elaborated. These elements should express that they have a function.
 
 All components in an experience should feel they are interconnected as a whole,
-so the experience is not just functional, but intelligent. Actions in one place can echo in
-other places or even broadcast to the whole system.
+so the experience is not just functional, but intelligent. Actions in one place
+can echo in other places or even broadcast to the whole system.

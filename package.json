@@ -7,8 +7,11 @@
     "bootstrap": "lerna bootstrap",
     "lerna": "lerna",
     "playground": "webpack-dev-server --config ./playground/playground.config.js",
-    "lint": "eslint .",
-    "lint-fix": "eslint --fix .",
+    "lint": "npm run lint-js && npm run lint-md",
+    "lint-js": "eslint .",
+    "lint-js-fix": "eslint . --fix",
+    "lint-md": "markdownlint .",
+    "lint-md-fix": "markdownlint . --fix",
     "test": "jest",
     "test-dev": "jest --watch",
     "test-cov": "jest --coverage",
@@ -63,5 +66,9 @@
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
+  },
+  "devDependencies": {
+    "markdownlint": "^0.20.4",
+    "markdownlint-cli": "^0.23.2"
   }
 }

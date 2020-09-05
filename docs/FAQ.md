@@ -1,5 +1,3 @@
-# Frequently Asked Questions
-
 <!-- TODO: Update questions when the next "stable" alpha/beta is released. -->
 <!-- TODO: Update questions when the website is released. -->
 
@@ -8,34 +6,28 @@
 Arwes is currently in _alpha_ version. It means there is ongoing development,
 APIs and guidelines can change and have breaking changes.
 
-An ideal Arwes project _beta_ release would be for **2020 Q2**.
-
-A stable version is expected to be released anytime in **2020**.
+The project will be ready for production when it has a stable and tested API.
 
 See [roadmap](./ROADMAP.md) for more details.
 
 ## What is the status of the development?
 
-Arwes is being worked on packages. The functional packages can be developed
-in parallel, except for `@arwes/core` which depends on the other functional
-ones.
+Arwes is being worked on packages. Functional packages and design system packages.
 
-The guidelines are the main concepts used for all design implementations and
-can be worked in parallel with the functional packages.
+The project uses guidelines as the main concepts for all functional and design
+implementations.
 
-Once the functional packages and the guidelines are ready, the `@arwes/arwes`
-package can be started. And later the documentation and the website.
+The functional packages should be ready and the guidelines defined for the design
+system packages to be developed.
 
-In the packages information there is a badge indicating its status.
+In the packages information there is a badge indicating its current status.
 
-- <img src="https://img.shields.io/badge/status-in%20concept-999999.svg" alt="status">
-- <img src="https://img.shields.io/badge/status-in%20specification-blue.svg" alt="status">
-- <img src="https://img.shields.io/badge/status-in%20development-orange.svg" alt="status">
-- <img src="https://img.shields.io/badge/status-in%20polishing-yellow.svg" alt="status">
-- <img src="https://img.shields.io/badge/status-in%20testing-purple.svg" alt="status">
-- <img src="https://img.shields.io/badge/status-in%20production-green.svg" alt="status">
-
-See [roadmap](./ROADMAP.md) for more details.
+- ![status](https://img.shields.io/badge/status-in%20concept-999999.svg)
+- ![status](https://img.shields.io/badge/status-in%20specification-blue.svg)
+- ![status](https://img.shields.io/badge/status-in%20development-orange.svg)
+- ![status](https://img.shields.io/badge/status-in%20polishing-yellow.svg)
+- ![status](https://img.shields.io/badge/status-in%20testing-purple.svg)
+- ![status](https://img.shields.io/badge/status-in%20production-green.svg)
 
 ## [arwes.dev](https://arwes.dev) website is outdated and where is the source code?
 
@@ -67,12 +59,12 @@ for AR/VR.
 
 ## What browsers are supported?
 
-Latest version of Chrome, Firefox and Safari for Android, iOS and desktop.
+Latest version of Chrome, Firefox, and Safari for Android, iOS and desktop.
 
 ## Does Arwes only work with [React](https://reactjs.org)?
 
 Since [React](https://reactjs.org) is a library with component logic written
-in JavaScript, we could easily use React components with other frameworks or
+in JavaScript, we could "easily" use React components with other frameworks or
 vanilla JavaScript. Though it may be more complicated to setup and work with.
 
 ## Why Arwes uses [JSS](https://cssinjs.org) as a styling solution?
@@ -84,7 +76,9 @@ Read more:
 
 - [A Unified Styling Language](https://medium.com/seek-blog/a-unified-styling-language-d0c208de2660).
 - [CSS in JavaScript with JSS and React](https://medium.com/jobsity/css-in-javascript-with-jss-and-react-54cdd2720222).
-- Check how [material-ui](https://material-ui.com) (the world's most popular UI React framework) uses JSS for its [customization](https://material-ui.com/customization/css-in-js) strategy.
+- Check how [material-ui](https://material-ui.com) (the world's most popular UI
+React framework) uses JSS for its [customization](https://material-ui.com/styles/basics)
+strategy.
 
 ## What about SSR or the [JAMstack](https://jamstack.org)?
 
@@ -93,7 +87,7 @@ or used as static generated markup/JavaScript sites as the [JAMstack](https://ja
 so definitely you can use Arwes with [Gatsby](http://gatsbyjs.org) or [Next](https://nextjs.org).
 
 But Arwes requires a few more setup steps to make it work for such requirements
-due to its design, sound and animation systems.
+due to its design, sound, and animation systems.
 
 There is a plan to document complete examples.
 
@@ -105,7 +99,7 @@ with Arwes can be SEO-friendly.
 
 There is a plan to document these.
 
-## Is there a plan to build specific tools?
+## Is there a plan to build more specific tools?
 
-There are plans to add _grid layout_, _graph_, and _map_ tools with Arwes
-customization but not for version 1.0.
+There are ideas to add grid layouts, custom form controls, graph, and map tools
+with Arwes customization but not for version 1.0.

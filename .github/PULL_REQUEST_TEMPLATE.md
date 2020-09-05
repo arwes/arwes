@@ -1,7 +1,5 @@
-### Your checklist for this pull request
-
-:alien: Please review the [guidelines for contributing](./CONTRIBUTING.md) to
-this repository.
+_Please make sure you have reviewed the [contribution guidelines](https://github.com/arwes/arwes/blob/master/docs/CONTRIBUTING.md)
+for this project._
 
 - [ ] Make sure you are making a pull request against the **master branch**
 (left side). Also you should start *your branch* off *our master*.
@@ -9,8 +7,8 @@ this repository.
 structure.
 - [ ] Check your code additions will fail neither code linting checks nor unit test.
 
-### Description
+## Description
 
 Please describe your pull request.
 
-:blue_heart: Thank you!
+Thank you! :alien: :blue_heart:

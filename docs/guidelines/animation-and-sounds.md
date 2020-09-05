@@ -1,5 +1,3 @@
-# Animation and Sounds Guidelines
-
 A system is a tree of nodes with only one parent.
 
 Any node in a system can use animations for many purposes, as individual

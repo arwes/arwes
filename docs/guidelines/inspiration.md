@@ -1,5 +1,3 @@
-# Inspiration
-
 Main sources of inspiration come from these awesome projects:
 
 - [Star Citizen](http://robertsspaceindustries.com) ([Starmap](https://robertsspaceindustries.com/starmap))

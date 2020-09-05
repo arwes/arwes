@@ -1,6 +1,4 @@
-# Roadmap
-
-An ideal Arwes project _beta_ release would be for **2020 Q2**.
+**Arwes project will be ready when it is ready.**
 
 - The order in the lists does not represent priority.
 - Active items are represented with **bold**.
@@ -56,9 +54,7 @@ the vision of the project is.
 
 ----
 
-## 2020
-
-### Q1
+## Backlog
 
 - [ ] Update contribution guidelines to allow developers to know what are the
 technical guidelines, architectures, workflow tasks, and communication and
@@ -75,17 +71,11 @@ management details, in the project, to contribute in it.
     include tools for asset loading, viewport dimension, user-browser activity,
     and any other general need.
     - [ ] Develop the `@arwes/platform` package with the general tools APIs.
-
-### Q2
-
 - Arwes core components.
     - [ ] Develop the `@arwes/core` package with the core UI components.
 - Arwes UI components.
     - [ ] Define the UI components to implement the specified Arwes design system.
     - [ ] Develop the `@arwes/arwes` package with the UI components.
-
-### Q3
-
 - Animation System.
     - [ ] Research SEO and SSR strategies to standardize recommended animation
     setups and settings.

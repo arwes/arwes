@@ -1,4 +1,4 @@
-# How to contribute :blue_heart:
+> **THIS DOCUMENT IS OUTDATED.**
 
 All your contributions are welcome!
 
@@ -300,4 +300,4 @@ git commit -m "chore: changelog"
 
 Have a question or an idea? Share it on [Discord](https://discord.gg/s5sbTkw)!
 
-Thank you for your contributions :blue_heart:
+Thank you for your contributions! :alien: :blue_heart:
