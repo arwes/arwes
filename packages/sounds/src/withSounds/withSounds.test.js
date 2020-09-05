@@ -77,6 +77,7 @@ test('Should forward reference', () => {
     render () {
       return <div />;
     }
+
     greet () {
       return 'hello!';
     }

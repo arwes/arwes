@@ -4,7 +4,7 @@ function makeIsActivated (component) {
   return function isActivated () {
     // Is root
     if (component.isRoot()) {
-      if (component.props.activate !== void 0) {
+      if (component.props.activate !== undefined) {
         return component.props.activate;
       }
 

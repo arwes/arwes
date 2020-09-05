@@ -6,11 +6,11 @@ function Component (props) {
   const parentContext = useContext(AnimationContext);
   const settings = { ...parentContext };
 
-  if (props.hasOwnProperty('animate')) {
+  if (Object.prototype.hasOwnProperty.call(props, 'animate')) {
     settings.animate = props.animate;
   }
 
-  if (props.hasOwnProperty('duration')) {
+  if (Object.prototype.hasOwnProperty.call(props, 'duration')) {
     if (typeof props.duration === 'number') {
       settings.duration = {
         ...settings.duration,

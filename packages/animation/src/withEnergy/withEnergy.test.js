@@ -26,6 +26,7 @@ test('Should forwardRef', () => {
     render () {
       return <div>{this.props.children}</div>; // eslint-disable-line react/prop-types
     }
+
     hi () {
       return 'hi';
     }
@@ -55,6 +56,7 @@ test('Should call "enter" on energy flow "entering" if "options.cycles=true" (de
     render () {
       return <div />;
     }
+
     enter () {
       onEnter();
     }
@@ -73,9 +75,11 @@ test('Should call "exit" on energy flow "exiting" if "options.cycles=true"', asy
     render () {
       return <div>{this.props.children}</div>; // eslint-disable-line react/prop-types
     }
+
     enter () {
       onEnter();
     }
+
     exit () {
       onExit();
     }
@@ -107,6 +111,7 @@ test('Should not call component methods if "options.cycles=false"', async () => 
     render () {
       return <div>{this.props.children}</div>; // eslint-disable-line react/prop-types
     }
+
     enter () {
       onEnter();
     }

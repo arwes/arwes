@@ -16,19 +16,23 @@ describe('get()', () => {
   });
 
   test('Should duration be extended by animation context and prop', () => {
-    const component = { props: {
-      animationContext: { duration: { enter: 700, exit: 500, delay: 50 } },
-      duration: { exit: 700 }
-    } };
+    const component = {
+      props: {
+        animationContext: { duration: { enter: 700, exit: 500, delay: 50 } },
+        duration: { exit: 700 }
+      }
+    };
     const durationManager = makeDurationManager(component);
     expect(durationManager.get()).toMatchObject({ enter: 700, exit: 700, delay: 50 });
   });
 
   test('Should get enter/exit values with provided prop number', () => {
-    const component = { props: {
-      animationContext: { duration: { enter: 500, exit: 500 } },
-      duration: 250
-    } };
+    const component = {
+      props: {
+        animationContext: { duration: { enter: 500, exit: 500 } },
+        duration: 250
+      }
+    };
     const durationManager = makeDurationManager(component);
     expect(durationManager.get()).toMatchObject({ enter: 250, exit: 250 });
   });

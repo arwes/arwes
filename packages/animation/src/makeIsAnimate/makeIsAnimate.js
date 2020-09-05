@@ -3,12 +3,12 @@ function makeIsAnimate (component) {
     let animate = true;
 
     const providedAnimate = component.props.animationContext.animate;
-    if (providedAnimate !== void 0) {
+    if (providedAnimate !== undefined) {
       animate = providedAnimate;
     }
 
     const propAnimate = component.props.animate;
-    if (propAnimate !== void 0) {
+    if (propAnimate !== undefined) {
       animate = propAnimate;
     }
 

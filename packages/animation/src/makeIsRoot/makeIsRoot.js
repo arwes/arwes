@@ -6,7 +6,7 @@ function makeIsRoot (component) {
       root = false;
     }
 
-    if (component.props.root !== void 0) {
+    if (component.props.root !== undefined) {
       root = component.props.root;
     }
 
