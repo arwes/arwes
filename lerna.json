@@ -5,8 +5,8 @@
   "version": "1.0.0-alpha.14",
   "command": {
     "publish": {
-      "allowBranch": "master",
-      "message": "release: %s"
+      "allowBranch": "main",
+      "message": "chore: release %s"
     }
   }
 }
