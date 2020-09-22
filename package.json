@@ -1,6 +1,5 @@
 {
   "scripts": {
-    "lerna": "lerna",
     "postinstall": "npm run bootstrap && npm run compile",
     "bootstrap": "lerna bootstrap",
     "compile": "sh compile.sh",

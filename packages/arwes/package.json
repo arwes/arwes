@@ -37,7 +37,7 @@
     "d3-shape": "^2.0.0",
     "detect-node": "^2.0.4",
     "extend": "^3.0.2",
-    "polished": "^3.6.6",
+    "polished": "^3.6.7",
     "prismjs": "^1.21.0",
     "prop-types": "*",
     "react-jss": "^10.4.0",

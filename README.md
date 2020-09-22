@@ -72,6 +72,7 @@ The main functionalities which power the UI component system.
 <div>
     <img src="https://img.shields.io/badge/status-in%20concept-999999.svg" alt="status">
     <img src="https://img.shields.io/npm/dm/@arwes/design.svg" alt="downloads" />
+    <img src="https://img.shields.io/bundlephobia/minzip/@arwes/design" alt="npm bundle size">
 </div>
 
 Styling tools using [JSS](https://cssinjs.org) with React components.
@@ -81,6 +82,7 @@ Styling tools using [JSS](https://cssinjs.org) with React components.
 <div>
     <img src="https://img.shields.io/badge/status-in%20development-orange.svg" alt="status">
     <img src="https://img.shields.io/npm/dm/@arwes/animation.svg" alt="downloads" />
+    <img src="https://img.shields.io/bundlephobia/minzip/@arwes/animation" alt="npm bundle size">
 </div>
 
 Assemble and disassemble user interfaces using animations from React components.
@@ -90,6 +92,7 @@ Assemble and disassemble user interfaces using animations from React components.
 <div>
     <img src="https://img.shields.io/badge/status-in%20polishing-yellow.svg" alt="status">
     <img src="https://img.shields.io/npm/dm/@arwes/sounds.svg" alt="downloads" />
+    <img src="https://img.shields.io/bundlephobia/minzip/@arwes/sounds" alt="npm bundle size">
 </div>
 
 Define, manage and control interactive sound effects from React components.
@@ -99,6 +102,7 @@ Define, manage and control interactive sound effects from React components.
 <div>
     <img src="https://img.shields.io/badge/status-in%20concept-999999.svg" alt="status">
     <img src="https://img.shields.io/npm/dm/@arwes/platform.svg" alt="downloads" />
+    <img src="https://img.shields.io/bundlephobia/minzip/@arwes/platform" alt="npm bundle size">
 </div>
 
 Resource loading, responsive control, and general browser API tools.
@@ -108,6 +112,7 @@ Resource loading, responsive control, and general browser API tools.
 <div>
     <img src="https://img.shields.io/badge/status-in%20concept-999999.svg" alt="status">
     <img src="https://img.shields.io/npm/dm/@arwes/core.svg" alt="downloads" />
+    <img src="https://img.shields.io/bundlephobia/minzip/@arwes/core" alt="npm bundle size">
 </div>
 
 Core UI React components.
@@ -122,6 +127,7 @@ design system or design component implementations.
 <div>
     <img src="https://img.shields.io/badge/status-in%20concept-999999.svg" alt="status">
     <img src="https://img.shields.io/npm/dm/@arwes/arwes.svg" alt="downloads" />
+    <img src="https://img.shields.io/bundlephobia/minzip/@arwes/arwes" alt="npm bundle size">
 </div>
 
 Arwes design system React components.
