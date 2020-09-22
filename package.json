@@ -1,31 +1,35 @@
 {
-  "name": "project",
-  "version": "1.0.0",
-  "private": true,
   "scripts": {
+    "lerna": "lerna",
     "postinstall": "npm run bootstrap && npm run compile",
     "bootstrap": "lerna bootstrap",
-    "lerna": "lerna",
-    "playground": "webpack-dev-server --config ./playground/playground.config.js",
+    "compile": "sh compile.sh",
     "lint": "npm run lint-js && npm run lint-md",
     "lint-js": "eslint .",
     "lint-js-fix": "eslint . --fix",
     "lint-md": "markdownlint .",
     "lint-md-fix": "markdownlint . --fix",
     "test": "jest",
-    "test-dev": "jest --watch",
-    "test-cov": "jest --coverage",
+    "test-watch": "jest --watch",
+    "test-coverage": "jest --coverage",
     "test-list": "jest --listTests",
-    "test-ci": "npm run bootstrap && npm run compile && npm run lint && npm test",
-    "compile": "sh compile.sh",
-    "release": "npm run test-ci && lerna publish",
+    "ci": "npm run bootstrap && npm run compile && npm run lint && npm test",
+    "playground": "webpack-dev-server --config ./playground/playground.config.js",
+    "release": "npm run ci && lerna publish",
     "changelog": "auto-changelog --output ./docs/CHANGELOG.md --commit-limit false",
     "contributors-add": "all-contributors add",
     "contributors-generate": "all-contributors generate"
   },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run test-ci"
+      "pre-commit": "npm run ci",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "dependencies": {
@@ -37,6 +41,8 @@
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
     "@babel/runtime": "^7.11.2",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "@testing-library/react": "^11.0.2",
     "all-contributors-cli": "^6.17.2",
     "animejs": "^3.2.0",
@@ -44,6 +50,8 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
+    "commitizen": "^4.2.1",
+    "cz-conventional-changelog": "^3.3.0",
     "documentation": "^13.0.2",
     "eslint": "^7.8.1",
     "eslint-config-standard": "^14.1.1",
@@ -58,6 +66,8 @@
     "husky": "^4.2.5",
     "jest": "^26.4.2",
     "lerna": "^3.22.1",
+    "markdownlint": "^0.20.4",
+    "markdownlint-cli": "^0.23.2",
     "navigo": "^7.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -66,9 +76,5 @@
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
-  },
-  "devDependencies": {
-    "markdownlint": "^0.20.4",
-    "markdownlint-cli": "^0.23.2"
   }
 }
