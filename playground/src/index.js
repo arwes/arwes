@@ -1,7 +1,10 @@
+/* eslint-disable react/prop-types */
+
 import React, { useState, useEffect } from 'react';
 import { render } from 'react-dom';
 import withStyles from 'react-jss';
 import Navigo from 'navigo';
+
 import sandboxes from './sandboxes';
 
 const sandboxesItems = sandboxes
@@ -23,7 +26,7 @@ const styles = {
     'html, body': {
       margin: 0,
       padding: 0,
-      backgroundColor: '#000'
+      backgroundColor: '#000909'
     }
   },
   root: {
@@ -37,40 +40,61 @@ const styles = {
   },
   header: {
     display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     overflow: 'hidden',
     width: '100%',
     height: 40,
-    borderBottom: '1px solid #0ff',
-    backgroundColor: '#222',
-    fontFamily: 'Monaco, Terminal, monospace',
-    color: '#0ff',
-    userSelect: 'none'
+    borderBottom: '1px solid #06d8d7',
+    backgroundColor: '#031214',
+    fontFamily: '"Titillium Web", sans-serif',
+    color: '#a1ecfb',
+    userSelect: 'none',
+
+    '& a': {
+      textDecoration: 'none',
+      color: 'inherit',
+      outline: 'none',
+
+      '&hover, &:focus': {
+        outline: 'none'
+      }
+    }
+  },
+  headerHeading: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  headerLogo: {
+    display: 'inline-block',
+    margin: 7,
+    width: 26,
+    height: 26
   },
   headerTitle: {
     display: 'inline-block',
-    margin: [0, 10],
+    margin: [0, 10, 0, 0],
     lineHeight: '40px',
     fontSize: 20,
     fontWeight: 'bold'
   },
   headerSelect: {
     display: 'inline-block',
-    margin: [5, 0],
+    margin: 5,
     height: 30,
     border: 'none',
     outline: 'none',
     boxShadow: 'none',
     cursor: 'pointer',
-
     backgroundColor: 'transparent',
-    fontFamily: 'Monaco, Terminal, monospace',
+    fontFamily: '"Titillium Web", sans-serif',
     lineHeight: '30px',
     fontSize: 14,
-    color: '#0ff',
+    color: '#a1ecfb',
 
     '& option, & optgroup': {
-      backgroundColor: '#000',
-      color: '#0ff'
+      backgroundColor: '#031214',
+      color: '#a1ecfb'
     }
   },
   content: {
@@ -83,7 +107,7 @@ const styles = {
 
 let router;
 
-const Playground = withStyles(styles)(({ classes }) => { // eslint-disable-line react/prop-types
+function Playground ({ classes }) {
   const [sandboxKey, setSandboxKey] = useState('/');
   const sandbox = sandboxesItems.find(({ key }) => key === sandboxKey);
 
@@ -97,15 +121,18 @@ const Playground = withStyles(styles)(({ classes }) => { // eslint-disable-line 
     });
   }, []);
 
-  function onChange (ev) {
-    const sandboxKey = ev.target.value;
+  function onChange (event) {
+    const sandboxKey = event.target.value;
     router.navigate(sandboxKey);
   }
 
   return (
     <div className={classes.root}>
       <header className={classes.header}>
-        <h1 className={classes.headerTitle}>Arwes Playground</h1>
+        <a className={classes.headerHeading} href='/'>
+          <img className={classes.headerLogo} src='arwes.png' />
+          <h1 className={classes.headerTitle}>Arwes Playground</h1>
+        </a>
         <select
           className={classes.headerSelect}
           value={sandboxKey}
@@ -134,6 +161,8 @@ const Playground = withStyles(styles)(({ classes }) => { // eslint-disable-line 
       </main>
     </div>
   );
-});
+};
 
-render(<Playground />, document.querySelector('#root'));
+const App = withStyles(styles)(Playground);
+
+render(<App />, document.querySelector('#root'));
