@@ -1,10 +1,14 @@
-module.exports = [
+const playgrounds = [
   {
-    name: 'sounds',
-    items: [
-      { name: 'withSounds', component: require('../../packages/sounds/src/withSounds/withSounds.sandbox.js').default }
+    packageName: 'sounds',
+    components: [
+      {
+        componentName: 'withSounds',
+        playground: require('../../packages/sounds/src/withSounds/withSounds.playground.js')
+      }
     ]
-  },
+  }
+  /*
   {
     name: 'animation',
     items: [
@@ -12,4 +16,7 @@ module.exports = [
       { name: 'Stream', component: require('../../packages/animation/src/Stream/Stream.sandbox.js').default }
     ]
   }
+  */
 ];
+
+export { playgrounds };
