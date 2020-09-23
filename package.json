@@ -1,4 +1,7 @@
 {
+  "name": "workspace",
+  "version": "1.0.0",
+  "private": true,
   "scripts": {
     "postinstall": "npm run bootstrap && npm run compile",
     "bootstrap": "lerna bootstrap",
