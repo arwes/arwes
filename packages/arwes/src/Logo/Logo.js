@@ -24,7 +24,11 @@ const createArcLight = (details, classes, ...props) => (
   </Aux>
 );
 
-export default function Logo(props) {
+createArcLight.propTypes = {
+  className: PropTypes.any
+};
+
+export default function Logo (props) {
   const {
     theme,
     classes,
@@ -50,23 +54,23 @@ export default function Logo(props) {
           className={cx(cls, classes[anim.status])}
           width={size}
           height={size}
-          viewBox="0 0 1000 1000"
-          version="1.1"
+          viewBox='0 0 1000 1000'
+          version='1.1'
           {...etc}
         >
-          <filter id="arwes-logo-filter-blur">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="20" />
+          <filter id='arwes-logo-filter-blur'>
+            <feGaussianBlur in='SourceGraphic' stdDeviation='20' />
           </filter>
 
           <g style={{ transform: 'translate(500px,500px)' }}>
             {/* 1 arc */}
             <circle
               className={cx(classes.light, classes.elementFilter)}
-              cx="0"
-              cy="0"
-              r="85"
+              cx='0'
+              cy='0'
+              r='85'
             />
-            <circle className={classes.light} cx="0" cy="0" r="85" />
+            <circle className={classes.light} cx='0' cy='0' r='85' />
 
             {/* 2 arc */}
             <path
@@ -134,6 +138,7 @@ Logo.propTypes = {
   animate: PropTypes.bool,
   show: PropTypes.bool,
   animation: PropTypes.object,
+  className: PropTypes.any,
 
   layer: PropTypes.oneOf([
     'primary',

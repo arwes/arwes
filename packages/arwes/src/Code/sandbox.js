@@ -10,7 +10,7 @@ export default () => (
       code rendered.
     </p>
     <p>But we can also render a full example:</p>
-    <Code animate type="pre" language="javascript">{`// An arbitrary example
+    <Code animate type='pre' language='javascript'>{`// An arbitrary example
 class Code extends Component {
     constructor () {
         super(...arguments);
@@ -29,7 +29,7 @@ class Code extends Component {
     }
 }`}</Code>
     <p>And another example with more details:</p>
-    <Code animate type="pre" language="css">{`/* Some global classes */
+    <Code animate type='pre' language='css'>{`/* Some global classes */
 html {
   box-sizing: border-box;
 }

@@ -1,32 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState, useEffect } from 'react';
+import { render } from 'react-dom';
 import withStyles from 'react-jss';
 import Navigo from 'navigo';
-
-import createTheme from '../packages/arwes/src/tools/createTheme';
-import ThemeProvider from '../packages/arwes/src/ThemeProvider';
-import createSounds from '../packages/sounds/src/createSounds';
-import SoundsProvider from '../packages/sounds/src/SoundsProvider';
 import sandboxes from './sandboxes';
 
-const theme = createTheme();
-const sounds = createSounds({
-  shared: { volume: 1 },
-  players: {
-    click: {
-      sound: { src: ['/sound/click.mp3'] },
-      settings: { oneAtATime: true }
-    },
-    typing: {
-      sound: { src: ['/sound/typing.mp3'] },
-      settings: { oneAtATime: true }
-    },
-    deploy: {
-      sound: { src: ['/sound/deploy.mp3'] },
-      settings: { oneAtATime: true }
-    }
-  }
-});
+const sandboxesItems = sandboxes
+  .map(({ name, items }) => items.map(item => {
+    item.category = name;
+    item.key = `${name}/${item.name}`;
+    return item;
+  }))
+  .reduce((total, items) => [...total, ...items], []);
+
 const styles = {
   '@global': {
     html: {
@@ -56,9 +41,10 @@ const styles = {
     width: '100%',
     height: 40,
     borderBottom: '1px solid #0ff',
-    backgroundColor: '#111',
+    backgroundColor: '#222',
     fontFamily: 'Monaco, Terminal, monospace',
-    color: '#0ff'
+    color: '#0ff',
+    userSelect: 'none'
   },
   headerTitle: {
     display: 'inline-block',
@@ -82,7 +68,7 @@ const styles = {
     fontSize: 14,
     color: '#0ff',
 
-    '& option': {
+    '& option, & optgroup': {
       backgroundColor: '#000',
       color: '#0ff'
     }
@@ -95,69 +81,59 @@ const styles = {
   }
 };
 
-class PlaygroundSource extends React.Component {
-  constructor() {
-    super(...arguments);
+let router;
 
-    this.state = {
-      sandboxName: ''
-    };
-  }
+const Playground = withStyles(styles)(({ classes }) => { // eslint-disable-line react/prop-types
+  const [sandboxKey, setSandboxKey] = useState('/');
+  const sandbox = sandboxesItems.find(({ key }) => key === sandboxKey);
 
-  componentDidMount() {
-    this.router = new Navigo(null, true);
+  useEffect(() => {
+    router = new Navigo(null, true);
 
-    this.router.on('/', () => {
-      this.setState({ sandboxName: '' });
+    router.on('/', () => setSandboxKey('/'));
+
+    sandboxesItems.forEach(item => {
+      router.on(item.key, () => setSandboxKey(item.key)).resolve();
     });
+  }, []);
 
-    sandboxes.forEach(sandbox => {
-      this.router
-        .on(sandbox.name, () => this.setState({ sandboxName: sandbox.name }))
-        .resolve();
-    });
+  function onChange (ev) {
+    const sandboxKey = ev.target.value;
+    router.navigate(sandboxKey);
   }
 
-  onChange = ev => {
-    const sandboxName = ev.target.value;
-    this.router.navigate(sandboxName);
-  };
+  return (
+    <div className={classes.root}>
+      <header className={classes.header}>
+        <h1 className={classes.headerTitle}>Arwes Playground</h1>
+        <select
+          className={classes.headerSelect}
+          value={sandboxKey}
+          onChange={onChange}
+        >
+          <option value='/'>-- Select --</option>
+          {sandboxes.map(sandbox => (
+            <optgroup
+              key={sandbox.name}
+              label={sandbox.name}
+            >
+              {sandbox.items.map(item => (
+                <option
+                  key={item.name}
+                  value={`${sandbox.name}/${item.name}`}
+                >
+                  {item.name}
+                </option>
+              ))}
+            </optgroup>
+          ))}
+        </select>
+      </header>
+      <main className={classes.content}>
+        {!!sandbox && <sandbox.component />}
+      </main>
+    </div>
+  );
+});
 
-  render() {
-    const { classes } = this.props;
-    const { sandboxName } = this.state;
-
-    const sandbox = sandboxes.find(item => item.name === sandboxName);
-
-    return (
-      <div className={classes.root}>
-        <header className={classes.header}>
-          <h1 className={classes.headerTitle}>Arwes Playground</h1>
-          <select
-            className={classes.headerSelect}
-            value={sandboxName}
-            onChange={this.onChange}
-          >
-            <option value="">-- Select component --</option>
-            {sandboxes.map((item, index) => (
-              <option key={index} value={item.name}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-        </header>
-        <main className={classes.content}>
-          <ThemeProvider theme={theme}>
-            <SoundsProvider sounds={sounds}>
-              <div>{!!sandbox && <sandbox.component />}</div>
-            </SoundsProvider>
-          </ThemeProvider>
-        </main>
-      </div>
-    );
-  }
-}
-
-const Playground = withStyles(styles)(PlaygroundSource);
-
-ReactDOM.render(<Playground />, document.querySelector('#root'));
+render(<Playground />, document.querySelector('#root'));

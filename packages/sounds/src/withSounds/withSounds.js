@@ -1,27 +1,41 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import hoistNonReactStatics from 'hoist-non-react-statics';
+import React, { useContext } from 'react';
+import { SoundsContext } from '../SoundsContext';
 
-export default function withSounds() {
-  return Inner => {
-    const displayName = Inner.displayName || Inner.name || 'Component';
+function withSounds (options = {}) {
+  return function hoc (Component) {
+    function Sounds (props, ref) {
+      let {
+        players = {},
+        audio = {}
+      } = useContext(SoundsContext) || {};
 
-    const defaultProps = { ...Inner.defaultProps };
-    delete defaultProps.sounds;
-
-    class Sounds extends Component {
-      static displayName = `Sounds(${displayName})`;
-      static defaultProps = defaultProps;
-      static contextTypes = {
-        sounds: PropTypes.object
+      players = {
+        ...players,
+        ...options.players,
+        ...props.players // eslint-disable-line react/prop-types
       };
 
-      render() {
-        const { props, context } = this;
-        return <Inner sounds={context.sounds} {...props} />;
-      }
+      audio = {
+        ...audio,
+        ...options.audio,
+        ...props.audio // eslint-disable-line react/prop-types
+      };
+
+      return (
+        <Component
+          {...props}
+          ref={ref}
+          players={players}
+          audio={audio}
+        />
+      );
     }
 
-    return hoistNonReactStatics(Sounds, Inner);
+    const soundsDisplayName = Component.displayName || Component.name;
+    Sounds.displayName = `withSounds(${soundsDisplayName})`;
+
+    return React.forwardRef(Sounds);
   };
 }
+
+export { withSounds };

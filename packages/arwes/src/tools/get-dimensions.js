@@ -1,6 +1,6 @@
 import isNode from 'detect-node';
 
-const getViewportSize = function(Name) {
+const getViewportSize = function (Name) {
   var size;
   var name = Name.toLowerCase();
   var document = window.document;
@@ -10,7 +10,6 @@ const getViewportSize = function(Name) {
   if (window['inner' + Name] === undefined) {
     size = documentElement['client' + Name];
   }
-
   // WebKit doesn't include scrollbars while calculating viewport size so we have to get fancy
   else if (window['inner' + Name] !== documentElement['client' + Name]) {
     // Insert markup to test if a media query will match document.doumentElement["client" + Name]
@@ -35,7 +34,8 @@ const getViewportSize = function(Name) {
     if (divElement['offset' + Name] === 7) {
       // Media query matches document.documentElement["client" + Name]
       size = documentElement['client' + Name];
-    } else {
+    }
+    else {
       // Media query didn't match, use window["inner" + Name]
       size = window['inner' + Name];
     }
@@ -61,7 +61,7 @@ const getViewportSize = function(Name) {
  *
  * @return {Object} { Number width, Number height }
  */
-export default function(wMin, hMin, wMax, hMax) {
+export default function (wMin, hMin, wMax, hMax) {
   let width = isNode ? 1024 : getViewportSize('Width');
   let height = isNode ? 768 : getViewportSize('Height');
 

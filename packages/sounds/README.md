@@ -1,6 +1,3 @@
-# Sounds
+# Arwes Sounds
 
-> Arwes Sounds Tools
-
-See [arwesjs.org](https://arwesjs.org) for more information or check out the
-[repository](https://github.com/arwesjs/arwes).
+Check out [github.com/arwes/arwes](https://github.com/arwes/arwes).

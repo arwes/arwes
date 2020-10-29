@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-export default function Content(props) {
+export default function Content (props) {
   const { theme, classes, className, children, ...etc } = props;
   const cls = cx(classes.root, className);
   return (
@@ -13,6 +13,8 @@ export default function Content(props) {
 }
 
 Content.propTypes = {
+  className: PropTypes.any,
+  children: PropTypes.any,
   theme: PropTypes.any.isRequired,
   classes: PropTypes.any.isRequired
 };

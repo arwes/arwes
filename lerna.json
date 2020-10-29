@@ -1,13 +1,12 @@
 {
-  "lerna": "2.11.0",
   "packages": [
     "packages/*"
   ],
-  "version": "independent",
+  "version": "1.0.0-alpha.14",
   "command": {
     "publish": {
-      "skipGit": true,
-      "allowBranch": "master"
+      "allowBranch": "master",
+      "message": "release: %s"
     }
   }
 }

@@ -49,7 +49,10 @@ export default class Button extends Component {
     /**
      * If function, receives the animation status object.
      */
-    children: PropTypes.any
+    children: PropTypes.any,
+
+    className: PropTypes.any,
+    onClick: PropTypes.func
   };
 
   static defaultProps = {
@@ -62,7 +65,7 @@ export default class Button extends Component {
     level: 2
   };
 
-  render() {
+  render () {
     const {
       Animation,
       Highlight,

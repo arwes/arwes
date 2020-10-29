@@ -24,7 +24,10 @@ export default class Code extends Component {
     /**
      * The programming language. Supported by [Prism](http://prismjs.com/).
      */
-    language: PropTypes.string
+    language: PropTypes.string,
+
+    children: PropTypes.any,
+    className: PropTypes.any
   };
 
   static defaultProps = {
@@ -34,15 +37,15 @@ export default class Code extends Component {
     language: 'javascript'
   };
 
-  componentDidMount() {
+  componentDidMount () {
     this.highlight();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     this.highlight();
   }
 
-  render() {
+  render () {
     const {
       Animation,
       animation,
@@ -79,7 +82,7 @@ export default class Code extends Component {
     );
   }
 
-  highlight() {
-    Prism.highlightElement(this.wrapper);
+  highlight () {
+    Prism.highlightElement(this.wrapper); // eslint-disable-line no-undef
   }
 }

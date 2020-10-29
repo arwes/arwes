@@ -2,7 +2,7 @@ import React from 'react';
 import Arwes from './index';
 
 export default () => (
-  <Arwes animate background="/img/background.jpg" pattern="/img/glow.png">
+  <Arwes animate background='/images/background.jpg' pattern='/images/glow.png'>
     <h2>SciFi UI Framework</h2>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod

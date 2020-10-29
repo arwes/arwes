@@ -7,7 +7,10 @@ import FrameComponent from '../Frame';
 import WordsComponent from '../Words';
 import HeadingComponent from '../Heading';
 
-export default function Project(props) {
+// TODO:
+// - Add a 'featured' prop to highligh item.
+
+export default function Project (props) {
   const {
     theme,
     classes,
@@ -47,7 +50,7 @@ export default function Project(props) {
             animate={animate}
             show={show}
             timeout={theme.animTime}
-            layer="primary"
+            layer='primary'
             level={0}
             corners={4}
             hover
@@ -57,7 +60,7 @@ export default function Project(props) {
             {frameAnim => (
               <div>
                 <header className={classes.header}>
-                  <Heading node="h1">
+                  <Heading node='h1'>
                     <Words animate={animate} show={frameAnim.entered}>
                       {header}
                     </Words>
@@ -120,7 +123,9 @@ Project.propTypes = {
   /**
    * If function, receives the animation status object.
    */
-  children: PropTypes.any
+  children: PropTypes.any,
+
+  className: PropTypes.any
 };
 
 Project.defaultProps = {
@@ -132,5 +137,5 @@ Project.defaultProps = {
   sounds: {},
   node: 'article',
   headerSize: 'h2',
-  icon: <i className="mdi mdi-package" />
+  icon: <i className='mdi mdi-package' />
 };

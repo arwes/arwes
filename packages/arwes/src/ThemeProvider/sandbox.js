@@ -13,30 +13,30 @@ const MyColor = withStyles(theme => ({
 }))(props => <div className={props.classes.root} />);
 
 export default class MyApp extends React.Component {
-  constructor() {
+  constructor () {
     super(...arguments);
     const color = '#22179a';
     this.state = { color, theme: this.getTheme(color) };
     this.onChange = this.onChange.bind(this);
   }
-  render() {
+  render () {
     const { color, theme } = this.state;
     return (
       <ThemeProvider theme={theme}>
         <div>
-          <label htmlFor="colorPrimary">Primary Color: </label>
-          <input id="colorPrimary" value={color} onChange={this.onChange} />
+          <label htmlFor='colorPrimary'>Primary Color: </label>
+          <input id='colorPrimary' value={color} onChange={this.onChange} />
           <MyColor />
         </div>
       </ThemeProvider>
     );
   }
-  onChange(ev) {
+  onChange (ev) {
     const color = ev.target.value;
     const theme = this.getTheme(color);
     this.setState({ color, theme });
   }
-  getTheme(color) {
+  getTheme (color) {
     return createTheme({
       color: {
         primary: { base: color }

@@ -1,3 +1,5 @@
+/* eslint-env browser */
+
 /**
  * Load a provided image by URL.
  * @param  {String} url

@@ -1,7 +1,9 @@
+/* eslint-env jest */
+
 import createLoader from './index';
 
-describe('createLoader', function() {
-  it('Should load and resolve when all assets provided are loaded', function() {
+describe('createLoader', () => {
+  test('Should load and resolve when all assets provided are loaded', () => {
     const loader = createLoader({
       loadImage: () => Promise.resolve(),
       loadSound: () => Promise.resolve()
@@ -12,7 +14,7 @@ describe('createLoader', function() {
     });
   });
 
-  it('Should load and reject when at least one assets provided is not loaded', function() {
+  test('Should load and reject when at least one assets provided is not loaded', () => {
     const loader = createLoader({
       loadImage: () => Promise.resolve(),
       loadSound: asset => (asset === 2 ? Promise.reject() : Promise.resolve())
@@ -32,7 +34,7 @@ describe('createLoader', function() {
       );
   });
 
-  it('Should reject when timeout', function() {
+  test('Should reject when timeout', () => {
     const loader = createLoader({
       loadImage: () => new Promise(() => {}), // Load images will never resolve
       loadSound: () => Promise.resolve() // Load sounds will resolve

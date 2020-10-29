@@ -17,7 +17,10 @@ export default class Puffs extends Component {
     /**
      * Total number of puffs to create.
      */
-    quantity: PropTypes.number
+    quantity: PropTypes.number,
+
+    children: PropTypes.any,
+    className: PropTypes.any
   };
 
   static defaultProps = {
@@ -35,27 +38,28 @@ export default class Puffs extends Component {
   // Timeout to remove current puff animations.
   puffElementsTimeout = null;
 
-  componentDidMount() {
+  componentDidMount () {
     if (this.props.animate) {
       this.startAnimations();
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     if (prevProps.animate !== this.props.animate) {
       if (this.props.animate) {
         this.startAnimations();
-      } else {
+      }
+      else {
         this.stopAnimations();
       }
     }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.stopAnimations();
   }
 
-  render() {
+  render () {
     const {
       theme,
       classes,
@@ -75,12 +79,12 @@ export default class Puffs extends Component {
     );
   }
 
-  stopAnimations() {
+  stopAnimations () {
     clearInterval(this.puffTimeout);
     clearTimeout(this.puffElementsTimeout);
   }
 
-  startAnimations() {
+  startAnimations () {
     this.onPuffs();
     this.puffTimeout = setInterval(this.onPuffs, this.props.puffInterval);
   }
@@ -105,7 +109,7 @@ export default class Puffs extends Component {
    * Create a puff with random valid properties.
    * @return {HTMLElement}
    */
-  createPuff() {
+  createPuff () {
     const { classes } = this.props;
 
     const puff = document.createElement('div');

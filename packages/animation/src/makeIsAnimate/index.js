@@ -1,0 +1,1 @@
+export { makeIsAnimate } from './makeIsAnimate';

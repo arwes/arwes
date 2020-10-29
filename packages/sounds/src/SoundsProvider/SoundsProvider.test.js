@@ -1,79 +1,52 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+/* eslint-env jest */
 
-import SoundsProvider from './SoundsProvider';
+import React, { useContext } from 'react';
+import { render, cleanup } from '@testing-library/react';
+import { SoundsContext } from '../SoundsContext';
+import { SoundsProvider } from './SoundsProvider';
 
-Enzyme.configure({ adapter: new Adapter() });
+afterEach(cleanup);
 
-describe('SoundsProvider', function() {
-  it('Should render children as they come', function() {
-    const sounds = { shared: {}, players: {} };
-    const createPlayer = () => null;
-    const el = mount(
-      <SoundsProvider sounds={sounds} createPlayer={createPlayer}>
-        <div>Component Children</div>
+test('Should provide "players" and "audio" as empty objects', () => {
+  function Player () {
+    const { players, audio } = useContext(SoundsContext);
+    expect(players).toEqual({});
+    expect(audio).toEqual({});
+    return <div />;
+  }
+  render(
+    <SoundsProvider>
+      <Player />
+    </SoundsProvider>
+  );
+});
+
+test('Should provide "players" and "audio" with provided values', () => {
+  function Player () {
+    const { players, audio } = useContext(SoundsContext);
+    expect(players).toEqual({ a: 1 });
+    expect(audio).toEqual({ x: 2 });
+    return <div />;
+  }
+  render(
+    <SoundsProvider players={{ a: 1 }} audio={{ x: 2 }}>
+      <Player />
+    </SoundsProvider>
+  );
+});
+
+test('Should support nested providers and extend provided values', () => {
+  function Player () {
+    const { players, audio } = useContext(SoundsContext);
+    expect(players).toEqual({ a: 3, b: 4 });
+    expect(audio).toEqual({ x: 2, y: 5 });
+    return <div />;
+  }
+  render(
+    <SoundsProvider players={{ a: 1 }} audio={{ x: 2 }}>
+      <SoundsProvider players={{ a: 3, b: 4 }} audio={{ y: 5 }}>
+        <Player />
       </SoundsProvider>
-    );
-
-    const actual = el.html();
-    const expected = '<div>Component Children</div>';
-    expect(actual).toBe(expected);
-  });
-
-  it('Should be able to create a sounds provider', function() {
-    const sounds = { shared: {}, players: { click: {} } };
-    class Howl {}
-    const createPlayer = () => new Howl();
-
-    class MyComp extends React.Component {
-      static contextTypes = {
-        sounds: PropTypes.object
-      };
-      render() {
-        expect(this.context.sounds.click).toBeTruthy();
-        expect(this.context.sounds.click instanceof Howl).toBeTruthy();
-        return <div />;
-      }
-    }
-
-    mount(
-      <SoundsProvider sounds={sounds} createPlayer={createPlayer}>
-        <MyComp />
-      </SoundsProvider>
-    );
-  });
-
-  it('Should be able to define players with shared config', function() {
-    const sounds = {
-      shared: { volume: 0.75 },
-      players: { click: { sound: { loop: true } } }
-    };
-    class Howl {
-      constructor(config) {
-        this.config = config;
-      }
-    }
-    const createPlayer = config => new Howl(config.sound);
-
-    class MyComp extends React.Component {
-      static contextTypes = {
-        sounds: PropTypes.object
-      };
-      render() {
-        expect(this.context.sounds.click.config).toEqual({
-          volume: 0.75,
-          loop: true
-        });
-        return <div />;
-      }
-    }
-
-    mount(
-      <SoundsProvider sounds={sounds} createPlayer={createPlayer}>
-        <MyComp />
-      </SoundsProvider>
-    );
-  });
+    </SoundsProvider>
+  );
 });

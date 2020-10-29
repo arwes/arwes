@@ -1,1 +1,1 @@
-export { default } from './withSounds';
+export * from './withSounds';

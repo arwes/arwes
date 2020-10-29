@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 import AnimationComponent from '../Animation';
 
-export default function Line(props) {
+export default function Line (props) {
   const {
     theme,
     classes,
@@ -41,6 +41,7 @@ Line.propTypes = {
 
   theme: PropTypes.any.isRequired,
   classes: PropTypes.any.isRequired,
+  className: PropTypes.any,
 
   animate: PropTypes.bool,
   show: PropTypes.bool,

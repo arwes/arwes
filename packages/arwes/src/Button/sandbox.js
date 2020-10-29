@@ -6,15 +6,15 @@ export default () => (
     <Button animate disabled>
       Non-punk
     </Button>{' '}
-    <Button animate disabled layer="success">
+    <Button animate disabled layer='success'>
       Steampunk
     </Button>{' '}
     <Button animate>Cyberpunk</Button>{' '}
-    <Button animate layer="success">
-      <i className="mdi mdi-chemical-weapon" /> Sci Fi
+    <Button animate layer='success'>
+      <i className='mdi mdi-chemical-weapon' /> Sci Fi
     </Button>{' '}
-    <Button animate layer="alert">
-      High Tech <i className="mdi mdi-robot" />
+    <Button animate layer='alert'>
+      High Tech <i className='mdi mdi-robot' />
     </Button>
   </div>
 );

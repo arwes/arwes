@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 import AnimationComponent from '../Animation';
 
-export default function Loading(props) {
+export default function Loading (props) {
   const {
     theme,
     classes,
@@ -53,6 +53,7 @@ Loading.propTypes = {
   animate: PropTypes.bool,
   show: PropTypes.bool,
   animation: PropTypes.object,
+  className: PropTypes.any,
 
   layer: PropTypes.oneOf([
     'primary',

@@ -1,3 +1,5 @@
+/* eslint-env browser */
+
 // Polyfills for requestAnimationFrame and performance.now()
 // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
 // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
@@ -20,7 +22,7 @@ import isNode from 'detect-node';
       nowOffset = performance.timing.navigationStart;
     }
 
-    window.performance.now = function now() {
+    window.performance.now = function now () {
       return Date.now() - nowOffset;
     };
   }
@@ -35,11 +37,11 @@ import isNode from 'detect-node';
   }
 
   if (!window.requestAnimationFrame) {
-    window.requestAnimationFrame = function(callback) {
+    window.requestAnimationFrame = function (callback) {
       var currTime = new Date().getTime();
       var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-      var id = window.setTimeout(function() {
-        callback(currTime + timeToCall);
+      var id = window.setTimeout(function () {
+        callback(currTime + timeToCall); // eslint-disable-line standard/no-callback-literal
       }, timeToCall);
       lastTime = currTime + timeToCall;
       return id;
@@ -47,7 +49,7 @@ import isNode from 'detect-node';
   }
 
   if (!window.cancelAnimationFrame) {
-    window.cancelAnimationFrame = function(id) {
+    window.cancelAnimationFrame = function (id) {
       clearTimeout(id);
     };
   }
