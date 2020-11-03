@@ -5,7 +5,7 @@
 </div>
 
 <p align="center" style="margin-top: 16px; font-size: 1.2rem;">
-  Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for Web Apps
+  Futuristic Sci-Fi UI Web Framework
 </p>
 
 <div align="center">
@@ -15,21 +15,6 @@
     <a href="https://travis-ci.org/arwes/arwes">
         <img src="https://img.shields.io/travis/arwes/arwes.svg" alt="travis" />
     </a>
-    <a href="https://standardjs.com">
-        <img src="https://img.shields.io/badge/code_style-standardjs-d2bb09.svg?style=flat-square" alt="code style: standardjs">
-    </a>
-    <a href="https://jestjs.io">
-        <img src="https://img.shields.io/badge/tested%20with-jest-15c213.svg?style=flat-square" alt="tested with: jest">
-    </a>
-    <a href="https://lernajs.io">
-        <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="lerna" />
-    </a>
-    <a href="https://github.com/arwes/arwes/blob/master/LICENSE">
-        <img src="https://img.shields.io/github/license/arwes/arwes.svg?maxAge=2592000" alt="license" />
-    </a>
-</div>
-
-<div align="center">
     <a href="https://github.com/arwes/arwes">
         <img src="https://img.shields.io/github/stars/arwes/arwes.svg?style=social&label=stars" alt="github stars" />
     </a>
@@ -41,23 +26,41 @@
     </a>
 </div>
 
+<div align="center">
+    <a href="https://standardjs.com">
+        <img src="https://img.shields.io/badge/code_style-standardjs-d2bb09.svg?style=flat-square" alt="code style: standardjs">
+    </a>
+    <a href="https://jestjs.io">
+        <img src="https://img.shields.io/badge/tested%20with-jest-15c213.svg?style=flat-square" alt="tested with: jest">
+    </a>
+    <a href="https://lernajs.io">
+        <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="lerna" />
+    </a>
+    <a href="http://commitizen.github.io/cz-cli">
+        <img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt="Commitizen friendly" />
+    </a>
+    <a href="https://github.com/arwes/arwes/blob/main/LICENSE">
+        <img src="https://img.shields.io/github/license/arwes/arwes.svg?maxAge=2592000" alt="license" />
+    </a>
+</div>
+
 ----
 
-[Arwes](https://arwes.dev) is a web framework to build user interfaces
-for web applications based on futuristic science fiction and cyberpunk styles,
-animations, and sound effects. The concepts behind are opinionated
-and try to inspire advanced space technology and alien influence. It is built
-on top of [React](https://reactjs.org), [JSS](https://cssinjs.org), [Anime](https://animejs.com),
-and [Howler](https://howlerjs.com).
+[Arwes](https://arwes.dev) is a web framework to build user interfaces based on
+futuristic science fiction designs, animations, and sound effects. The concepts
+behind are opinionated with influences from Cyberpunk, Cyberprep, and Synthwave.
+It tries to inspire advanced space and alien technology.
 
-The project has a working version with the package [`arwes`](https://npmjs.org/package/arwes)
+It is built on top of [React](https://reactjs.org), [JSS](https://cssinjs.org),
+[Anime](https://animejs.com), and [Howler](https://howlerjs.com).
+
+> The project has a working version with the package [`arwes`](https://npmjs.org/package/arwes)
 and the documentation with the website [arwes.dev](https://arwes.dev).
 This is an _alpha_ release. Modules and components are being tested and their
 API may change. Check out the source code at
 **[`version1-breakpoint1`](https://github.com/arwes/arwes/tree/version1-breakpoint1)**
 branch where you can find the components and the website.
-
-Currently, the development is at [`master`](https://github.com/arwes/arwes) branch
+Currently, the development is at [`main`](https://github.com/arwes/arwes) branch
 with the packages `@arwes/[package]`. They are not a working version yet, and they
 have major breaking changes with the `arwes` package.
 

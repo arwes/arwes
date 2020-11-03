@@ -23,9 +23,9 @@ But written and spoken languages with letters and numbers are still the primary
 means of communication, and mechanical interactions are still needed to manipulate
 controls.
 
-Arwes design could be used in displays, virtual reality, augmented reality, and
-even holograms, and it should give users the impression that they are controlling
-sophisticated futuristic devices.
+Arwes designs could be used in displays, virtual reality, augmented reality, and
+even holograms-like designs, and it should give users the impression that they
+are controlling sophisticated futuristic devices.
 
 ## Energetic and Vibrant
 
