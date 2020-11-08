@@ -1,10 +1,10 @@
 {
-  "name": "@arwes/platform",
+  "name": "@arwes/tools",
   "version": "1.0.0-alpha.14",
   "publishConfig": {
     "access": "public"
   },
-  "description": "Arwes Platform Tools",
+  "description": "Arwes Tools",
   "keywords": [
     "arwes"
   ],

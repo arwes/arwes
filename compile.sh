@@ -18,11 +18,10 @@ build () {
 
 log "Compiling Arwes packages."
 
-build "arwes"
-build "sounds"
+build "tools"
 build "animation"
+build "sounds"
 build "design"
-build "platform"
-build "core"
+build "arwes"
 
 log "\nCompilation completed."
