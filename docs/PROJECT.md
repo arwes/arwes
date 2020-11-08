@@ -1,6 +1,7 @@
 [Arwes](https://arwes.dev) is a web framework to build user interfaces based on
 futuristic science fiction designs, animations, and sound effects. The concepts
-behind are opinionated with influences from Cyberpunk, Cyberprep, and Synthwave.
+behind are opinionated with influences from [Cyberpunk](https://en.wikipedia.org/wiki/Cyberpunk),
+[Cyberprep](https://aesthetics.fandom.com/wiki/Cyberprep), and [Synthwave](https://en.wikipedia.org/wiki/Synthwave).
 It tries to inspire advanced space and alien technology.
 
 It is built on top of [React](https://reactjs.org), [JSS](https://cssinjs.org),

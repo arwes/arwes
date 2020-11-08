@@ -9,30 +9,30 @@ implemented from React components. It goes hand in hand with the [Sounds System]
 - A sub-system is a branch of the system. Starting from a node as root.
 - The animation is a "flow" of states in the nodes.
 - A node can have one of the following four animation flow states:
-    - `exited` - Transitioned out. The animation is completed and the component
-    is hidden. If component is animated, this will be always its initial state.
-    - `entering` - Transitioning in. The animations are assembling the component.
-    - `entered` - Transitioned in. The animation is completed and component
-    is shown. If component is not animated, this will be always its state.
-    - `exiting` - Transitioning out. Animations are disassembling the component.
+  - `exited` - Transitioned out. The animation is completed and the component
+  is hidden. If component is animated, this will be always its initial state.
+  - `entering` - Transitioning in. The animations are assembling the component.
+  - `entered` - Transitioned in. The animation is completed and component
+  is shown. If component is not animated, this will be always its state.
+  - `exiting` - Transitioning out. Animations are disassembling the component.
 - A node can only have the following changes between flow states:
 
-![Animation Node Flow State](../static/animation-node-flow-state.png)
+![Animation Node Flow State](./animation-node-flow-state.png)
 
 - The animation flow "enters" from parent nodes to children nodes.
 - By default, a system nodes are `exited` and when activated, the nodes begin
 entering level by level.
 - Flow "enters" in a node when it changes from `exited` to `entering` to `entered`.
 - For a node to enter:
-    - It is a "root node" and it is activated to enter.
-    - Its parent was changed to `entered`.
-    - It is controlled by its parent component.
+  - It is a "root node" and it is activated to enter.
+  - Its parent was changed to `entered`.
+  - It is controlled by its parent component.
 - The animation flow "exits" from a root node to all its descendant nodes at
 the same time, or it is controlled by its parent. So it is recommended to have
 the same exit duration for all nodes.
 - Flow "exits" in a node when it changes from `entered` to `exiting` to `exited`.
 
-![Animation System Flow](../static/animation-system-flow.png)
+![Animation System Flow](./animation-system-flow.png)
 
 - By default, a node is animated.
 - A node is added to the system as `exited` if animation is enabled. According
@@ -58,12 +58,12 @@ Otherwise this component animation will be controlled externally, not this prop.
 - `duration: number | Object` - Duration settings for this node. If number is
 provided, it only specifies `enter` and `exit` times. Any duration is set in
 milliseconds.
-    - `enter: number = 200` - The duration the component lasts entering.
-    - `exit: number = 200` - The duration the component lasts exiting.
-    - `delay: number = 0` - Time to delay before transitioning to `entered`.
-    - `offset: number = 0` - When this node is child of `Stream`, this is the
-    time to delay before transitioning to `entered` from this node and the
-    following nodes.
+  - `enter: number = 200` - The duration the component lasts entering.
+  - `exit: number = 200` - The duration the component lasts exiting.
+  - `delay: number = 0` - Time to delay before transitioning to `entered`.
+  - `offset: number = 0` - When this node is child of `Stream`, this is the
+  time to delay before transitioning to `entered` from this node and the
+  following nodes.
 - `merge: boolean` - If enabled and it is not a root node, the node will enter
 in the flow when its parent changes to `entering`.
 - `imperative: boolean = false` - If `true`, the flow state is controlled
@@ -137,13 +137,13 @@ And the node component will receive the following props:
 
 - `energy: EnergyInterface` - An interface to access the `Energy`
 component instance API.
-    - `flow: Object` - The animation flow state. It indicates in which point
+  - `flow: Object` - The animation flow state. It indicates in which point
     of the animation flow the component is.
-        - `value: string` - One of `entering`, `entered`, `exiting`, `exited`.
-        - `entering: boolean`
-        - `entered: boolean`
-        - `exiting: boolean`
-        - `exited: boolean`
+    - `value: string` - One of `entering`, `entered`, `exiting`, `exited`.
+    - `entering: boolean`
+    - `entered: boolean`
+    - `exiting: boolean`
+    - `exited: boolean`
 
 ```js
 MyComponent.propTypes = {
@@ -188,10 +188,10 @@ will transition to `entering` at `0ms`, the second at `50ms`, the third at `100m
 and so on. If `true`, the nodes will transition to `entering` one after the
 previous one finishes. The first one will still transition at `0ms`.
 - `duration: Object`
-    - `stagger: number = 50` - The duration to start animating between nodes
-    in a list if staggering is enabled.
-    - _`enter` - It is not available._
-    - _`exit` - It is not available._
+  - `stagger: number = 50` - The duration to start animating between nodes
+  in a list if staggering is enabled.
+  - _`enter` - It is not available._
+  - _`exit` - It is not available._
 - _`merge` - It is not available._
 
 ### Methods

@@ -64,14 +64,19 @@ latest version. You can check out the source in [docs](./docs).
 
 ## Need help?
 
-Open [a GitHub issue](https://github.com/arwes/arwes/issues/new) or let's chat on [Discord](https://discord.gg/s5sbTkw).
+Open [a GitHub issue](https://github.com/arwes/arwes/issues/new/choose) or let's chat on [Discord](https://discord.gg/s5sbTkw).
 
 Review [frequently asked questions](./docs/FAQ.md) and [code of conduct](./docs/CODE_OF_CONDUCT.md).
 
 ## Showcase
 
 <!-- ARWES-PROJECT-SHOWCASE:START -->
-<table><td align="center"><a href="https://soulextract.com"><img src="./docs/static/soulextract.com.jpg" width="252px;" alt="SoulExtract.com" /></a><br /><a href="https://soulextract.com">SoulExtract.com</a><br /><a href="https://github.com/soulextract/soulextract.com"><sub>soulextract/soulextract.com</sub></a></td><td align="center"><a href="https://romelperez.dev"><img src="./docs/static/romelperez.dev.jpg" width="252px;" alt="RomelPerez.dev" /></a><br /><a href="https://romelperez.dev">RomelPerez.dev</a><br /><a href="https://github.com/romelperez/romelperez.dev"><sub>romelperez/romelperez.dev</sub></a></td></table>
+<table>
+<tr>
+<td align="center"><a href="https://soulextract.com"><img src="./docs/showcase/images/soulextract.com.jpg" width="252px;" alt="SoulExtract.com" /></a><br /><a href="https://soulextract.com">SoulExtract.com</a><br /><a href="https://github.com/soulextract/soulextract.com"><sub>soulextract/soulextract.com</sub></a></td>
+<td align="center"><a href="https://romelperez.dev"><img src="./docs/showcase/images/romelperez.dev.jpg" width="252px;" alt="RomelPerez.dev" /></a><br /><a href="https://romelperez.dev">RomelPerez.dev</a><br /><a href="https://github.com/romelperez/romelperez.dev"><sub>romelperez/romelperez.dev</sub></a></td>
+</tr>
+</table>
 <!-- ARWES-PROJECT-SHOWCASE:END -->
 
 ## Roadmap
@@ -89,8 +94,17 @@ Review the [project boards](https://github.com/arwes/arwes/projects).
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
-<table><tr><td align="center"><a href="https://RomelPerez.com"><img src="https://avatars2.githubusercontent.com/u/1393135?v=4" width="100px;" alt="Romel Pérez"/><br /><sub><b>Romel Pérez</b></sub></a><br /><a href="#projectManagement-romelperez" title="Project Management">📆</a> <a href="https://github.com/arwes/arwes/commits?author=romelperez" title="Code">💻</a> <a href="https://github.com/arwes/arwes/commits?author=romelperez" title="Documentation">📖</a> <a href="#question-romelperez" title="Answering Questions">💬</a></td><td align="center"><a href="https://nickwe.st"><img src="https://avatars1.githubusercontent.com/u/3742496?v=4" width="100px;" alt="Nick West 眨眼龙"/><br /><sub><b>Nick West 眨眼龙</b></sub></a><br /><a href="https://github.com/arwes/arwes/commits?author=njwest" title="Documentation">📖</a> <a href="#ideas-njwest" title="Ideas, Planning, & Feedback">🤔</a></td></tr></table>
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://RomelPerez.dev"><img src="https://avatars2.githubusercontent.com/u/1393135?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Romel Pérez</b></sub></a><br /><a href="#projectManagement-romelperez" title="Project Management">📆</a> <a href="https://github.com/arwes/arwes/commits?author=romelperez" title="Code">💻</a> <a href="https://github.com/arwes/arwes/commits?author=romelperez" title="Documentation">📖</a> <a href="#question-romelperez" title="Answering Questions">💬</a></td>
+    <td align="center"><a href="https://nickwe.st"><img src="https://avatars1.githubusercontent.com/u/3742496?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nick West</b></sub></a><br /><a href="https://github.com/arwes/arwes/commits?author=njwest" title="Documentation">📖</a> <a href="#ideas-njwest" title="Ideas, Planning, & Feedback">🤔</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
