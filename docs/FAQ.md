@@ -1,6 +1,3 @@
-<!-- TODO: Update questions when the next "stable" alpha/beta is released. -->
-<!-- TODO: Update questions when the website is released. -->
-
 ## When Arwes will be ready for production?
 
 Arwes is currently in _alpha_ version. It means there is ongoing development,
@@ -12,15 +9,14 @@ See [roadmap](./ROADMAP.md) for more details.
 
 ## What is the status of the development?
 
-Arwes is being worked on packages. Functional packages and design system packages.
-
-The project uses guidelines as the main concepts for all functional and design
-implementations.
+Arwes is being worked on packages. Functional packages and design implementation
+packages. The guidelines are used as the main concepts behind them.
 
 The functional packages should be ready and the guidelines defined for the design
-system packages to be developed.
+implementation packages to be developed.
 
-In the main README, each package should have a badge indicating its current status.
+In the [project page](./PROJECT.md), each package should have a badge indicating
+its current status.
 
 - ![status](https://img.shields.io/badge/status-in%20concept-999999.svg)
 - ![status](https://img.shields.io/badge/status-in%20specification-blue.svg)

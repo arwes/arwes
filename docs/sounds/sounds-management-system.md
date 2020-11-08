@@ -1,6 +1,7 @@
 The Arwes Sounds System is composed by a set of tools which follow the
 [Arwes Animation and Sounds Guidelines](../guidelines/animation-and-sounds.md)
-implemented from React components. It goes hand in hand with the [Animation System](../animation/animation-system.md).
+implemented from React components. It goes hand in hand with the
+[Animation Management System](../animation/animation-management-system.md).
 
 ## Sounds
 

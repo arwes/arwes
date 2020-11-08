@@ -1,5 +1,3 @@
-**Arwes project will be ready when it is ready.**
-
 - The order in the lists does not represent priority.
 - Active items are represented with **bold**.
 - Tasks are listed in the [project boards](https://github.com/arwes/arwes/projects).

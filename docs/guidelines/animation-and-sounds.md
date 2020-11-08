@@ -33,16 +33,16 @@ then structural frames, then containers, and finally content. All nodes in
 the same depth start transitioning in at the same time and should take the
 same duration.
 
-The duration of a transition should be around 200 milliseconds.
-
-A system can take as many levels as needed. It is recommended to have as few as
-possible. A typical system can take 5 levels of depth.
-
 When a system transitions out, all nodes regardless of their level of depth,
 should start transitioning out at the same time and should take the same duration.
 
 All nodes in a system should support being animated or not. A non-animated node
 should not have transition animations.
+
+A system can take as many levels as needed. It is recommended to have as few as
+possible.
+
+A typical system may have 100ms transitions and 5 levels depth.
 
 ## Persistency
 

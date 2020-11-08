@@ -1,0 +1,87 @@
+[
+  {
+    "title": "Arwes Project",
+    "document": "README.md"
+  },
+  {
+    "title": "FAQ",
+    "document": "FAQ.md"
+  },
+  {
+    "title": "Showcase",
+    "items": [
+      {
+        "title": "SoulExtract.com",
+        "description": "Alternative Rock injected with electronic and cinematic elements. Proud member of the [FiXT](https://www.fixtonline.com) roster.",
+        "url": "https://soulextract.com",
+        "repository": "https://github.com/soulextract/soulextract.com",
+        "image": "static/soulextract.com.jpg"
+      },
+      {
+        "title": "RomelPerez.dev",
+        "description": "Romel Pérez's personal website.",
+        "url": "https://romelperez.dev",
+        "repository": "https://github.com/romelperez/romelperez.dev",
+        "image": "static/romelperez.dev.jpg"
+      }
+    ]
+  },
+  {
+    "title": "Guidelines",
+    "document": "guidelines/README.md",
+    "children": [
+      {
+        "title": "Purpose",
+        "document": "guidelines/purpose.md"
+      },
+      {
+        "title": "Inspiration",
+        "document": "guidelines/inspiration.md"
+      },
+      {
+        "title": "Animation and Sounds",
+        "document": "guidelines/animation-and-sounds.md"
+      },
+      {
+        "title": "Design",
+        "document": "guidelines/design.md"
+      }
+    ]
+  },
+  {
+    "title": "Animation",
+    "document": "animation/README.md",
+    "children": [
+      {
+        "title": "Animation Management System",
+        "document": "animation/animation-management-system.md"
+      }
+    ]
+  },
+  {
+    "title": "Sounds",
+    "document": "sounds/README.md",
+    "children": [
+      {
+        "title": "Sounds Management System",
+        "document": "sounds/sounds-management-system.md"
+      }
+    ]
+  },
+  {
+    "title": "Roadmap",
+    "document": "ROADMAP.md"
+  },
+  {
+    "title": "Contributing",
+    "document": "CONTRIBUTING.md"
+  },
+  {
+    "title": "Code of Conduct",
+    "document": "CODE_OF_CONDUCT.md"
+  },
+  {
+    "title": "Changelog",
+    "document": "CHANGELOG.md"
+  }
+]

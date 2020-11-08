@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD033 MD013 -->
 
 <div align="center">
-  <img src="./docs/static/arwes.gif" alt="Arwes" />
+  <img src="./arwes.gif" alt="Arwes" />
 </div>
 
 <p align="center" style="margin-top: 16px; font-size: 1.2rem;">
@@ -17,6 +17,9 @@
     </a>
     <a href="https://github.com/arwes/arwes">
         <img src="https://img.shields.io/github/stars/arwes/arwes.svg?style=social&label=stars" alt="github stars" />
+    </a>
+    <a href="https://npmjs.org/package/@arwes/arwes">
+        <img src="https://img.shields.io/npm/dm/@arwes/arwes.svg" alt="downloads" />
     </a>
     <a href="https://twitter.com/arwesjs">
         <img src="https://img.shields.io/twitter/follow/arwesjs.svg?label=%40arwesjs&style=social" alt="Twitter Follow">
@@ -48,98 +51,16 @@
 
 [Arwes](https://arwes.dev) is a web framework to build user interfaces based on
 futuristic science fiction designs, animations, and sound effects. The concepts
-behind are opinionated with influences from Cyberpunk, Cyberprep, and Synthwave.
+behind are opinionated with influences from [Cyberpunk](https://en.wikipedia.org/wiki/Cyberpunk),
+[Cyberprep](https://aesthetics.fandom.com/wiki/Cyberprep), and [Synthwave](https://en.wikipedia.org/wiki/Synthwave).
 It tries to inspire advanced space and alien technology.
-
-It is built on top of [React](https://reactjs.org), [JSS](https://cssinjs.org),
-[Anime](https://animejs.com), and [Howler](https://howlerjs.com).
-
-> The project has a working version with the package [`arwes`](https://npmjs.org/package/arwes)
-and the documentation with the website [arwes.dev](https://arwes.dev).
-This is an _alpha_ release. Modules and components are being tested and their
-API may change. Check out the source code at
-**[`version1-breakpoint1`](https://github.com/arwes/arwes/tree/version1-breakpoint1)**
-branch where you can find the components and the website.
-Currently, the development is at [`main`](https://github.com/arwes/arwes) branch
-with the packages `@arwes/[package]`. They are not a working version yet, and they
-have major breaking changes with the `arwes` package.
-
-## Packages
-
-### Functional
-
-The main functionalities which power the UI component system.
-
-#### [`@arwes/design`](./packages/design)
-
-<div>
-    <img src="https://img.shields.io/badge/status-in%20concept-999999.svg" alt="status">
-    <img src="https://img.shields.io/npm/dm/@arwes/design.svg" alt="downloads" />
-    <img src="https://img.shields.io/bundlephobia/minzip/@arwes/design" alt="npm bundle size">
-</div>
-
-Styling tools using [JSS](https://cssinjs.org) with React components.
-
-#### [`@arwes/animation`](./packages/animation)
-
-<div>
-    <img src="https://img.shields.io/badge/status-in%20development-orange.svg" alt="status">
-    <img src="https://img.shields.io/npm/dm/@arwes/animation.svg" alt="downloads" />
-    <img src="https://img.shields.io/bundlephobia/minzip/@arwes/animation" alt="npm bundle size">
-</div>
-
-Assemble and disassemble user interfaces using animations from React components.
-
-#### [`@arwes/sounds`](./packages/sounds)
-
-<div>
-    <img src="https://img.shields.io/badge/status-in%20polishing-yellow.svg" alt="status">
-    <img src="https://img.shields.io/npm/dm/@arwes/sounds.svg" alt="downloads" />
-    <img src="https://img.shields.io/bundlephobia/minzip/@arwes/sounds" alt="npm bundle size">
-</div>
-
-Define, manage and control interactive sound effects from React components.
-
-#### [`@arwes/platform`](./packages/platform)
-
-<div>
-    <img src="https://img.shields.io/badge/status-in%20concept-999999.svg" alt="status">
-    <img src="https://img.shields.io/npm/dm/@arwes/platform.svg" alt="downloads" />
-    <img src="https://img.shields.io/bundlephobia/minzip/@arwes/platform" alt="npm bundle size">
-</div>
-
-Resource loading, responsive control, and general browser API tools.
-
-#### [`@arwes/core`](./packages/core)
-
-<div>
-    <img src="https://img.shields.io/badge/status-in%20concept-999999.svg" alt="status">
-    <img src="https://img.shields.io/npm/dm/@arwes/core.svg" alt="downloads" />
-    <img src="https://img.shields.io/bundlephobia/minzip/@arwes/core" alt="npm bundle size">
-</div>
-
-Core UI React components.
-
-### Design
-
-Using the core functionalities and based on the guidelines, these are
-design system or design component implementations.
-
-#### [`@arwes/arwes`](./packages/arwes)
-
-<div>
-    <img src="https://img.shields.io/badge/status-in%20concept-999999.svg" alt="status">
-    <img src="https://img.shields.io/npm/dm/@arwes/arwes.svg" alt="downloads" />
-    <img src="https://img.shields.io/bundlephobia/minzip/@arwes/arwes" alt="npm bundle size">
-</div>
-
-Arwes design system React components.
 
 ## Documentation
 
 **[arwes.dev](https://arwes.dev)** is for version `1.0.0-alpha.5`.
 
-**[docs](./docs)** is a _work in progress_ of the latest version.
+**[next.arwes.dev](https://next.arwes.dev)** is a _work in progress_ of the
+latest version. You can check out the source in [docs](./docs).
 
 ## Need help?
 
@@ -149,22 +70,9 @@ Review [frequently asked questions](./docs/FAQ.md) and [code of conduct](./docs/
 
 ## Showcase
 
-### [SoulExtract.com](https://soulextract.com)
-
-[![SoulExtract.com](./docs/static/soulextractcom.gif)](https://soulextract.com)
-
-Alternative Rock injected with electronic and cinematic elements.
-Proud member of the [FiXT](https://www.fixtonline.com) roster.
-
-Repository: [soulextract/soulextract.com](https://github.com/soulextract/soulextract.com)
-
-### [RomelPerez.dev](https://romelperez.dev)
-
-[![RomelPerez.dev](./docs/static/romelperezdev.gif)](https://romelperez.dev)
-
-Romel Pérez's personal website.
-
-Repository: [romelperez/romelperez.dev](https://github.com/romelperez/romelperez.dev)
+<!-- ARWES-PROJECT-SHOWCASE:START -->
+<table><td align="center"><a href="https://soulextract.com"><img src="./docs/static/soulextract.com.jpg" width="252px;" alt="SoulExtract.com" /></a><br /><a href="https://soulextract.com">SoulExtract.com</a><br /><a href="https://github.com/soulextract/soulextract.com"><sub>soulextract/soulextract.com</sub></a></td><td align="center"><a href="https://romelperez.dev"><img src="./docs/static/romelperez.dev.jpg" width="252px;" alt="RomelPerez.dev" /></a><br /><a href="https://romelperez.dev">RomelPerez.dev</a><br /><a href="https://github.com/romelperez/romelperez.dev"><sub>romelperez/romelperez.dev</sub></a></td></table>
+<!-- ARWES-PROJECT-SHOWCASE:END -->
 
 ## Roadmap
 

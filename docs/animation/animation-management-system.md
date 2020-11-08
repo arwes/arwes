@@ -1,6 +1,6 @@
 The Arwes Animation System is composed by a set of tools which follow the
 [Arwes Animation and Sounds Guidelines](../guidelines/animation-and-sounds.md)
-implemented from React components. It goes hand in hand with the [Sounds System](../sounds/sounds-system.md).
+implemented from React components. It goes hand in hand with the [Sounds System](../sounds/sounds-management-system.md).
 
 ## Nodes
 
@@ -17,7 +17,7 @@ implemented from React components. It goes hand in hand with the [Sounds System]
     - `exiting` - Transitioning out. Animations are disassembling the component.
 - A node can only have the following changes between flow states:
 
-![Animation Node Flow State](./animation-node-flow-state.png)
+![Animation Node Flow State](../static/animation-node-flow-state.png)
 
 - The animation flow "enters" from parent nodes to children nodes.
 - By default, a system nodes are `exited` and when activated, the nodes begin
@@ -32,7 +32,7 @@ the same time, or it is controlled by its parent. So it is recommended to have
 the same exit duration for all nodes.
 - Flow "exits" in a node when it changes from `entered` to `exiting` to `exited`.
 
-![Animation System Flow](./animation-system-flow.png)
+![Animation System Flow](../static/animation-system-flow.png)
 
 - By default, a node is animated.
 - A node is added to the system as `exited` if animation is enabled. According
