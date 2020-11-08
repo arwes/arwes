@@ -6,7 +6,7 @@
   "command": {
     "publish": {
       "allowBranch": "main",
-      "message": "chore: release %s"
+      "message": "chore(release): %s"
     }
   }
 }

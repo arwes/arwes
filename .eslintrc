@@ -8,6 +8,7 @@
   ],
   "extends": [
     "standard",
+    "standard-jsx",
     "standard-react"
   ],
   "parser": "babel-eslint",

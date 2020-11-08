@@ -1,6 +1,6 @@
 script: npm run ci
 language: node_js
 node_js:
-  - "12.18"
+  - "14.15"
 os:
   - linux

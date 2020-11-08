@@ -4,6 +4,7 @@ pids
 lib-cov
 coverage
 nbproject
+build
 build/Release
 typings/
 *.tgz
