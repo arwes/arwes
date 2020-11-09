@@ -44,4 +44,4 @@ yarn-error.log*
 .yarn-integrity
 
 packages/*/lib
-playground/public
+playground/dist

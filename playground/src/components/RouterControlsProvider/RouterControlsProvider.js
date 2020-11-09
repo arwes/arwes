@@ -1,5 +1,7 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Navigo from 'navigo';
+
+import { RouterControlsContext } from '../RouterControlsContext';
 
 const initialControls = {
   packageName: '',
@@ -7,7 +9,7 @@ const initialControls = {
   sandboxName: ''
 };
 
-function useRouterControls () {
+function RouterControlsProvider ({ children }) {
   const [controls, setControls] = useState(initialControls);
   const router = useRef();
 
@@ -18,7 +20,7 @@ function useRouterControls () {
     setControls({ packageName, componentName, sandboxName });
   };
 
-  const onControlChange = (name, value) => {
+  const changeControl = (name, value) => {
     let controlsSideEffectChanges = {};
 
     if (name === 'packageName') {
@@ -28,7 +30,7 @@ function useRouterControls () {
       controlsSideEffectChanges = { sandboxName: '' };
     }
 
-    const newControls = { ...controls, [name]: value, ...controlsSideEffectChanges };
+    const newControls = { ...controls, ...controlsSideEffectChanges, [name]: value };
     const params = [newControls.packageName, newControls.componentName, newControls.sandboxName];
     const route = params.filter(Boolean).join('/');
 
@@ -40,7 +42,13 @@ function useRouterControls () {
     router.current.on('*', onRouteChange).resolve();
   }, []);
 
-  return { controls, onControlChange };
+  const value = { controls, changeControl };
+
+  return (
+    <RouterControlsContext.Provider value={value}>
+      {children}
+    </RouterControlsContext.Provider>
+  );
 }
 
-export { useRouterControls };
+export { RouterControlsProvider };

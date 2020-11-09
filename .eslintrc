@@ -4,7 +4,7 @@
     "node_modules",
     "packages/*/lib",
     "packages/arwes", // TODO: Remove when @arwes/arwes package has the new API.
-    "playground/public"
+    "playground/dist"
   ],
   "extends": [
     "standard",
@@ -21,6 +21,7 @@
   },
   "rules": {
     "semi": ["error", "always"],
-    "brace-style": ["error", "stroustrup"]
+    "brace-style": ["error", "stroustrup"],
+    "react/prop-types": [0]
   }
 }

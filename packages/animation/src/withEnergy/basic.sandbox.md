@@ -1,17 +1,11 @@
-/* eslint-disable react/prop-types */
-
-import React, { createRef } from 'react';
-import anime from 'animejs';
-import { AnimationProvider } from '../AnimationProvider';
-import { withEnergy } from './withEnergy';
-
-const COLOR_ON = '#0f0';
-const COLOR_OFF = '#f00';
+```js
+const COLOR_ON = '#27efb5'; // green
+const COLOR_OFF = '#efb527'; // orange
 
 class ItemComponent extends React.PureComponent {
   constructor () {
     super(...arguments);
-    this.element = createRef();
+    this.element = React.createRef();
   }
 
   render () {
@@ -19,7 +13,11 @@ class ItemComponent extends React.PureComponent {
     return (
       <div
         ref={this.element}
-        style={{ backgroundColor: COLOR_OFF, marginLeft: '10px' }}
+        style={{
+          padding: 5,
+          backgroundColor: COLOR_OFF,
+          marginLeft: '10px'
+        }}
       >
         <div>{energy.flow.value}</div>
         <div>{children}</div>
@@ -81,4 +79,5 @@ class Sandbox extends React.PureComponent {
   }
 }
 
-export default Sandbox;
+render(<Sandbox />);
+```
