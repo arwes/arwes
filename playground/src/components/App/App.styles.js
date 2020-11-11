@@ -32,25 +32,46 @@ const styles = theme => ({
     height: '100vh'
   },
   content: {
-    display: 'grid',
-    gridTemplateColumns: '200px auto',
-    gridTemplateRows: 'auto',
+    position: 'relative',
+    display: 'flex',
     minHeight: 0 // Height overflow issue.
   },
   controls: {
-    borderRight: `1px solid ${theme.color.border}`
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    overflowY: 'auto'
   },
   main: {
+    flex: 1,
     display: 'grid',
     gridTemplateRows: 'auto',
     gridTemplateColumns: '50% 50%',
     minHeight: 0 // Height overflow issue.
   },
   panel: {
+    position: 'relative',
     overflow: 'auto'
   },
   editor: {
     borderRight: `1px solid ${rgba(theme.color.border, 0.5)}`
+  },
+
+  [`@media only screen and (min-width: ${theme.breakpoints.tablet}px)`]: {
+    content: {
+      display: 'grid',
+      gridTemplateColumns: '200px auto',
+      gridTemplateRows: 'auto'
+    },
+    controls: {
+      position: 'static',
+      borderRight: `1px solid ${theme.color.border}`
+    },
+    main: {
+      flex: 'none'
+    }
   }
 });
 

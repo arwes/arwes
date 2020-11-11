@@ -1,7 +1,8 @@
 const styles = theme => ({
   root: {
-    display: 'block',
+    display: 'flex',
     borderBottom: `1px solid ${theme.color.border}`,
+    padding: [8, 10],
     backgroundColor: theme.color.section,
     fontFamily: theme.typography.content,
     color: theme.color.content,
@@ -17,13 +18,24 @@ const styles = theme => ({
       }
     }
   },
-  title: {
-    display: 'inline-block',
-    margin: 0,
-    padding: [8, 10],
+  menu: {
+    display: 'block',
+    marginRight: 5,
     lineHeight: 1,
     fontSize: 20,
-    fontWeight: 'bold'
+    cursor: 'pointer'
+  },
+  title: {
+    display: 'block',
+    margin: 0,
+    lineHeight: 1,
+    fontSize: 20
+  },
+
+  '@media only screen and (min-width: 768px)': {
+    menu: {
+      display: 'none'
+    }
   }
 });
 

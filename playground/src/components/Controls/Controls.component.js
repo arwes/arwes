@@ -1,56 +1,83 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import cx from 'classnames';
+import anime from 'animejs';
 
 import { useSelectedPlayground } from 'playground/src/tools/useSelectedPlayground';
 import { useRouterControls } from 'playground/src/tools/useRouterControls';
 import { Select } from '../Select';
 
-function Component ({ classes, className }) {
+function Component ({ classes, className, isHidden }) {
+  const rootRef = useRef();
+  const isFirstRender = useRef(true);
   const { controls, changeControl } = useRouterControls();
   const { packagesNames, componentsNames, sandboxesNames } = useSelectedPlayground();
 
   const onControlChange = name => event => changeControl(name, event.target.value);
 
-  return (
-    <aside className={cx(classes.root, className)}>
+  useEffect(() => {
+    if (isHidden) {
+      anime.set(rootRef.current, { zIndex: 0, opacity: 0 });
+    }
+    else {
+      anime.set(rootRef.current, { zIndex: 1000, opacity: 1 });
+    }
 
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    if (isHidden) {
+      anime({
+        targets: rootRef.current,
+        duration: 150,
+        easing: 'easeOutSine',
+        opacity: [1, 0],
+        complete: () => anime.set(rootRef.current, { zIndex: 0 })
+      });
+    }
+    else {
+      anime({
+        targets: rootRef.current,
+        duration: 150,
+        easing: 'easeOutSine',
+        opacity: [0, 1]
+      });
+    }
+  }, [isHidden]);
+
+  return (
+    <aside
+      ref={rootRef}
+      className={cx(classes.root, className)}
+    >
       <Select
         labelText='Package'
         value={controls.packageName}
         onChange={onControlChange('packageName')}
       >
-        <option value=''>-- Select Package --</option>
         {packagesNames.map((packageName, index) => (
-          <option key={index} value={packageName}>
-            @arwes/{packageName}
-          </option>
+          <option key={index} value={packageName}>@arwes/{packageName}</option>
         ))}
       </Select>
-
       <Select
         labelText='Component'
         value={controls.componentName}
         onChange={onControlChange('componentName')}
       >
-        <option value=''>-- Select Component --</option>
         {componentsNames.map((componentName, index) =>
-          <option key={index} value={componentName}>
-            {componentName}
-          </option>
+          <option key={index} value={componentName}>{componentName}</option>
         )}
       </Select>
-
       <Select
         labelText='Sandbox'
         value={controls.sandboxName}
         onChange={onControlChange('sandboxName')}
       >
-        <option value=''>-- Select Sandbox --</option>
         {sandboxesNames.map((sandboxName, index) =>
           <option key={index} value={sandboxName}>{sandboxName}</option>
         )}
       </Select>
-
     </aside>
   );
 }

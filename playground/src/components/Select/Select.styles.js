@@ -11,7 +11,8 @@ const styles = theme => ({
     display: 'block',
     padding: [2, 0],
     lineHeight: 1,
-    fontSize: 12,
+    fontSize: 10,
+    textTransform: 'uppercase',
     color: rgba(theme.color.content, 0.75)
   },
   select: {
@@ -39,8 +40,10 @@ const styles = theme => ({
   },
   arrow: {
     position: 'absolute',
+    zIndex: -1,
     right: 0,
-    bottom: '0.2em',
+    bottom: 5,
+    fontSize: 14,
     color: theme.color.content,
     fontWeight: 'bold'
   }

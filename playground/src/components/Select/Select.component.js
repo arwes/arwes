@@ -27,10 +27,11 @@ function Component ({
         value={value}
         onChange={onChange}
       >
+        <option value=''>--</option>
         {children}
       </select>
-      <span className={classes.arrow}>
-        &#8964;
+      <span className={cx(classes.arrow, 'material-icons')}>
+        keyboard_arrow_down
       </span>
     </div>
   );

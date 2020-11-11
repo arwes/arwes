@@ -8,6 +8,9 @@ const theme = {
     border: '#06d8d7',
     content: '#a1ecfb',
     error: '#ce003e'
+  },
+  breakpoints: {
+    tablet: 768
   }
 };
 
