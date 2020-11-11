@@ -5,7 +5,7 @@ import { useEnergy } from '../useEnergy';
 
 function withEnergy (options) {
   options = {
-    cycles: true,
+    cycles: false,
     ...options
   };
   const { cycles, ...energyOptions } = options;

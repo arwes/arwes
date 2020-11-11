@@ -61,7 +61,7 @@ test('Should call "enter" on energy flow "entering" if "options.cycles=true" (de
       onEnter();
     }
   }
-  const Example = withEnergy()(ExampleComponent);
+  const Example = withEnergy({ cycles: true })(ExampleComponent);
   render(<Example energy={{ duration: 100 }} />);
 
   await sleep(10);
@@ -84,7 +84,7 @@ test('Should call "exit" on energy flow "exiting" if "options.cycles=true"', asy
       onExit();
     }
   }
-  const Example = withEnergy()(ExampleComponent);
+  const Example = withEnergy({ cycles: true })(ExampleComponent);
 
   class Container extends React.PureComponent {
     state = { activate: true }

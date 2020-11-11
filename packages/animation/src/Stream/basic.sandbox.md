@@ -1,81 +1,71 @@
 ```js
-const COLOR_ON = '#27efb5'; // green
+const COLOR_ON = '#27efb5'; // cyan
 const COLOR_OFF = '#efb527'; // orange
 
-const Item = withEnergy()(
-  class ItemBase extends React.PureComponent {
-    constructor () {
-      super(...arguments);
-      this.element = React.createRef();
-    }
+const Item = withEnergy()(props => {
+  const element = React.useRef();
+  const { energy: { flow, getDuration } } = props;
+  const duration = getDuration();
 
-    render () {
-      return (
-        <li ref={this.element} style={{ padding: 5, backgroundColor: COLOR_OFF }}>
-          <div>{this.props.energy.flow.value}</div>
-        </li>
-      );
-    }
-
-    enter () {
+  React.useEffect(() => {
+    if (flow.entering) {
       anime({
-        targets: this.element.current,
-        backgroundColor: [COLOR_OFF, COLOR_ON],
-        duration: this.props.energy.getDuration().enter,
+        targets: element.current,
+        background: [COLOR_OFF, COLOR_ON],
+        duration: duration.enter,
         easing: 'linear'
       });
     }
-
-    exit () {
+    else if (flow.exiting) {
       anime({
-        targets: this.element.current,
-        backgroundColor: [COLOR_ON, COLOR_OFF],
-        duration: this.props.energy.getDuration().exit,
+        targets: element.current,
+        background: [COLOR_ON, COLOR_OFF],
+        duration: duration.exit,
         easing: 'linear'
       });
     }
-  }
-);
+  }, [flow.value]);
 
-class Sandbox extends React.PureComponent {
-  constructor () {
-    super(...arguments);
-    this.interval = null;
-    this.element = React.createRef();
-    this.state = { activate: true };
-  }
+  return (
+    <div
+      ref={element}
+      style={{ padding: 5, background: COLOR_OFF }}
+    >
+      <div>{flow.value}</div>
+    </div>
+  );
+});
 
-  componentDidMount () {
-    this.interval = setInterval(() => {
-      this.setState({ activate: !this.state.activate });
-    }, 4000);
-  }
+function Sandbox () {
+  const timeout = React.useRef();
+  const [activate, setActivate] = React.useState(true);
+  const duration = { enter: 500, exit: 500, stagger: 250 };
 
-  componentWillUnmount () {
-    clearInterval(this.interval);
-  }
-
-  render () {
-    return (
-      <AnimationProvider duration={{ enter: 500, exit: 500, stagger: 250 }}>
-        <Stream activate={this.state.activate} serial>
-          <ul>
-            <Item />
-            <Item />
-            <Stream>
-              <ul>
-                <Item />
-                <Item />
-                <Item />
-              </ul>
-            </Stream>
-            <Item />
-            <Item />
-          </ul>
-        </Stream>
-      </AnimationProvider>
+  React.useEffect(() => {
+    timeout.current = setTimeout(
+      () => setActivate(!activate),
+      3500
     );
-  }
+    return () => clearTimeout(timeout.current);
+  }, [activate]);
+
+  return (
+    <AnimationProvider duration={duration}>
+      <Stream activate={activate} serial>
+        <Item />
+        <Item />
+        <Stream>
+          <div style={{ marginLeft: 20 }}>
+            <Item />
+            <Item />
+            <Item />
+          </div>
+        </Stream>
+        <Item />
+        <Item />
+      </Stream>
+    </AnimationProvider>
+  );
 }
 
 render(<Sandbox />);
