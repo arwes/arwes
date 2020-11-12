@@ -27,7 +27,7 @@ function Component ({
         value={value}
         onChange={onChange}
       >
-        <option value=''>--</option>
+        <option value=''>-- Select {labelText} --</option>
         {children}
       </select>
       <span className={cx(classes.arrow, 'material-icons')}>

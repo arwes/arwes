@@ -5,7 +5,13 @@ const styles = theme => ({
     position: 'relative',
     display: 'block',
     margin: [0, 0, 10],
-    fontFamily: theme.typography.content
+    fontFamily: theme.typography.content,
+    color: theme.color.content,
+
+    '&:hover, &:focus': {
+      color: theme.color.active,
+      outline: 'none'
+    }
   },
   labelText: {
     display: 'block',
@@ -16,6 +22,8 @@ const styles = theme => ({
     color: rgba(theme.color.content, 0.75)
   },
   select: {
+    position: 'relative',
+    zIndex: 1,
     display: 'block',
     border: 'none',
     margin: 0,
@@ -24,12 +32,13 @@ const styles = theme => ({
     height: 26,
     lineHeight: '26px',
     fontSize: 14,
-    fontFamily: theme.typography.content,
-    color: theme.color.content,
+    fontFamily: 'inherit',
+    color: 'inherit',
     cursor: 'pointer',
     backgroundColor: 'transparent',
     outline: 'none',
     boxShadow: 'none',
+    transition: 'color 150ms ease-out',
     '-webkit-appearance': 'none',
     '-moz-appearance': 'none',
 
@@ -40,7 +49,6 @@ const styles = theme => ({
   },
   arrow: {
     position: 'absolute',
-    zIndex: -1,
     right: 0,
     bottom: 5,
     fontSize: 14,

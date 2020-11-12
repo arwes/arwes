@@ -54,33 +54,73 @@ function Component ({ classes, className, isHidden }) {
       ref={rootRef}
       className={cx(classes.root, className)}
     >
-      <Select
-        labelText='Package'
-        value={controls.packageName}
-        onChange={onControlChange('packageName')}
-      >
-        {packagesNames.map((packageName, index) => (
-          <option key={index} value={packageName}>@arwes/{packageName}</option>
-        ))}
-      </Select>
-      <Select
-        labelText='Component'
-        value={controls.componentName}
-        onChange={onControlChange('componentName')}
-      >
-        {componentsNames.map((componentName, index) =>
-          <option key={index} value={componentName}>{componentName}</option>
-        )}
-      </Select>
-      <Select
-        labelText='Sandbox'
-        value={controls.sandboxName}
-        onChange={onControlChange('sandboxName')}
-      >
-        {sandboxesNames.map((sandboxName, index) =>
-          <option key={index} value={sandboxName}>{sandboxName}</option>
-        )}
-      </Select>
+      <div className={classes.content}>
+        <div className={classes.options}>
+          <Select
+            labelText='Package'
+            value={controls.packageName}
+            onChange={onControlChange('packageName')}
+          >
+            {packagesNames.map((packageName, index) => (
+              <option key={index} value={packageName}>@arwes/{packageName}</option>
+            ))}
+          </Select>
+          <Select
+            labelText='Component'
+            value={controls.componentName}
+            onChange={onControlChange('componentName')}
+          >
+            {componentsNames.map((componentName, index) =>
+              <option key={index} value={componentName}>{componentName}</option>
+            )}
+          </Select>
+          <Select
+            labelText='Sandbox'
+            value={controls.sandboxName}
+            onChange={onControlChange('sandboxName')}
+          >
+            {sandboxesNames.map((sandboxName, index) =>
+              <option key={index} value={sandboxName}>{sandboxName}</option>
+            )}
+          </Select>
+        </div>
+        <div className={classes.info}>
+          <p>
+            Each sandbox source code should call a function <code>render()</code>{' '}
+            with the sandbox component to render.
+          </p>
+          <p>Available global modules to use in the sandbox code:</p>
+          <ul>
+            <li>
+              <a href='https://reactjs.org' target='_blank' rel='noreferrer'><code>React</code></a>.
+            </li>
+            <li>
+              <a href='https://animejs.com' target='_blank' rel='noreferrer'><code>anime</code></a>.
+            </li>
+            <li>
+              <a href='https://howlerjs.com' target='_blank' rel='noreferrer'><code>howler</code></a>.
+            </li>
+            <li>
+              All Arwes packages exported modules.
+            </li>
+          </ul>
+          <p>Available Google Fonts:</p>
+          <ul>
+            <li><a href='https://fonts.google.com/specimen/Titillium+Web' target='_blank' rel='noreferrer'>Titillium Web</a>.</li>
+            <li><a href='https://fonts.google.com/specimen/Source+Code+Pro' target='_blank' rel='noreferrer'>Source Code Pro</a>.</li>
+            <li><a href='https://material.io/resources/icons' target='_blank' rel='noreferrer'>Material Design Icons</a>.</li>
+          </ul>
+          <p>
+            The playground pollutes globally the sandbox preview components with a few
+            global styles:
+          </p>
+          <ul>
+            <li>Elements with <code>box-sizing: border-box</code>.</li>
+            <li>The <code>::selection</code> styles.</li>
+            <li>The scrollbars styles.</li>
+          </ul>
+        </div>
+      </div>
     </aside>
   );
 }

@@ -8,10 +8,10 @@ const PlayerComponent = ({ players, audio, name }) => (
 const Player = withSounds()(PlayerComponent);
 
 const players = {
-  information: new Howl({ src: ['/sounds/information.mp3'] }),
-  ask: new Howl({ src: ['/sounds/ask.mp3'] }),
-  warning: new Howl({ src: ['/sounds/warning.mp3'] }),
-  error: new Howl({ src: ['/sounds/error.mp3'] })
+  information: new howler.Howl({ src: ['/sounds/information.mp3'] }),
+  ask: new howler.Howl({ src: ['/sounds/ask.mp3'] }),
+  warning: new howler.Howl({ src: ['/sounds/warning.mp3'] }),
+  error: new howler.Howl({ src: ['/sounds/error.mp3'] })
 };
 
 function Sandbox () {

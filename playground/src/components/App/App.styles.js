@@ -21,15 +21,22 @@ const styles = theme => ({
       },
       '& ::-webkit-scrollbar-thumb': {
         background: lighten(0.1, theme.color.background)
+      },
+      '& ::selection': {
+        backgroundColor: theme.color.content,
+        color: theme.color.background
       }
     }
   },
   root: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
     display: 'grid',
     gridTemplateColumns: 'auto',
-    gridTemplateRows: 'auto 1fr auto',
-    width: '100%',
-    height: '100vh'
+    gridTemplateRows: 'auto 1fr auto'
   },
   content: {
     position: 'relative',
@@ -61,8 +68,7 @@ const styles = theme => ({
     overflow: 'auto'
   },
   editor: {
-    borderRight: `1px solid ${rgba(theme.color.border, 0.5)}`,
-    fontSize: 10
+    borderRight: `1px solid ${rgba(theme.color.border, 0.5)}`
   },
 
   [`@media (min-width: ${theme.breakpoints.tablet}px)`]: {
@@ -77,9 +83,6 @@ const styles = theme => ({
     },
     main: {
       flex: 'none'
-    },
-    editor: {
-      fontSize: 12
     }
   }
 });

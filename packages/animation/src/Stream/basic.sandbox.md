@@ -24,6 +24,8 @@ const Item = withEnergy()(props => {
         easing: 'linear'
       });
     }
+
+    return () => anime.remove(element.current);
   }, [flow.value]);
 
   return (

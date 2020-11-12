@@ -16,8 +16,10 @@ const styles = theme => ({
       textDecoration: 'none',
       color: 'inherit',
       outline: 'none',
+      transition: 'color 150ms ease-out',
 
-      '&hover, &:focus': {
+      '&:hover, &:focus': {
+        color: theme.color.active,
         outline: 'none'
       }
     }
@@ -38,11 +40,15 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     cursor: 'pointer',
-    opacity: 0.5,
-    transition: 'opacity 150ms ease-out'
+    transition: 'color 150ms ease-out',
+
+    '&:hover, &:focus': {
+      color: theme.color.active,
+      outline: 'none'
+    }
   },
   optionActive: {
-    opacity: 1
+    color: theme.color.active
   },
   optionIcon: {
     display: 'inline-block',
@@ -53,7 +59,6 @@ const styles = theme => ({
     paddingRight: 5,
     fontSize: 12
   },
-  optionControls: {},
 
   [`@media (min-width: ${theme.breakpoints.tablet}px)`]: {
     title: {
@@ -64,9 +69,6 @@ const styles = theme => ({
     },
     optionText: {
       fontSize: 14
-    },
-    optionControls: {
-      display: 'none'
     }
   }
 });
