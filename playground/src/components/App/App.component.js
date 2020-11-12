@@ -13,28 +13,61 @@ import { SandboxEditor } from '../SandboxEditor';
 import { SandboxResult } from '../SandboxResult';
 import { Footer } from '../Footer';
 
-const getIsDeviceMobile = () => document.body.offsetWidth < theme.breakpoints.tablet;
+const getIsDeviceLarge = () => document.body.offsetWidth >= theme.breakpoints.tablet;
 
 function Component ({ classes }) {
   const { sandboxConfig } = useSelectedPlayground();
 
-  const [isControlsHidden, setIsControlsHidden] = useState(getIsDeviceMobile);
+  const [isCodeActive, setIsCodeActive] = useState(false);
+  const [isPreviewActive, setIsPreviewActive] = useState(false);
+  const [isControlsActive, setIsControlsActive] = useState(getIsDeviceLarge);
 
-  const onMenu = () => setIsControlsHidden(!isControlsHidden);
+  const onToggleCode = () => sandboxConfig && setIsCodeActive(!isCodeActive);
+  const onTogglePreview = () => sandboxConfig && setIsPreviewActive(!isPreviewActive);
+  const onToggleControls = () => setIsControlsActive(!isControlsActive);
 
   useEffect(() => {
-    const onResize = () => setIsControlsHidden(getIsDeviceMobile);
+    const onResize = () => setIsControlsActive(getIsDeviceLarge);
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
+  useEffect(() => {
+    if (sandboxConfig) {
+      if (getIsDeviceLarge()) {
+        setIsCodeActive(true);
+        setIsPreviewActive(true);
+      }
+      else {
+        setIsCodeActive(false);
+        setIsPreviewActive(true);
+      }
+    }
+    else {
+      setIsCodeActive(false);
+      setIsPreviewActive(false);
+    }
+  }, [sandboxConfig]);
+
   return (
-    <div className={classes.root}>
-      <Header onMenu={onMenu} />
+    <div
+      className={cx(
+        classes.root,
+        isCodeActive && isPreviewActive && classes.isMainTwoPanels
+      )}
+    >
+      <Header
+        isCodeActive={isCodeActive}
+        isPreviewActive={isPreviewActive}
+        isControlsActive={isControlsActive}
+        onToggleCode={onToggleCode}
+        onTogglePreview={onTogglePreview}
+        onToggleControls={onToggleControls}
+      />
       <div className={classes.content}>
         <Controls
           className={classes.controls}
-          isHidden={isControlsHidden}
+          isHidden={!isControlsActive}
         />
         <main className={classes.main}>
           {!!sandboxConfig && (
@@ -42,14 +75,19 @@ function Component ({ classes }) {
               code={getSandboxFileCode(sandboxConfig.code)}
               scope={getPackagesScope()}
               theme={prismThemeVSDark}
+              disabled={!getIsDeviceLarge()}
               noInline
             >
-              <div className={cx(classes.panel, classes.editor)}>
-                <SandboxEditor />
-              </div>
-              <div className={classes.panel}>
-                <SandboxResult />
-              </div>
+              {isCodeActive && (
+                <div className={cx(classes.panel, classes.editor)}>
+                  <SandboxEditor />
+                </div>
+              )}
+              {isPreviewActive && (
+                <div className={classes.panel}>
+                  <SandboxResult />
+                </div>
+              )}
             </LiveProvider>
           )}
         </main>

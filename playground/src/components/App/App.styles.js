@@ -48,18 +48,24 @@ const styles = theme => ({
     flex: 1,
     display: 'grid',
     gridTemplateRows: 'auto',
-    gridTemplateColumns: '50% 50%',
+    gridTemplateColumns: '100%',
     minHeight: 0 // Height overflow issue.
+  },
+  isMainTwoPanels: {
+    '& $main': {
+      gridTemplateColumns: '50% 50%'
+    }
   },
   panel: {
     position: 'relative',
     overflow: 'auto'
   },
   editor: {
-    borderRight: `1px solid ${rgba(theme.color.border, 0.5)}`
+    borderRight: `1px solid ${rgba(theme.color.border, 0.5)}`,
+    fontSize: 10
   },
 
-  [`@media only screen and (min-width: ${theme.breakpoints.tablet}px)`]: {
+  [`@media (min-width: ${theme.breakpoints.tablet}px)`]: {
     content: {
       display: 'grid',
       gridTemplateColumns: '200px auto',
@@ -71,6 +77,9 @@ const styles = theme => ({
     },
     main: {
       flex: 'none'
+    },
+    editor: {
+      fontSize: 12
     }
   }
 });

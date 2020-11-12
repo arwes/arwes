@@ -45,7 +45,9 @@ module.exports = {
       path.join(__dirname, 'static')
     ],
     watchContentBase: true,
+    disableHostCheck: true,
     compress: true,
+    host: '0.0.0.0',
     port: 9000,
     open: true
   }

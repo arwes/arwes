@@ -1,18 +1,50 @@
 import React from 'react';
 import cx from 'classnames';
 
-function Component ({ classes, className, onMenu }) {
+function Component ({
+  classes,
+  className,
+  isCodeActive,
+  isPreviewActive,
+  isControlsActive,
+  onToggleCode,
+  onTogglePreview,
+  onToggleControls
+}) {
   return (
     <header className={cx(classes.root, className)}>
-      <span
-        className={cx(classes.menu, 'material-icons')}
-        onClick={onMenu}
-      >
-        menu
-      </span>
       <a href='/'>
         <h1 className={classes.title}>Arwes Playground</h1>
       </a>
+      <div className={classes.options}>
+        <div
+          className={cx(classes.option, isCodeActive && classes.optionActive)}
+          onClick={onToggleCode}
+          title='Toggle code editor'
+        >
+          <span className={cx(classes.optionIcon, 'material-icons')}>code</span>
+          <span className={classes.optionText}>Code</span>
+          <span className={classes.optionLine} />
+        </div>
+        <div
+          className={cx(classes.option, isPreviewActive && classes.optionActive)}
+          onClick={onTogglePreview}
+          title='Toggle preview'
+        >
+          <span className={cx(classes.optionIcon, 'material-icons')}>visibility</span>
+          <span className={classes.optionText}>Preview</span>
+          <span className={classes.optionLine} />
+        </div>
+        <div
+          className={cx(classes.option, classes.optionControls, isControlsActive && classes.optionActive)}
+          onClick={onToggleControls}
+          title='Toggle controls'
+        >
+          <span className={cx(classes.optionIcon, 'material-icons')}>settings</span>
+          <span className={classes.optionText}>Controls</span>
+          <span className={classes.optionLine} />
+        </div>
+      </div>
     </header>
   );
 };

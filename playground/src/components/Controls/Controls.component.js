@@ -15,15 +15,17 @@ function Component ({ classes, className, isHidden }) {
   const onControlChange = name => event => changeControl(name, event.target.value);
 
   useEffect(() => {
-    if (isHidden) {
-      anime.set(rootRef.current, { zIndex: 0, opacity: 0 });
-    }
-    else {
-      anime.set(rootRef.current, { zIndex: 1000, opacity: 1 });
-    }
-
     if (isFirstRender.current) {
       isFirstRender.current = false;
+
+      // Initial animation state.
+      if (isHidden) {
+        anime.set(rootRef.current, { display: 'none', opacity: 0 });
+      }
+      else {
+        anime.set(rootRef.current, { display: 'block', opacity: 1 });
+      }
+
       return;
     }
 
@@ -33,10 +35,11 @@ function Component ({ classes, className, isHidden }) {
         duration: 150,
         easing: 'easeOutSine',
         opacity: [1, 0],
-        complete: () => anime.set(rootRef.current, { zIndex: 0 })
+        complete: () => anime.set(rootRef.current, { display: 'none' })
       });
     }
     else {
+      anime.set(rootRef.current, { display: 'block' });
       anime({
         targets: rootRef.current,
         duration: 150,
