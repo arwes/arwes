@@ -41,7 +41,7 @@ Assemble and disassemble user interfaces using animations from React components.
 
 #### `@arwes/sounds`
 
-![status](https://img.shields.io/badge/status-in%20polishing-yellow.svg)
+![status](https://img.shields.io/badge/status-in%20development-orange.svg)
 ![downloads](https://img.shields.io/npm/dm/@arwes/sounds.svg)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@arwes/sounds)
 

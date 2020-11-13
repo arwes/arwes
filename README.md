@@ -81,15 +81,15 @@ Review [frequently asked questions](./docs/FAQ.md) and [code of conduct](./docs/
 
 ## Roadmap
 
-Check out [Arwes Roadmap](./docs/ROADMAP.md) for the project planning.
+Check out [roadmap](./docs/ROADMAP.md) for the project planning.
 
-See [changelog](./docs/CHANGELOG.md).
+Review [changelog](./docs/CHANGELOG.md).
 
 ## Want to contribute?
 
 See [how to contribute](./docs/CONTRIBUTING.md). All contributions of any kind are welcome!
 
-Review the [project boards](https://github.com/arwes/arwes/projects).
+Review [project boards](https://github.com/arwes/arwes/projects).
 
 ## Contributors
 
