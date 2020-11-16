@@ -22,7 +22,7 @@
     "changelog": "auto-changelog --output ./docs/CHANGELOG.md --commit-limit false",
     "contributors-add": "all-contributors add",
     "readme-contributors-generate": "all-contributors generate",
-    "readme-showcase-generate": "node ./readme-showcase-generate.js"
+    "readme-community-generate": "node ./readme-community-generate.js"
   },
   "config": {
     "commitizen": {

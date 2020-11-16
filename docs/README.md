@@ -31,13 +31,21 @@ The main functionalities which power the UI component system.
 
 Resource loading, responsive control, and general browser API tools.
 
+#### `@arwes/design`
+
+![status](https://img.shields.io/badge/status-in%20concept-999999.svg)
+![downloads](https://img.shields.io/npm/dm/@arwes/design.svg)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/@arwes/design)
+
+Theming and styling tools using [JSS](https://cssinjs.org) in [React](https://reactjs.org).
+
 #### `@arwes/animation`
 
 ![status](https://img.shields.io/badge/status-in%20development-orange.svg)
 ![downloads](https://img.shields.io/npm/dm/@arwes/animation.svg)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@arwes/animation)
 
-Assemble and disassemble user interfaces using animations from React components.
+Assemble and disassemble user interfaces using animation controls in [React](https://reactjs.org).
 
 #### `@arwes/sounds`
 
@@ -45,19 +53,12 @@ Assemble and disassemble user interfaces using animations from React components.
 ![downloads](https://img.shields.io/npm/dm/@arwes/sounds.svg)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@arwes/sounds)
 
-Define, manage and control interactive sound effects from React components.
-
-#### `@arwes/design`
-
-![status](https://img.shields.io/badge/status-in%20concept-999999.svg)
-![downloads](https://img.shields.io/npm/dm/@arwes/design.svg)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/@arwes/design)
-
-Styling tools using [JSS](https://cssinjs.org) with React components.
+Define, manage and control interactive sound effects using [Howler](https://howlerjs.com)
+in [React](https://reactjs.org).
 
 ### Implementations
 
-Using the core functionalities and based on the guidelines, these are
+Using the functionality packages and based on the project guidelines, these are
 design system or design component implementations.
 
 #### `@arwes/arwes`
@@ -66,4 +67,4 @@ design system or design component implementations.
 ![downloads](https://img.shields.io/npm/dm/@arwes/arwes.svg)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@arwes/arwes)
 
-Arwes design system React components.
+Arwes design component system.

@@ -69,6 +69,8 @@ the vision of the project is.
 
 - [x] Project dependency packages update.
 - [x] Repository and website documentation file structure definition.
+- [x] Documentation guidelines for systems, states, and events.
+- [ ] [#64](https://github.com/arwes/arwes/issues/64) Arwes UI/UX design specification.
 - [ ] [#61](https://github.com/arwes/arwes/issues/61) Migrate project packages
 source code to TypeScript.
 - [ ] [#62](https://github.com/arwes/arwes/issues/62) Setup UMD distribution support.
@@ -83,21 +85,26 @@ design.
 
 #### Website
 
-- [ ] [#64](https://github.com/arwes/arwes/issues/64) Arwes UI/UX design specification.
 - [ ] [#65](https://github.com/arwes/arwes/issues/65) Website application setup.
-- [ ] [#66](https://github.com/arwes/arwes/issues/66) Website index page.
-- [ ] [#67](https://github.com/arwes/arwes/issues/67) Website docs pages.
-- [ ] [#68](https://github.com/arwes/arwes/issues/68) Website API pages.
+
+#### `@arwes/design`
+
+- [ ] Documentation design management.
+- [ ] Component theme setup and extensibility.
+- [ ] Component styling setup and extensibility.
 
 #### `@arwes/animation`
 
+- [ ] Documentation animation management.
 - [ ] [#63](https://github.com/arwes/arwes/issues/63) Research SEO support for
 animated components.
-- [ ] Declarative and extensible animation component tools.
+- [ ] [#70](https://github.com/arwes/arwes/issues/70) Declarative and extensible
+animation component tools.
 
 #### `@arwes/sounds`
 
-- [ ] Component sound players setup and extensibility APIs.
+- [ ] Documentation sounds management.
+- [ ] Component sound players and settings setup and extensibility.
 
 ----
 
@@ -108,3 +115,9 @@ animated components.
 #### General
 
 - [ ] [#18](https://github.com/arwes/arwes/issues/18) Update contributing documentation.
+
+#### Website
+
+- [ ] [#66](https://github.com/arwes/arwes/issues/66) Website index page.
+- [ ] [#67](https://github.com/arwes/arwes/issues/67) Website docs pages.
+- [ ] [#68](https://github.com/arwes/arwes/issues/68) Website API pages.

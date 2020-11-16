@@ -68,16 +68,16 @@ Open [a GitHub issue](https://github.com/arwes/arwes/issues/new/choose) or let's
 
 Review [frequently asked questions](./docs/FAQ.md) and [code of conduct](./docs/CODE_OF_CONDUCT.md).
 
-## Showcase
+## Community
 
-<!-- ARWES-PROJECT-SHOWCASE:START -->
+<!-- ARWES-COMMUNITY-APPS:START -->
 <table>
 <tr>
-<td align="center"><a href="https://soulextract.com"><img src="./docs/showcase/images/soulextract.com.jpg" width="252px;" alt="SoulExtract.com" /></a><br /><a href="https://soulextract.com">SoulExtract.com</a><br /><a href="https://github.com/soulextract/soulextract.com"><sub>soulextract/soulextract.com</sub></a></td>
-<td align="center"><a href="https://romelperez.dev"><img src="./docs/showcase/images/romelperez.dev.jpg" width="252px;" alt="RomelPerez.dev" /></a><br /><a href="https://romelperez.dev">RomelPerez.dev</a><br /><a href="https://github.com/romelperez/romelperez.dev"><sub>romelperez/romelperez.dev</sub></a></td>
+<td align="center"><a href="https://soulextract.com"><img src="./docs/community/apps/images/soulextract.com.jpg" width="252px;" alt="SoulExtract.com" /></a><br /><a href="https://soulextract.com">SoulExtract.com</a><br /><a href="https://github.com/soulextract/soulextract.com"><sub>soulextract/soulextract.com</sub></a></td>
+<td align="center"><a href="https://romelperez.dev"><img src="./docs/community/apps/images/romelperez.dev.jpg" width="252px;" alt="RomelPerez.dev" /></a><br /><a href="https://romelperez.dev">RomelPerez.dev</a><br /><a href="https://github.com/romelperez/romelperez.dev"><sub>romelperez/romelperez.dev</sub></a></td>
 </tr>
 </table>
-<!-- ARWES-PROJECT-SHOWCASE:END -->
+<!-- ARWES-COMMUNITY-APPS:END -->
 
 ## Roadmap
 

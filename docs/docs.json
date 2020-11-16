@@ -1,81 +1,89 @@
-[
-  {
-    "id": "PROJECT",
-    "title": "Arwes Project",
-    "document": "README.md"
-  },
-  {
-    "id": "FAQ",
-    "title": "FAQ",
-    "document": "FAQ.md"
-  },
-  {
-    "id": "SHOWCASE",
-    "title": "Showcase"
-  },
-  {
-    "id": "GUIDELINES",
-    "title": "Guidelines",
-    "document": "guidelines/README.md",
-    "children": [
-      {
-        "title": "Purpose",
-        "document": "guidelines/purpose.md"
-      },
-      {
-        "title": "Inspiration",
-        "document": "guidelines/inspiration.md"
-      },
-      {
-        "title": "Animation and Sounds",
-        "document": "guidelines/animation-and-sounds.md"
-      },
-      {
-        "title": "Design",
-        "document": "guidelines/design.md"
-      }
-    ]
-  },
-  {
-    "id": "ANIMATION",
-    "title": "Animation",
-    "document": "animation/README.md",
-    "children": [
-      {
-        "title": "Animation Management System",
-        "document": "animation/animation-management-system.md"
-      }
-    ]
-  },
-  {
-    "id": "SOUNDS",
-    "title": "Sounds",
-    "document": "sounds/README.md",
-    "children": [
-      {
-        "title": "Sounds Management System",
-        "document": "sounds/sounds-management-system.md"
-      }
-    ]
-  },
-  {
-    "id": "ROADMAP",
-    "title": "Roadmap",
-    "document": "ROADMAP.md"
-  },
-  {
-    "id": "CONTRIBUTING",
-    "title": "Contributing",
-    "document": "CONTRIBUTING.md"
-  },
-  {
-    "id": "CODEOFCONDUCT",
-    "title": "Code of Conduct",
-    "document": "CODE_OF_CONDUCT.md"
-  },
-  {
-    "id": "CHANGELOG",
-    "title": "Changelog",
-    "document": "CHANGELOG.md"
-  }
-]
+{
+  "id": "PROJECT",
+  "title": "Project",
+  "document": "README.md",
+  "children": [
+    {
+      "id": "COMMUNITY",
+      "title": "Community",
+      "children": [
+        {
+          "id": "APPS",
+          "title": "Apps"
+        }
+      ]
+    },
+    {
+      "id": "GUIDELINES",
+      "title": "Guidelines",
+      "document": "guidelines/guidelines.md",
+      "children": [
+        {
+          "id": "PURPOSE",
+          "title": "Purpose",
+          "document": "guidelines/purpose/purpose.md"
+        },
+        {
+          "id": "INSPIRATION",
+          "title": "Inspiration",
+          "document": "guidelines/inspiration/inspiration.md"
+        },
+        {
+          "id": "SYSTEMS",
+          "title": "Systems",
+          "document": "guidelines/systems/systems.md"
+        },
+        {
+          "id": "STATES",
+          "title": "States",
+          "document": "guidelines/states/states.md"
+        },
+        {
+          "id": "EVENTS",
+          "title": "Events",
+          "document": "guidelines/events/events.md"
+        }
+      ]
+    },
+    {
+      "id": "DESIGN_MANAGEMENT",
+      "title": "Design Management",
+      "document": "design-management/design-management.md"
+    },
+    {
+      "id": "ANIMATION_MANAGEMENT",
+      "title": "Animation Management",
+      "document": "animation-management/animation-management.md"
+    },
+    {
+      "id": "SOUNDS_MANAGEMENT",
+      "title": "Sounds Management",
+      "document": "sounds-management/sounds-management.md"
+    },
+    {
+      "id": "FAQ",
+      "title": "FAQ",
+      "document": "FAQ.md"
+    },
+    {
+      "id": "ROADMAP",
+      "title": "Roadmap",
+      "document": "ROADMAP.md"
+    },
+    {
+      "id": "CONTRIBUTING",
+      "title": "Contributing",
+      "document": "CONTRIBUTING.md"
+    },
+    {
+      "id": "CODEOFCONDUCT",
+      "title": "Code of Conduct",
+      "document": "CODE_OF_CONDUCT.md"
+    },
+    {
+      "id": "CHANGELOG",
+      "title": "Changelog",
+      "document": "CHANGELOG.md"
+    }
+  ]
+}
