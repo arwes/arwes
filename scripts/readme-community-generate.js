@@ -3,9 +3,9 @@
 
 const path = require('path');
 const { readFileSync, writeFileSync } = require('fs');
-const appsItems = require('./docs/community/apps/apps.json');
+const appsItems = require('../docs/community/apps/apps.json');
 
-const README_FILE_PATH = './README.md';
+const README_FILE_PATH = path.join(process.cwd(), 'README.md');
 const README_FILE_ENCODING = 'utf-8';
 const APPS_ITEMS_PER_LINE = 3;
 const APPS_ITEM_WIDTH = 252; // In desktop, the GitHub readme page width divided by 3.

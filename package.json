@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "npm run bootstrap && npm run compile",
     "bootstrap": "lerna bootstrap",
-    "compile": "sh compile.sh",
+    "compile": "sh ./scripts/compile.sh",
     "lint": "npm run lint-js && npm run lint-md",
     "lint-js": "eslint .",
     "lint-js-fix": "eslint . --fix",
@@ -22,7 +22,7 @@
     "changelog": "auto-changelog --output ./docs/CHANGELOG.md --commit-limit false",
     "contributors-add": "all-contributors add",
     "readme-contributors-generate": "all-contributors generate",
-    "readme-community-generate": "node ./readme-community-generate.js"
+    "readme-community-generate": "node ./scripts/readme-community-generate.js"
   },
   "config": {
     "commitizen": {
