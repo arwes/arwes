@@ -23,5 +23,9 @@
   "main": "lib/index.js",
   "dependencies": {
     "@babel/runtime": "^7.11.2"
+  },
+  "peerDependencies": {
+    "prop-types": "*",
+    "react": "16.x || 17.x"
   }
 }

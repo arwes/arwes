@@ -26,6 +26,6 @@
   },
   "peerDependencies": {
     "prop-types": "*",
-    "react": "16.x"
+    "react": "16.x || 17.x"
   }
 }

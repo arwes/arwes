@@ -39,12 +39,12 @@
     "extend": "^3.0.2",
     "polished": "^3.6.7",
     "prismjs": "^1.21.0",
-    "prop-types": "*",
     "react-jss": "^10.4.0",
     "react-transition-group": "^4.4.1",
     "theming": "^3.3.0"
   },
   "peerDependencies": {
-    "react": "16.x"
+    "prop-types": "*",
+    "react": "16.x || 17.x"
   }
 }
