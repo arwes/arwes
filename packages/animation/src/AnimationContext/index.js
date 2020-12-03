@@ -1,1 +1,1 @@
-export { AnimationContext } from './AnimationContext';
+export * from './AnimationContext';

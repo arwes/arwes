@@ -1,5 +1,5 @@
-import React from 'react';
+import { createContext } from 'react';
 
-const AnimationContext = React.createContext(null);
+const AnimationContext = createContext();
 
 export { AnimationContext };

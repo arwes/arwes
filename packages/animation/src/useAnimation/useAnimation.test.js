@@ -7,25 +7,24 @@ import { useAnimation } from './useAnimation';
 
 afterEach(cleanup);
 
-test('Should return an empty object if no provider was found', () => {
-  const expected = {};
+test('Should return nothing if no provider was found', () => {
   const Example = () => {
     const received = useAnimation();
-    expect(received).toEqual(expected);
-    return <div />;
+    expect(received).toBeUndefined();
+    return null;
   };
   render(<Example />);
 });
 
 test('Should return provided data if provider was found', () => {
-  const expected = { animate: true, duration: { enter: 100 } };
   const Example = () => {
     const received = useAnimation();
+    const expected = { animate: true, duration: { enter: 100 } };
     expect(received).toEqual(expected);
-    return <div />;
+    return null;
   };
   render(
-    <AnimationProvider animate duration={{ enter: 100 }}>
+    <AnimationProvider animation={{ animate: true, duration: { enter: 100 } }}>
       <Example />
     </AnimationProvider>
   );
