@@ -1,1 +1,0 @@
-export { makeIsRoot } from './makeIsRoot';

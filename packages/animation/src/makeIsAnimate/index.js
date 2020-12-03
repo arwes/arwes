@@ -1,1 +1,0 @@
-export { makeIsAnimate } from './makeIsAnimate';

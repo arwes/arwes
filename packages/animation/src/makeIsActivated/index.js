@@ -1,1 +1,0 @@
-export { makeIsActivated } from './makeIsActivated';
