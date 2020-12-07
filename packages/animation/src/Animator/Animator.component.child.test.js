@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { render, act, cleanup } from '@testing-library/react';
 
 import { EXITED, EXITING, ENTERED, ENTERING } from '../constants';
-import { AnimatorSettingsProvider } from '../AnimatorSettingsProvider';
+import { AnimatorGeneralSettingsProvider } from '../AnimatorGeneralSettingsProvider';
 import { useAnimator } from '../useAnimator';
 import { Component as Animator } from './Animator.component';
 
@@ -310,11 +310,11 @@ test('Should inherit "duration" setting from parent provider', () => {
     return null;
   }
   render(
-    <AnimatorSettingsProvider animator={{ duration: 300 }}>
+    <AnimatorGeneralSettingsProvider animator={{ duration: 300 }}>
       <Animator>
         <ExampleChild />
       </Animator>
-    </AnimatorSettingsProvider>
+    </AnimatorGeneralSettingsProvider>
   );
   expect(animator.duration).toMatchObject({ enter: 300, exit: 300 });
 });

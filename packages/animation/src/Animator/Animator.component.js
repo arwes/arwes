@@ -11,22 +11,22 @@ import {
 } from '../constants';
 import { expandAnimatorDuration } from '../utils/expandAnimatorDuration';
 import { AnimatorContext } from '../AnimatorContext';
-import { useAnimatorSettings } from '../useAnimatorSettings';
+import { useAnimatorGeneralSettings } from '../useAnimatorGeneralSettings';
 import { useAnimator } from '../useAnimator';
 
 function Component (props) {
   const { animator, children } = props;
 
-  const parentAnimatorSettings = useAnimatorSettings();
+  const parentAnimatorGeneralSettings = useAnimatorGeneralSettings();
   const parentAnimator = useAnimator();
 
   const duration = useMemo(() => {
     return Object.freeze({
       ...DURATION_DEFAULT,
-      ...parentAnimatorSettings?.duration,
+      ...parentAnimatorGeneralSettings?.duration,
       ...expandAnimatorDuration(animator.duration)
     });
-  }, [animator.duration, parentAnimatorSettings]);
+  }, [animator.duration, parentAnimatorGeneralSettings]);
 
   // Since the expected boolean values applicable to the node are provided down
   // to the next child node, they are converted to booleans always to prevent

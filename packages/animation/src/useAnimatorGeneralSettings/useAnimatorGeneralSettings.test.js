@@ -3,15 +3,15 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 
-import { AnimatorSettingsProvider } from '../AnimatorSettingsProvider';
-import { useAnimatorSettings } from './useAnimatorSettings';
+import { AnimatorGeneralSettingsProvider } from '../AnimatorGeneralSettingsProvider';
+import { useAnimatorGeneralSettings } from './useAnimatorGeneralSettings';
 
 afterEach(cleanup);
 
 test('Should return nothing if no provider was found', () => {
   let received;
   const Example = () => {
-    received = useAnimatorSettings();
+    received = useAnimatorGeneralSettings();
     return null;
   };
   render(<Example />);
@@ -21,13 +21,13 @@ test('Should return nothing if no provider was found', () => {
 test('Should return provided data if provider was found', () => {
   let received;
   const Example = () => {
-    received = useAnimatorSettings();
+    received = useAnimatorGeneralSettings();
     return null;
   };
   render(
-    <AnimatorSettingsProvider animator={{ duration: { enter: 100 } }}>
+    <AnimatorGeneralSettingsProvider animator={{ duration: { enter: 100 } }}>
       <Example />
-    </AnimatorSettingsProvider>
+    </AnimatorGeneralSettingsProvider>
   );
   const expected = { duration: { enter: 100 } };
   expect(received).toEqual(expected);

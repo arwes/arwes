@@ -2,11 +2,11 @@ import React, { useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import { expandAnimatorDuration } from '../utils/expandAnimatorDuration';
-import { AnimatorSettingsContext } from '../AnimatorSettingsContext';
+import { AnimatorGeneralSettingsContext } from '../AnimatorGeneralSettingsContext';
 
 function Component (props) {
   const { animator: localSettings, children } = props;
-  const parentSettings = useContext(AnimatorSettingsContext);
+  const parentSettings = useContext(AnimatorGeneralSettingsContext);
 
   const toProvideSettings = useMemo(() => {
     if (!localSettings) {
@@ -23,13 +23,13 @@ function Component (props) {
   }, [localSettings, parentSettings]);
 
   return (
-    <AnimatorSettingsContext.Provider value={toProvideSettings}>
+    <AnimatorGeneralSettingsContext.Provider value={toProvideSettings}>
       {children}
-    </AnimatorSettingsContext.Provider>
+    </AnimatorGeneralSettingsContext.Provider>
   );
 }
 
-Component.displayName = 'AnimatorSettingsProvider';
+Component.displayName = 'AnimatorGeneralSettingsProvider';
 
 Component.propTypes = {
   animator: PropTypes.shape({
