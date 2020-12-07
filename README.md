@@ -57,10 +57,10 @@ It tries to inspire advanced space and alien technology.
 
 ## Documentation
 
-**[arwes.dev](https://arwes.dev)** is for version `1.0.0-alpha.5`.
+**[arwes.dev](https://arwes.dev)** is for version [`1.0.0-alpha.5`](https://github.com/arwes/arwes/tree/version1-breakpoint1).
 
-**[next.arwes.dev](https://next.arwes.dev)** is a _work in progress_ of the
-latest version. You can check out the source in [docs](./docs).
+**[docs](./docs)** is a _work in progress_ of the latest version which will be
+available at **[next.arwes.dev](https://next.arwes.dev)**.
 
 ## Need help?
 

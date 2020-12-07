@@ -15,7 +15,7 @@ packages. The guidelines are used as the main concepts behind them.
 The functional packages should be ready and the guidelines defined for the design
 implementation packages to be developed.
 
-In the [project page](./PROJECT.md), each package should have a badge indicating
+In the [project page](./README.md), each package should have a badge indicating
 its current status.
 
 - ![status](https://img.shields.io/badge/status-in%20concept-999999.svg)
