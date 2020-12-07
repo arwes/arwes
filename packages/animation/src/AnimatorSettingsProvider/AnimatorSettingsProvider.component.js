@@ -29,6 +29,8 @@ function Component (props) {
   );
 }
 
+Component.displayName = 'AnimatorSettingsProvider';
+
 Component.propTypes = {
   animator: PropTypes.shape({
     duration: PropTypes.oneOfType([

@@ -1,19 +1,9 @@
 import React, { forwardRef } from 'react';
 
 import { expandAnimatorDuration } from '../utils/expandAnimatorDuration';
+import { filterAnimatorClassSettings } from '../utils/filterAnimatorClassSettings';
 import { Animator } from '../Animator';
 import { useAnimator } from '../useAnimator';
-
-function filterAnimatorClassSettings (providedSettings) {
-  const { animate, duration, root, merge } = providedSettings;
-  const toFilterSettings = { animate, duration, root, merge };
-  const settings = Object
-    .keys(toFilterSettings)
-    .filter(key => toFilterSettings[key] !== undefined)
-    .reduce((obj, key) => ({ ...obj, [key]: toFilterSettings[key] }), {});
-
-  return settings;
-}
 
 function mergeAnimatorSettings (providedClassSettings, instaceSettings) {
   const classSettings = providedClassSettings && filterAnimatorClassSettings(providedClassSettings);

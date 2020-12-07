@@ -123,6 +123,8 @@ function Component (props) {
   );
 }
 
+Component.displayName = 'Animator';
+
 Component.propTypes = {
   animator: PropTypes.shape({
     duration: PropTypes.oneOfType([
