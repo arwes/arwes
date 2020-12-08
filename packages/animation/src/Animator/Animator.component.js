@@ -66,6 +66,21 @@ function Component (props) {
     _setFlow(Object.freeze({ value, [value]: true, hasEntered, hasExited }));
   };
 
+  const animateRefs = React.createRef();
+
+  const toProvideAnimator = useMemo(() => {
+    const setupAnimateRefs = parameter => (animateRefs.current = parameter);
+
+    return Object.freeze({
+      duration,
+      animate,
+      root,
+      merge,
+      flow,
+      setupAnimateRefs
+    });
+  }, [duration, animate, root, merge, flow]);
+
   useEffect(() => {
     // The flow should not be transitioned when it is not animated.
     // Even if this early return is removed, it should still work, but it is added
@@ -106,18 +121,31 @@ function Component (props) {
     return () => clearTimeout(timeout);
   }, [activate]);
 
-  useEffect(
-    () => animate && animator.onTransition?.(flow),
-    [flow]
-  );
+  useEffect(() => {
+    animator.useAnimateMount?.(toProvideAnimator, animateRefs.current);
 
-  const animatorToProvide = useMemo(
-    () => Object.freeze({ duration, animate, root, merge, flow }),
-    [duration, animate, root, merge, flow]
-  );
+    return () => {
+      animator.useAnimateUnmount?.(toProvideAnimator, animateRefs.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!animate) {
+      return;
+    }
+
+    animator.onTransition?.(flow);
+
+    switch (flow.value) {
+      case ENTERING: animator.useAnimateEntering?.(toProvideAnimator, animateRefs.current); break;
+      case ENTERED: animator.useAnimateEntered?.(toProvideAnimator, animateRefs.current); break;
+      case EXITING: animator.useAnimateExiting?.(toProvideAnimator, animateRefs.current); break;
+      case EXITED: animator.useAnimateExited?.(toProvideAnimator, animateRefs.current); break;
+    }
+  }, [flow.value]);
 
   return (
-    <AnimatorContext.Provider value={animatorToProvide}>
+    <AnimatorContext.Provider value={toProvideAnimator}>
       {children}
     </AnimatorContext.Provider>
   );
@@ -141,7 +169,13 @@ Component.propTypes = {
     root: PropTypes.bool,
     merge: PropTypes.bool,
     activate: PropTypes.bool,
-    onTransition: PropTypes.func
+    onTransition: PropTypes.func,
+    useAnimateMount: PropTypes.func,
+    useAnimateEntering: PropTypes.func,
+    useAnimateEntered: PropTypes.func,
+    useAnimateExiting: PropTypes.func,
+    useAnimateExited: PropTypes.func,
+    useAnimateUnmount: PropTypes.func
   }),
   children: PropTypes.any
 };

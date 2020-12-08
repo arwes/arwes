@@ -1,19 +1,19 @@
 import React, { forwardRef } from 'react';
 
 import { expandAnimatorDuration } from '../utils/expandAnimatorDuration';
-import { filterAnimatorClassSettings } from '../utils/filterAnimatorClassSettings';
+import { filterClassAnimatorSettings } from '../utils/filterClassAnimatorSettings';
 import { Animator } from '../Animator';
 import { useAnimator } from '../useAnimator';
 
-function mergeAnimatorSettings (providedClassSettings, instaceSettings) {
-  const classSettings = providedClassSettings && filterAnimatorClassSettings(providedClassSettings);
+function mergeAnimatorSettings (providedClassAnimator, instanceAnimator) {
+  const classAnimator = providedClassAnimator && filterClassAnimatorSettings(providedClassAnimator);
 
   return {
-    ...classSettings,
-    ...instaceSettings,
+    ...classAnimator,
+    ...instanceAnimator,
     duration: {
-      ...expandAnimatorDuration(classSettings?.duration),
-      ...expandAnimatorDuration(instaceSettings?.duration)
+      ...expandAnimatorDuration(classAnimator?.duration),
+      ...expandAnimatorDuration(instanceAnimator?.duration)
     }
   };
 }

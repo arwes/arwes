@@ -14,15 +14,13 @@ afterEach(cleanup);
 test('Should transition on "activate" changes', () => {
   let flow1;
   function ExampleParent () {
-    const animator = useAnimator();
-    useEffect(() => (flow1 = animator.flow), [animator]);
+    flow1 = useAnimator().flow;
     return null;
   }
 
   let flow2;
   function ExampleChild () {
-    const animator = useAnimator();
-    useEffect(() => (flow2 = animator.flow), [animator]);
+    flow2 = useAnimator().flow;
     return null;
   }
 
@@ -93,15 +91,13 @@ test('Should transition on "activate" changes', () => {
 test('Should not update flow if child node receives "activate"', () => {
   let flow1;
   function ExampleParent () {
-    const animator = useAnimator();
-    useEffect(() => (flow1 = animator.flow), [animator]);
+    flow1 = useAnimator().flow;
     return null;
   }
 
   let flow2;
   function ExampleChild () {
-    const animator = useAnimator();
-    useEffect(() => (flow2 = animator.flow), [animator]);
+    flow2 = useAnimator().flow;
     return null;
   }
 
@@ -176,15 +172,13 @@ test('Should not update flow if child node receives "activate"', () => {
 test('Should merge child flow with parent if "merge" defined', () => {
   let flow1;
   function ExampleParent () {
-    const animator = useAnimator();
-    useEffect(() => (flow1 = animator.flow), [animator]);
+    flow1 = useAnimator().flow;
     return null;
   }
 
   let flow2;
   function ExampleChild () {
-    const animator = useAnimator();
-    useEffect(() => (flow2 = animator.flow), [animator]);
+    flow2 = useAnimator().flow;
     return null;
   }
 
