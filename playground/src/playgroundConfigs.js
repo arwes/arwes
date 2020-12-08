@@ -3,15 +3,10 @@ const playgroundConfigs = [
     name: 'animation',
     components: [
       {
-        name: 'withEnergy',
+        name: 'withAnimator',
         sandboxes: [
-          { name: 'basic', code: require('repository/packages/animation/src/withEnergy/basic.sandbox.md').default }
-        ]
-      },
-      {
-        name: 'Stream',
-        sandboxes: [
-          { name: 'basic', code: require('repository/packages/animation/src/Stream/basic.sandbox.md').default }
+          { name: 'basic', code: require('repository/packages/animation/src/withAnimator/basic.sandbox.md').default },
+          { name: 'nested', code: require('repository/packages/animation/src/withAnimator/nested.sandbox.md').default }
         ]
       }
     ]
