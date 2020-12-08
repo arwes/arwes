@@ -70,6 +70,9 @@ const styles = theme => ({
   editor: {
     borderRight: `1px solid ${rgba(theme.color.border, 0.5)}`
   },
+  preview: {
+    padding: 10
+  },
 
   [`@media (min-width: ${theme.breakpoints.tablet}px)`]: {
     content: {

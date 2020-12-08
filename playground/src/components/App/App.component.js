@@ -117,7 +117,7 @@ function Component ({ classes }) {
                 </div>
               )}
               {isPreviewActive && (
-                <div className={classes.panel}>
+                <div className={cx(classes.panel, classes.preview)}>
                   <SandboxResult />
                 </div>
               )}
