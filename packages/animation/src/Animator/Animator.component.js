@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, createRef, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -14,11 +14,15 @@ import { AnimatorContext } from '../AnimatorContext';
 import { useAnimatorGeneralSettings } from '../useAnimatorGeneralSettings';
 import { useAnimator } from '../useAnimator';
 
+let classInstanceIdCounter = 0;
+
 function Component (props) {
   const { animator, children } = props;
 
   const parentAnimatorGeneralSettings = useAnimatorGeneralSettings();
   const parentAnimator = useAnimator();
+
+  const [instanceId] = useState(() => classInstanceIdCounter++);
 
   const duration = useMemo(() => {
     return Object.freeze({
@@ -26,7 +30,7 @@ function Component (props) {
       ...parentAnimatorGeneralSettings?.duration,
       ...expandAnimatorDuration(animator.duration)
     });
-  }, [animator.duration, parentAnimatorGeneralSettings]);
+  }, [parentAnimatorGeneralSettings, animator.duration]);
 
   // Since the expected boolean values applicable to the node are provided down
   // to the next child node, they are converted to booleans always to prevent
@@ -39,17 +43,9 @@ function Component (props) {
 
   const merge = !root && !!animator.merge;
 
-  const parentAnimatorFlowValue = parentAnimator?.flow?.value;
-  const isParentActivatingMe = merge
-    ? parentAnimatorFlowValue === ENTERED || parentAnimatorFlowValue === ENTERING
-    : parentAnimatorFlowValue === ENTERED;
-
-  // An animated root node is by default activated.
-  const providedActivate = root ? animator.activate !== false : isParentActivatingMe;
-
   // If this node is not animated, its initial flow state is ENTERED,
   // so it is activated.
-  const activate = animate ? providedActivate : true;
+  const [activate, setActivate] = useState(() => !animate);
 
   // The flow object is not directly updated. It is always updated based on
   // its next value.
@@ -66,10 +62,20 @@ function Component (props) {
     _setFlow(Object.freeze({ value, [value]: true, hasEntered, hasExited }));
   };
 
-  const animateRefs = React.createRef();
+  // All the <Animator/> children non-root instances.
+  const [childrenNodesMap] = useState(() => new Map());
 
-  const toProvideAnimator = useMemo(() => {
-    const setupAnimateRefs = parameter => (animateRefs.current = parameter);
+  // This variable is supposed to be defined by the component using this
+  // <Animator/>. It will contain the reference(s) to the actual HTML element(s)
+  // to animate on the flow transitions and component lifecycle.
+  const animateRefs = createRef();
+
+  const providedAnimator = useMemo(() => {
+    const setupAnimateRefs = refs => (animateRefs.current = refs);
+
+    const _id = instanceId;
+    const _subscribe = (id, child) => childrenNodesMap.set(id, child);
+    const _unsubscribe = id => childrenNodesMap.delete(id);
 
     return Object.freeze({
       duration,
@@ -77,9 +83,86 @@ function Component (props) {
       root,
       merge,
       flow,
-      setupAnimateRefs
+      setupAnimateRefs,
+      _id,
+      _subscribe,
+      _unsubscribe
     });
   }, [duration, animate, root, merge, flow]);
+
+  useEffect(() => {
+    if (!animate) {
+      return;
+    }
+
+    // TODO: What should be the interface reference from this child?
+    // TODO: What if it is changed to root and needs to be unsuscribed?
+    // TODO: Test when "duration" is changed before its activation is updated.
+    // TODO: Test when "merge" is changed before its activation is updated.
+    if (!root) {
+      const getDuration = () => duration;
+      const getIsMerge = () => merge;
+      const child = Object.freeze({ getDuration, getIsMerge, setActivate });
+
+      parentAnimator?._subscribe(instanceId, child);
+    }
+
+    animator.useAnimateMount?.(providedAnimator, animateRefs.current);
+
+    return () => {
+      animator.useAnimateUnmount?.(providedAnimator, animateRefs.current);
+
+      if (!root) {
+        parentAnimator?._unsubscribe(instanceId);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    // An animated root node is by default activated.
+    if (animate && root) {
+      setActivate(animator.activate !== false);
+    }
+  }, [root, animator.activate]);
+
+  useEffect(() => {
+    if (!animate) {
+      return;
+    }
+
+    const childrenNodes = Array.from(childrenNodesMap.values());
+
+    animator.onTransition?.(flow);
+
+    switch (flow.value) {
+      case ENTERING: {
+        animator.useAnimateEntering?.(providedAnimator, animateRefs.current);
+
+        childrenNodes
+          .filter(child => child.getIsMerge())
+          .forEach(child => child.setActivate(true));
+        break;
+      }
+      case ENTERED: {
+        animator.useAnimateEntered?.(providedAnimator, animateRefs.current);
+
+        childrenNodes
+          .filter(child => !child.getIsMerge())
+          .forEach(child => child.setActivate(true));
+        break;
+      }
+      case EXITING: {
+        animator.useAnimateExiting?.(providedAnimator, animateRefs.current);
+
+        childrenNodes.forEach(child => child.setActivate(false));
+        break;
+      }
+      case EXITED: {
+        animator.useAnimateExited?.(providedAnimator, animateRefs.current);
+        break;
+      }
+    }
+  }, [flow.value]);
 
   useEffect(() => {
     // The flow should not be transitioned when it is not animated.
@@ -121,31 +204,8 @@ function Component (props) {
     return () => clearTimeout(timeout);
   }, [activate]);
 
-  useEffect(() => {
-    animator.useAnimateMount?.(toProvideAnimator, animateRefs.current);
-
-    return () => {
-      animator.useAnimateUnmount?.(toProvideAnimator, animateRefs.current);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!animate) {
-      return;
-    }
-
-    animator.onTransition?.(flow);
-
-    switch (flow.value) {
-      case ENTERING: animator.useAnimateEntering?.(toProvideAnimator, animateRefs.current); break;
-      case ENTERED: animator.useAnimateEntered?.(toProvideAnimator, animateRefs.current); break;
-      case EXITING: animator.useAnimateExiting?.(toProvideAnimator, animateRefs.current); break;
-      case EXITED: animator.useAnimateExited?.(toProvideAnimator, animateRefs.current); break;
-    }
-  }, [flow.value]);
-
   return (
-    <AnimatorContext.Provider value={toProvideAnimator}>
+    <AnimatorContext.Provider value={providedAnimator}>
       {children}
     </AnimatorContext.Provider>
   );
