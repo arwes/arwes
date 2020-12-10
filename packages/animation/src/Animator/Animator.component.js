@@ -6,10 +6,15 @@ import {
   ENTERING,
   EXITED,
   EXITING,
+  PARALLEL,
+  SEQUENCE,
+  STAGGER,
   ANIMATE_DEFAULT,
   DURATION_DEFAULT
 } from '../constants';
 import { expandAnimatorDuration } from '../utils/expandAnimatorDuration';
+import { makeScheduler } from '../utils/makeScheduler';
+import { updateChildrenNodesActivation } from '../utils/updateChildrenNodesActivation';
 import { AnimatorContext } from '../AnimatorContext';
 import { useAnimatorGeneralSettings } from '../useAnimatorGeneralSettings';
 import { useAnimator } from '../useAnimator';
@@ -23,6 +28,7 @@ function Component (props) {
   const parentAnimator = useAnimator();
 
   const [instanceId] = useState(() => classInstanceIdCounter++);
+  const [scheduler] = useState(() => makeScheduler());
 
   const duration = useMemo(() => {
     return Object.freeze({
@@ -42,6 +48,8 @@ function Component (props) {
   const root = parentAnimator ? !!animator.root : true;
 
   const merge = !root && !!animator.merge;
+
+  const manager = animator.manager || PARALLEL;
 
   // If this node is not animated, its initial flow state is ENTERED,
   // so it is activated.
@@ -99,10 +107,16 @@ function Component (props) {
     // TODO: What if it is changed to root and needs to be unsuscribed?
     // TODO: Test when "duration" is changed before its activation is updated.
     // TODO: Test when "merge" is changed before its activation is updated.
+    // TODO: What about a case where the <Animator/> is fused with its children
+    // or it is invisible as an animated node?
+    // Should it show its flow state according to its children grouped flow state?
+    // Should it not have flow state? Only ENTERED and EXITED?
+
     if (!root) {
+      const id = instanceId;
       const getDuration = () => duration;
       const getIsMerge = () => merge;
-      const child = Object.freeze({ getDuration, getIsMerge, setActivate });
+      const child = Object.freeze({ id, getDuration, getIsMerge, setActivate });
 
       parentAnimator?._subscribe(instanceId, child);
     }
@@ -110,6 +124,8 @@ function Component (props) {
     animator.useAnimateMount?.(providedAnimator, animateRefs.current);
 
     return () => {
+      scheduler.stopAll();
+
       animator.useAnimateUnmount?.(providedAnimator, animateRefs.current);
 
       if (!root) {
@@ -130,38 +146,22 @@ function Component (props) {
       return;
     }
 
-    const childrenNodes = Array.from(childrenNodesMap.values());
-
     animator.onTransition?.(flow);
 
     switch (flow.value) {
-      case ENTERING: {
-        animator.useAnimateEntering?.(providedAnimator, animateRefs.current);
-
-        childrenNodes
-          .filter(child => child.getIsMerge())
-          .forEach(child => child.setActivate(true));
-        break;
-      }
-      case ENTERED: {
-        animator.useAnimateEntered?.(providedAnimator, animateRefs.current);
-
-        childrenNodes
-          .filter(child => !child.getIsMerge())
-          .forEach(child => child.setActivate(true));
-        break;
-      }
-      case EXITING: {
-        animator.useAnimateExiting?.(providedAnimator, animateRefs.current);
-
-        childrenNodes.forEach(child => child.setActivate(false));
-        break;
-      }
-      case EXITED: {
-        animator.useAnimateExited?.(providedAnimator, animateRefs.current);
-        break;
-      }
+      case ENTERING: animator.useAnimateEntering?.(providedAnimator, animateRefs.current); break;
+      case ENTERED: animator.useAnimateEntered?.(providedAnimator, animateRefs.current); break;
+      case EXITING: animator.useAnimateExiting?.(providedAnimator, animateRefs.current); break;
+      case EXITED: animator.useAnimateExited?.(providedAnimator, animateRefs.current); break;
     }
+
+    const nodes = Array.from(childrenNodesMap.values());
+    const newChildrenActivation = flow.value === ENTERING || flow.value === ENTERED;
+    const activations = updateChildrenNodesActivation({ nodes, duration, flow, manager });
+
+    activations.times.forEach(({ node, time }) =>
+      scheduler.start(node.id, time, () => node.setActivate(newChildrenActivation))
+    );
   }, [flow.value]);
 
   useEffect(() => {
@@ -172,36 +172,28 @@ function Component (props) {
       return;
     }
 
-    let timeout;
-
     if (activate) {
       if (flow.value === ENTERING || flow.value === ENTERED) {
         return;
       }
 
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
+      scheduler.start(duration.delay, () => {
         setFlowValue(ENTERING);
-
-        clearTimeout(timeout);
-        timeout = setTimeout(() => setFlowValue(ENTERED), duration.enter);
-      }, duration.delay);
+        scheduler.start(duration.enter, () => setFlowValue(ENTERED));
+      });
     }
     else {
       if (flow.value === EXITING || flow.value === EXITED) {
         return;
       }
 
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
+      scheduler.start(0, () => {
         setFlowValue(EXITING);
-
-        clearTimeout(timeout);
-        timeout = setTimeout(() => setFlowValue(EXITED), duration.exit);
-      }, 0);
+        scheduler.start(duration.exit, () => setFlowValue(EXITED));
+      });
     }
 
-    return () => clearTimeout(timeout);
+    return () => scheduler.stop();
   }, [activate]);
 
   return (
@@ -228,6 +220,10 @@ Component.propTypes = {
     animate: PropTypes.bool,
     root: PropTypes.bool,
     merge: PropTypes.bool,
+    manager: PropTypes.oneOfType([
+      PropTypes.oneOf([PARALLEL, SEQUENCE, STAGGER]),
+      PropTypes.func
+    ]),
     activate: PropTypes.bool,
     onTransition: PropTypes.func,
     useAnimateMount: PropTypes.func,

@@ -2,6 +2,9 @@ export const ENTERING = 'entering';
 export const ENTERED = 'entered';
 export const EXITING = 'exiting';
 export const EXITED = 'exited';
+export const PARALLEL = 'parallel';
+export const SEQUENCE = 'sequence';
+export const STAGGER = 'stagger';
 export const ANIMATE_DEFAULT = true;
 export const DURATION_DEFAULT = Object.freeze({
   enter: 100,
