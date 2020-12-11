@@ -3,8 +3,8 @@
   "ignorePatterns": [
     "node_modules",
     "packages/*/lib",
-    "packages/arwes", // TODO: Remove when @arwes/arwes package has the new API.
-    "playground/dist"
+    "playground/dist",
+    "__deprecated__"
   ],
   "extends": [
     "standard",
