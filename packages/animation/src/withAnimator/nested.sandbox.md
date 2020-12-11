@@ -5,18 +5,18 @@ const COLOR_OFF = '#efb527'; // orange
 function useAnimateEntering (animator, element) {
   anime({
     targets: element.current,
-    backgroundColor: [COLOR_OFF, COLOR_ON],
+    easing: 'linear',
     duration: animator.duration.enter,
-    easing: 'linear'
+    backgroundColor: [COLOR_OFF, COLOR_ON]
   });
 }
 
 function useAnimateExiting (animator, element) {
   anime({
     targets: element.current,
-    backgroundColor: [COLOR_ON, COLOR_OFF],
+    easing: 'linear',
     duration: animator.duration.exit,
-    easing: 'linear'
+    backgroundColor: [COLOR_ON, COLOR_OFF]
   });
 }
 

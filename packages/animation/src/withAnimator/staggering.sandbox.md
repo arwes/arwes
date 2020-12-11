@@ -43,20 +43,31 @@ const Item = withAnimator({
 })(ItemComponent);
 
 function Sandbox () {
-  const duration = 1000;
+  const duration = { enter: 200, exit: 200, stagger: 50 };
   const [activate, setActivate] = React.useState(true);
+  const manager = 'stagger';
   const timeout = React.useRef();
 
   React.useEffect(() => {
-    timeout.current = setTimeout(
-      () => setActivate(!activate),
-      2000
-    );
+    timeout.current = setTimeout(() => setActivate(!activate), 1500);
     return () => clearTimeout(timeout.current);
   }, [activate]);
 
   return (
-    <Item animator={{ duration, activate }} />
+    <AnimatorGeneralSettingsProvider animator={{ duration }}>
+      <Item animator={{ activate, manager }}>
+        <Item />
+        <Item />
+        <Item />
+        <Item />
+        <Item />
+        <Item />
+        <Item />
+        <Item />
+        <Item />
+        <Item />
+      </Item>
+    </AnimatorGeneralSettingsProvider>
   );
 }
 
