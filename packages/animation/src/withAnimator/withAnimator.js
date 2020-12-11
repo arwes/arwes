@@ -1,50 +1,34 @@
-import React, { forwardRef } from 'react';
+import { createElement, forwardRef } from 'react';
 
-import { expandAnimatorDuration } from '../utils/expandAnimatorDuration';
-import { filterClassAnimatorSettings } from '../utils/filterClassAnimatorSettings';
+import { mergeClassAndInstanceAnimatorSettings } from '../utils/mergeClassAndInstanceAnimatorSettings';
 import { Animator } from '../Animator';
 import { useAnimator } from '../useAnimator';
-
-function mergeAnimatorSettings (providedClassAnimator, instanceAnimator) {
-  const classAnimator = providedClassAnimator && filterClassAnimatorSettings(providedClassAnimator);
-
-  return {
-    ...classAnimator,
-    ...instanceAnimator,
-    duration: {
-      ...expandAnimatorDuration(classAnimator?.duration),
-      ...expandAnimatorDuration(instanceAnimator?.duration)
-    }
-  };
-}
 
 function withAnimator (classAnimator) {
   function AnimatorMiddleware (props) {
     const { Animated, forwardedRef, ...otherProps } = props;
     const componentAnimator = useAnimator();
 
-    return (
-      <Animated
-        {...otherProps}
-        animator={componentAnimator}
-        ref={forwardedRef}
-      />
-    );
+    return createElement(Animated, {
+      ...otherProps,
+      animator: componentAnimator,
+      ref: forwardedRef
+    });
   }
 
   function withAnimatorWrapper (Animated) {
     const WithAnimator = forwardRef((props, forwardedRef) => {
       const { animator: instanceAnimator, ...otherProps } = props;
-      const resultAnimator = mergeAnimatorSettings(classAnimator, instanceAnimator);
+      const resultAnimator = mergeClassAndInstanceAnimatorSettings(classAnimator, instanceAnimator);
 
-      return (
-        <Animator animator={resultAnimator}>
-          <AnimatorMiddleware
-            {...otherProps}
-            Animated={Animated}
-            forwardedRef={forwardedRef}
-          />
-        </Animator>
+      return createElement(
+        Animator,
+        { animator: resultAnimator },
+        createElement(AnimatorMiddleware, {
+          ...otherProps,
+          Animated,
+          forwardedRef: forwardedRef
+        })
       );
     });
 
