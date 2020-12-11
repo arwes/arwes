@@ -18,8 +18,8 @@
       "contributions": [
         "projectManagement",
         "code",
-        "doc",
-        "question"
+        "test",
+        "doc"
       ]
     },
     {
@@ -29,7 +29,8 @@
       "profile": "https://nickwe.st",
       "contributions": [
         "doc",
-        "ideas"
+        "ideas",
+        "research"
       ]
     }
   ],

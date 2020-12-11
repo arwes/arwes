@@ -98,8 +98,8 @@ Review [project boards](https://github.com/arwes/arwes/projects).
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://RomelPerez.dev"><img src="https://avatars2.githubusercontent.com/u/1393135?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Romel Pérez</b></sub></a><br /><a href="#projectManagement-romelperez" title="Project Management">📆</a> <a href="https://github.com/arwes/arwes/commits?author=romelperez" title="Code">💻</a> <a href="https://github.com/arwes/arwes/commits?author=romelperez" title="Documentation">📖</a> <a href="#question-romelperez" title="Answering Questions">💬</a></td>
-    <td align="center"><a href="https://nickwe.st"><img src="https://avatars1.githubusercontent.com/u/3742496?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nick West</b></sub></a><br /><a href="https://github.com/arwes/arwes/commits?author=njwest" title="Documentation">📖</a> <a href="#ideas-njwest" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://RomelPerez.dev"><img src="https://avatars2.githubusercontent.com/u/1393135?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Romel Pérez</b></sub></a><br /><a href="#projectManagement-romelperez" title="Project Management">📆</a> <a href="https://github.com/arwes/arwes/commits?author=romelperez" title="Code">💻</a> <a href="https://github.com/arwes/arwes/commits?author=romelperez" title="Tests">⚠️</a> <a href="https://github.com/arwes/arwes/commits?author=romelperez" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://nickwe.st"><img src="https://avatars1.githubusercontent.com/u/3742496?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nick West</b></sub></a><br /><a href="https://github.com/arwes/arwes/commits?author=njwest" title="Documentation">📖</a> <a href="#ideas-njwest" title="Ideas, Planning, & Feedback">🤔</a> <a href="#research-njwest" title="Research">🔬</a></td>
   </tr>
 </table>
 
