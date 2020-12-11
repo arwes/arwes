@@ -1,4 +1,4 @@
-import React, { useState, createRef, useMemo, useEffect } from 'react';
+import React, { useState, useRef, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -29,14 +29,16 @@ function Component (props) {
 
   const [instanceId] = useState(() => classInstanceIdCounter++);
   const [scheduler] = useState(() => makeScheduler());
+  const [dynamicDuration, setDynamicDuration] = useState();
 
   const duration = useMemo(() => {
     return Object.freeze({
       ...DURATION_DEFAULT,
       ...parentAnimatorGeneralSettings?.duration,
-      ...expandAnimatorDuration(animator.duration)
+      ...expandAnimatorDuration(animator.duration),
+      ...expandAnimatorDuration(dynamicDuration)
     });
-  }, [parentAnimatorGeneralSettings, animator.duration]);
+  }, [parentAnimatorGeneralSettings, animator.duration, dynamicDuration]);
 
   // Since the expected boolean values applicable to the node are provided down
   // to the next child node, they are converted to booleans always to prevent
@@ -80,11 +82,11 @@ function Component (props) {
   // This variable is supposed to be defined by the component using this
   // <Animator/>. It will contain the reference(s) to the actual HTML element(s)
   // to animate on the flow transitions and component lifecycle.
-  const animateRefs = createRef();
+  const animateRefs = useRef();
 
   const providedAnimator = useMemo(() => {
     const setupAnimateRefs = refs => (animateRefs.current = refs);
-
+    const updateDuration = setDynamicDuration;
     const _id = instanceId;
     const _subscribe = (id, child) => childrenNodesMap.set(id, child);
     const _unsubscribe = id => childrenNodesMap.delete(id);
@@ -96,6 +98,7 @@ function Component (props) {
       merge,
       flow,
       setupAnimateRefs,
+      updateDuration,
       _id,
       _subscribe,
       _unsubscribe

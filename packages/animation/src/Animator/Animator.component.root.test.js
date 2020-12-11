@@ -451,3 +451,35 @@ test('Should transition even with zero durations', () => {
   act(() => moveTimeTo(2001));
   expect(flow.value).toBe(EXITED);
 });
+
+test('Should imperatively update duration', () => {
+  let flow;
+  let duration;
+  function ExampleChild () {
+    const animator = useAnimator();
+    flow = animator.flow;
+    duration = animator.duration;
+    useEffect(() => {
+      animator.updateDuration(500);
+    }, []);
+    return null;
+  }
+
+  render(
+    <Animator>
+      <ExampleChild />
+    </Animator>
+  );
+
+  expect(flow.value).toBe(EXITED);
+  expect(duration).toMatchObject({ enter: 500, exit: 500 });
+
+  act(() => moveTimeTo(1));
+  expect(flow.value).toBe(ENTERING);
+
+  act(() => moveTimeTo(499));
+  expect(flow.value).toBe(ENTERING);
+
+  act(() => moveTimeTo(501));
+  expect(flow.value).toBe(ENTERED);
+});
