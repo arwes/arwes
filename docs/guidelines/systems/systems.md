@@ -19,7 +19,7 @@ of and its specific configuration.
 
 Any node can have general non-specific settings which can be inherited to children
 nodes. It can also have specific settings which are only applicable to the node
-alone but can generate affects on other nodes.
+alone but can generate effects on other nodes.
 
 Transition and persistent [states](../states/states.md) are defined in each node
 to manage complex interface effects. These states can affect children node states.

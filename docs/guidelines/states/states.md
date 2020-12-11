@@ -11,8 +11,8 @@ one node to another in the system hierarchy.
 An UI mounted node in a system can have 4 states:
 
 - **Exited**: Transitioned out. If a node is animated, this is its initial
-state. If a node is animated and it is going to be removed, this is its final state.
-The node component should be invisible.
+state. If a node is animated and it is going to be removed, this should be its
+final state. The node component should be invisible.
 - **Entering**: Transitioning in. The node component is being assembled to be visible.
 - **Entered**: Transitioned in. If a node component is not animated, this will be
 always its state. The node component should be completely visible.
