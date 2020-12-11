@@ -2,14 +2,17 @@ function getChildrenNodesSequenceActivationTimes (nodes) {
   let duration = 0;
 
   const times = nodes.reduce((items, node, index) => {
-    let time = 0;
+    const nodeDuration = node.getDuration();
+    const offset = nodeDuration.offset || 0;
+
+    let time = offset;
 
     if (index !== 0) {
       const prevItem = items[index - 1];
-      time = prevItem.time + prevItem.node.getDuration().enter;
+      time = prevItem.time + prevItem.node.getDuration().enter + offset;
     }
 
-    duration = time + node.getDuration().enter;
+    duration = time + nodeDuration.enter;
 
     const item = { node, time };
 

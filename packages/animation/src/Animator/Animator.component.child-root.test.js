@@ -3,11 +3,19 @@
 import React, { useState, useEffect } from 'react';
 import { render, act, cleanup } from '@testing-library/react';
 
+import { makeMoveTimeTo } from '../../test/makeMoveTimeTo';
 import { EXITED, EXITING, ENTERED, ENTERING } from '../constants';
 import { useAnimator } from '../useAnimator';
 import { Component as Animator } from './Animator.component';
 
+let moveTimeTo;
+
 jest.useFakeTimers();
+
+beforeEach(() => {
+  moveTimeTo = makeMoveTimeTo();
+});
+
 afterEach(cleanup);
 
 test('Should transition on "activate" changes', () => {
@@ -34,30 +42,30 @@ test('Should transition on "activate" changes', () => {
 
   expect(flow.value).toBe(EXITED);
 
-  act(() => jest.advanceTimersByTime(1));
+  act(() => moveTimeTo(1));
   expect(flow.value).toBe(EXITED);
 
-  act(() => jest.advanceTimersByTime(498)); // 499ms
+  act(() => moveTimeTo(499));
   expect(flow.value).toBe(EXITED);
 
-  act(() => jest.advanceTimersByTime(2)); // 501ms
+  act(() => moveTimeTo(501));
   expect(flow.value).toBe(ENTERING);
 
-  act(() => jest.advanceTimersByTime(98)); // 599ms
+  act(() => moveTimeTo(599));
   expect(flow.value).toBe(ENTERING);
 
-  act(() => jest.advanceTimersByTime(2)); // 601ms
+  act(() => moveTimeTo(601));
   expect(flow.value).toBe(ENTERED);
 
-  act(() => jest.advanceTimersByTime(398)); // 999ms
+  act(() => moveTimeTo(999));
   expect(flow.value).toBe(ENTERED);
 
-  act(() => jest.advanceTimersByTime(2)); // 1001ms
+  act(() => moveTimeTo(1001));
   expect(flow.value).toBe(EXITING);
 
-  act(() => jest.advanceTimersByTime(98)); // 1099ms
+  act(() => moveTimeTo(1099));
   expect(flow.value).toBe(EXITING);
 
-  act(() => jest.advanceTimersByTime(2)); // 1101ms
+  act(() => moveTimeTo(1101));
   expect(flow.value).toBe(EXITED);
 });

@@ -49,6 +49,10 @@ function Component (props) {
 
   const merge = !root && !!animator.merge;
 
+  // TODO: Add animator manager "SERIAL" support.
+  // Serial manager should transition its children as in sequence but taking
+  // in consideration its children depth durations, not only its direct children.
+
   const manager = animator.manager || PARALLEL;
 
   // If this node is not animated, its initial flow state is ENTERED,
@@ -103,14 +107,8 @@ function Component (props) {
       return;
     }
 
-    // TODO: What should be the interface reference from this child?
-    // TODO: What if it is changed to root and needs to be unsuscribed?
-    // TODO: Test when "duration" is changed before its activation is updated.
-    // TODO: Test when "merge" is changed before its activation is updated.
-    // TODO: What about a case where the <Animator/> is fused with its children
-    // or it is invisible as an animated node?
-    // Should it show its flow state according to its children grouped flow state?
-    // Should it not have flow state? Only ENTERED and EXITED?
+    // TODO: What if node is changed from child node to root node and needs
+    // to be unsuscribed from its parent?
 
     if (!root) {
       const id = instanceId;
@@ -171,6 +169,9 @@ function Component (props) {
     if (!animate) {
       return;
     }
+
+    // TODO: Test when "duration" is changed before its activation is updated.
+    // TODO: Test when "merge" is changed before its activation is updated.
 
     if (activate) {
       if (flow.value === ENTERING || flow.value === ENTERED) {

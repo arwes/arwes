@@ -3,11 +3,19 @@
 import React, { useState, useEffect } from 'react';
 import { render, act, cleanup } from '@testing-library/react';
 
+import { makeMoveTimeTo } from '../../test/makeMoveTimeTo';
 import { EXITED, EXITING, ENTERED, ENTERING } from '../constants';
 import { useAnimator } from '../useAnimator';
 import { Component as Animator } from './Animator.component';
 
+let moveTimeTo;
+
 jest.useFakeTimers();
+
+beforeEach(() => {
+  moveTimeTo = makeMoveTimeTo();
+});
+
 afterEach(cleanup);
 
 test('Should transition from "exited" to "entering" if "activate" with default "duration" (by default)', () => {
@@ -398,5 +406,48 @@ test('Should delay transition from "exited" to "entering" if provided "duration.
   expect(flow.value).toBe(EXITING);
 
   act(() => jest.advanceTimersByTime(2)); // 2101ms
+  expect(flow.value).toBe(EXITED);
+});
+
+test('Should transition even with zero durations', () => {
+  let flow;
+  function ExampleChild () {
+    flow = useAnimator().flow;
+    return null;
+  }
+
+  function ExampleApp () {
+    const [activate, setActivate] = useState(false);
+    const duration = 0;
+    useEffect(() => setTimeout(() => setActivate(true), 1000), []);
+    useEffect(() => setTimeout(() => setActivate(false), 2000), []);
+    return (
+      <Animator animator={{ activate, duration }}>
+        <ExampleChild />
+      </Animator>
+    );
+  }
+
+  render(<ExampleApp />);
+
+  expect(flow.value).toBe(EXITED);
+
+  act(() => moveTimeTo(1));
+  expect(flow.value).toBe(EXITED);
+
+  act(() => moveTimeTo(999));
+  expect(flow.value).toBe(EXITED);
+
+  // At 1000ms it is supposed to change to ENTERING and immediately to ENTERED.
+
+  act(() => moveTimeTo(1001));
+  expect(flow.value).toBe(ENTERED);
+
+  act(() => moveTimeTo(1999));
+  expect(flow.value).toBe(ENTERED);
+
+  // At 2000ms it is supposed to change to EXITING and immediately to EXITED.
+
+  act(() => moveTimeTo(2001));
   expect(flow.value).toBe(EXITED);
 });

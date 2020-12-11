@@ -35,3 +35,26 @@ test('Should get staggering enter times and total duration for children nodes', 
   };
   expect(received).toEqual(expected);
 });
+
+test('Should get staggering enter times and total duration for children nodes with duration offsets', () => {
+  const nodes = [
+    { id: 0, getDuration: () => ({ enter: 100 }) },
+    { id: 1, getDuration: () => ({ enter: 100 }) },
+    { id: 2, getDuration: () => ({ enter: 100, offset: 30 }) },
+    { id: 3, getDuration: () => ({ enter: 100 }) },
+    { id: 4, getDuration: () => ({ enter: 100 }) }
+  ];
+  const parentDuration = { stagger: 25 };
+  const received = getChildrenNodesStaggerActivationTimes(nodes, parentDuration);
+  const expected = {
+    duration: 230,
+    times: [
+      { node: nodes[0], time: 0 },
+      { node: nodes[1], time: 25 },
+      { node: nodes[2], time: 80 }, // 50ms on normal behavior, plus 30ms offset
+      { node: nodes[3], time: 105 },
+      { node: nodes[4], time: 130 }
+    ]
+  };
+  expect(received).toEqual(expected);
+});
