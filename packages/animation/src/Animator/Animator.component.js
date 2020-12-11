@@ -14,7 +14,7 @@ import {
 } from '../constants';
 import { expandAnimatorDuration } from '../utils/expandAnimatorDuration';
 import { makeScheduler } from '../utils/makeScheduler';
-import { updateChildrenNodesActivation } from '../utils/updateChildrenNodesActivation';
+import { getChildrenNodesActivations } from '../utils/getChildrenNodesActivations';
 import { AnimatorContext } from '../AnimatorContext';
 import { useAnimatorGeneralSettings } from '../useAnimatorGeneralSettings';
 import { useAnimator } from '../useAnimator';
@@ -158,7 +158,7 @@ function Component (props) {
 
     const nodes = Array.from(childrenNodesMap.values());
     const newChildrenActivation = flow.value === ENTERING || flow.value === ENTERED;
-    const activations = updateChildrenNodesActivation({ nodes, duration, flow, manager });
+    const activations = getChildrenNodesActivations({ nodes, duration, flow, manager });
 
     activations.times.forEach(({ node, time }) =>
       scheduler.start(node.id, time, () => node.setActivate(newChildrenActivation))
