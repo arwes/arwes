@@ -46,17 +46,17 @@
       ]
     },
     {
-      "id": "DESIGN_MANAGEMENT",
+      "id": "DESIGNMANAGEMENT",
       "title": "Design Management",
       "document": "design-management/design-management.md"
     },
     {
-      "id": "ANIMATION_MANAGEMENT",
+      "id": "ANIMATIONMANAGEMENT",
       "title": "Animation Management",
       "document": "animation-management/animation-management.md"
     },
     {
-      "id": "SOUNDS_MANAGEMENT",
+      "id": "SOUNDSMANAGEMENT",
       "title": "Sounds Management",
       "document": "sounds-management/sounds-management.md"
     },

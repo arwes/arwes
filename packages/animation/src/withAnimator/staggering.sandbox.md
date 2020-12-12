@@ -43,9 +43,7 @@ const Item = withAnimator({
 })(ItemComponent);
 
 function Sandbox () {
-  const duration = { enter: 200, exit: 200, stagger: 50 };
   const [activate, setActivate] = React.useState(true);
-  const manager = 'stagger';
   const timeout = React.useRef();
 
   React.useEffect(() => {
@@ -54,8 +52,12 @@ function Sandbox () {
   }, [activate]);
 
   return (
-    <AnimatorGeneralSettingsProvider animator={{ duration }}>
-      <Item animator={{ activate, manager }}>
+    <AnimatorGeneralSettingsProvider animator={{ duration: 200 }}>
+      <Animator animator={{
+        activate,
+        manager: 'stagger',
+        duration: { enter: 0, exit: 0, stagger: 30 }
+      }}>
         <Item />
         <Item />
         <Item />
@@ -66,7 +68,7 @@ function Sandbox () {
         <Item />
         <Item />
         <Item />
-      </Item>
+      </Animator>
     </AnimatorGeneralSettingsProvider>
   );
 }

@@ -87,7 +87,6 @@ function Sandbox () {
       width: 360,
       height: 360
     }}>
-      {/* TODO: This animator should be invisible. */}
       <Animator animator={{
         activate,
         manager,

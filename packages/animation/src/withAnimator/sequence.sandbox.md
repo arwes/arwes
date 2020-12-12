@@ -43,9 +43,7 @@ const Item = withAnimator({
 })(ItemComponent);
 
 function Sandbox () {
-  const duration = 200;
   const [activate, setActivate] = React.useState(true);
-  const manager = 'sequence';
   const timeout = React.useRef();
 
   React.useEffect(() => {
@@ -57,8 +55,12 @@ function Sandbox () {
   // are not taken in account for the calculation.
 
   return (
-    <AnimatorGeneralSettingsProvider animator={{ duration }}>
-      <Item animator={{ activate, manager }}>
+    <AnimatorGeneralSettingsProvider animator={{ duration: 200 }}>
+      <Animator animator={{
+        activate,
+        manager: 'sequence',
+        duration: 0
+      }}>
         <Item />
         <Item />
         <Item />
@@ -69,7 +71,7 @@ function Sandbox () {
         <Item />
         <Item />
         <Item />
-      </Item>
+      </Animator>
     </AnimatorGeneralSettingsProvider>
   );
 }
