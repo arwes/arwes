@@ -95,11 +95,13 @@ design.
 
 #### `@arwes/animation`
 
-- [ ] Documentation animation management.
+- [x] [#70](https://github.com/arwes/arwes/issues/70) Declarative and extensible
+animation component tools.
+- [x] [#36](https://github.com/arwes/arwes/issues/36) Non-parallel animation
+management support.
+- [x] Documentation animation management.
 - [ ] [#63](https://github.com/arwes/arwes/issues/63) Research SEO support for
 animated components.
-- [ ] [#70](https://github.com/arwes/arwes/issues/70) Declarative and extensible
-animation component tools.
 
 #### `@arwes/sounds`
 
