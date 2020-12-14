@@ -4,11 +4,15 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "Arwes Sound Tools",
+  "description": "Futuristic Sci-Fi UI Web Framework",
   "keywords": [
     "arwes",
-    "sounds",
-    "react"
+    "ui",
+    "front-end",
+    "framework",
+    "scifi",
+    "sci-fi",
+    "science-fiction"
   ],
   "homepage": "https://arwes.dev",
   "repository": {
@@ -20,12 +24,11 @@
   },
   "license": "MIT",
   "files": [
-    "lib"
+    "lib",
+    "dist"
   ],
   "main": "lib/index.js",
-  "dependencies": {
-    "@babel/runtime": "^7.11.2"
-  },
+  "unpkg": "dist/sounds.min.js",
   "peerDependencies": {
     "prop-types": "*",
     "react": "17.x"

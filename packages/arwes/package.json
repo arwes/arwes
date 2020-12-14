@@ -4,17 +4,15 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for Web Apps",
+  "description": "Futuristic Sci-Fi UI Web Framework",
   "keywords": [
     "arwes",
     "ui",
-    "interfaces",
-    "futuristic",
+    "front-end",
+    "framework",
+    "scifi",
     "sci-fi",
-    "cyberpunk",
-    "high-tech",
-    "react",
-    "jss"
+    "science-fiction"
   ],
   "homepage": "https://arwes.dev",
   "repository": {
@@ -26,22 +24,14 @@
   },
   "license": "MIT",
   "files": [
-    "lib"
+    "lib",
+    "dist"
   ],
   "main": "lib/index.js",
+  "unpkg": "dist/arwes.min.js",
   "dependencies": {
-    "@arwes/sounds": "^1.0.0-alpha.15",
-    "@babel/runtime": "^7.11.2",
-    "classnames": "^2.2.6",
-    "d3-path": "^2.0.0",
-    "d3-shape": "^2.0.0",
-    "detect-node": "^2.0.4",
-    "extend": "^3.0.2",
-    "polished": "^3.6.7",
-    "prismjs": "^1.21.0",
-    "react-jss": "^10.4.0",
-    "react-transition-group": "^4.4.1",
-    "theming": "^3.3.0"
+    "@arwes/animation": "^1.0.0-alpha.15",
+    "@arwes/sounds": "^1.0.0-alpha.15"
   },
   "peerDependencies": {
     "prop-types": "*",
