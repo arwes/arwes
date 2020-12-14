@@ -2,26 +2,35 @@
   "root": true,
   "ignorePatterns": [
     "node_modules",
+    "coverage",
     "packages/*/lib",
+    "packages/*/dist",
     "playground/dist",
     "__deprecated__"
   ],
-  "extends": [
-    "standard",
-    "standard-jsx",
-    "standard-react"
-  ],
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module"
+    "project": "./tsconfig.json",
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
-  "env": {
-    "es6": true
-  },
+  "plugins": [
+    "react",
+    "react-hooks"
+  ],
+  "extends": [
+    "standard-with-typescript"
+  ],
   "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/semi": ["error", "always"],
+    "react/prop-types": "off",
     "semi": ["error", "always"],
     "brace-style": ["error", "stroustrup"],
-    "react/prop-types": [0]
+    "no-use-before-define": "off"
   }
 }

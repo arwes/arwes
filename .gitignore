@@ -43,5 +43,6 @@ yarn-error.log
 yarn-error.log*
 .yarn-integrity
 
-packages/*/lib
-playground/dist
+/packages/*/lib
+/packages/*/dist
+/playground/dist

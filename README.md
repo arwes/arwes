@@ -31,10 +31,10 @@
 
 <div align="center">
     <a href="https://standardjs.com">
-        <img src="https://img.shields.io/badge/code_style-standardjs-d2bb09.svg?style=flat-square" alt="code style: standardjs">
+        <img src="https://img.shields.io/badge/code_style-standardjs-d2bb09.svg" alt="code style: standardjs">
     </a>
     <a href="https://jestjs.io">
-        <img src="https://img.shields.io/badge/tested%20with-jest-15c213.svg?style=flat-square" alt="tested with: jest">
+        <img src="https://img.shields.io/badge/tested%20with-jest-15c213.svg" alt="tested with: jest">
     </a>
     <a href="https://lernajs.io">
         <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="lerna" />

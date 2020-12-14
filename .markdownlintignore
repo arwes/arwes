@@ -1,3 +1,5 @@
 node_modules
-CHANGELOG.md
 packages/*/lib
+packages/*/dist
+playground/dist
+CHANGELOG.md
