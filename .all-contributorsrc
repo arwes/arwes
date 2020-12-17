@@ -32,6 +32,15 @@
         "ideas",
         "research"
       ]
+    },
+    {
+      "login": "jdpnielsen",
+      "name": "Joshua Pratt",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/8746698?v=4",
+      "profile": "https://github.com/jdpnielsen",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
