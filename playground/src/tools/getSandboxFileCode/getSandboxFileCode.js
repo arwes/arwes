@@ -1,5 +1,5 @@
 function getSandboxFileCode (code) {
-  return code.replace(/```.*\n/g, '');
+  return code.replace(/```.*\r?\n/g, '');
 }
 
 export { getSandboxFileCode };
