@@ -12,8 +12,8 @@
     <a href="https://npmjs.org/package/@arwes/arwes">
         <img src="https://img.shields.io/npm/v/@arwes/arwes.svg" alt="version" />
     </a>
-    <a href="https://travis-ci.org/arwes/arwes">
-        <img src="https://img.shields.io/travis/arwes/arwes.svg" alt="travis" />
+    <a href="https://github.com/njwest/arwes/workflows/NodeCI/badge.svg">
+        <img src="https://img.shields.io/travis/arwes/arwes.svg" alt="CI" />
     </a>
     <a href="https://github.com/arwes/arwes">
         <img src="https://img.shields.io/github/stars/arwes/arwes.svg?style=social&label=stars" alt="github stars" />
