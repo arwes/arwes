@@ -1,6 +1,9 @@
+import { Styles } from 'jss';
 import { rgba, lighten } from 'polished';
 
-const styles = theme => ({
+import { theme } from '../../theme';
+
+const styles: Styles = {
   '@global': {
     '*, *:before, *:after': {
       boxSizing: 'border-box'
@@ -88,6 +91,6 @@ const styles = theme => ({
       flex: 'none'
     }
   }
-});
+};
 
 export { styles };

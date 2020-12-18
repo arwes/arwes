@@ -1,7 +1,22 @@
-import React from 'react';
-import cx from 'classnames';
+import React, { FC } from 'react';
+import { Classes } from 'jss';
+import cx from 'clsx';
 
-function Component ({
+interface HeaderProps {
+  classes: Classes
+  className?: string
+  isCodeEnabled?: boolean
+  isPreviewEnabled?: boolean
+  isControlsEnabled?: boolean
+  isCodeActive?: boolean
+  isPreviewActive?: boolean
+  isControlsActive?: boolean
+  onToggleCode?: () => void
+  onTogglePreview?: () => void
+  onToggleControls?: () => void
+}
+
+const Header: FC<HeaderProps> = ({
   classes,
   className,
   isCodeEnabled,
@@ -13,7 +28,7 @@ function Component ({
   onToggleCode,
   onTogglePreview,
   onToggleControls
-}) {
+}) => {
   return (
     <header className={cx(classes.root, className)}>
       <a href='/'>
@@ -58,4 +73,4 @@ function Component ({
   );
 };
 
-export { Component };
+export { HeaderProps, Header };

@@ -1,24 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import cx from 'classnames';
-import { useTheme } from 'react-jss';
+import React, { FC, useState, useEffect } from 'react';
+import cx from 'clsx';
+import { Classes } from 'jss';
 import { LiveProvider } from 'react-live';
 import prismThemeVSDark from 'prism-react-renderer/themes/vsDark';
 
 import { useSelectedPlayground } from 'playground/src/tools/useSelectedPlayground';
 import { getSandboxFileCode } from 'playground/src/tools/getSandboxFileCode';
 import { getPackagesScope } from 'playground/src/tools/getPackagesScope';
+import { theme } from 'playground/src/theme';
 import { Header } from '../Header';
 import { Controls } from '../Controls';
 import { SandboxEditor } from '../SandboxEditor';
 import { SandboxResult } from '../SandboxResult';
 import { Footer } from '../Footer';
 
-function Component ({ classes }) {
-  const theme = useTheme();
+interface AppProps {
+  classes: Classes
+}
+
+const App: FC <AppProps> = ({ classes }) => {
   const { sandboxConfig } = useSelectedPlayground();
 
-  const getIsDeviceMobile = () => document.body.offsetWidth < theme.breakpoints.tablet;
-  const getIsDeviceLarge = () => !getIsDeviceMobile();
+  const getIsDeviceMobile = (): boolean => document.body.offsetWidth < theme.breakpoints.tablet;
+  const getIsDeviceLarge = (): boolean => !getIsDeviceMobile();
 
   const [isCodeEnabled, setIsCodeEnabled] = useState(false);
   const [isPreviewEnabled, setIsPreviewEnabled] = useState(false);
@@ -32,7 +36,7 @@ function Component ({ classes }) {
   // shown, either the code editor or the preview. Otherwise, both panels should
   // be disabled.
 
-  const onToggleCode = () => {
+  const onToggleCode: () => void = () => {
     if (sandboxConfig) {
       if (isCodeActive) {
         setIsPreviewActive(true);
@@ -40,7 +44,7 @@ function Component ({ classes }) {
       setIsCodeActive(!isCodeActive);
     }
   };
-  const onTogglePreview = () => {
+  const onTogglePreview: () => void = () => {
     if (sandboxConfig) {
       if (isPreviewActive) {
         setIsCodeActive(true);
@@ -48,10 +52,10 @@ function Component ({ classes }) {
       setIsPreviewActive(!isPreviewActive);
     };
   };
-  const onToggleControls = () => setIsControlsActive(!isControlsActive);
+  const onToggleControls: () => void = () => setIsControlsActive(!isControlsActive);
 
   useEffect(() => {
-    const onResize = () => {
+    const onResize: () => void = () => {
       setIsControlsEnabled(getIsDeviceMobile);
       setIsControlsActive(getIsDeviceLarge);
     };
@@ -130,4 +134,4 @@ function Component ({ classes }) {
   );
 };
 
-export { Component };
+export { AppProps, App };

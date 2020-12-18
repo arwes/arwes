@@ -1,18 +1,33 @@
-import React, { useRef, useEffect } from 'react';
-import cx from 'classnames';
+import React, { FC, ChangeEvent, useRef, useEffect } from 'react';
+import cx from 'clsx';
+import { Classes } from 'jss';
 import anime from 'animejs';
 
 import { useSelectedPlayground } from 'playground/src/tools/useSelectedPlayground';
 import { useRouterControls } from 'playground/src/tools/useRouterControls';
 import { Select } from '../Select';
 
-function Component ({ classes, className, isHidden }) {
-  const rootRef = useRef();
+interface ControlsProps {
+  classes: Classes
+  className?: string
+  isHidden?: boolean
+}
+
+const Controls: FC<ControlsProps> = ({ classes, className, isHidden }) => {
+  const rootRef = useRef<HTMLElement>(null);
   const isFirstRender = useRef(true);
-  const { controls, changeControl } = useRouterControls();
+  const routerControls = useRouterControls();
+  const controls = routerControls?.controls ?? {
+    packageName: '',
+    componentName: '',
+    sandboxName: ''
+  };
+  const changeControl = routerControls?.changeControl;
   const { packagesNames, componentsNames, sandboxesNames } = useSelectedPlayground();
 
-  const onControlChange = name => event => changeControl(name, event.target.value);
+  const onControlChange = (name: string) =>
+    (event: ChangeEvent<HTMLSelectElement>) =>
+      changeControl?.(name, event.target.value);
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -123,6 +138,6 @@ function Component ({ classes, className, isHidden }) {
       </div>
     </aside>
   );
-}
+};
 
-export { Component };
+export { ControlsProps, Controls };

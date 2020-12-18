@@ -1,9 +1,15 @@
-import React from 'react';
-import cx from 'classnames';
+import React, { FC } from 'react';
+import cx from 'clsx';
+import { Classes } from 'jss';
 
-import lernaSettings from 'repository/lerna.json';
+import lernaSettings from '../../../../lerna.json';
 
-function Component ({ classes, className }) {
+interface FooterProps {
+  classes: Classes
+  className?: string
+}
+
+const Footer: FC<FooterProps> = ({ classes, className }) => {
   return (
     <footer className={cx(classes.root, className)}>
       <div>
@@ -22,6 +28,6 @@ function Component ({ classes, className }) {
       </div>
     </footer>
   );
-}
+};
 
-export { Component };
+export { FooterProps, Footer };

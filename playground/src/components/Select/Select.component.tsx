@@ -1,17 +1,26 @@
-import React from 'react';
-import cx from 'classnames';
+import React, { FC, ChangeEvent, useRef } from 'react';
+import { Classes } from 'jss';
+import cx from 'clsx';
 
 let globalSelectCounter = 0;
 
-function Component ({
+interface SelectProps {
+  classes: Classes
+  className?: string
+  labelText: string
+  value: string
+  onChange: (event: ChangeEvent<HTMLSelectElement>) => void
+}
+
+const Select: FC<SelectProps> = ({
   classes,
   className,
   labelText,
   value,
   onChange,
   children
-}) {
-  const id = React.useRef('select-' + globalSelectCounter++);
+}) => {
+  const id = useRef('select-' + String(globalSelectCounter++));
 
   return (
     <div className={cx(classes.root, className)}>
@@ -35,6 +44,6 @@ function Component ({
       </span>
     </div>
   );
-}
+};
 
-export { Component };
+export { SelectProps, Select };

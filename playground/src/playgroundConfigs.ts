@@ -1,4 +1,24 @@
 const playgroundConfigs = [
+  // TODO: Example sandboxes to test the application. Remove after TypeScript migration.
+  {
+    name: 'animation',
+    components: [
+      {
+        name: 'withAnimator',
+        sandboxes: [
+          {
+            name: 'basic',
+            code: 'render(<h1 style={{ color: "cyan" }}>Basic</h1>);'
+          },
+          {
+            name: 'complex',
+            code: 'render(<h1 style={{ color: "green" }}>Complex</h1>);'
+          }
+        ]
+      }
+    ]
+  }
+  /*
   {
     name: 'animation',
     components: [
@@ -25,6 +45,7 @@ const playgroundConfigs = [
       }
     ]
   }
+  */
 ];
 
 export { playgroundConfigs };

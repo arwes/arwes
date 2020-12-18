@@ -27,7 +27,9 @@
   "rules": {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/semi": ["error", "always"],
+    "@typescript-eslint/brace-style": ["error", "stroustrup"],
     "react/prop-types": "off",
     "semi": ["error", "always"],
     "brace-style": ["error", "stroustrup"],

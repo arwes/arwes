@@ -1,4 +1,8 @@
-const styles = theme => ({
+import { Styles } from 'jss';
+
+import { theme } from '../../theme';
+
+const styles: Styles = {
   root: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -24,6 +28,6 @@ const styles = theme => ({
       fontSize: 14
     }
   }
-});
+};
 
 export { styles };

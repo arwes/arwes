@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { FC, useRef, useState, useEffect } from 'react';
 import Navigo from 'navigo';
 
-import { RouterControlsContext } from '../RouterControlsContext';
+import { RouterControls, RouterControlsContext } from '../RouterControlsContext';
 
 const initialControls = {
   packageName: '',
@@ -9,18 +9,18 @@ const initialControls = {
   sandboxName: ''
 };
 
-function RouterControlsProvider ({ children }) {
-  const [controls, setControls] = useState(initialControls);
-  const router = useRef();
+const RouterControlsProvider: FC = ({ children }) => {
+  const [controls, setControls] = useState(() => initialControls);
+  const router = useRef<Navigo>();
 
-  const onRouteChange = () => {
+  const onRouteChange: () => void = () => {
     const route = window.location.hash.replace('#', '');
     const [packageName = '', componentName = '', sandboxName = ''] = route.split('/');
 
     setControls({ packageName, componentName, sandboxName });
   };
 
-  const changeControl = (name, value) => {
+  const changeControl: RouterControls['changeControl'] = (name, value) => {
     let controlsSideEffectChanges = {};
 
     if (name === 'packageName') {
@@ -34,7 +34,7 @@ function RouterControlsProvider ({ children }) {
     const params = [newControls.packageName, newControls.componentName, newControls.sandboxName];
     const route = params.filter(Boolean).join('/');
 
-    router.current.navigate(route);
+    router.current?.navigate(route);
   };
 
   useEffect(() => {
@@ -42,13 +42,13 @@ function RouterControlsProvider ({ children }) {
     router.current.on('*', onRouteChange).resolve();
   }, []);
 
-  const value = { controls, changeControl };
+  const routerControls: RouterControls = { controls, changeControl };
 
   return (
-    <RouterControlsContext.Provider value={value}>
+    <RouterControlsContext.Provider value={routerControls}>
       {children}
     </RouterControlsContext.Provider>
   );
-}
+};
 
 export { RouterControlsProvider };

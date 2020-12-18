@@ -1,4 +1,8 @@
-const styles = theme => ({
+import { Styles } from 'jss';
+
+import { theme } from '../../theme';
+
+const styles: Styles = {
   root: {
     display: 'block'
   },
@@ -11,6 +15,6 @@ const styles = theme => ({
     padding: 10,
     color: theme.color.error
   }
-});
+};
 
 export { styles };

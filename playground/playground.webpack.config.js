@@ -1,12 +1,13 @@
 const path = require('path');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const babelConfig = require('../babel.config');
 
 const { NODE_ENV } = process.env;
+const tsConfigFilePath = path.join(process.cwd(), 'playground/tsconfig.webpack.json');
 
 module.exports = {
   mode: NODE_ENV || 'development',
-  entry: './playground/src/index.js',
+  entry: './playground/src/index.tsx',
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'playground.js'
@@ -14,12 +15,17 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /(node_modules)/,
-        use: {
-          loader: 'babel-loader',
-          options: babelConfig
-        }
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              configFile: tsConfigFilePath,
+              transpileOnly: true
+            }
+          }
+        ]
       },
       {
         test: /\.md$/i,
@@ -28,6 +34,12 @@ module.exports = {
     ]
   },
   resolve: {
+    extensions: ['.js', '.ts', '.tsx'],
+    plugins: [
+      new TsconfigPathsPlugin({
+        configFile: tsConfigFilePath
+      })
+    ],
     alias: {
       repository: process.cwd(),
       playground: path.join(process.cwd(), 'playground')

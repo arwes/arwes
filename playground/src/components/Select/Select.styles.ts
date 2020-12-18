@@ -1,6 +1,9 @@
+import { Styles } from 'jss';
 import { rgba } from 'polished';
 
-const styles = theme => ({
+import { theme } from '../../theme';
+
+const styles: Styles = {
   root: {
     position: 'relative',
     display: 'block',
@@ -55,6 +58,6 @@ const styles = theme => ({
     color: theme.color.content,
     fontWeight: 'bold'
   }
-});
+};
 
 export { styles };

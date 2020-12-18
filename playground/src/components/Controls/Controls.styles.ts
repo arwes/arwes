@@ -1,6 +1,9 @@
+import { Styles } from 'jss';
 import { rgba } from 'polished';
 
-const styles = theme => ({
+import { theme } from '../../theme';
+
+const styles: Styles = {
   root: {
     zIndex: 1000,
     position: 'relative',
@@ -66,6 +69,6 @@ const styles = theme => ({
       border: 'none'
     }
   }
-});
+};
 
 export { styles };
