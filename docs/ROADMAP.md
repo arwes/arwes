@@ -73,7 +73,7 @@ the vision of the project is.
 - [ ] [#64](https://github.com/arwes/arwes/issues/64) Arwes UI/UX design specification.
 - [ ] [#61](https://github.com/arwes/arwes/issues/61) Migrate project packages
 source code to TypeScript.
-- [ ] [#62](https://github.com/arwes/arwes/issues/62) Setup UMD distribution support.
+- [x] [#62](https://github.com/arwes/arwes/issues/62) Setup UMD distribution support.
 
 #### Playground
 

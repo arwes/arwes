@@ -3,7 +3,7 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const { NODE_ENV } = process.env;
-const tsConfigFilePath = path.join(process.cwd(), 'playground/tsconfig.webpack.json');
+const tsConfigFilePath = path.join(process.cwd(), 'playground/tsconfig.json');
 
 module.exports = {
   mode: NODE_ENV || 'development',
