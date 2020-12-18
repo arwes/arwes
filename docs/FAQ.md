@@ -1,6 +1,3 @@
-<!-- TODO: Update questions when the next "stable" alpha/beta is released. -->
-<!-- TODO: Update questions when the website is released. -->
-
 ## When Arwes will be ready for production?
 
 Arwes is currently in _alpha_ version. It means there is ongoing development,
@@ -12,15 +9,14 @@ See [roadmap](./ROADMAP.md) for more details.
 
 ## What is the status of the development?
 
-Arwes is being worked on packages. Functional packages and design system packages.
-
-The project uses guidelines as the main concepts for all functional and design
-implementations.
+Arwes is being worked on packages. Functional packages and design implementation
+packages. The guidelines are used as the main concepts behind them.
 
 The functional packages should be ready and the guidelines defined for the design
-system packages to be developed.
+implementation packages to be developed.
 
-In the packages information there is a badge indicating its current status.
+In the [project page](./README.md), each package should have a badge indicating
+its current status.
 
 - ![status](https://img.shields.io/badge/status-in%20concept-999999.svg)
 - ![status](https://img.shields.io/badge/status-in%20specification-blue.svg)
@@ -34,15 +30,15 @@ In the packages information there is a badge indicating its current status.
 Currently, the website shows the documentation for **Arwes v1.0.0-alpha.5** with
 source code for the project and the website from this repository at branch **[`version1-breakpoint1`](https://github.com/arwes/arwes/tree/version1-breakpoint1)**.
 
-The branch `master` is at current development with major breaking changes.
+The branch [`main`](https://github.com/arwes/arwes) is at current development
+with major breaking changes.
 
 ## Can I use it in React Native and other environments?
 
 Arwes version 1.x is intended to support only web environments with latest
 technologies.
 
-Though the project may offer support for other environments in major future
-versions.
+Though the project may offer support for other environments in future versions.
 
 You can use tools to embed the web apps into other environments such as
 mobile with [Apache Cordova](https://cordova.apache.org) or [Electron](https://electronjs.org)
@@ -65,7 +61,8 @@ Latest version of Chrome, Firefox, and Safari for Android, iOS and desktop.
 
 Since [React](https://reactjs.org) is a library with component logic written
 in JavaScript, we could "easily" use React components with other frameworks or
-vanilla JavaScript. Though it may be more complicated to setup and work with.
+vanilla JavaScript. Not all features will be supported. Additional setup
+is required.
 
 ## Why Arwes uses [JSS](https://cssinjs.org) as a styling solution?
 

@@ -1,6 +1,6 @@
 {
   "name": "@arwes/sounds",
-  "version": "1.0.0-alpha.14",
+  "version": "1.0.0-alpha.15",
   "publishConfig": {
     "access": "public"
   },
@@ -27,6 +27,7 @@
     "@babel/runtime": "^7.11.2"
   },
   "peerDependencies": {
-    "react": "16.x"
+    "prop-types": "*",
+    "react": "17.x"
   }
 }

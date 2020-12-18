@@ -4,6 +4,7 @@ pids
 lib-cov
 coverage
 nbproject
+build
 build/Release
 typings/
 *.tgz
@@ -43,3 +44,4 @@ yarn-error.log*
 .yarn-integrity
 
 packages/*/lib
+playground/dist

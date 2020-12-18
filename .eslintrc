@@ -3,10 +3,12 @@
   "ignorePatterns": [
     "node_modules",
     "packages/*/lib",
-    "packages/arwes"
+    "playground/dist",
+    "__deprecated__"
   ],
   "extends": [
     "standard",
+    "standard-jsx",
     "standard-react"
   ],
   "parser": "babel-eslint",
@@ -19,6 +21,7 @@
   },
   "rules": {
     "semi": ["error", "always"],
-    "brace-style": ["error", "stroustrup"]
+    "brace-style": ["error", "stroustrup"],
+    "react/prop-types": [0]
   }
 }

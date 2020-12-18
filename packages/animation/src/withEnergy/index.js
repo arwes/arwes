@@ -1,1 +1,0 @@
-export { withEnergy } from './withEnergy';

@@ -1,0 +1,27 @@
+{
+  "name": "@arwes/tools",
+  "version": "1.0.0-alpha.15",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Arwes Tools",
+  "keywords": [
+    "arwes"
+  ],
+  "homepage": "https://arwes.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arwes/arwes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/arwes/arwes/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "dependencies": {
+    "@babel/runtime": "^7.11.2"
+  }
+}
