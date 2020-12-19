@@ -1,1 +1,1 @@
-export const animation = '@arwes/animation';
+export * from './constants';

@@ -1,9 +1,11 @@
 /* eslint-env jest */
 
-function makeMoveTimeTo () {
+type JestMoveTimeTo = (timeToMove: number) => void;
+
+function makeJestMoveTimeTo (): JestMoveTimeTo {
   let currentTimeMoved = 0;
 
-  return function moveTimeTo (timeToMove) {
+  function jestMoveTimeTo (timeToMove: number): void {
     const timeOffset = timeToMove - currentTimeMoved;
 
     if (timeOffset <= 0) {
@@ -14,6 +16,8 @@ function makeMoveTimeTo () {
 
     jest.advanceTimersByTime(timeOffset);
   };
+
+  return jestMoveTimeTo;
 }
 
-export { makeMoveTimeTo };
+export { JestMoveTimeTo, makeJestMoveTimeTo };
