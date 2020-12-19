@@ -1,7 +1,6 @@
 {
   "extends": "./tsconfig.build.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
       "@arwes/*": ["packages/*/src"],
       "@playground/*": ["playground/*"]
