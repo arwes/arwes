@@ -1,2 +1,1 @@
-export * from '@arwes/animation';
-export * from '@arwes/sounds';
+export const design = '@arwes/design';
