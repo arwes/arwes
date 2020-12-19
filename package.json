@@ -70,7 +70,7 @@
     "test-watch": "jest --watch",
     "test-coverage": "jest --coverage",
     "test-list": "jest --listTests",
-    "ci": "npm run bootstrap && npm run compile && npm run lint && npm test && npm run test-coverage",
+    "ci": "npm run bootstrap && npm run compile && npm run lint && npm run test-coverage",
     "playground-build": "cross-env NODE_ENV=production webpack --config ./playground/playground.webpack.config.js",
     "playground-watch": "webpack serve --config ./playground/playground.webpack.config.js",
     "release": "npm run ci && lerna publish",

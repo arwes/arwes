@@ -1,1 +1,1 @@
-export const design = '@arwes/design';
+export const arwes = '@arwes/arwes';
