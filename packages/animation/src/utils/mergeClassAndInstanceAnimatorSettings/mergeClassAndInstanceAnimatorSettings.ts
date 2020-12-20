@@ -1,5 +1,4 @@
-import { AnimatorSettingsDurationObject, AnimatorClassSettings, AnimatorInstanceSettings } from '../../constants';
-import { expandAnimatorDuration } from '../expandAnimatorDuration';
+import { AnimatorSettingsDuration, AnimatorClassSettings, AnimatorInstanceSettings } from '../../constants';
 import { filterClassAnimatorSettings } from '../filterClassAnimatorSettings';
 
 function mergeClassAndInstanceAnimatorSettings (
@@ -13,17 +12,17 @@ function mergeClassAndInstanceAnimatorSettings (
     ...instanceAnimator
   };
 
-  let newDuration: AnimatorSettingsDurationObject | undefined;
+  let newDuration: AnimatorSettingsDuration | undefined;
 
   if (classAnimator?.duration !== undefined) {
-    newDuration = expandAnimatorDuration(classAnimator.duration);
+    newDuration = classAnimator.duration;
   }
 
   if (instanceAnimator?.duration !== undefined) {
     const newInstanceDuration = newDuration ?? {};
     newDuration = {
       ...newInstanceDuration,
-      ...expandAnimatorDuration(instanceAnimator.duration)
+      ...instanceAnimator.duration
     };
   }
 

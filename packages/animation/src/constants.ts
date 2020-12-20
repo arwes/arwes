@@ -19,9 +19,7 @@ export interface AnimatorFlow {
   hasExited?: boolean
 }
 
-export type AnimatorSettingsDurationValue = number;
-
-export interface AnimatorSettingsDurationObject {
+export interface AnimatorSettingsDuration {
   enter?: number
   exit?: number
   stagger?: number
@@ -29,15 +27,17 @@ export interface AnimatorSettingsDurationObject {
   offset?: number
 }
 
-export type AnimatorSettingsDuration = AnimatorSettingsDurationValue | AnimatorSettingsDurationObject;
-
 export interface AnimatorDuration {
   enter: number
   exit: number
   stagger: number
   delay: number
   offset: number
-};
+}
+
+export interface AnimatorGeneralSettings {
+  duration?: AnimatorSettingsDuration
+}
 
 export interface AnimatorRefChild {
   id: number

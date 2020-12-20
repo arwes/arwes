@@ -1,8 +1,8 @@
-import { AnimatorSettingsDurationObject, AnimatorRefChild } from '../src/constants';
+import { AnimatorSettingsDuration, AnimatorRefChild } from '../src/constants';
 
 function mockAnimatorRefChild (
   id: number,
-  duration: AnimatorSettingsDurationObject,
+  duration: AnimatorSettingsDuration,
   merge?: boolean
 ): AnimatorRefChild {
   return {

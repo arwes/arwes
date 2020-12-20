@@ -1,4 +1,8 @@
-import { AnimatorRefChild, AnimatorChildrenActivations, AnimatorChildrenActivationsTimes } from '../../constants';
+import {
+  AnimatorRefChild,
+  AnimatorChildrenActivations,
+  AnimatorChildrenActivationsTimes
+} from '../../constants';
 
 function getChildrenNodesSequenceActivationTimes (
   nodes: AnimatorRefChild[]

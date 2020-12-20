@@ -30,7 +30,6 @@
   "main": "lib/index.js",
   "unpkg": "dist/animation.min.js",
   "peerDependencies": {
-    "prop-types": "*",
     "react": "17.x"
   }
 }
