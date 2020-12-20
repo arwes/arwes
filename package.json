@@ -56,7 +56,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "postinstall": "npm run bootstrap && npm run compile",
+    "postinstall": "sh ./scripts/postinstall.sh",
     "bootstrap": "lerna bootstrap",
     "compile": "npm run compile-commonjs && npm run compile-umd",
     "compile-commonjs": "sh ./scripts/compile-commonjs.sh",
@@ -70,10 +70,10 @@
     "test-watch": "jest --watch",
     "test-coverage": "jest --coverage",
     "test-list": "jest --listTests",
-    "ci": "npm run bootstrap && npm run compile && npm run lint && npm run test-coverage",
+    "ci": "npm run bootstrap && npm run compile-commonjs && npm run lint && npm run test-coverage",
     "playground-build": "cross-env NODE_ENV=production webpack --config ./playground/playground.webpack.config.js",
     "playground-watch": "webpack serve --config ./playground/playground.webpack.config.js",
-    "release": "npm run ci && lerna publish",
+    "release": "npm run bootstrap && npm run compile && npm run lint && npm run test && lerna publish",
     "changelog": "auto-changelog --output ./docs/CHANGELOG.md --commit-limit false",
     "contributors-add": "all-contributors add",
     "readme-contributors-generate": "all-contributors generate",

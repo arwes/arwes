@@ -1,4 +1,5 @@
 /* eslint-env jest */
+/* istanbul ignore file */
 
 type JestMoveTimeTo = (timeToMove: number) => void;
 

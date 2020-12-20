@@ -7,7 +7,6 @@ const testMatch = glob
 
 module.exports = {
   preset: 'ts-jest',
-  testEnvironment: 'node',
   verbose: true,
   testURL: 'http://localhost/',
   testMatch

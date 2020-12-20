@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { AnimatorSettingsDuration, AnimatorRefChild } from '../src/constants';
 
 function mockAnimatorRefChild (
