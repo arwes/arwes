@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import { mockAnimatorRefChild } from '../../../__test__/mockAnimatorRefChild';
+import { mockAnimatorRefChild } from '../../../test-utils/mockAnimatorRefChild';
 import { AnimatorRefChild } from '../../constants';
 import { getChildrenNodesStaggerActivationTimes } from './getChildrenNodesStaggerActivationTimes';
 

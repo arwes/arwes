@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import { JestMoveTimeTo, makeJestMoveTimeTo } from '../../../__test__/makeJestMoveTimeTo';
+import { JestMoveTimeTo, makeJestMoveTimeTo } from '../../../test-utils/makeJestMoveTimeTo';
 import { makeScheduler } from './makeScheduler';
 
 let jestMoveTimeTo: JestMoveTimeTo;
