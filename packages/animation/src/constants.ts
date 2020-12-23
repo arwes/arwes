@@ -19,14 +19,6 @@ export interface AnimatorFlow {
   hasExited?: boolean
 }
 
-export interface AnimatorSettingsDuration {
-  enter?: number
-  exit?: number
-  stagger?: number
-  delay?: number
-  offset?: number
-}
-
 export interface AnimatorDuration {
   enter: number
   exit: number
@@ -35,11 +27,27 @@ export interface AnimatorDuration {
   offset: number
 }
 
+export interface AnimatorSettingsDuration {
+  enter?: number
+  exit?: number
+  stagger?: number
+  delay?: number
+  offset?: number
+}
+
+export type AnimatorSettingsManagerCustom = (status: AnimatorSettingsManagerStatus) => AnimatorChildrenActivations;
+
+export type AnimatorSettingsManager = typeof PARALLEL | typeof SEQUENCE | typeof STAGGER | AnimatorSettingsManagerCustom;
+
+export type AnimatorSettingsUseAnimate = (animator: AnimatorProvidedSettings, refs: any) => void;
+
+export type AnimatorSettingsOnTransition = (flow: AnimatorFlow) => void;
+
 export interface AnimatorGeneralProviderProvidedSettings {
   duration?: AnimatorSettingsDuration
 }
 
-/** <AnimatorGeneralProvider /> component settings prop. */
+/** `<AnimatorGeneralProvider />` component `animator` settings prop. */
 export interface AnimatorGeneralProviderSettings {
   duration?: AnimatorSettingsDuration
 }
@@ -66,10 +74,6 @@ export interface AnimatorSettingsManagerStatus {
   duration: AnimatorDuration
 }
 
-export type AnimatorSettingsManagerCustom = (status: AnimatorSettingsManagerStatus) => AnimatorChildrenActivations;
-
-export type AnimatorSettingsManager = typeof PARALLEL | typeof SEQUENCE | typeof STAGGER | AnimatorSettingsManagerCustom | undefined;
-
 export interface AnimatorProvidedSettings {
   duration: AnimatorDuration
   animate: boolean
@@ -89,18 +93,18 @@ export interface AnimatorClassSettings {
   root?: boolean
   merge?: boolean
   manager?: AnimatorSettingsManager
-  useAnimateMount?: (animator: AnimatorProvidedSettings, refs: any) => void
-  useAnimateEntering?: (animator: AnimatorProvidedSettings, refs: any) => void
-  useAnimateEntered?: (animator: AnimatorProvidedSettings, refs: any) => void
-  useAnimateExiting?: (animator: AnimatorProvidedSettings, refs: any) => void
-  useAnimateExited?: (animator: AnimatorProvidedSettings, refs: any) => void
-  useAnimateUnmount?: (animator: AnimatorProvidedSettings, refs: any) => void
+  useAnimateMount?: AnimatorSettingsUseAnimate
+  useAnimateEntering?: AnimatorSettingsUseAnimate
+  useAnimateEntered?: AnimatorSettingsUseAnimate
+  useAnimateExiting?: AnimatorSettingsUseAnimate
+  useAnimateExited?: AnimatorSettingsUseAnimate
+  useAnimateUnmount?: AnimatorSettingsUseAnimate
 }
 
 export interface AnimatorInstanceSettings extends AnimatorClassSettings {
   activate?: boolean
-  onTransition?: (flow: AnimatorFlow) => void
+  onTransition?: AnimatorSettingsOnTransition
 }
 
-/** <Animator /> component settings prop. */
+/** `<Animator />` component `animator` settings prop. */
 export interface AnimatorSettings extends AnimatorInstanceSettings {}

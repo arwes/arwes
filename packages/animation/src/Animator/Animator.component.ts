@@ -1,4 +1,5 @@
 import { FC, createElement, useState, useRef, useMemo, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import {
   ENTERED,
@@ -37,6 +38,7 @@ let classInstanceIdCounter = 0;
 
 interface AnimatorProps {
   animator?: AnimatorSettings
+  children?: any
 }
 
 const Animator: FC<AnimatorProps> = props => {
@@ -269,4 +271,33 @@ const Animator: FC<AnimatorProps> = props => {
   return createElement(AnimatorContext.Provider, { value: providedAnimator }, children);
 };
 
-export { Animator };
+Animator.propTypes = {
+  // @ts-expect-error
+  animator: PropTypes.shape({
+    duration: PropTypes.shape({
+      enter: PropTypes.number,
+      exit: PropTypes.number,
+      stagger: PropTypes.number,
+      delay: PropTypes.number,
+      offset: PropTypes.number
+    }),
+    animate: PropTypes.bool,
+    root: PropTypes.bool,
+    merge: PropTypes.bool,
+    manager: PropTypes.oneOfType([
+      PropTypes.oneOf([PARALLEL, SEQUENCE, STAGGER]),
+      PropTypes.func
+    ]),
+    useAnimateMount: PropTypes.func,
+    useAnimateEntering: PropTypes.func,
+    useAnimateEntered: PropTypes.func,
+    useAnimateExiting: PropTypes.func,
+    useAnimateExited: PropTypes.func,
+    useAnimateUnmount: PropTypes.func,
+    activate: PropTypes.bool,
+    onTransition: PropTypes.func
+  }),
+  children: PropTypes.any
+};
+
+export { AnimatorProps, Animator };
