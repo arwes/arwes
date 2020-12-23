@@ -48,7 +48,7 @@ test('Should add <Animator/> wrapper and provide "animator" settings to componen
         animator = props.animator;
         return null;
       };
-      const ExampleNode = withAnimator(classSettings)(ExampleComponent);
+      const ExampleNode = withAnimator<typeof ExampleComponent>(classSettings)(ExampleComponent);
       render(<ExampleNode animator={instanceSettings} />);
       expect(animator.animate).toBe(false);
       expect(animator.flow.value).toBe(ENTERED);
@@ -183,13 +183,13 @@ test('Should allow passing a "ref" to wrapped component', () => {
       return 100;
     }
   }
-  const ExampleNode = withAnimator()(ExampleComponent);
+  const ExampleNode = withAnimator<ExampleComponent>()(ExampleComponent);
 
   const ExampleApp: FC = () => {
-    const ref = useRef<any>();
+    const ref = useRef<ExampleComponent>(null);
 
     useEffect(() => {
-      expect(ref.current.hello()).toBe(100);
+      expect(ref.current?.hello()).toBe(100);
     }, []);
 
     return (

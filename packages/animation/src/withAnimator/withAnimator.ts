@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
-import { ComponentType, FC, Ref, createElement, forwardRef } from 'react';
+import { ComponentType, FC, createElement, forwardRef, Component, Ref } from 'react';
 
 import { AnimatorClassSettings, AnimatorInstanceSettings, AnimatorProvidedSettings } from '../constants';
 import { mergeClassAndInstanceAnimatorSettings } from '../utils/mergeClassAndInstanceAnimatorSettings';
@@ -15,11 +15,11 @@ interface WithAnimatorOutputProps {
   animator?: AnimatorInstanceSettings
 }
 
-function withAnimator (classAnimator?: AnimatorClassSettings) {
+function withAnimator<T extends Component<WithAnimatorInputProps> | FC<WithAnimatorInputProps>> (classAnimator?: AnimatorClassSettings) {
   const withAnimatorWrapper = <P extends WithAnimatorInputProps>(InputComponent: ComponentType<P>) => {
     interface AnimatorMiddlewareProps {
       InputComponent: ComponentType<P>
-      forwardedRef: Ref<any>
+      forwardedRef: Ref<T>
     }
 
     const AnimatorMiddleware: FC<AnimatorMiddlewareProps> = props => {
@@ -38,7 +38,7 @@ function withAnimator (classAnimator?: AnimatorClassSettings) {
     // The output component will optionally allow the `animator: AnimatorInstanceSettings` prop.
     type C = Pick<P, Exclude<keyof P, keyof WithAnimatorInputProps>> & WithAnimatorOutputProps;
 
-    const OutputComponent = forwardRef<Ref<any>, C>((props, forwardedRef) => {
+    const OutputComponent = forwardRef<T, C>((props, forwardedRef) => {
       const { animator: instanceAnimator, ...otherProps } = props;
       const resultAnimator = mergeClassAndInstanceAnimatorSettings(classAnimator, instanceAnimator);
 
