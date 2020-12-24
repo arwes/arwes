@@ -3,7 +3,7 @@
 import React, { FC, createRef, ReactNode } from 'react';
 import { render, cleanup, act } from '@testing-library/react';
 
-import { EXITED, ENTERING, AnimatorProvidedSettings } from '../constants';
+import { EXITED, ENTERING, AnimatorProvidedSettings, AnimatorSettings } from '../constants';
 import { extendAnimator } from './extendAnimator';
 import { withAnimator } from '../withAnimator';
 
@@ -16,11 +16,11 @@ test('Should extend actual animated component', () => {
     animator: AnimatorProvidedSettings
   }
   const ExampleComponent: FC<ExampleExtendAnimatorProps> = props => {
-    flow = props.animator.flow;
+    flow = props.animator?.flow;
     return null;
   };
-  const ExampleNode = withAnimator()(ExampleComponent);
-  const ExampleExtendedNode = extendAnimator({})(ExampleNode);
+  const ExampleNode = withAnimator<typeof ExampleComponent>()(ExampleComponent);
+  const ExampleExtendedNode = extendAnimator<typeof ExampleNode>({})(ExampleNode);
   render(<ExampleExtendedNode />);
   expect(flow.value).toBe(EXITED);
   act(() => {
@@ -31,12 +31,15 @@ test('Should extend actual animated component', () => {
 
 test('Should extend class animator settings and filter unknown settings for animated component', () => {
   let animator: any;
-  const ExampleComponent: FC<any> = props => {
+  interface ExampleAnimator {
+    animator?: AnimatorSettings
+  }
+  const ExampleComponent: FC<ExampleAnimator> = props => {
     animator = props.animator;
     return null;
   };
-  const useAnimateEntering = (): void => {};
-  const useAnimateExiting = (): void => {};
+  const useAnimateEntering = (): void => { };
+  const useAnimateExiting = (): void => { };
   const classAnimator = {
     duration: { enter: 500 },
     merge: true,
@@ -45,7 +48,7 @@ test('Should extend class animator settings and filter unknown settings for anim
     x: 1,
     y: 2
   };
-  const ExampleExtendedNode = extendAnimator(classAnimator)(ExampleComponent);
+  const ExampleExtendedNode = extendAnimator<typeof ExampleComponent>(classAnimator)(ExampleComponent);
   render(<ExampleExtendedNode />);
   expect(animator).toEqual({
     duration: {
@@ -59,7 +62,10 @@ test('Should extend class animator settings and filter unknown settings for anim
 
 test('Should extended class animator settings be extended by instance animator settings', () => {
   let animator: any;
-  const ExampleComponent: FC<any> = props => {
+  interface ExampleAnimator {
+    animator?: AnimatorSettings
+  };
+  const ExampleComponent: FC<ExampleAnimator> = props => {
     animator = props.animator;
     return null;
   };
@@ -78,7 +84,7 @@ test('Should extended class animator settings be extended by instance animator s
 });
 
 test('Should allow to pass ref to wrapped component', () => {
-  class ToWrap extends React.Component<any> {
+  class ToWrap extends React.Component {
     render (): ReactNode {
       return null;
     }
@@ -87,8 +93,8 @@ test('Should allow to pass ref to wrapped component', () => {
       return 'hello';
     }
   }
-  const Wrapped = extendAnimator({})(ToWrap);
-  const ref = createRef<any>();
+  const Wrapped = extendAnimator<ToWrap>({})(ToWrap);
+  const ref = createRef<ToWrap>();
   render(<Wrapped ref={ref} />);
-  expect(ref.current.greet()).toBe('hello');
+  expect(ref.current?.greet()).toBe('hello');
 });
