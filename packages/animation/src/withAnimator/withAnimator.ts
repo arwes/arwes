@@ -15,8 +15,8 @@ interface WithAnimatorOutputProps {
   animator?: AnimatorInstanceSettings
 }
 
-function withAnimator<T extends Component<WithAnimatorInputProps> | FC<WithAnimatorInputProps>> (classAnimator?: AnimatorClassSettings) {
-  const withAnimatorWrapper = <P extends WithAnimatorInputProps>(InputComponent: ComponentType<P>) => {
+function withAnimator<T extends Component<P> | FC<P>, P extends WithAnimatorInputProps = WithAnimatorInputProps> (classAnimator?: AnimatorClassSettings) {
+  const withAnimatorWrapper = (InputComponent: ComponentType<P>) => {
     interface AnimatorMiddlewareProps {
       InputComponent: ComponentType<P>
       forwardedRef: Ref<T>
