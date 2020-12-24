@@ -27,13 +27,7 @@ export interface AnimatorDuration {
   offset: number
 }
 
-export interface AnimatorSettingsDuration {
-  enter?: number
-  exit?: number
-  stagger?: number
-  delay?: number
-  offset?: number
-}
+export type AnimatorSettingsDuration = Partial<AnimatorDuration>;
 
 export type AnimatorSettingsManagerCustom = (status: AnimatorSettingsManagerStatus) => AnimatorChildrenActivations;
 
