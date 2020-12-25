@@ -2,14 +2,14 @@
 
 import { ComponentType, createElement, forwardRef, Component, FC } from 'react';
 
-import { AnimatorInstanceSettings } from '../constants';
+import { AnimatorClassSettings, AnimatorInstanceSettings } from '../constants';
 import { mergeClassAndInstanceAnimatorSettings } from '../utils/mergeClassAndInstanceAnimatorSettings';
 
 interface ExtendAnimatorProps {
   animator?: AnimatorInstanceSettings
 }
 
-function extendAnimator<T extends (Component<P> | FC<P>), P extends ExtendAnimatorProps = ExtendAnimatorProps> (extendedClassAnimator: AnimatorInstanceSettings) {
+function extendAnimator<T extends (Component<P> | FC<P>), P extends ExtendAnimatorProps = ExtendAnimatorProps> (extendedClassAnimator: AnimatorClassSettings) {
   const extendAnimatorWrapper = (InputComponent: ComponentType<P>) => {
     const OutputComponent = forwardRef<T, P>((props, ref) => {
       const { animator: instanceAnimator, ...otherProps } = props;
