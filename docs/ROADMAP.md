@@ -1,5 +1,6 @@
-- Tasks are listed in the [project boards](https://github.com/arwes/arwes/projects).
+- Tasks are listed with their respective details in the [project boards](https://github.com/arwes/arwes/projects).
 - The order in the lists does not represent priority neither order or execution.
+- The roadmap is subject to changes according to the development progress.
 
 ----
 
@@ -70,8 +71,9 @@ the vision of the project is.
 - [x] Project dependency packages update.
 - [x] Repository and website documentation file structure definition.
 - [x] Documentation guidelines for systems, states, and events.
-- [ ] [#64](https://github.com/arwes/arwes/issues/64) Arwes UI/UX design specification.
-- [ ] [#61](https://github.com/arwes/arwes/issues/61) Migrate project packages
+- [x] [#64](https://github.com/arwes/arwes/issues/64) Arwes UI/UX design
+specification. (In progress.)
+- [x] [#61](https://github.com/arwes/arwes/issues/61) Migrate project packages
 source code to TypeScript.
 - [x] [#62](https://github.com/arwes/arwes/issues/62) Setup UMD distribution support.
 
@@ -80,18 +82,10 @@ source code to TypeScript.
 - [x] [#24](https://github.com/arwes/arwes/issues/24) Playground support with
 multiple sandboxes.
 - [x] Playground application UX update.
-- [ ] [#69](https://github.com/arwes/arwes/issues/69) Playground application UI/UX
-design.
 
 #### Website
 
 - [ ] [#65](https://github.com/arwes/arwes/issues/65) Website application setup.
-
-#### `@arwes/design`
-
-- [ ] Documentation design management.
-- [ ] Component theme setup and extensibility.
-- [ ] Component styling setup and extensibility.
 
 #### `@arwes/animation`
 
@@ -100,13 +94,12 @@ animation component tools.
 - [x] [#36](https://github.com/arwes/arwes/issues/36) Non-parallel animation
 management support.
 - [x] Documentation animation management.
-- [ ] [#63](https://github.com/arwes/arwes/issues/63) Research SEO support for
-animated components.
 
 #### `@arwes/sounds`
 
+- [ ] [#81](https://github.com/arwes/arwes/issues/81) Sounds provider and sounds
+component set up.
 - [ ] Documentation sounds management.
-- [ ] Component sound players and settings setup and extensibility.
 
 ----
 
@@ -116,10 +109,27 @@ animated components.
 
 #### General
 
+- [ ] [#64](https://github.com/arwes/arwes/issues/64) Arwes UI/UX design specification.
 - [ ] [#18](https://github.com/arwes/arwes/issues/18) Update contributing documentation.
+
+#### Playground
+
+- [ ] [#69](https://github.com/arwes/arwes/issues/69) Playground application UI/UX
+design.
 
 #### Website
 
 - [ ] [#66](https://github.com/arwes/arwes/issues/66) Website index page.
 - [ ] [#67](https://github.com/arwes/arwes/issues/67) Website docs pages.
 - [ ] [#68](https://github.com/arwes/arwes/issues/68) Website API pages.
+
+#### `@arwes/design`
+
+- [ ] Documentation design management.
+- [ ] Component theme setup and extensibility.
+- [ ] Component styling setup and extensibility.
+
+#### `@arwes/animation`
+
+- [ ] [#63](https://github.com/arwes/arwes/issues/63) Research SEO support for
+animated components.

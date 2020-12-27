@@ -41,7 +41,7 @@ Theming and styling tools using [JSS](https://cssinjs.org) in [React](https://re
 
 #### `@arwes/animation`
 
-![status](https://img.shields.io/badge/status-in%20development-orange.svg)
+![status](https://img.shields.io/badge/status-in%20polishing-yellow.svg)
 ![downloads](https://img.shields.io/npm/dm/@arwes/animation.svg)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@arwes/animation)
 
