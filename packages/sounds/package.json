@@ -30,7 +30,8 @@
   "main": "lib/index.js",
   "unpkg": "dist/sounds.min.js",
   "peerDependencies": {
+    "react": "17.x",
     "prop-types": "*",
-    "react": "17.x"
+    "howler": "2.2.x"
   }
 }
