@@ -1,17 +1,28 @@
 import { Howl } from 'howler';
 
+export const BLEEPS_BACKGROUND = 'background';
+export const BLEEPS_TRANSITION = 'transition';
+export const BLEEPS_INTERACTION = 'interaction';
+export const BLEEPS_NOTIFICATION = 'notification';
+export const BLEEPS_CATEGORIES = [
+  BLEEPS_BACKGROUND,
+  BLEEPS_TRANSITION,
+  BLEEPS_INTERACTION,
+  BLEEPS_NOTIFICATION
+];
+
 // Bleeps Audio
 
 export interface BleepsAudioGroupSettings {
   volume?: number
-  mute?: boolean
   rate?: number
   preload?: boolean
+  disabled?: boolean
 }
 
-export type BleepCategoryName = string;
+export type BleepCategoryName = typeof BLEEPS_BACKGROUND | typeof BLEEPS_TRANSITION | typeof BLEEPS_INTERACTION | typeof BLEEPS_NOTIFICATION;
 
-export type BleepsAudioCategoriesSettings = Record<BleepCategoryName, BleepsAudioGroupSettings>;
+export type BleepsAudioCategoriesSettings = Partial<Record<BleepCategoryName, BleepsAudioGroupSettings>>;
 
 export interface BleepsAudioSettings {
   common?: BleepsAudioGroupSettings
@@ -27,13 +38,10 @@ export interface BleepPlayerSettings {
   format?: string[]
   loop?: boolean
   rate?: number
+  disabled?: boolean
 }
 
 export type BleepsPlayersSettings = Record<BleepPlayerName, BleepPlayerSettings>;
-
-export type BleepPlayer = Howl;
-
-export type BleepsPlayers = Record<BleepPlayerName, BleepPlayer>;
 
 // Bleeps Provider
 
@@ -57,12 +65,15 @@ export type BleepsSettings = Record<BleepName, BleepSettings>;
 // Bleeps Consumer Injection
 
 export interface Bleep {
+  _settings: BleepsAudioGroupSettings & BleepPlayerSettings
+  _howl: Howl
   play: () => void
   pause: () => void
   seek: (time: number) => void
   stop: () => void
   getIsPlaying: () => boolean
   getDuration: () => number
+  unload: () => void
 }
 
 export type Bleeps = Record<BleepName, Bleep>;

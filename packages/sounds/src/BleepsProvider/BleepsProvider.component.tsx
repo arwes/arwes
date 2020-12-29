@@ -2,8 +2,10 @@ import React, { FC, useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import {
+  BLEEPS_CATEGORIES,
   BleepsAudioSettings,
   BleepsPlayersSettings,
+  BleepCategoryName,
   BleepsSetup
 } from '../constants';
 import { BleepsContext } from '../BleepsContext';
@@ -23,10 +25,16 @@ const BleepsProvider: FC<BleepsProviderProps> = props => {
     const audioCategories = { ...parentAudioCategories };
 
     if (localAudioCategories) {
-      Object.keys(localAudioCategories).forEach(categoryName => {
+      Object.keys(localAudioCategories).forEach(key => {
+        const categoryName = key as BleepCategoryName;
+
+        if (!BLEEPS_CATEGORIES.includes(categoryName)) {
+          throw new Error(`Bleep category "${categoryName}" is not valid.`);
+        }
+
         audioCategories[categoryName] = {
           ...audioCategories[categoryName],
-          ...localAudioCategories[categoryName]
+          ...localAudioCategories?.[categoryName]
         };
       });
     }
@@ -68,7 +76,6 @@ BleepsProvider.propTypes = {
   audio: PropTypes.shape({
     common: PropTypes.shape({
       volume: PropTypes.number,
-      mute: PropTypes.bool,
       rate: PropTypes.number,
       preload: PropTypes.bool
     }),

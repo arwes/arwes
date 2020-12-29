@@ -5,14 +5,14 @@ import { render, cleanup } from '@testing-library/react';
 
 import { BleepsSetup } from '../constants';
 import { BleepsProvider } from '../BleepsProvider';
-import { useBleeps } from './useBleeps';
+import { useBleepsSetup } from './useBleepsSetup';
 
 afterEach(cleanup);
 
 test('Should provide undefined if provided was not found', () => {
   let bleepsSetup: BleepsSetup | undefined;
   const Example: FC = () => {
-    bleepsSetup = useBleeps();
+    bleepsSetup = useBleepsSetup();
     return null;
   };
   render(<Example />);
@@ -22,7 +22,7 @@ test('Should provide undefined if provided was not found', () => {
 test('Should provide bleeps setup if provider was found', () => {
   let bleepsSetup: BleepsSetup | undefined;
   const Example: FC = () => {
-    bleepsSetup = useBleeps();
+    bleepsSetup = useBleepsSetup();
     return null;
   };
   const audio = {

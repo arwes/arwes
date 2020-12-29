@@ -3,11 +3,23 @@
 import React, { FC, useContext } from 'react';
 import { render, cleanup } from '@testing-library/react';
 
+import { makeErrorCatcher } from '../../test-utils/makeErrorCatcher';
 import { BleepsSetup } from '../constants';
 import { BleepsContext } from '../BleepsContext';
 import { BleepsProvider } from './BleepsProvider.component';
 
-afterEach(cleanup);
+let mockConsoleError: any;
+let mockErrorCatcher: any;
+
+beforeEach(() => {
+  mockConsoleError = jest.spyOn(console, 'error').mockImplementation();
+  mockErrorCatcher = makeErrorCatcher();
+});
+
+afterEach(() => {
+  mockConsoleError.mockRestore();
+  cleanup();
+});
 
 test('Should render children and provide audio settings and player settings', () => {
   let bleepsSetup: BleepsSetup | undefined;
@@ -42,8 +54,8 @@ test('Should render children and provide audio settings and player settings', ()
       <Example />
     </BleepsProvider>
   );
-  expect(bleepsSetup.audioSettings).toEqual(audio);
-  expect(bleepsSetup.playersSettings).toEqual(players);
+  expect(bleepsSetup?.audioSettings).toEqual(audio);
+  expect(bleepsSetup?.playersSettings).toEqual(players);
 });
 
 test('Should extend nested audio settings', () => {
@@ -72,7 +84,7 @@ test('Should extend nested audio settings', () => {
     },
     categories: {
       transition: {
-        mute: true
+        preload: true
       }
     }
   };
@@ -93,14 +105,14 @@ test('Should extend nested audio settings', () => {
     categories: {
       transition: { // partial extended
         volume: 0.5,
-        mute: true
+        preload: true
       },
       notification: { // untouched
         volume: 1
       }
     }
   };
-  expect(bleepsSetup.audioSettings).toEqual(expectedAudio);
+  expect(bleepsSetup?.audioSettings).toEqual(expectedAudio);
 });
 
 test('Should extend nested players settings', () => {
@@ -151,5 +163,28 @@ test('Should extend nested players settings', () => {
       loop: true
     }
   };
-  expect(bleepsSetup.playersSettings).toEqual(expectedPlayers);
+  expect(bleepsSetup?.playersSettings).toEqual(expectedPlayers);
+});
+
+test('Should throw error if audio categories are not valid', () => {
+  const audio: any = {
+    common: {
+      volume: 0.7
+    },
+    categories: {
+      xxx: {
+        volume: 1
+      }
+    }
+  };
+  render(
+    <mockErrorCatcher.Catcher>
+      <BleepsProvider audio={audio}>
+        <div />
+      </BleepsProvider>
+    </mockErrorCatcher.Catcher>
+  );
+  expect(mockErrorCatcher.error).toBeInstanceOf(Error);
+  expect(mockErrorCatcher.error?.message).toBe('Bleep category "xxx" is not valid.');
+  expect(mockConsoleError).toHaveBeenCalled();
 });

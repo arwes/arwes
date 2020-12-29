@@ -1,4 +1,6 @@
 export * from './constants';
 
 export * from './BleepsProvider';
-export * from './useBleeps';
+export * from './useBleepsSetup';
+
+export * from './withBleeps';
