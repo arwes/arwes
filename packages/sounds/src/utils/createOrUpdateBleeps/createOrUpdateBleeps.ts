@@ -9,6 +9,11 @@ import { createBleep } from '../createBleep';
 import { updateBleep } from '../updateBleep';
 import { unloadBleeps } from '../unloadBleeps';
 
+const removeBleep = (bleeps: Bleeps, bleepName: string): void => {
+  bleeps[bleepName]?.unload();
+  delete bleeps[bleepName];
+};
+
 const createOrUpdateBleeps = (providedBleeps: Bleeps | undefined, bleepsSetup: BleepsSetup, bleepsSettings: BleepsSettings): Bleeps => {
   const bleeps: Bleeps = providedBleeps ?? {};
 
@@ -19,6 +24,12 @@ const createOrUpdateBleeps = (providedBleeps: Bleeps | undefined, bleepsSetup: B
 
   Object.keys(bleepsSettings).map(bleepName => {
     const bleepSettings = bleepsSettings[bleepName];
+
+    if (!bleepSettings) {
+      removeBleep(bleeps, bleepName);
+      return;
+    }
+
     const bleepCategory = bleepSettings.category as BleepCategoryName;
 
     if (bleepCategory !== undefined && !BLEEPS_CATEGORIES.includes(bleepCategory)) {
@@ -32,8 +43,7 @@ const createOrUpdateBleeps = (providedBleeps: Bleeps | undefined, bleepsSetup: B
     };
 
     if (audioSettings.disabled) {
-      bleeps[bleepName]?.unload();
-      delete bleeps[bleepName];
+      removeBleep(bleeps, bleepName);
       return;
     }
 
@@ -44,8 +54,7 @@ const createOrUpdateBleeps = (providedBleeps: Bleeps | undefined, bleepsSetup: B
     }
 
     if (playerSettings.disabled) {
-      bleeps[bleepName]?.unload();
-      delete bleeps[bleepName];
+      removeBleep(bleeps, bleepName);
       return;
     }
 

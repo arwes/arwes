@@ -10,7 +10,7 @@ import {
   BleepsSettings
 } from '../constants';
 import { BleepsProvider } from '../BleepsProvider';
-import { WithBleepsOutputProps, withBleeps } from './withBleeps';
+import { WithBleepsInputProps, withBleeps } from './withBleeps';
 
 let mockConsoleError: any;
 let mockErrorCatcher: any;
@@ -33,7 +33,7 @@ test('Should inject configured bleeps into wrapped component', () => {
     tap: { src: ['tap.webm'] }
   };
   let bleeps: Bleeps | undefined;
-  const ExampleComponent: FC<WithBleepsOutputProps> = props => {
+  const ExampleComponent: FC<WithBleepsInputProps> = props => {
     bleeps = props.bleeps;
     return null;
   };
@@ -74,7 +74,7 @@ test('Should inject common and category configured bleeps into wrapped component
     type: { src: ['type.webm'], loop: true }
   };
   let bleeps: Bleeps | undefined;
-  const ExampleComponent: FC<WithBleepsOutputProps> = props => {
+  const ExampleComponent: FC<WithBleepsInputProps> = props => {
     bleeps = props.bleeps;
     return null;
   };
@@ -103,8 +103,42 @@ test('Should inject common and category configured bleeps into wrapped component
   });
 });
 
+test('Should extend class bleeps settings with instances bleeps settings allowing removals and editions', () => {
+  const players = {
+    click: { src: ['click.webm'] },
+    hover: { src: ['hover.webm'] },
+    type: { src: ['type.webm'] },
+    notify: { src: ['notify.webm'] }
+  };
+  let bleeps: Bleeps | undefined;
+  const ExampleComponent: FC<WithBleepsInputProps> = props => {
+    bleeps = props.bleeps;
+    return null;
+  };
+  const classBleepsSettings: BleepsSettings = {
+    click: { player: 'click' },
+    hover: { player: 'hover' },
+    notify: { player: 'notify' }
+  };
+  const Example = withBleeps(classBleepsSettings)(ExampleComponent);
+  const instanceBleepsSettings = {
+    click: undefined, // Remove bleep if it was previosly defined.
+    type: { player: 'type' },
+    notify: { player: 'click' }
+  };
+  render(
+    <BleepsProvider players={players}>
+      <Example bleeps={instanceBleepsSettings} />
+    </BleepsProvider>
+  );
+  expect(Object.keys(bleeps || {})).toHaveLength(3);
+  expect(bleeps?.hover).toMatchObject({ _settings: { src: ['hover.webm'] } });
+  expect(bleeps?.type).toMatchObject({ _settings: { src: ['type.webm'] } });
+  expect(bleeps?.notify).toMatchObject({ _settings: { src: ['click.webm'] } });
+});
+
 test('Should throw error if there is not provider found', () => {
-  const ExampleComponent: FC<WithBleepsOutputProps> = () => null;
+  const ExampleComponent: FC<WithBleepsInputProps> = () => null;
   const bleepsSettings: BleepsSettings = {
     click: { player: 'click' }
   };

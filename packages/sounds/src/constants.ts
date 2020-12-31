@@ -60,7 +60,7 @@ export interface BleepSettings {
   shared?: boolean
 }
 
-export type BleepsSettings = Record<BleepName, BleepSettings>;
+export type BleepsSettings = Record<BleepName, BleepSettings | undefined>;
 
 // Bleeps Consumer Injection
 

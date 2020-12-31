@@ -7,12 +7,16 @@ import { createOrUpdateBleeps } from '../utils/createOrUpdateBleeps';
 import { unloadBleeps } from '../utils/unloadBleeps';
 import { useBleepsSetup } from '../useBleepsSetup';
 
-interface WithBleepsOutputProps {
+interface WithBleepsInputProps {
   bleeps: Bleeps
 }
 
-const withBleeps = <C extends ComponentType<P>, P extends WithBleepsOutputProps = WithBleepsOutputProps>(bleepsSettings: BleepsSettings) => {
-  type T = Pick<P, Exclude<keyof P, keyof WithBleepsOutputProps>>;
+interface WithBleepsOutputProps {
+  bleeps?: BleepsSettings
+}
+
+const withBleeps = <C extends ComponentType<P>, P extends WithBleepsInputProps = WithBleepsInputProps>(classBleepsSettings: BleepsSettings) => {
+  type T = Pick<P, Exclude<keyof P, keyof WithBleepsInputProps>> & WithBleepsOutputProps;
 
   // The total number of instances of this component.
   let componentInstances = 0;
@@ -21,17 +25,21 @@ const withBleeps = <C extends ComponentType<P>, P extends WithBleepsOutputProps 
   let bleeps: Bleeps | undefined;
 
   const withBleepsWrapped = (InputComponent: ComponentType<P>) => {
-    const WithBleeps = forwardRef<C, T>((props, ref) => {
+    const OutputComponent = forwardRef<C, T>((props, ref) => {
+      const { bleeps: instanceBleepsSettings, ...otherProps } = props;
+
       const bleepsSetup = useBleepsSetup();
 
       if (!bleepsSetup) {
         throw new Error('Component with bleeps requires <BleepsProvider/> settings.');
       }
 
-      bleeps = useMemo(
-        () => createOrUpdateBleeps(bleeps, bleepsSetup, bleepsSettings),
-        [bleepsSetup]
-      );
+      bleeps = useMemo(() => {
+        return createOrUpdateBleeps(bleeps, bleepsSetup, {
+          ...classBleepsSettings,
+          ...instanceBleepsSettings
+        });
+      }, [bleepsSetup, instanceBleepsSettings]);
 
       useEffect(() => {
         componentInstances++;
@@ -47,16 +55,16 @@ const withBleeps = <C extends ComponentType<P>, P extends WithBleepsOutputProps 
       }, []);
 
       return createElement(InputComponent, {
-        ...(props as P),
+        ...(otherProps as any),
         bleeps,
         ref
       });
     });
 
-    return WithBleeps;
+    return OutputComponent;
   };
 
   return withBleepsWrapped;
 };
 
-export { WithBleepsOutputProps, withBleeps };
+export { WithBleepsInputProps, WithBleepsOutputProps, withBleeps };
