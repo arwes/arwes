@@ -29,6 +29,7 @@
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/prefer-nullish-coalescing": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/no-dynamic-delete": "off",
     "@typescript-eslint/semi": ["error", "always"],
     "@typescript-eslint/brace-style": ["error", "stroustrup"],
     "react/prop-types": "off",
