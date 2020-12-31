@@ -71,8 +71,8 @@ the vision of the project is.
 - [x] Project dependency packages update.
 - [x] Repository and website documentation file structure definition.
 - [x] Documentation guidelines for systems, states, and events.
-- [x] [#64](https://github.com/arwes/arwes/issues/64) Arwes UI/UX design
-specification. (In progress.)
+- [x] [#64](https://github.com/arwes/arwes/issues/64) _Arwes UI/UX design
+specification. (In progress.)_
 - [x] [#61](https://github.com/arwes/arwes/issues/61) Migrate project packages
 source code to TypeScript.
 - [x] [#62](https://github.com/arwes/arwes/issues/62) Setup UMD distribution support.
@@ -83,23 +83,18 @@ source code to TypeScript.
 multiple sandboxes.
 - [x] Playground application UX update.
 
-#### Website
-
-- [ ] [#65](https://github.com/arwes/arwes/issues/65) Website application setup.
-
 #### `@arwes/animation`
 
 - [x] [#70](https://github.com/arwes/arwes/issues/70) Declarative and extensible
 animation component tools.
 - [x] [#36](https://github.com/arwes/arwes/issues/36) Non-parallel animation
 management support.
-- [x] Documentation animation management.
+- [x] Animation management documentation.
 
 #### `@arwes/sounds`
 
-- [ ] [#81](https://github.com/arwes/arwes/issues/81) Sounds provider and sounds
+- [x] [#81](https://github.com/arwes/arwes/issues/81) Sounds provider and sounds
 component set up.
-- [ ] Documentation sounds management.
 
 ----
 
@@ -119,17 +114,21 @@ design.
 
 #### Website
 
+- [ ] [#65](https://github.com/arwes/arwes/issues/65) Website application setup.
 - [ ] [#66](https://github.com/arwes/arwes/issues/66) Website index page.
 - [ ] [#67](https://github.com/arwes/arwes/issues/67) Website docs pages.
 - [ ] [#68](https://github.com/arwes/arwes/issues/68) Website API pages.
 
 #### `@arwes/design`
 
-- [ ] Documentation design management.
-- [ ] Component theme setup and extensibility.
-- [ ] Component styling setup and extensibility.
+- [ ] Component theme and style setup and extensibility.
+- [ ] Design management documentation.
 
 #### `@arwes/animation`
 
 - [ ] [#63](https://github.com/arwes/arwes/issues/63) Research SEO support for
 animated components.
+
+#### `@arwes/sounds`
+
+- [ ] Sounds management documentation.

@@ -33,7 +33,7 @@ Resource loading, responsive control, and general browser API tools.
 
 #### `@arwes/design`
 
-![status](https://img.shields.io/badge/status-in%20concept-999999.svg)
+![status](https://img.shields.io/badge/status-in%20specification-blue.svg)
 ![downloads](https://img.shields.io/npm/dm/@arwes/design.svg)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@arwes/design)
 
@@ -49,7 +49,7 @@ Assemble and disassemble user interfaces using animation controls in [React](htt
 
 #### `@arwes/sounds`
 
-![status](https://img.shields.io/badge/status-in%20development-orange.svg)
+![status](https://img.shields.io/badge/status-in%20polishing-yellow.svg)
 ![downloads](https://img.shields.io/npm/dm/@arwes/sounds.svg)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@arwes/sounds)
 
