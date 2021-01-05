@@ -153,3 +153,43 @@ test('Should throw error if there is not provider found', () => {
   expect(mockErrorCatcher.error?.message).toBe('Component with bleeps requires <BleepsProvider/> settings.');
   expect(mockConsoleError).toHaveBeenCalled();
 });
+
+test('Should allow passing a "ref" to wrapped component', () => {
+  const audio = {
+    common: { volume: 0.5 }
+  };
+  const players = {
+    tap: { src: ['tap.webm'] }
+  };
+  class ExampleComponent extends React.Component<WithBleepsInputProps> {
+    render (): React.ReactNode {
+      return null;
+    }
+
+    hello (): number {
+      return 100;
+    }
+  }
+  const bleepsSettings: BleepsSettings = {
+    click: { player: 'tap' }
+  };
+  const Example = withBleeps(bleepsSettings)(ExampleComponent);
+
+  let helloResponse: any;
+  const ExampleApp: FC = () => {
+    const ref = React.useRef<ExampleComponent | null>(null);
+
+    React.useEffect(() => {
+      helloResponse = ref.current?.hello();
+    }, []);
+
+    return (
+      <BleepsProvider audio={audio} players={players}>
+        <Example ref={ref} />
+      </BleepsProvider>
+    );
+  };
+
+  render(<ExampleApp />);
+  expect(helloResponse).toBe(100);
+});
