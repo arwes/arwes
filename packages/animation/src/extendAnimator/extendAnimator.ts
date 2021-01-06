@@ -1,31 +1,31 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
-import { ComponentType, createElement, forwardRef, Component, FC } from 'react';
+import { forwardRef, ForwardRefExoticComponent, PropsWithoutRef, RefAttributes, createElement } from 'react';
 
 import { AnimatorClassSettings, AnimatorInstanceSettings } from '../constants';
 import { mergeClassAndInstanceAnimatorSettings } from '../utils/mergeClassAndInstanceAnimatorSettings';
 
-interface ExtendAnimatorProps {
-  animator?: AnimatorInstanceSettings
+interface ExtendAnimatorInputProps {
+  animator: AnimatorInstanceSettings
 }
 
-function extendAnimator<T extends (Component<P> | FC<P>), P extends ExtendAnimatorProps = ExtendAnimatorProps> (extendedClassAnimator: AnimatorClassSettings) {
-  const extendAnimatorWrapper = (InputComponent: ComponentType<P>) => {
-    const OutputComponent = forwardRef<T, P>((props, ref) => {
+function extendAnimator<C extends React.ComponentType<P>, P extends ExtendAnimatorInputProps = ExtendAnimatorInputProps> (extendedClassAnimator: AnimatorClassSettings) {
+  const extendAnimatorWrapper = (Component: C) => {
+    const OutputComponent = forwardRef<C, P>((props, ref) => {
       const { animator: instanceAnimator, ...otherProps } = props;
       const resultAnimator = mergeClassAndInstanceAnimatorSettings(
         extendedClassAnimator,
         instanceAnimator
       );
 
-      return createElement<P>(InputComponent, {
+      return createElement(Component, {
         ...(otherProps as P),
         animator: resultAnimator,
         ref
       });
-    });
+    }) as ForwardRefExoticComponent<PropsWithoutRef<P> & RefAttributes<C>> & { defaultProps: Partial<P> & ExtendAnimatorInputProps };
 
-    const componentName = InputComponent.displayName || InputComponent.name || 'Component';
+    const componentName = OutputComponent.displayName || OutputComponent.name || 'Component';
 
     OutputComponent.displayName = `extendAnimator(${componentName})`;
 

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
-import { ComponentType, FC, createElement, forwardRef, Component, Ref } from 'react';
+import { ComponentType, FC, createElement, forwardRef, Ref, ForwardRefExoticComponent, PropsWithoutRef, RefAttributes } from 'react';
 
 import { AnimatorClassSettings, AnimatorInstanceSettings, AnimatorProvidedSettings } from '../constants';
 import { mergeClassAndInstanceAnimatorSettings } from '../utils/mergeClassAndInstanceAnimatorSettings';
@@ -12,13 +12,13 @@ interface WithAnimatorInputProps {
 }
 
 interface WithAnimatorOutputProps {
-  animator?: AnimatorInstanceSettings
+  animator: AnimatorInstanceSettings
 }
 
-function withAnimator<T extends Component<P> | FC<P>, P extends WithAnimatorInputProps = WithAnimatorInputProps> (classAnimator?: AnimatorClassSettings) {
-  const withAnimatorWrapper = (InputComponent: ComponentType<P>) => {
+function withAnimator<T extends ComponentType<P>, P extends WithAnimatorInputProps = WithAnimatorInputProps> (classAnimator?: AnimatorClassSettings) {
+  const withAnimatorWrapper = (InputComponent: T) => {
     interface AnimatorMiddlewareProps {
-      InputComponent: ComponentType<P>
+      InputComponent: T
       forwardedRef: Ref<T>
     }
 
@@ -51,7 +51,7 @@ function withAnimator<T extends Component<P> | FC<P>, P extends WithAnimatorInpu
           forwardedRef
         })
       );
-    });
+    }) as ForwardRefExoticComponent<PropsWithoutRef<C> & RefAttributes<T>> & { defaultProps: Partial<C> & WithAnimatorOutputProps };
 
     const componentName = InputComponent.displayName || InputComponent.name || 'Component';
 
