@@ -10,7 +10,7 @@ interface ExtendAnimatorInputProps {
 }
 
 function extendAnimator<C extends React.ComponentType<P>, P extends ExtendAnimatorInputProps = ExtendAnimatorInputProps> (extendedClassAnimator: AnimatorClassSettings) {
-  const extendAnimatorWrapper = (Component: C) => {
+  const extendAnimatorWrapper = (InputComponent: C) => {
     const OutputComponent = forwardRef<C, P>((props, ref) => {
       const { animator: instanceAnimator, ...otherProps } = props;
       const resultAnimator = mergeClassAndInstanceAnimatorSettings(
@@ -18,14 +18,14 @@ function extendAnimator<C extends React.ComponentType<P>, P extends ExtendAnimat
         instanceAnimator
       );
 
-      return createElement(Component, {
+      return createElement(InputComponent, {
         ...(otherProps as P),
         animator: resultAnimator,
         ref
       });
     }) as ForwardRefExoticComponent<PropsWithoutRef<P> & RefAttributes<C>> & { defaultProps: Partial<P> & ExtendAnimatorInputProps };
 
-    const componentName = OutputComponent.displayName || OutputComponent.name || 'Component';
+    const componentName = InputComponent.displayName || InputComponent.name || 'Component';
 
     OutputComponent.displayName = `extendAnimator(${componentName})`;
 
