@@ -13,7 +13,6 @@ const styles: Styles = {
     fontFamily: theme.typography.content,
     backgroundColor: theme.color.section,
     userSelect: 'none',
-
     '& a': {
       color: theme.color.content,
       textDecoration: 'none',
@@ -22,6 +21,9 @@ const styles: Styles = {
       '&:hover, &:focus': {
         color: theme.color.active
       }
+    },
+    '& a + a': {
+      marginLeft: 10
     },
 
     [`@media (min-width: ${theme.breakpoints.tablet}px)`]: {

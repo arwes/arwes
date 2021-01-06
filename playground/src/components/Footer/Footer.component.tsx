@@ -13,15 +13,14 @@ const Footer: FC<FooterProps> = ({ classes, className }) => {
   return (
     <footer className={cx(classes.root, className)}>
       <div>
-        <a href='https://arwes.dev' target='_blank' rel='noreferrer'>
-          Arwes v{lernaSettings.version}
+        <a href='https://github.com/arwes/arwes' target='_blank' rel='noreferrer'>
+          v{lernaSettings.version}
         </a>
       </div>
       <div>
-        <a href='https://github.com/arwes/arwes' target='_blank' rel='noreferrer'>
+        <a href='https://github.com/arwes' target='_blank' rel='noreferrer'>
           GitHub
         </a>
-        {' / '}
         <a href='https://twitter.com/arwesjs' target='_blank' rel='noreferrer'>
           Twitter
         </a>
