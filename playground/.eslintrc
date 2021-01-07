@@ -1,0 +1,29 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "node_modules",
+    "public"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": [
+    "standard",
+    "standard-react"
+  ],
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "react/jsx-uses-vars": "error",
+    "react/jsx-uses-react": "error",
+    "react/prop-types": "off",
+    "semi": ["error", "always"],
+    "brace-style": ["error", "stroustrup"]
+  }
+}
