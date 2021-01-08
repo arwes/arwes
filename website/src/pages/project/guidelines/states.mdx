@@ -1,7 +1,11 @@
+import imageStateTransitions from '../../../images/docs/state-transitions-@2x.jpg';
+import imageSystemStateFlowAssembling from '../../../images/docs/system-state-flow-assembling-@2x.jpg';
+import imageSystemStateFlowDisassembling from '../../../images/docs/system-state-flow-disassembling-@2x.jpg';
+
 Arwes futuristic science fiction user interfaces have assembling/creating/building
 and disassembling/destructing/demolishing user experiences. To manage this workflow,
-[systems](../systems/systems.md) have UI states according to the application
-and user [events](../events/events.md). These states determine the nodes design,
+[systems](./systems) have UI states according to the application
+and user [events](./events). These states determine the nodes design,
 animations, and sounds configuration changes.
 
 Since the state transitions from one state to another throughout the user
@@ -21,7 +25,7 @@ invisible to the user.
 
 ## Transitions
 
-Due to [events](../events/events.md), a node can have the following state transitions:
+Due to [events](./events), a node can have the following state transitions:
 
 - From **exited** to **entering** when assembling.
 - From **entering** to **entered** when assembled.
@@ -32,7 +36,7 @@ cancelled so the flow is reversed.
 - From **exiting** to **entering** when in the middle of disassembling, it is
 cancelled so the flow is reversed.
 
-![State transitions.](./state-transitions-@2x.jpg)
+<img src={imageStateTransitions} alt='State transitions' />
 
 Other transitions should not be permitted.
 
@@ -61,12 +65,12 @@ then structural frames, then containers, and finally content. All nodes in
 the same level start transitioning in at the same time and should take the
 same duration.
 
-![System state flow assembling.](./system-state-flow-assembling-@2x.jpg)
+<img src={imageSystemStateFlowAssembling} alt='System state flow assembling' />
 
 When a system transitions out, all nodes regardless of their level in the hierarchy,
 should start transitioning out at the same time and should take the same duration.
 
-![System state flow disassembling.](./system-state-flow-disassembling-@2x.jpg)
+<img src={imageSystemStateFlowDisassembling} alt='System state flow disassembling' />
 
 All nodes in a system should support being animated or not. A non-animated node
 should not have transition animations nor sounds. The nodes components should

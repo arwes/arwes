@@ -1,3 +1,6 @@
+import imageArwesSystem from '../../../images/docs/arwes-system-@2x.jpg';
+import imageSystemExtensibility from '../../../images/docs/system-extensibility-@2x.jpg';
+
 Arwes UI applications are rich in visual, animations, and sounds effects,
 which can be structured as a tree of nodes.
 
@@ -7,7 +10,7 @@ each other by inheriting data and communicating dynamically.
 
 An Arwes system is an dynamically interconnected tree of nodes.
 
-![Arwes System example.](./arwes-system-@2x.jpg)
+<img src={imageArwesSystem} alt='Arwes System example' />
 
 In the example, each node has defined which combination of features to use.
 
@@ -21,10 +24,10 @@ Any node can have general non-specific settings which can be inherited to childr
 nodes. It can also have specific settings which are only applicable to the node
 alone but can generate effects on other nodes.
 
-Transition and persistent [states](../states/states.md) are defined in each node
+Transition and persistent [states](./states) are defined in each node
 to manage complex interface effects. These states can affect children node states.
 
-The interactive and programatic [events](../events/events.md) specified in
+The interactive and programatic [events](./events) specified in
 a node component can change its state and behavior based on its defined settings.
 
 ## Extensibility
@@ -43,7 +46,7 @@ or overwrited.
 
 A node should be listening to the system changes to react accordingly.
 
-![System extensibility example.](./system-extensibility-@2x.jpg)
+<img src={imageSystemExtensibility} alt='System extensibility example' />
 
 In the example, each of the different types of nodes will receive a value
 represented as a letter. The value is extended from left to right. Priority
