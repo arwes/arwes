@@ -1,26 +1,25 @@
 ```js
-const SOUND_CLICK_URL = '/sounds/click.mp3';
+const SOUND_INFORMATION_URL = '/sounds/information.mp3';
 const SOUND_WARNING_URL = '/sounds/warning.mp3';
 
-// Button
+// NotifyInfo
 
-const ButtonComponent = ({ bleeps, children }) => {
-  const onClick = () => bleeps.tap.play();
+const NotifyInfoComponent = ({ bleeps, children }) => {
+  const onClick = () => bleeps.info.play();
   return <button onClick={onClick}>{children}</button>;
 };
 
 const buttonBleepsSettings = {
-  tap: {
-    player: 'click',
-    category: 'interaction'
+  info: {
+    player: 'information'
   }
 };
 
-const Button = withBleeps(buttonBleepsSettings)(ButtonComponent);
+const NotifyInfo = withBleeps(buttonBleepsSettings)(NotifyInfoComponent);
 
-// Notify
+// NotifyWarn
 
-const NotifyComponent = ({ bleeps, children }) => {
+const NotifyWarnComponent = ({ bleeps, children }) => {
   const onClick = () => bleeps.notify.play();
   return <button onClick={onClick}>{children}</button>;
 };
@@ -32,7 +31,7 @@ const notifyBleepsSettings = {
   }
 };
 
-const Notify = withBleeps(notifyBleepsSettings)(NotifyComponent);
+const NotifyWarn = withBleeps(notifyBleepsSettings)(NotifyWarnComponent);
 
 // Sandbox
 
@@ -48,8 +47,8 @@ function Sandbox () {
     }
   };
   const players = {
-    click: {
-      src: [SOUND_CLICK_URL]
+    information: {
+      src: [SOUND_INFORMATION_URL]
     },
     warning: {
       src: [SOUND_WARNING_URL]
@@ -58,9 +57,17 @@ function Sandbox () {
 
   return (
     <BleepsProvider audio={audio} players={players}>
-      <Button>Button</Button>
+      {/*
+        The information bleep will have common audio
+        settings with low volume.
+      */}
+      <NotifyInfo>Information</NotifyInfo>
       {' '}
-      <Notify>Warning</Notify>
+      {/*
+        The warning bleep will have common audio and extended
+        by the notification category settings with high volume.
+      */}
+      <NotifyWarn>Warning</NotifyWarn>
     </BleepsProvider>
   );
 }
