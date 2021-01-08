@@ -45,4 +45,3 @@ yarn-error.log*
 
 /packages/*/lib
 /packages/*/dist
-/playground/dist

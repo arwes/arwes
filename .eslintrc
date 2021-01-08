@@ -5,7 +5,8 @@
     "coverage",
     "packages/*/lib",
     "packages/*/dist",
-    "playground/dist",
+    "playground",
+    "website",
     "__deprecated__"
   ],
   "parser": "@typescript-eslint/parser",
