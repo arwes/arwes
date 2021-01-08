@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 
+import { GA_TRACKING_ID } from '../../settings';
 import { RouterControlsContext } from '../RouterControlsContext';
 
 const initialControls = {
@@ -21,9 +22,7 @@ function RouterControlsProvider ({ children }) {
     setControls({ packageName, componentName, sandboxName });
   };
 
-  const changeRoute = route => {
-    history.push(route);
-  };
+  const changeRoute = route => history.push(route);
 
   const changeControl = (name, value) => {
     let controlsSideEffectChanges = {};
@@ -44,6 +43,9 @@ function RouterControlsProvider ({ children }) {
 
   useEffect(() => {
     onRouteChange();
+
+    // Google Analytics page tracking.
+    window.gtag?.('config', GA_TRACKING_ID, { page_path: location.pathname });
   }, [location.pathname]);
 
   const value = { controls, changeControl };

@@ -41,8 +41,8 @@ const styles = {
     outline: 'none',
     boxShadow: 'none',
     transition: 'color 150ms ease-out',
-    '-webkit-appearance': 'none',
-    '-moz-appearance': 'none',
+    WebkitAppearance: 'none',
+    MozAppearance: 'none',
 
     '& option, & optgroup': {
       backgroundColor: theme.color.section,
