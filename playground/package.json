@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "react-jss": "^10.5.0",
     "react-live": "^2.2.3",
     "react-router-dom": "^5.2.0"
   },

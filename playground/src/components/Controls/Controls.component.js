@@ -1,12 +1,15 @@
-import React, { useRef, useEffect } from 'react';
-import clsx from 'clsx';
+/** @jsx jsx */
+import { jsx } from '@emotion/react';
+import { useRef, useEffect } from 'react';
 import anime from 'animejs';
 
 import { useSelectedPlayground } from 'playground/src/tools/useSelectedPlayground';
 import { useRouterControls } from 'playground/src/tools/useRouterControls';
 import { Select } from '../Select';
+import { Button } from '../Button';
+import { styles } from './Controls.styles';
 
-function Component ({ classes, className, isHidden }) {
+function Controls ({ className, isHidden, onToggleControls }) {
   const rootRef = useRef();
   const isFirstRender = useRef(true);
   const { controls, changeControl } = useRouterControls();
@@ -52,10 +55,11 @@ function Component ({ classes, className, isHidden }) {
   return (
     <aside
       ref={rootRef}
-      className={clsx(classes.root, className)}
+      css={styles.root}
+      className={className}
     >
-      <div className={classes.content}>
-        <div className={classes.options}>
+      <div css={styles.content}>
+        <div css={styles.options}>
           <Select
             labelText='Package'
             value={controls.packageName}
@@ -84,7 +88,8 @@ function Component ({ classes, className, isHidden }) {
             )}
           </Select>
         </div>
-        <div className={classes.info}>
+        <div css={styles.guide}>
+          <div css={styles.guideTitle}>Guide</div>
           <p>
             Each sandbox source code should call a function <code>render()</code>{' '}
             with the sandbox component to render.
@@ -120,9 +125,12 @@ function Component ({ classes, className, isHidden }) {
             <li>The scrollbars styles.</li>
           </ul>
         </div>
+        <div css={styles.buttons}>
+          <Button onClick={onToggleControls}>OK</Button>
+        </div>
       </div>
     </aside>
   );
 }
 
-export { Component };
+export { Controls };

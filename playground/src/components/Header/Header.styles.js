@@ -13,7 +13,6 @@ const styles = {
     color: theme.color.content,
     userSelect: 'none',
     backgroundColor: theme.color.section,
-
     '& a': {
       textDecoration: 'none',
       color: 'inherit',
@@ -29,9 +28,13 @@ const styles = {
   title: {
     display: 'block',
     margin: 0,
-    padding: [0, 10],
+    padding: '0 10px',
     fontSize: 16,
-    whiteSpace: 'nowrap'
+    whiteSpace: 'nowrap',
+
+    [theme.breakpoints.tabletUp]: {
+      fontSize: 20
+    }
   },
   options: {
     display: 'flex',
@@ -55,21 +58,17 @@ const styles = {
   optionIcon: {
     display: 'inline-block',
     padding: 5,
-    fontSize: 18
+    fontSize: 18,
+
+    [theme.breakpoints.tabletUp]: {
+      fontSize: 20
+    }
   },
   optionText: {
     paddingRight: 5,
-    fontSize: 12
-  },
+    fontSize: 12,
 
-  [`@media (min-width: ${theme.breakpoints.tablet}px)`]: {
-    title: {
-      fontSize: 20
-    },
-    optionIcon: {
-      fontSize: 20
-    },
-    optionText: {
+    [theme.breakpoints.tabletUp]: {
       fontSize: 14
     }
   }

@@ -1,16 +1,18 @@
-import React from 'react';
-import clsx from 'clsx';
+/** @jsx jsx */
+import { jsx } from '@emotion/react';
 
-function Component ({ classes, className, live }) {
+import { styles } from './SandboxResult.styles';
+
+function SandboxResult ({ className, live }) {
   return (
-    <div className={clsx(classes.root, className)}>
+    <div className={className} css={styles.root}>
       {live.element && (
-        <div className={classes.rendered}>
+        <div css={styles.rendered}>
           <live.element />
         </div>
       )}
       {!live.element && (
-        <pre className={classes.error}>
+        <pre css={styles.error}>
           {live.error}
         </pre>
       )}
@@ -18,4 +20,4 @@ function Component ({ classes, className, live }) {
   );
 };
 
-export { Component };
+export { SandboxResult };

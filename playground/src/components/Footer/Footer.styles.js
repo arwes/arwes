@@ -5,7 +5,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     borderTop: `1px solid ${theme.color.border}`,
-    padding: [4, 10],
+    padding: '4px 10px',
     color: theme.color.content,
     fontSize: 12,
     fontFamily: theme.typography.content,
@@ -23,8 +23,7 @@ const styles = {
     '& a + a': {
       marginLeft: 10
     },
-
-    [`@media (min-width: ${theme.breakpoints.tablet}px)`]: {
+    [theme.breakpoints.tabletUp]: {
       fontSize: 14
     }
   }

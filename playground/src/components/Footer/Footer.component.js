@@ -1,15 +1,15 @@
-import React from 'react';
-import clsx from 'clsx';
+/** @jsx jsx */
+import { jsx } from '@emotion/react';
 
 import lernaSettings from 'repository/lerna.json';
+import { styles } from './Footer.styles';
 
-function Component ({ classes, className }) {
+function Footer ({ className }) {
   return (
-    <footer className={clsx(classes.root, className)}>
+    <footer css={styles.root} className={className}>
       <div>
-        <a href='https://github.com/arwes' target='github' rel='noreferrer'>
-          v{lernaSettings.version}
-        </a>
+        <a href='https://arwes.dev' target='website' rel='noreferrer'>arwes.dev</a>
+        <a href='https://github.com/arwes' target='github' rel='noreferrer'>v{lernaSettings.version}</a>
       </div>
       <div>
         <a href='https://discord.gg/s5sbTkw' target='discord' rel='noreferrer'>Discord</a>
@@ -20,4 +20,4 @@ function Component ({ classes, className }) {
   );
 }
 
-export { Component };
+export { Footer };

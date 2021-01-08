@@ -1,8 +1,6 @@
 import { withLive } from 'react-live';
-import withStyles from 'react-jss';
-import { Component } from './SandboxResult.component';
-import { styles } from './SandboxResult.styles';
+import { SandboxResult as Component } from './SandboxResult.component';
 
-const SandboxResult = withStyles(styles)(withLive(Component));
+const SandboxResult = withLive(Component);
 
 export { SandboxResult };

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import clsx from 'clsx';
+/** @jsx jsx */
+import { jsx, Global } from '@emotion/react';
+import { useState, useEffect } from 'react';
 import { LiveProvider } from 'react-live';
 import prismThemeVSDark from 'prism-react-renderer/themes/vsDark';
 
@@ -12,8 +13,9 @@ import { Controls } from '../Controls';
 import { SandboxEditor } from '../SandboxEditor';
 import { SandboxResult } from '../SandboxResult';
 import { Footer } from '../Footer';
+import { styles } from './App.styles';
 
-function Component ({ classes }) {
+function App () {
   const { sandboxConfig } = useSelectedPlayground();
 
   const getIsDeviceMobile = () => document.body.offsetWidth < theme.breakpoints.tablet;
@@ -79,12 +81,8 @@ function Component ({ classes }) {
   }, [sandboxConfig]);
 
   return (
-    <div
-      className={clsx(
-        classes.root,
-        isCodeActive && isPreviewActive && classes.isMainTwoPanels
-      )}
-    >
+    <div css={styles.root}>
+      <Global styles={styles.global} />
       <Header
         isCodeEnabled={isCodeEnabled}
         isPreviewEnabled={isPreviewEnabled}
@@ -96,12 +94,16 @@ function Component ({ classes }) {
         onTogglePreview={onTogglePreview}
         onToggleControls={onToggleControls}
       />
-      <div className={classes.content}>
+      <div css={styles.content}>
         <Controls
-          className={classes.controls}
+          css={styles.controls}
           isHidden={!isControlsActive}
+          onToggleControls={onToggleControls}
         />
-        <main className={classes.main}>
+        <main css={[
+          styles.main,
+          isCodeActive && isPreviewActive && styles.isMainTwoPanels
+        ]}>
           {!!sandboxConfig && (
             <LiveProvider
               code={getSandboxFileCode(sandboxConfig.code)}
@@ -111,12 +113,12 @@ function Component ({ classes }) {
               noInline
             >
               {isCodeActive && (
-                <div className={clsx(classes.panel, classes.editor)}>
+                <div css={[styles.panel, styles.editor, !isPreviewActive && styles.editorOnly]}>
                   <SandboxEditor />
                 </div>
               )}
               {isPreviewActive && (
-                <div className={clsx(classes.panel, classes.preview)}>
+                <div css={[styles.panel, styles.preview]}>
                   <SandboxResult />
                 </div>
               )}
@@ -129,4 +131,4 @@ function Component ({ classes }) {
   );
 };
 
-export { Component };
+export { App };

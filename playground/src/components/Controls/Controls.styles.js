@@ -14,10 +14,10 @@ const styles = {
     color: theme.color.content,
 
     '& p, & ul': {
-      margin: [10, 0]
+      margin: '10px 0'
     },
     '& ul': {
-      padding: [0, 0, 0, 10],
+      padding: '0 0 0 10px',
       listStyle: 'none'
     },
     '& li': {
@@ -44,28 +44,47 @@ const styles = {
     '& code': {
       fontFamily: theme.typography.monospace,
       backgroundColor: rgba(theme.color.content, 0.1)
+    },
+    [theme.breakpoints.tabletUp]: {
+      padding: 0
     }
   },
   content: {
+    display: 'grid',
+    gridTemplateColumns: 'auto',
+    gridTemplateRows: 'auto auto 1fr',
+    overflowY: 'auto',
     border: `1px solid ${theme.color.border}`,
-    padding: 10,
+    padding: '0 10px',
     width: '100%',
     height: '100%',
-    overflowY: 'auto',
-    backgroundColor: theme.color.section
+    backgroundColor: theme.color.section,
+    [theme.breakpoints.tabletUp]: {
+      border: 'none'
+    }
   },
   options: {
-    borderBottom: `1px solid ${rgba(theme.color.border, 0.5)}`
+    borderBottom: `1px solid ${rgba(theme.color.border, 0.5)}`,
+    paddingTop: 10
   },
-  info: {},
-
-  [`@media (min-width: ${theme.breakpoints.tablet}px)`]: {
-    root: {
-      padding: 0
-    },
-    content: {
-      padding: 10,
-      border: 'none'
+  guide: {
+    paddingTop: 10
+  },
+  guideTitle: {
+    display: 'block',
+    padding: '2px 0',
+    lineHeight: 1,
+    fontSize: 10,
+    textTransform: 'uppercase',
+    color: rgba(theme.color.content, 0.75)
+  },
+  buttons: {
+    display: 'flex',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    padding: '10px 0',
+    [theme.breakpoints.tabletUp]: {
+      display: 'none'
     }
   }
 };

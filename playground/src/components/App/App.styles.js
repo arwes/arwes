@@ -3,7 +3,7 @@ import { rgba, lighten } from 'polished';
 import { theme } from '../../theme';
 
 const styles = {
-  '@global': {
+  global: {
     '*, *:before, *:after': {
       boxSizing: 'border-box'
     },
@@ -43,7 +43,13 @@ const styles = {
   content: {
     position: 'relative',
     display: 'flex',
-    minHeight: 0 // Height overflow issue.
+    minHeight: 0, // Height overflow issue.
+
+    [theme.breakpoints.tabletUp]: {
+      display: 'grid',
+      gridTemplateColumns: '200px auto',
+      gridTemplateRows: 'auto'
+    }
   },
   controls: {
     position: 'absolute',
@@ -51,19 +57,25 @@ const styles = {
     right: 0,
     top: 0,
     bottom: 0,
-    overflowY: 'auto'
+
+    [theme.breakpoints.tabletUp]: {
+      position: 'static',
+      borderRight: `1px solid ${theme.color.border}`
+    }
   },
   main: {
     flex: 1,
     display: 'grid',
     gridTemplateRows: 'auto',
     gridTemplateColumns: '100%',
-    minHeight: 0 // Height overflow issue.
+    minHeight: 0, // Height overflow issue.
+
+    [theme.breakpoints.tabletUp]: {
+      flex: 'none'
+    }
   },
   isMainTwoPanels: {
-    '& $main': {
-      gridTemplateColumns: '50% 50%'
-    }
+    gridTemplateColumns: '50% 50%'
   },
   panel: {
     position: 'relative',
@@ -72,23 +84,11 @@ const styles = {
   editor: {
     borderRight: `1px solid ${rgba(theme.color.border, 0.5)}`
   },
+  editorOnly: {
+    borderRight: 'none'
+  },
   preview: {
     padding: 10
-  },
-
-  [`@media (min-width: ${theme.breakpoints.tablet}px)`]: {
-    content: {
-      display: 'grid',
-      gridTemplateColumns: '200px auto',
-      gridTemplateRows: 'auto'
-    },
-    controls: {
-      position: 'static',
-      borderRight: `1px solid ${theme.color.border}`
-    },
-    main: {
-      flex: 'none'
-    }
   }
 };
 

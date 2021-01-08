@@ -5,23 +5,21 @@ const styles = {
     fontSize: 10,
 
     // Prism editor uses inline styles.
-    fontFamily: [theme.typography.monospace, '!important'],
+    fontFamily: `${theme.typography.monospace} !important`,
 
     '& textarea': {
-      // Prism editor uses inline styles.
-      color: [theme.color.content, '!important'],
-      background: [theme.color.background, '!important'],
-
       outline: 'none',
+
+      // Prism editor uses inline styles.
+      color: `${theme.color.content} !important`,
+      background: `${theme.color.background} !important`,
 
       '&:hover': {
         outline: 'none'
       }
-    }
-  },
+    },
 
-  [`@media (min-width: ${theme.breakpoints.tablet}px)`]: {
-    root: {
+    [theme.breakpoints.tabletUp]: {
       fontSize: 12
     }
   }

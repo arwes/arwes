@@ -1,9 +1,16 @@
-import React from 'react';
+/** @jsx jsx */
+import { jsx } from '@emotion/react';
 import { LiveEditor } from 'react-live';
-import clsx from 'clsx';
 
-function Component ({ classes, className }) {
-  return <LiveEditor className={clsx(classes.root, className)} />;
+import { styles } from './SandboxEditor.styles';
+
+function SandboxEditor ({ className }) {
+  return (
+    <LiveEditor
+      className={className}
+      css={styles.root}
+    />
+  );
 }
 
-export { Component };
+export { SandboxEditor };

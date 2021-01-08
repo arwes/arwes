@@ -6,7 +6,7 @@ const styles = {
   root: {
     position: 'relative',
     display: 'block',
-    margin: [0, 0, 10],
+    margin: '0 0 10px',
     fontFamily: theme.typography.content,
     color: theme.color.content,
 
@@ -17,7 +17,7 @@ const styles = {
   },
   labelText: {
     display: 'block',
-    padding: [2, 0],
+    padding: '2px 0',
     lineHeight: 1,
     fontSize: 10,
     textTransform: 'uppercase',
