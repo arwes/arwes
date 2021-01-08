@@ -15,6 +15,7 @@
     "@babel/runtime": "^7.12.5",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
+    "copy-webpack-plugin": "^7.0.0",
     "cross-env": "^7.0.3",
     "eslint": "^7.17.0",
     "eslint-config-standard": "^16.0.2",

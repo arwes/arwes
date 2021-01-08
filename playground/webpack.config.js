@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const babelConfig = require('./babel.config');
 
@@ -39,13 +40,16 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src/index.html'),
       filename: path.join(__dirname, 'public/index.html')
+    }),
+    new CopyWebpackPlugin({
+      patterns: [{
+        from: path.join(__dirname, 'static'),
+        to: path.join(__dirname, 'public')
+      }]
     })
   ],
   devServer: {
-    contentBase: [
-      path.join(__dirname, 'public'),
-      path.join(__dirname, 'static')
-    ],
+    contentBase: path.join(__dirname, 'public'),
     historyApiFallback: true,
     watchContentBase: true,
     disableHostCheck: true,
