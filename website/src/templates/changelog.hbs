@@ -1,0 +1,40 @@
+import { PageContentLayout } from '../../components/PageContentLayout';
+export default props => React.createElement(PageContentLayout, {
+  headProps: { title: 'Changelog' },
+  ...props
+});
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+Dates are displayed in UTC.
+
+The project uses [Semantic Versioning 2.0](https://semver.org).
+
+{{#each releases}}
+  {{#if href}}
+    ##{{#unless major}}#{{/unless}} [{{title}}]({{href}})
+  {{else}}
+    ### {{title}}
+  {{/if}}
+
+  {{#if tag}}
+    > {{niceDate}}
+  {{/if}}
+
+  {{#if summary}}
+    {{summary}}
+  {{/if}}
+
+  {{#each merges}}
+    - {{#if commit.breaking}}**Breaking change:** {{/if}}{{message}}{{#if href}} [`#{{id}}`]({{href}}){{/if}}
+  {{/each}}
+  {{#each fixes}}
+    - {{#if commit.breaking}}**Breaking change:** {{/if}}{{commit.subject}}{{#each fixes}}{{#if href}} [`#{{id}}`]({{href}}){{/if}}{{/each}}
+  {{/each}}
+  {{#each commits}}
+    - {{#if breaking}}**Breaking change:** {{/if}}{{subject}}{{#if href}} [`{{shorthash}}`]({{href}}){{/if}}
+  {{/each}}
+
+{{/each}}

@@ -1,20 +1,13 @@
 const path = require('path');
 
+const settings = require('./settings');
+
 module.exports = {
-  siteMetadata: {
-    title: 'Arwes',
-    siteName: 'Arwes',
-    description: 'Futuristic Sci-Fi UI Web Framework.',
-    author: '@arwesjs',
-    url: 'https://arwes.dev',
-    image: 'https://arwes.dev/arwes.jpg'
-  },
   plugins: [
     {
       resolve: 'gatsby-plugin-google-analytics',
       options: {
-        trackingId: 'UA-50433259-2',
-        head: true
+        trackingId: settings.gaTrackingId
       }
     },
     'gatsby-plugin-react-helmet',

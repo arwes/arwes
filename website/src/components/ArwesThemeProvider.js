@@ -17,7 +17,9 @@ const theme = {
     error: '#ce003e'
   },
   breakpoints: {
-    tablet: 768
+    tablet: 768,
+    tabletUp: '@media (min-width: 768px)',
+    tabletDown: '@media (max-width: 767px)'
   }
 };
 

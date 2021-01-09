@@ -1,5 +1,12 @@
+import { PageContentLayout } from '../../components/PageContentLayout';
+export default props => <PageContentLayout headProps={{ title: 'Roadmap' }} {...props} />;
+
+# Roadmap
+
+> _Last updated: January 11, 2021_
+
 - Tasks are listed with their respective details in the [project boards](https://github.com/arwes/arwes/projects).
-- The order in the lists does not represent priority neither order or execution.
+- The order in the lists does not exactly represent priority, order, neither execution.
 - The roadmap is subject to changes according to the development progress.
 
 ----
@@ -68,10 +75,10 @@ the vision of the project is.
 
 #### General
 
-- [x] Project dependency packages update.
-- [x] Repository and website documentation file structure definition.
-- [x] Documentation guidelines for systems, states, and events.
-- [x] [#64](https://github.com/arwes/arwes/issues/64) _Arwes UI/UX design
+- [x] Update project dependency packages.
+- [x] Define repository and website documentation file structure.
+- [x] Create documentation guidelines for systems, states, and events.
+- [x] [#64](https://github.com/arwes/arwes/issues/64) _Create Arwes UI/UX design
 specification. (In progress.)_
 - [x] [#61](https://github.com/arwes/arwes/issues/61) Migrate project packages
 source code to TypeScript.
@@ -79,22 +86,22 @@ source code to TypeScript.
 
 #### Playground
 
-- [x] [#24](https://github.com/arwes/arwes/issues/24) Playground support with
+- [x] [#24](https://github.com/arwes/arwes/issues/24) Add playground support for
 multiple sandboxes.
-- [x] Playground application UX update.
+- [x] Update playground application UX.
 
 #### `@arwes/animation`
 
-- [x] [#70](https://github.com/arwes/arwes/issues/70) Declarative and extensible
+- [x] [#70](https://github.com/arwes/arwes/issues/70) Add declarative and extensible
 animation component tools.
-- [x] [#36](https://github.com/arwes/arwes/issues/36) Non-parallel animation
+- [x] [#36](https://github.com/arwes/arwes/issues/36) Add non-parallel animation
 management support.
-- [x] Animation management documentation.
+- [x] Create animation management documentation.
 
 #### `@arwes/sounds`
 
-- [x] [#81](https://github.com/arwes/arwes/issues/81) Sounds provider and sounds
-component set up.
+- [x] [#81](https://github.com/arwes/arwes/issues/81) Add bleeps provider and bleeps
+component set up tools.
 
 ----
 
@@ -105,6 +112,7 @@ component set up.
 #### General
 
 - [ ] [#64](https://github.com/arwes/arwes/issues/64) Arwes UI/UX design specification.
+- [ ] Project guidelines related to visual design.
 - [ ] [#18](https://github.com/arwes/arwes/issues/18) Update contributing documentation.
 
 #### Playground
@@ -121,14 +129,29 @@ design.
 
 #### `@arwes/design`
 
-- [ ] Component theme and style setup and extensibility.
-- [ ] Design management documentation.
+- [x] Research current React styling tools state to define which ones to use for
+the Arwes theming/styling tools.
+- [ ] Specify and develop component theme and style setup and extensibility tools.
+- [ ] Create design management documentation.
 
 #### `@arwes/animation`
 
+- [ ] Simplify animator TypeScript typing names.
 - [ ] [#63](https://github.com/arwes/arwes/issues/63) Research SEO support for
 animated components.
 
 #### `@arwes/sounds`
 
-- [ ] Sounds management documentation.
+- [x] Create sounds management documentation.
+- [ ] Research and define a way to handle custom sound loading along with the
+tools usage.
+
+#### `@arwes/core`
+
+- [ ] Specify and develop structure components.
+- [ ] Specify and develop content components.
+- [ ] Specify and develop interaction components.
+
+#### `@arwes/arwes`
+
+- [ ] Specify and develop Logo component.

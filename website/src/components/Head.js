@@ -1,26 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import { useStaticQuery, graphql } from 'gatsby';
+
+import settings from '../../settings';
 
 function Head ({ lang, title, description, meta, link }) {
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
-        }
-      }
-    `
-  );
-
-  const siteMetadata = site.siteMetadata || {};
-  const defaultTitle = siteMetadata.title;
-  const metaDescription = description || siteMetadata.description;
+  const { metadata } = settings;
+  const defaultTitle = metadata.title;
+  const metaDescription = description || metadata.description;
 
   return (
     <Helmet
@@ -32,20 +19,20 @@ function Head ({ lang, title, description, meta, link }) {
       meta={[
         { name: 'description', content: metaDescription },
         { property: 'og:title', content: title },
-        { property: 'og:site_name', content: siteMetadata.siteName },
+        { property: 'og:site_name', content: metadata.siteName },
         { property: 'og:description', content: metaDescription },
         { property: 'og:type', content: 'website' },
         { name: 'twitter:card', content: 'summary' },
-        { name: 'twitter:creator', content: siteMetadata.author },
+        { name: 'twitter:creator', content: metadata.author },
         { name: 'twitter:title', content: title },
         { name: 'twitter:description', content: metaDescription },
-        { name: 'og:url', content: siteMetadata.url },
-        { name: 'og:image', content: siteMetadata.image }
+        { name: 'og:url', content: metadata.url },
+        { name: 'og:image', content: metadata.image }
       ].concat(meta)}
       link={[
         { rel: 'preconnect', href: 'https://fonts.gstatic.com' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;600&family=Titillium+Web:wght@300;400;600&display=swap' }
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600&family=Source+Code+Pro:wght@300;400;600&display=swap' }
       ].concat(link)}
     />
   );

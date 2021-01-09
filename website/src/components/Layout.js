@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Global } from '@emotion/react';
-import { lighten } from 'polished';
+import { lighten, rgba } from 'polished';
 
 const Layout = ({ children }) => {
   return (
@@ -18,13 +18,14 @@ const Layout = ({ children }) => {
             backgroundColor: theme.color.neutral,
             fontFamily: theme.typography.content,
             color: theme.color.content,
-            lineHeight: 1.3,
+            lineHeight: 1.35,
             fontSize: 16,
             scrollbarWidth: 'thin',
             scrollbarColor: lighten(0.1, theme.color.neutral) + ' ' + lighten(0.05, theme.color.neutral),
 
             '& ::-webkit-scrollbar': {
-              width: 8
+              width: 8,
+              height: 8
             },
             '& ::-webkit-scrollbar-track': {
               background: lighten(0.05, theme.color.neutral)
@@ -37,9 +38,59 @@ const Layout = ({ children }) => {
               color: theme.color.neutral
             }
           },
+          'h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote, pre, img, hr': {
+            display: 'block',
+            margin: '0 0 20px'
+          },
           a: {
             color: theme.color.link,
-            textDecoration: 'none'
+            textDecoration: 'none',
+            transition: 'color 150ms ease-out',
+
+            '&:hover, &:focus': {
+              color: theme.color.active
+            }
+          },
+          h1: { fontSize: 32 },
+          h2: { fontSize: 28 },
+          h3: { fontSize: 24 },
+          h4: { fontSize: 21 },
+          h5: { fontSize: 18 },
+          h6: { fontSize: 16 },
+          'ul, ol': {
+            padding: '0 0 0 40px',
+
+            '& img': {
+              display: 'inline-block',
+              margin: 0
+            }
+          },
+          blockquote: {
+            display: 'block',
+            marginLeft: 10,
+            borderLeft: `4px solid ${theme.color.content}`,
+            padding: '0 0 0 10px'
+          },
+          'pre, code': {
+            fontFamily: theme.typography.monospace
+          },
+          pre: {
+            overflowX: 'auto',
+            border: `1px solid ${rgba(theme.color.content, 0.5)}`,
+            padding: 10,
+            lineHeight: 1.2,
+            fontSize: '0.9em'
+          },
+          img: {
+            display: 'block',
+            maxWidth: '100%'
+          },
+          hr: {
+            width: '100%',
+            height: 0,
+            borderStyle: 'solid',
+            borderColor: theme.color.content,
+            borderWidth: '0 0 1px 0'
           }
         })}
       />

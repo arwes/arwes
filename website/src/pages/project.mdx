@@ -1,70 +1,89 @@
+import { PageContentLayout } from '../components/PageContentLayout';
+export default props => <PageContentLayout headProps={{ title: 'Project' }} {...props} />;
+
+# Project
+
+<div>
+    <a href="https://npmjs.org/package/@arwes/arwes" target='_blank'>
+        <img src="https://img.shields.io/npm/v/@arwes/arwes.svg" alt="version" style={{ display: 'inline-block' }} />
+    </a>
+    {' '}
+    <a href="https://github.com/arwes/arwes/actions" target='_blank'>
+        <img src="https://github.com/arwes/arwes/workflows/ci/badge.svg" alt="ci" style={{ display: 'inline-block' }} />
+    </a>
+    {' '}
+    <a href="https://github.com/arwes/arwes" target='_blank'>
+        <img src="https://img.shields.io/github/stars/arwes/arwes.svg?style=social&label=stars" alt="github stars" style={{ display: 'inline-block' }} />
+    </a>
+    {' '}
+    <a href="https://npmjs.org/package/@arwes/arwes" target='_blank'>
+        <img src="https://img.shields.io/npm/dm/@arwes/arwes.svg" alt="downloads" style={{ display: 'inline-block' }} />
+    </a>
+    {' '}
+    <a href="https://twitter.com/arwesjs" target='_blank'>
+        <img src="https://img.shields.io/twitter/follow/arwesjs.svg?label=%40arwesjs&style=social" alt="Twitter Follow" style={{ display: 'inline-block' }} />
+    </a>
+    {' '}
+    <a href="https://discord.gg/s5sbTkw" target='_blank'>
+        <img src="https://img.shields.io/badge/chat-discord-blue.svg" alt="chat on discord" style={{ display: 'inline-block' }} />
+    </a>
+</div>
+<div>
+    <a href="https://standardjs.com" target='_blank'>
+        <img src="https://img.shields.io/badge/code_style-standardjs-d2bb09.svg" alt="code style: standardjs" style={{ display: 'inline-block' }} />
+    </a>
+    {' '}
+    <a href="https://jestjs.io" target='_blank'>
+        <img src="https://img.shields.io/badge/tested%20with-jest-15c213.svg" alt="tested with: jest" style={{ display: 'inline-block' }} />
+    </a>
+    {' '}
+    <a href="https://lernajs.io" target='_blank'>
+        <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="lerna" style={{ display: 'inline-block' }} />
+    </a>
+    {' '}
+    <a href="http://commitizen.github.io/cz-cli" target='_blank'>
+        <img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt="Commitizen friendly" style={{ display: 'inline-block' }} />
+    </a>
+    {' '}
+    <a href="https://github.com/arwes/arwes/blob/main/LICENSE" target='_blank'>
+        <img src="https://img.shields.io/github/license/arwes/arwes.svg?maxAge=2592000" alt="license" style={{ display: 'inline-block' }} />
+    </a>
+</div>
+
 [Arwes](https://arwes.dev) is a web framework to build user interfaces based on
 futuristic science fiction designs, animations, and sound effects. The concepts
 behind are opinionated with influences from [Cyberpunk](https://en.wikipedia.org/wiki/Cyberpunk),
-[Cyberprep](https://aesthetics.fandom.com/wiki/Cyberprep), and [Synthwave](https://en.wikipedia.org/wiki/Synthwave).
-It tries to inspire advanced space and alien technology.
+[Cyberprep](https://aesthetics.fandom.com/wiki/Cyberprep), and [Synthwave](https://en.wikipedia.org/wiki/Synthwave),
+and productions like [Star Citizen](http://robertsspaceindustries.com),
+[Halo](https://www.halowaypoint.com/en-us/games), and [TRON: Legacy](http://www.imdb.com/title/tt1104001).
+It tries to inspire advanced space and alien technology. See [Purpose](/project/purpose).
 
-It is built on top of [React](https://reactjs.org), [JSS](https://cssinjs.org),
-[Anime](https://animejs.com), and [Howler](https://howlerjs.com).
+The project defines [a set of UI/UX guidelines](/project/guidelines), uses
+[many inspiration resources](/design), and it is delivered as [a collection of packages](/develop).
 
-> The project has a working version with the package [`arwes`](https://npmjs.org/package/arwes)
-and the documentation with the website [arwes.dev](https://arwes.dev).
-This is an _alpha_ release. Modules and components are being tested and their
-API may change. Check out the source code at
-**[`version1-breakpoint1`](https://github.com/arwes/arwes/tree/version1-breakpoint1)**
-branch where you can find the components and the website.
-Currently, the development is at [`main`](https://github.com/arwes/arwes) branch
-with the packages `@arwes/[package]`. They are not a working version yet, and they
-have major breaking changes with the `arwes` package.
+This website, [arwes.dev](https://arwes.dev), shows the work in progress of the
+documentation for the project latest version which is under active development
+at [`main`](https://github.com/arwes/arwes) branch with the packages `@arwes/[package]`
+with major breaking changes from the previous version. It is still in
+[alpha release](https://stackoverflow.com/questions/40067469), so the components
+are being tested and their API may change as it gets completed.
 
-## Packages
+> As it is now, the website has a simple layout until the first beta version is
+released and the components can be properly implemented in this website.
 
-### Functionalities
+The project is not fully open for sustancial contributions yet until the
+first beta version is released and the [project guidelines](/project/guidelines)
+are finished. But you can follow the development in [Discord](https://discord.gg/s5sbTkw)
+and [Twitter](https://twitter.com/arwesjs). For more details, read
+[FAQ](/project/faq) and [Roadmap](/project/roadmap).
 
-The main functionalities which power the UI component system.
+The [playground](https://playground.arwes.dev) application intends to show the
+project APIs in a live environment so the developer can test the main functionalities
+and components use cases in JavaScript. The playground will not use the framework
+components directly since it is a playground for the components themselves.
 
-#### `@arwes/tools`
-
-![status](https://img.shields.io/badge/status-in%20concept-999999.svg)
-![downloads](https://img.shields.io/npm/dm/@arwes/tools.svg)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/@arwes/tools)
-
-Resource loading, responsive control, and general browser API tools.
-
-#### `@arwes/design`
-
-![status](https://img.shields.io/badge/status-in%20specification-blue.svg)
-![downloads](https://img.shields.io/npm/dm/@arwes/design.svg)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/@arwes/design)
-
-Theming and styling tools using [JSS](https://cssinjs.org) in [React](https://reactjs.org).
-
-#### `@arwes/animation`
-
-![status](https://img.shields.io/badge/status-in%20polishing-yellow.svg)
-![downloads](https://img.shields.io/npm/dm/@arwes/animation.svg)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/@arwes/animation)
-
-Assemble and disassemble user interfaces using animation controls in [React](https://reactjs.org).
-
-#### `@arwes/sounds`
-
-![status](https://img.shields.io/badge/status-in%20polishing-yellow.svg)
-![downloads](https://img.shields.io/npm/dm/@arwes/sounds.svg)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/@arwes/sounds)
-
-Define, manage and control interactive sound effects using [Howler](https://howlerjs.com)
-in [React](https://reactjs.org).
-
-### Implementations
-
-Using the functionality packages and based on the project guidelines, these are
-design system or design component implementations.
-
-#### `@arwes/arwes`
-
-![status](https://img.shields.io/badge/status-in%20concept-999999.svg)
-![downloads](https://img.shields.io/npm/dm/@arwes/arwes.svg)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/@arwes/arwes)
-
-Arwes design component system.
+The project has a working version with the package [`arwes`](https://npmjs.org/package/arwes)
+`v1.0.0-alpha.5` and the documentation with the website [version1-breakpoint1.arwes.dev](https://version1-breakpoint1.arwes.dev).
+Check out the source code at [`version1-breakpoint1`](https://github.com/arwes/arwes/tree/version1-breakpoint1)
+branch where you can find the components and the website. This package was released
+in February, 2018, and it is now deprecated.

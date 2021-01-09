@@ -1,3 +1,8 @@
+import { PageContentLayout } from '../../../components/PageContentLayout';
+export default props => <PageContentLayout headProps={{ title: 'Events' }} {...props} />;
+
+# Events
+
 A node will transition from one [state](./states) to another when events
 occur under certain conditions.
 
@@ -18,7 +23,7 @@ to a new application view.
 out before it is replaced for another.
 - A menu hover event can make the menu children item nodes to transition in.
 
-Node components events should not necessarily change its state. Such as toggling
+Node components events should not necessarily change its own state. Such as toggling
 a form checkbox or filling out a form input.
 
 For subtle interactions, like hovering a link or typing a key, subtle animations
