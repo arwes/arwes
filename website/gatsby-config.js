@@ -40,6 +40,14 @@ module.exports = {
         icon: 'src/images/icon.png'
       }
     },
-    'gatsby-plugin-mdx'
+    'gatsby-plugin-mdx',
+    {
+      resolve: 'gatsby-plugin-alias-imports',
+      options: {
+        alias: {
+          '@repository': path.join(process.cwd(), '..')
+        }
+      }
+    }
   ]
 };

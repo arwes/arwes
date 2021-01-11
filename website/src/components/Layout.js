@@ -24,8 +24,8 @@ const Layout = ({ children }) => {
             scrollbarColor: lighten(0.1, theme.color.neutral) + ' ' + lighten(0.05, theme.color.neutral),
 
             '& ::-webkit-scrollbar': {
-              width: 8,
-              height: 8
+              width: 10,
+              height: 10
             },
             '& ::-webkit-scrollbar-track': {
               background: lighten(0.05, theme.color.neutral)
@@ -62,7 +62,8 @@ const Layout = ({ children }) => {
 
             '& img': {
               display: 'inline-block',
-              margin: 0
+              margin: 0,
+              verticalAlign: 'middle'
             }
           },
           blockquote: {
@@ -72,7 +73,8 @@ const Layout = ({ children }) => {
             padding: '0 0 0 10px'
           },
           'pre, code': {
-            fontFamily: theme.typography.monospace
+            fontFamily: theme.typography.monospace,
+            backgroundColor: rgba(theme.color.content, 0.2)
           },
           pre: {
             overflowX: 'auto',

@@ -7,6 +7,7 @@
     "@mdx-js/react": "^1.6.22",
     "gatsby": "^2.30.1",
     "gatsby-image": "^2.9.0",
+    "gatsby-plugin-alias-imports": "^1.0.5",
     "gatsby-plugin-emotion": "^5.2.0",
     "gatsby-plugin-google-analytics": "^2.9.0",
     "gatsby-plugin-manifest": "^2.10.0",
@@ -16,7 +17,9 @@
     "gatsby-plugin-sharp": "^2.12.0",
     "gatsby-source-filesystem": "^2.9.0",
     "gatsby-transformer-sharp": "^2.10.0",
-    "react-helmet": "^6.1.0"
+    "prism-react-renderer": "^1.1.1",
+    "react-helmet": "^6.1.0",
+    "react-live": "^2.2.3"
   },
   "devDependencies": {
     "eslint": "^7.17.0",

@@ -1,13 +1,5 @@
-import React from 'react';
+import { WrapRootElement } from './src/components/WrapRootElement';
 
-import { ArwesThemeProvider } from './src/components/ArwesThemeProvider';
-
-const wrapRootElement = ({ element }) => {
-  return (
-    <ArwesThemeProvider>
-      {element}
-    </ArwesThemeProvider>
-  );
-};
+const wrapRootElement = WrapRootElement;
 
 export { wrapRootElement };
