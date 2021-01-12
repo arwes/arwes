@@ -1,0 +1,142 @@
+import { PageContentLayout } from '../../../components/PageContentLayout';
+export default props => <PageContentLayout headProps={{ title: 'Animator Managers' }} {...props} />;
+
+# Animator Managers
+
+Direct children nodes inside a parent node can transition with different kinds
+of managers. A manager is a function which determines when the children nodes
+should transition on parent flow changes.
+
+There are `parallel` (default), `stagger`, `sequence` and custom function managers.
+
+Taking the example of the animated `<Menu/>` and `<Item/>` components, the
+menu can make its children items to transition in staggering using the `duration.stagger`
+default time.
+
+```tsx
+<Menu animator={{ manager: 'stagger' }}>
+  <Item>Menu Item 1</Item>
+  <Item>Menu Item 2</Item>
+  <Item>Menu Item 3</Item>
+</Menu>
+```
+
+A complete example can look like:
+
+```arwes_sandbox
+// MENU
+
+const menuStyle = {
+  listStyle: 'none',
+  border: '1px solid cyan',
+  padding: 20,
+  background: 'MidnightBlue',
+
+  // Animation initial values.
+  opacity: 0,
+  translateX: -20
+};
+
+const MenuComponent = ({ animator, children }) => {
+  const ref = React.useRef();
+  animator.setupAnimateRefs(ref);
+  return <ul ref={ref} style={menuStyle}>{children}</ul>;
+};
+
+const menuAnimator = {
+  duration: { enter: 200, exit: 200 },
+
+  useAnimateEntering (animator, ref) {
+    anime({
+      targets: ref.current,
+      duration: animator.duration.enter,
+      easing: 'linear',
+      opacity: [0, 1],
+      translateX: [-20, 0]
+    });
+  },
+
+  useAnimateExiting (animator, ref) {
+    anime({
+      targets: ref.current,
+      duration: animator.duration.enter,
+      easing: 'linear',
+      opacity: [1, 0],
+      translateX: [0, 20]
+    });
+  }
+};
+
+const Menu = withAnimator(menuAnimator)(MenuComponent);
+
+// ITEM
+
+const itemStyle = {
+  display: 'block',
+  fontSize: 20,
+  color: 'cyan',
+
+  // Animation initial values.
+  opacity: 0,
+  translateX: -10
+};
+
+const ItemComponent = ({ animator, children }) => {
+  const ref = React.useRef();
+  animator.setupAnimateRefs(ref);
+  return <li ref={ref} style={itemStyle}>{children}</li>;
+};
+
+const itemAnimator = {
+  duration: { enter: 200, exit: 200 },
+
+  useAnimateEntering (animator, ref) {
+    anime({
+      targets: ref.current,
+      duration: animator.duration.enter,
+      easing: 'linear',
+      opacity: [0, 1],
+      translateX: [-10, 0]
+    });
+  },
+
+  useAnimateExiting (animator, ref) {
+    anime({
+      targets: ref.current,
+      duration: animator.duration.enter,
+      easing: 'linear',
+      opacity: [1, 0]
+    });
+  }
+};
+
+const Item = withAnimator(itemAnimator)(ItemComponent);
+
+// APP
+
+function App () {
+  const [activate, setActivate] = React.useState(true);
+  const timeout = React.useRef();
+
+  React.useEffect(() => {
+    timeout.current = setTimeout(() => setActivate(!activate), 2000);
+    return () => clearTimeout(timeout.current);
+  }, [activate]);
+
+  return (
+    <Menu animator={{
+      activate,
+      manager: 'stagger',
+      duration: { stagger: 100 }
+    }}>
+      <Item>Menu Item 1</Item>
+      <Item>Menu Item 2</Item>
+      <Item>Menu Item 3</Item>
+    </Menu>
+  );
+}
+
+render(<App />);
+```
+
+Now the children items enter in staggering animation.

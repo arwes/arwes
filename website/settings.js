@@ -40,7 +40,14 @@ module.exports = {
       name: 'Develop',
       path: 'develop',
       items: [
-        { name: 'Animation', path: 'animation' },
+        {
+          name: 'Animation',
+          path: 'animation',
+          items: [
+            { name: 'Nesting Animators', path: 'nesting' },
+            { name: 'Animator Managers', path: 'managers' }
+          ]
+        },
         { name: 'Sounds', path: 'sounds' }
       ]
     },
