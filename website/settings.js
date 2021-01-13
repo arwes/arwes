@@ -48,7 +48,14 @@ module.exports = {
             { name: 'Animator Managers', path: 'managers' }
           ]
         },
-        { name: 'Sounds', path: 'sounds' }
+        {
+          name: 'Sounds',
+          path: 'sounds',
+          items: [
+            { name: 'Bleeps Categories', path: 'categories' },
+            { name: 'Sound Accessibility', path: 'accessibility' }
+          ]
+        }
       ]
     },
     {

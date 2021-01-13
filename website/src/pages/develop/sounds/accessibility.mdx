@@ -1,0 +1,37 @@
+import { PageContentLayout } from '../../../components/PageContentLayout';
+export default props => <PageContentLayout headProps={{ title: 'Sound Accessibility' }} {...props} />;
+
+# Sound Accessibility
+
+A web page with interface sounds effects should not be intrusive to the
+user. Certain web applications make the user expect sounds effects implicitely,
+but this is not necessarily the default case. See the [UI/UX guidelines](/project/guidelines)
+where some recommendations are made.
+
+Since [Chrome Audio Autoplay Policies](https://developers.google.com/web/updates/2018/11/web-audio-autoplay)
+block the sound playback on window load until first user interaction, it is not
+recommended to play sounds on window start time. Only after first user interaction.
+
+By default, [howlerjs](https://howlerjs.com) will try to unlock the browser
+sound playback on window load. In case audio is locked, this will queue all sound
+playbacks before it was unlocked and play them when it is unlocked. This behavior
+is not recommended and it can be disabled:
+
+```tsx
+import howler from 'howler';
+
+howler.autoUnlock = false;
+```
+
+In this case, only sounds after browser audio is unlocked are reproduced.
+So the sounds can be played normally and they will be reproduced only if allowed
+without throwing erros if audio playback is locked.
+
+If the application requires to play sounds as normal user experience, it is
+recommended to "explicitely" request permission from the user, such as showing
+a start page with a button to request access before accessing to the application.
+
+The sounds tools allow the programmer to define if the sounds are enabled,
+the sound volume, and the rate of playback. It also allows to set settings
+by [categories of sounds](/develop/sounds/categories). It is recommended to show
+the user a settings panel where to configure these behaviors.

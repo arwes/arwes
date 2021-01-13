@@ -3,21 +3,244 @@ export default props => <PageContentLayout headProps={{ title: 'Sounds' }} {...p
 
 # Sounds
 
-The Arwes sounds management is composed by a set of tools which follow the
-[project guidelines](../guidelines/guidelines.md) and is implemented using
-[howlerjs](https://howlerjs.com) in [React](https://reactjs.org). It goes hand
-in hand with the [animation management](../animation-management/animation-management.md)
-though it is not a dependency.
+Define, manage, and control interactive sound effects using [Howler](https://howlerjs.com)
+in [React](https://reactjs.org).
 
-- A sound can be played by a `player` from nodes.
-- The `player` behavior can be determined by the `audio` settings received in
-the node.
-- The `players` and `audio` values can be setup for all system nodes, for nodes
-of a certain type, or an specific node.
-- If many nodes play the same `player` at the same time, it is responsibility
-of the `player` to determine if the sound is played multiple times or only once.
-- Only if a node is animated, it can play sounds.
-- If multiple nodes in a system play the same sound at the same time, the sound
-should be played only once.
-- If a sound is playing and another node tries to play it again, the sound should
-restarts.
+Based on the [UI/UX guidelines](/project/guidelines), the sounds tools can be
+used for application interface sounds management. Futuristic science fiction
+user interfaces usually execute short experiential sounds such as beeps and bleeps
+on [events](/project/guidelines/events) or [state transitions](/project/guidelines/states).
+
+These tools are not intended for sounds with long durations such as music songs.
+
+The sounds tools require the [React](https://reactjs.org) component tree to
+allow the dynamic communication between components and [Howler](https://howlerjs.com)
+for sound management.
+
+It goes hand in hand with the [animation tools](/develop/animation), though
+it is not a dependency.
+
+It is advised to follow the [Sound Accessibility](/develop/sounds/accessibility)
+recommendations.
+
+## Installation
+
+All the tools are bundled and can be installed with the following NPM package:
+
+```bash
+npm install @arwes/sounds
+```
+
+The sounds management tooling requires React v17 and Howler v2.2 as peer-dependencies.
+
+## Bleeps
+
+A short sound used in Arwes application components is called a bleep. Bleeps can
+be used on user events such as user interactions, application events such as
+notifications, or animation flow transitions on specific components along with
+the [animation tools](/develop/animation).
+
+## Providers
+
+Since bleeps in an application are shared among its components, there needs to be
+a global data provider of the audio settings and the player settings. Then these
+settings are consumed by components with specific configurations.
+
+The provider only provides the sounds settings, it does not create or process the
+bleep sounds themselves, since each component knows what sounds configurations
+are required.
+
+Audio settings and players settings are provided simultaneously.
+
+### Audio Settings
+
+The audio settings define the general audio sound settings which are normally
+transversal for sound control in an application. They can be applicable to all bleeps
+and to [categories of bleeps](/develop/sounds/categories).
+
+For example, enabling all sounds with an specific volume can be set in a application
+component like:
+
+```tsx
+import React, { FC } from 'react';
+import { BleepsProvider, BleepsAudioSettings } from '@arwes/sounds';
+
+const audio: BleepsAudioSettings = {
+  common: {
+    volume: 0.5, // default 1
+    disabled: false // default false
+  }
+};
+
+const App: FC = ({ children }) => (
+  <BleepsProvider audio={audio}>
+    {children}
+  </BleepsProvider>
+);
+
+export { App };
+```
+
+Sound volume can go from `0` to `1`.
+
+If sounds are disabled, no bleeps are created in the components.
+
+With only audio settings, the components can not create bleeps yet. Players settings
+are required.
+
+### Players Settings
+
+A player settings define the sound file data.
+
+A bleep is created based on the applicable audio settings and the defined player
+settings.
+
+In an application component example, the players could be configured like:
+
+```tsx
+import React, { FC } from 'react';
+import { BleepsProvider, BleepsPlayersSettings } from '@arwes/sounds';
+
+const players: BleepsPlayersSettings = {
+  click: {
+    src: ['/path/to/sounds/click.mp3']
+  },
+  typing: {
+    src: ['/path/to/sounds/typing.mp3'],
+    loop: true
+  }
+};
+
+const App: FC = ({ children }) => (
+  <BleepsProvider players={players}>
+    {children}
+  </BleepsProvider>
+);
+
+export { App };
+```
+
+The `click` player will use the file `click.mp3` in MP3 format.
+
+The `typing` player will use the file `typing.mp3` in MP3 format as a loop sound.
+It means that the player will play in a loop until explicitely stopped.
+
+Along with `audio` settings, the provider configures the sounds settings of
+an application.
+
+## Consumers
+
+A React component can consume bleeps using the `withBleeps` higher-order
+component (HOC). It requires a parent `BleepsProvider` provided settings to work.
+
+A component bleep references a sound player and implements the audio settings.
+
+Assuming a `click` player provided by a parent provider, a button component can
+use it like this:
+
+```tsx
+import React, { FC } from 'react';
+import { withBleeps, Bleeps, BleepsSettings } from '@arwes/sounds';
+
+interface ButtonProps {
+  bleeps: Bleeps
+}
+
+const ButtonComponent: FC<ButtonProps> = ({ bleeps, children }) => {
+  const onClick = () => bleeps.tap.play();
+  return (
+    <button onClick={onClick}>
+      {children}
+    </button>
+  );
+};
+
+const buttonBleeps: BleepsSettings = {
+  tap: {
+    player: 'click'
+  }
+};
+
+const Button = withBleeps(buttonBleeps)(ButtonComponent);
+
+export { ButtonProps, Button };
+```
+
+A complete example can look like this:
+
+```arwes_sandbox
+const SOUND_CLICK_URL = 'https://playground.arwes.dev/assets/sounds/click.mp3';
+
+const ButtonComponent = ({ bleeps, children }) => {
+  const onClick = () => bleeps.tap.play();
+  return <button onClick={onClick}>{children}</button>;
+};
+
+const bleepsSettings = {
+  tap: {
+    player: 'click'
+  }
+};
+
+const Button = withBleeps(bleepsSettings)(ButtonComponent);
+
+function App () {
+  const audio = {
+    common: {
+      volume: 0.5
+    }
+  };
+  const players = {
+    click: {
+      src: [SOUND_CLICK_URL]
+    }
+  };
+
+  return (
+    <BleepsProvider audio={audio} players={players}>
+      <Button>Bleep!</Button>
+    </BleepsProvider>
+  );
+}
+
+render(<App />);
+```
+
+If the applicable audio settings disable the bleep, the sound will not be available
+in the component. So if the component should work with enabled/disabled bleeps,
+it should check if it exists before using it.
+
+If the bleep is enabled and the player `click` does not exist, it will throw an error.
+
+## Shared Sounds
+
+Bleeps are shared by all instances of the component. It means that if any of the
+component instances try to play or stop the sound, it would be the same
+bleep sound. The same goes for all the other bleep API methods.
+
+Since an intensive application can have hundreds or thousands of component instances
+with different sounds, if the sounds were created each time, it would highly
+compromise performance.
+
+## Preloading
+
+Bleeps are preloaded on creation time, not on definition time. So the sounds
+would be loaded when the components consuming bleeps are mounted.
+
+> Functionalities for custom sound loading are still in progress.
+
+## Recommended Audio Formats
+
+As recommended by [howlerjs](https://github.com/goldfire/howler.js#format-recommendations):
+
+> "If your goal is to have the best balance of small filesize and high quality,
+based on extensive production testing, your best bet is to default to `webm` and
+fallback to `mp3`. `webm` has nearly full browser coverage with a great combination
+of compression and quality. You'll need the `mp3` fallback for Internet Explorer."
+
+Since Arwes is not supported in Internet Explorer out of the box, the recommendation
+is to use `webm` audio format.
+
+----
+
+You can see and play with more examples in the [playground](https://playground.arwes.dev/sounds/withBleeps/basic).
