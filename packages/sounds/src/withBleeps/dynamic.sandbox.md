@@ -60,6 +60,14 @@ function Sandbox() {
         </button>
       </div>
       <br />
+      {/*
+        When the components with bleeps are mounted for the
+        first time, check the browser Developer Tools Network,
+        it should display the sounds were just loaded on mount
+        time. Then you can unmount and mount the component many
+        times to see the sounds are only loaded once, unless
+        cache is disabled.
+      */}
       {isMounted && (
         <div>
           <Button>Bleep 1!</Button>

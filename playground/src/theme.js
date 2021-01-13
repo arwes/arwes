@@ -1,3 +1,8 @@
+// The theme is not provided to components in a React context provider
+// since the components should be rendered as decoupled from this interface.
+// So in this playground application, the theme is imported directly into
+// each component.
+
 const theme = {
   typography: {
     content: '"Titillium Web", sans-serif',
