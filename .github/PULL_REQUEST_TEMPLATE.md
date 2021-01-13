@@ -1,5 +1,5 @@
-_Please make sure you have reviewed the [contribution guidelines](https://github.com/arwes/arwes/blob/main/docs/CONTRIBUTING.md)
-for this project._
+Please make sure you have reviewed the [contribution guidelines](https://arwes.dev/project/contributing)
+for this project.
 
 - [ ] Make sure you are making a pull request against the **main branch**
 (left side). Also you should start *your branch* off *main*.
