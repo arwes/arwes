@@ -1,11 +1,11 @@
 /* eslint-env jest */
 
-import { mockAnimatorRefChild } from '../../../test-utils/mockAnimatorRefChild';
-import { AnimatorRefChild } from '../../constants';
+import { mockAnimatorChildRef } from '../../../test-utils/mockAnimatorChildRef';
+import { AnimatorChildRef } from '../../constants';
 import { getChildrenNodesStaggerActivationTimes } from './getChildrenNodesStaggerActivationTimes';
 
 test('Should get empty start times and 0 total duration when no nodes provided', () => {
-  const nodes: AnimatorRefChild[] = [];
+  const nodes: AnimatorChildRef[] = [];
   const parentDuration = { enter: 0, exit: 0, stagger: 25, delay: 0, offset: 0 };
   const received = getChildrenNodesStaggerActivationTimes(nodes, parentDuration);
   const expected = {
@@ -17,11 +17,11 @@ test('Should get empty start times and 0 total duration when no nodes provided',
 
 test('Should get staggering enter times and total duration for children nodes', () => {
   const nodes = [
-    mockAnimatorRefChild(0, { enter: 100 }),
-    mockAnimatorRefChild(1, { enter: 100 }),
-    mockAnimatorRefChild(2, { enter: 100 }),
-    mockAnimatorRefChild(3, { enter: 100 }),
-    mockAnimatorRefChild(4, { enter: 100 })
+    mockAnimatorChildRef(0, { enter: 100 }),
+    mockAnimatorChildRef(1, { enter: 100 }),
+    mockAnimatorChildRef(2, { enter: 100 }),
+    mockAnimatorChildRef(3, { enter: 100 }),
+    mockAnimatorChildRef(4, { enter: 100 })
   ];
   const parentDuration = { enter: 0, exit: 0, stagger: 50, delay: 0, offset: 0 };
   const received = getChildrenNodesStaggerActivationTimes(nodes, parentDuration);
@@ -39,12 +39,12 @@ test('Should get staggering enter times and total duration for children nodes', 
 });
 
 test('Should get staggering enter times and total duration for children nodes with duration offsets', () => {
-  const nodes: AnimatorRefChild[] = [
-    mockAnimatorRefChild(0, { enter: 100 }),
-    mockAnimatorRefChild(1, { enter: 100 }),
-    mockAnimatorRefChild(2, { enter: 100, offset: 30 }),
-    mockAnimatorRefChild(3, { enter: 100 }),
-    mockAnimatorRefChild(4, { enter: 100 })
+  const nodes: AnimatorChildRef[] = [
+    mockAnimatorChildRef(0, { enter: 100 }),
+    mockAnimatorChildRef(1, { enter: 100 }),
+    mockAnimatorChildRef(2, { enter: 100, offset: 30 }),
+    mockAnimatorChildRef(3, { enter: 100 }),
+    mockAnimatorChildRef(4, { enter: 100 })
   ];
   const parentDuration = { enter: 0, exit: 0, stagger: 25, delay: 0, offset: 0 };
   const received = getChildrenNodesStaggerActivationTimes(nodes, parentDuration);

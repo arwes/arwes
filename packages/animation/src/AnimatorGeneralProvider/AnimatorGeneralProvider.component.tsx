@@ -1,7 +1,7 @@
 import React, { FC, useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
-import { AnimatorGeneralProviderSettings, AnimatorGeneralProviderProvidedSettings } from '../constants';
+import { AnimatorGeneralProviderSettings, AnimatorGeneralProviderRef } from '../constants';
 import { AnimatorGeneralContext } from '../AnimatorGeneralContext';
 
 interface AnimatorGeneralProviderProps {
@@ -13,7 +13,7 @@ const AnimatorGeneralProvider: FC<AnimatorGeneralProviderProps> = props => {
   const { animator: localSettings, children } = props;
   const parentSettings = useContext(AnimatorGeneralContext);
 
-  const toProvideSettings: AnimatorGeneralProviderProvidedSettings | undefined = useMemo(() => {
+  const toProvideSettings: AnimatorGeneralProviderRef | undefined = useMemo(() => {
     if (!localSettings) {
       return parentSettings;
     }

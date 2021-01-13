@@ -14,9 +14,9 @@ import {
   AnimatorSettings,
   AnimatorSettingsDuration,
   AnimatorChildrenActivations,
-  AnimatorProvidedSettings,
+  AnimatorRef,
   AnimatorDuration,
-  AnimatorRefChild
+  AnimatorChildRef
 } from '../constants';
 import { makeScheduler } from '../utils/makeScheduler';
 import { getChildrenNodesSequenceActivationTimes } from '../utils/getChildrenNodesSequenceActivationTimes';
@@ -93,14 +93,14 @@ const Animator: FC<AnimatorProps> = props => {
   };
 
   // All the <Animator/> children non-root instances.
-  const [childrenNodesMap] = useState<Map<number, AnimatorRefChild>>(() => new Map());
+  const [childrenNodesMap] = useState<Map<number, AnimatorChildRef>>(() => new Map());
 
   // This variable is supposed to be defined by the component using this
   // <Animator/>. It will contain the reference(s) to the actual HTML element(s)
   // to animate on the flow transitions and component lifecycle.
   const animateRefs = useRef<any>();
 
-  const providedAnimator: AnimatorProvidedSettings = useMemo(() => {
+  const providedAnimator: AnimatorRef = useMemo(() => {
     const setupAnimateRefs = (refs: any): void => {
       animateRefs.current = refs;
     };
@@ -108,7 +108,7 @@ const Animator: FC<AnimatorProps> = props => {
       setDynamicDuration(duration);
     };
     const _id = instanceId;
-    const _subscribe = (id: number, node: AnimatorRefChild): void => {
+    const _subscribe = (id: number, node: AnimatorChildRef): void => {
       childrenNodesMap.set(id, node);
     };
     const _unsubscribe = (id: number): void => {
@@ -141,7 +141,7 @@ const Animator: FC<AnimatorProps> = props => {
       const id = instanceId;
       const getDuration = (): AnimatorDuration => duration;
       const getIsMerge = (): boolean => merge;
-      const child: AnimatorRefChild = Object.freeze({
+      const child: AnimatorChildRef = Object.freeze({
         id,
         getDuration,
         getIsMerge,
@@ -188,7 +188,7 @@ const Animator: FC<AnimatorProps> = props => {
     const nodes = Array.from(childrenNodesMap.values());
     const newChildrenActivation = flow.value === ENTERING || flow.value === ENTERED;
 
-    let nodesToUpdate: AnimatorRefChild[] = [];
+    let nodesToUpdate: AnimatorChildRef[] = [];
     let activations: AnimatorChildrenActivations;
 
     // On exited, no nodes should be updated.

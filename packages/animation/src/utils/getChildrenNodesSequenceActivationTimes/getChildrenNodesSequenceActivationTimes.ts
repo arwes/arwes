@@ -1,16 +1,16 @@
 import {
-  AnimatorRefChild,
+  AnimatorChildRef,
   AnimatorChildrenActivations,
-  AnimatorChildrenActivationsTimes
+  AnimatorChildActivationTime
 } from '../../constants';
 
 function getChildrenNodesSequenceActivationTimes (
-  nodes: AnimatorRefChild[]
+  nodes: AnimatorChildRef[]
 ): AnimatorChildrenActivations {
   let duration = 0;
 
   const times = nodes.reduce(
-    (items: AnimatorChildrenActivationsTimes[], node, index) => {
+    (items: AnimatorChildActivationTime[], node, index) => {
       const nodeDuration = node.getDuration();
       const offset = nodeDuration.offset || 0;
 

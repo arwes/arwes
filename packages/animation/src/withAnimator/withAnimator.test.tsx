@@ -3,7 +3,7 @@
 import React, { createRef, FC, ReactNode, useEffect } from 'react';
 import { render, cleanup, act } from '@testing-library/react';
 
-import { EXITED, ENTERED, ENTERING, AnimatorProvidedSettings } from '../constants';
+import { EXITED, ENTERED, ENTERING, AnimatorRef } from '../constants';
 import { Animator } from '../Animator';
 import { withAnimator } from './withAnimator';
 
@@ -11,11 +11,11 @@ jest.useFakeTimers();
 afterEach(cleanup);
 
 interface ExampleComponentWithAnimatorProps {
-  animator: AnimatorProvidedSettings
+  animator: AnimatorRef
 }
 
 test('Should add <Animator/> wrapper and provide "animator" settings to component', () => {
-  let animator: AnimatorProvidedSettings | undefined;
+  let animator: AnimatorRef | undefined;
   const ExampleComponent: FC<ExampleComponentWithAnimatorProps> = props => {
     animator = props.animator;
     return null;

@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 
-import { AnimatorProvidedSettings } from '../constants';
+import { AnimatorRef } from '../constants';
 import { AnimatorContext } from '../AnimatorContext';
 
-function useAnimator (): AnimatorProvidedSettings | undefined {
+function useAnimator (): AnimatorRef | undefined {
   return useContext(AnimatorContext);
 }
 

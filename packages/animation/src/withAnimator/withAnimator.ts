@@ -2,13 +2,13 @@
 
 import { ComponentType, FC, createElement, forwardRef, Ref, ForwardRefExoticComponent, PropsWithoutRef, RefAttributes } from 'react';
 
-import { AnimatorClassSettings, AnimatorInstanceSettings, AnimatorProvidedSettings } from '../constants';
+import { AnimatorClassSettings, AnimatorInstanceSettings, AnimatorRef } from '../constants';
 import { mergeClassAndInstanceAnimatorSettings } from '../utils/mergeClassAndInstanceAnimatorSettings';
 import { Animator } from '../Animator';
 import { useAnimator } from '../useAnimator';
 
 interface WithAnimatorInputProps {
-  animator: AnimatorProvidedSettings
+  animator: AnimatorRef
 }
 
 interface WithAnimatorOutputProps {
@@ -33,7 +33,7 @@ function withAnimator<T extends ComponentType<P>, P extends WithAnimatorInputPro
       });
     };
 
-    // The input component will receive the `animator: AnimatorProvidedSettings` prop.
+    // The input component will receive the `animator: AnimatorRef` prop.
     // But it will be excluded from the output component proptypes.
     // The output component will optionally allow the `animator: AnimatorInstanceSettings` prop.
     type C = Pick<P, Exclude<keyof P, keyof WithAnimatorInputProps>> & WithAnimatorOutputProps;

@@ -1,18 +1,18 @@
 import {
   AnimatorDuration,
-  AnimatorRefChild,
+  AnimatorChildRef,
   AnimatorChildrenActivations,
-  AnimatorChildrenActivationsTimes
+  AnimatorChildActivationTime
 } from '../../constants';
 
 function getChildrenNodesStaggerActivationTimes (
-  nodes: AnimatorRefChild[],
+  nodes: AnimatorChildRef[],
   parentDuration: AnimatorDuration
 ): AnimatorChildrenActivations {
   let accumulatedOffset = 0;
 
   const times = nodes.reduce(
-    (items: AnimatorChildrenActivationsTimes[], node, index) => {
+    (items: AnimatorChildActivationTime[], node, index) => {
       accumulatedOffset += node.getDuration().offset || 0;
 
       const normalTime = !index ? 0 : index * parentDuration.stagger;

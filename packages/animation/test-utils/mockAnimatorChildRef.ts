@@ -1,12 +1,12 @@
 /* istanbul ignore file */
 
-import { AnimatorSettingsDuration, AnimatorRefChild } from '../src/constants';
+import { AnimatorSettingsDuration, AnimatorChildRef } from '../src/constants';
 
-function mockAnimatorRefChild (
+function mockAnimatorChildRef (
   id: number,
   duration: AnimatorSettingsDuration,
   merge?: boolean
-): AnimatorRefChild {
+): AnimatorChildRef {
   return {
     id,
     getDuration: () => ({ enter: 0, exit: 0, stagger: 0, delay: 0, offset: 0, ...duration }),
@@ -15,4 +15,4 @@ function mockAnimatorRefChild (
   };
 }
 
-export { mockAnimatorRefChild };
+export { mockAnimatorChildRef };

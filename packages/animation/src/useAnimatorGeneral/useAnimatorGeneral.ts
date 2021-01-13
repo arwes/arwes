@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 
-import { AnimatorGeneralProviderSettings } from '../constants';
+import { AnimatorGeneralProviderRef } from '../constants';
 import { AnimatorGeneralContext } from '../AnimatorGeneralContext';
 
-function useAnimatorGeneral (): AnimatorGeneralProviderSettings | undefined {
+function useAnimatorGeneral (): AnimatorGeneralProviderRef | undefined {
   return useContext(AnimatorGeneralContext);
 }
 

@@ -3,7 +3,7 @@
 import React, { FC, createRef, ReactNode } from 'react';
 import { render, cleanup, act } from '@testing-library/react';
 
-import { EXITED, ENTERING, AnimatorProvidedSettings, AnimatorSettings, AnimatorInstanceSettings } from '../constants';
+import { EXITED, ENTERING, AnimatorRef, AnimatorSettings, AnimatorInstanceSettings } from '../constants';
 import { extendAnimator } from './extendAnimator';
 import { withAnimator } from '../withAnimator';
 
@@ -13,7 +13,7 @@ afterEach(cleanup);
 test('Should extend actual animated component', () => {
   let flow: any;
   interface ExampleExtendAnimatorProps {
-    animator: AnimatorProvidedSettings
+    animator: AnimatorRef
   }
   const ExampleComponent: FC<ExampleExtendAnimatorProps> = props => {
     flow = props.animator.flow;

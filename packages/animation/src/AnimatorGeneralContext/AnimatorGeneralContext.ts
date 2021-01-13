@@ -1,8 +1,8 @@
 import { createContext } from 'react';
 
-import { AnimatorGeneralProviderProvidedSettings } from '../constants';
+import { AnimatorGeneralProviderRef } from '../constants';
 
-const AnimatorGeneralContext = createContext<AnimatorGeneralProviderProvidedSettings | undefined>(undefined);
+const AnimatorGeneralContext = createContext<AnimatorGeneralProviderRef | undefined>(undefined);
 
 AnimatorGeneralContext.displayName = 'AnimatorGeneralContext';
 
