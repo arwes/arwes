@@ -35,4 +35,4 @@ function extendAnimator<C extends React.ComponentType<P>, P extends ExtendAnimat
   return extendAnimatorWrapper;
 }
 
-export { extendAnimator };
+export { ExtendAnimatorInputProps, extendAnimator };

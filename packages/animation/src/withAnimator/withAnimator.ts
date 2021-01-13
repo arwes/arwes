@@ -63,4 +63,4 @@ function withAnimator<T extends ComponentType<P>, P extends WithAnimatorInputPro
   return withAnimatorWrapper;
 }
 
-export { withAnimator };
+export { WithAnimatorInputProps, WithAnimatorOutputProps, withAnimator };
