@@ -10,10 +10,14 @@ import { DesktopNavSecondary } from './DesktopNavSecondary';
 
 const styles = {
   root: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
     display: 'grid',
     gridTemplateColumns: 'auto',
-    gridTemplateRows: 'auto 1fr auto',
-    height: '100vh'
+    gridTemplateRows: 'auto 1fr auto'
   },
   container: {
     overflowY: 'auto',

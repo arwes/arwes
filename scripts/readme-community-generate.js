@@ -14,7 +14,7 @@ const appsRowsHTML = appsItems
   .map(item => ({
     ...item,
     repositoryName: item.repository.replace(/^https?:\/\/[^/]+\//, ''),
-    imageRelativePath: './' + path.join('docs/community/apps', item.image)
+    imageRelativePath: './' + path.join('website/static/community/apps/images', item.image)
   }))
   .map(({ name, url, repository, repositoryName, imageRelativePath }) =>
     [

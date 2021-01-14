@@ -45,12 +45,12 @@ A HTML button component can be animated like:
 
 ```tsx
 import React, { FC, useRef, MutableRefObject } from 'react';
-import { AnimatorProvidedSettings, withAnimator } from '@arwes/animation';
+import { AnimatorRef, AnimatorClassSettings, withAnimator } from '@arwes/animation';
 
 interface ButtonProps {
   // An animated component will receive the `animator` prop with
   // the animator API.
-  animator: AnimatorProvidedSettings
+  animator: AnimatorRef
 }
 
 const ButtonComponent: FC<ButtonProps> = props => {
@@ -72,7 +72,7 @@ const ButtonComponent: FC<ButtonProps> = props => {
 const duration = { enter: 200, exit: 200 };
 
 const useAnimateEntering = (
-  animator: AnimatorProvidedSettings,
+  animator: AnimatorRef,
   buttonRef: MutableRefObject<HTMLButtonElement>
 ): void => {
   // On flow entering:
@@ -80,14 +80,14 @@ const useAnimateEntering = (
 };
 
 const useAnimateExiting = (
-  animator: AnimatorProvidedSettings,
+  animator: AnimatorRef,
   buttonRef: MutableRefObject<HTMLButtonElement>
 ): void => {
   // On flow exiting:
   // You can animate the references passed as the second parameter.
 };
 
-const animatorClassSettings = {
+const animatorClassSettings: AnimatorClassSettings = {
   duration,
   useAnimateEntering,
   useAnimateExiting
@@ -129,7 +129,7 @@ import anime from 'animejs';
 // ...
 
 const useAnimateEntering = (
-  animator: AnimatorProvidedSettings,
+  animator: AnimatorRef,
   buttonRef: MutableRefObject<HTMLButtonElement>
 ): void => {
   anime({
@@ -141,7 +141,7 @@ const useAnimateEntering = (
 };
 
 const useAnimateExiting = (
-  animator: AnimatorProvidedSettings,
+  animator: AnimatorRef,
   buttonRef: MutableRefObject<HTMLButtonElement>
 ): void => {
   anime({

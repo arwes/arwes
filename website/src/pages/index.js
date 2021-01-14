@@ -8,9 +8,12 @@ import { Footer } from '../components/Footer';
 
 const styles = {
   root: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
     display: 'flex',
-    width: '100%',
-    minHeight: '100vh',
     flexDirection: 'column'
   },
   main: {
