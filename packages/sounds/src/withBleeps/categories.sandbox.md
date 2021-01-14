@@ -1,6 +1,6 @@
 ```js
-const SOUND_INFORMATION_URL = '/sounds/information.mp3';
-const SOUND_WARNING_URL = '/sounds/warning.mp3';
+const SOUND_INFORMATION_URL = '/assets/sounds/information.mp3';
+const SOUND_WARNING_URL = '/assets/sounds/warning.mp3';
 
 // NotifyInfo
 

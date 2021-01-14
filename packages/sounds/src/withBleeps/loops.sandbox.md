@@ -1,5 +1,5 @@
 ```js
-const SOUND_TYPING_URL = '/sounds/typing.mp3';
+const SOUND_TYPING_URL = '/assets/sounds/typing.mp3';
 
 const TypingComponent = ({ bleeps, children }) => {
   const [status, setStatus] = React.useState('Not typing.');

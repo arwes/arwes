@@ -1,5 +1,5 @@
 ```js
-const SOUND_CLICK_URL = '/sounds/click.mp3';
+const SOUND_CLICK_URL = '/assets/sounds/click.mp3';
 const VOLUME_LOW = 0.1;
 const VOLUME_HIGH = 1;
 

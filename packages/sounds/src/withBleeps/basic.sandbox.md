@@ -1,5 +1,5 @@
 ```js
-const SOUND_CLICK_URL = '/sounds/click.mp3';
+const SOUND_CLICK_URL = '/assets/sounds/click.mp3';
 
 const ButtonComponent = ({ bleeps, children }) => {
   const onClick = () => bleeps.tap.play();
