@@ -41,7 +41,6 @@ const styles = {
     gridTemplateRows: 'auto 1fr auto'
   },
   content: {
-    position: 'relative',
     display: 'flex',
     minHeight: 0, // Height overflow issue.
 
@@ -52,14 +51,7 @@ const styles = {
     }
   },
   controls: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-
     [theme.breakpoints.tabletUp]: {
-      position: 'static',
       borderRight: `1px solid ${theme.color.border}`
     }
   },

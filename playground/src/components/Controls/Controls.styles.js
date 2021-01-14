@@ -5,13 +5,18 @@ import { theme } from '../../theme';
 const styles = {
   root: {
     zIndex: 1000,
-    position: 'relative',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
     display: 'block',
     padding: 20,
     fontFamily: theme.typography.content,
     lineHeight: 1.2,
     fontSize: 12,
     color: theme.color.content,
+    backgroundColor: rgba(theme.color.background, 0.75),
 
     '& p, & ul': {
       margin: '10px 0'
@@ -45,7 +50,9 @@ const styles = {
       fontFamily: theme.typography.monospace,
       backgroundColor: rgba(theme.color.content, 0.1)
     },
+
     [theme.breakpoints.tabletUp]: {
+      position: 'static',
       padding: 0
     }
   },
