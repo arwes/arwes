@@ -65,8 +65,6 @@ export type BleepsSettings = Record<BleepName, BleepSettings | undefined>;
 // Bleeps Consumer Injection
 
 export interface Bleep {
-  _settings: BleepsAudioGroupSettings & BleepPlayerSettings
-  _howl: Howl
   play: () => void
   pause: () => void
   seek: (time: number) => void
@@ -74,6 +72,9 @@ export interface Bleep {
   getIsPlaying: () => boolean
   getDuration: () => number
   unload: () => void
+
+  _settings: BleepsAudioGroupSettings & BleepPlayerSettings
+  _howl: Howl
 }
 
 export type Bleeps = Record<BleepName, Bleep>;
