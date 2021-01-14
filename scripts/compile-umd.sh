@@ -34,6 +34,7 @@ build "tools"
 build "design"
 build "animation"
 build "sounds"
+build "core"
 build "arwes"
 
 logInfo "Compilation completed."

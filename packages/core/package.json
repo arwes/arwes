@@ -1,5 +1,5 @@
 {
-  "name": "@arwes/arwes",
+  "name": "@arwes/core",
   "version": "1.0.0-alpha.15",
   "publishConfig": {
     "access": "public"
@@ -28,5 +28,5 @@
     "dist"
   ],
   "main": "lib/index.js",
-  "unpkg": "dist/arwes.min.js"
+  "unpkg": "dist/core.min.js"
 }
