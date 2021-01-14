@@ -1,5 +1,8 @@
 # SciFi UI Framework
 
+> This website version covers the package arwes v1.0.0-alpha.5 published in February, 2018.
+This version is now deprecated. Please refer to the latest project version [arwes.dev](https://arwes.dev).
+
 Arwes is a web framework to build user interfaces for
 web applications based on science fiction and cyberpunk styles guidelines, animations
 and sounds effects. The idea is to **provide an user experience as if you were using
@@ -11,9 +14,7 @@ The tools are based on [React](https://reactjs.org) for components,
 animations, [Howler](https://howlerjs.com/) for sounds and [Prism](http://prismjs.com)
 for code highlighting.
 
-> Currently is under development with an alpha version available on npm. API may change.
-
-See [GitHub repository](https://github.com/arwesjs/arwes) or
+See [GitHub repository](https://github.com/arwes/arwes) or
 [npm package](https://www.npmjs.com/package/arwes).
 
 ## Get Started
@@ -34,7 +35,7 @@ $ npm install --save arwes
 
 Images and sounds are not provided, if you want to use the assets implemented in the docs,
 download them from the static folder in the
-[GitHub repository](https://github.com/arwesjs/arwes).
+[GitHub repository](https://github.com/arwes/arwes/tree/version1-breakpoint1/static).
 
 Once installed, enter to the folder and empty the `src/index.js` to start
 from scratch.

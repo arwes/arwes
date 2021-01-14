@@ -28,7 +28,7 @@
 
 _______________
 
-[Arwes](https://arwesjs.org) is a web framework to build user interfaces
+[Arwes](https://arwes.dev) is a web framework to build user interfaces
 for web applications based on science fiction and cyberpunk styles guidelines,
 animations and sounds effects. The idea is to let you create realistic
 futuristic user experiences for your projects.
@@ -49,7 +49,7 @@ $ npm install --save arwes
 
 ## Documentation
 
-See [arwesjs.org](https://arwesjs.org).
+See [arwes.dev](https://arwes.dev).
 
 ## Need help?
 

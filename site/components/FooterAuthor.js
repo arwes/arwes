@@ -8,7 +8,7 @@ import Link from './Link';
 export default function FooterAuthor (props) {
   const { show, onLink, ...etc } = props;
   return (
-    <Link href='https://romelperez.com' onLink={onLink} {...etc}>
+    <Link href='https://romelperez.dev' onLink={onLink} {...etc}>
       <Appear className='mdi mdi-copyright' animate show={show} />
       {' '}
       <Words animate show={show}>

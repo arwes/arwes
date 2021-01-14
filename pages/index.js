@@ -126,9 +126,16 @@ class Home extends React.Component {
                   </Words></h1>
                 </header>
                 <main>
-                  <p><Words animate show={anim.entered}>
-                    Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for Web Apps
-                  </Words></p>
+                  <p style={{ marginBottom: '10px' }}>
+                    <Words animate show={anim.entered}>
+                      Futuristic Sci-Fi and Cyberpunk Graphical User Interface Framework for Web Apps
+                    </Words>
+                  </p>
+                  <p><small><a href='https://arwes.dev'>
+                    <Words animate show={anim.entered}>
+                      This project version is now deprecated. Please use arwes.dev.
+                    </Words>
+                  </a></small></p>
                 </main>
 
                 <nav>
