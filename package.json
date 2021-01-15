@@ -36,8 +36,7 @@
     "script-api": "node ./scripts/api",
     "site-dev": "npm run script-api && next -p 7000",
     "site-build": "npm run script-api && next build",
-    "site-start": "next start -p 17000",
-    "site-deploy": "pm2 startOrRestart deploy.json --env production"
+    "site-start": "next start -p 17000"
   },
   "peerDependencies": {
     "react": "*",
