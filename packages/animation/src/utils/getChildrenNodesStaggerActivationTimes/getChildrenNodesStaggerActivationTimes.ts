@@ -1,14 +1,14 @@
 import {
   AnimatorDuration,
   AnimatorChildRef,
-  AnimatorChildrenActivations,
+  AnimatorChildActivations,
   AnimatorChildActivationTime
 } from '../../constants';
 
 function getChildrenNodesStaggerActivationTimes (
   nodes: AnimatorChildRef[],
   parentDuration: AnimatorDuration
-): AnimatorChildrenActivations {
+): AnimatorChildActivations {
   let accumulatedOffset = 0;
 
   const times = nodes.reduce(

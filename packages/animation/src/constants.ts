@@ -85,10 +85,10 @@ export interface AnimatorChildActivationTime {
 
 /**
  * In a custom function manager, it is the resulting definition of an `<Animator />`
- * each children activation times. An activation time is the time for the node
+ * each child activation times. An activation time is the time for the node
  * to transition in.
  */
-export interface AnimatorChildrenActivations {
+export interface AnimatorChildActivations {
   duration?: number
   times: AnimatorChildActivationTime[]
 }
@@ -98,7 +98,7 @@ export interface AnimatorChildrenActivations {
  * transition in the flow. It receives the manager status as a parameter only
  * when its flow value is in ENTERING or ENTERED according to its configuration.
  */
-export type AnimatorSettingsManagerCustom = (status: AnimatorSettingsManagerStatus) => AnimatorChildrenActivations;
+export type AnimatorSettingsManagerCustom = (status: AnimatorSettingsManagerStatus) => AnimatorChildActivations;
 
 /**
  * The available `<Animator />` children flow transition managers.

@@ -13,7 +13,7 @@ import {
   AnimatorFlow,
   AnimatorSettings,
   AnimatorSettingsDuration,
-  AnimatorChildrenActivations,
+  AnimatorChildActivations,
   AnimatorRef,
   AnimatorDuration,
   AnimatorChildRef
@@ -189,7 +189,7 @@ const Animator: FC<AnimatorProps> = props => {
     const newChildrenActivation = flow.value === ENTERING || flow.value === ENTERED;
 
     let nodesToUpdate: AnimatorChildRef[] = [];
-    let activations: AnimatorChildrenActivations;
+    let activations: AnimatorChildActivations;
 
     // On exited, no nodes should be updated.
     if (flow.value === ENTERING) {

@@ -1,12 +1,12 @@
 import {
   AnimatorChildRef,
-  AnimatorChildrenActivations,
+  AnimatorChildActivations,
   AnimatorChildActivationTime
 } from '../../constants';
 
 function getChildrenNodesSequenceActivationTimes (
   nodes: AnimatorChildRef[]
-): AnimatorChildrenActivations {
+): AnimatorChildActivations {
   let duration = 0;
 
   const times = nodes.reduce(
