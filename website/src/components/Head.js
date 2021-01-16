@@ -8,23 +8,25 @@ function Head ({ lang, title, description, meta, link }) {
   const { metadata } = settings;
   const defaultTitle = metadata.title;
   const metaDescription = description || metadata.description;
+  const metaTitle = title
+    ? `${title} | ${defaultTitle}`
+    : defaultTitle;
 
   return (
     <Helmet
       htmlAttributes={{
         lang
       }}
-      title={title || defaultTitle}
-      titleTemplate={title ? `%s | ${defaultTitle}` : null}
+      title={metaTitle}
       meta={[
         { name: 'description', content: metaDescription },
-        { property: 'og:title', content: title },
+        { property: 'og:title', content: metaTitle },
         { property: 'og:site_name', content: metadata.siteName },
         { property: 'og:description', content: metaDescription },
         { property: 'og:type', content: 'website' },
         { name: 'twitter:card', content: 'summary' },
         { name: 'twitter:creator', content: metadata.author },
-        { name: 'twitter:title', content: title },
+        { name: 'twitter:title', content: metaTitle },
         { name: 'twitter:description', content: metaDescription },
         { name: 'og:url', content: metadata.url },
         { name: 'og:image', content: metadata.image }
