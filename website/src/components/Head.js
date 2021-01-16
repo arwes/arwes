@@ -24,7 +24,7 @@ function Head ({ lang, title, description, meta, link }) {
         { property: 'og:site_name', content: metadata.siteName },
         { property: 'og:description', content: metaDescription },
         { property: 'og:type', content: 'website' },
-        { name: 'twitter:card', content: 'summary' },
+        { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:creator', content: metadata.author },
         { name: 'twitter:title', content: metaTitle },
         { name: 'twitter:description', content: metaDescription },
