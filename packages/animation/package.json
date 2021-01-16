@@ -1,6 +1,6 @@
 {
   "name": "@arwes/animation",
-  "version": "1.0.0-alpha.15",
+  "version": "1.0.0-alpha.16",
   "publishConfig": {
     "access": "public"
   },
@@ -30,7 +30,7 @@
   "main": "lib/index.js",
   "unpkg": "dist/animation.min.js",
   "peerDependencies": {
-    "react": "17.x",
-    "prop-types": "*"
+    "prop-types": "*",
+    "react": "17.x"
   }
 }
