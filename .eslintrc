@@ -2,6 +2,7 @@
   "root": true,
   "ignorePatterns": [
     "node_modules",
+    "build",
     "coverage",
     "packages/*/lib",
     "packages/*/dist",
