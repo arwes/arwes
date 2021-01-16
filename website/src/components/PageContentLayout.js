@@ -37,7 +37,8 @@ const styles = {
   }),
   article: theme => ({
     [theme.breakpoints.tabletUp]: {
-      paddingRight: 15
+      borderRight: '1px solid' + theme.color.border,
+      paddingRight: 20
     }
   }),
   desktopNavSecondary: theme => ({
@@ -46,7 +47,7 @@ const styles = {
 
     [theme.breakpoints.tabletUp]: {
       display: 'block',
-      paddingLeft: 15
+      paddingLeft: 20
     }
   })
 };

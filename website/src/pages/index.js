@@ -23,8 +23,12 @@ const styles = {
     textAlign: 'center'
   },
   mainHeader: {
+    '& img': {
+      margin: '0 auto 5px',
+      width: 100
+    },
     '& h1': {
-      margin: '0 0 10px',
+      margin: '0 0 25px',
       fontSize: 42
     },
     '& p': {
@@ -46,7 +50,8 @@ const IndexPage = () => (
       <Header />
       <main css={styles.main}>
         <header css={styles.mainHeader}>
-          <h1>Arwes</h1>
+          <img src='/logo.jpg' alt="Arwes's Logo" />
+          <h1>ARWES</h1>
           <p>Futuristic Sci-Fi UI Web Framework</p>
           <p><small>Work in progress of the project latest version</small></p>
         </header>

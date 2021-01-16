@@ -7,19 +7,45 @@ import { MobileNav } from './MobileNav';
 
 const styles = {
   root: theme => ({
+    borderBottom: `1px solid ${theme.color.border}`,
+    backgroundColor: theme.color.section
+  }),
+  container: theme => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderBottom: `1px solid ${theme.color.border}`,
+    margin: '0 auto',
     padding: 10,
+    width: '100%',
+    maxWidth: 1200,
     lineHeight: '30px',
-    backgroundColor: theme.color.section
+
+    [theme.breakpoints.tabletUp]: {
+      padding: 20
+    }
   }),
-  title: {
+  logo: theme => ({
+    display: 'inline-block',
+    margin: '3px 5px 0 0',
+    height: 25,
+    verticalAlign: 'top',
+
+    [theme.breakpoints.tabletUp]: {
+      margin: '0 10px 0 0',
+      height: 30
+    }
+  }),
+  title: theme => ({
+    display: 'inline-block',
     margin: 0,
     lineHeight: '30px',
-    fontSize: 20
-  },
+    fontSize: 20,
+    verticalAlign: 'top',
+
+    [theme.breakpoints.tabletUp]: {
+      fontSize: 30
+    }
+  }),
   desktopNav: theme => ({
     [theme.breakpoints.tabletDown]: {
       display: 'none'
@@ -34,13 +60,16 @@ const styles = {
 
 const Header = () => (
   <header css={styles.root}>
-    <div>
-      <Link to='/'>
-        <h1 css={styles.title}>Arwes</h1>
-      </Link>
+    <div css={styles.container}>
+      <div>
+        <Link to='/'>
+          <img css={styles.logo} src='/logo-mini.jpg' alt='Arwes Logo' />
+          <h1 css={styles.title}>ARWES</h1>
+        </Link>
+      </div>
+      <DesktopNavPrimary css={styles.desktopNav} />
+      <MobileNav css={styles.mobileNav} />
     </div>
-    <DesktopNavPrimary css={styles.desktopNav} />
-    <MobileNav css={styles.mobileNav} />
   </header>
 );
 
