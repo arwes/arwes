@@ -28,9 +28,5 @@
     "dist"
   ],
   "main": "lib/index.js",
-  "unpkg": "dist/design.min.js",
-  "peerDependencies": {
-    "prop-types": "*",
-    "react": "17.x"
-  }
+  "unpkg": "dist/design.min.js"
 }
