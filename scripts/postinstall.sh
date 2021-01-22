@@ -6,5 +6,5 @@
 if [ -z $CI ] || [ $CI != "true" ]
 then
   npm run bootstrap
-  npm run compile
+  npm run compile-commonjs
 fi
