@@ -2,12 +2,13 @@ import {
   THEME_BREAKPOINTS_KEYS,
   THEME_BREAKPOINTS_DEFAULT,
   THEME_SPACE_DEFAULT,
+  THEME_SHADOW_BLUR_DEFAULT,
+  THEME_SHADOW_SPREAD_DEFAULT,
   ThemeSettingsBreakpoint,
   ThemeSettingsBreakpointAny,
   ThemeSettings,
   ThemeSetup,
   ThemeBreakpoints,
-  ThemeSpace,
   Theme
 } from '../constants';
 
@@ -22,9 +23,10 @@ const getThemeSetup = (providedSettings?: ThemeSettings, extendTheme?: Theme): T
 
   const space = providedSettings?.space || extendTheme?.space(1) || THEME_SPACE_DEFAULT;
 
-  if (process.env.NODE_ENV !== 'production' && !Number.isFinite(space)) {
-    throw new Error(`Theme space factor provided "${String(space)}" is not a number.`);
-  }
+  const shadow = {
+    blur: providedSettings?.shadow?.blur || extendTheme?.shadow.blur(1) || THEME_SHADOW_BLUR_DEFAULT,
+    spread: providedSettings?.shadow?.spread || extendTheme?.shadow.spread(1) || THEME_SHADOW_SPREAD_DEFAULT
+  };
 
   const zIndexes = Object.freeze({
     ...extendTheme?.zIndexes,
@@ -34,6 +36,7 @@ const getThemeSetup = (providedSettings?: ThemeSettings, extendTheme?: Theme): T
   return Object.freeze({
     breakpoints,
     space,
+    shadow,
     zIndexes
   });
 };
@@ -61,10 +64,7 @@ const createThemeBreakpoints = (setup: ThemeSetup): ThemeBreakpoints => {
     if (key !== lastBreakpointKey) {
       const currentBreakpoint = setup.breakpoints.values[key];
 
-      if (
-        process.env.NODE_ENV !== 'production' &&
-        !Number.isFinite(currentBreakpoint)
-      ) {
+      if (process.env.NODE_ENV !== 'production' && !Number.isFinite(currentBreakpoint)) {
         throw new Error(`Provided value "${key}" to theme.breakpoints.only() is not valid.`);
       }
 
@@ -99,13 +99,19 @@ const createThemeBreakpoints = (setup: ThemeSetup): ThemeBreakpoints => {
   });
 };
 
-const createThemeSpace = (setup: ThemeSetup): ThemeSpace => {
+type FactorMultiplier = (multiplier?: number) => number;
+
+const makeFactorMultiplier = (factor: number): FactorMultiplier => {
+  if (process.env.NODE_ENV !== 'production' && !Number.isFinite(factor)) {
+    throw new Error(`Theme factor value was expected to be a number, but received "${String(factor)}".`);
+  }
+
   return (multiplier: number = 1): number => {
     if (process.env.NODE_ENV !== 'production' && !Number.isFinite(multiplier)) {
-      throw new Error(`Theme space multiplier provided "${multiplier}" is not a number.`);
+      throw new Error(`Theme multiplier value was expected to be a number, but received "${multiplier}".`);
     }
 
-    return Math.round(setup.space * multiplier);
+    return Math.round(factor * multiplier);
   };
 };
 
@@ -113,11 +119,22 @@ const createTheme = (settings?: ThemeSettings, extendTheme?: Theme): Theme => {
   const setup = getThemeSetup(settings, extendTheme);
 
   const breakpoints = createThemeBreakpoints(setup);
-  const space = createThemeSpace(setup);
+
+  const space = makeFactorMultiplier(setup.space);
+
+  const shadow = Object.freeze({
+    blur: makeFactorMultiplier(setup.shadow.blur),
+    spread: makeFactorMultiplier(setup.shadow.spread)
+  });
 
   const zIndexes = setup.zIndexes;
 
-  return Object.freeze({ breakpoints, space, zIndexes });
+  return Object.freeze({
+    breakpoints,
+    space,
+    shadow,
+    zIndexes
+  });
 };
 
 export { createTheme };

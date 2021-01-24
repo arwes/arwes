@@ -10,6 +10,9 @@ export const THEME_BREAKPOINTS_DEFAULT = Object.freeze({
 
 export const THEME_SPACE_DEFAULT = 8;
 
+export const THEME_SHADOW_BLUR_DEFAULT = 1;
+export const THEME_SHADOW_SPREAD_DEFAULT = 1;
+
 // SETTINGS
 
 export type ThemeSettingsBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -27,11 +30,17 @@ export interface ThemeSettingsBreakpoints {
 
 export type ThemeSettingsSpace = number;
 
+export interface ThemeSettingsShadow {
+  blur?: number
+  spread?: number
+}
+
 export type ThemeSettingsZIndexes = Record<string, number>;
 
 export interface ThemeSettings {
   breakpoints?: ThemeSettingsBreakpoints
   space?: ThemeSettingsSpace
+  shadow?: ThemeSettingsShadow
   zIndexes?: ThemeSettingsZIndexes
 }
 
@@ -49,11 +58,17 @@ export interface ThemeSetupBreakpoints {
 
 export type ThemeSetupSpace = ThemeSettingsSpace;
 
+export interface ThemeSetupShadow {
+  blur: number
+  spread: number
+}
+
 export type ThemeSetupZIndexes = ThemeSettingsZIndexes;
 
 export interface ThemeSetup {
   breakpoints: ThemeSetupBreakpoints
   space: ThemeSetupSpace
+  shadow: ThemeSetupShadow
   zIndexes: ThemeSetupZIndexes
 }
 
@@ -68,12 +83,18 @@ export interface ThemeBreakpoints {
   between: (start: ThemeSettingsBreakpointAny, end: ThemeSettingsBreakpointAny) => string
 }
 
-export type ThemeZIndexes = ThemeSettingsZIndexes;
-
 export type ThemeSpace = (multiplier?: number) => number;
+
+export interface ThemeShadow {
+  blur: (multiplier?: number) => number
+  spread: (multiplier?: number) => number
+}
+
+export type ThemeZIndexes = ThemeSettingsZIndexes;
 
 export interface Theme {
   breakpoints: ThemeBreakpoints
   space: ThemeSpace
+  shadow: ThemeShadow
   zIndexes: ThemeZIndexes
 }
