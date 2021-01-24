@@ -23,8 +23,11 @@ export interface ThemeSettingsBreakpoints {
   }
 }
 
+export type ThemeSettingsZIndexes = Record<string, number>;
+
 export interface ThemeSettings {
   breakpoints?: ThemeSettingsBreakpoints
+  zIndexes?: ThemeSettingsZIndexes
 }
 
 // SETUP
@@ -39,8 +42,11 @@ export interface ThemeSetupBreakpoints {
   }
 }
 
+export type ThemeSetupZIndexes = ThemeSettingsZIndexes;
+
 export interface ThemeSetup {
   breakpoints: ThemeSetupBreakpoints
+  zIndexes: ThemeSetupZIndexes
 }
 
 // CONSUMER
@@ -54,6 +60,9 @@ export interface ThemeBreakpoints {
   between: (start: ThemeSettingsBreakpointAny, end: ThemeSettingsBreakpointAny) => string
 }
 
+export type ThemeZIndexes = ThemeSettingsZIndexes;
+
 export interface Theme {
   breakpoints: ThemeBreakpoints
+  zIndexes: ThemeZIndexes
 }

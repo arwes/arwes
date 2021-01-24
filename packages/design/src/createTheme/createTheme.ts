@@ -10,15 +10,20 @@ import {
 } from '../constants';
 
 const getThemeSetup = (providedSettings?: ThemeSettings, extendTheme?: Theme): ThemeSetup => {
-  const breakpoints = {
+  const breakpoints = Object.freeze({
     values: Object.freeze({
       ...BREAKPOINTS_DEFAULT,
-      ...extendTheme?.breakpoints.values,
+      ...extendTheme?.breakpoints?.values,
       ...providedSettings?.breakpoints?.values
     })
-  };
+  });
 
-  return Object.freeze({ breakpoints });
+  const zIndexes = Object.freeze({
+    ...extendTheme?.zIndexes,
+    ...providedSettings?.zIndexes
+  });
+
+  return Object.freeze({ breakpoints, zIndexes });
 };
 
 const createThemeBreakpoints = (setup: ThemeSetup): ThemeBreakpoints => {
@@ -85,8 +90,9 @@ const createThemeBreakpoints = (setup: ThemeSetup): ThemeBreakpoints => {
 const createTheme = (settings?: ThemeSettings, extendTheme?: Theme): Theme => {
   const setup = getThemeSetup(settings, extendTheme);
   const breakpoints = createThemeBreakpoints(setup);
+  const zIndexes = setup.zIndexes;
 
-  return Object.freeze({ breakpoints });
+  return Object.freeze({ breakpoints, zIndexes });
 };
 
 export { createTheme };
