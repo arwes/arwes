@@ -1,34 +1,46 @@
 import {
-  BREAKPOINTS_KEYS,
-  BREAKPOINTS_DEFAULT,
+  THEME_BREAKPOINTS_KEYS,
+  THEME_BREAKPOINTS_DEFAULT,
+  THEME_SPACE_DEFAULT,
   ThemeSettingsBreakpoint,
   ThemeSettingsBreakpointAny,
   ThemeSettings,
   ThemeSetup,
   ThemeBreakpoints,
+  ThemeSpace,
   Theme
 } from '../constants';
 
 const getThemeSetup = (providedSettings?: ThemeSettings, extendTheme?: Theme): ThemeSetup => {
   const breakpoints = Object.freeze({
     values: Object.freeze({
-      ...BREAKPOINTS_DEFAULT,
+      ...THEME_BREAKPOINTS_DEFAULT,
       ...extendTheme?.breakpoints?.values,
       ...providedSettings?.breakpoints?.values
     })
   });
+
+  const space = providedSettings?.space || extendTheme?.space(1) || THEME_SPACE_DEFAULT;
+
+  if (process.env.NODE_ENV !== 'production' && !Number.isFinite(space)) {
+    throw new Error(`Theme space factor provided "${String(space)}" is not a number.`);
+  }
 
   const zIndexes = Object.freeze({
     ...extendTheme?.zIndexes,
     ...providedSettings?.zIndexes
   });
 
-  return Object.freeze({ breakpoints, zIndexes });
+  return Object.freeze({
+    breakpoints,
+    space,
+    zIndexes
+  });
 };
 
 const createThemeBreakpoints = (setup: ThemeSetup): ThemeBreakpoints => {
   const getBreakpointValue = (key: ThemeSettingsBreakpointAny): number => {
-    if (typeof setup.breakpoints.values[key as ThemeSettingsBreakpoint] === 'number') {
+    if (Number.isFinite(setup.breakpoints.values[key as ThemeSettingsBreakpoint])) {
       return setup.breakpoints.values[key as ThemeSettingsBreakpoint];
     }
 
@@ -44,20 +56,20 @@ const createThemeBreakpoints = (setup: ThemeSetup): ThemeBreakpoints => {
   );
 
   const only = (key: ThemeSettingsBreakpoint): string => {
-    const lastBreakpointKey = BREAKPOINTS_KEYS[BREAKPOINTS_KEYS.length - 1];
+    const lastBreakpointKey = THEME_BREAKPOINTS_KEYS[THEME_BREAKPOINTS_KEYS.length - 1];
 
     if (key !== lastBreakpointKey) {
       const currentBreakpoint = setup.breakpoints.values[key];
 
       if (
         process.env.NODE_ENV !== 'production' &&
-        typeof currentBreakpoint !== 'number'
+        !Number.isFinite(currentBreakpoint)
       ) {
         throw new Error(`Provided value "${key}" to theme.breakpoints.only() is not valid.`);
       }
 
-      const nextBreakpointIndex = BREAKPOINTS_KEYS.findIndex(val => val === key) + 1;
-      const nextBreakpointKey = BREAKPOINTS_KEYS[nextBreakpointIndex];
+      const nextBreakpointIndex = THEME_BREAKPOINTS_KEYS.findIndex(val => val === key) + 1;
+      const nextBreakpointKey = THEME_BREAKPOINTS_KEYS[nextBreakpointIndex];
       const nextBreakpoint = setup.breakpoints.values[nextBreakpointKey as ThemeSettingsBreakpoint];
 
       return `@media screen and (min-width: ${currentBreakpoint}px) and (max-width: ${nextBreakpoint - 1}px)`;
@@ -78,7 +90,7 @@ const createThemeBreakpoints = (setup: ThemeSetup): ThemeBreakpoints => {
   };
 
   return Object.freeze({
-    keys: BREAKPOINTS_KEYS,
+    keys: THEME_BREAKPOINTS_KEYS,
     values: setup.breakpoints.values,
     up,
     down,
@@ -87,12 +99,25 @@ const createThemeBreakpoints = (setup: ThemeSetup): ThemeBreakpoints => {
   });
 };
 
+const createThemeSpace = (setup: ThemeSetup): ThemeSpace => {
+  return (multiplier: number = 1): number => {
+    if (process.env.NODE_ENV !== 'production' && !Number.isFinite(multiplier)) {
+      throw new Error(`Theme space multiplier provided "${multiplier}" is not a number.`);
+    }
+
+    return Math.round(setup.space * multiplier);
+  };
+};
+
 const createTheme = (settings?: ThemeSettings, extendTheme?: Theme): Theme => {
   const setup = getThemeSetup(settings, extendTheme);
+
   const breakpoints = createThemeBreakpoints(setup);
+  const space = createThemeSpace(setup);
+
   const zIndexes = setup.zIndexes;
 
-  return Object.freeze({ breakpoints, zIndexes });
+  return Object.freeze({ breakpoints, space, zIndexes });
 };
 
 export { createTheme };

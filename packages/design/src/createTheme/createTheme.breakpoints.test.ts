@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import { BREAKPOINTS_KEYS, BREAKPOINTS_DEFAULT } from '../constants';
+import { THEME_BREAKPOINTS_KEYS, THEME_BREAKPOINTS_DEFAULT } from '../constants';
 import { createTheme } from './createTheme';
 
 test('Should allow to extend multiple themes', () => {
@@ -12,7 +12,7 @@ test('Should allow to extend multiple themes', () => {
   }, theme1);
   const received = theme2.breakpoints.values;
   const expected = {
-    ...BREAKPOINTS_DEFAULT,
+    ...THEME_BREAKPOINTS_DEFAULT,
     sm: 400,
     lg: 1500
   };
@@ -22,14 +22,14 @@ test('Should allow to extend multiple themes', () => {
 describe('keys', () => {
   test('Should provide keys', () => {
     const theme = createTheme();
-    expect(theme.breakpoints.keys).toEqual(BREAKPOINTS_KEYS);
+    expect(theme.breakpoints.keys).toEqual(THEME_BREAKPOINTS_KEYS);
   });
 });
 
 describe('values', () => {
   test('Should provide default values', () => {
     const theme = createTheme();
-    expect(theme.breakpoints.values).toEqual(BREAKPOINTS_DEFAULT);
+    expect(theme.breakpoints.values).toEqual(THEME_BREAKPOINTS_DEFAULT);
   });
 
   test('Should provide configured values', () => {
@@ -39,7 +39,7 @@ describe('values', () => {
       }
     });
     expect(theme.breakpoints.values).toEqual({
-      ...BREAKPOINTS_DEFAULT,
+      ...THEME_BREAKPOINTS_DEFAULT,
       md: 400,
       lg: 1600
     });
@@ -50,7 +50,7 @@ describe('up', () => {
   test('Should get media query min-width for breakpoint with default value', () => {
     const theme = createTheme();
     const received = theme.breakpoints.up('sm');
-    const expected = `@media screen and (min-width: ${BREAKPOINTS_DEFAULT.sm}px)`;
+    const expected = `@media screen and (min-width: ${THEME_BREAKPOINTS_DEFAULT.sm}px)`;
     expect(received).toBe(expected);
   });
 
@@ -77,7 +77,7 @@ describe('down', () => {
   test('Should get media query max-width for breakpoint with default value', () => {
     const theme = createTheme();
     const received = theme.breakpoints.down('md');
-    const expected = `@media screen and (max-width: ${BREAKPOINTS_DEFAULT.md - 1}px)`;
+    const expected = `@media screen and (max-width: ${THEME_BREAKPOINTS_DEFAULT.md - 1}px)`;
     expect(received).toBe(expected);
   });
 
@@ -104,7 +104,7 @@ describe('only', () => {
   test('Should get media query for only one breakpoint and before the next with default values', () => {
     const theme = createTheme();
     const received = theme.breakpoints.only('sm');
-    const expected = `@media screen and (min-width: ${BREAKPOINTS_DEFAULT.sm}px) and (max-width: ${BREAKPOINTS_DEFAULT.md - 1}px)`;
+    const expected = `@media screen and (min-width: ${THEME_BREAKPOINTS_DEFAULT.sm}px) and (max-width: ${THEME_BREAKPOINTS_DEFAULT.md - 1}px)`;
     expect(received).toBe(expected);
   });
 
@@ -122,7 +122,7 @@ describe('only', () => {
   test('Should get media query for only one breakpoint onwards if it is the last breakpoint with default value', () => {
     const theme = createTheme();
     const received = theme.breakpoints.only('xl');
-    const expected = `@media screen and (min-width: ${BREAKPOINTS_DEFAULT.xl}px)`;
+    const expected = `@media screen and (min-width: ${THEME_BREAKPOINTS_DEFAULT.xl}px)`;
     expect(received).toBe(expected);
   });
 
@@ -138,7 +138,7 @@ describe('between', () => {
   test('Should get media query between two provided breakpoint keys', () => {
     const theme = createTheme();
     const received = theme.breakpoints.between('md', 'lg');
-    const expected = `@media screen and (min-width: ${BREAKPOINTS_DEFAULT.md}px) and (max-width: ${BREAKPOINTS_DEFAULT.lg - 1}px)`;
+    const expected = `@media screen and (min-width: ${THEME_BREAKPOINTS_DEFAULT.md}px) and (max-width: ${THEME_BREAKPOINTS_DEFAULT.lg - 1}px)`;
     expect(received).toBe(expected);
   });
 
