@@ -17,7 +17,6 @@ export const THEME_SHADOW_SPREAD_DEFAULT = 1;
 
 export type ThemeSettingsBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type ThemeSettingsBreakpointAny = ThemeSettingsBreakpoint | number;
-
 export interface ThemeSettingsBreakpoints {
   values?: {
     xs?: number
@@ -53,6 +52,7 @@ export interface ThemeSettings {
   space?: ThemeSettingsSpace
   shadow?: ThemeSettingsShadow
   zIndexes?: ThemeSettingsZIndexes
+  [prop: string]: any
 }
 
 // SETUP
@@ -84,6 +84,7 @@ export interface ThemeSetup {
   space: ThemeSetupSpace
   shadow: ThemeSetupShadow
   zIndexes: ThemeSetupZIndexes
+  extraFeatures: Record<string, any>
 }
 
 // CONSUMER
@@ -116,4 +117,5 @@ export interface Theme {
   space: ThemeSpace
   shadow: ThemeShadow
   zIndexes: ThemeZIndexes
+  [prop: string]: any
 }

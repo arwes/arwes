@@ -41,11 +41,11 @@ test('Should allow to extend theme factor', () => {
 test('Should throw error if provided factor is not a number', () => {
   const factor: any = 'zzz';
   expect(() => createTheme({ space: factor }))
-    .toThrow('Theme factor value was expected to be a number, but received "zzz".');
+    .toThrow('Factor value was expected to be a number, but received "zzz".');
 });
 
 test('Should throw error if provided multiplier is not a number', () => {
   const multiplier: any = 'yyy';
   expect(() => createTheme().space(multiplier))
-    .toThrow('Theme multiplier value was expected to be a number, but received "yyy".');
+    .toThrow('Multiplier value was expected to be a number, but received "yyy".');
 });

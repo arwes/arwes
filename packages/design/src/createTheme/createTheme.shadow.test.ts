@@ -44,15 +44,15 @@ test('Should allow to extend theme factor', () => {
 test('Should throw error if provided factor is not a number', () => {
   const factor: any = 'rrr';
   expect(() => createTheme({ shadow: { blur: factor } }))
-    .toThrow('Theme factor value was expected to be a number, but received "rrr".');
+    .toThrow('Factor value was expected to be a number, but received "rrr".');
   expect(() => createTheme({ shadow: { spread: factor } }))
-    .toThrow('Theme factor value was expected to be a number, but received "rrr".');
+    .toThrow('Factor value was expected to be a number, but received "rrr".');
 });
 
 test('Should throw error if provided multiplier is not a number', () => {
   const multiplier: any = 'ppp';
   expect(() => createTheme().shadow.blur(multiplier))
-    .toThrow('Theme multiplier value was expected to be a number, but received "ppp".');
+    .toThrow('Multiplier value was expected to be a number, but received "ppp".');
   expect(() => createTheme().shadow.spread(multiplier))
-    .toThrow('Theme multiplier value was expected to be a number, but received "ppp".');
+    .toThrow('Multiplier value was expected to be a number, but received "ppp".');
 });
