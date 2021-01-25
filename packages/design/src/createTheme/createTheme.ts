@@ -9,8 +9,14 @@ import {
   ThemeSettings,
   ThemeSetup,
   ThemeBreakpoints,
-  Theme
+  ThemeSettingsTypography,
+  ThemeSettingsTypographyValue,
+  ThemeTypographyProps,
+  ThemeTypography,
+  Theme,
+  ThemeSetupBreakpoints
 } from '../constants';
+import { makeFilterObjectKeys } from '../utils/makeFilterObjectKeys';
 
 const getThemeSetup = (providedSettings?: ThemeSettings, extendTheme?: Theme): ThemeSetup => {
   const breakpoints = Object.freeze({
@@ -20,6 +26,11 @@ const getThemeSetup = (providedSettings?: ThemeSettings, extendTheme?: Theme): T
       ...providedSettings?.breakpoints?.values
     })
   });
+
+  const typography = {
+    ...extendTheme?.typography,
+    ...providedSettings?.typography
+  };
 
   const space = providedSettings?.space || extendTheme?.space(1) || THEME_SPACE_DEFAULT;
 
@@ -35,6 +46,7 @@ const getThemeSetup = (providedSettings?: ThemeSettings, extendTheme?: Theme): T
 
   return Object.freeze({
     breakpoints,
+    typography,
     space,
     shadow,
     zIndexes
@@ -99,6 +111,79 @@ const createThemeBreakpoints = (setup: ThemeSetup): ThemeBreakpoints => {
   });
 };
 
+const expandThemeTypographyGroups = (selector: string): string => {
+  switch (selector) {
+    case 'root': return 'html, body';
+    case 'headings': return 'h1, h2, h3, h4, h5, h6';
+    case 'codes': return 'code, pre';
+    case 'controls': return 'input, textarea, select, option, button';
+  }
+  return selector;
+};
+
+const filterThemeTypographyProps = makeFilterObjectKeys([
+  'fontFamily',
+  'fontSize',
+  'lineHeight'
+]);
+
+const getThemeTypographyStyleProps = (breakpoints: ThemeSetupBreakpoints, props: ThemeSettingsTypographyValue): ThemeTypographyProps => {
+  if (Array.isArray(props)) {
+    return props
+      .map((item, index) => {
+        if (!item) {
+          return undefined;
+        }
+
+        const itemProps = filterThemeTypographyProps(item);
+
+        if (index === 0 && breakpoints.values.xs === 0) {
+          return { selector: undefined, props: itemProps };
+        }
+
+        const breakpointKey = THEME_BREAKPOINTS_KEYS[index] as ThemeSettingsBreakpoint;
+        const breakpoint = breakpoints.values[breakpointKey];
+        const selector = `@media screen and (min-width: ${breakpoint}px)`;
+
+        return { selector, props: itemProps };
+      })
+      .reduce((accum, item) => {
+        if (!item) {
+          return accum;
+        }
+
+        const { selector, props } = item;
+
+        if (!selector) {
+          return { ...accum, ...props };
+        }
+
+        return { ...accum, [selector]: props };
+      }, {});
+  }
+
+  return filterThemeTypographyProps(props);
+};
+
+const createThemeTypography = (setup: ThemeSetup): ThemeTypography =>
+  Object.freeze(
+    Object
+      .keys(setup.typography)
+      .map(rawSelector => {
+        const providedSelector = rawSelector as keyof ThemeSettingsTypography;
+        const selector = expandThemeTypographyGroups(rawSelector) as keyof ThemeSettingsTypography;
+
+        const providedProps = setup.typography[providedSelector] || {};
+        const props = Object.freeze(getThemeTypographyStyleProps(setup.breakpoints, providedProps));
+
+        return { selector, props };
+      })
+      .reduce((accum, { selector, props }) => ({
+        ...accum,
+        [selector]: props
+      }), {})
+  );
+
 type FactorMultiplier = (multiplier?: number) => number;
 
 const makeFactorMultiplier = (factor: number): FactorMultiplier => {
@@ -119,18 +204,17 @@ const createTheme = (settings?: ThemeSettings, extendTheme?: Theme): Theme => {
   const setup = getThemeSetup(settings, extendTheme);
 
   const breakpoints = createThemeBreakpoints(setup);
-
+  const typography = createThemeTypography(setup);
   const space = makeFactorMultiplier(setup.space);
-
   const shadow = Object.freeze({
     blur: makeFactorMultiplier(setup.shadow.blur),
     spread: makeFactorMultiplier(setup.shadow.spread)
   });
-
   const zIndexes = setup.zIndexes;
 
   return Object.freeze({
     breakpoints,
+    typography,
     space,
     shadow,
     zIndexes

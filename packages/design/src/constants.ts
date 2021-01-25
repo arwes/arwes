@@ -28,6 +28,16 @@ export interface ThemeSettingsBreakpoints {
   }
 }
 
+export type ThemeSettingsTypographyKey = keyof HTMLElementTagNameMap | 'root' | 'headings' | 'codes' | 'controls';
+export interface ThemeSettingsTypographyProps {
+  fontFamily?: string
+  fontSize?: number | string
+  lineHeight?: number | string
+}
+export type ThemeSettingsTypographyPropsArrayItem = ThemeSettingsTypographyProps | undefined | null;
+export type ThemeSettingsTypographyValue = ThemeSettingsTypographyProps | ThemeSettingsTypographyPropsArrayItem[];
+export type ThemeSettingsTypography = Partial<Record<ThemeSettingsTypographyKey, ThemeSettingsTypographyValue>>;
+
 export type ThemeSettingsSpace = number;
 
 export interface ThemeSettingsShadow {
@@ -39,6 +49,7 @@ export type ThemeSettingsZIndexes = Record<string, number>;
 
 export interface ThemeSettings {
   breakpoints?: ThemeSettingsBreakpoints
+  typography?: ThemeSettingsTypography
   space?: ThemeSettingsSpace
   shadow?: ThemeSettingsShadow
   zIndexes?: ThemeSettingsZIndexes
@@ -56,6 +67,8 @@ export interface ThemeSetupBreakpoints {
   }
 }
 
+export interface ThemeSetupTypography extends ThemeSettingsTypography {}
+
 export type ThemeSetupSpace = ThemeSettingsSpace;
 
 export interface ThemeSetupShadow {
@@ -67,6 +80,7 @@ export type ThemeSetupZIndexes = ThemeSettingsZIndexes;
 
 export interface ThemeSetup {
   breakpoints: ThemeSetupBreakpoints
+  typography: ThemeSetupTypography
   space: ThemeSetupSpace
   shadow: ThemeSetupShadow
   zIndexes: ThemeSetupZIndexes
@@ -83,6 +97,10 @@ export interface ThemeBreakpoints {
   between: (start: ThemeSettingsBreakpointAny, end: ThemeSettingsBreakpointAny) => string
 }
 
+export type ThemeTypographyKey = ThemeSettingsTypographyKey;
+export type ThemeTypographyProps = ThemeSettingsTypographyProps | Partial<Record<string, ThemeSettingsTypographyProps>>;
+export type ThemeTypography = Partial<Record<ThemeTypographyKey, ThemeTypographyProps>>;
+
 export type ThemeSpace = (multiplier?: number) => number;
 
 export interface ThemeShadow {
@@ -94,6 +112,7 @@ export type ThemeZIndexes = ThemeSettingsZIndexes;
 
 export interface Theme {
   breakpoints: ThemeBreakpoints
+  typography: ThemeTypography
   space: ThemeSpace
   shadow: ThemeShadow
   zIndexes: ThemeZIndexes
