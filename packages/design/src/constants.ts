@@ -1,5 +1,4 @@
 export const THEME_BREAKPOINTS_KEYS = Object.freeze(['xs', 'sm', 'md', 'lg', 'xl']);
-
 export const THEME_BREAKPOINTS_DEFAULT = Object.freeze({
   xs: 0,
   sm: 600,
@@ -7,6 +6,10 @@ export const THEME_BREAKPOINTS_DEFAULT = Object.freeze({
   lg: 1280,
   xl: 1920
 });
+
+export const THEME_PALETTE_TONAL_OFFSET_DEFAULT = 0.2;
+export const THEME_PALETTE_CONTRAST_OFFSET_DEFAULT = 0.45;
+export const THEME_PALETTE_ELEVATION_OFFSET_DEFAULT = 0.025;
 
 export const THEME_SPACE_DEFAULT = 8;
 
@@ -25,6 +28,24 @@ export interface ThemeSettingsBreakpoints {
     lg?: number
     xl?: number
   }
+}
+
+export type ThemeSettingsPaletteColorBasic = Partial<ThemePaletteColorBasic>;
+export interface ThemeSettingsPaletteColorElevation {
+  main?: string
+}
+export interface ThemeSettingsPalette {
+  tonalOffset?: number
+  contrastOffset?: number
+  elevationOffset?: number
+  primary?: ThemeSettingsPaletteColorBasic
+  secondary?: ThemeSettingsPaletteColorBasic
+  success?: ThemeSettingsPaletteColorBasic
+  info?: ThemeSettingsPaletteColorBasic
+  warn?: ThemeSettingsPaletteColorBasic
+  error?: ThemeSettingsPaletteColorBasic
+  neutral?: ThemeSettingsPaletteColorElevation
+  [prop: string]: any
 }
 
 export type ThemeSettingsTypographyKey = keyof HTMLElementTagNameMap | 'root' | 'headings' | 'codes' | 'controls';
@@ -48,6 +69,7 @@ export type ThemeSettingsZIndexes = Record<string, number>;
 
 export interface ThemeSettings {
   breakpoints?: ThemeSettingsBreakpoints
+  palette?: ThemeSettingsPalette
   typography?: ThemeSettingsTypography
   space?: ThemeSettingsSpace
   shadow?: ThemeSettingsShadow
@@ -67,6 +89,12 @@ export interface ThemeSetupBreakpoints {
   }
 }
 
+export interface ThemeSetupPalette extends ThemeSettingsPalette {
+  tonalOffset: number
+  contrastOffset: number
+  elevationOffset: number
+}
+
 export interface ThemeSetupTypography extends ThemeSettingsTypography {}
 
 export type ThemeSetupSpace = ThemeSettingsSpace;
@@ -80,6 +108,7 @@ export type ThemeSetupZIndexes = ThemeSettingsZIndexes;
 
 export interface ThemeSetup {
   breakpoints: ThemeSetupBreakpoints
+  palette: ThemeSetupPalette
   typography: ThemeSetupTypography
   space: ThemeSetupSpace
   shadow: ThemeSetupShadow
@@ -98,6 +127,30 @@ export interface ThemeBreakpoints {
   between: (start: ThemeSettingsBreakpointAny, end: ThemeSettingsBreakpointAny) => string
 }
 
+export interface ThemePaletteColorBasic {
+  main: string
+  dark: string
+  light: string
+  contrast: string
+}
+export interface ThemePaletteColorElevation {
+  main: string
+  elevate: (level: number) => string
+}
+export interface ThemePalette {
+  tonalOffset: number
+  contrastOffset: number
+  elevationOffset: number
+  primary: ThemePaletteColorBasic
+  secondary: ThemePaletteColorBasic
+  success: ThemePaletteColorBasic
+  info: ThemePaletteColorBasic
+  warn: ThemePaletteColorBasic
+  error: ThemePaletteColorBasic
+  neutral: ThemePaletteColorElevation
+  [prop: string]: any
+}
+
 export type ThemeTypographyKey = ThemeSettingsTypographyKey;
 export type ThemeTypographyProps = ThemeSettingsTypographyProps | Partial<Record<string, ThemeSettingsTypographyProps>>;
 export type ThemeTypography = Partial<Record<ThemeTypographyKey, ThemeTypographyProps>>;
@@ -113,6 +166,7 @@ export type ThemeZIndexes = ThemeSettingsZIndexes;
 
 export interface Theme {
   breakpoints: ThemeBreakpoints
+  palette: ThemePalette
   typography: ThemeTypography
   space: ThemeSpace
   shadow: ThemeShadow

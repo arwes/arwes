@@ -28,5 +28,8 @@
     "dist"
   ],
   "main": "lib/index.js",
-  "unpkg": "dist/design.min.js"
+  "unpkg": "dist/design.min.js",
+  "peerDependencies": {
+    "polished": "4.x"
+  }
 }

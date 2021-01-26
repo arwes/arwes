@@ -1,5 +1,8 @@
 import {
   THEME_BREAKPOINTS_DEFAULT,
+  THEME_PALETTE_TONAL_OFFSET_DEFAULT,
+  THEME_PALETTE_CONTRAST_OFFSET_DEFAULT,
+  THEME_PALETTE_ELEVATION_OFFSET_DEFAULT,
   THEME_SPACE_DEFAULT,
   THEME_SHADOW_BLUR_DEFAULT,
   THEME_SHADOW_SPREAD_DEFAULT,
@@ -9,7 +12,15 @@ import {
 } from '../constants';
 
 const extractExtraFeatures = (providedSettings: ThemeSettings = {}): Record<string, any> => {
-  const { breakpoints, typography, space, shadow, zIndexes, ...extraFeatures } = providedSettings;
+  const {
+    breakpoints,
+    palette,
+    typography,
+    space,
+    shadow,
+    zIndexes,
+    ...extraFeatures
+  } = providedSettings;
   return extraFeatures;
 };
 
@@ -21,6 +32,14 @@ const getThemeSetup = (providedSettings?: ThemeSettings, extendTheme?: Theme): T
       ...providedSettings?.breakpoints?.values
     })
   });
+
+  const palette = {
+    tonalOffset: THEME_PALETTE_TONAL_OFFSET_DEFAULT,
+    contrastOffset: THEME_PALETTE_CONTRAST_OFFSET_DEFAULT,
+    elevationOffset: THEME_PALETTE_ELEVATION_OFFSET_DEFAULT,
+    ...extendTheme?.palette,
+    ...providedSettings?.palette
+  };
 
   const typography = {
     ...extendTheme?.typography,
@@ -43,6 +62,7 @@ const getThemeSetup = (providedSettings?: ThemeSettings, extendTheme?: Theme): T
 
   return Object.freeze({
     breakpoints,
+    palette,
     typography,
     space,
     shadow,
