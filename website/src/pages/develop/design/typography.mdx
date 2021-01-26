@@ -1,0 +1,188 @@
+import { PageContentLayout } from '../../../components/PageContentLayout';
+export default props => <PageContentLayout headProps={{ title: 'Typography' }} {...props} />;
+
+# Typography
+
+The theme can be setup to have specific typography styles for common HTML elements.
+
+The focus of these settings is only for the main text styles properties:
+
+- `font-family`
+- `font-size`
+- `line-height`
+
+These properties are configured as most CSS-in-JS libraries.
+
+All HTML element tags can be defined to have the typography styles like:
+
+```tsx
+const theme = createTheme({
+  typography: {
+    h1: {
+      fontFamily: 'Roboto',
+      fontSize: 32,
+      lineHeight: 1
+    },
+    h2: {
+      fontFamily: 'Roboto',
+      fontSize: 28,
+      lineHeight: 1
+    },
+    p: {
+      fontFamily: 'Lato',
+      fontSize: '1rem',
+      lineHeight: 1.5
+    },
+    pre: {
+      fontFamily: 'monospace',
+      fontSize: '14px',
+      lineHeight: '16px'
+    }
+  }
+})
+```
+
+The resulting style objects can be accessed in the theme object like:
+
+```tsx
+theme.typography; // the style objects
+```
+
+Then the objects can used to setup global styles using any CSS-in-JS library.
+
+## Groups
+
+There are special names for groups of HTML elements:
+
+- `root`: `html`, `body`.
+- `headings`: `h1`, `h2`, `h3`, `h4`, `h5`, `h6`.
+- `codes`: `code`, `pre`.
+- `controls`: `input`, `textarea`, `select`, `option`, `button`.
+
+Then they can be used as normal tags:
+
+```tsx
+const theme = createTheme({
+  typography: {
+    root: { // html, body
+      fontFamily: 'Lato',
+      lineHeight: 1.5
+    },
+    headings: { // h1, h2, h3, h4, h5, h6
+      fontFamily: 'Roboto',
+      lineHeight: 1
+    },
+    h1: {
+      fontSize: 32
+    },
+    h2: {
+      fontSize: 28
+    },
+    p: {
+      fontSize: '1rem'
+    },
+    codes: { // code, pre
+      fontFamily: 'monospace'
+    },
+    pre: {
+      fontSize: '14px',
+      lineHeight: '16px'
+    }
+  }
+})
+```
+
+## Breakpoints
+
+Any set of properties can be setup as an array representing the applicable
+styles for the defined [theme breakpoints](/develop/design/breakpoints) as
+[mobile-first](https://www.invisionapp.com/inside-design/mobile-first-design)
+strategy.
+
+An example of creating `h1` element styles for all cases, then for small and
+then for medium breakpoint ranges:
+
+```tsx
+const theme = createTheme({
+  typography: {
+    h1: [
+      { fontSize: 28 }, // applicable in all cases
+      { fontSize: 30 }, // from breakpoint small (sm) upwards
+      { fontSize: 32 } // from breakpoint medium (md) upwards
+      // breakpoint large (lg) not configured
+      // breakpoint extra large (xl) not configured
+    ]
+  }
+});
+```
+
+It will create an object like:
+
+```tsx
+theme1.typography.h1;
+// {
+//   fontSize: 28,
+//   '@media screen and (min-width: 600px)': { fontSize: 30 },
+//   '@media screen and (min-width: 960px)': { fontSize: 32 }
+// }
+```
+
+Based on default breakpoint settings.
+
+Specific breakpoints can be ignored by passing a void value:
+
+```tsx
+const theme = createTheme({
+  typography: {
+    h1: [
+      { fontSize: 28 }, // applicable in all cases
+      undefined,
+      { fontSize: 32 } // from breakpoint medium (md) upwards
+    ]
+  }
+});
+```
+
+It will create:
+
+```tsx
+theme2.typography.h1;
+// {
+//   fontSize: 28,
+//   '@media screen and (min-width: 960px)': { fontSize: 32 }
+// }
+```
+
+## Using Styles
+
+Adding the styles globally with [Emotion](https://emotion.sh) should be made like:
+
+```tsx
+import { Global } from '@emotion/react';
+import { createTheme } from '@arwes/design';
+
+const theme = createTheme({
+  typography: {
+    headings: {
+      fontFamily: 'Roboto, sans-serif'
+    },
+    h1: [
+      { fontSize: 42 },
+      { fontSize: 36 }
+    ],
+    // ...
+  }
+});
+
+// ...
+<Global styles={theme.typography} />
+<Global
+  styles={{
+    // Other global styles...
+  }}
+/>
+// ...
+```
+
+If the styles are merged with other sets of styles using any CSS-in-JS library,
+they can overwrite each other. It is recommended to add the styles independently.

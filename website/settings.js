@@ -41,6 +41,17 @@ module.exports = {
       path: 'develop',
       items: [
         {
+          name: 'Design',
+          path: 'design',
+          items: [
+            { name: 'Breakpoints', path: 'breakpoints' },
+            { name: 'Palette', path: 'palette' },
+            { name: 'Typography', path: 'typography' },
+            { name: 'Space', path: 'space' },
+            { name: 'Shadow', path: 'shadow' }
+          ]
+        },
+        {
           name: 'Animation',
           path: 'animation',
           items: [

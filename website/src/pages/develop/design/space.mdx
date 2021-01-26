@@ -1,0 +1,23 @@
+import { PageContentLayout } from '../../../components/PageContentLayout';
+export default props => <PageContentLayout headProps={{ title: 'Space' }} {...props} />;
+
+# Space
+
+The spacing and the resulting density of the UI elements in a application can
+be managed dynamically by the theme space utility.
+
+A numeric factor value can be setup. Then a multiplier can be provided to get
+an specific space value.
+
+```tsx
+const theme = createTheme({
+  space: 5
+});
+
+theme.space(1); // 5
+theme.space(2); // 10
+theme.space(3); // 15
+theme.space(0); // 0
+```
+
+By default, the factor value is `8`.
