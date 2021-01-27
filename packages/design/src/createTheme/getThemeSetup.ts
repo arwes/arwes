@@ -18,7 +18,6 @@ const extractExtraFeatures = (providedSettings: ThemeSettings = {}): Record<stri
     typography,
     space,
     shadow,
-    zIndexes,
     ...extraFeatures
   } = providedSettings;
   return extraFeatures;
@@ -53,11 +52,6 @@ const getThemeSetup = (providedSettings?: ThemeSettings, extendTheme?: Theme): T
     spread: providedSettings?.shadow?.spread || extendTheme?.shadow.spread(1) || THEME_SHADOW_SPREAD_DEFAULT
   };
 
-  const zIndexes = Object.freeze({
-    ...extendTheme?.zIndexes,
-    ...providedSettings?.zIndexes
-  });
-
   const extraFeatures = extractExtraFeatures(providedSettings);
 
   return Object.freeze({
@@ -66,7 +60,6 @@ const getThemeSetup = (providedSettings?: ThemeSettings, extendTheme?: Theme): T
     typography,
     space,
     shadow,
-    zIndexes,
     extraFeatures
   });
 };

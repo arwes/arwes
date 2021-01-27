@@ -65,15 +65,12 @@ export interface ThemeSettingsShadow {
   spread?: number
 }
 
-export type ThemeSettingsZIndexes = Record<string, number>;
-
 export interface ThemeSettings {
   breakpoints?: ThemeSettingsBreakpoints
   palette?: ThemeSettingsPalette
   typography?: ThemeSettingsTypography
   space?: ThemeSettingsSpace
   shadow?: ThemeSettingsShadow
-  zIndexes?: ThemeSettingsZIndexes
   [prop: string]: any
 }
 
@@ -104,15 +101,12 @@ export interface ThemeSetupShadow {
   spread: number
 }
 
-export type ThemeSetupZIndexes = ThemeSettingsZIndexes;
-
 export interface ThemeSetup {
   breakpoints: ThemeSetupBreakpoints
   palette: ThemeSetupPalette
   typography: ThemeSetupTypography
   space: ThemeSetupSpace
   shadow: ThemeSetupShadow
-  zIndexes: ThemeSetupZIndexes
   extraFeatures: Record<string, any>
 }
 
@@ -162,14 +156,11 @@ export interface ThemeShadow {
   spread: (multiplier?: number) => number
 }
 
-export type ThemeZIndexes = ThemeSettingsZIndexes;
-
 export interface Theme {
   breakpoints: ThemeBreakpoints
   palette: ThemePalette
   typography: ThemeTypography
   space: ThemeSpace
   shadow: ThemeShadow
-  zIndexes: ThemeZIndexes
   [prop: string]: any
 }

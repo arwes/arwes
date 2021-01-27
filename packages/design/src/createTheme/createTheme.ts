@@ -20,7 +20,6 @@ const createTheme = (settings?: ThemeSettings, extendTheme?: Theme): Theme => {
     blur: makeFactorMultiplier(setup.shadow.blur),
     spread: makeFactorMultiplier(setup.shadow.spread)
   });
-  const zIndexes = setup.zIndexes;
 
   return Object.freeze({
     ...setup.extraFeatures,
@@ -28,8 +27,7 @@ const createTheme = (settings?: ThemeSettings, extendTheme?: Theme): Theme => {
     palette,
     typography,
     space,
-    shadow,
-    zIndexes
+    shadow
   });
 };
 
