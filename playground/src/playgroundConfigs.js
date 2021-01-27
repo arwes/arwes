@@ -1,5 +1,17 @@
 const playgroundConfigs = [
   {
+    name: 'design',
+    components: [
+      {
+        name: 'createTheme',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/design/src/createTheme/basic.sandbox.md').default },
+          { name: 'dynamic', code: require('repository/packages/design/src/createTheme/dynamic.sandbox.md').default }
+        ]
+      }
+    ]
+  },
+  {
     name: 'animation',
     components: [
       {
