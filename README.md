@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD033 MD013 -->
 
 <div align="center">
-  <img src="./arwes.gif" alt="Arwes" />
+  <img src="./website/static/arwes.jpg" alt="Arwes" />
 </div>
 
 <p align="center" style="margin-top: 16px; font-size: 1.2rem;">
