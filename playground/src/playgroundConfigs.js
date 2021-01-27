@@ -15,12 +15,6 @@ const playgroundConfigs = [
     name: 'animation',
     components: [
       {
-        name: 'Animator',
-        sandboxes: [
-          { name: 'basic', code: require('repository/packages/animation/src/Animator/basic.sandbox.md').default }
-        ]
-      },
-      {
         name: 'withAnimator',
         sandboxes: [
           { name: 'basic', code: require('repository/packages/animation/src/withAnimator/basic.sandbox.md').default },
@@ -34,6 +28,12 @@ const playgroundConfigs = [
         name: 'extendAnimator',
         sandboxes: [
           { name: 'basic', code: require('repository/packages/animation/src/extendAnimator/basic.sandbox.md').default }
+        ]
+      },
+      {
+        name: 'Animator',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/animation/src/Animator/basic.sandbox.md').default }
         ]
       }
     ]

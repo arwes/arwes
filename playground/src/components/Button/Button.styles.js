@@ -9,7 +9,7 @@ const styles = {
     padding: '8px 16px',
     userSelect: 'none',
     verticalAlign: 'middle',
-    fontSize: 12,
+    fontSize: 14,
     textTransform: 'uppercase',
     color: theme.color.content,
     fontFamily: theme.typography.content,

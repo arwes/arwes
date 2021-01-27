@@ -34,10 +34,10 @@ module.exports = {
         name: 'Arwes',
         short_name: 'Arwes',
         start_url: '/',
-        background_color: '#000909',
-        theme_color: '#000909',
+        background_color: '#001313',
+        theme_color: '#001313',
         display: 'minimal-ui',
-        icon: 'src/images/icon.png'
+        icon: 'static/logo.png'
       }
     },
     'gatsby-plugin-mdx',

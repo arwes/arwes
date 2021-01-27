@@ -1,6 +1,11 @@
 ```js
 /* @jsx emotion.jsx */
 
+// THIS SANDBOX MODIFIES THE HTML ELEMENTS GLOBAL STYLES.
+// IT MAY CONFLICT WITH THE PLAYGROUND APPLICATION STYLES.
+
+// CARD
+
 const containerStyles = theme => ({
   margin: theme.space(2),
   border: `1px solid ${theme.palette.primary.light}`,
@@ -28,6 +33,8 @@ function Card ({ onClick }) {
     </div>
   );
 }
+
+// SANDBOX
 
 const colors = [
   { primary: '#ff0', neutral: '#220' },

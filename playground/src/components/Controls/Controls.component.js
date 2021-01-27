@@ -100,6 +100,9 @@ function Controls ({ className, isHidden, onToggleControls }) {
               <a href='https://reactjs.org' target='_blank' rel='noreferrer'><code>React</code></a>.
             </li>
             <li>
+              <a href='https://emotion.sh/docs/@emotion/react' target='_blank' rel='noreferrer'><code>emotion</code></a>.
+            </li>
+            <li>
               <a href='https://animejs.com' target='_blank' rel='noreferrer'><code>anime</code></a>.
             </li>
             <li>

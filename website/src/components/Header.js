@@ -24,26 +24,35 @@ const styles = {
       padding: 20
     }
   }),
-  logo: theme => ({
+  logoItem: {
     display: 'inline-block',
-    margin: '3px 5px 0 0',
-    height: 25,
     verticalAlign: 'top',
+    margin: 0
+  },
+  logo: theme => ({
+    display: 'block',
+    marginTop: 5,
 
     [theme.breakpoints.tabletUp]: {
-      margin: '0 10px 0 0',
+      marginTop: 0
+    }
+  }),
+  logoType: theme => ({
+    marginRight: 5,
+    height: 25,
+
+    [theme.breakpoints.tabletUp]: {
+      marginRight: 8,
       height: 30
     }
   }),
-  title: theme => ({
-    display: 'inline-block',
-    margin: 0,
-    lineHeight: '30px',
-    fontSize: 20,
-    verticalAlign: 'top',
+  logoText: theme => ({
+    marginTop: 3,
+    height: 20,
 
     [theme.breakpoints.tabletUp]: {
-      fontSize: 30
+      marginTop: 3,
+      height: 25
     }
   }),
   desktopNav: theme => ({
@@ -61,12 +70,10 @@ const styles = {
 const Header = () => (
   <header css={styles.root}>
     <div css={styles.container}>
-      <div>
-        <Link to='/'>
-          <img css={styles.logo} src='/logo-mini.jpg' alt='Arwes Logo' />
-          <h1 css={styles.title}>ARWES</h1>
-        </Link>
-      </div>
+      <Link css={styles.logo} to='/'>
+        <img css={[styles.logoItem, styles.logoType]} src='/logo.png' alt='Arwes Logotype' />
+        <img css={[styles.logoItem, styles.logoText]} src='/logo-horizontal-text.png' alt='Arwes Logotext' />
+      </Link>
       <DesktopNavPrimary css={styles.desktopNav} />
       <MobileNav css={styles.mobileNav} />
     </div>

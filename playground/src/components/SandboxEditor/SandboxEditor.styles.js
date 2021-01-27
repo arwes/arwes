@@ -2,7 +2,7 @@ import { theme } from '../../theme';
 
 const styles = {
   root: {
-    fontSize: 10,
+    fontSize: 12,
 
     // Prism editor uses inline styles.
     fontFamily: `${theme.typography.monospace} !important`,
@@ -20,7 +20,7 @@ const styles = {
     },
 
     [theme.breakpoints.tabletUp]: {
-      fontSize: 12
+      fontSize: 14
     }
   }
 };

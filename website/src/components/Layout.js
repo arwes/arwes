@@ -51,12 +51,15 @@ const Layout = ({ children }) => {
               color: theme.color.active
             }
           },
-          h1: { fontSize: 32 },
-          h2: { fontSize: 28 },
+          'h1, h2, h3, h4, h5, h6': {
+            color: theme.color.headings
+          },
+          h1: { fontSize: 28 },
+          h2: { fontSize: 26 },
           h3: { fontSize: 24 },
-          h4: { fontSize: 21 },
-          h5: { fontSize: 18 },
-          h6: { fontSize: 16 },
+          h4: { fontSize: 22 },
+          h5: { fontSize: 20 },
+          h6: { fontSize: 18 },
           'ul, ol': {
             padding: '0 0 0 40px',
 

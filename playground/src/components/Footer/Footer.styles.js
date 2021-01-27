@@ -24,6 +24,7 @@ const styles = {
       marginLeft: 10
     },
     [theme.breakpoints.tabletUp]: {
+      padding: '8px 15px',
       fontSize: 14
     }
   }

@@ -8,10 +8,11 @@ const theme = {
     monospace: '"Source Code Pro", monospace'
   },
   color: {
-    neutral: '#000909',
-    section: '#031214',
+    neutral: '#001313',
+    section: '#001a1a',
     border: '#06d8d7',
-    content: '#a1ecfb',
+    headings: '#00f8f8',
+    content: '#7efcf6',
     active: '#d4f6fd',
     link: '#51d4ff',
     error: '#ce003e'

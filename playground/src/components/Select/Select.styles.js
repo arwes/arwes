@@ -6,7 +6,7 @@ const styles = {
   root: {
     position: 'relative',
     display: 'block',
-    margin: '0 0 10px',
+    margin: '0 0 15px',
     fontFamily: theme.typography.content,
     color: theme.color.content,
 
@@ -17,12 +17,11 @@ const styles = {
   },
   labelText: {
     display: 'block',
-    marginBottom: 5,
-    padding: '2px 0',
+    marginBottom: 15,
     lineHeight: 1,
-    fontSize: 10,
+    fontSize: 14,
     textTransform: 'uppercase',
-    color: rgba(theme.color.content, 0.75)
+    color: rgba(theme.color.headings, 0.75)
   },
   select: {
     position: 'relative',
@@ -30,11 +29,11 @@ const styles = {
     display: 'block',
     border: 'none',
     margin: 0,
-    padding: '0 0 0 5px',
+    padding: '0 0 0 8px',
     width: '100%',
-    height: 26,
-    lineHeight: '26px',
-    fontSize: 14,
+    height: 30,
+    lineHeight: '30px',
+    fontSize: 16,
     fontFamily: 'inherit',
     color: 'inherit',
     cursor: 'pointer',
@@ -52,9 +51,9 @@ const styles = {
   },
   arrow: {
     position: 'absolute',
-    right: 5,
-    bottom: 5,
-    fontSize: 14,
+    right: 8,
+    bottom: 6,
+    fontSize: 16,
     color: theme.color.content,
     fontWeight: 'bold'
   }

@@ -2,6 +2,13 @@ import { rgba } from 'polished';
 
 import { theme } from '../../theme';
 
+const resetTextStyles = {
+  fontFamily: theme.typography.content,
+  lineHeight: 1.3,
+  fontSize: 16,
+  color: theme.color.content
+};
+
 const styles = {
   root: {
     zIndex: 1000,
@@ -12,17 +19,15 @@ const styles = {
     bottom: 0,
     display: 'block',
     padding: 20,
-    fontFamily: theme.typography.content,
-    lineHeight: 1.2,
-    fontSize: 12,
-    color: theme.color.content,
     backgroundColor: rgba(theme.color.background, 0.75),
+    ...resetTextStyles,
 
     '& p, & ul': {
-      margin: '10px 0'
+      ...resetTextStyles,
+      margin: '15px 0'
     },
     '& ul': {
-      padding: '0 0 0 10px',
+      padding: '0 0 0 20px',
       listStyle: 'none'
     },
     '& li': {
@@ -31,14 +36,15 @@ const styles = {
       '&::before': {
         content: '">"',
         position: 'absolute',
-        left: -10,
-        top: 1,
+        left: -15,
+        top: 3,
         lineHeight: '1em',
-        fontSize: '0.75em',
+        fontSize: '0.9em',
         color: theme.color.content
       }
     },
     '& a': {
+      ...resetTextStyles,
       color: theme.color.content,
       transition: 'color 150ms ease-out',
 
@@ -62,7 +68,7 @@ const styles = {
     gridTemplateRows: 'auto auto 1fr',
     overflowY: 'auto',
     border: `1px solid ${theme.color.border}`,
-    padding: '0 10px',
+    padding: '0 15px',
     width: '100%',
     height: '100%',
     backgroundColor: theme.color.section,
@@ -72,24 +78,23 @@ const styles = {
   },
   options: {
     borderBottom: `1px solid ${rgba(theme.color.border, 0.5)}`,
-    paddingTop: 10
+    marginTop: 15
   },
   guide: {
-    paddingTop: 10
+    marginTop: 15
   },
   guideTitle: {
     display: 'block',
-    padding: '2px 0',
     lineHeight: 1,
-    fontSize: 10,
+    fontSize: 14,
     textTransform: 'uppercase',
-    color: rgba(theme.color.content, 0.75)
+    color: rgba(theme.color.headings, 0.75)
   },
   buttons: {
     display: 'flex',
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
-    padding: '10px 0',
+    padding: '15px 0',
     [theme.breakpoints.tabletUp]: {
       display: 'none'
     }

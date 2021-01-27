@@ -46,11 +46,13 @@ const styles = {
 
     [theme.breakpoints.tabletUp]: {
       display: 'grid',
-      gridTemplateColumns: '200px auto',
+      gridTemplateColumns: '280px auto',
       gridTemplateRows: 'auto'
     }
   },
   controls: {
+    minHeight: 0, // Height overflow issue.
+
     [theme.breakpoints.tabletUp]: {
       borderRight: `1px solid ${theme.color.border}`
     }

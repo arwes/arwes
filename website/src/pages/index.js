@@ -22,11 +22,11 @@ const styles = {
     padding: 20,
     textAlign: 'center'
   },
-  mainHeader: {
+  mainHeader: theme => ({
     '& img': {
       margin: '0 auto 15px',
       width: '100%',
-      maxWidth: 200
+      maxWidth: 160
     },
     '& h1': {
       margin: '0 0 25px',
@@ -35,8 +35,14 @@ const styles = {
     '& p': {
       margin: '0 0 10px',
       fontSize: 18
+    },
+
+    [theme.breakpoints.tabletUp]: {
+      '& img': {
+        maxWidth: 180
+      }
     }
-  },
+  }),
   mainNav: {
     '& a + a': {
       marginLeft: 10
