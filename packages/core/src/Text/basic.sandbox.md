@@ -2,14 +2,18 @@
 const SOUND_TYPING_URL = '/assets/sounds/typing.mp3';
 
 function Sandbox () {
-  const audio = { common: { volume: 0.1 } };
-  const players = { typing: { src: [SOUND_TYPING_URL], loop: true } };
-  const duration = { enter: 1000, exit: 1000 };
+  const [audio] = React.useState({
+    common: { volume: 0.1 }
+  });
+  const [players] = React.useState({
+    typing: { src: [SOUND_TYPING_URL], loop: true }
+  });
+  const [duration] = React.useState({ enter: 1000, exit: 1000 });
   const [activate, setActivate] = React.useState(true);
 
   React.useEffect(() => {
-    const id = setTimeout(() => setActivate(!activate), 2000);
-    return () => clearTimeout(id);
+    const timeout = setTimeout(() => setActivate(!activate), 2000);
+    return () => clearTimeout(timeout);
   }, [activate]);
 
   return (

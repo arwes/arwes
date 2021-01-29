@@ -6,6 +6,8 @@ import { WithAnimatorInputProps } from '@arwes/animation';
 import { WithBleepsInputProps } from '@arwes/sounds';
 
 import { styles } from './Text.styles';
+// DEBUG:
+// import { startAnimation } from './Text.animations';
 
 interface TextProps {
   as?: keyof HTMLElementTagNameMap
@@ -76,6 +78,18 @@ const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
       }
     }
   }, [animator.flow]);
+
+  // DEBUG:
+  /*
+  useEffect(() => {
+    if (animator.animate && animator.flow.entered) {
+      // DEBUG:
+      console.log('Children updated, reanimating');
+
+      startAnimation(animator, animateRefs);
+    }
+  }, [children]);
+  */
 
   return jsx(
     as as string,
