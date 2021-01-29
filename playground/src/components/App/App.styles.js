@@ -82,7 +82,11 @@ const styles = {
     borderRight: 'none'
   },
   preview: {
-    padding: 10
+    padding: 10,
+
+    [theme.breakpoints.tabletUp]: {
+      padding: 15
+    }
   }
 };
 

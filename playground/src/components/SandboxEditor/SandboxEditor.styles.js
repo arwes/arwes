@@ -20,7 +20,11 @@ const styles = {
     },
 
     [theme.breakpoints.tabletUp]: {
-      fontSize: 14
+      fontSize: 14,
+
+      '& textarea, & pre': {
+        padding: '15px !important'
+      }
     }
   }
 };

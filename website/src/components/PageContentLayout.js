@@ -60,9 +60,9 @@ const PageContentLayout = ({ headProps, children, location }) => {
         <Header />
         <div css={styles.container}>
           <div css={styles.content}>
-            <article css={styles.article}>
+            <main css={styles.article}>
               {children}
-            </article>
+            </main>
             <DesktopNavSecondary
               css={styles.desktopNavSecondary}
               location={location}
