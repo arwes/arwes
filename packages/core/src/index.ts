@@ -1,1 +1,1 @@
-export const core = '@arwes/core';
+export * from './Text';

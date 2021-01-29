@@ -28,5 +28,15 @@
     "dist"
   ],
   "main": "lib/index.js",
-  "unpkg": "dist/core.min.js"
+  "unpkg": "dist/core.min.js",
+  "peerDependencies": {
+    "react": "17.x",
+    "prop-types": "*",
+    "@emotion/css": "11.x",
+    "@emotion/react": "11.x"
+  },
+  "dependencies": {
+    "@arwes/animation": "^1.0.0-alpha.16",
+    "@arwes/sounds": "^1.0.0-alpha.16"
+  }
 }

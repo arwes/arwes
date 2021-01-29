@@ -51,6 +51,18 @@ const playgroundConfigs = [
         ]
       }
     ]
+  },
+  {
+    name: 'core',
+    components: [
+      {
+        name: 'Text',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/core/src/Text/basic.sandbox.md').default },
+          { name: 'static', code: require('repository/packages/core/src/Text/static.sandbox.md').default }
+        ]
+      }
+    ]
   }
 ];
 
