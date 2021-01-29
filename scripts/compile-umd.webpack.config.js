@@ -3,6 +3,7 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const {
   NODE_ENV,
+  COMPILE_NAME,
   COMPILE_SRC,
   COMPILE_OUT_PATH,
   COMPILE_OUT_FILENAME,
@@ -22,7 +23,7 @@ module.exports = {
     extensions: ['.js', '.ts', '.tsx'],
     plugins: [
       new TsconfigPathsPlugin({
-        configFile: path.join(process.cwd(), 'tsconfig.json')
+        configFile: path.join(process.cwd(), 'packages', COMPILE_NAME, 'tsconfig.build.json')
       })
     ]
   },
