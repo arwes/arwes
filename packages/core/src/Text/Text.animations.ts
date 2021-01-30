@@ -12,20 +12,37 @@ const calcelAnimation = (animator: AnimatorRef, refs: any): void => {
 };
 
 const stopAnimation = (animator: AnimatorRef, refs: any): void => {
-  const { rootRef, actualChildrenRef, currentCloneNode } = refs.current;
+  const {
+    rootRef,
+    actualChildrenRef,
+    currentCloneNode,
+    currentAnimationFrame,
+    bleeps
+  } = refs.current;
+
+  // If there is no animation running, nothing needs to be stopped.
+  if (currentAnimationFrame.current === null) {
+    return;
+  }
 
   calcelAnimation(animator, refs);
+
+  if (bleeps.typing?.getIsPlaying()) {
+    bleeps.typing?.stop();
+  }
 
   if (rootRef.current && currentCloneNode.current) {
     rootRef.current.removeChild(currentCloneNode.current);
     currentCloneNode.current = null;
   }
 
-  const isEnteringPhase = animator.flow.entering || animator.flow.entered;
+  const isEntering = animator.flow.entering || animator.flow.entered;
 
-  if (isEnteringPhase && actualChildrenRef.current) {
+  if (isEntering && actualChildrenRef.current) {
     actualChildrenRef.current.style.opacity = '';
   }
+
+  currentAnimationFrame.current = null;
 };
 
 const startAnimation = (animator: AnimatorRef, refs: any): void => {
@@ -34,12 +51,16 @@ const startAnimation = (animator: AnimatorRef, refs: any): void => {
     actualChildrenRef,
     currentCloneNode,
     currentBlinkNode,
-    currentAnimationFrame
+    currentAnimationFrame,
+    bleeps
   } = refs.current;
 
   stopAnimation(animator, refs);
 
-  const isEntering = animator.flow.entering;
+  // If the animation is run when the element is already "entered", it should
+  // restart the same entering animation.
+  const isEntering = animator.flow.entering || animator.flow.entered;
+
   const durationTotal = isEntering
     ? animator.duration.enter
     : animator.duration.exit;
@@ -118,6 +139,8 @@ const startAnimation = (animator: AnimatorRef, refs: any): void => {
   };
 
   addNextFrame(runFrame);
+
+  bleeps.typing?.play();
 };
 
 export { calcelAnimation, stopAnimation, startAnimation };

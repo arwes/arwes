@@ -1,4 +1,4 @@
-import { FC, useRef, useEffect } from 'react';
+import { FC, useRef, useEffect, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import { css, cx, keyframes } from '@emotion/css';
 import { jsx } from '@emotion/react';
@@ -6,8 +6,10 @@ import { WithAnimatorInputProps } from '@arwes/animation';
 import { WithBleepsInputProps } from '@arwes/sounds';
 
 import { styles } from './Text.styles';
-// DEBUG:
-// import { startAnimation } from './Text.animations';
+import { startAnimation } from './Text.animations';
+
+// TODO: Is the "bleeps" object reference always the same?
+// TODO: Add support for dynamic duration based on text length.
 
 interface TextProps {
   as?: keyof HTMLElementTagNameMap
@@ -40,7 +42,8 @@ const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
     actualChildrenRef,
     currentCloneNode,
     currentBlinkNode,
-    currentAnimationFrame
+    currentAnimationFrame,
+    bleeps
   });
 
   animator.setupAnimateRefs(animateRefs);
@@ -52,6 +55,8 @@ const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
   }, [animator.animate]);
 
   useEffect(() => {
+    // The blink element is created only once for all the animations,
+    // since this element is the same each case.
     if (hasBlink && blinkText && blinkInterval) {
       const blinkKeyframes = keyframes(styles.blinkKeyframes);
       const blinkClassName = css({
@@ -68,28 +73,26 @@ const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
     }
   }, [hasBlink]);
 
-  useEffect(() => {
-    if (animator.animate) {
-      if (animator.flow.entering || animator.flow.exiting) {
-        bleeps.typing?.play();
-      }
-      else {
-        bleeps.typing?.stop();
-      }
-    }
-  }, [animator.flow]);
+  // Every time the children content is updated when the animator is ENTERED,
+  // the animation should be re-run. This check is a simple comparision if children
+  // is a string, but if it is a JSX object(s), every time any prop changes,
+  // the children is received as changed too.
+  // The solution is to store a copy of the children element content as
+  // a string, then compare it each time it is changed.
+  const childrenContent = useRef<string>('');
 
-  // DEBUG:
-  /*
-  useEffect(() => {
-    if (animator.animate && animator.flow.entered) {
-      // DEBUG:
-      console.log('Children updated, reanimating');
+  useLayoutEffect(() => {
+    const newChildrenContent = String(actualChildrenRef.current?.innerHTML || '');
+    const isChildrenContentEqual = newChildrenContent === childrenContent.current;
 
+    childrenContent.current = newChildrenContent;
+
+    // The animation is re-run every time the children content changes when
+    // animator is ENTERED.
+    if (animator.animate && animator.flow.entered && !isChildrenContentEqual) {
       startAnimation(animator, animateRefs);
     }
   }, [children]);
-  */
 
   return jsx(
     as as string,

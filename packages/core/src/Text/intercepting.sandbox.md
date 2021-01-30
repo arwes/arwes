@@ -8,8 +8,11 @@ const duration = { enter: 1000, exit: 1000 };
 function Sandbox () {
   const [activate, setActivate] = React.useState(true);
 
+  // The animation process is intercepted and reversed, since
+  // the animator activated/deactivated before the animation
+  // is completed.
   React.useEffect(() => {
-    const timeout = setTimeout(() => setActivate(!activate), 2000);
+    const timeout = setTimeout(() => setActivate(!activate), 750);
     return () => clearTimeout(timeout);
   }, [activate]);
 
