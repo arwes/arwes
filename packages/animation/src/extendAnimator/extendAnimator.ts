@@ -1,5 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
+// TODO: Review and analyze if the extension functionality is necessary or
+// if it can be removed, since it creates excesive typing overload and
+// decreases performance.
+// TODO: Test cases are not correctly checking typing.
+
 import { forwardRef, ForwardRefExoticComponent, PropsWithoutRef, RefAttributes, createElement } from 'react';
 
 import { AnimatorClassSettings, AnimatorInstanceSettings } from '../constants';

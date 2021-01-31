@@ -12,7 +12,7 @@ interface WithAnimatorInputProps {
 }
 
 interface WithAnimatorOutputProps {
-  animator: AnimatorInstanceSettings
+  animator?: AnimatorInstanceSettings
 }
 
 function withAnimator<T extends ComponentType<P>, P extends WithAnimatorInputProps = WithAnimatorInputProps> (classAnimator?: AnimatorClassSettings) {

@@ -19,8 +19,8 @@ test('Should extend actual animated component', () => {
     flow = props.animator.flow;
     return null;
   };
-  const ExampleNode = withAnimator()(ExampleComponent);
-  const ExampleExtendedNode = extendAnimator({})(ExampleNode);
+  const ExampleNode = withAnimator({})(ExampleComponent);
+  const ExampleExtendedNode = extendAnimator({})(ExampleNode as any);
   render(<ExampleExtendedNode />);
   expect(flow.value).toBe(EXITED);
   act(() => {
