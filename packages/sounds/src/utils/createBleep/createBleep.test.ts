@@ -47,6 +47,10 @@ test('Should allow playing the sound as shared sound', () => {
   expect(howlPlay).toHaveBeenNthCalledWith(4, 777);
 });
 
+test.todo('Should load the sound if it is unloaded when it is played');
+
+test.todo('Should always set shared sound id as number or undefined when playing (even if the play returns null)');
+
 test('Should allow pausing the shared sound', () => {
   const audioSettings = { volume: 0.8 };
   const playerSettings = { src: ['sound.webm'] };

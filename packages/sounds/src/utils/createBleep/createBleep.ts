@@ -16,7 +16,17 @@ const createBleep = (audioSettings: BleepsAudioGroupSettings, playerSettings: Bl
   let lastId: number | undefined;
 
   const play = (): void => {
-    lastId = howl.play(lastId);
+    // Even if the audio is set up to be preloaded, sometimes the file
+    // is not loaded, probably because the browser has locked the playback.
+    if (howl.state() === 'unloaded') {
+      howl.load();
+    }
+
+    const newId = howl.play(lastId);
+
+    // If the sound is being loaded, it returns null.
+    // The id to pass to play must be a number or undefined.
+    lastId = newId || undefined;
   };
   const pause = (): void => {
     howl.pause(lastId);
