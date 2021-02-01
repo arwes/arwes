@@ -24,7 +24,7 @@ test('Should call "useAnimateMount" with animator object and setup refs on <Anim
   let animator: any;
   const ExampleComponent: FC = () => {
     animator = useAnimator();
-    animator?.setupAnimateRefs('xxx');
+    animator?.setupAnimateRefs('x', 'y', 'z');
     return null;
   };
   const useAnimateMount = jest.fn();
@@ -39,7 +39,9 @@ test('Should call "useAnimateMount" with animator object and setup refs on <Anim
   expect(useAnimateMount).toHaveBeenCalledTimes(1);
   expect(useAnimateMount).toHaveBeenCalledWith(
     expect.objectContaining({ flow: expect.objectContaining({ value: EXITED }) }),
-    'xxx'
+    'x',
+    'y',
+    'z'
   );
 
   actJestMoveTimeTo(1000);
@@ -50,7 +52,7 @@ test('Should call "useAnimateUnmount" with animator object and setup refs on <An
   let animator: any;
   const ExampleComponent: FC = () => {
     animator = useAnimator();
-    animator.setupAnimateRefs('xxx');
+    animator.setupAnimateRefs('x', 'y', 'z');
     return null;
   };
   const useAnimateUnmount = jest.fn();
@@ -78,7 +80,9 @@ test('Should call "useAnimateUnmount" with animator object and setup refs on <An
   expect(useAnimateUnmount).toHaveBeenCalledTimes(1);
   expect(useAnimateUnmount).toHaveBeenCalledWith(
     expect.objectContaining({ flow: expect.objectContaining({ value: EXITED }) }),
-    'xxx'
+    'x',
+    'y',
+    'z'
   );
 });
 
@@ -86,7 +90,7 @@ test('Should call "useAnimateEntered" with animator object and setup refs on flo
   let animator: any;
   const ExampleComponent: FC = () => {
     animator = useAnimator();
-    animator.setupAnimateRefs('xxx');
+    animator.setupAnimateRefs('x', 'y', 'z');
     return null;
   };
   const useAnimateEntered = jest.fn();
@@ -110,7 +114,9 @@ test('Should call "useAnimateEntered" with animator object and setup refs on flo
   expect(useAnimateEntered).toHaveBeenCalledTimes(1);
   expect(useAnimateEntered).toHaveBeenCalledWith(
     expect.objectContaining({ flow: expect.objectContaining({ value: ENTERED }) }),
-    'xxx'
+    'x',
+    'y',
+    'z'
   );
 });
 
@@ -118,7 +124,7 @@ test('Should call "useAnimateEntering" with animator object and setup refs on fl
   let animator: any;
   const ExampleComponent: FC = () => {
     animator = useAnimator();
-    animator.setupAnimateRefs('xxx');
+    animator.setupAnimateRefs('x', 'y', 'z');
     return null;
   };
 
@@ -143,7 +149,9 @@ test('Should call "useAnimateEntering" with animator object and setup refs on fl
   expect(useAnimateEntering).toHaveBeenCalledTimes(1);
   expect(useAnimateEntering).toHaveBeenCalledWith(
     expect.objectContaining({ flow: expect.objectContaining({ value: ENTERING }) }),
-    'xxx'
+    'x',
+    'y',
+    'z'
   );
 
   actJestMoveTimeTo(2000);
@@ -154,7 +162,7 @@ test('Should call "useAnimateExiting" with animator object and setup refs on flo
   let animator: any;
   const ExampleComponent: FC = () => {
     animator = useAnimator();
-    animator.setupAnimateRefs('xxx');
+    animator.setupAnimateRefs('x', 'y', 'z');
     return null;
   };
   const useAnimateExiting = jest.fn();
@@ -178,7 +186,9 @@ test('Should call "useAnimateExiting" with animator object and setup refs on flo
   expect(useAnimateExiting).toHaveBeenCalledTimes(1);
   expect(useAnimateExiting).toHaveBeenCalledWith(
     expect.objectContaining({ flow: expect.objectContaining({ value: EXITING }) }),
-    'xxx'
+    'x',
+    'y',
+    'z'
   );
 
   actJestMoveTimeTo(1101);
@@ -189,7 +199,7 @@ test('Should call "useAnimateExited" with animator object and setup refs on flow
   let animator: any;
   const ExampleComponent: FC = () => {
     animator = useAnimator();
-    animator.setupAnimateRefs('xxx');
+    animator.setupAnimateRefs('x', 'y', 'z');
     return null;
   };
   const useAnimateExited = jest.fn();
@@ -209,7 +219,9 @@ test('Should call "useAnimateExited" with animator object and setup refs on flow
   expect(useAnimateExited).toHaveBeenCalledTimes(1);
   expect(useAnimateExited).toHaveBeenCalledWith(
     expect.objectContaining({ flow: expect.objectContaining({ value: EXITED }) }),
-    'xxx'
+    'x',
+    'y',
+    'z'
   );
 
   actJestMoveTimeTo(1099);
@@ -219,6 +231,8 @@ test('Should call "useAnimateExited" with animator object and setup refs on flow
   expect(useAnimateExited).toHaveBeenCalledTimes(2);
   expect(useAnimateExited.mock.calls[1]).toEqual([
     expect.objectContaining({ flow: expect.objectContaining({ value: EXITED }) }),
-    'xxx'
+    'x',
+    'y',
+    'z'
   ]);
 });

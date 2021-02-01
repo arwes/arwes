@@ -98,10 +98,10 @@ const Animator: FC<AnimatorProps> = props => {
   // This variable is supposed to be defined by the component using this
   // <Animator/>. It will contain the reference(s) to the actual HTML element(s)
   // to animate on the flow transitions and component lifecycle.
-  const animateRefs = useRef<any>();
+  const animateRefs = useRef<any[]>([]);
 
   const providedAnimator: AnimatorRef = useMemo(() => {
-    const setupAnimateRefs = (refs: any): void => {
+    const setupAnimateRefs = (...refs: any[]): void => {
       animateRefs.current = refs;
     };
     const updateDuration = (duration: AnimatorSettingsDuration | undefined): void => {
@@ -151,12 +151,12 @@ const Animator: FC<AnimatorProps> = props => {
       parentAnimator?._subscribe(instanceId, child);
     }
 
-    animator.useAnimateMount?.(providedAnimator, animateRefs.current);
+    animator.useAnimateMount?.(providedAnimator, ...animateRefs.current);
 
     return () => {
       scheduler.stopAll();
 
-      animator.useAnimateUnmount?.(providedAnimator, animateRefs.current);
+      animator.useAnimateUnmount?.(providedAnimator, ...animateRefs.current);
 
       if (!root) {
         parentAnimator?._unsubscribe(instanceId);
@@ -179,10 +179,10 @@ const Animator: FC<AnimatorProps> = props => {
     animator.onTransition?.(flow);
 
     switch (flow.value) {
-      case ENTERING: animator.useAnimateEntering?.(providedAnimator, animateRefs.current); break;
-      case ENTERED: animator.useAnimateEntered?.(providedAnimator, animateRefs.current); break;
-      case EXITING: animator.useAnimateExiting?.(providedAnimator, animateRefs.current); break;
-      case EXITED: animator.useAnimateExited?.(providedAnimator, animateRefs.current); break;
+      case ENTERING: animator.useAnimateEntering?.(providedAnimator, ...animateRefs.current); break;
+      case ENTERED: animator.useAnimateEntered?.(providedAnimator, ...animateRefs.current); break;
+      case EXITING: animator.useAnimateExiting?.(providedAnimator, ...animateRefs.current); break;
+      case EXITED: animator.useAnimateExited?.(providedAnimator, ...animateRefs.current); break;
     }
 
     const nodes = Array.from(childrenNodesMap.values());

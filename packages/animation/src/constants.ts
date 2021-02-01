@@ -109,7 +109,7 @@ export type AnimatorSettingsManager = typeof PARALLEL | typeof SEQUENCE | typeof
  * The function type definition for the animator "animate hooks".
  * All the animate hooks would receive and return the same values.
  */
-export type AnimatorSettingsUseAnimate = (animator: AnimatorRef, refs: any) => void;
+export type AnimatorSettingsUseAnimate = (animator: AnimatorRef, ...refs: any[]) => void;
 
 /**
  * On `<Animator />` flow transition. It is called every time the animator transition
@@ -132,7 +132,7 @@ export interface AnimatorRef {
    * Send any data references to the "animate hooks" to handle HTML animations
    * when they are called. Usually, React HTMLElement references are used.
    */
-  setupAnimateRefs: (refs: any) => void
+  setupAnimateRefs: (...refs: any[]) => void
 
   /**
    * Update dynamically the duration, usually in component mount lifecycle.
