@@ -56,6 +56,12 @@ const playgroundConfigs = [
     name: 'core',
     components: [
       {
+        name: 'StylesBaseline',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/core/src/StylesBaseline/basic.sandbox.md').default }
+        ]
+      },
+      {
         name: 'Text',
         sandboxes: [
           { name: 'basic', code: require('repository/packages/core/src/Text/basic.sandbox.md').default },
