@@ -6,7 +6,10 @@ import { WithAnimatorInputProps } from '@arwes/animation';
 import { WithBleepsInputProps } from '@arwes/sounds';
 
 import { styles } from './Text.styles';
-import { startAnimation } from './Text.animations';
+import { TextAnimationRefs, startTextAnimation } from './Text.animations';
+
+// Browser normally renders 60 frames per second for requested animations.
+const FPS_NORMAL_DURATION = 1000 / 60;
 
 interface TextProps {
   as?: keyof HTMLElementTagNameMap
@@ -34,45 +37,42 @@ const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
 
   const rootRef = useRef<HTMLElement>(null);
   const actualChildrenRef = useRef<HTMLElement>(null);
-  const currentCloneNode = useRef<HTMLElement | null>(null);
-  const currentBlinkNode = useRef<HTMLElement | null>(null);
-  const currentAnimationFrame = useRef<number | null>(null);
+  const cloneNode = useRef<HTMLElement | null>(null);
+  const blinkNode = useRef<HTMLElement | null>(null);
+  const animationFrame = useRef<number | null>(null);
 
-  const animateRefs = useRef({
+  const animateRefs: TextAnimationRefs = useRef({
     rootRef,
     actualChildrenRef,
-    currentCloneNode,
-    currentBlinkNode,
-    currentAnimationFrame,
-    bleeps
+    cloneNode,
+    blinkNode,
+    animationFrame
   });
 
-  animator.setupAnimateRefs(animateRefs);
+  animator.setupAnimateRefs(animateRefs, bleeps);
 
   useEffect(() => {
     if (actualChildrenRef.current) {
       actualChildrenRef.current.style.opacity = animator.animate ? '0' : '';
     }
-  }, [animator.animate]);
 
-  useEffect(() => {
     // The blink element is created only once for all the animations,
     // since this element is the same each case.
-    if (hasBlink && blinkText && blinkInterval) {
+    if (animator.animate && hasBlink && blinkText && blinkInterval) {
       const blinkKeyframes = keyframes(styles.blinkKeyframes);
       const blinkClassName = css({
         ...styles.blink,
         animation: `${blinkKeyframes} ${blinkInterval}ms step-end infinite`
       });
 
-      currentBlinkNode.current = document.createElement('span');
-      currentBlinkNode.current.innerHTML = blinkText;
-      currentBlinkNode.current.setAttribute('class', blinkClassName);
+      blinkNode.current = document.createElement('span');
+      blinkNode.current.innerHTML = blinkText;
+      blinkNode.current.setAttribute('class', blinkClassName);
     }
     else {
-      currentBlinkNode.current = null;
+      blinkNode.current = null;
     }
-  }, [hasBlink]);
+  }, [animator.animate, hasBlink]);
 
   // Every time the children content is updated when the animator is ENTERED,
   // the animation should be re-run. This check is a simple comparision if children
@@ -96,7 +96,7 @@ const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
     // a specific animator duration needs to be provided.
     if (dynamicDuration) {
       const newChildrenTextContent = String(actualChildrenRef.current?.textContent || '');
-      const factor = dynamicDurationFactor || (1000 / 60);
+      const factor = dynamicDurationFactor || FPS_NORMAL_DURATION;
       const newDynamicDuration = Math.min(
         factor * newChildrenTextContent.length,
         animator.duration.enter
@@ -115,7 +115,7 @@ const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
     // The animation is re-run every time the children content changes when
     // animator is ENTERED.
     if (animator.flow.entered && !isChildrenContentEqual) {
-      startAnimation(animator, animateRefs);
+      startTextAnimation(animator, animateRefs, bleeps);
     }
   }, [children]);
 
@@ -151,7 +151,7 @@ Text.propTypes = {
 Text.defaultProps = {
   as: 'span',
   dynamicDuration: true,
-  dynamicDurationFactor: 1000 / 60, // Normal FPS duration
+  dynamicDurationFactor: FPS_NORMAL_DURATION,
   blink: true,
   blinkText: '&#9614;',
   blinkInterval: 100

@@ -3,13 +3,8 @@ import { WithAnimatorOutputProps, withAnimator } from '@arwes/animation';
 import { WithBleepsOutputProps, withBleeps } from '@arwes/sounds';
 
 import { TextProps, Text as Component } from './Text.component';
-import * as animator from './Text.animator';
-
-const bleepsSettings = {
-  typing: {
-    player: 'typing'
-  }
-};
+import { animator } from './Text.animator';
+import { bleepsSettings } from './Text.bleeps';
 
 const Text: FC<TextProps & WithAnimatorOutputProps & WithBleepsOutputProps> =
   withAnimator(animator)(

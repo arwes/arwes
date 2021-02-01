@@ -1,21 +1,28 @@
 import { AnimatorRef } from '@arwes/animation';
+import { Bleeps } from '@arwes/sounds';
 
-import { startAnimation, stopAnimation } from './Text.animations';
+import {
+  TextAnimationRefs,
+  startTextAnimation,
+  stopTextAnimation
+} from './Text.animations';
 
-const useAnimateEntering = (animator: AnimatorRef, refs: any): void => {
-  startAnimation(animator, refs);
+const useAnimateEntering = (animator: AnimatorRef, refs: TextAnimationRefs, bleeps: Bleeps): void => {
+  startTextAnimation(animator, refs, bleeps);
 };
 
-const useAnimateExiting = (animator: AnimatorRef, refs: any): void => {
-  startAnimation(animator, refs);
+const useAnimateExiting = (animator: AnimatorRef, refs: TextAnimationRefs, bleeps: Bleeps): void => {
+  startTextAnimation(animator, refs, bleeps);
 };
 
-const useAnimateUnmount = (animator: AnimatorRef, refs: any): void => {
-  stopAnimation(animator, refs);
+const useAnimateUnmount = (animator: AnimatorRef, refs: TextAnimationRefs, bleeps: Bleeps): void => {
+  stopTextAnimation(animator, refs, bleeps);
 };
 
-export {
+const animator = {
   useAnimateEntering,
   useAnimateExiting,
   useAnimateUnmount
 };
+
+export { animator };

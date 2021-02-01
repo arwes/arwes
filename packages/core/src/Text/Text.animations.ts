@@ -1,39 +1,48 @@
+import { RefObject, MutableRefObject } from 'react';
 import { css } from '@emotion/css';
 import { AnimatorRef } from '@arwes/animation';
+import { Bleeps } from '@arwes/sounds';
 
-import { walkTextNodes } from './walkTextNodes';
-import { setTextNodesEnteringContentLength } from './setTextNodesEnteringContentLength';
-import { setTextNodesExitingContentLength } from './setTextNodesExitingContentLength';
+import { walkTextNodes } from './utils/walkTextNodes';
+import { setTextNodesEnteringContentLength } from './utils/setTextNodesEnteringContentLength';
+import { setTextNodesExitingContentLength } from './utils/setTextNodesExitingContentLength';
 import { styles } from './Text.styles';
 
-const calcelAnimation = (animator: AnimatorRef, refs: any): void => {
-  const { currentAnimationFrame } = refs.current;
-  window.cancelAnimationFrame(currentAnimationFrame.current);
+type TextAnimationRefs = MutableRefObject<{
+  rootRef: RefObject<HTMLElement>
+  actualChildrenRef: RefObject<HTMLElement>
+  cloneNode: MutableRefObject<HTMLElement | null>
+  blinkNode: MutableRefObject<HTMLElement | null>
+  animationFrame: MutableRefObject<number | null>
+}>;
+
+const calcelTextAnimation = (animator: AnimatorRef, refs: TextAnimationRefs): void => {
+  const { animationFrame } = refs.current;
+  window.cancelAnimationFrame(animationFrame.current as number);
 };
 
-const stopAnimation = (animator: AnimatorRef, refs: any): void => {
+const stopTextAnimation = (animator: AnimatorRef, refs: TextAnimationRefs, bleeps: Bleeps): void => {
   const {
     rootRef,
     actualChildrenRef,
-    currentCloneNode,
-    currentAnimationFrame,
-    bleeps
+    cloneNode,
+    animationFrame
   } = refs.current;
 
   // If there is no animation running, nothing needs to be stopped.
-  if (currentAnimationFrame.current === null) {
+  if (animationFrame.current === null) {
     return;
   }
 
-  calcelAnimation(animator, refs);
+  calcelTextAnimation(animator, refs);
 
   if (bleeps.typing?.getIsPlaying()) {
     bleeps.typing?.stop();
   }
 
-  if (rootRef.current && currentCloneNode.current) {
-    rootRef.current.removeChild(currentCloneNode.current);
-    currentCloneNode.current = null;
+  if (rootRef.current && cloneNode.current) {
+    rootRef.current.removeChild(cloneNode.current);
+    cloneNode.current = null;
   }
 
   const isEntering = animator.flow.entering || animator.flow.entered;
@@ -42,22 +51,21 @@ const stopAnimation = (animator: AnimatorRef, refs: any): void => {
     actualChildrenRef.current.style.opacity = '';
   }
 
-  currentAnimationFrame.current = null;
+  animationFrame.current = null;
 };
 
-const startAnimation = (animator: AnimatorRef, refs: any): void => {
+const startTextAnimation = (animator: AnimatorRef, refs: TextAnimationRefs, bleeps: Bleeps): void => {
   const {
     rootRef,
     actualChildrenRef,
-    currentCloneNode,
-    currentBlinkNode,
-    currentAnimationFrame,
-    bleeps
+    cloneNode,
+    blinkNode,
+    animationFrame
   } = refs.current;
 
-  stopAnimation(animator, refs);
+  stopTextAnimation(animator, refs, bleeps);
 
-  // If the animation is run when the element is already "entered", it should
+  // If the animation is run when the element is already ENTERED, it should
   // restart the same entering animation.
   const isEntering = animator.flow.entering || animator.flow.entered;
 
@@ -65,12 +73,12 @@ const startAnimation = (animator: AnimatorRef, refs: any): void => {
     ? animator.duration.enter
     : animator.duration.exit;
 
-  currentCloneNode.current = actualChildrenRef.current.cloneNode(true);
+  cloneNode.current = actualChildrenRef.current?.cloneNode(true) as HTMLElement;
 
   const textNodes: Node[] = [];
   const texts: string[] = [];
 
-  walkTextNodes(currentCloneNode.current, child => {
+  walkTextNodes(cloneNode.current, child => {
     textNodes.push(child);
     texts.push(child.textContent || '');
 
@@ -82,26 +90,28 @@ const startAnimation = (animator: AnimatorRef, refs: any): void => {
   const lengthTotal = texts.join('').length;
 
   if (!lengthTotal) {
-    currentCloneNode.current = null;
+    cloneNode.current = null;
     return;
   }
 
-  actualChildrenRef.current.style.opacity = '0';
+  if (actualChildrenRef.current) {
+    actualChildrenRef.current.style.opacity = '0';
+  }
 
-  currentCloneNode.current.setAttribute('style', '');
-  currentCloneNode.current.setAttribute('class', css(styles.cloneNode));
+  cloneNode.current.setAttribute('style', '');
+  cloneNode.current.setAttribute('class', css(styles.cloneNode));
 
-  rootRef.current.appendChild(currentCloneNode.current);
+  rootRef.current?.appendChild(cloneNode.current);
 
-  if (currentBlinkNode.current) {
-    currentCloneNode.current.appendChild(currentBlinkNode.current);
+  if (blinkNode.current) {
+    cloneNode.current.appendChild(blinkNode.current);
   }
 
   let timeStart = 0;
   let durationProgress: number = 0;
 
   const addNextFrame = (callback: (timestamp: number) => void): void => {
-    currentAnimationFrame.current = window.requestAnimationFrame(callback);
+    animationFrame.current = window.requestAnimationFrame(callback);
   };
 
   const runFrame = (timestamp: number): void => {
@@ -134,7 +144,7 @@ const startAnimation = (animator: AnimatorRef, refs: any): void => {
       addNextFrame(runFrame);
     }
     else {
-      stopAnimation(animator, refs);
+      stopTextAnimation(animator, refs, bleeps);
     }
   };
 
@@ -143,4 +153,9 @@ const startAnimation = (animator: AnimatorRef, refs: any): void => {
   bleeps.typing?.play();
 };
 
-export { calcelAnimation, stopAnimation, startAnimation };
+export {
+  TextAnimationRefs,
+  calcelTextAnimation,
+  stopTextAnimation,
+  startTextAnimation
+};
