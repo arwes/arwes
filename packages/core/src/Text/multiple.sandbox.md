@@ -8,10 +8,7 @@ function Sandbox () {
   const [activate, setActivate] = React.useState(true);
 
   React.useEffect(() => {
-    const timeout = setTimeout(
-      () => setActivate(!activate),
-      activate ? 3000 : 1500
-    );
+    const timeout = setTimeout(() => setActivate(!activate), 1000);
     return () => clearTimeout(timeout);
   }, [activate]);
 
@@ -19,12 +16,12 @@ function Sandbox () {
     <div style={{ color: 'cyan' }}>
       <BleepsProvider audio={audio} players={players}>
         <AnimatorGeneralProvider animator={{
-          duration: { enter: 1000, exit: 1000 }
+          duration: { enter: 200, exit: 200 }
         }}>
           <Animator animator={{
             activate,
             manager: 'stagger',
-            duration: { enter: 0, exit: 0, stagger: 500 }
+            duration: { enter: 0, exit: 0, stagger: 50 }
           }}>
             <Text as='h1'>
               Lorem ipsum dolor

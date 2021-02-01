@@ -8,14 +8,13 @@ import { WithBleepsInputProps } from '@arwes/sounds';
 import { styles } from './Text.styles';
 import { startAnimation } from './Text.animations';
 
-// TODO: Is the "bleeps" object reference always the same?
-// TODO: Add support for dynamic duration based on text length.
-
 interface TextProps {
   as?: keyof HTMLElementTagNameMap
   blink?: boolean
   blinkText?: string
   blinkInterval?: number
+  dynamicDuration?: boolean
+  dynamicDurationFactor?: number
   className?: string
 }
 
@@ -27,6 +26,8 @@ const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
     blink: hasBlink,
     blinkText,
     blinkInterval,
+    dynamicDuration,
+    dynamicDurationFactor,
     className,
     children
   } = props;
@@ -82,6 +83,30 @@ const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
   const childrenContent = useRef<string>('');
 
   useLayoutEffect(() => {
+    if (!animator.animate) {
+      return;
+    }
+
+    // The dynamic duration for ENTERING transition is the minimum number of:
+    // 1) The children text length multiplied by a factor number. The factor is
+    // by default a "normal" FPS (Frame per second) duration which is 1 second / 60.
+    // 2) The provided animator entering duration.
+    // This minimum calculation is made to ensure a consistent behavior.
+    // If a fixed value is needed, dynamic duration must be disabled, and
+    // a specific animator duration needs to be provided.
+    if (dynamicDuration) {
+      const newChildrenTextContent = String(actualChildrenRef.current?.textContent || '');
+      const factor = dynamicDurationFactor || (1000 / 60);
+      const newDynamicDuration = Math.min(
+        factor * newChildrenTextContent.length,
+        animator.duration.enter
+      );
+
+      if (animator.duration.enter !== newDynamicDuration) {
+        animator.updateDuration({ enter: newDynamicDuration });
+      }
+    }
+
     const newChildrenContent = String(actualChildrenRef.current?.innerHTML || '');
     const isChildrenContentEqual = newChildrenContent === childrenContent.current;
 
@@ -89,7 +114,7 @@ const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
 
     // The animation is re-run every time the children content changes when
     // animator is ENTERED.
-    if (animator.animate && animator.flow.entered && !isChildrenContentEqual) {
+    if (animator.flow.entered && !isChildrenContentEqual) {
       startAnimation(animator, animateRefs);
     }
   }, [children]);
@@ -116,6 +141,8 @@ const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
 Text.propTypes = {
   // @ts-expect-error
   as: PropTypes.string,
+  dynamicDuration: PropTypes.bool,
+  dynamicDurationFactor: PropTypes.number,
   blink: PropTypes.bool,
   blinkText: PropTypes.string,
   blinkInterval: PropTypes.number
@@ -123,6 +150,8 @@ Text.propTypes = {
 
 Text.defaultProps = {
   as: 'span',
+  dynamicDuration: true,
+  dynamicDurationFactor: 1000 / 60, // Normal FPS duration
   blink: true,
   blinkText: '&#9614;',
   blinkInterval: 100
