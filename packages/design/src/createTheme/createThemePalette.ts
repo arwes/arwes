@@ -1,57 +1,14 @@
-import lighten from 'polished/lib/color/lighten';
-import darken from 'polished/lib/color/darken';
-import readableColor from 'polished/lib/color/readableColor';
-
-import {
-  ThemeSetup,
-  ThemeSettingsPaletteColorBasic,
-  ThemePaletteColorBasic,
-  ThemePaletteColorElevation,
-  ThemePalette
-} from '../constants';
-
-const isColorLight = (color: string): boolean => readableColor(color) === '#000';
-
-const createColorBasicVariations = (
-  color: ThemeSettingsPaletteColorBasic,
-  tonalOffset: number,
-  contrastOffset: number
-): ThemePaletteColorBasic => {
-  if (!color.main) {
-    throw new Error('Theme color requires "main" color.');
-  }
-
-  const { main } = color;
-  const dark = color.dark ?? darken(tonalOffset, main);
-  const light = color.light ?? lighten(tonalOffset, main);
-  const contrast = color.contrast ?? (
-    isColorLight(main)
-      ? darken(contrastOffset, main)
-      : lighten(contrastOffset, main)
-  );
-
-  return Object.freeze({ main, dark, light, contrast });
-};
-
-const createColorElevationVariations = (
-  main: string,
-  elevationOffset: number
-): ThemePaletteColorElevation => {
-  const elevate = (level: number): string => {
-    const value = elevationOffset * level;
-
-    if (value === 0) {
-      return main;
-    }
-
-    return isColorLight(main) ? darken(value, main) : lighten(value, main);
-  };
-
-  return Object.freeze({ main, elevate });
-};
+import { ThemeSetup, ThemePalette } from '../constants';
+import { createColorBasicVariations } from '../createColorBasicVariations';
+import { createColorElevationVariations } from '../createColorElevationVariations';
 
 const createThemePalette = (setup: ThemeSetup): ThemePalette => {
-  const { tonalOffset, contrastOffset, elevationOffset, ...otherFeatures } = setup.palette;
+  const {
+    tonalOffset,
+    contrastOffset,
+    elevationOffset,
+    ...otherFeatures
+  } = setup.palette;
 
   return Object.freeze({
     ...otherFeatures,

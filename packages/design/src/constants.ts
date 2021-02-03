@@ -16,7 +16,7 @@ export const THEME_SPACE_DEFAULT = 8;
 export const THEME_SHADOW_BLUR_DEFAULT = 1;
 export const THEME_SHADOW_SPREAD_DEFAULT = 1;
 
-// SETTINGS
+// THEME SETTINGS
 
 export type ThemeSettingsBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type ThemeSettingsBreakpointAny = ThemeSettingsBreakpoint | number;
@@ -74,7 +74,7 @@ export interface ThemeSettings {
   [prop: string]: any
 }
 
-// SETUP
+// THEME SETUP
 
 export interface ThemeSetupBreakpoints {
   values: {
@@ -110,7 +110,7 @@ export interface ThemeSetup {
   extraFeatures: Record<string, any>
 }
 
-// CONSUMER
+// THEME CONSUMER
 
 export interface ThemeBreakpoints {
   keys: readonly string[]
