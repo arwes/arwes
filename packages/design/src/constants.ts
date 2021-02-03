@@ -7,7 +7,7 @@ export const THEME_BREAKPOINTS_DEFAULT = Object.freeze({
   xl: 1920
 });
 
-export const THEME_PALETTE_TONAL_OFFSET_DEFAULT = 0.2;
+export const THEME_PALETTE_TONAL_OFFSET_DEFAULT = 0.1;
 export const THEME_PALETTE_CONTRAST_OFFSET_DEFAULT = 0.45;
 export const THEME_PALETTE_ELEVATION_OFFSET_DEFAULT = 0.025;
 
@@ -30,6 +30,7 @@ export interface ThemeSettingsBreakpoints {
   }
 }
 
+export type ThemeSettingsPaletteColorRays = Partial<ThemePaletteColorRays>;
 export type ThemeSettingsPaletteColorBasic = Partial<ThemePaletteColorBasic>;
 export interface ThemeSettingsPaletteColorElevation {
   main?: string
@@ -38,8 +39,8 @@ export interface ThemeSettingsPalette {
   tonalOffset?: number
   contrastOffset?: number
   elevationOffset?: number
-  primary?: ThemeSettingsPaletteColorBasic
-  secondary?: ThemeSettingsPaletteColorBasic
+  primary?: ThemeSettingsPaletteColorRays
+  secondary?: ThemeSettingsPaletteColorRays
   success?: ThemeSettingsPaletteColorBasic
   info?: ThemeSettingsPaletteColorBasic
   warn?: ThemeSettingsPaletteColorBasic
@@ -121,6 +122,15 @@ export interface ThemeBreakpoints {
   between: (start: ThemeSettingsBreakpointAny, end: ThemeSettingsBreakpointAny) => string
 }
 
+export interface ThemePaletteColorRays {
+  main: string
+  dark1: string
+  dark2: string
+  dark3: string
+  light1: string
+  light2: string
+  light3: string
+}
 export interface ThemePaletteColorBasic {
   main: string
   dark: string
@@ -135,8 +145,8 @@ export interface ThemePalette {
   tonalOffset: number
   contrastOffset: number
   elevationOffset: number
-  primary: ThemePaletteColorBasic
-  secondary: ThemePaletteColorBasic
+  primary: ThemePaletteColorRays
+  secondary: ThemePaletteColorRays
   success: ThemePaletteColorBasic
   info: ThemePaletteColorBasic
   warn: ThemePaletteColorBasic

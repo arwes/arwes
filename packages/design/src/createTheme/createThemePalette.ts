@@ -1,4 +1,5 @@
 import { ThemeSetup, ThemePalette } from '../constants';
+import { createColorRaysVariations } from '../createColorRaysVariations';
 import { createColorBasicVariations } from '../createColorBasicVariations';
 import { createColorElevationVariations } from '../createColorElevationVariations';
 
@@ -15,8 +16,8 @@ const createThemePalette = (setup: ThemeSetup): ThemePalette => {
     tonalOffset,
     contrastOffset,
     elevationOffset,
-    primary: createColorBasicVariations({ main: '#0ff', ...setup.palette.primary }, tonalOffset, contrastOffset),
-    secondary: createColorBasicVariations({ main: '#ff0', ...setup.palette.secondary }, tonalOffset, contrastOffset),
+    primary: createColorRaysVariations({ main: '#0ff', ...setup.palette.primary }, tonalOffset),
+    secondary: createColorRaysVariations({ main: '#ff0', ...setup.palette.secondary }, tonalOffset),
     success: createColorBasicVariations({ main: '#0f0', ...setup.palette.success }, tonalOffset, contrastOffset),
     info: createColorBasicVariations({ main: '#00f', ...setup.palette.info }, tonalOffset, contrastOffset),
     warn: createColorBasicVariations({ main: '#fa0', ...setup.palette.warn }, tonalOffset, contrastOffset),

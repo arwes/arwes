@@ -8,7 +8,7 @@
 
 const containerStyles = theme => ({
   margin: theme.space(2),
-  border: `1px solid ${theme.palette.primary.light}`,
+  border: `1px solid ${theme.palette.primary.light2}`,
   padding: theme.space(2),
   background: theme.palette.neutral.elevate(0)
 });
@@ -20,7 +20,7 @@ const h1Styles = theme => ({
 
 const pStyles = theme => ({
   margin: 0,
-  color: theme.palette.primary.dark
+  color: theme.palette.primary.dark2
 });
 
 function Card () {
@@ -42,7 +42,7 @@ function Sandbox () {
   const theme = createTheme({
     palette: {
       primary: { main: '#ff0' },
-      neutral: { main: '#110' }
+      neutral: { main: '#220' }
     },
     typography: {
       h1: { fontSize: 30, fontFamily: 'monospace' },
