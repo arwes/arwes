@@ -22,7 +22,7 @@ const createOrUpdateBleeps = (providedBleeps: Bleeps | undefined, bleepsSetup: B
     return {};
   }
 
-  Object.keys(bleepsSettings).map(bleepName => {
+  Object.keys(bleepsSettings).forEach(bleepName => {
     const bleepSettings = bleepsSettings[bleepName];
 
     if (!bleepSettings) {
