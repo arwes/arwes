@@ -16,11 +16,6 @@ type TextAnimationRefs = MutableRefObject<{
   animationFrame: MutableRefObject<number | null>
 }>;
 
-const calcelTextAnimation = (animator: AnimatorRef, refs: TextAnimationRefs): void => {
-  const { animationFrame } = refs.current;
-  window.cancelAnimationFrame(animationFrame.current as number);
-};
-
 const stopTextAnimation = (animator: AnimatorRef, refs: TextAnimationRefs, bleeps: Bleeps): void => {
   const {
     rootRef,
@@ -34,7 +29,7 @@ const stopTextAnimation = (animator: AnimatorRef, refs: TextAnimationRefs, bleep
     return;
   }
 
-  calcelTextAnimation(animator, refs);
+  window.cancelAnimationFrame(animationFrame.current);
 
   if (bleeps.typing?.getIsPlaying()) {
     bleeps.typing?.stop();
@@ -155,7 +150,6 @@ const startTextAnimation = (animator: AnimatorRef, refs: TextAnimationRefs, blee
 
 export {
   TextAnimationRefs,
-  calcelTextAnimation,
   stopTextAnimation,
   startTextAnimation
 };

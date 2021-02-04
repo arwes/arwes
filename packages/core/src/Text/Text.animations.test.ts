@@ -1,9 +1,5 @@
 /* eslint-env jest */
 
-describe('calcelTextAnimation', () => {
-  test.todo('Should cancel current animation frame');
-});
-
 describe('stopTextAnimation', () => {
   test.todo('Should do nothing if there is no animation frame');
 
