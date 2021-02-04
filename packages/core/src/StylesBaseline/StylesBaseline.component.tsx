@@ -1,37 +1,17 @@
-import { Global } from '@emotion/react';
 import React, { FC, useMemo } from 'react';
-import { createTheme } from '@arwes/design';
+import PropTypes from 'prop-types';
+import { CSSObject } from '@emotion/css';
+import { Global, useTheme } from '@emotion/react';
 
 import { createGlobalGeneralStyles } from './StylesBaseline.styles';
 
-const StylesBaseline: FC = props => {
-  const { children } = props;
+interface StylesBaselineProps {
+  styles?: Record<string, CSSObject>
+}
 
-  const theme = useMemo(() => {
-    return createTheme({
-      palette: {
-        primary: {
-          light: '#7efcf6',
-          main: '#00f8f8',
-          dark: '#05c6c1'
-        },
-        secondary: {
-          light: '#ffece1',
-          main: '#ffa76c',
-          dark: '#f66901'
-        },
-        neutral: {
-          main: '#021114'
-        },
-        text: {
-          root: '#7efcf6',
-          headings: '#00f8f8',
-          link: '#ffa76c',
-          linkHover: '#f66901'
-        }
-      }
-    });
-  }, []);
+const StylesBaseline: FC<StylesBaselineProps> = props => {
+  const { styles, children } = props;
+  const theme = useTheme();
 
   const globalGeneralStyles = useMemo(() => {
     return createGlobalGeneralStyles(theme);
@@ -40,9 +20,15 @@ const StylesBaseline: FC = props => {
   return (
     <>
       <Global styles={globalGeneralStyles} />
+      {styles && <Global styles={styles} />}
       {children}
     </>
   );
 };
 
-export { StylesBaseline };
+StylesBaseline.propTypes = {
+  // @ts-expect-error
+  styles: PropTypes.object
+};
+
+export { StylesBaselineProps, StylesBaseline };
