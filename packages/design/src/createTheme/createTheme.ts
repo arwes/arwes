@@ -16,6 +16,7 @@ const createTheme = (settings?: ThemeSettings, extendTheme?: Theme): Theme => {
   const palette = createThemePalette(setup);
   const typography = createThemeTypography(setup);
   const space = makeFactorMultiplier(setup.space);
+  const outline = makeFactorMultiplier(setup.outline);
   const shadow = Object.freeze({
     blur: makeFactorMultiplier(setup.shadow.blur),
     spread: makeFactorMultiplier(setup.shadow.spread)
@@ -27,6 +28,7 @@ const createTheme = (settings?: ThemeSettings, extendTheme?: Theme): Theme => {
     palette,
     typography,
     space,
+    outline,
     shadow
   });
 };

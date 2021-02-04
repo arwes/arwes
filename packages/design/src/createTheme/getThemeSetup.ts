@@ -4,6 +4,7 @@ import {
   THEME_PALETTE_CONTRAST_OFFSET_DEFAULT,
   THEME_PALETTE_ELEVATION_OFFSET_DEFAULT,
   THEME_SPACE_DEFAULT,
+  THEME_OUTLINE_DEFAULT,
   THEME_SHADOW_BLUR_DEFAULT,
   THEME_SHADOW_SPREAD_DEFAULT,
   ThemeSettings,
@@ -17,6 +18,7 @@ const extractExtraFeatures = (providedSettings: ThemeSettings = {}): Record<stri
     palette,
     typography,
     space,
+    outline,
     shadow,
     ...extraFeatures
   } = providedSettings;
@@ -46,7 +48,7 @@ const getThemeSetup = (providedSettings?: ThemeSettings, extendTheme?: Theme): T
   };
 
   const space = providedSettings?.space || extendTheme?.space(1) || THEME_SPACE_DEFAULT;
-
+  const outline = providedSettings?.outline || extendTheme?.outline(1) || THEME_OUTLINE_DEFAULT;
   const shadow = {
     blur: providedSettings?.shadow?.blur || extendTheme?.shadow.blur(1) || THEME_SHADOW_BLUR_DEFAULT,
     spread: providedSettings?.shadow?.spread || extendTheme?.shadow.spread(1) || THEME_SHADOW_SPREAD_DEFAULT
@@ -59,6 +61,7 @@ const getThemeSetup = (providedSettings?: ThemeSettings, extendTheme?: Theme): T
     palette,
     typography,
     space,
+    outline,
     shadow,
     extraFeatures
   });
