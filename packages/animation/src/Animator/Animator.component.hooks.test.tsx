@@ -61,13 +61,14 @@ test('Should call "useAnimateUnmount" with animator object and setup refs on <An
     useEffect(() => {
       setTimeout(() => setShow(false), 1000);
     }, []);
-    return (
-      show ? (
+    if (show) {
+      return (
         <Animator animator={{ useAnimateUnmount }}>
           <ExampleComponent />
         </Animator>
-      ) : null
-    );
+      );
+    }
+    return null;
   };
   render(<ExampleApp />);
 

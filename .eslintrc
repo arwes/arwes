@@ -34,6 +34,9 @@
     "@typescript-eslint/no-dynamic-delete": "off",
     "@typescript-eslint/semi": ["error", "always"],
     "@typescript-eslint/brace-style": ["error", "stroustrup"],
+    "@typescript-eslint/restrict-template-expressions": ["error", {
+      "allowAny": true
+    }],
     "react/prop-types": "off",
     "semi": ["error", "always"],
     "brace-style": ["error", "stroustrup"],
