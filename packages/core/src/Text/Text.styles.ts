@@ -9,15 +9,6 @@ const styles: Record<string, CSSObject> = {
     display: 'inline-block',
     zIndex: 1
   },
-  cloneNode: {
-    display: 'inline-block',
-    position: 'absolute',
-    zIndex: 0,
-    left: '0',
-    right: '0',
-    top: '0',
-    overflow: 'hidden'
-  },
   blink: {
     position: 'relative',
     display: 'inline-block',

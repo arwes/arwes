@@ -5,7 +5,7 @@ import {
   TextAnimationRefs,
   startTextAnimation,
   stopTextAnimation
-} from './Text.animations';
+} from '../utils/textAnimations';
 
 const useAnimateEntering = (animator: AnimatorRef, refs: TextAnimationRefs, bleeps: Bleeps): void => {
   startTextAnimation(animator, refs, bleeps);

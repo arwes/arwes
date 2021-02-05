@@ -5,8 +5,8 @@ import { jsx } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
 import { WithBleepsInputProps } from '@arwes/sounds';
 
+import { TextAnimationRefs, startTextAnimation } from '../utils/textAnimations';
 import { styles } from './Text.styles';
-import { TextAnimationRefs, startTextAnimation } from './Text.animations';
 
 // Browser normally renders 60 frames per second for requested animations.
 const FPS_NORMAL_DURATION = 1000 / 60;

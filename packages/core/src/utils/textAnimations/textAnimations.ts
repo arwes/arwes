@@ -1,12 +1,11 @@
 import { RefObject, MutableRefObject } from 'react';
-import { css } from '@emotion/css';
+import { CSSObject, css } from '@emotion/css';
 import { AnimatorRef } from '@arwes/animation';
 import { Bleeps } from '@arwes/sounds';
 
-import { walkTextNodes } from './utils/walkTextNodes';
-import { setTextNodesEnteringContentLength } from './utils/setTextNodesEnteringContentLength';
-import { setTextNodesExitingContentLength } from './utils/setTextNodesExitingContentLength';
-import { styles } from './Text.styles';
+import { walkTextNodes } from '../walkTextNodes';
+import { setTextNodesEnteringContentLength } from '../setTextNodesEnteringContentLength';
+import { setTextNodesExitingContentLength } from '../setTextNodesExitingContentLength';
 
 type TextAnimationRefs = MutableRefObject<{
   rootRef: RefObject<HTMLElement>
@@ -15,6 +14,20 @@ type TextAnimationRefs = MutableRefObject<{
   blinkNode: MutableRefObject<HTMLElement | null>
   animationFrame: MutableRefObject<number | null>
 }>;
+
+// TODO: Since these styles could be used simultaneously by many components,
+// should these styles be memoized to improve performance?
+const styles: Record<string, CSSObject> = {
+  cloneNode: {
+    display: 'inline-block',
+    position: 'absolute',
+    zIndex: 0,
+    left: '0',
+    right: '0',
+    top: '0',
+    overflow: 'hidden'
+  }
+};
 
 const stopTextAnimation = (animator: AnimatorRef, refs: TextAnimationRefs, bleeps: Bleeps): void => {
   const {
