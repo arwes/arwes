@@ -5,6 +5,7 @@ const CLASS_ALLOWED_SETTINGS = [
   'animate',
   'root',
   'merge',
+  'manager',
   'useAnimateMount',
   'useAnimateEntering',
   'useAnimateEntered',

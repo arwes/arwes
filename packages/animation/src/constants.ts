@@ -106,6 +106,11 @@ export type AnimatorSettingsManagerCustom = (status: AnimatorSettingsManagerStat
 export type AnimatorSettingsManager = typeof PARALLEL | typeof SEQUENCE | typeof STAGGER | AnimatorSettingsManagerCustom;
 
 /**
+ * The implemented animator manager.
+ */
+export type AnimatorManager = AnimatorSettingsManager;
+
+/**
  * The function type definition for the animator "animate hooks".
  * All the animate hooks would receive and return the same values.
  */
@@ -126,6 +131,7 @@ export interface AnimatorRef {
   animate: boolean
   root: boolean
   merge: boolean
+  manager: AnimatorManager
   flow: AnimatorFlow
 
   /**

@@ -3,7 +3,7 @@
 import React, { createRef, FC, ReactNode, useEffect } from 'react';
 import { render, cleanup, act } from '@testing-library/react';
 
-import { EXITED, ENTERED, ENTERING, AnimatorRef } from '../constants';
+import { EXITED, ENTERED, ENTERING, AnimatorRef, AnimatorClassSettings } from '../constants';
 import { Animator } from '../Animator';
 import { withAnimator } from './withAnimator';
 
@@ -114,6 +114,25 @@ test('Should add <Animator/> wrapper and provide "animator" settings to componen
       );
       expect(animator).toMatchObject({ merge: true });
     });
+
+    test(`Should allow "animator.manager" in ${typeOfTest} setting`, () => {
+      const settingsToSet: AnimatorClassSettings = { manager: 'stagger' };
+      const classSettings = isClassTestType ? settingsToSet : undefined;
+      const instanceSettings = !isClassTestType ? settingsToSet : undefined;
+
+      let animator: any;
+      const ExampleComponent: FC<ExampleComponentWithAnimatorProps> = props => {
+        animator = props.animator;
+        return null;
+      };
+      const ExampleNode = withAnimator(classSettings)(ExampleComponent);
+      render(
+        <Animator>
+          <ExampleNode animator={instanceSettings} />
+        </Animator>
+      );
+      expect(animator).toMatchObject({ manager: 'stagger' });
+    });
   });
 });
 
@@ -171,6 +190,21 @@ test('Should "animator.merge" setting take priority in instance setting', () => 
     </Animator>
   );
   expect(animator).toMatchObject({ merge: false });
+});
+
+test('Should "animator.manager" setting take priority in instance setting', () => {
+  let animator: any;
+  const ExampleComponent: FC<ExampleComponentWithAnimatorProps> = props => {
+    animator = props.animator;
+    return null;
+  };
+  const ExampleNode = withAnimator({ manager: 'sequence' })(ExampleComponent);
+  render(
+    <Animator>
+      <ExampleNode animator={{ manager: 'stagger' }} />
+    </Animator>
+  );
+  expect(animator).toMatchObject({ manager: 'stagger' });
 });
 
 test('Should allow passing a "ref" to wrapped component', () => {

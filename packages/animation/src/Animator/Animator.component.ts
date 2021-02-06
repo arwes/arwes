@@ -120,6 +120,7 @@ const Animator: FC<AnimatorProps> = props => {
       animate,
       root,
       merge,
+      manager,
       flow,
       setupAnimateRefs,
       updateDuration,
@@ -127,7 +128,7 @@ const Animator: FC<AnimatorProps> = props => {
       _subscribe,
       _unsubscribe
     });
-  }, [duration, animate, root, merge, flow]);
+  }, [duration, animate, root, merge, manager, flow]);
 
   useEffect(() => {
     if (!animate) {

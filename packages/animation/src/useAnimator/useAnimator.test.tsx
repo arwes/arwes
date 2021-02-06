@@ -3,7 +3,7 @@
 import React, { FC } from 'react';
 import { render, cleanup } from '@testing-library/react';
 
-import { ENTERING, AnimatorFlow } from '../constants';
+import { AnimatorRef, ENTERING, AnimatorFlow } from '../constants';
 import { AnimatorContext } from '../AnimatorContext';
 import { useAnimator } from './useAnimator';
 
@@ -23,7 +23,7 @@ test('Should return provided data if provider was found', () => {
   const flow: AnimatorFlow = {
     value: ENTERING
   };
-  const animatorSettings = {
+  const animatorRef: AnimatorRef = {
     duration: {
       enter: 0,
       exit: 0,
@@ -34,6 +34,7 @@ test('Should return provided data if provider was found', () => {
     animate: true,
     root: true,
     merge: false,
+    manager: 'parallel',
     flow,
     setupAnimateRefs: () => { },
     updateDuration: () => { },
@@ -47,9 +48,9 @@ test('Should return provided data if provider was found', () => {
     return null;
   };
   render(
-    <AnimatorContext.Provider value={animatorSettings}>
+    <AnimatorContext.Provider value={animatorRef}>
       <Example />
     </AnimatorContext.Provider>
   );
-  expect(animator).toBe(animatorSettings);
+  expect(animator).toBe(animatorRef);
 });

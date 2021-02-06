@@ -19,6 +19,7 @@ test('Should filter flow activation values', () => {
   'animate',
   'root',
   'merge',
+  'manager',
   'useAnimateMount',
   'useAnimateEntering',
   'useAnimateEntered',

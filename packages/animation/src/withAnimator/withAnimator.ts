@@ -54,7 +54,6 @@ function withAnimator<T extends ComponentType<P>, P extends WithAnimatorInputPro
     }) as ForwardRefExoticComponent<PropsWithoutRef<C> & RefAttributes<T>> & { defaultProps: Partial<C> & WithAnimatorOutputProps };
 
     const componentName = InputComponent.displayName || InputComponent.name || 'Component';
-
     OutputComponent.displayName = `withAnimator(${componentName})`;
 
     return OutputComponent;
