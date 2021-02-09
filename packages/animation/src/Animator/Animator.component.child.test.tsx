@@ -37,8 +37,8 @@ test('Should transition on "activate" changes', () => {
   const ExampleApp: FC = () => {
     const [activate, setActivate] = useState(false);
     useEffect(() => {
-      setTimeout(() => setActivate(false), 2000);
       setTimeout(() => setActivate(true), 1000);
+      setTimeout(() => setActivate(false), 2000);
     }, []);
     return (
       <Animator animator={{ activate }}>

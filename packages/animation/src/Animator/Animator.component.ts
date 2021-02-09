@@ -1,4 +1,4 @@
-import { FC, createElement, useState, useRef, useMemo, useEffect } from 'react';
+import { FC, createElement, useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -34,31 +34,18 @@ const DURATION_DEFAULT = Object.freeze({
   offset: 0
 });
 
+const animatorEmptySettings: AnimatorSettings = {};
 let classInstanceIdCounter = 0;
 
 interface AnimatorProps {
   animator?: AnimatorSettings
-  children?: any
 }
 
 const Animator: FC<AnimatorProps> = props => {
-  const { animator = {}, children } = props;
+  const { animator = animatorEmptySettings, children } = props;
 
   const parentAnimatorGeneral = useAnimatorGeneral();
   const parentAnimator = useAnimator();
-
-  const [instanceId] = useState(() => classInstanceIdCounter++);
-  const [scheduler] = useState(() => makeScheduler());
-  const [dynamicDuration, setDynamicDuration] = useState<AnimatorSettingsDuration | undefined>(undefined);
-
-  const duration: AnimatorDuration = useMemo(() => {
-    return Object.freeze({
-      ...DURATION_DEFAULT,
-      ...parentAnimatorGeneral?.duration,
-      ...animator.duration,
-      ...dynamicDuration
-    });
-  }, [parentAnimatorGeneral, animator.duration, dynamicDuration]);
 
   // Since the expected boolean values applicable to the node are provided down
   // to the next child node, they are converted to booleans always to prevent
@@ -71,42 +58,71 @@ const Animator: FC<AnimatorProps> = props => {
 
   const merge = !root && !!animator.merge;
 
+  const combine = !!animator.combine;
+
   const manager = animator.manager ?? PARALLEL;
 
-  // If this node is not animated, its initial flow state is ENTERED,
-  // so it is activated.
-  const [activate, setActivate] = useState(() => !animate);
+  const [instanceId] = useState(() => classInstanceIdCounter++);
 
-  // The flow object is not directly updated. It is always updated based on
-  // its next value.
-  const [flow, _setFlow] = useState<AnimatorFlow>(() => {
-    const value = animate ? EXITED : ENTERED;
-    const hasEntered = value === ENTERED;
-    const hasExited = value === EXITED;
-    return Object.freeze({ value, [value]: true, hasEntered, hasExited });
-  });
-
-  const setFlowValue = (value: AnimatorFlowValue): void => {
-    const hasEntered = flow.hasEntered || value === ENTERED;
-    const hasExited = flow.hasExited || value === EXITED;
-    _setFlow(Object.freeze({ value, [value]: true, hasEntered, hasExited }));
-  };
+  const [scheduler] = useState(() => makeScheduler());
 
   // All the <Animator/> children non-root instances.
   const [childrenNodesMap] = useState<Map<number, AnimatorChildRef>>(() => new Map());
 
+  const dynamicDuration = useRef<AnimatorSettingsDuration | undefined>(undefined);
+
   // This variable is supposed to be defined by the component using this
   // <Animator/>. It will contain the reference(s) to the actual HTML element(s)
-  // to animate on the flow transitions and component lifecycle.
+  // to animate on the flow transitions and component lifecycles.
   const animateRefs = useRef<any[]>([]);
 
-  const providedAnimator: AnimatorRef = useMemo(() => {
+  // Since the animator data is passed to different contexts, if it were to be
+  // a "useState", a stale version of the data would be passed. So this is a
+  // "persistent animator data reference" across different contexts.
+  // It must be the same as "publicAnimatorRef" for consistency.
+  const _persistentAnimatorRef = useRef<AnimatorRef>(null);
+  const getPersistentAnimatorRef = (): AnimatorRef => _persistentAnimatorRef.current as AnimatorRef;
+
+  // It is initially empty to trigger an initial flow diff and call the
+  // event callbacks in the first render.
+  const previousAnimatorRef = useRef<AnimatorRef | null>();
+
+  const createAnimatorRef = (providedFlowValue?: AnimatorFlowValue): AnimatorRef => {
+    const oldAnimatorRef = getPersistentAnimatorRef();
+
+    const duration: AnimatorDuration = Object.freeze({
+      ...DURATION_DEFAULT,
+      ...parentAnimatorGeneral?.duration,
+      ...animator.duration,
+      ...dynamicDuration.current
+    });
+
+    // The flow object is not directly updated.
+    // It is always updated based on its next flow value.
+    let newFlow: AnimatorFlow | undefined;
+    if (!oldAnimatorRef) {
+      const value = animate ? EXITED : ENTERED;
+      const hasEntered = value === ENTERED;
+      const hasExited = value === EXITED;
+      newFlow = Object.freeze({ value, [value]: true, hasEntered, hasExited });
+    }
+    else {
+      const value = providedFlowValue ?? oldAnimatorRef.flow.value;
+      const hasEntered = oldAnimatorRef?.flow.hasEntered || value === ENTERED;
+      const hasExited = oldAnimatorRef?.flow.hasExited || value === EXITED;
+      newFlow = Object.freeze({ value: value, [value]: true, hasEntered, hasExited });
+    }
+    const flow: AnimatorFlow = newFlow;
+
     const setupAnimateRefs = (...refs: any[]): void => {
       animateRefs.current = refs;
     };
-    const updateDuration = (duration: AnimatorSettingsDuration | undefined): void => {
-      setDynamicDuration(duration);
+    const updateDuration = (newDynamicDuration: AnimatorSettingsDuration | undefined): void => {
+      dynamicDuration.current = newDynamicDuration;
+
+      updateAnimatorRef(createAnimatorRef());
     };
+
     const _id = instanceId;
     const _subscribe = (id: number, node: AnimatorChildRef): void => {
       childrenNodesMap.set(id, node);
@@ -116,11 +132,12 @@ const Animator: FC<AnimatorProps> = props => {
     };
 
     return Object.freeze({
-      duration,
       animate,
       root,
       merge,
+      combine,
       manager,
+      duration,
       flow,
       setupAnimateRefs,
       updateDuration,
@@ -128,122 +145,34 @@ const Animator: FC<AnimatorProps> = props => {
       _subscribe,
       _unsubscribe
     });
-  }, [duration, animate, root, merge, manager, flow]);
+  };
 
-  useEffect(() => {
-    if (!animate) {
-      return;
-    }
+  // "_persistentAnimatorRef" and "publicAnimatorRef" must be the same data.
+  // "_persistentAnimatorRef" is passed to different contexts to prevent
+  // stale data since it is a "useRef". "publicAnimatorRef" is passed as provided
+  // React context value to trigger renders.
+  // Both values should be updated only with "updateAnimatorRef".
+  if (!_persistentAnimatorRef.current) {
+    const valueRef: any = _persistentAnimatorRef;
+    valueRef.current = createAnimatorRef();
+  }
+  const [publicAnimatorRef, _setPublicAnimatorRef] = useState<AnimatorRef>(
+    _persistentAnimatorRef.current as AnimatorRef
+  );
+  const updateAnimatorRef = (newAnimatorRef: AnimatorRef): void => {
+    const valueRef: any = _persistentAnimatorRef;
+    valueRef.current = newAnimatorRef;
+    _setPublicAnimatorRef(newAnimatorRef);
+  };
 
-    // TODO: What if node is changed from child node to root node and needs
-    // to be unsuscribed from its parent?
+  const setFlowValue = (newFlowValue: AnimatorFlowValue): void => {
+    const newAnimatorRef = createAnimatorRef(newFlowValue);
+    updateAnimatorRef(newAnimatorRef);
+  };
 
-    if (!root) {
-      const id = instanceId;
-      const getDuration = (): AnimatorDuration => duration;
-      const getIsMerge = (): boolean => merge;
-      const child: AnimatorChildRef = Object.freeze({
-        id,
-        getDuration,
-        getIsMerge,
-        setActivate
-      });
-
-      parentAnimator?._subscribe(instanceId, child);
-    }
-
-    animator.useAnimateMount?.(providedAnimator, ...animateRefs.current);
-
-    return () => {
-      scheduler.stopAll();
-
-      animator.useAnimateUnmount?.(providedAnimator, ...animateRefs.current);
-
-      if (!root) {
-        parentAnimator?._unsubscribe(instanceId);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    // An animated root node is by default activated.
-    if (animate && root) {
-      setActivate(animator.activate !== false);
-    }
-  }, [root, animator.activate]);
-
-  useEffect(() => {
-    if (!animate) {
-      return;
-    }
-
-    animator.onTransition?.(flow);
-
-    switch (flow.value) {
-      case ENTERING: animator.useAnimateEntering?.(providedAnimator, ...animateRefs.current); break;
-      case ENTERED: animator.useAnimateEntered?.(providedAnimator, ...animateRefs.current); break;
-      case EXITING: animator.useAnimateExiting?.(providedAnimator, ...animateRefs.current); break;
-      case EXITED: animator.useAnimateExited?.(providedAnimator, ...animateRefs.current); break;
-    }
-
-    const nodes = Array.from(childrenNodesMap.values());
-    const newChildrenActivation = flow.value === ENTERING || flow.value === ENTERED;
-
-    let nodesToUpdate: AnimatorChildRef[] = [];
-    let activations: AnimatorChildActivations;
-
-    // On exited, no nodes should be updated.
-    if (flow.value === ENTERING) {
-      nodesToUpdate = nodes.filter(node => node.getIsMerge());
-    }
-    else if (flow.value === ENTERED) {
-      nodesToUpdate = nodes.filter(node => !node.getIsMerge());
-    }
-    else if (flow.value === EXITING) {
-      nodesToUpdate = nodes;
-    }
-
-    // On exiting, all nodes exit at the same time in parallel.
-    if (flow.value === EXITING || manager === PARALLEL) {
-      // Since all the children will be transitioned in parallel, a possible
-      // approach is to make the process synchronous so the scheduler only makes
-      // one task. This becomes a bottle-neck if there are more animated nodes
-      // than the machine CPU can handle and eventually block the thread.
-      // So each node is transitioned separately to prevent this case.
-      const times = nodesToUpdate.map(node => ({ node, time: 0 }));
-      activations = { times };
-    }
-    else if (flow.value === EXITED) {
-      activations = { times: [] };
-    }
-    else if (manager === SEQUENCE) {
-      activations = getChildrenNodesSequenceActivationTimes(nodesToUpdate);
-    }
-    else if (manager === STAGGER) {
-      activations = getChildrenNodesStaggerActivationTimes(nodesToUpdate, duration);
-    }
-    else if (typeof manager === 'function') {
-      activations = manager({ nodes: nodesToUpdate, duration });
-    }
-    else {
-      throw new Error(`Manager "${String(manager)}" is not supported.`);
-    }
-
-    activations.times.forEach(({ node, time }) =>
-      scheduler.start(node.id, time, () => node.setActivate(newChildrenActivation))
-    );
-  }, [flow.value]);
-
-  useEffect(() => {
-    // The flow should not be transitioned when it is not animated.
-    // Even if this early return is removed, it should still work, but it is added
-    // to improve performance.
-    if (!animate) {
-      return;
-    }
-
-    // TODO: Test when "duration" is changed before its activation is updated.
-    // TODO: Test when "merge" is changed before its activation is updated.
+  const setActivate = (activate: boolean): void => {
+    const animatorRef = getPersistentAnimatorRef();
+    const { duration, flow } = animatorRef;
 
     if (activate) {
       if (flow.value === ENTERING || flow.value === ENTERED) {
@@ -265,11 +194,118 @@ const Animator: FC<AnimatorProps> = props => {
         scheduler.start(duration.exit, () => setFlowValue(EXITED));
       });
     }
+  };
 
-    return () => scheduler.stop();
-  }, [activate]);
+  useEffect(() => {
+    if (!animate) {
+      return;
+    }
 
-  return createElement(AnimatorContext.Provider, { value: providedAnimator }, children);
+    // TODO: What if node is changed from child node to root node and needs
+    // to be unsuscribed from its parent?
+
+    if (!root) {
+      const id = instanceId;
+      const getDuration = (): AnimatorDuration => getPersistentAnimatorRef().duration;
+      const getIsMerge = (): boolean => getPersistentAnimatorRef().merge;
+      const child: AnimatorChildRef = Object.freeze({
+        id,
+        getDuration,
+        getIsMerge,
+        setActivate
+      });
+
+      parentAnimator?._subscribe(instanceId, child);
+    }
+
+    animator.useAnimateMount?.(publicAnimatorRef, ...animateRefs.current);
+
+    return () => {
+      scheduler.stopAll();
+
+      animator.useAnimateUnmount?.(publicAnimatorRef, ...animateRefs.current);
+
+      if (!root) {
+        parentAnimator?._unsubscribe(instanceId);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!animate) {
+      return;
+    }
+
+    const animatorRef = getPersistentAnimatorRef();
+    const { duration, flow } = animatorRef;
+
+    // An animated root node is by default activated.
+    if (root) {
+      setActivate(animator.activate !== false);
+    }
+
+    if (previousAnimatorRef.current?.flow.value !== flow.value) {
+      animator.onTransition?.(flow);
+
+      switch (flow.value) {
+        case ENTERING: animator.useAnimateEntering?.(publicAnimatorRef, ...animateRefs.current); break;
+        case ENTERED: animator.useAnimateEntered?.(publicAnimatorRef, ...animateRefs.current); break;
+        case EXITING: animator.useAnimateExiting?.(publicAnimatorRef, ...animateRefs.current); break;
+        case EXITED: animator.useAnimateExited?.(publicAnimatorRef, ...animateRefs.current); break;
+      }
+
+      const nodes = Array.from(childrenNodesMap.values());
+      const newChildrenActivation = flow.value === ENTERING || flow.value === ENTERED;
+
+      let nodesToUpdate: AnimatorChildRef[] = [];
+      let activations: AnimatorChildActivations;
+
+      // On exited, no nodes should be updated.
+      if (flow.value === ENTERING) {
+        nodesToUpdate = nodes.filter(node => node.getIsMerge());
+      }
+      else if (flow.value === ENTERED) {
+        nodesToUpdate = nodes.filter(node => !node.getIsMerge());
+      }
+      else if (flow.value === EXITING) {
+        nodesToUpdate = nodes;
+      }
+
+      // On exiting, all nodes exit at the same time in parallel.
+      if (flow.value === EXITING || manager === PARALLEL) {
+        // Since all the children will be transitioned in parallel, a possible
+        // approach is to make the process synchronous so the scheduler only makes
+        // one task. This becomes a bottle-neck if there are more animated nodes
+        // than the machine CPU can handle and eventually block the thread.
+        // So each node is transitioned separately to prevent this case.
+        const times = nodesToUpdate.map(node => ({ node, time: 0 }));
+        activations = { times };
+      }
+      else if (flow.value === EXITED) {
+        activations = { times: [] };
+      }
+      else if (manager === SEQUENCE) {
+        activations = getChildrenNodesSequenceActivationTimes(nodesToUpdate);
+      }
+      else if (manager === STAGGER) {
+        activations = getChildrenNodesStaggerActivationTimes(nodesToUpdate, duration);
+      }
+      else if (typeof manager === 'function') {
+        activations = manager({ nodes: nodesToUpdate, duration });
+      }
+      else {
+        throw new Error(`Manager "${String(manager)}" is not supported.`);
+      }
+
+      activations.times.forEach(({ node, time }) =>
+        scheduler.start(node.id, time, () => node.setActivate(newChildrenActivation))
+      );
+    }
+
+    previousAnimatorRef.current = animatorRef;
+  }, [parentAnimatorGeneral, parentAnimator, animator, publicAnimatorRef]);
+
+  return createElement(AnimatorContext.Provider, { value: publicAnimatorRef }, children);
 };
 
 Animator.propTypes = {
@@ -285,6 +321,7 @@ Animator.propTypes = {
     animate: PropTypes.bool,
     root: PropTypes.bool,
     merge: PropTypes.bool,
+    combine: PropTypes.bool,
     manager: PropTypes.oneOfType([
       PropTypes.oneOf([PARALLEL, SEQUENCE, STAGGER]),
       PropTypes.func
