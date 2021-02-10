@@ -2,15 +2,25 @@ import { Interpolation } from '@emotion/react';
 
 import { ArwesTheme } from '../ArwesThemeProvider';
 
-const styles: Record<string, Interpolation<ArwesTheme>> = {
-  root: {
-    //
-  },
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%'
-  }
+const generateStyles = (theme: ArwesTheme): Record<string, Interpolation<ArwesTheme>> => {
+  const { space } = theme;
+
+  return {
+    root: {
+      display: 'block',
+      overflow: 'auto',
+      margin: `0 0 ${space(4)}px`,
+      width: '100%'
+    },
+    rootIsTransitioning: {
+      overflow: 'hidden'
+    },
+    container: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '100%'
+    }
+  };
 };
 
-export { styles };
+export { generateStyles };

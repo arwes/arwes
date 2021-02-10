@@ -65,10 +65,17 @@ const playgroundConfigs = [
         name: 'Text',
         sandboxes: [
           { name: 'basic', code: require('repository/packages/core/src/Text/basic.sandbox.md').default },
+          { name: 'multiple', code: require('repository/packages/core/src/Text/multiple.sandbox.md').default },
           { name: 'dynamic', code: require('repository/packages/core/src/Text/dynamic.sandbox.md').default },
           { name: 'intercepting', code: require('repository/packages/core/src/Text/intercepting.sandbox.md').default },
-          { name: 'multiple', code: require('repository/packages/core/src/Text/multiple.sandbox.md').default },
           { name: 'static', code: require('repository/packages/core/src/Text/static.sandbox.md').default }
+        ]
+      },
+      {
+        name: 'Table',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/core/src/Table/basic.sandbox.md').default },
+          { name: 'static', code: require('repository/packages/core/src/Table/static.sandbox.md').default }
         ]
       }
     ]

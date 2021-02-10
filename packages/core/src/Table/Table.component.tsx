@@ -1,32 +1,47 @@
 /** @jsx jsx */
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, Ref, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { jsx } from '@emotion/react';
+import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
 import { WithBleepsInputProps } from '@arwes/sounds';
 
 import { TableRow } from './TableRow';
-import { styles } from './Table.styles';
+import { generateStyles } from './Table.styles';
+
+type TableColumnWidth = string | number;
 
 interface TableProps {
-  headers?: ReactNode[]
-  dataset?: ReactNode[][]
+  headers: ReactNode[]
+  dataset: ReactNode[][]
+  columnWidths?: TableColumnWidth[]
+  condensed?: boolean
+  rootRef?: Ref<HTMLDivElement>
 }
 
 const Table: FC<TableProps & WithAnimatorInputProps & WithBleepsInputProps> = props => {
   const {
     animator,
     bleeps,
-    headers = [],
-    dataset = []
+    rootRef,
+    headers,
+    dataset,
+    columnWidths,
+    condensed
   } = props;
+
+  const theme = useTheme();
+  const styles = useMemo(() => generateStyles(theme), [theme]);
 
   animator.setupAnimateRefs(bleeps);
 
   return (
     <div
-      css={styles.root}
+      css={[
+        styles.root,
+        !animator.flow.entered && styles.rootIsTransitioning
+      ]}
       className='arwes-table'
+      ref={rootRef}
     >
       <div
         css={styles.container}
@@ -35,11 +50,15 @@ const Table: FC<TableProps & WithAnimatorInputProps & WithBleepsInputProps> = pr
         <TableRow
           isHeader
           rowValues={headers}
+          columnWidths={columnWidths}
+          condensed={condensed}
         />
-        {dataset.map((rowValues, rowIndex) =>
+        {dataset.map((rowValues: ReactNode[], rowIndex: number) =>
           <TableRow
             key={rowIndex}
             rowValues={rowValues}
+            columnWidths={columnWidths}
+            condensed={condensed}
           />
         )}
       </div>
@@ -48,14 +67,15 @@ const Table: FC<TableProps & WithAnimatorInputProps & WithBleepsInputProps> = pr
 };
 
 Table.propTypes = {
-  headers: PropTypes.arrayOf(PropTypes.node),
+  headers: PropTypes.arrayOf(PropTypes.node).isRequired,
   // @ts-expect-error
-  dataset: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.node))
-};
-
-Table.defaultProps = {
-  headers: [],
-  dataset: []
+  dataset: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.node)).isRequired,
+  // @ts-expect-error
+  columnWidths: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ),
+  condensed: PropTypes.bool,
+  rootRef: PropTypes.any
 };
 
 export { TableProps, Table };
