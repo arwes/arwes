@@ -33,7 +33,7 @@
     "eslint-plugin-standard": "^4.1.0"
   },
   "scripts": {
-    "develop": "gatsby develop",
+    "develop": "gatsby develop -H 0.0.0.0 -p 9100 -o",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "build": "gatsby build",
