@@ -192,6 +192,21 @@ test('Should "animator.merge" setting take priority in instance setting', () => 
   expect(animator).toMatchObject({ merge: false });
 });
 
+test('Should "animator.combine" setting take priority in instance setting', () => {
+  let animator: any;
+  const ExampleComponent: FC<ExampleComponentWithAnimatorProps> = props => {
+    animator = props.animator;
+    return null;
+  };
+  const ExampleNode = withAnimator({ combine: true })(ExampleComponent);
+  render(
+    <Animator>
+      <ExampleNode animator={{ combine: false }} />
+    </Animator>
+  );
+  expect(animator).toMatchObject({ combine: false });
+});
+
 test('Should "animator.manager" setting take priority in instance setting', () => {
   let animator: any;
   const ExampleComponent: FC<ExampleComponentWithAnimatorProps> = props => {
