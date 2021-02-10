@@ -131,6 +131,7 @@ export interface AnimatorRef {
   animate: boolean
   root: boolean
   merge: boolean
+  combine: boolean
   manager: AnimatorManager
   flow: AnimatorFlow
 
@@ -161,6 +162,7 @@ export interface AnimatorClassSettings {
   animate?: boolean
   root?: boolean
   merge?: boolean
+  combine?: boolean
   manager?: AnimatorSettingsManager
   useAnimateMount?: AnimatorSettingsUseAnimate
   useAnimateEntering?: AnimatorSettingsUseAnimate

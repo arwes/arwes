@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import React, { FC, useState, useEffect, ReactNode } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { render, cleanup } from '@testing-library/react';
 
 import { makeJestMoveTimeTo } from '../../test-utils/makeJestMoveTimeTo';
@@ -86,29 +86,14 @@ afterEach(cleanup);
   });
 });
 
-test('Should throw error if manager is unknown', () => {
+test('Should console.error() if manager is unknown', () => {
   const consoleError = jest.spyOn(console, 'error').mockImplementation();
 
-  let err: any;
-  class Example extends React.Component {
-    render (): ReactNode {
-      return this.props.children;
-    }
-
-    componentDidCatch (error: Error): void {
-      err = error;
-    }
-  }
   const manager: any = 'XXX';
-  render(
-    <Example>
-      <Animator animator={{ manager }} />
-    </Example>
-  );
+  render(<Animator animator={{ manager }} />);
 
   actJestMoveTimeTo(1000);
-  expect(err).toBeInstanceOf(Error);
-  expect(consoleError).toHaveBeenCalled();
+  expect(consoleError).toHaveBeenCalledWith('Animator manager "XXX" is not supported.');
 
   consoleError.mockRestore();
 });

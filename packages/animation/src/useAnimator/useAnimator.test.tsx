@@ -34,6 +34,7 @@ test('Should return provided data if provider was found', () => {
     animate: true,
     root: true,
     merge: false,
+    combine: false,
     manager: 'parallel',
     flow,
     setupAnimateRefs: () => { },

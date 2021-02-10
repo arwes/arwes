@@ -118,6 +118,11 @@ const Animator: FC<AnimatorProps> = props => {
       animateRefs.current = refs;
     };
     const updateDuration = (newDynamicDuration: AnimatorSettingsDuration | undefined): void => {
+      if (combine) {
+        console.error('Animator can not update duration dynamically when "combine" is enabled.');
+        return;
+      }
+
       dynamicDuration.current = newDynamicDuration;
 
       updateAnimatorRef(createAnimatorRef());
@@ -165,19 +170,114 @@ const Animator: FC<AnimatorProps> = props => {
     _setPublicAnimatorRef(newAnimatorRef);
   };
 
+  const childActivations = useRef<AnimatorChildActivations | null>(null);
+
+  const generateChildActivations = (flowValue: AnimatorFlowValue): void => {
+    const animatorRef = getPersistentAnimatorRef();
+    const { duration } = animatorRef;
+
+    const nodes = Array.from(childrenNodesMap.values());
+    let nodesToUpdate: AnimatorChildRef[] = [];
+
+    // On EXITED, no nodes should be updated.
+
+    if (combine) {
+      nodesToUpdate = nodes;
+    }
+    else if (flowValue === ENTERING) {
+      nodesToUpdate = nodes.filter(node => node.getIsMerge());
+    }
+    else if (flowValue === ENTERED) {
+      nodesToUpdate = nodes.filter(node => !node.getIsMerge());
+    }
+    else if (flowValue === EXITING) {
+      nodesToUpdate = nodes;
+    }
+
+    // On EXITING, all nodes exit at the same time in parallel.
+    if (flowValue === EXITING || manager === PARALLEL) {
+      // Since all the children will be transitioned in parallel, a possible
+      // approach is to make the process synchronous so the scheduler only makes
+      // one task. This becomes a bottle-neck if there are more animated nodes
+      // than the machine CPU can handle and eventually block the thread.
+      // So each node is transitioned separately to prevent this case.
+      let totalDuration = 0;
+      const times = nodesToUpdate.map(node => {
+        totalDuration = Math.max(
+          totalDuration,
+          flowValue === EXITING ? node.getDuration().exit : node.getDuration().enter
+        );
+        return { node, time: 0 };
+      });
+
+      childActivations.current = { duration: totalDuration, times };
+    }
+    else if (flowValue === EXITED) {
+      childActivations.current = { times: [] };
+    }
+    else if (manager === SEQUENCE) {
+      childActivations.current = getChildrenNodesSequenceActivationTimes(nodesToUpdate);
+    }
+    else if (manager === STAGGER) {
+      childActivations.current = getChildrenNodesStaggerActivationTimes(nodesToUpdate, duration);
+    }
+    else if (typeof manager === 'function') {
+      childActivations.current = manager({ nodes: nodesToUpdate, duration });
+    }
+    else if (process.env.NODE_ENV !== 'production') {
+      console.error(`Animator manager "${String(manager)}" is not supported.`);
+    }
+  };
+
+  const generateActivationsDuration = (newFlowValue: AnimatorFlowValue): AnimatorDuration => {
+    const animatorRef = getPersistentAnimatorRef();
+
+    if (!combine) {
+      return animatorRef.duration;
+    }
+
+    generateChildActivations(newFlowValue);
+
+    if (
+      process.env.NODE_ENV !== 'production' &&
+      typeof manager === 'function' &&
+      !childActivations.current?.duration &&
+      childActivations.current?.times.length
+    ) {
+      console.error([
+        'Animator with custom "manager" and "combine" enabled should return a child',
+        'activations "duration". Otherwise the Animator duration will use the default',
+        'value and it will not reflect the real combination of the durations.'
+      ].join('\n'));
+    }
+
+    const durationChangedKey = newFlowValue === EXITING ? 'exit' : 'enter';
+    const durationValueDefault = durationChangedKey === 'enter'
+      ? animatorRef.duration.enter
+      : animatorRef.duration.exit;
+    const durationValue = childActivations.current?.duration || durationValueDefault;
+
+    return { ...animatorRef.duration, [durationChangedKey]: durationValue };
+  };
+
   const setFlowValue = (newFlowValue: AnimatorFlowValue): void => {
+    if (!combine) {
+      generateChildActivations(newFlowValue);
+    }
+
     const newAnimatorRef = createAnimatorRef(newFlowValue);
     updateAnimatorRef(newAnimatorRef);
   };
 
   const setActivate = (activate: boolean): void => {
-    const animatorRef = getPersistentAnimatorRef();
-    const { duration, flow } = animatorRef;
+    const { flow } = getPersistentAnimatorRef();
 
     if (activate) {
       if (flow.value === ENTERING || flow.value === ENTERED) {
         return;
       }
+
+      const duration = generateActivationsDuration(ENTERING);
 
       scheduler.start(duration.delay, () => {
         setFlowValue(ENTERING);
@@ -188,6 +288,8 @@ const Animator: FC<AnimatorProps> = props => {
       if (flow.value === EXITING || flow.value === EXITED) {
         return;
       }
+
+      const duration = generateActivationsDuration(EXITING);
 
       scheduler.start(0, () => {
         setFlowValue(EXITING);
@@ -237,13 +339,14 @@ const Animator: FC<AnimatorProps> = props => {
     }
 
     const animatorRef = getPersistentAnimatorRef();
-    const { duration, flow } = animatorRef;
+    const { flow } = animatorRef;
 
     // An animated root node is by default activated.
     if (root) {
       setActivate(animator.activate !== false);
     }
 
+    // If the flow value was changed in this update.
     if (previousAnimatorRef.current?.flow.value !== flow.value) {
       animator.onTransition?.(flow);
 
@@ -254,52 +357,13 @@ const Animator: FC<AnimatorProps> = props => {
         case EXITED: animator.useAnimateExited?.(publicAnimatorRef, ...animateRefs.current); break;
       }
 
-      const nodes = Array.from(childrenNodesMap.values());
-      const newChildrenActivation = flow.value === ENTERING || flow.value === ENTERED;
+      if (childActivations.current?.times.length) {
+        const newChildrenActivation = flow.value === ENTERING || flow.value === ENTERED;
 
-      let nodesToUpdate: AnimatorChildRef[] = [];
-      let activations: AnimatorChildActivations;
-
-      // On exited, no nodes should be updated.
-      if (flow.value === ENTERING) {
-        nodesToUpdate = nodes.filter(node => node.getIsMerge());
+        childActivations.current.times.forEach(({ node, time }) =>
+          scheduler.start(node.id, time, () => node.setActivate(newChildrenActivation))
+        );
       }
-      else if (flow.value === ENTERED) {
-        nodesToUpdate = nodes.filter(node => !node.getIsMerge());
-      }
-      else if (flow.value === EXITING) {
-        nodesToUpdate = nodes;
-      }
-
-      // On exiting, all nodes exit at the same time in parallel.
-      if (flow.value === EXITING || manager === PARALLEL) {
-        // Since all the children will be transitioned in parallel, a possible
-        // approach is to make the process synchronous so the scheduler only makes
-        // one task. This becomes a bottle-neck if there are more animated nodes
-        // than the machine CPU can handle and eventually block the thread.
-        // So each node is transitioned separately to prevent this case.
-        const times = nodesToUpdate.map(node => ({ node, time: 0 }));
-        activations = { times };
-      }
-      else if (flow.value === EXITED) {
-        activations = { times: [] };
-      }
-      else if (manager === SEQUENCE) {
-        activations = getChildrenNodesSequenceActivationTimes(nodesToUpdate);
-      }
-      else if (manager === STAGGER) {
-        activations = getChildrenNodesStaggerActivationTimes(nodesToUpdate, duration);
-      }
-      else if (typeof manager === 'function') {
-        activations = manager({ nodes: nodesToUpdate, duration });
-      }
-      else {
-        throw new Error(`Manager "${String(manager)}" is not supported.`);
-      }
-
-      activations.times.forEach(({ node, time }) =>
-        scheduler.start(node.id, time, () => node.setActivate(newChildrenActivation))
-      );
     }
 
     previousAnimatorRef.current = animatorRef;

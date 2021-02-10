@@ -61,7 +61,7 @@ function Sandbox () {
       <Animator animator={{
         activate,
         manager: 'sequence',
-        duration: { enter: 0, exit: 0 }
+        combine: true
       }}>
         <Item />
         <Item />

@@ -47,18 +47,19 @@ function Sandbox () {
   const timeout = React.useRef();
 
   React.useEffect(() => {
-    timeout.current = setTimeout(() => setActivate(!activate), 1500);
+    timeout.current = setTimeout(() => setActivate(!activate), 2300);
     return () => clearTimeout(timeout.current);
   }, [activate]);
 
   return (
     <AnimatorGeneralProvider animator={{
-      duration: { enter: 200, exit: 200 }
+      duration: { enter: 500, exit: 500 }
     }}>
       <Animator animator={{
         activate,
         manager: 'stagger',
-        duration: { enter: 0, exit: 0, stagger: 30 }
+        combine: true,
+        duration: { stagger: 100 }
       }}>
         <Item />
         <Item />
