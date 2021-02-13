@@ -19,6 +19,7 @@ interface ArwesThemePalette extends ThemePalette {
 interface ArwesTheme extends Theme {
   palette: ArwesThemePalette
   fontScale: number
+  transitionDuration: number
 }
 
 interface ArwesThemeProviderProps {
@@ -58,7 +59,7 @@ const ArwesThemeProvider: FC<ArwesThemeProviderProps> = props => {
           root: '#7efcf6',
           headings: '#00f8f8',
           link: '#ffa76c',
-          linkHover: '#f66901'
+          linkHover: '#ffc69f'
         },
         ...themeSettings?.palette
       },
@@ -69,7 +70,8 @@ const ArwesThemeProvider: FC<ArwesThemeProviderProps> = props => {
         spread: 1,
         ...themeSettings?.shadow
       },
-      fontScale: themeSettings?.fontScale ?? 1
+      fontScale: themeSettings?.fontScale ?? 1,
+      transitionDuration: themeSettings?.transitionDuration ?? 150
     }) as ArwesTheme;
   }, []);
 

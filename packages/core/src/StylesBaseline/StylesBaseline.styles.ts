@@ -4,8 +4,7 @@ import { CSSObject } from '@emotion/css';
 import { ArwesTheme } from '../ArwesThemeProvider';
 
 const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject> => {
-  const { palette, space, outline, shadow, fontScale } = theme;
-  const transitionDuration = 150;
+  const { palette, space, outline, shadow, fontScale, transitionDuration } = theme;
 
   return {
     '*, *:before, *:after': {
