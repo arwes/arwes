@@ -1,4 +1,4 @@
-import { FC, useRef, useEffect, useLayoutEffect } from 'react';
+import { FC, MutableRefObject, useRef, useMemo, useCallback, useEffect, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import { css, cx, keyframes } from '@emotion/css';
 import { jsx } from '@emotion/react';
@@ -19,30 +19,32 @@ interface TextProps {
   dynamicDuration?: boolean
   dynamicDurationFactor?: number
   className?: string
+  rootRef?: MutableRefObject<HTMLElement> | Function
 }
 
 const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = props => {
   const {
     animator,
     bleeps,
-    as,
+    as: providedAs,
     blink: hasBlink,
     blinkText,
     blinkInterval,
     dynamicDuration,
     dynamicDurationFactor,
     className,
-    children
+    children,
+    rootRef: providedRootRef
   } = props;
 
-  const rootRef = useRef<HTMLElement>(null);
-  const actualChildrenRef = useRef<HTMLElement>(null);
+  const internalRootRef = useRef<HTMLElement | null>(null);
+  const actualChildrenRef = useRef<HTMLElement | null>(null);
   const cloneNode = useRef<HTMLElement | null>(null);
   const blinkNode = useRef<HTMLElement | null>(null);
   const animationFrame = useRef<number | null>(null);
 
   const animateRefs: TextAnimationRefs = useRef({
-    rootRef,
+    rootRef: internalRootRef,
     actualChildrenRef,
     cloneNode,
     blinkNode,
@@ -50,6 +52,19 @@ const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
   });
 
   animator.setupAnimateRefs(animateRefs, bleeps);
+
+  const as = useMemo(() => providedAs, []);
+
+  const rootRef = useCallback((node: HTMLElement) => {
+    internalRootRef.current = node;
+
+    if (typeof providedRootRef === 'function') {
+      providedRootRef(node);
+    }
+    else if (providedRootRef) {
+      providedRootRef.current = node;
+    }
+  }, []);
 
   useEffect(() => {
     if (actualChildrenRef.current) {
@@ -145,7 +160,8 @@ Text.propTypes = {
   dynamicDurationFactor: PropTypes.number,
   blink: PropTypes.bool,
   blinkText: PropTypes.string,
-  blinkInterval: PropTypes.number
+  blinkInterval: PropTypes.number,
+  rootRef: PropTypes.any
 };
 
 Text.defaultProps = {

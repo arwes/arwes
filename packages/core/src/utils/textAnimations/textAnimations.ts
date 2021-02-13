@@ -8,8 +8,8 @@ import { setTextNodesEnteringContentLength } from '../setTextNodesEnteringConten
 import { setTextNodesExitingContentLength } from '../setTextNodesExitingContentLength';
 
 type TextAnimationRefs = MutableRefObject<{
-  rootRef: RefObject<HTMLElement>
-  actualChildrenRef: RefObject<HTMLElement>
+  rootRef: RefObject<HTMLElement | null>
+  actualChildrenRef: RefObject<HTMLElement | null>
   cloneNode: MutableRefObject<HTMLElement | null>
   blinkNode: MutableRefObject<HTMLElement | null>
   animationFrame: MutableRefObject<number | null>
