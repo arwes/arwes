@@ -61,6 +61,9 @@ const withBleeps = <C extends ComponentType<P>, P extends WithBleepsInputProps =
       });
     });
 
+    const componentName = InputComponent.displayName || InputComponent.name || 'Component';
+    OutputComponent.displayName = `withBleeps(${componentName})`;
+
     return OutputComponent;
   };
 
