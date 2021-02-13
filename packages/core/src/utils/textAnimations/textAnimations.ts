@@ -56,7 +56,7 @@ const stopTextAnimation = (animator: AnimatorRef, refs: TextAnimationRefs, bleep
   const isEntering = animator.flow.entering || animator.flow.entered;
 
   if (isEntering && actualChildrenRef.current) {
-    actualChildrenRef.current.style.opacity = '';
+    actualChildrenRef.current.style.opacity = '1';
   }
 
   animationFrame.current = null;
