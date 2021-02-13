@@ -76,7 +76,8 @@ const styles = {
     overflow: 'auto'
   },
   editor: {
-    borderRight: `1px solid ${rgba(theme.color.border, 0.5)}`
+    borderRight: `1px solid ${rgba(theme.color.border, 0.5)}`,
+    backgroundColor: theme.color.background
   },
   editorOnly: {
     borderRight: 'none'

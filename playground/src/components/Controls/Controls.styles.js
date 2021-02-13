@@ -46,6 +46,7 @@ const styles = {
     '& a': {
       ...resetTextStyles,
       color: theme.color.content,
+      textDecoration: 'underline',
       transition: 'color 150ms ease-out',
 
       '&:hover, &:focus': {

@@ -3,6 +3,7 @@ import { theme } from '../../theme';
 const styles = {
   root: {
     fontSize: 12,
+    lineHeight: 1.2,
 
     // Prism editor uses inline styles.
     fontFamily: `${theme.typography.monospace} !important`,

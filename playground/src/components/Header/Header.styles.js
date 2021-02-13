@@ -38,6 +38,9 @@ const styles = {
     fontFamily: theme.typography.content,
     color: theme.color.headings,
     whiteSpace: 'nowrap',
+    letterSpacing: 0,
+    textTransform: 'none',
+    textShadow: 'none',
 
     [theme.breakpoints.tabletUp]: {
       padding: '0 15px',
