@@ -15,7 +15,7 @@ const expandThemeTypographyGroups = (selector: string): string => {
     case 'root': return 'html, body';
     case 'headings': return 'h1, h2, h3, h4, h5, h6';
     case 'codes': return 'code, pre';
-    case 'controls': return 'input, textarea, select, option, button';
+    case 'controls': return 'label, input, textarea, select, option, optgroup, button, fieldset, legend, datalist, output';
   }
   return selector;
 };

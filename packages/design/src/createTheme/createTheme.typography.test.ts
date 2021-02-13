@@ -86,7 +86,7 @@ test('Should create "codes" group for HTMLElements code, pre', () => {
   });
 });
 
-test('Should create "controls" group for HTMLElements input, textarea, select, option, button', () => {
+test('Should create "controls" group for HTMLElements label, input, textarea, select, option, optgroup, button, fieldset, legend, datalist, output', () => {
   const theme = createTheme({
     typography: {
       controls: { fontFamily: 'arial' },
@@ -95,7 +95,7 @@ test('Should create "controls" group for HTMLElements input, textarea, select, o
     }
   });
   expect(theme.typography).toEqual({
-    'input, textarea, select, option, button': { fontFamily: 'arial' },
+    'label, input, textarea, select, option, optgroup, button, fieldset, legend, datalist, output': { fontFamily: 'arial' },
     input: { fontSize: 20 },
     button: { fontSize: 30 }
   });
