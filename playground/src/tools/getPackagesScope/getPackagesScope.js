@@ -9,8 +9,11 @@ import * as sounds from 'repository/packages/sounds';
 import * as core from 'repository/packages/core';
 import * as arwes from 'repository/packages/arwes';
 
+import { generateRandomText } from '../generateRandomText';
+
 function getPackagesScope () {
   return {
+    _generateRandomText: generateRandomText,
     emotion,
     anime,
     howler,
