@@ -77,6 +77,13 @@ const playgroundConfigs = [
           { name: 'basic', code: require('repository/packages/core/src/Table/basic.sandbox.md').default },
           { name: 'static', code: require('repository/packages/core/src/Table/static.sandbox.md').default }
         ]
+      },
+      {
+        name: 'CodeBlock',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/core/src/CodeBlock/basic.sandbox.md').default },
+          { name: 'static', code: require('repository/packages/core/src/CodeBlock/static.sandbox.md').default }
+        ]
       }
     ]
   }

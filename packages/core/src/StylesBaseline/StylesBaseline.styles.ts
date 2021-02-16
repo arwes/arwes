@@ -129,10 +129,10 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       display: 'block',
       borderWidth: `${outline(1)}px 0 ${outline(1)}px 0`,
       borderStyle: 'solid',
-      borderColor: palette.primary.dark2,
+      borderColor: palette.primary.dark1,
       padding: space(4),
       fontSize: '1rem',
-      backgroundColor: rgba(palette.text.root, 0.05)
+      backgroundColor: rgba(palette.primary.light2, 0.05)
     },
 
     // BLOCKQUOTE
