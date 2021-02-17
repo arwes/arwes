@@ -6,7 +6,7 @@ import { WithAnimatorInputProps } from '@arwes/animation';
 import { WithBleepsInputProps } from '@arwes/sounds';
 
 import { TextAnimationRefs, startTextAnimation } from '../utils/textAnimations';
-import { styles } from './Text.styles';
+import { generateStyles } from './Text.styles';
 
 // Browser normally renders 60 frames per second for requested animations.
 const FPS_NORMAL_DURATION = 1000 / 60;
@@ -53,6 +53,11 @@ const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
 
   animator.setupAnimateRefs(animateRefs, bleeps);
 
+  const styles = useMemo(
+    () => generateStyles({ animate: animator.animate }),
+    [animator.animate]
+  );
+
   const as = useMemo(() => providedAs, []);
 
   const rootRef = useCallback((node: HTMLElement) => {
@@ -67,10 +72,6 @@ const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
   }, []);
 
   useEffect(() => {
-    if (actualChildrenRef.current) {
-      actualChildrenRef.current.style.opacity = animator.animate ? '0' : '';
-    }
-
     // The blink element is created only once for all the animations,
     // since this element is the same each case.
     if (animator.animate && hasBlink && blinkText && blinkInterval) {
