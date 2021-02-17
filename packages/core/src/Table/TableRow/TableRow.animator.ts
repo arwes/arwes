@@ -79,15 +79,15 @@ const startTableAnimation = (
     anime({
       targets: cell,
       duration: animator.duration.enter,
-      translateX: isEntering ? [theme.space(1), 0] : [0, theme.space(1)],
-      easing: 'easeOutSine'
+      easing: isEntering ? 'easeOutSine' : 'easeInSine',
+      translateX: isEntering ? [theme.space(1), 0] : [0, theme.space(1)]
     });
 
     anime({
       targets: cellLine,
       duration: animator.duration.enter,
-      width: isEntering ? [0, '100%'] : ['100%', 0],
-      easing: 'easeOutSine'
+      easing: isEntering ? 'easeOutSine' : 'easeInSine',
+      width: isEntering ? [0, '100%'] : ['100%', 0]
     });
   });
 };
