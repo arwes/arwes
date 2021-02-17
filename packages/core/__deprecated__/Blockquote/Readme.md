@@ -1,1 +1,0 @@
-A HTML `<blockquote />` element.
