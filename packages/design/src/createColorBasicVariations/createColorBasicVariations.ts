@@ -5,7 +5,7 @@ import {
   ThemeSettingsPaletteColorBasic,
   ThemePaletteColorBasic
 } from '../constants';
-import { isColorLight } from '../utils/isColorLight';
+import { updateColorContrastLuminance } from '../updateColorContrastLuminance';
 
 const createColorBasicVariations = (
   color: ThemeSettingsPaletteColorBasic,
@@ -19,11 +19,7 @@ const createColorBasicVariations = (
   const { main } = color;
   const dark = color.dark ?? darken(tonalOffset, main);
   const light = color.light ?? lighten(tonalOffset, main);
-  const contrast = color.contrast ?? (
-    isColorLight(main)
-      ? darken(contrastOffset, main)
-      : lighten(contrastOffset, main)
-  );
+  const contrast = color.contrast ?? updateColorContrastLuminance(contrastOffset, main);
 
   return Object.freeze({ main, dark, light, contrast });
 };

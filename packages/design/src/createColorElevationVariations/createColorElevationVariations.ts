@@ -1,8 +1,5 @@
-import lighten from 'polished/lib/color/lighten';
-import darken from 'polished/lib/color/darken';
-
 import { ThemePaletteColorElevation } from '../constants';
-import { isColorLight } from '../utils/isColorLight';
+import { updateColorContrastLuminance } from '../updateColorContrastLuminance';
 
 const createColorElevationVariations = (
   main: string,
@@ -15,7 +12,7 @@ const createColorElevationVariations = (
       return main;
     }
 
-    return isColorLight(main) ? darken(value, main) : lighten(value, main);
+    return updateColorContrastLuminance(value, main);
   };
 
   return Object.freeze({ main, elevate });
