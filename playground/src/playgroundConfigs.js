@@ -84,6 +84,15 @@ const playgroundConfigs = [
           { name: 'basic', code: require('repository/packages/core/src/CodeBlock/CodeBlock.basic.sandbox.md').default },
           { name: 'static', code: require('repository/packages/core/src/CodeBlock/CodeBlock.static.sandbox.md').default }
         ]
+      },
+      {
+        name: 'LoadingBars',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/core/src/LoadingBars/LoadingBars.basic.sandbox.md').default },
+          { name: 'determinate', code: require('repository/packages/core/src/LoadingBars/LoadingBars.determinate.sandbox.md').default },
+          { name: 'full', code: require('repository/packages/core/src/LoadingBars/LoadingBars.full.sandbox.md').default },
+          { name: 'static', code: require('repository/packages/core/src/LoadingBars/LoadingBars.static.sandbox.md').default }
+        ]
       }
     ]
   }
