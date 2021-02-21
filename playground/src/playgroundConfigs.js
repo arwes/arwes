@@ -93,6 +93,16 @@ const playgroundConfigs = [
           { name: 'full', code: require('repository/packages/core/src/LoadingBars/LoadingBars.full.sandbox.md').default },
           { name: 'static', code: require('repository/packages/core/src/LoadingBars/LoadingBars.static.sandbox.md').default }
         ]
+      },
+      {
+        name: 'Figure',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/core/src/Figure/Figure.basic.sandbox.md').default },
+          { name: 'responsive', code: require('repository/packages/core/src/Figure/Figure.responsive.sandbox.md').default },
+          { name: 'loading', code: require('repository/packages/core/src/Figure/Figure.loading.sandbox.md').default },
+          { name: 'fluid', code: require('repository/packages/core/src/Figure/Figure.fluid.sandbox.md').default },
+          { name: 'static', code: require('repository/packages/core/src/Figure/Figure.static.sandbox.md').default }
+        ]
       }
     ]
   }
