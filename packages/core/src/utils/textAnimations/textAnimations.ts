@@ -25,7 +25,8 @@ const styles: Record<string, CSSObject> = {
     left: '0',
     right: '0',
     top: '0',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    userSelect: 'none'
   }
 };
 
