@@ -3,6 +3,7 @@ import { FC, MutableRefObject, useRef, useMemo, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
+import { THEME_BREAKPOINTS_KEYS, ThemeSettingsBreakpoint } from '@arwes/design';
 import { WithAnimatorInputProps } from '@arwes/animation';
 import { WithBleepsInputProps } from '@arwes/sounds';
 
@@ -10,7 +11,7 @@ import { TextProps, Text } from '../Text';
 import { generateStyles } from './Figure.styles';
 
 interface FigureProps {
-  src: string
+  src: string | string[]
   alt?: string
   fluid?: boolean
   descriptionTextProps?: TextProps
@@ -57,17 +58,45 @@ const Figure: FC<FigureProps & WithAnimatorInputProps & WithBleepsInputProps> = 
           className='arwes-figure__content'
           css={styles.content}
         >
-          <div
+          <picture
             className='arwes-figure__asset'
             css={styles.asset}
           >
-            <img
-              className='arwes-figure__image'
-              css={styles.image}
-              src={src}
-              alt={alt}
-            />
-          </div>
+            {!Array.isArray(src) && (
+              <img
+                className='arwes-figure__image'
+                css={styles.image}
+                src={src}
+                alt={alt}
+              />
+            )}
+            {Array.isArray(src) && (
+              src
+                .map((srcItem: string, index: number) => {
+                  if (!srcItem) {
+                    return null;
+                  }
+
+                  const isFirst = index === 0;
+                  const tag = isFirst ? 'img' : 'source';
+                  const srcKey = isFirst ? 'src' : 'srcSet';
+                  const breakpointKey = THEME_BREAKPOINTS_KEYS[index] as ThemeSettingsBreakpoint;
+
+                  return jsx(tag, {
+                    key: index,
+                    className: isFirst ? 'arwes-figure__image' : undefined,
+                    css: isFirst ? styles.image : undefined,
+                    [srcKey]: srcItem,
+                    media: isFirst
+                      ? undefined
+                      : theme.breakpoints.up(breakpointKey).replace('@media ', ''),
+                    alt: isFirst ? alt : undefined
+                  });
+                })
+                .filter(Boolean)
+                .reverse()
+            )}
+          </picture>
           {!!children && (
             <div
               className='arwes-figure__description'
@@ -133,7 +162,11 @@ const Figure: FC<FigureProps & WithAnimatorInputProps & WithBleepsInputProps> = 
 };
 
 Figure.propTypes = {
-  src: PropTypes.string.isRequired,
+  // @ts-expect-error
+  src: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string)
+  ]).isRequired,
   alt: PropTypes.string,
   fluid: PropTypes.bool,
   descriptionTextProps: PropTypes.object,

@@ -2,7 +2,6 @@
 const ROOT_FONT_FAMILY = '"Titillium Web", sans-serif';
 const IMAGE_URL = '/assets/images/img1.jpg';
 const SOUND_TYPING_URL = '/assets/sounds/typing.mp3';
-const SOUND_READOUT_URL = '/assets/sounds/readout.mp3';
 const SOUND_OBJECT_URL = '/assets/sounds/object.mp3';
 
 const audio = {
@@ -10,7 +9,6 @@ const audio = {
 };
 const players = {
   typing: { src: [SOUND_TYPING_URL], loop: true },
-  readout: { src: [SOUND_READOUT_URL], loop: true },
   object: { src: [SOUND_OBJECT_URL] }
 };
 

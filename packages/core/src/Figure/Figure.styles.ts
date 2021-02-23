@@ -10,7 +10,7 @@ const generateStyles = (
   const { palette, space, outline, shadow } = theme;
   const { animate, fluid } = options;
 
-  const containerPadding = space(3);
+  const containerPadding = space(2);
 
   const lineWidth = outline(1);
   const lineShadowBlur = shadow.blur(2);
@@ -38,6 +38,7 @@ const generateStyles = (
     },
     asset: {
       position: 'relative',
+      display: 'block',
       backgroundColor: palette.neutral.elevate(2),
       boxShadow: `0 0 ${shadow.blur(2)}px ${palette.primary.dark1}`,
       opacity: animate ? 0 : undefined
