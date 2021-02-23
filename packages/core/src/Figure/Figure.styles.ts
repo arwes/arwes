@@ -5,10 +5,10 @@ import { ArwesTheme } from '../ArwesThemeProvider';
 
 const generateStyles = (
   theme: ArwesTheme,
-  options: { animate: boolean }
+  options: { animate: boolean, fluid?: boolean }
 ): Record<string, CSSObject> => {
   const { palette, space, outline, shadow } = theme;
-  const { animate } = options;
+  const { animate, fluid } = options;
 
   const containerPadding = space(3);
 
@@ -33,7 +33,7 @@ const generateStyles = (
       padding: containerPadding
     },
     content: {
-      display: 'table',
+      display: fluid ? 'block' : 'table',
       margin: '0 auto'
     },
     asset: {
@@ -46,14 +46,14 @@ const generateStyles = (
       display: 'block',
       margin: 0,
       border: 'none',
-      width: 'auto',
+      width: fluid ? '100%' : 'auto',
       minWidth: 300,
       height: 'auto',
       minHeight: 150,
       verticalAlign: 'top'
     },
     description: {
-      display: 'table-caption',
+      display: fluid ? 'block' : 'table-caption',
       captionSide: 'bottom',
       position: 'relative',
       overflow: 'hidden',

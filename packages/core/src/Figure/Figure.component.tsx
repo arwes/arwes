@@ -12,6 +12,7 @@ import { generateStyles } from './Figure.styles';
 interface FigureProps {
   src: string
   alt?: string
+  fluid?: boolean
   descriptionTextProps?: TextProps
   rootRef?: MutableRefObject<HTMLDivElement> | ((node: HTMLDivElement) => void)
   className?: string
@@ -23,6 +24,7 @@ const Figure: FC<FigureProps & WithAnimatorInputProps & WithBleepsInputProps> = 
     bleeps,
     src,
     alt,
+    fluid,
     descriptionTextProps,
     className,
     children,
@@ -32,8 +34,8 @@ const Figure: FC<FigureProps & WithAnimatorInputProps & WithBleepsInputProps> = 
 
   const theme = useTheme();
   const styles = useMemo(
-    () => generateStyles(theme, { animate }),
-    [theme, animate]
+    () => generateStyles(theme, { animate, fluid }),
+    [theme, animate, fluid]
   );
 
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -133,6 +135,7 @@ const Figure: FC<FigureProps & WithAnimatorInputProps & WithBleepsInputProps> = 
 Figure.propTypes = {
   src: PropTypes.string.isRequired,
   alt: PropTypes.string,
+  fluid: PropTypes.bool,
   descriptionTextProps: PropTypes.object,
   className: PropTypes.string,
   rootRef: PropTypes.any
