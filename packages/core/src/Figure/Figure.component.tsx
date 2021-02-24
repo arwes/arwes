@@ -1,5 +1,14 @@
 /* @jsx jsx */
-import { FC, MutableRefObject, useRef, useMemo, Fragment } from 'react';
+import {
+  FC,
+  MutableRefObject,
+  useRef,
+  useMemo,
+  useState,
+  useEffect,
+  Fragment,
+  ImgHTMLAttributes
+} from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
@@ -7,14 +16,21 @@ import { THEME_BREAKPOINTS_KEYS, ThemeSettingsBreakpoint } from '@arwes/design';
 import { WithAnimatorInputProps } from '@arwes/animation';
 import { WithBleepsInputProps } from '@arwes/sounds';
 
+import { loadImage } from '../utils/loadImage';
 import { TextProps, Text } from '../Text';
+import { LoadingBarsProps, LoadingBars } from '../LoadingBars';
 import { generateStyles } from './Figure.styles';
 
+type FigurePropsSrcListItem = string | undefined | null;
+
 interface FigureProps {
-  src: string | string[]
+  src: string | FigurePropsSrcListItem[]
   alt?: string
   fluid?: boolean
+  preload?: boolean
+  imgProps?: ImgHTMLAttributes<HTMLImageElement>
   descriptionTextProps?: TextProps
+  loadingProps?: LoadingBarsProps
   rootRef?: MutableRefObject<HTMLDivElement> | ((node: HTMLDivElement) => void)
   className?: string
 }
@@ -26,7 +42,10 @@ const Figure: FC<FigureProps & WithAnimatorInputProps & WithBleepsInputProps> = 
     src,
     alt,
     fluid,
+    preload,
+    imgProps,
     descriptionTextProps,
+    loadingProps,
     className,
     children,
     rootRef
@@ -40,6 +59,31 @@ const Figure: FC<FigureProps & WithAnimatorInputProps & WithBleepsInputProps> = 
   );
 
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const isMountedRef = useRef(true);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (preload) {
+      // TODO: Handle responsive images.
+      const imageURL: string = Array.isArray(src) ? 'TODO' : src;
+
+      setIsLoading(true);
+
+      loadImage(imageURL)
+        // TODO: Handle error.
+        .catch(() => {})
+        .then(() => {
+          if (isMountedRef.current) {
+            setIsLoading(false);
+          }
+        })
+        .catch(() => {});
+    }
+
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
 
   animator.setupAnimateRefs(containerRef, theme, styles, bleeps);
 
@@ -64,6 +108,7 @@ const Figure: FC<FigureProps & WithAnimatorInputProps & WithBleepsInputProps> = 
           >
             {!Array.isArray(src) && (
               <img
+                {...imgProps}
                 className='arwes-figure__image'
                 css={styles.image}
                 src={src}
@@ -72,29 +117,44 @@ const Figure: FC<FigureProps & WithAnimatorInputProps & WithBleepsInputProps> = 
             )}
             {Array.isArray(src) && (
               src
-                .map((srcItem: string, index: number) => {
+                .map((srcItem: string | undefined | null, index: number) => {
                   if (!srcItem) {
                     return null;
                   }
 
-                  const isFirst = index === 0;
-                  const tag = isFirst ? 'img' : 'source';
-                  const srcKey = isFirst ? 'src' : 'srcSet';
-                  const breakpointKey = THEME_BREAKPOINTS_KEYS[index] as ThemeSettingsBreakpoint;
+                  if (index === 0) {
+                    return (
+                      <img
+                        key={index}
+                        {...imgProps}
+                        className='arwes-figure__image'
+                        css={styles.image}
+                        src={srcItem}
+                        alt={alt}
+                      />
+                    );
+                  }
 
-                  return jsx(tag, {
-                    key: index,
-                    className: isFirst ? 'arwes-figure__image' : undefined,
-                    css: isFirst ? styles.image : undefined,
-                    [srcKey]: srcItem,
-                    media: isFirst
-                      ? undefined
-                      : theme.breakpoints.up(breakpointKey).replace('@media ', ''),
-                    alt: isFirst ? alt : undefined
-                  });
+                  return (
+                    <source
+                      key={index}
+                      srcSet={srcItem}
+                      media={theme.breakpoints
+                        .up(THEME_BREAKPOINTS_KEYS[index] as ThemeSettingsBreakpoint)
+                        .replace('@media ', '')}
+                    />
+                  );
                 })
                 .filter(Boolean)
                 .reverse()
+            )}
+            {preload && isLoading && (
+              <LoadingBars
+                {...loadingProps}
+                className='arwes-figure__loading'
+                css={styles.loading}
+                full
+              />
             )}
           </picture>
           {!!children && (
@@ -162,14 +222,15 @@ const Figure: FC<FigureProps & WithAnimatorInputProps & WithBleepsInputProps> = 
 };
 
 Figure.propTypes = {
-  // @ts-expect-error
   src: PropTypes.oneOfType([
-    PropTypes.string,
+    PropTypes.string.isRequired,
     PropTypes.arrayOf(PropTypes.string)
   ]).isRequired,
   alt: PropTypes.string,
   fluid: PropTypes.bool,
+  imgProps: PropTypes.object,
   descriptionTextProps: PropTypes.object,
+  loadingProps: PropTypes.object,
   className: PropTypes.string,
   rootRef: PropTypes.any
 };

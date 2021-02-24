@@ -36,6 +36,7 @@ const generateStyles = (
       display: fluid ? 'block' : 'table',
       margin: '0 auto'
     },
+
     asset: {
       position: 'relative',
       display: 'block',
@@ -53,6 +54,10 @@ const generateStyles = (
       minHeight: 150,
       verticalAlign: 'top'
     },
+    loading: {
+      backgroundColor: palette.neutral.elevate(2)
+    },
+
     description: {
       display: fluid ? 'block' : 'table-caption',
       captionSide: 'bottom',
@@ -109,6 +114,7 @@ const generateStyles = (
         backgroundColor: descriptionBgColor
       }
     },
+
     line: {
       position: 'absolute',
       backgroundColor: lineColor,
