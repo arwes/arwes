@@ -20,6 +20,7 @@ import { loadImage } from '../utils/loadImage';
 import { TextProps, Text } from '../Text';
 import { LoadingBarsProps, LoadingBars } from '../LoadingBars';
 import { generateStyles } from './Figure.styles';
+import { startEffectAppear } from './Figure.effects';
 
 type FigurePropsSrcListItem = string | undefined | null;
 
@@ -61,23 +62,62 @@ const Figure: FC<FigureProps & WithAnimatorInputProps & WithBleepsInputProps> = 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const isMountedRef = useRef(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    if (preload) {
-      // TODO: Handle responsive images.
-      const imageURL: string = Array.isArray(src) ? 'TODO' : src;
+    if (!preload) {
+      return;
+    }
 
+    // TODO: Create a custom functionality to handle dynamic
+    // breakpoint resources settings.
+
+    let imageURL: string | undefined | null;
+
+    if (Array.isArray(src)) {
+      src.find((value: string | undefined | null, index: number) => {
+        const breakpointKey = THEME_BREAKPOINTS_KEYS[index] as ThemeSettingsBreakpoint;
+        const breakpoint = theme.breakpoints.values[breakpointKey];
+
+        if (breakpoint && breakpoint >= window.innerWidth) {
+          return true;
+        }
+
+        if (value) {
+          imageURL = value;
+        }
+
+        return false;
+      });
+    }
+    else {
+      imageURL = src;
+    }
+
+    if (imageURL) {
       setIsLoading(true);
+      setHasError(false);
 
       loadImage(imageURL)
-        // TODO: Handle error.
-        .catch(() => {})
+        .catch(() => {
+          if (isMountedRef.current) {
+            setHasError(true);
+          }
+        })
         .then(() => {
           if (isMountedRef.current) {
             setIsLoading(false);
+
+            startEffectAppear(
+              containerRef.current?.querySelector('.arwes-figure__asset'),
+              animator.duration.enter
+            );
           }
         })
         .catch(() => {});
+    }
+    else {
+      setHasError(true);
     }
 
     return () => {
@@ -104,7 +144,10 @@ const Figure: FC<FigureProps & WithAnimatorInputProps & WithBleepsInputProps> = 
         >
           <picture
             className='arwes-figure__asset'
-            css={styles.asset}
+            css={[
+              styles.asset,
+              hasError && styles.assetHasError
+            ]}
           >
             {!Array.isArray(src) && (
               <img

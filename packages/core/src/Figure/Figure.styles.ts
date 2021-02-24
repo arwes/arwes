@@ -44,6 +44,13 @@ const generateStyles = (
       boxShadow: `0 0 ${shadow.blur(2)}px ${palette.primary.dark1}`,
       opacity: animate ? 0 : undefined
     },
+    assetHasError: {
+      backgroundColor: rgba(palette.error.main, 0.2),
+
+      '& img': {
+        opacity: 0
+      }
+    },
     image: {
       display: 'block',
       margin: 0,

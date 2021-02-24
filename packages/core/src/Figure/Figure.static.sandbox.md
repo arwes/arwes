@@ -1,6 +1,6 @@
 ```jsx
 const ROOT_FONT_FAMILY = '"Titillium Web", sans-serif';
-const IMAGE_URL = '/assets/images/wallpaper.jpg';
+const IMAGE_URL = '/assets/images/wallpaper-large.jpg';
 
 const Sandbox = () => {
   return (
