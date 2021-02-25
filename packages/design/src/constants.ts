@@ -8,7 +8,6 @@ export const THEME_BREAKPOINTS_DEFAULT = Object.freeze({
 });
 
 export const THEME_PALETTE_TONAL_OFFSET_DEFAULT = 0.1;
-export const THEME_PALETTE_CONTRAST_OFFSET_DEFAULT = 0.45;
 export const THEME_PALETTE_ELEVATION_OFFSET_DEFAULT = 0.025;
 
 export const THEME_SPACE_DEFAULT = 8;
@@ -32,20 +31,16 @@ export interface ThemeSettingsBreakpoints {
   }
 }
 
-export type ThemeSettingsPaletteColorRays = Partial<ThemePaletteColorRays>;
 export type ThemeSettingsPaletteColorBasic = Partial<ThemePaletteColorBasic>;
 export interface ThemeSettingsPaletteColorElevation {
   main?: string
 }
 export interface ThemeSettingsPalette {
   tonalOffset?: number
-  contrastOffset?: number
   elevationOffset?: number
-  primary?: ThemeSettingsPaletteColorRays
-  secondary?: ThemeSettingsPaletteColorRays
+  primary?: ThemeSettingsPaletteColorBasic
+  secondary?: ThemeSettingsPaletteColorBasic
   success?: ThemeSettingsPaletteColorBasic
-  info?: ThemeSettingsPaletteColorBasic
-  warn?: ThemeSettingsPaletteColorBasic
   error?: ThemeSettingsPaletteColorBasic
   neutral?: ThemeSettingsPaletteColorElevation
   [prop: string]: any
@@ -90,7 +85,6 @@ export interface ThemeSetupBreakpoints {
 
 export interface ThemeSetupPalette extends ThemeSettingsPalette {
   tonalOffset: number
-  contrastOffset: number
   elevationOffset: number
 }
 
@@ -122,7 +116,7 @@ export interface ThemeBreakpoints {
   between: (start: ThemeSettingsBreakpointAny, end: ThemeSettingsBreakpointAny) => string
 }
 
-export interface ThemePaletteColorRays {
+export interface ThemePaletteColorBasic {
   main: string
   dark1: string
   dark2: string
@@ -131,25 +125,16 @@ export interface ThemePaletteColorRays {
   light2: string
   light3: string
 }
-export interface ThemePaletteColorBasic {
-  main: string
-  dark: string
-  light: string
-  contrast: string
-}
 export interface ThemePaletteColorElevation {
   main: string
   elevate: (level: number) => string
 }
 export interface ThemePalette {
   tonalOffset: number
-  contrastOffset: number
   elevationOffset: number
-  primary: ThemePaletteColorRays
-  secondary: ThemePaletteColorRays
+  primary: ThemePaletteColorBasic
+  secondary: ThemePaletteColorBasic
   success: ThemePaletteColorBasic
-  info: ThemePaletteColorBasic
-  warn: ThemePaletteColorBasic
   error: ThemePaletteColorBasic
   neutral: ThemePaletteColorElevation
   [prop: string]: any

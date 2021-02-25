@@ -1,7 +1,6 @@
 import {
   THEME_BREAKPOINTS_DEFAULT,
   THEME_PALETTE_TONAL_OFFSET_DEFAULT,
-  THEME_PALETTE_CONTRAST_OFFSET_DEFAULT,
   THEME_PALETTE_ELEVATION_OFFSET_DEFAULT,
   THEME_SPACE_DEFAULT,
   THEME_OUTLINE_DEFAULT,
@@ -36,7 +35,6 @@ const getThemeSetup = (providedSettings?: ThemeSettings, extendTheme?: Theme): T
 
   const palette = {
     tonalOffset: THEME_PALETTE_TONAL_OFFSET_DEFAULT,
-    contrastOffset: THEME_PALETTE_CONTRAST_OFFSET_DEFAULT,
     elevationOffset: THEME_PALETTE_ELEVATION_OFFSET_DEFAULT,
     ...extendTheme?.palette,
     ...providedSettings?.palette

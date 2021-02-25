@@ -5,14 +5,9 @@ import darken from 'polished/lib/color/darken';
 
 import { createTheme } from './createTheme';
 
-test('Should create default palette tonalOffset of 0.1', () => {
+test('Should create default palette "tonalOffset" of 0.1', () => {
   const theme = createTheme();
   expect(theme.palette.tonalOffset).toBe(0.1);
-});
-
-test('Should create default palette contrastThreshold of 0.45', () => {
-  const theme = createTheme();
-  expect(theme.palette.contrastOffset).toBe(0.45);
 });
 
 test('Should create default "primary" palette with "cyan" color', () => {
@@ -45,29 +40,12 @@ test('Should create default "success" palette with "green" color', () => {
   const theme = createTheme();
   expect(theme.palette.success).toEqual({
     main: '#0f0',
-    dark: '#0c0',
-    light: '#3f3',
-    contrast: '#001900'
-  });
-});
-
-test('Should create default "info" palette with "blue" color', () => {
-  const theme = createTheme();
-  expect(theme.palette.info).toEqual({
-    main: '#00f',
-    dark: '#00c',
-    light: '#33f',
-    contrast: '#e5e5ff'
-  });
-});
-
-test('Should create default "warn" palette with "orange" color', () => {
-  const theme = createTheme();
-  expect(theme.palette.warn).toEqual({
-    main: '#fa0',
-    dark: '#c80',
-    light: '#fb3',
-    contrast: '#191100'
+    dark1: '#0c0',
+    dark2: '#090',
+    dark3: '#060',
+    light1: '#3f3',
+    light2: '#6f6',
+    light3: '#9f9'
   });
 });
 
@@ -75,14 +53,17 @@ test('Should create default "error" palette with "red" color', () => {
   const theme = createTheme();
   expect(theme.palette.error).toEqual({
     main: '#f00',
-    dark: '#c00',
-    light: '#f33',
-    contrast: '#190000'
+    dark1: '#c00',
+    dark2: '#900',
+    dark3: '#600',
+    light1: '#f33',
+    light2: '#f66',
+    light3: '#f99'
   });
 });
 
-describe('ray colors', () => {
-  ['primary', 'secondary'].forEach(paletteName => {
+describe('basic colors', () => {
+  ['primary', 'secondary', 'success', 'error'].forEach(paletteName => {
     test(`Should create "${paletteName}" palette with provided main color and tonalOffset`, () => {
       const tonalOffset = 0.12;
       const color = '#9acd32';
@@ -119,61 +100,6 @@ describe('ray colors', () => {
       expect(theme.palette[paletteName]).toEqual(
         { main, dark1, dark2, dark3, light1, light2, light3 }
       );
-    });
-  });
-});
-
-describe('basic colors', () => {
-  ['success', 'info', 'warn', 'error'].forEach(paletteName => {
-    test(`Should create "${paletteName}" palette with provided light color, tonalOffset, contrastOffset`, () => {
-      const tonalOffset = 0.15;
-      const contrastOffset = 3;
-      const color = '#3885f7'; // light color
-      const theme: any = createTheme({
-        palette: {
-          tonalOffset,
-          contrastOffset,
-          [paletteName]: { main: color }
-        }
-      });
-      expect(theme.palette[paletteName]).toEqual({
-        main: color,
-        dark: darken(tonalOffset, color),
-        light: lighten(tonalOffset, color),
-        contrast: darken(contrastOffset, color)
-      });
-    });
-
-    test(`Should create "${paletteName}" palette with provided dark color, tonalOffset, contrastOffset`, () => {
-      const tonalOffset = 0.225;
-      const contrastOffset = 2.75;
-      const color = '#102b54'; // dark color
-      const theme: any = createTheme({
-        palette: {
-          tonalOffset,
-          contrastOffset,
-          [paletteName]: { main: color }
-        }
-      });
-      expect(theme.palette[paletteName]).toEqual({
-        main: color,
-        dark: darken(tonalOffset, color),
-        light: lighten(tonalOffset, color),
-        contrast: lighten(contrastOffset, color)
-      });
-    });
-
-    test(`Should create "${paletteName}" palette with all colors provided`, () => {
-      const main = '#000';
-      const dark = '#111';
-      const light = '#222';
-      const contrast = '#333';
-      const theme: any = createTheme({
-        palette: {
-          [paletteName]: { main, dark, light, contrast }
-        }
-      });
-      expect(theme.palette[paletteName]).toEqual({ main, dark, light, contrast });
     });
   });
 });
@@ -218,7 +144,7 @@ test('Should allow to extend multiple themes', () => {
     palette: {
       elevationOffset: 0.5,
       primary: { main: '#e94' },
-      info: { main: '#af0' },
+      success: { main: '#af0' },
       neutral: { main: '#a0f' }
     }
   });
@@ -226,7 +152,7 @@ test('Should allow to extend multiple themes', () => {
     palette: {
       tonalOffset: 0.3,
       secondary: { main: '#770' },
-      info: { main: '#f79' }
+      success: { main: '#f79' }
     }
   }, theme1);
   expect(theme2.palette).toMatchObject({
@@ -234,7 +160,7 @@ test('Should allow to extend multiple themes', () => {
     elevationOffset: 0.5,
     primary: { main: '#e94' },
     secondary: { main: '#770' },
-    info: { main: '#f79' },
+    success: { main: '#f79' },
     neutral: { main: '#a0f' }
   });
 });
