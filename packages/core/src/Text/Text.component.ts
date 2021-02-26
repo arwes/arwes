@@ -138,7 +138,7 @@ const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
   return jsx(
     as as string,
     {
-      className: cx('arwes-core-text', className),
+      className: cx('arwes-text', className),
       ref: rootRef,
       css: styles.root
     },
@@ -147,7 +147,7 @@ const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
       {
         ref: actualChildrenRef,
         css: styles.actualChildren,
-        className: 'arwes-core-text__content'
+        className: 'arwes-text__content'
       },
       children
     )
