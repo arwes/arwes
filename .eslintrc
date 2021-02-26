@@ -41,11 +41,15 @@
       "varsIgnorePattern": "^jsx$",
       "ignoreRestSiblings": true
     }],
+    "@typescript-eslint/promise-function-async": ["error", {
+      "checkArrowFunctions": false
+    }],
     "react/prop-types": "off",
     "semi": ["error", "always"],
     "brace-style": ["error", "stroustrup"],
     "no-unused-vars": "off",
     "no-use-before-define": "off",
-    "prefer-regex-literals": "off"
+    "prefer-regex-literals": "off",
+    "prefer-promise-reject-errors": "off"
   }
 }
