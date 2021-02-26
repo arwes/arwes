@@ -1,9 +1,7 @@
-// TODO: Transitioning scroll changes the size of the container.
-// TODO: Setup proper bleep.
-
 /* @jsx jsx */
-import { FC, MutableRefObject, useRef, useMemo, useCallback } from 'react';
+import { FC, MutableRefObject, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
 import { WithBleepsInputProps } from '@arwes/sounds';
@@ -14,84 +12,78 @@ import { generateStyles } from './CodeBlock.styles';
 interface CodeBlockProps {
   lang?: string
   contentTextProps?: TextProps
-  rootRef?: MutableRefObject<HTMLElement> | Function
+  className?: string
+  rootRef?: MutableRefObject<HTMLDivElement> | ((node: HTMLDivElement) => void)
 }
 
 const CodeBlock: FC<CodeBlockProps & WithAnimatorInputProps & WithBleepsInputProps> = props => {
-  const {
-    animator,
-    bleeps,
-    lang,
-    contentTextProps,
-    children,
-    rootRef: externalRootRef
-  } = props;
+  const { animator, bleeps, lang, contentTextProps, children, className, rootRef } = props;
   const { animate } = animator;
 
   const theme = useTheme();
-  const styles = useMemo(
-    () => generateStyles(theme, { animate }),
-    [theme, animator.animate]
-  );
+  const styles = useMemo(() => generateStyles(theme, { animate }), [theme, animate]);
 
-  // TODO: Modularize the way to join multiple references into one.
-  const internalRootRef = useRef<HTMLDivElement | null>(null);
-  const rootRef = useCallback(node => {
-    internalRootRef.current = node;
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-    if (typeof externalRootRef === 'function') {
-      externalRootRef(node);
-    }
-    else if (externalRootRef) {
-      externalRootRef.current = node;
-    }
-  }, []);
-
-  animator.setupAnimateRefs(internalRootRef, theme, bleeps);
+  animator.setupAnimateRefs(containerRef, bleeps);
 
   return (
     <div
-      className='arwes-code-block'
+      className={cx('arwes-code-block', className)}
       css={styles.root}
       ref={rootRef}
     >
       <div
-        className='arwes-code-block__line arwes-code-block__line-top'
-        css={[styles.line, styles.lineTop]}
-      />
-      {!!lang && (
-        <div
-          className='arwes-code-block__lang'
-          css={styles.lang}
-        >
-          <Text blink={false}>
-            {lang}
-          </Text>
-          <div
-            className='arwes-code-block__line arwes-code-block__line-lang'
-            css={[styles.line, styles.lineLang]}
-          />
-        </div>
-      )}
-      <div
         className='arwes-code-block__container'
-        css={[
-          styles.container,
-          !animator.flow.entered && styles.containerIsTransitioning
-        ]}
+        css={styles.container}
+        ref={containerRef}
       >
-        <Text
-          {...contentTextProps}
-          className='arwes-code-block__content'
-          css={styles.content}
+        <div
+          className='arwes-code-block__bg'
+          css={styles.bg}
+        />
+
+        <div
+          className='arwes-code-block__wrap'
+          css={styles.wrap}
         >
-          {children}
-        </Text>
+          <Text
+            {...contentTextProps}
+            className='arwes-code-block__content'
+            css={styles.content}
+          >
+            {children}
+          </Text>
+        </div>
+
+        {!!lang && (
+          <div
+            className='arwes-code-block__lang'
+            css={styles.lang}
+          >
+            <div
+              className='arwes-code-block__lang-bg'
+              css={styles.langBg}
+            />
+            <div
+              className='arwes-code-block__line arwes-code-block__line-lang'
+              css={[styles.line, styles.lineLang]}
+            />
+            <Text blink={false}>
+              {lang}
+            </Text>
+          </div>
+        )}
+
+        <div
+          className='arwes-code-block__line arwes-code-block__line-top'
+          css={[styles.line, styles.lineTop]}
+        />
+        <div
+          className='arwes-code-block__line arwes-code-block__line-bottom'
+          css={[styles.line, styles.lineBottom]}
+        />
       </div>
-      <div
-        className='arwes-code-block__line arwes-code-block__line-bottom'
-        css={[styles.line, styles.lineBottom]}
-      />
     </div>
   );
 };
@@ -99,6 +91,7 @@ const CodeBlock: FC<CodeBlockProps & WithAnimatorInputProps & WithBleepsInputPro
 CodeBlock.propTypes = {
   lang: PropTypes.string,
   contentTextProps: PropTypes.object,
+  className: PropTypes.string,
   rootRef: PropTypes.any
 };
 

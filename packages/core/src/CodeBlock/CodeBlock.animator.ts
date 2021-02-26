@@ -1,73 +1,78 @@
-import rgba from 'polished/lib/color/rgba';
 import anime from 'animejs';
 import { MutableRefObject } from 'react';
 import { AnimatorClassSettings, AnimatorRef } from '@arwes/animation';
 import { Bleeps } from '@arwes/sounds';
 
-import { ArwesTheme } from '../ArwesThemeProvider';
-
-type RootRef = MutableRefObject<HTMLElement>;
+type ContainerRef = MutableRefObject<HTMLElement>;
 
 const playBleeps = (bleeps: Bleeps): void => {
-  bleeps.readout?.play();
+  bleeps.transition?.play();
 };
 
 const stopBleeps = (bleeps: Bleeps): void => {
-  if (bleeps.readout?.getIsPlaying()) {
-    bleeps.readout?.stop();
+  if (bleeps.transition?.getIsPlaying()) {
+    bleeps.transition?.stop();
   }
 };
 
-const stopCodeBlockAnimation = (animator: AnimatorRef, ref: RootRef): void => {
-  if (ref.current) {
-    const root = ref.current;
-    const lines = root.querySelectorAll('.arwes-code-block__line');
+const stopCodeBlockAnimation = (animator: AnimatorRef, containerRef: ContainerRef): void => {
+  if (containerRef.current) {
+    const container = containerRef.current;
+    const elements = container.querySelectorAll([
+      '.arwes-code-block__wrap',
+      '.arwes-code-block__bg',
+      '.arwes-code-block__lang-bg',
+      '.arwes-code-block__line'
+    ].join(','));
 
-    anime.remove(root);
-    anime.remove(lines);
+    anime.remove(elements);
   }
 };
 
-const startCodeBlockAnimation = (animator: AnimatorRef, ref: RootRef, theme: ArwesTheme): void => {
-  stopCodeBlockAnimation(animator, ref);
+const startCodeBlockAnimation = (animator: AnimatorRef, containerRef: ContainerRef): void => {
+  stopCodeBlockAnimation(animator, containerRef);
 
   const { duration, flow } = animator;
   const isEntering = flow.entering || flow.entered;
-  const { palette } = theme;
-
-  const root = ref.current;
-  const lines = root.querySelectorAll('.arwes-code-block__line');
+  const container = containerRef.current;
 
   anime({
-    targets: root,
+    targets: container.querySelector('.arwes-code-block__wrap'),
     duration: isEntering ? duration.enter : duration.exit,
-    easing: isEntering ? 'easeOutSine' : 'easeInSine',
-    backgroundColor: isEntering ? rgba(palette.primary.light2, 0.05) : 'rgba(0,0,0,0)'
+    easing: 'easeInExpo',
+    opacity: isEntering ? [0, 1] : [1, 0]
   });
 
   anime({
-    targets: lines,
+    targets: container.querySelectorAll('.arwes-code-block__bg, .arwes-code-block__lang-bg'),
     duration: isEntering ? duration.enter : duration.exit,
-    easing: isEntering ? 'easeOutSine' : 'easeInSine',
+    easing: 'easeOutSine',
+    opacity: isEntering ? [0, 1] : [1, 0]
+  });
+
+  anime({
+    targets: container.querySelectorAll('.arwes-code-block__line'),
+    duration: isEntering ? duration.enter : duration.exit,
+    easing: 'easeOutSine',
     width: isEntering ? [0, '100%'] : ['100%', 0]
   });
 };
 
-const useAnimateEntering = (animator: AnimatorRef, ref: RootRef, theme: ArwesTheme, bleeps: Bleeps): void => {
-  startCodeBlockAnimation(animator, ref, theme);
+const useAnimateEntering = (animator: AnimatorRef, containerRef: ContainerRef, bleeps: Bleeps): void => {
+  startCodeBlockAnimation(animator, containerRef);
   playBleeps(bleeps);
 };
 
-const useAnimateEntered = (animator: AnimatorRef, ref: RootRef, theme: ArwesTheme, bleeps: Bleeps): void => {
+const useAnimateEntered = (animator: AnimatorRef, containerRef: ContainerRef, bleeps: Bleeps): void => {
   stopBleeps(bleeps);
 };
 
-const useAnimateExiting = (animator: AnimatorRef, ref: RootRef, theme: ArwesTheme): void => {
-  startCodeBlockAnimation(animator, ref, theme);
+const useAnimateExiting = (animator: AnimatorRef, containerRef: ContainerRef): void => {
+  startCodeBlockAnimation(animator, containerRef);
 };
 
-const useAnimateUnmount = (animator: AnimatorRef, ref: RootRef, theme: ArwesTheme, bleeps: Bleeps): void => {
-  stopCodeBlockAnimation(animator, ref);
+const useAnimateUnmount = (animator: AnimatorRef, containerRef: ContainerRef, bleeps: Bleeps): void => {
+  stopCodeBlockAnimation(animator, containerRef);
   stopBleeps(bleeps);
 };
 

@@ -1,14 +1,14 @@
 ```jsx
-const rootFontFamily = '"Titillium Web", sans-serif';
-const codeFontFamily = '"Source Code Pro", monospace';
+const FONT_FAMILY_ROOT = '"Titillium Web", sans-serif';
+const FONT_FAMILY_CODE = '"Source Code Pro", monospace';
 
 const Sandbox = () => {
   return (
     <ArwesThemeProvider>
       <BleepsProvider audio={{ common: { disabled: true } }}>
         <StylesBaseline styles={{
-          'html, body': { fontFamily: rootFontFamily },
-          'code, pre': { fontFamily: codeFontFamily }
+          'html, body': { fontFamily: FONT_FAMILY_ROOT },
+          'code, pre': { fontFamily: FONT_FAMILY_CODE }
         }} />
         <CodeBlock animator={{ animate: false }} lang='jsx'>
           {`const startCodeBlockAnimation = (
