@@ -13,7 +13,7 @@ const rootFullStyles = {
 
 const generateStyles = (
   theme: ArwesTheme,
-  options: { animate: boolean, length: number, size: number, full: boolean }
+  options: { animate: boolean, length: number, size: number, full?: boolean }
 ): Record<string, CSSObject> => {
   const { palette, space, outline, shadow } = theme;
   const { animate, length, size, full } = options;

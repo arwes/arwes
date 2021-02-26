@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { FC, ReactNode, Ref, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
 import { WithBleepsInputProps } from '@arwes/sounds';
@@ -16,6 +17,7 @@ interface TableProps {
   columnWidths?: TableColumnWidth[]
   condensed?: boolean
   rootRef?: Ref<HTMLDivElement>
+  className?: string
 }
 
 const Table: FC<TableProps & WithAnimatorInputProps & WithBleepsInputProps> = props => {
@@ -26,7 +28,8 @@ const Table: FC<TableProps & WithAnimatorInputProps & WithBleepsInputProps> = pr
     headers,
     dataset,
     columnWidths,
-    condensed
+    condensed,
+    className
   } = props;
 
   const theme = useTheme();
@@ -40,7 +43,7 @@ const Table: FC<TableProps & WithAnimatorInputProps & WithBleepsInputProps> = pr
         styles.root,
         !animator.flow.entered && styles.rootIsTransitioning
       ]}
-      className='arwes-table'
+      className={cx('arwes-table', className)}
       ref={rootRef}
     >
       <div
@@ -75,7 +78,8 @@ Table.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
   condensed: PropTypes.bool,
-  rootRef: PropTypes.any
+  rootRef: PropTypes.any,
+  className: PropTypes.string
 };
 
 export { TableProps, Table };

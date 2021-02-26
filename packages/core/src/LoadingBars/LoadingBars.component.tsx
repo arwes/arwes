@@ -1,6 +1,7 @@
 /* @jsx jsx */
 import { FC, MutableRefObject, useRef, useMemo, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
 
@@ -18,16 +19,16 @@ interface LoadingBarsProps {
   size?: number
   full?: boolean
   speed?: number
+  className?: string
   rootRef?: MutableRefObject<HTMLElement> | ((node: HTMLElement) => void)
 }
 
 const LoadingBars: FC<LoadingBarsProps & WithAnimatorInputProps> = props => {
-  const { animator, determinate, rootRef: externalRootRef } = props;
+  const { animator, determinate, full, className, rootRef: externalRootRef } = props;
   const length = props.length as number;
   const progress = props.progress as number;
   const size = props.size as number;
   const speed = props.speed as number;
-  const full = !!props.full;
   const { animate, flow } = animator;
 
   const theme = useTheme();
@@ -64,7 +65,7 @@ const LoadingBars: FC<LoadingBarsProps & WithAnimatorInputProps> = props => {
 
   return (
     <div
-      className='arwes-loading-bars'
+      className={cx('arwes-loading-bars', className)}
       css={styles.root}
       ref={internalRootRef}
     >
@@ -96,6 +97,7 @@ LoadingBars.propTypes = {
   size: PropTypes.number.isRequired,
   full: PropTypes.bool,
   speed: PropTypes.number.isRequired,
+  className: PropTypes.string,
   rootRef: PropTypes.any
 };
 
