@@ -51,8 +51,8 @@
 
 [Arwes](https://arwes.dev) is a web framework to build user interfaces based on
 futuristic science fiction designs, animations, and sound effects. The concepts
-behind are opinionated with influences from [Cyberpunk](https://en.wikipedia.org/wiki/Cyberpunk),
-[Cyberprep](https://aesthetics.fandom.com/wiki/Cyberprep), and [Synthwave](https://en.wikipedia.org/wiki/Synthwave),
+behind are opinionated with influences from [Cyberprep](https://aesthetics.fandom.com/wiki/Cyberprep),
+[Cyberpunk](https://en.wikipedia.org/wiki/Cyberpunk), and [Synthwave](https://en.wikipedia.org/wiki/Synthwave),
 and productions like [Star Citizen](http://robertsspaceindustries.com),
 [Halo](https://www.halowaypoint.com/en-us/games), and [TRON: Legacy](http://www.imdb.com/title/tt1104001).
 It tries to inspire advanced space and alien technology.
