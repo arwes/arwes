@@ -6,14 +6,12 @@ const IMAGE_XS_URL = '/assets/images/wallpaper.jpg';
 const IMAGE_MD_URL = '/assets/images/wallpaper-medium.jpg';
 const IMAGE_LG_URL = '/assets/images/wallpaper-large.jpg';
 const SOUND_TYPING_URL = '/assets/sounds/typing.mp3';
-const SOUND_OBJECT_URL = '/assets/sounds/object.mp3';
+const SOUND_FIGURE_URL = '/assets/sounds/figure.mp3';
 
-const audio = {
-  common: { volume: 0.4 }
-};
+const audio = { common: { volume: 0.4 } };
 const players = {
   typing: { src: [SOUND_TYPING_URL], loop: true },
-  object: { src: [SOUND_OBJECT_URL] }
+  figure: { src: [SOUND_FIGURE_URL] }
 };
 
 const Sandbox = () => {

@@ -5,14 +5,12 @@
 const ROOT_FONT_FAMILY = '"Titillium Web", sans-serif';
 const IMAGE_URL = '/assets/images/wallpaper-large.jpg';
 const SOUND_TYPING_URL = '/assets/sounds/typing.mp3';
-const SOUND_OBJECT_URL = '/assets/sounds/object.mp3';
+const SOUND_FIGURE_URL = '/assets/sounds/figure.mp3';
 
-const audio = {
-  common: { volume: 0.4 }
-};
+const audio = { common: { volume: 0.4 } };
 const players = {
   typing: { src: [SOUND_TYPING_URL], loop: true },
-  object: { src: [SOUND_OBJECT_URL] }
+  figure: { src: [SOUND_FIGURE_URL] }
 };
 const generalAnimator = { duration: { enter: 200, exit: 200 } };
 
