@@ -103,6 +103,14 @@ const playgroundConfigs = [
           { name: 'preload', code: require('repository/packages/core/src/Figure/Figure.preload.sandbox.md').default },
           { name: 'static', code: require('repository/packages/core/src/Figure/Figure.static.sandbox.md').default }
         ]
+      },
+      {
+        name: 'FrameUnderline',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/core/src/FrameUnderline/FrameUnderline.basic.sandbox.md').default },
+          { name: 'disabled', code: require('repository/packages/core/src/FrameUnderline/FrameUnderline.disabled.sandbox.md').default },
+          { name: 'static', code: require('repository/packages/core/src/FrameUnderline/FrameUnderline.static.sandbox.md').default }
+        ]
       }
     ]
   }

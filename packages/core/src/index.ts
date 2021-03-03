@@ -5,3 +5,4 @@ export * from './Table';
 export * from './CodeBlock';
 export * from './LoadingBars';
 export * from './Figure';
+export * from './FrameUnderline';
