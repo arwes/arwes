@@ -111,6 +111,14 @@ const playgroundConfigs = [
           { name: 'disabled', code: require('repository/packages/core/src/FrameUnderline/FrameUnderline.disabled.sandbox.md').default },
           { name: 'static', code: require('repository/packages/core/src/FrameUnderline/FrameUnderline.static.sandbox.md').default }
         ]
+      },
+      {
+        name: 'Button',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/core/src/Button/Button.basic.sandbox.md').default },
+          { name: 'disabled', code: require('repository/packages/core/src/Button/Button.disabled.sandbox.md').default },
+          { name: 'static', code: require('repository/packages/core/src/Button/Button.static.sandbox.md').default }
+        ]
       }
     ]
   }

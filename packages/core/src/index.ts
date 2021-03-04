@@ -6,3 +6,4 @@ export * from './CodeBlock';
 export * from './LoadingBars';
 export * from './Figure';
 export * from './FrameUnderline';
+export * from './Button';
