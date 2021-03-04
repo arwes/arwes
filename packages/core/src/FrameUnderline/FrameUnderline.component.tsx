@@ -1,5 +1,5 @@
 /* @jsx jsx */
-import { FC, MutableRefObject, useRef, useMemo } from 'react';
+import { FC, MutableRefObject, useRef, useMemo, HTMLAttributes } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
@@ -9,6 +9,7 @@ import { WithBleepsInputProps } from '@arwes/sounds';
 import { generateStyles } from './FrameUnderline.styles';
 
 interface FrameUnderlineProps {
+  as?: keyof HTMLElementTagNameMap
   palette?: 'primary' | 'secondary' | string
   hover?: boolean
   disabled?: boolean
@@ -16,16 +17,18 @@ interface FrameUnderlineProps {
   className?: string
 }
 
-const FrameUnderline: FC<FrameUnderlineProps & WithAnimatorInputProps & WithBleepsInputProps> = props => {
+const FrameUnderline: FC<FrameUnderlineProps & HTMLAttributes<HTMLElement> & WithAnimatorInputProps & WithBleepsInputProps> = props => {
   const {
     animator,
     bleeps,
+    as: asProvided,
     palette,
     hover,
     disabled,
     rootRef,
     className,
-    children
+    children,
+    ...otherProps
   } = props;
   const { animate } = animator;
 
@@ -35,46 +38,56 @@ const FrameUnderline: FC<FrameUnderlineProps & WithAnimatorInputProps & WithBlee
     [theme, animate, palette, hover, disabled]
   );
 
+  // The "as" prop must not be updated.
+  const as = useMemo(() => asProvided || 'div', []);
+
   const containerRef = useRef<HTMLDivElement>(null);
 
   animator.setupAnimateRefs(containerRef, theme, bleeps);
 
-  return (
+  return jsx(
+    as,
+    {
+      ...otherProps,
+      className: cx('arwes-frame-underline', className),
+      css: styles.root,
+      ref: rootRef
+    },
     <div
-      className={cx('arwes-frame-underline', className)}
-      css={styles.root}
-      ref={rootRef}
+      className='arwes-frame-underline__container'
+      css={styles.container}
+      ref={containerRef}
     >
       <div
-        className='arwes-frame-underline__container'
-        css={styles.container}
-        ref={containerRef}
+        className='arwes-frame-underline__line arwes-frame-underline__line-1'
+        css={[styles.line, styles.line1]}
+      />
+      <div
+        className='arwes-frame-underline__line arwes-frame-underline__line-2'
+        css={[styles.line, styles.line2]}
+      />
+      <div
+        className='arwes-frame-underline__content'
+        css={styles.content}
       >
-        <div
-          className='arwes-frame-underline__line arwes-frame-underline__line-1'
-          css={[styles.line, styles.line1]}
-        />
-        <div
-          className='arwes-frame-underline__line arwes-frame-underline__line-2'
-          css={[styles.line, styles.line2]}
-        />
-        <div
-          className='arwes-frame-underline__content'
-          css={styles.content}
-        >
-          {children}
-        </div>
+        {children}
       </div>
     </div>
   );
 };
 
 FrameUnderline.propTypes = {
+  // @ts-expect-error
+  as: PropTypes.string.isRequired,
   palette: PropTypes.string,
   hover: PropTypes.bool,
   disabled: PropTypes.bool,
   className: PropTypes.string,
   rootRef: PropTypes.any
+};
+
+FrameUnderline.defaultProps = {
+  as: 'div'
 };
 
 export { FrameUnderlineProps, FrameUnderline };

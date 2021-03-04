@@ -48,7 +48,7 @@ const generateStyles = (
       transformOrigin: 'left'
     },
     content: {
-      padding: `${space(2)}px ${space(4)}px ${space(2)}px ${space(2)}px`
+      padding: `${space(2)}px ${space(4)}px`
     }
   };
 };
