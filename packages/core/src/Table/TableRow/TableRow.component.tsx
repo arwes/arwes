@@ -7,19 +7,25 @@ import { WithAnimatorInputProps } from '@arwes/animation';
 
 import { TextAnimationRefs } from '../../utils/textAnimations';
 import { generateStyles } from './TableRow.styles';
-import { TableRowAnimateRefs } from './TableRow.animator';
+import { TableRowTransitionRefs } from './TableRow.animator';
 
-type TableRowColumnWidth = string | number;
+interface TableRowPropsColumn {
+  id: string | number
+  data: ReactNode
+}
+
+type TableRowPropsColumnWidth = string | number;
 
 interface TableRowProps {
+  columns: TableRowPropsColumn[]
+  columnWidths?: TableRowPropsColumnWidth[]
   isHeader?: boolean
-  rowValues: ReactNode[]
-  columnWidths?: TableRowColumnWidth[]
   condensed?: boolean
 }
 
 const TableRow: FC<TableRowProps & WithAnimatorInputProps> = props => {
-  const { animator, isHeader, rowValues, columnWidths, condensed } = props;
+  const { animator, isHeader, columns, columnWidths, condensed } = props;
+
   const theme = useTheme();
   const styles = useMemo(
     () => generateStyles(theme, { animate: animator.animate, isHeader, condensed }),
@@ -28,9 +34,9 @@ const TableRow: FC<TableRowProps & WithAnimatorInputProps> = props => {
 
   const rootRef = useRef<HTMLDivElement>(null);
   const textAnimateRefsCollection = useRef<TextAnimationRefs[]>([]);
-  const animateRefs: TableRowAnimateRefs = useRef({ rootRef, textAnimateRefsCollection });
+  const transitionRefs: TableRowTransitionRefs = useRef({ rootRef, textAnimateRefsCollection });
 
-  animator.setupAnimateRefs(animateRefs, theme, isHeader);
+  animator.setupAnimateRefs(transitionRefs, theme, isHeader);
 
   const cellMarginLateral = condensed ? theme.space(0.5) : theme.space(1);
 
@@ -43,16 +49,16 @@ const TableRow: FC<TableRowProps & WithAnimatorInputProps> = props => {
       )}
       ref={rootRef}
     >
-      {rowValues.map((value: ReactNode, index: number) => {
-        const isLast = rowValues.length - 1 === index;
+      {columns.map((column, index) => {
+        const isLast = columns.length - 1 === index;
         const lessMargin = isLast ? '' : ` - ${cellMarginLateral}px`;
         const cellWidth = columnWidths
           ? `calc(${columnWidths[index] || 'auto'}${lessMargin})`
-          : `calc(${100 / rowValues.length}%${lessMargin})`;
+          : `calc(${100 / columns.length}%${lessMargin})`;
 
         return (
           <div
-            key={index}
+            key={column.id}
             css={styles.cell}
             className={cx(
               'arwes-table__cell',
@@ -68,7 +74,7 @@ const TableRow: FC<TableRowProps & WithAnimatorInputProps> = props => {
                 css={styles.cellContent}
                 className='arwes-table__cell-content'
               >
-                {value}
+                {column.data}
               </div>
             </div>
             <div
@@ -83,14 +89,25 @@ const TableRow: FC<TableRowProps & WithAnimatorInputProps> = props => {
 };
 
 TableRow.propTypes = {
-  // @ts-expect-error
-  rowValues: PropTypes.arrayOf(PropTypes.node),
-  isHeader: PropTypes.bool,
-  // @ts-expect-error
+  columns: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      data: PropTypes.node.isRequired
+    }).isRequired
+  ).isRequired,
   columnWidths: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]).isRequired
   ),
+  isHeader: PropTypes.bool,
   condensed: PropTypes.bool
 };
 
-export { TableRowProps, TableRow };
+export {
+  TableRowPropsColumn,
+  TableRowPropsColumnWidth,
+  TableRowProps,
+  TableRow
+};

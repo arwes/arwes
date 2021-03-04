@@ -10,12 +10,12 @@ import {
 } from '../../utils/textAnimations';
 import { ArwesTheme } from '../../ArwesThemeProvider';
 
-type TableRowAnimateRefs = MutableRefObject<{
+type TableRowTransitionRefs = MutableRefObject<{
   rootRef: RefObject<HTMLDivElement>
   textAnimateRefsCollection: MutableRefObject<TextAnimationRefs[]>
 }>;
 
-const stopTableAnimation = (animator: AnimatorRef, refs: TableRowAnimateRefs): void => {
+const transitionRemoveTableRow = (animator: AnimatorRef, refs: TableRowTransitionRefs): void => {
   const tableRow = refs.current.rootRef.current as HTMLElement;
 
   if (tableRow) {
@@ -38,13 +38,13 @@ const stopTableAnimation = (animator: AnimatorRef, refs: TableRowAnimateRefs): v
   }
 };
 
-const startTableAnimation = (
+const transitionTableRow = (
   animator: AnimatorRef,
-  refs: TableRowAnimateRefs,
+  refs: TableRowTransitionRefs,
   theme: ArwesTheme,
   isHeader: boolean
 ): void => {
-  stopTableAnimation(animator, refs);
+  transitionRemoveTableRow(animator, refs);
 
   const isEntering = animator.flow.entering || animator.flow.entered;
 
@@ -79,23 +79,23 @@ const startTableAnimation = (
     anime({
       targets: cell,
       duration: animator.duration.enter,
-      easing: isEntering ? 'easeOutSine' : 'easeInSine',
+      easing: 'easeOutSine',
       translateX: isEntering ? [theme.space(1), 0] : [0, theme.space(1)]
     });
 
     anime({
       targets: cellLine,
       duration: animator.duration.enter,
-      easing: isEntering ? 'easeOutSine' : 'easeInSine',
+      easing: 'easeOutSine',
       width: isEntering ? [0, '100%'] : ['100%', 0]
     });
   });
 };
 
 const animator = {
-  useAnimateEntering: startTableAnimation,
-  useAnimateExiting: startTableAnimation,
-  useAnimateUnmount: stopTableAnimation
+  useAnimateEntering: transitionTableRow,
+  useAnimateExiting: transitionTableRow,
+  useAnimateUnmount: transitionRemoveTableRow
 };
 
-export { TableRowAnimateRefs, animator };
+export { TableRowTransitionRefs, animator };

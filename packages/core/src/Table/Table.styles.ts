@@ -1,8 +1,8 @@
-import { Interpolation } from '@emotion/react';
+import { CSSObject } from '@emotion/react';
 
 import { ArwesTheme } from '../ArwesThemeProvider';
 
-const generateStyles = (theme: ArwesTheme): Record<string, Interpolation<ArwesTheme>> => {
+const generateStyles = (theme: ArwesTheme): Record<string, CSSObject> => {
   const { space } = theme;
 
   return {

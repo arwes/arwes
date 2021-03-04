@@ -1,34 +1,34 @@
 import { AnimatorClassSettings, AnimatorRef } from '@arwes/animation';
 import { Bleeps } from '@arwes/sounds';
 
-const playBleepReadout = (bleeps: Bleeps): void => {
-  bleeps.readout?.play();
+const playTableTransitionBleep = (bleeps: Bleeps): void => {
+  bleeps.transition?.play();
 };
 
-const stopBleepReadout = (bleeps: Bleeps): void => {
-  if (bleeps.readout?.getIsPlaying()) {
-    bleeps.readout?.stop();
+const stopTableTransitionBleep = (bleeps: Bleeps): void => {
+  if (bleeps.transition?.getIsPlaying()) {
+    bleeps.transition?.stop();
   }
 };
 
 const useAnimateEntering = (animator: AnimatorRef, bleeps: Bleeps): void => {
-  playBleepReadout(bleeps);
+  playTableTransitionBleep(bleeps);
 };
 
 const useAnimateEntered = (animator: AnimatorRef, bleeps: Bleeps): void => {
-  stopBleepReadout(bleeps);
+  stopTableTransitionBleep(bleeps);
 };
 
 const useAnimateExiting = (animator: AnimatorRef, bleeps: Bleeps): void => {
-  playBleepReadout(bleeps);
+  playTableTransitionBleep(bleeps);
 };
 
 const useAnimateExited = (animator: AnimatorRef, bleeps: Bleeps): void => {
-  stopBleepReadout(bleeps);
+  stopTableTransitionBleep(bleeps);
 };
 
 const useAnimateUnmount = (animator: AnimatorRef, bleeps: Bleeps): void => {
-  stopBleepReadout(bleeps);
+  stopTableTransitionBleep(bleeps);
 };
 
 const animator: AnimatorClassSettings = {

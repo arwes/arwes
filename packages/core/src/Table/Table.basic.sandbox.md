@@ -9,13 +9,21 @@ const players = {
 const animatorGeneral = {
   duration: { enter: 200, exit: 200, stagger: 30 }
 };
-const headers = ['Header 1', 'Header 2', 'Header 3', 'Header 4'];
-const dataset = Array(10).fill(0).map(() => [
-  _generateRandomText(2),
-  _generateRandomText(3),
-  _generateRandomText(2),
-  _generateRandomText(8)
-]);
+const headers = [
+  { id: 'z', data: 'Header 1' },
+  { id: 'y', data: 'Header 2' },
+  { id: 'x', data: 'Header 3' },
+  { id: 'w', data: 'Header 4' }
+];
+const dataset = Array(10).fill(0).map((_, index) => ({
+  id: index,
+  columns: [
+    { id: 'a', data: _generateRandomText(2) },
+    { id: 'b', data: _generateRandomText(3) },
+    { id: 'c', data: _generateRandomText(2) },
+    { id: 'd', data: _generateRandomText(8) }
+  ]
+}));
 const columnWidths = ['20%', '20%', '20%', '40%'];
 
 const Sandbox = () => {

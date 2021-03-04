@@ -1,20 +1,23 @@
 /** @jsx jsx */
-import { FC, ReactNode, Ref, useMemo } from 'react';
+import { FC, Ref, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
 import { WithBleepsInputProps } from '@arwes/sounds';
 
-import { TableRow } from './TableRow';
+import { TableRowPropsColumn, TableRowPropsColumnWidth, TableRow } from './TableRow';
 import { generateStyles } from './Table.styles';
 
-type TableColumnWidth = string | number;
+interface TableRowPropsDataRow {
+  id: string | number
+  columns: TableRowPropsColumn[]
+}
 
 interface TableProps {
-  headers: ReactNode[]
-  dataset: ReactNode[][]
-  columnWidths?: TableColumnWidth[]
+  headers: TableRowPropsDataRow['columns']
+  dataset: TableRowPropsDataRow[]
+  columnWidths?: TableRowPropsColumnWidth[]
   condensed?: boolean
   rootRef?: Ref<HTMLDivElement>
   className?: string
@@ -24,11 +27,11 @@ const Table: FC<TableProps & WithAnimatorInputProps & WithBleepsInputProps> = pr
   const {
     animator,
     bleeps,
-    rootRef,
     headers,
     dataset,
     columnWidths,
     condensed,
+    rootRef,
     className
   } = props;
 
@@ -52,14 +55,14 @@ const Table: FC<TableProps & WithAnimatorInputProps & WithBleepsInputProps> = pr
       >
         <TableRow
           isHeader
-          rowValues={headers}
+          columns={headers}
           columnWidths={columnWidths}
           condensed={condensed}
         />
-        {dataset.map((rowValues: ReactNode[], rowIndex: number) =>
+        {dataset.map(row =>
           <TableRow
-            key={rowIndex}
-            rowValues={rowValues}
+            key={row.id}
+            columns={row.columns}
             columnWidths={columnWidths}
             condensed={condensed}
           />
@@ -69,13 +72,26 @@ const Table: FC<TableProps & WithAnimatorInputProps & WithBleepsInputProps> = pr
   );
 };
 
+const propTypeColumns = PropTypes.arrayOf(
+  PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    data: PropTypes.node.isRequired
+  }).isRequired
+).isRequired;
+
 Table.propTypes = {
-  headers: PropTypes.arrayOf(PropTypes.node).isRequired,
-  // @ts-expect-error
-  dataset: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.node)).isRequired,
-  // @ts-expect-error
+  headers: propTypeColumns,
+  dataset: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      columns: propTypeColumns
+    }).isRequired
+  ).isRequired,
   columnWidths: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]).isRequired
   ),
   condensed: PropTypes.bool,
   rootRef: PropTypes.any,
