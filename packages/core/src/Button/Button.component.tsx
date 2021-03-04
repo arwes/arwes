@@ -1,30 +1,34 @@
+// The <Button /> component encapsulates an animated <FrameComponent />.
+// The <Button /> component will pass its received `animator` prop directly to the
+// <FrameComponent /> to simplify the animator management.
+
 /* @jsx jsx */
-import { FC, ComponentClass, MouseEvent, MutableRefObject, useMemo } from 'react';
+import { FC, ComponentType, MouseEvent, MutableRefObject, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
-import { WithAnimatorInputProps } from '@arwes/animation';
-import { WithBleepsInputProps } from '@arwes/sounds';
+import { WithAnimatorOutputProps, AnimatorFlow } from '@arwes/animation';
+import { WithBleepsOutputProps, WithBleepsInputProps } from '@arwes/sounds';
 
 import { FrameUnderline } from '../FrameUnderline';
 import { generateStyles } from './Button.styles';
 
 interface ButtonProps {
-  FrameComponent: FC<any> | ComponentClass<any>
-  frameProps?: any
+  FrameComponent: ComponentType<WithAnimatorOutputProps & WithBleepsOutputProps & { [prop: string]: any }>
   palette?: 'primary' | 'secondary' | string
   disabled?: boolean
-  onClick?: (event: MouseEvent<HTMLButtonElement>) => void
-  rootRef?: MutableRefObject<HTMLButtonElement> | ((node: HTMLButtonElement) => void)
+  onClick?: (event: MouseEvent<HTMLElement>) => void
+  rootRef?: MutableRefObject<HTMLElement> | ((node: HTMLElement) => void)
   className?: string
 }
 
-const Button: FC<ButtonProps & WithAnimatorInputProps & WithBleepsInputProps> = props => {
+// The component will receive the `animator` as `AnimatorInstanceSettings` and
+// not as `AnimatorRef` since it is encapsulating another animated component.
+const Button: FC<ButtonProps & WithAnimatorOutputProps & WithBleepsInputProps> = props => {
   const {
-    animator,
+    animator: animatorSettings,
     bleeps,
     FrameComponent,
-    frameProps,
     palette,
     disabled,
     onClick,
@@ -39,47 +43,46 @@ const Button: FC<ButtonProps & WithAnimatorInputProps & WithBleepsInputProps> = 
     [theme, palette, disabled]
   );
 
+  const [flow, setFlow] = useState<AnimatorFlow | null>(null);
+
   return (
-    <button
+    <FrameComponent
+      animator={{
+        ...animatorSettings,
+        onTransition: flow => {
+          setFlow(flow);
+          animatorSettings?.onTransition?.(flow);
+        }
+      }}
+      as='button'
       className={cx('arwes-button', className)}
+      rootRef={rootRef}
       css={[
         styles.root,
-        !animator.flow.entered && styles.rootIsTransitioning
+        !!flow && !flow?.entered && styles.rootIsTransitioning
       ]}
-      ref={rootRef}
+      hover
+      palette={palette}
       disabled={disabled}
       onClick={(event: MouseEvent<HTMLButtonElement>) => {
-        if (animator.flow.entered) {
+        if (flow?.entered) {
           bleeps.click?.play();
           onClick?.(event);
         }
       }}
     >
-      <FrameComponent
-        palette={palette}
-        disabled={disabled}
-        hover
-        {...frameProps}
-        animator={{
-          merge: true,
-          ...frameProps?.animator
-        }}
-        className={cx('arwes-button__frame', frameProps?.className)}
+      <div
+        className='arwes-button__content'
+        css={styles.content}
       >
-        <div
-          className='arwes-button__content'
-          css={styles.content}
-        >
-          {children}
-        </div>
-      </FrameComponent>
-    </button>
+        {children}
+      </div>
+    </FrameComponent>
   );
 };
 
 Button.propTypes = {
   FrameComponent: PropTypes.any.isRequired,
-  frameProps: PropTypes.object,
   palette: PropTypes.string,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,

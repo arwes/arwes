@@ -25,7 +25,7 @@ const generateStyles = (
       textTransform: 'uppercase',
       color,
       textShadow: `0 0 ${shadow.blur(1)}px ${color}`,
-      cursor: disabled ? 'auto' : 'pointer',
+      cursor: disabled ? 'default' : 'pointer',
       transition: ['color', 'text-shadow']
         .map(prop => `${prop} ${transitionDuration}ms ease-out`)
         .join(','),
@@ -36,9 +36,8 @@ const generateStyles = (
       }
     },
     rootIsTransitioning: {
-      cursor: 'auto'
+      cursor: 'default'
     },
-    frame: {},
     content: {}
   };
 };
