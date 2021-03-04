@@ -1,11 +1,7 @@
-```js
-// THIS SANDBOX MODIFIES THE HTML ELEMENTS GLOBAL STYLES.
-// IT MAY CONFLICT WITH THE PLAYGROUND APPLICATION STYLES.
-
-const IMAGE_URL = '/assets/images/wallpaper.jpg';
-
-const rootFontFamily = '"Titillium Web", sans-serif';
-const codeFontFamily = '"Source Code Pro", monospace';
+```jsx
+const FONT_FAMILY_ROOT = '"Titillium Web", sans-serif';
+const FONT_FAMILY_CODE = '"Source Code Pro", monospace';
+const IMAGE_URL = '/assets/images/wallpaper-large.jpg';
 
 const fontScale = 1; // Default
 const space = 5; // Default
@@ -15,8 +11,8 @@ const shadow = { blur: 1, spread: 1 }; // Default
 render(
   <ArwesThemeProvider themeSettings={{ fontScale, space, outline, shadow }}>
     <StylesBaseline styles={{
-      'html, body': { fontFamily: rootFontFamily },
-      'code, pre': { fontFamily: codeFontFamily }
+      'html, body': { fontFamily: FONT_FAMILY_ROOT },
+      'code, pre': { fontFamily: FONT_FAMILY_CODE }
     }} />
 
     <h1>h1. Lorem ipsum lov sit amet</h1>
@@ -128,48 +124,6 @@ render(
       <img src={IMAGE_URL} alt='Image' />
       <figcaption>Lorem ipsum lov sit amet.</figcaption>
     </figure>
-
-    <form action="#">
-      <fieldset>
-        <legend>Information</legend>
-        <div>
-          <label>Form label</label>
-        </div>
-        <div>
-          <input placeholder='Form Input' />
-          <br />
-          <input placeholder='Disabled Form Input' disabled />
-        </div>
-        <br />
-        <div>
-          <textarea placeholder='Form Textarea' />
-          <br />
-          <textarea placeholder='Disabled Form Textarea' disabled />
-        </div>
-        <br />
-        <div>
-          <select>
-            <option>Form Select</option>
-            <option>Option 1</option>
-            <option>Option 2</option>
-            <option>Option 3</option>
-          </select>
-          <br />
-          <select disabled>
-            <option>Disabled Form Select</option>
-            <option>Disabled Option 1</option>
-            <option>Disabled Option 2</option>
-            <option>Disabled Option 3</option>
-          </select>
-        </div>
-        <br />
-        <div>
-          <button>Button</button>
-          {' '}
-          <button disabled>Disabled Button</button>
-        </div>
-      </fieldset>
-    </form>
   </ArwesThemeProvider>
 );
 ```

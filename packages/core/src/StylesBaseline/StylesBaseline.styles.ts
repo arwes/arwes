@@ -6,6 +6,10 @@ import { ArwesTheme } from '../ArwesThemeProvider';
 const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject> => {
   const { palette, space, outline, shadow, fontScale, transitionDuration } = theme;
 
+  const highlightedContentBgColor1 = rgba(palette.primary.light1, 0.05);
+  const highlightedContentBgColor2 = rgba(palette.primary.light1, 0.1);
+  const highlightedContentBgColor3 = rgba(palette.primary.light1, 0.15);
+
   return {
     '*, *:before, *:after': {
       boxSizing: 'border-box',
@@ -132,7 +136,7 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       borderColor: palette.primary.dark1,
       padding: space(4),
       fontSize: '1rem',
-      backgroundColor: rgba(palette.primary.light2, 0.05)
+      backgroundColor: highlightedContentBgColor1
     },
 
     // BLOCKQUOTE
@@ -153,7 +157,7 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
     },
     thead: {
       tr: {
-        backgroundColor: rgba(palette.text.root, 0.15)
+        backgroundColor: highlightedContentBgColor3
       },
       'th, td': {
         borderBottom: `${outline(1)}px solid ${palette.secondary.dark1}`
@@ -161,9 +165,9 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
     },
     tbody: {
       tr: {
-        backgroundColor: rgba(palette.text.root, 0.05),
+        backgroundColor: highlightedContentBgColor1,
         '&:hover, &:focus': {
-          backgroundColor: rgba(palette.text.root, 0.1)
+          backgroundColor: highlightedContentBgColor2
         }
       },
       td: {
@@ -192,7 +196,7 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
     },
     figcaption: {
       padding: space(2),
-      backgroundColor: rgba(palette.text.root, 0.05)
+      backgroundColor: highlightedContentBgColor1
     },
 
     // LINE
@@ -223,37 +227,16 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
     'button, [type="button"], [type="reset"], [type="submit"]': {
       display: 'inline-block',
       outline: 'none',
-      border: `${outline(1)}px solid ${palette.secondary.main}`,
-      padding: `0 ${space(5)}px`,
-      color: palette.secondary.light1,
-      lineHeight: `${space(6)}px`,
-      fontSize: '0.875rem',
-      textTransform: 'uppercase',
+      border: 'none',
       cursor: 'pointer',
-      backgroundColor: rgba(palette.secondary.dark2, 0.3),
-      boxShadow: `0 0 ${shadow.blur(2)}px ${palette.secondary.main}`,
-      transition: [
-        `border-color ${transitionDuration}ms ease-out`,
-        `color ${transitionDuration}ms ease-out`,
-        `background-color ${transitionDuration}ms ease-out`,
-        `box-shadow ${transitionDuration}ms ease-out`
-      ].join(', '),
 
       // Correct the inability to style clickable types in iOS and Safari.
       WebkitAppearance: 'button',
 
       '&:hover, &:focus': {
-        outline: 'none',
-        borderColor: palette.secondary.light1,
-        color: palette.secondary.light2,
-        backgroundColor: rgba(palette.secondary.dark1, 0.3),
-        boxShadow: `0 0 ${shadow.blur(4)}px ${palette.secondary.light1}`
+        outline: 'none'
       },
       '&:disabled': {
-        borderColor: palette.primary.dark2,
-        color: palette.primary.dark2,
-        backgroundColor: palette.neutral.elevate(1),
-        boxShadow: 'none',
         cursor: 'auto'
       }
     },
