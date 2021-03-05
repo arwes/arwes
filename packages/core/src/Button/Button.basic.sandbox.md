@@ -32,9 +32,7 @@ const Sandbox = () => {
             palette='secondary'
             onClick={event => console.log(event)}
           >
-            <Text>
-              Learn More
-            </Text>
+            <Text>Download Data</Text>
           </Button>
         </AnimatorGeneralProvider>
       </BleepsProvider>

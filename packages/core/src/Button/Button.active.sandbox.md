@@ -8,8 +8,12 @@ const Sandbox = () => {
         <StylesBaseline styles={{
           body: { fontFamily: FONT_FAMILY_ROOT }
         }} />
-        <Button animator={{ animate: false }}>
-          <Text>Upload Data File</Text>
+        <Button
+          animator={{ animate: false }}
+          palette='success'
+          active
+        >
+          <Text>Accept and Continue</Text>
         </Button>
       </BleepsProvider>
     </ArwesThemeProvider>

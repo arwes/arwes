@@ -13,7 +13,7 @@ const Sandbox = () => {
           disabled
         >
           <Text>
-            Accept
+            Remove Items
           </Text>
         </Button>
       </BleepsProvider>
