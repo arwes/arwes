@@ -11,8 +11,16 @@ const useAnimateEntering = (animator: AnimatorRef, refs: TextAnimationRefs, blee
   startTextAnimation(animator, refs, bleeps);
 };
 
+const useAnimateEntered = (animator: AnimatorRef, refs: TextAnimationRefs, bleeps: Bleeps): void => {
+  bleeps?.typing.stop();
+};
+
 const useAnimateExiting = (animator: AnimatorRef, refs: TextAnimationRefs, bleeps: Bleeps): void => {
   startTextAnimation(animator, refs, bleeps);
+};
+
+const useAnimateExited = (animator: AnimatorRef, refs: TextAnimationRefs, bleeps: Bleeps): void => {
+  bleeps?.typing.stop();
 };
 
 const useAnimateUnmount = (animator: AnimatorRef, refs: TextAnimationRefs, bleeps: Bleeps): void => {
@@ -21,7 +29,9 @@ const useAnimateUnmount = (animator: AnimatorRef, refs: TextAnimationRefs, bleep
 
 const animator = {
   useAnimateEntering,
+  useAnimateEntered,
   useAnimateExiting,
+  useAnimateExited,
   useAnimateUnmount
 };
 

@@ -1,4 +1,5 @@
-```js
+```jsx
+const FONT_FAMILY_ROOT = '"Titillium Web", sans-serif';
 const SOUND_TYPING_URL = '/assets/sounds/typing.mp3';
 
 const audio = { common: { volume: 0.1 } };
@@ -17,7 +18,10 @@ function Sandbox () {
   }, [activate]);
 
   return (
-    <div style={{ color: 'cyan' }}>
+    <ArwesThemeProvider>
+      <StylesBaseline styles={{
+        body: { fontFamily: FONT_FAMILY_ROOT }
+      }} />
       <BleepsProvider audio={audio} players={players}>
         <Text animator={{ duration, activate }}>
           Lorem ipsum dolor sit amet, <b>consectetur adipiscing</b> elit,
@@ -27,7 +31,7 @@ function Sandbox () {
           ex ea commodo consequat.
         </Text>
       </BleepsProvider>
-    </div>
+    </ArwesThemeProvider>
   );
 }
 

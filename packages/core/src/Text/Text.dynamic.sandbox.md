@@ -1,4 +1,5 @@
-```js
+```jsx
+const FONT_FAMILY_ROOT = '"Titillium Web", sans-serif';
 const SOUND_TYPING_URL = '/assets/sounds/typing.mp3';
 
 const childrenList = [
@@ -23,13 +24,16 @@ function Sandbox () {
   }, [childrenIndex]);
 
   return (
-    <div style={{ color: 'cyan' }}>
+    <ArwesThemeProvider>
+      <StylesBaseline styles={{
+        body: { fontFamily: FONT_FAMILY_ROOT }
+      }} />
       <BleepsProvider audio={audio} players={players}>
-        <Text as='h2' animator={{ duration }}>
+        <Text as='h1' animator={{ duration }}>
           {childrenList[childrenIndex]}
         </Text>
       </BleepsProvider>
-    </div>
+    </ArwesThemeProvider>
   );
 }
 
