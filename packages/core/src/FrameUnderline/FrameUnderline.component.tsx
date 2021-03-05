@@ -6,13 +6,15 @@ import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
 import { WithBleepsInputProps } from '@arwes/sounds';
 
+import { ARWES_CORE_FRAME_CLASSNAME, ARWES_CORE_FRAME_BG_CLASSNAME } from '../constants';
 import { generateStyles } from './FrameUnderline.styles';
 
 interface FrameUnderlineProps {
   as?: keyof HTMLElementTagNameMap
-  palette?: 'primary' | 'secondary' | string
+  palette?: string
   hover?: boolean
   disabled?: boolean
+  shape?: boolean
   rootRef?: MutableRefObject<HTMLDivElement> | ((node: HTMLDivElement) => void)
   className?: string
 }
@@ -25,6 +27,7 @@ const FrameUnderline: FC<FrameUnderlineProps & HTMLAttributes<HTMLElement> & Wit
     palette,
     hover,
     disabled,
+    shape,
     rootRef,
     className,
     children,
@@ -49,7 +52,7 @@ const FrameUnderline: FC<FrameUnderlineProps & HTMLAttributes<HTMLElement> & Wit
     as,
     {
       ...otherProps,
-      className: cx('arwes-frame-underline', className),
+      className: cx('arwes-frame-underline', ARWES_CORE_FRAME_CLASSNAME, className),
       css: styles.root,
       ref: rootRef
     },
@@ -58,6 +61,31 @@ const FrameUnderline: FC<FrameUnderlineProps & HTMLAttributes<HTMLElement> & Wit
       css={styles.container}
       ref={containerRef}
     >
+      {!!shape && (
+        <div
+          className='arwes-frame-underline__shapes'
+          css={styles.shapes}
+        >
+          <div
+            className={`arwes-frame-underline__shape ${ARWES_CORE_FRAME_BG_CLASSNAME}`}
+            css={[styles.shape, styles.shape1, styles.bg]}
+          />
+          <div
+            className={`arwes-frame-underline__shape ${ARWES_CORE_FRAME_BG_CLASSNAME}`}
+            css={[styles.shape, styles.shape2, styles.bg]}
+          />
+          <div
+            className='arwes-frame-underline__shape'
+            css={[styles.shape, styles.shape3]}
+          >
+            <div
+              className={`arwes-frame-underline__shape ${ARWES_CORE_FRAME_BG_CLASSNAME}`}
+              css={[styles.shape, styles.shape3A, styles.bg]}
+            />
+          </div>
+        </div>
+      )}
+
       <div
         className='arwes-frame-underline__line arwes-frame-underline__line-1'
         css={[styles.line, styles.line1]}
@@ -66,6 +94,7 @@ const FrameUnderline: FC<FrameUnderlineProps & HTMLAttributes<HTMLElement> & Wit
         className='arwes-frame-underline__line arwes-frame-underline__line-2'
         css={[styles.line, styles.line2]}
       />
+
       <div
         className='arwes-frame-underline__content'
         css={styles.content}
@@ -82,6 +111,7 @@ FrameUnderline.propTypes = {
   palette: PropTypes.string,
   hover: PropTypes.bool,
   disabled: PropTypes.bool,
+  shape: PropTypes.bool,
   className: PropTypes.string,
   rootRef: PropTypes.any
 };

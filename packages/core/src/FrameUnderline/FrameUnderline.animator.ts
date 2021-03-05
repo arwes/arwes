@@ -13,10 +13,13 @@ const transitionRemoveFrameUnderline = (
 ): void => {
   if (containerRef.current) {
     const container = containerRef.current;
-    const lines = container.querySelectorAll('.arwes-frame-underline__line');
+    const animated = Array.from(
+      container.querySelectorAll(
+        '.arwes-frame-underline__line, .arwes-frame-underline__shapes'
+      )
+    );
 
-    anime.remove(container);
-    anime.remove(lines);
+    anime.remove([container, ...animated]);
   }
 };
 
@@ -30,19 +33,22 @@ const transitionFrameUnderline = (
 
   const { duration, flow } = animator;
   const isEntering = flow.entering || flow.entered;
+  const transitionDuration = isEntering ? duration.enter : duration.exit;
   const { space } = theme;
   const container = containerRef.current;
 
   anime({
     targets: container,
-    duration: duration.enter,
+    duration: transitionDuration,
     easing: 'easeOutSine',
     translateX: isEntering ? [-space(2), 0] : [0, -space(2)]
   });
 
   anime({
-    targets: container.querySelectorAll('.arwes-frame-underline__line'),
-    duration: duration.enter / 2,
+    targets: container.querySelectorAll(
+      '.arwes-frame-underline__shapes, .arwes-frame-underline__line'
+    ),
+    duration: transitionDuration,
     easing: 'easeOutSine',
     opacity: isEntering ? [0, 1] : [1, 0]
   });

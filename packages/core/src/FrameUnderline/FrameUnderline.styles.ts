@@ -25,6 +25,7 @@ const generateStyles = (
       }
     },
     container: {},
+
     line: {
       position: 'absolute',
       height: outline(2),
@@ -47,6 +48,47 @@ const generateStyles = (
       transform: 'skewY(135deg)', // 45deg.
       transformOrigin: 'left'
     },
+
+    shapes: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+      overflow: 'hidden',
+      opacity: animate ? 0 : undefined
+    },
+    shape: {
+      position: 'absolute',
+      overflow: 'hidden'
+    },
+    shape1: {
+      left: 0,
+      right: 0,
+      bottom: space(4),
+      height: '100%'
+    },
+    shape2: {
+      left: 0,
+      right: space(4),
+      bottom: 0,
+      height: space(4)
+    },
+    shape3: {
+      right: 0,
+      bottom: 0,
+      width: space(4),
+      height: space(4)
+    },
+    shape3A: {
+      left: 0,
+      top: 0,
+      width: '100%',
+      height: '100%',
+      transform: 'skewY(135deg)', // 45deg.
+      transformOrigin: 'left'
+    },
+
     content: {
       padding: `${space(2)}px ${space(4)}px`
     }

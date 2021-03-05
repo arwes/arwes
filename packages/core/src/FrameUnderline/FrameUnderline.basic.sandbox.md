@@ -25,7 +25,11 @@ const Sandbox = () => {
           body: { fontFamily: FONT_FAMILY_ROOT }
         }} />
         <AnimatorGeneralProvider animator={animatorGeneral}>
-          <FrameUnderline animator={{ activate }} hover>
+          <FrameUnderline
+            animator={{ activate }}
+            palette='primary'
+            hover
+          >
             <Text>
               Futuristic Sci-Fi UI Web Framework
             </Text>
