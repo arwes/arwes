@@ -121,6 +121,14 @@ const playgroundConfigs = [
           { name: 'disabled', code: require('repository/packages/core/src/Button/Button.disabled.sandbox.md').default },
           { name: 'static', code: require('repository/packages/core/src/Button/Button.static.sandbox.md').default }
         ]
+      },
+      {
+        name: 'Card',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/core/src/Card/Card.basic.sandbox.md').default },
+          { name: 'landscape', code: require('repository/packages/core/src/Card/Card.landscape.sandbox.md').default },
+          { name: 'static', code: require('repository/packages/core/src/Card/Card.static.sandbox.md').default }
+        ]
       }
     ]
   }

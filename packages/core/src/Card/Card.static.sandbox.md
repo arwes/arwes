@@ -1,0 +1,39 @@
+```jsx
+const FONT_FAMILY_ROOT = '"Titillium Web", sans-serif';
+const IMAGE_URL = '/assets/images/wallpaper.jpg';
+
+const Sandbox = () => {
+  return (
+    <ArwesThemeProvider>
+      <BleepsProvider audio={{ common: { disabled: true } }}>
+        <StylesBaseline styles={{
+          body: { fontFamily: FONT_FAMILY_ROOT }
+        }} />
+        <Card
+          animator={{ animate: false }}
+          image={IMAGE_URL}
+          header={
+            <Text>Nebula</Text>
+          }
+          footer={
+            <Button palette='secondary'>
+              <Text>Learn More</Text>
+            </Button>
+          }
+          hover
+          style={{ maxWidth: 400 }}
+        >
+          <Text>
+            A nebula is an interstellar cloud of dust, hydrogen,
+            helium and other ionized gases. Originally, the term
+            was used to describe any diffused astronomical object,
+            including galaxies beyond the Milky Way.
+          </Text>
+        </Card>
+      </BleepsProvider>
+    </ArwesThemeProvider>
+  );
+};
+
+render(<Sandbox />);
+```
