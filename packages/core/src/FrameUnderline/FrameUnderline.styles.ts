@@ -19,7 +19,10 @@ const generateStyles = (
       position: 'relative',
       display: 'inline-block',
 
-      '&:hover .arwes-frame-underline__line': hover && !disabled && {
+      [[
+        '&:hover .arwes-frame-underline__line',
+        '&:focus .arwes-frame-underline__line'
+      ].join(',')]: hover && !disabled && {
         backgroundColor: colorHover,
         boxShadow: `0 0 ${shadow.blur(2)}px ${colorHover}`
       }

@@ -6,16 +6,23 @@ const Sandbox = () => {
     <ArwesThemeProvider>
       <BleepsProvider audio={{ common: { disabled: true } }}>
         <StylesBaseline styles={{
-          body: { fontFamily: FONT_FAMILY_ROOT }
+          body: { fontFamily: FONT_FAMILY_ROOT },
+          button: { margin: '0 20px 20px 0' }
         }} />
-        <Button
-          animator={{ animate: false }}
-          disabled
-        >
-          <Text>
-            Remove Items
-          </Text>
-        </Button>
+        <Animator animator={{ animate: false }}>
+          <Button palette='primary' disabled>
+            <Text>Accept and Continue</Text>
+          </Button>
+          <Button palette='secondary' disabled>
+            <Text>Accept and Continue</Text>
+          </Button>
+          <Button palette='success' disabled>
+            <Text>Accept and Continue</Text>
+          </Button>
+          <Button palette='error' disabled>
+            <Text>Accept and Continue</Text>
+          </Button>
+        </Animator>
       </BleepsProvider>
     </ArwesThemeProvider>
   );

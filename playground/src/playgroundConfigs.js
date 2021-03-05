@@ -116,6 +116,8 @@ const playgroundConfigs = [
         name: 'Button',
         sandboxes: [
           { name: 'basic', code: require('repository/packages/core/src/Button/Button.basic.sandbox.md').default },
+          { name: 'palette', code: require('repository/packages/core/src/Button/Button.palette.sandbox.md').default },
+          { name: 'active', code: require('repository/packages/core/src/Button/Button.active.sandbox.md').default },
           { name: 'disabled', code: require('repository/packages/core/src/Button/Button.disabled.sandbox.md').default },
           { name: 'static', code: require('repository/packages/core/src/Button/Button.static.sandbox.md').default }
         ]

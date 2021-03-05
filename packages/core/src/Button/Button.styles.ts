@@ -1,8 +1,10 @@
-import rgba from 'polished/lib/color/rgba';
 import { CSSObject } from '@emotion/react';
 
 import { ARWES_CORE_FRAME_BG_CLASSNAME } from '../constants';
 import { ArwesTheme } from '../ArwesThemeProvider';
+
+const BUTTON_FRAME_BG_BASE_OPACITY = 0.2;
+const BUTTON_FRAME_BG_HIGH_OPACITY = 0.6;
 
 const generateStyles = (
   theme: ArwesTheme,
@@ -13,11 +15,8 @@ const generateStyles = (
 
   const defaultPalette = theme.palette.primary;
   const colorPalette = theme.palette[options.palette as string] ?? defaultPalette;
-
   const color = disabled ? colorPalette.dark2 : colorPalette.main;
   const colorHover = colorPalette.light2;
-  const colorBg = rgba(colorPalette.dark2, 0.25);
-  const colorBgHover = rgba(colorPalette.light2, 0.25);
 
   return {
     root: {
@@ -36,18 +35,19 @@ const generateStyles = (
         .map(prop => `${prop} ${transitionDuration}ms ease-out`)
         .join(','),
 
+      [`& .${ARWES_CORE_FRAME_BG_CLASSNAME}`]: active && {
+        backgroundColor: color,
+        opacity: BUTTON_FRAME_BG_BASE_OPACITY,
+        transition: `opacity ${transitionDuration}ms ease-out`
+      },
+
       '&:hover, &:focus': !disabled && {
         color: colorHover,
         textShadow: `0 0 ${shadow.blur(1)}px ${colorHover}`,
 
         [`& .${ARWES_CORE_FRAME_BG_CLASSNAME}`]: active && {
-          backgroundColor: colorBgHover
+          backgroundColor: colorHover
         }
-      },
-
-      [`& .${ARWES_CORE_FRAME_BG_CLASSNAME}`]: active && {
-        backgroundColor: colorBg,
-        transition: `background-color ${transitionDuration}ms ease-out`
       }
     },
     rootIsTransitioning: {
@@ -57,4 +57,8 @@ const generateStyles = (
   };
 };
 
-export { generateStyles };
+export {
+  BUTTON_FRAME_BG_BASE_OPACITY,
+  BUTTON_FRAME_BG_HIGH_OPACITY,
+  generateStyles
+};

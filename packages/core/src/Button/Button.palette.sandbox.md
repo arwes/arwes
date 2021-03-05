@@ -10,16 +10,16 @@ const Sandbox = () => {
           button: { margin: '0 20px 20px 0' }
         }} />
         <Animator animator={{ animate: false }}>
-          <Button palette='primary' active>
+          <Button palette='primary'>
             <Text>Accept and Continue</Text>
           </Button>
-          <Button palette='secondary' active>
+          <Button palette='secondary'>
             <Text>Accept and Continue</Text>
           </Button>
-          <Button palette='success' active>
+          <Button palette='success'>
             <Text>Accept and Continue</Text>
           </Button>
-          <Button palette='error' active>
+          <Button palette='error'>
             <Text>Accept and Continue</Text>
           </Button>
         </Animator>

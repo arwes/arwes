@@ -10,7 +10,9 @@ import {
   MouseEvent,
   MutableRefObject,
   useState,
-  useMemo
+  useMemo,
+  useRef,
+  useCallback
 } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
@@ -20,9 +22,12 @@ import { WithBleepsOutputProps, WithBleepsInputProps } from '@arwes/sounds';
 
 import { FrameUnderline } from '../FrameUnderline';
 import { generateStyles } from './Button.styles';
+import { highlightFrameBgs } from './Button.effects';
+
+type ButtonPropsFrameComponent = ComponentType<HTMLAttributes<HTMLElement> & WithAnimatorOutputProps & WithBleepsOutputProps & { [prop: string]: any }>;
 
 interface ButtonProps {
-  FrameComponent: ComponentType<HTMLAttributes<HTMLElement> & WithAnimatorOutputProps & WithBleepsOutputProps & { [prop: string]: any }>
+  FrameComponent?: ButtonPropsFrameComponent
   palette?: string
   active?: boolean
   disabled?: boolean
@@ -38,15 +43,15 @@ const Button: FC<ButtonProps & WithAnimatorOutputProps & WithBleepsInputProps> =
   const {
     animator: animatorSettings,
     bleeps,
-    FrameComponent,
     palette,
     disabled,
     active,
     onClick,
-    rootRef,
+    rootRef: externalRootRef,
     className,
     children
   } = props;
+  const FrameComponent = props.FrameComponent as ButtonPropsFrameComponent;
 
   const theme = useTheme();
   const styles = useMemo(
@@ -54,7 +59,36 @@ const Button: FC<ButtonProps & WithAnimatorOutputProps & WithBleepsInputProps> =
     [theme, palette, active, disabled]
   );
 
+  // A copy of the <FrameComponent/> animator flow for the <Button/> functionalities.
   const [flow, setFlow] = useState<AnimatorFlow | null>(null);
+
+  const internalRootRef = useRef<HTMLElement | null>(null);
+  const rootRef = useCallback((node: HTMLElement) => {
+    internalRootRef.current = node;
+
+    if (typeof externalRootRef === 'function') {
+      externalRootRef(node);
+    }
+    else if (externalRootRef) {
+      externalRootRef.current = node;
+    }
+  }, []);
+
+  const buttonOnClick = (event: MouseEvent<HTMLButtonElement>): void => {
+    const isAnimated = !!flow; // If flow, it means it's animated.
+    const isEntered = isAnimated ? flow?.entered : true; // No animated? Then it's entered.
+    const container = internalRootRef.current;
+
+    if (!disabled && isEntered) {
+      if (container) {
+        highlightFrameBgs(container, theme, palette);
+      }
+
+      bleeps.click?.play();
+
+      onClick?.(event);
+    }
+  };
 
   return (
     <FrameComponent
@@ -67,21 +101,16 @@ const Button: FC<ButtonProps & WithAnimatorOutputProps & WithBleepsInputProps> =
       }}
       as='button'
       className={cx('arwes-button', className)}
-      rootRef={rootRef}
       css={[
         styles.root,
         !!flow && !flow.entered && styles.rootIsTransitioning
       ]}
+      rootRef={rootRef}
       palette={palette}
       disabled={disabled}
       hover
       shape
-      onClick={(event: MouseEvent<HTMLButtonElement>) => {
-        if (flow?.entered) {
-          bleeps.click?.play();
-          onClick?.(event);
-        }
-      }}
+      onClick={buttonOnClick}
     >
       <div
         className='arwes-button__content'
