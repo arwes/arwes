@@ -1,6 +1,9 @@
 ```jsx
+// THE IMAGE IS SET TO 100% WIDTH EVEN IF IT IS SMALLER
+// THAN THE CURRENT WIDTH.
+
 const ROOT_FONT_FAMILY = '"Titillium Web", sans-serif';
-const IMAGE_URL = '/assets/images/wallpaper-large.jpg';
+const IMAGE_URL = '/assets/images/wallpaper.jpg';
 const SOUND_TYPING_URL = '/assets/sounds/typing.mp3';
 const SOUND_FIGURE_URL = '/assets/sounds/figure.mp3';
 

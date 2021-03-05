@@ -24,7 +24,7 @@ const generateStyles = (
 
   return {
     root: {
-      display: 'flex',
+      display: fluid ? 'block' : 'flex',
       margin: `0 auto ${space(4)}px`
     },
     container: {
