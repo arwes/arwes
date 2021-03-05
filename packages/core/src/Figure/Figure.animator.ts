@@ -5,7 +5,7 @@ import { AnimatorClassSettings, AnimatorRef } from '@arwes/animation';
 import { Bleeps } from '@arwes/sounds';
 
 import { ArwesTheme } from '../ArwesThemeProvider';
-import { startEffectAppear, startEffectDisappear } from './Figure.effects';
+import { transitionAppear, transitionDisappear } from '../utils/appearTransitions';
 
 type ContainerRef = MutableRefObject<HTMLElement>;
 
@@ -40,7 +40,7 @@ const useAnimateEntering = (
     }
   });
 
-  startEffectAppear(
+  transitionAppear(
     container.querySelectorAll([
       '.arwes-figure__asset',
       '.arwes-figure__description-bg'
@@ -54,7 +54,7 @@ const useAnimateExiting = (animator: AnimatorRef, containerRef: ContainerRef): v
   const { duration } = animator;
   const container = containerRef.current;
 
-  startEffectDisappear(
+  transitionDisappear(
     container.querySelectorAll([
       '.arwes-figure__asset',
       '.arwes-figure__description-bg',

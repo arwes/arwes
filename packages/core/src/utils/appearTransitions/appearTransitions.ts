@@ -1,6 +1,6 @@
 import anime from 'animejs';
 
-const startEffectAppear = (
+const transitionAppear = (
   targets: anime.AnimeAnimParams['targets'],
   duration: number,
   delay: number = 0
@@ -16,7 +16,7 @@ const startEffectAppear = (
     .add({ opacity: [0.5, 1] });
 };
 
-const startEffectDisappear = (
+const transitionDisappear = (
   targets: anime.AnimeAnimParams['targets'],
   duration: number,
   delay: number = 0
@@ -32,4 +32,4 @@ const startEffectDisappear = (
     .add({ opacity: [0.5, 0] });
 };
 
-export { startEffectAppear, startEffectDisappear };
+export { transitionAppear, transitionDisappear };

@@ -17,10 +17,10 @@ import { WithAnimatorInputProps } from '@arwes/animation';
 import { WithBleepsInputProps } from '@arwes/sounds';
 
 import { loadImage } from '../utils/loadImage';
+import { transitionAppear } from '../utils/appearTransitions';
 import { TextProps, Text } from '../Text';
 import { LoadingBarsProps, LoadingBars } from '../LoadingBars';
 import { generateStyles } from './Figure.styles';
-import { startEffectAppear } from './Figure.effects';
 
 type FigurePropsSrcListItem = string | undefined | null;
 
@@ -108,7 +108,7 @@ const Figure: FC<FigureProps & WithAnimatorInputProps & WithBleepsInputProps> = 
           if (isMountedRef.current) {
             setIsLoading(false);
 
-            startEffectAppear(
+            transitionAppear(
               containerRef.current?.querySelector('.arwes-figure__asset'),
               animator.duration.enter
             );
