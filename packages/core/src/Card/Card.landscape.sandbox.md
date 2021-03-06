@@ -1,7 +1,7 @@
 ```jsx
 const FONT_FAMILY_ROOT = '"Titillium Web", sans-serif';
 const IMAGE_URL = '/assets/images/wallpaper.jpg';
-const SOUND_FIGURE_URL = '/assets/sounds/figure.mp3';
+const SOUND_OBJECT_URL = '/assets/sounds/object.mp3';
 const SOUND_ASSEMBLE_URL = '/assets/sounds/assemble.mp3';
 const SOUND_TYPING_URL = '/assets/sounds/typing.mp3';
 const SOUND_CLICK_URL = '/assets/sounds/click.mp3';
@@ -10,7 +10,7 @@ const globalStyles = { body: { fontFamily: FONT_FAMILY_ROOT } };
 const animatorGeneral = { duration: { enter: 200, exit: 200, stagger: 30 } };
 const audio = { common: { volume: 0.4 } };
 const players = {
-  figure: { src: [SOUND_FIGURE_URL] },
+  object: { src: [SOUND_OBJECT_URL] },
   assemble: { src: [SOUND_ASSEMBLE_URL], loop: true },
   typing: { src: [SOUND_TYPING_URL], loop: true },
   click: { src: [SOUND_CLICK_URL] }
@@ -43,7 +43,7 @@ const Sandbox = () => {
             }
             landscape
             hover
-            style={{ maxWidth: 400 }}
+            style={{ maxWidth: 800 }}
           >
             <Text>
               A nebula is an interstellar cloud of dust, hydrogen,

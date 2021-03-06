@@ -10,12 +10,13 @@ import { Text } from '../Text';
 import { generateStyles } from './Card.styles';
 
 interface CardProps {
-  image: {
+  image?: {
     src: string
     alt?: string | null
   }
   title?: ReactNode
   options?: ReactNode
+  landscape?: boolean
   hover?: boolean
   className?: string
   style?: CSSProperties
@@ -29,6 +30,7 @@ const Card: FC<CardProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
     image,
     title,
     options,
+    landscape,
     hover,
     rootRef,
     className,
@@ -39,8 +41,8 @@ const Card: FC<CardProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
 
   const theme = useTheme();
   const styles = useMemo(
-    () => generateStyles(theme, { animate, hover }),
-    [theme, animate, hover]
+    () => generateStyles(theme, { animate, landscape, hover }),
+    [theme, animate, landscape, hover]
   );
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -59,22 +61,24 @@ const Card: FC<CardProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
         css={styles.container}
         ref={containerRef}
       >
-        <div
-          className='arwes-card__picture'
-          css={styles.picture}
-        >
-          <img
-            className='arwes-card__image'
-            css={styles.image}
-            style={{ backgroundImage: `url(${image.src})` }}
-            src={image.src}
-            alt={image.alt || ''}
-          />
+        {!!image && (
           <div
-            className='arwes-card__line arwes-card__line-picture'
-            css={[styles.line, styles.linePicture]}
-          />
-        </div>
+            className='arwes-card__picture'
+            css={styles.picture}
+          >
+            <img
+              className='arwes-card__image'
+              css={styles.image}
+              style={{ backgroundImage: `url(${image.src})` }}
+              src={image.src}
+              alt={image.alt || ''}
+            />
+            <div
+              className='arwes-card__line arwes-card__line-picture'
+              css={[styles.line, styles.linePicture]}
+            />
+          </div>
+        )}
 
         <div
           className='arwes-card__content'
@@ -130,9 +134,10 @@ Card.propTypes = {
   image: PropTypes.shape({
     src: PropTypes.string.isRequired,
     alt: PropTypes.string
-  }).isRequired,
+  }),
   title: PropTypes.node,
   options: PropTypes.node,
+  landscape: PropTypes.bool,
   hover: PropTypes.bool,
   className: PropTypes.string,
   style: PropTypes.object,

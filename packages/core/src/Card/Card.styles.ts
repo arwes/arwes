@@ -5,16 +5,16 @@ import { ArwesTheme } from '../ArwesThemeProvider';
 
 const generateStyles = (
   theme: ArwesTheme,
-  options: { animate?: boolean, hover?: boolean }
+  options: { animate?: boolean, landscape?: boolean, hover?: boolean }
 ): Record<string, CSSObject> => {
   const { palette, space, outline, shadow, transitionDuration } = theme;
-  const { animate, hover } = options;
+  const { animate, landscape, hover } = options;
 
   const contentBg = rgba(palette.primary.light1, 0.05);
 
   return {
     root: {
-      display: 'inline-block',
+      display: 'block',
 
       [[
         '&:hover .arwes-card__line-picture',
@@ -32,7 +32,12 @@ const generateStyles = (
         boxShadow: `0 0 ${shadow.blur(1)}px ${palette.primary.light1}`
       }
     },
-    container: {},
+    container: {
+      display: 'flex',
+      flexDirection: landscape ? 'row' : 'column',
+      width: '100%',
+      height: '100%'
+    },
 
     line: {
       position: 'absolute',
@@ -43,21 +48,24 @@ const generateStyles = (
     },
 
     picture: {
-      position: 'relative'
+      position: 'relative',
+      width: landscape ? '30%' : undefined
     },
-    // The real image is hidden and the background-image is shown to properly
-    // set its aspect ratio.
+    // If no landscape, the real image is hidden and the background-image
+    // is shown to properly set its aspect ratio.
     image: {
+      boxSizing: 'content-box', // `content-box` to properly calculate sizes.
       display: 'block',
       verticalAlign: 'top',
       outline: 'none',
       margin: 0,
       border: 'none',
-      boxSizing: 'content-box', // `content-box` to properly calculate sizes.
       padding: 0,
-      paddingBottom: 'calc(100% * 2 / 4)', // Image will have 2/4 of the total width.
+      paddingBottom: landscape ? 0 : 'calc(100% * 2 / 4)', // Image height is 2/4 width.
       width: '100%',
-      height: 0, // Real image is hidden.
+      height: landscape ? '100%' : 0, // Real image is hidden.
+      objectFit: 'cover',
+      objectPosition: 'center',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundColor: palette.neutral.elevate(2),
@@ -73,8 +81,11 @@ const generateStyles = (
     },
 
     content: {
+      flex: 1,
       position: 'relative',
-      textAlign: 'left'
+      display: 'grid',
+      gridTemplateRows: 'auto 1fr auto',
+      gridTemplateColumns: 'auto'
     },
     contentBg: {
       position: 'absolute',
