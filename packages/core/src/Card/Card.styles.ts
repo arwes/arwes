@@ -8,7 +8,7 @@ const generateStyles = (
   options: { animate?: boolean, hover?: boolean }
 ): Record<string, CSSObject> => {
   const { palette, space, outline, shadow, transitionDuration } = theme;
-  const { hover } = options;
+  const { animate, hover } = options;
 
   const contentBg = rgba(palette.primary.light1, 0.05);
 
@@ -32,20 +32,18 @@ const generateStyles = (
         boxShadow: `0 0 ${shadow.blur(1)}px ${palette.primary.light1}`
       }
     },
-    container: {
-      //
-    },
+    container: {},
 
     line: {
       position: 'absolute',
       transition: ['background-color', 'box-shadow']
         .map(prop => `${prop} ${transitionDuration}ms ease-out`)
-        .join(',')
+        .join(','),
+      opacity: animate ? 0 : undefined
     },
 
     picture: {
-      position: 'relative',
-      backgroundColor: palette.neutral.elevate(2)
+      position: 'relative'
     },
     // The real image is hidden and the background-image is shown to properly
     // set its aspect ratio.
@@ -61,7 +59,9 @@ const generateStyles = (
       width: '100%',
       height: 0, // Real image is hidden.
       backgroundSize: 'cover',
-      backgroundPosition: 'center'
+      backgroundPosition: 'center',
+      backgroundColor: palette.neutral.elevate(2),
+      opacity: animate ? 0 : undefined
     },
     linePicture: {
       left: 0,
@@ -74,18 +74,28 @@ const generateStyles = (
 
     content: {
       position: 'relative',
-      textAlign: 'left',
-      backgroundColor: contentBg
+      textAlign: 'left'
+    },
+    contentBg: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+      backgroundColor: contentBg,
+      opacity: animate ? 0 : undefined
     },
     header: {
+      padding: `${space(4)}px ${space(4)}px 0 ${space(4)}px`
+    },
+    title: {
       margin: 0,
-      padding: `${space(4)}px ${space(4)}px 0 ${space(4)}px`,
       fontSize: '1.5rem'
     },
     children: {
-      padding: space(4)
+      padding: `${space(4)}px ${space(4)}px ${space(5)}px ${space(4)}px`
     },
-    footer: {
+    options: {
       padding: `0 ${space(4)}px ${space(4)}px ${space(4)}px`,
       textAlign: 'right'
     },

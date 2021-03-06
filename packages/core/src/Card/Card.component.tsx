@@ -6,12 +6,16 @@ import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
 import { WithBleepsInputProps } from '@arwes/sounds';
 
+import { Text } from '../Text';
 import { generateStyles } from './Card.styles';
 
 interface CardProps {
-  image: string
-  header?: ReactNode
-  footer?: ReactNode
+  image: {
+    src: string
+    alt?: string | null
+  }
+  title?: ReactNode
+  options?: ReactNode
   hover?: boolean
   className?: string
   style?: CSSProperties
@@ -23,8 +27,8 @@ const Card: FC<CardProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
     animator,
     bleeps,
     image,
-    header,
-    footer,
+    title,
+    options,
     hover,
     rootRef,
     className,
@@ -62,8 +66,9 @@ const Card: FC<CardProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
           <img
             className='arwes-card__image'
             css={styles.image}
-            src={image}
-            style={{ backgroundImage: `url(${image})` }}
+            style={{ backgroundImage: `url(${image.src})` }}
+            src={image.src}
+            alt={image.alt || ''}
           />
           <div
             className='arwes-card__line arwes-card__line-picture'
@@ -75,12 +80,25 @@ const Card: FC<CardProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
           className='arwes-card__content'
           css={styles.content}
         >
-          <h1
-            className='arwes-card__header'
-            css={styles.header}
-          >
-            {header}
-          </h1>
+          <div
+            className='arwes-card__content-bg'
+            css={styles.contentBg}
+          />
+
+          {!!title && (
+            <header
+              className='arwes-card__header'
+              css={styles.header}
+            >
+              <Text
+                as='h1'
+                className='arwes-card__title'
+                css={styles.title}
+              >
+                {title}
+              </Text>
+            </header>
+          )}
 
           <div
             className='arwes-card__children'
@@ -89,12 +107,12 @@ const Card: FC<CardProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
             {children}
           </div>
 
-          {!!footer && (
+          {!!options && (
             <div
-              className='arwes-card__footer'
-              css={styles.footer}
+              className='arwes-card__options'
+              css={styles.options}
             >
-              {footer}
+              {options}
             </div>
           )}
 
@@ -109,13 +127,16 @@ const Card: FC<CardProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
 };
 
 Card.propTypes = {
-  image: PropTypes.string.isRequired,
-  header: PropTypes.node,
-  footer: PropTypes.node,
+  image: PropTypes.shape({
+    src: PropTypes.string.isRequired,
+    alt: PropTypes.string
+  }).isRequired,
+  title: PropTypes.node,
+  options: PropTypes.node,
   hover: PropTypes.bool,
-  rootRef: PropTypes.any,
   className: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+  rootRef: PropTypes.any
 };
 
 export { CardProps, Card };

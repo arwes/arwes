@@ -1,8 +1,8 @@
 import { BleepsSettings } from '@arwes/sounds';
 
 const bleepsSettings: BleepsSettings = {
-  transition: {
-    player: 'assemble',
+  transitionIn: {
+    player: 'figure',
     category: 'transition'
   }
 };

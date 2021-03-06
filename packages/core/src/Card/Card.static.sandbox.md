@@ -11,16 +11,15 @@ const Sandbox = () => {
         }} />
         <Card
           animator={{ animate: false }}
-          image={IMAGE_URL}
-          header={
-            <Text>Nebula</Text>
-          }
-          footer={
+          image={{
+            src: IMAGE_URL
+          }}
+          title='Nebula'
+          options={
             <Button palette='secondary'>
               <Text>Learn More</Text>
             </Button>
           }
-          hover
           style={{ maxWidth: 400 }}
         >
           <Text>
