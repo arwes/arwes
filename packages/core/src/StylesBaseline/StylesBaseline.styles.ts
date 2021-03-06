@@ -54,12 +54,11 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
     // TEXT
 
     'h1, h2, h3, h4, h5, h6': {
-      lineHeight: 1,
       fontWeight: 'bold',
       color: palette.text.headings,
       textTransform: 'uppercase',
       letterSpacing: 0.5,
-      textShadow: `0 0 ${shadow.blur(1)}px ${palette.text.headings}`
+      textShadow: `0 0 ${shadow.blur(2)}px ${palette.text.headings}`
     },
     h1: { fontSize: '1.75rem' },
     h2: { fontSize: '1.625rem' },
