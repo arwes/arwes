@@ -53,6 +53,7 @@ const generateStyles = (
     },
     // If no landscape, the real image is hidden and the background-image
     // is shown to properly set its aspect ratio.
+    // See: https://css-tricks.com/scale-svg/#option-2-use-css-background-images-and-the-padding-bottom-hack
     image: {
       boxSizing: 'content-box', // `content-box` to properly calculate sizes.
       display: 'block',
@@ -85,7 +86,9 @@ const generateStyles = (
       position: 'relative',
       display: 'grid',
       gridTemplateRows: 'auto 1fr auto',
-      gridTemplateColumns: 'auto'
+      gridTemplateColumns: 'auto',
+      padding: space(4),
+      minHeight: 0 // Content overflow fix.
     },
     contentBg: {
       position: 'absolute',
@@ -97,17 +100,19 @@ const generateStyles = (
       opacity: animate ? 0 : undefined
     },
     header: {
-      padding: `${space(4)}px ${space(4)}px 0 ${space(4)}px`
+      marginBottom: space(4)
     },
     title: {
       margin: 0,
       fontSize: '1.5rem'
     },
     children: {
-      padding: `${space(4)}px ${space(4)}px ${space(5)}px ${space(4)}px`
+      marginBottom: space(1),
+      overflow: 'hidden',
+      minHeight: 0 // Content overflow fix.
     },
     options: {
-      padding: `0 ${space(4)}px ${space(4)}px ${space(4)}px`,
+      marginTop: space(4),
       textAlign: 'right'
     },
     lineContent: {
