@@ -20,7 +20,7 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       backgroundColor: palette.neutral.main,
 
       // Prevent adjustments of font size after orientation changes in iOS.
-      webkitTextSizeAdjust: '100%',
+      WebkitTextSizeAdjust: '100%',
 
       // Fonts
       fontSize: `${16 * fontScale}px`,
