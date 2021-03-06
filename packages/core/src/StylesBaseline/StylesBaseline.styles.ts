@@ -141,9 +141,12 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
     // BLOCKQUOTE
 
     blockquote: {
-      marginLeft: space(3),
-      borderLeft: `${outline(6)}px solid ${palette.text.root}`,
-      paddingLeft: space(3)
+      borderLeft: `${outline(6)}px solid ${palette.primary.main}`,
+      paddingLeft: space(4) + outline(6),
+      paddingRight: space(4),
+      paddingTop: space(2),
+      paddingBottom: space(2),
+      backgroundColor: highlightedContentBgColor1
     },
 
     // TABLES
