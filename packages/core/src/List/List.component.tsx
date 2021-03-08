@@ -11,7 +11,7 @@ interface ListProps {
   as?: 'ul' | 'ol'
   className?: string
   style?: CSSProperties
-  rootRef?: MutableRefObject<HTMLElement> | ((node: HTMLElement) => void)
+  rootRef?: MutableRefObject<HTMLElement | null> | ((node: HTMLElement) => void)
 }
 
 const List: FC<ListProps & WithAnimatorInputProps> = props => {

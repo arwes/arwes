@@ -1,5 +1,5 @@
 /* @jsx jsx */
-import { FC, MutableRefObject, useRef, useMemo, HTMLAttributes } from 'react';
+import { FC, MutableRefObject, CSSProperties, useRef, useMemo, HTMLAttributes } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
@@ -15,8 +15,9 @@ interface FrameUnderlineProps {
   hover?: boolean
   disabled?: boolean
   shape?: boolean
-  rootRef?: MutableRefObject<HTMLDivElement> | ((node: HTMLDivElement) => void)
   className?: string
+  style?: CSSProperties
+  rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
 }
 
 const FrameUnderline: FC<FrameUnderlineProps & HTMLAttributes<HTMLElement> & WithAnimatorInputProps & WithBleepsInputProps> = props => {
@@ -28,8 +29,9 @@ const FrameUnderline: FC<FrameUnderlineProps & HTMLAttributes<HTMLElement> & Wit
     hover,
     disabled,
     shape,
-    rootRef,
     className,
+    style,
+    rootRef,
     children,
     ...otherProps
   } = props;
@@ -54,6 +56,7 @@ const FrameUnderline: FC<FrameUnderlineProps & HTMLAttributes<HTMLElement> & Wit
       ...otherProps,
       className: cx('arwes-frame-underline', ARWES_CORE_FRAME_CLASSNAME, className),
       css: styles.root,
+      style,
       ref: rootRef
     },
     <div
@@ -113,6 +116,7 @@ FrameUnderline.propTypes = {
   disabled: PropTypes.bool,
   shape: PropTypes.bool,
   className: PropTypes.string,
+  style: PropTypes.object,
   rootRef: PropTypes.any
 };
 

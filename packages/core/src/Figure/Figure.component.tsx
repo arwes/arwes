@@ -2,6 +2,7 @@
 import {
   FC,
   MutableRefObject,
+  CSSProperties,
   useRef,
   useMemo,
   useState,
@@ -32,8 +33,9 @@ interface FigureProps {
   imgProps?: ImgHTMLAttributes<HTMLImageElement>
   descriptionTextProps?: TextProps
   loadingProps?: LoadingBarsProps
-  rootRef?: MutableRefObject<HTMLDivElement> | ((node: HTMLDivElement) => void)
   className?: string
+  style?: CSSProperties
+  rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
 }
 
 const Figure: FC<FigureProps & WithAnimatorInputProps & WithBleepsInputProps> = props => {
@@ -48,8 +50,9 @@ const Figure: FC<FigureProps & WithAnimatorInputProps & WithBleepsInputProps> = 
     descriptionTextProps,
     loadingProps,
     className,
-    children,
-    rootRef
+    style,
+    rootRef,
+    children
   } = props;
   const { animate } = animator;
 
@@ -131,6 +134,7 @@ const Figure: FC<FigureProps & WithAnimatorInputProps & WithBleepsInputProps> = 
     <figure
       className={cx('arwes-figure', className)}
       css={styles.root}
+      style={style}
       ref={rootRef}
     >
       <div
@@ -275,6 +279,7 @@ Figure.propTypes = {
   descriptionTextProps: PropTypes.object,
   loadingProps: PropTypes.object,
   className: PropTypes.string,
+  style: PropTypes.object,
   rootRef: PropTypes.any
 };
 

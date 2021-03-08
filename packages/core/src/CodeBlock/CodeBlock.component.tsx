@@ -1,5 +1,5 @@
 /* @jsx jsx */
-import { FC, MutableRefObject, useRef, useMemo } from 'react';
+import { FC, MutableRefObject, CSSProperties, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
@@ -13,11 +13,21 @@ interface CodeBlockProps {
   lang?: string
   contentTextProps?: TextProps
   className?: string
-  rootRef?: MutableRefObject<HTMLDivElement> | ((node: HTMLDivElement) => void)
+  style?: CSSProperties
+  rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
 }
 
 const CodeBlock: FC<CodeBlockProps & WithAnimatorInputProps & WithBleepsInputProps> = props => {
-  const { animator, bleeps, lang, contentTextProps, children, className, rootRef } = props;
+  const {
+    animator,
+    bleeps,
+    lang,
+    contentTextProps,
+    children,
+    className,
+    style,
+    rootRef
+  } = props;
   const { animate } = animator;
 
   const theme = useTheme();
@@ -31,6 +41,7 @@ const CodeBlock: FC<CodeBlockProps & WithAnimatorInputProps & WithBleepsInputPro
     <div
       className={cx('arwes-code-block', className)}
       css={styles.root}
+      style={style}
       ref={rootRef}
     >
       <div
@@ -92,6 +103,7 @@ CodeBlock.propTypes = {
   lang: PropTypes.string,
   contentTextProps: PropTypes.object,
   className: PropTypes.string,
+  style: PropTypes.object,
   rootRef: PropTypes.any
 };
 

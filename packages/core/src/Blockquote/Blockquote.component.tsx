@@ -11,7 +11,7 @@ interface BlockquoteProps {
   palette?: string
   className?: string
   style?: CSSProperties
-  rootRef?: MutableRefObject<HTMLQuoteElement> | ((node: HTMLQuoteElement) => void)
+  rootRef?: MutableRefObject<HTMLQuoteElement | null> | ((node: HTMLQuoteElement) => void)
 }
 
 const Blockquote: FC<BlockquoteProps & WithAnimatorInputProps> = props => {

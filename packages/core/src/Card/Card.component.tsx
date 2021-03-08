@@ -20,7 +20,7 @@ interface CardProps {
   hover?: boolean
   className?: string
   style?: CSSProperties
-  rootRef?: MutableRefObject<HTMLDivElement> | ((node: HTMLDivElement) => void)
+  rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
 }
 
 const Card: FC<CardProps & WithAnimatorInputProps & WithBleepsInputProps> = props => {

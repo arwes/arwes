@@ -7,6 +7,7 @@ import {
   FC,
   ComponentType,
   HTMLAttributes,
+  CSSProperties,
   MouseEvent,
   MutableRefObject,
   useState,
@@ -32,8 +33,9 @@ interface ButtonProps {
   active?: boolean
   disabled?: boolean
   onClick?: (event: MouseEvent<HTMLElement>) => void
-  rootRef?: MutableRefObject<HTMLElement> | ((node: HTMLElement) => void)
   className?: string
+  style?: CSSProperties
+  rootRef?: MutableRefObject<HTMLButtonElement | null> | ((node: HTMLButtonElement) => void)
 }
 
 // The component will receive the `animator` as `AnimatorInstanceSettings` and
@@ -47,8 +49,9 @@ const Button: FC<ButtonProps & WithAnimatorOutputProps & WithBleepsInputProps> =
     disabled,
     active,
     onClick,
-    rootRef: externalRootRef,
     className,
+    style,
+    rootRef: externalRootRef,
     children
   } = props;
   const FrameComponent = props.FrameComponent as ButtonPropsFrameComponent;
@@ -62,8 +65,8 @@ const Button: FC<ButtonProps & WithAnimatorOutputProps & WithBleepsInputProps> =
   // A copy of the <FrameComponent/> animator flow for the <Button/> functionalities.
   const [flow, setFlow] = useState<AnimatorFlow | null>(null);
 
-  const internalRootRef = useRef<HTMLElement | null>(null);
-  const rootRef = useCallback((node: HTMLElement) => {
+  const internalRootRef = useRef<HTMLButtonElement | null>(null);
+  const rootRef = useCallback((node: HTMLButtonElement) => {
     internalRootRef.current = node;
 
     if (typeof externalRootRef === 'function') {
@@ -105,6 +108,7 @@ const Button: FC<ButtonProps & WithAnimatorOutputProps & WithBleepsInputProps> =
         styles.root,
         !!flow && !flow.entered && styles.rootIsTransitioning
       ]}
+      style={style}
       rootRef={rootRef}
       palette={palette}
       disabled={disabled}
@@ -129,6 +133,7 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
   className: PropTypes.string,
+  style: PropTypes.object,
   rootRef: PropTypes.any
 };
 

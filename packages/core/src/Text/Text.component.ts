@@ -1,4 +1,13 @@
-import { FC, MutableRefObject, useRef, useMemo, useCallback, useEffect, useLayoutEffect } from 'react';
+import {
+  FC,
+  MutableRefObject,
+  CSSProperties,
+  useRef,
+  useMemo,
+  useCallback,
+  useEffect,
+  useLayoutEffect
+} from 'react';
 import PropTypes from 'prop-types';
 import { css, cx, keyframes } from '@emotion/css';
 import { jsx } from '@emotion/react';
@@ -19,7 +28,8 @@ interface TextProps {
   dynamicDuration?: boolean
   dynamicDurationFactor?: number
   className?: string
-  rootRef?: MutableRefObject<HTMLElement> | Function
+  style?: CSSProperties
+  rootRef?: MutableRefObject<HTMLElement | null> | ((node: HTMLElement) => void)
 }
 
 const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = props => {
@@ -33,8 +43,9 @@ const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
     dynamicDuration,
     dynamicDurationFactor,
     className,
-    children,
-    rootRef: providedRootRef
+    style,
+    rootRef: providedRootRef,
+    children
   } = props;
 
   const internalRootRef = useRef<HTMLElement | null>(null);
@@ -139,8 +150,9 @@ const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
     as as string,
     {
       className: cx('arwes-text', className),
-      ref: rootRef,
-      css: styles.root
+      css: styles.root,
+      style,
+      ref: rootRef
     },
     jsx(
       'span',

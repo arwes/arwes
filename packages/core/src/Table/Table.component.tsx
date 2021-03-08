@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { FC, Ref, useMemo } from 'react';
+import { FC, MutableRefObject, CSSProperties, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
@@ -19,8 +19,9 @@ interface TableProps {
   dataset: TableRowPropsDataRow[]
   columnWidths?: TableRowPropsColumnWidth[]
   condensed?: boolean
-  rootRef?: Ref<HTMLDivElement>
   className?: string
+  style?: CSSProperties
+  rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
 }
 
 const Table: FC<TableProps & WithAnimatorInputProps & WithBleepsInputProps> = props => {
@@ -31,8 +32,9 @@ const Table: FC<TableProps & WithAnimatorInputProps & WithBleepsInputProps> = pr
     dataset,
     columnWidths,
     condensed,
-    rootRef,
-    className
+    style,
+    className,
+    rootRef
   } = props;
 
   const theme = useTheme();
@@ -42,16 +44,17 @@ const Table: FC<TableProps & WithAnimatorInputProps & WithBleepsInputProps> = pr
 
   return (
     <div
+      className={cx('arwes-table', className)}
       css={[
         styles.root,
         !animator.flow.entered && styles.rootIsTransitioning
       ]}
-      className={cx('arwes-table', className)}
+      style={style}
       ref={rootRef}
     >
       <div
-        css={styles.container}
         className='arwes-table__container'
+        css={styles.container}
       >
         <TableRow
           isHeader
