@@ -72,6 +72,13 @@ const playgroundConfigs = [
         ]
       },
       {
+        name: 'List',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/core/src/List/List.basic.sandbox.md').default },
+          { name: 'static', code: require('repository/packages/core/src/List/List.static.sandbox.md').default }
+        ]
+      },
+      {
         name: 'Blockquote',
         sandboxes: [
           { name: 'basic', code: require('repository/packages/core/src/Blockquote/Blockquote.basic.sandbox.md').default },

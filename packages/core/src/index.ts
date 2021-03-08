@@ -1,6 +1,7 @@
 export * from './ArwesThemeProvider';
 export * from './StylesBaseline';
 export * from './Text';
+export * from './List';
 export * from './Blockquote';
 export * from './Table';
 export * from './CodeBlock';
