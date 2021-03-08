@@ -46,7 +46,9 @@ const transitionList = (animator: AnimatorRef, containerRef: ContainerRef, theme
   else {
     anime({
       targets: items,
-      easing: 'easeInExpo',
+      // Only set `opacity: 0` when the animation is completed so the <List/>
+      // children text components can be animated properly.
+      easing: () => (progress: number): number => progress === 1 ? 1 : 0,
       duration: transitionDuration,
       opacity: [1, 0]
     });
