@@ -27,22 +27,22 @@ test('Should create shadow blur and spread calculator based on provided factors 
 [
   [
     'space',
-    (value: any) => value ? { space: value } : {},
+    (value: any) => value !== undefined ? { space: value } : {},
     (theme: any) => theme.space
   ],
   [
     'outline',
-    (value: any) => value ? { outline: value } : {},
+    (value: any) => value !== undefined ? { outline: value } : {},
     (theme: any) => theme.outline
   ],
   [
     'blur',
-    (value: any) => value ? { shadow: { blur: value } } : {},
+    (value: any) => value !== undefined ? { shadow: { blur: value } } : {},
     (theme: any) => theme.shadow.blur
   ],
   [
     'spread',
-    (value: any) => value ? { shadow: { spread: value } } : {},
+    (value: any) => value !== undefined ? { shadow: { spread: value } } : {},
     (theme: any) => theme.shadow.spread
   ]
 ].forEach(([name, createSettings, getResult]: any) => {
@@ -63,6 +63,13 @@ test('Should create shadow blur and spread calculator based on provided factors 
       const theme = createTheme(createSettings(8));
       expect(getResult(theme)(1.2)).toBe(10);
       expect(getResult(theme)(0.8)).toBe(6);
+    });
+
+    test('Should return 0 if provided multiplier is 0', () => {
+      const theme = createTheme(createSettings(0));
+      expect(getResult(theme)(0)).toBe(0);
+      expect(getResult(theme)(1)).toBe(0);
+      expect(getResult(theme)(2)).toBe(0);
     });
 
     test('Should throw error if provided factor is not a number', () => {
