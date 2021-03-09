@@ -31,18 +31,18 @@ export interface ThemeSettingsBreakpoints {
   }
 }
 
-export type ThemeSettingsPaletteColorBasic = Partial<ThemePaletteColorBasic>;
-export interface ThemeSettingsPaletteColorElevation {
+export type ThemeSettingsPaletteBasic = Partial<ThemePaletteBasic>;
+export interface ThemeSettingsPaletteElevation {
   main?: string
 }
 export interface ThemeSettingsPalette {
   tonalOffset?: number
   elevationOffset?: number
-  primary?: ThemeSettingsPaletteColorBasic
-  secondary?: ThemeSettingsPaletteColorBasic
-  success?: ThemeSettingsPaletteColorBasic
-  error?: ThemeSettingsPaletteColorBasic
-  neutral?: ThemeSettingsPaletteColorElevation
+  primary?: ThemeSettingsPaletteBasic
+  secondary?: ThemeSettingsPaletteBasic
+  success?: ThemeSettingsPaletteBasic
+  error?: ThemeSettingsPaletteBasic
+  neutral?: ThemeSettingsPaletteElevation
   [prop: string]: any
 }
 
@@ -116,7 +116,7 @@ export interface ThemeBreakpoints {
   between: (start: ThemeSettingsBreakpointAny, end: ThemeSettingsBreakpointAny) => string
 }
 
-export interface ThemePaletteColorBasic {
+export interface ThemePaletteBasic {
   main: string
   dark1: string
   dark2: string
@@ -125,18 +125,18 @@ export interface ThemePaletteColorBasic {
   light2: string
   light3: string
 }
-export interface ThemePaletteColorElevation {
+export interface ThemePaletteElevation {
   main: string
   elevate: (level: number) => string
 }
 export interface ThemePalette {
   tonalOffset: number
   elevationOffset: number
-  primary: ThemePaletteColorBasic
-  secondary: ThemePaletteColorBasic
-  success: ThemePaletteColorBasic
-  error: ThemePaletteColorBasic
-  neutral: ThemePaletteColorElevation
+  primary: ThemePaletteBasic
+  secondary: ThemePaletteBasic
+  success: ThemePaletteBasic
+  error: ThemePaletteBasic
+  neutral: ThemePaletteElevation
   [prop: string]: any
 }
 

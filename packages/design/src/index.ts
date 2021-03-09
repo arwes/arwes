@@ -1,7 +1,7 @@
 export * from './constants';
 
-export * from './createColorBasicVariations';
-export * from './createColorElevationVariations';
+export * from './createThemePaletteBasic';
+export * from './createThemePaletteElevation';
 export * from './updateColorContrastLuminance';
 
 export * from './createTheme';

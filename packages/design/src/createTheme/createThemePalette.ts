@@ -1,6 +1,6 @@
 import { ThemeSetup, ThemePalette } from '../constants';
-import { createColorBasicVariations } from '../createColorBasicVariations';
-import { createColorElevationVariations } from '../createColorElevationVariations';
+import { createThemePaletteBasic } from '../createThemePaletteBasic';
+import { createThemePaletteElevation } from '../createThemePaletteElevation';
 
 const createThemePalette = (setup: ThemeSetup): ThemePalette => {
   const {
@@ -13,11 +13,11 @@ const createThemePalette = (setup: ThemeSetup): ThemePalette => {
     ...otherFeatures,
     tonalOffset,
     elevationOffset,
-    primary: createColorBasicVariations({ main: '#0ff', ...setup.palette.primary }, tonalOffset),
-    secondary: createColorBasicVariations({ main: '#ff0', ...setup.palette.secondary }, tonalOffset),
-    success: createColorBasicVariations({ main: '#0f0', ...setup.palette.success }, tonalOffset),
-    error: createColorBasicVariations({ main: '#f00', ...setup.palette.error }, tonalOffset),
-    neutral: createColorElevationVariations(setup.palette.neutral?.main ?? '#000', elevationOffset)
+    primary: createThemePaletteBasic({ main: '#0ff', ...setup.palette.primary }, tonalOffset),
+    secondary: createThemePaletteBasic({ main: '#ff0', ...setup.palette.secondary }, tonalOffset),
+    success: createThemePaletteBasic({ main: '#0f0', ...setup.palette.success }, tonalOffset),
+    error: createThemePaletteBasic({ main: '#f00', ...setup.palette.error }, tonalOffset),
+    neutral: createThemePaletteElevation(setup.palette.neutral?.main ?? '#000', elevationOffset)
   });
 };
 

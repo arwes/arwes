@@ -1,10 +1,7 @@
-import { ThemePaletteColorElevation } from '../constants';
+import { ThemePaletteElevation } from '../constants';
 import { updateColorContrastLuminance } from '../updateColorContrastLuminance';
 
-const createColorElevationVariations = (
-  main: string,
-  elevationOffset: number
-): ThemePaletteColorElevation => {
+const createThemePaletteElevation = (main: string, elevationOffset: number): ThemePaletteElevation => {
   const elevate = (level: number): string => {
     const value = elevationOffset * level;
 
@@ -18,4 +15,4 @@ const createColorElevationVariations = (
   return Object.freeze({ main, elevate });
 };
 
-export { createColorElevationVariations };
+export { createThemePaletteElevation };

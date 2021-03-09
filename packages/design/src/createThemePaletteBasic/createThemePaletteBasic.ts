@@ -1,15 +1,9 @@
 import lighten from 'polished/lib/color/lighten';
 import darken from 'polished/lib/color/darken';
 
-import {
-  ThemeSettingsPaletteColorBasic,
-  ThemePaletteColorBasic
-} from '../constants';
+import { ThemeSettingsPaletteBasic, ThemePaletteBasic } from '../constants';
 
-const createColorBasicVariations = (
-  color: ThemeSettingsPaletteColorBasic,
-  tonalOffset: number
-): ThemePaletteColorBasic => {
+const createThemePaletteBasic = (color: ThemeSettingsPaletteBasic, tonalOffset: number): ThemePaletteBasic => {
   if (!color.main) {
     throw new Error('Theme color requires "main" color.');
   }
@@ -33,4 +27,4 @@ const createColorBasicVariations = (
   });
 };
 
-export { createColorBasicVariations };
+export { createThemePaletteBasic };
