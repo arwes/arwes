@@ -6,6 +6,8 @@ const playgroundConfigs = [
         name: 'createTheme',
         sandboxes: [
           { name: 'basic', code: require('repository/packages/design/src/createTheme/createTheme.basic.sandbox.md').default },
+          { name: 'breakpoints', code: require('repository/packages/design/src/createTheme/createTheme.breakpoints.sandbox.md').default },
+          { name: 'palette', code: require('repository/packages/design/src/createTheme/createTheme.palette.sandbox.md').default },
           { name: 'dynamic', code: require('repository/packages/design/src/createTheme/createTheme.dynamic.sandbox.md').default }
         ]
       }

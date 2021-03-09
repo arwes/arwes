@@ -1,59 +1,39 @@
-```js
+```jsx
 /* @jsx emotion.jsx */
 
-// THIS SANDBOX MODIFIES THE HTML ELEMENTS GLOBAL STYLES.
-// IT MAY CONFLICT WITH THE PLAYGROUND APPLICATION STYLES.
+const Item = ({ palette }) => (
+  <div css={theme => {
+    const color = theme.palette[palette].main;
 
-// CARD
-
-const containerStyles = theme => ({
-  margin: theme.space(2),
-  border: `1px solid ${theme.palette.primary.light2}`,
-  padding: theme.space(2),
-  background: theme.palette.neutral.elevate(0)
-});
-
-const h1Styles = theme => ({
-  margin: `0 0 ${theme.space(2)}px`,
-  color: theme.palette.primary.main
-});
-
-const pStyles = theme => ({
-  margin: 0,
-  color: theme.palette.primary.dark2
-});
-
-function Card () {
-  return (
-    <div css={containerStyles}>
-      <h1 css={h1Styles}>Lorem ipsum dolor</h1>
-      <p css={pStyles}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua.
-      </p>
-    </div>
-  );
-}
-
-// SANDBOX
+    return {
+      marginBottom: theme.space(2),
+      borderBottom: `${theme.outline(2)}px solid ${color}`,
+      padding: theme.space(2),
+      backgroundColor: theme.palette.neutral.elevate(2),
+      textShadow: `0 0 ${theme.shadow.blur(1)}px ${color}`,
+      color
+    };
+  }}>
+    Futuristic Sci-Fi UI Web Framework
+  </div>
+);
 
 function Sandbox () {
-  const theme = createTheme({
-    palette: {
-      primary: { main: '#ff0' },
-      neutral: { main: '#220' }
-    },
-    typography: {
-      h1: { fontSize: 30, fontFamily: 'monospace' },
-      p: { fontSize: 18, fontFamily: 'sans-serif' }
-    },
-    space: 10
-  });
+  const theme = createTheme();
+
   return (
     <emotion.ThemeProvider theme={theme}>
-      <emotion.Global styles={theme.typography} />
-      <Card />
+      <emotion.Global styles={{
+        'html, body': {
+          fontFamily: 'monospace',
+          fontSize: 16,
+          backgroundColor: theme.palette.neutral.elevate(0)
+        }
+      }} />
+      <Item palette='primary' />
+      <Item palette='secondary' />
+      <Item palette='success' />
+      <Item palette='error' />
     </emotion.ThemeProvider>
   );
 }
