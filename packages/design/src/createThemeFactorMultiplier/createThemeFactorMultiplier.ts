@@ -1,6 +1,6 @@
 type FactorMultiplier = (multiplier?: number) => number;
 
-const makeFactorMultiplier = (factor: number): FactorMultiplier => {
+const createThemeFactorMultiplier = (factor: number): FactorMultiplier => {
   if (process.env.NODE_ENV !== 'production' && !Number.isFinite(factor)) {
     throw new Error(`Factor value was expected to be a number, but received "${String(factor)}".`);
   }
@@ -14,4 +14,4 @@ const makeFactorMultiplier = (factor: number): FactorMultiplier => {
   };
 };
 
-export { FactorMultiplier, makeFactorMultiplier };
+export { FactorMultiplier, createThemeFactorMultiplier };

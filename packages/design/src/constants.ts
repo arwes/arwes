@@ -46,16 +46,6 @@ export interface ThemeSettingsPalette {
   [prop: string]: any
 }
 
-export type ThemeSettingsTypographyKey = keyof HTMLElementTagNameMap | 'root' | 'headings' | 'codes' | 'controls';
-export interface ThemeSettingsTypographyProps {
-  fontFamily?: string
-  fontSize?: number | string
-  lineHeight?: number | string
-}
-export type ThemeSettingsTypographyPropsArrayItem = ThemeSettingsTypographyProps | undefined | null;
-export type ThemeSettingsTypographyValue = ThemeSettingsTypographyProps | ThemeSettingsTypographyPropsArrayItem[];
-export type ThemeSettingsTypography = Partial<Record<ThemeSettingsTypographyKey, ThemeSettingsTypographyValue>>;
-
 export interface ThemeSettingsShadow {
   blur?: number
   spread?: number
@@ -64,7 +54,6 @@ export interface ThemeSettingsShadow {
 export interface ThemeSettings {
   breakpoints?: ThemeSettingsBreakpoints
   palette?: ThemeSettingsPalette
-  typography?: ThemeSettingsTypography
   space?: number
   outline?: number
   shadow?: ThemeSettingsShadow
@@ -88,8 +77,6 @@ export interface ThemeSetupPalette extends ThemeSettingsPalette {
   elevationOffset: number
 }
 
-export interface ThemeSetupTypography extends ThemeSettingsTypography {}
-
 export interface ThemeSetupShadow {
   blur: number
   spread: number
@@ -98,7 +85,6 @@ export interface ThemeSetupShadow {
 export interface ThemeSetup {
   breakpoints: ThemeSetupBreakpoints
   palette: ThemeSetupPalette
-  typography: ThemeSetupTypography
   space: number
   outline: number
   shadow: ThemeSetupShadow
@@ -140,10 +126,6 @@ export interface ThemePalette {
   [prop: string]: any
 }
 
-export type ThemeTypographyKey = ThemeSettingsTypographyKey;
-export type ThemeTypographyProps = ThemeSettingsTypographyProps | Partial<Record<string, ThemeSettingsTypographyProps>>;
-export type ThemeTypography = Partial<Record<ThemeTypographyKey, ThemeTypographyProps>>;
-
 export type ThemeFactorMultiplier = (multiplier?: number) => number;
 
 export interface ThemeShadow {
@@ -154,7 +136,6 @@ export interface ThemeShadow {
 export interface Theme {
   breakpoints: ThemeBreakpoints
   palette: ThemePalette
-  typography: ThemeTypography
   space: ThemeFactorMultiplier
   outline: ThemeFactorMultiplier
   shadow: ThemeShadow

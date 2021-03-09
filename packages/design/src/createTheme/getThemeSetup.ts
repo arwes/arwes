@@ -40,11 +40,6 @@ const getThemeSetup = (providedSettings?: ThemeSettings, extendTheme?: Theme): T
     ...providedSettings?.palette
   };
 
-  const typography = {
-    ...extendTheme?.typography,
-    ...providedSettings?.typography
-  };
-
   const space = providedSettings?.space ?? extendTheme?.space(1) ?? THEME_SPACE_DEFAULT;
   const outline = providedSettings?.outline ?? extendTheme?.outline(1) ?? THEME_OUTLINE_DEFAULT;
   const shadow = {
@@ -57,7 +52,6 @@ const getThemeSetup = (providedSettings?: ThemeSettings, extendTheme?: Theme): T
   return Object.freeze({
     breakpoints,
     palette,
-    typography,
     space,
     outline,
     shadow,

@@ -1,9 +1,8 @@
 import { ThemeSettings, Theme } from '../constants';
-import { makeFactorMultiplier } from '../utils/makeFactorMultiplier';
+import { createThemeFactorMultiplier } from '../createThemeFactorMultiplier';
 import { getThemeSetup } from './getThemeSetup';
 import { createThemeBreakpoints } from './createThemeBreakpoints';
 import { createThemePalette } from './createThemePalette';
-import { createThemeTypography } from './createThemeTypography';
 
 // All the functionalities are tested in integration with `createTheme()`.
 // They are not unit tested since only `createTheme()` is exposed and
@@ -14,19 +13,17 @@ const createTheme = (settings?: ThemeSettings, extendTheme?: Theme): Theme => {
 
   const breakpoints = createThemeBreakpoints(setup);
   const palette = createThemePalette(setup);
-  const typography = createThemeTypography(setup);
-  const space = makeFactorMultiplier(setup.space);
-  const outline = makeFactorMultiplier(setup.outline);
+  const space = createThemeFactorMultiplier(setup.space);
+  const outline = createThemeFactorMultiplier(setup.outline);
   const shadow = Object.freeze({
-    blur: makeFactorMultiplier(setup.shadow.blur),
-    spread: makeFactorMultiplier(setup.shadow.spread)
+    blur: createThemeFactorMultiplier(setup.shadow.blur),
+    spread: createThemeFactorMultiplier(setup.shadow.spread)
   });
 
   return Object.freeze({
     ...setup.extraFeatures,
     breakpoints,
     palette,
-    typography,
     space,
     outline,
     shadow
