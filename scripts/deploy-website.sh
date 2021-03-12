@@ -9,6 +9,8 @@ fi
 git fetch origin $1
 git reset --hard origin/$1
 
+NODE_ENV=production
+
 # WORKSPACE
 
 npm install
