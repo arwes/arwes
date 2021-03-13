@@ -25,7 +25,7 @@ const createBleep = (audioSettings: BleepsAudioGroupSettings, playerSettings: Bl
     const newId = howl.play(lastId);
 
     // If the sound is being loaded, it returns null.
-    // The id to pass to play must be a number or undefined.
+    // To prevent errors, the id to pass to play must be a number or undefined.
     lastId = newId || undefined;
   };
   const pause = (): void => {

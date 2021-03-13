@@ -47,9 +47,31 @@ test('Should allow playing the sound as shared sound', () => {
   expect(howlPlay).toHaveBeenNthCalledWith(4, 777);
 });
 
-test.todo('Should load the sound if it is unloaded when it is played');
+test('Should load the sound if it is unloaded when it is played', () => {
+  const audioSettings = { volume: 0.8 };
+  const playerSettings = { src: ['sound.webm'] };
+  const bleep = createBleep(audioSettings, playerSettings);
+  jest.spyOn(bleep._howl, 'state').mockImplementation(() => 'unloaded');
+  const howlLoad = jest.spyOn(bleep._howl, 'load').mockImplementation();
+  const howlPlay = jest.spyOn(bleep._howl, 'play').mockImplementation();
+  bleep.play();
+  expect(howlLoad).toHaveBeenCalled();
+  expect(howlPlay).toHaveBeenCalled();
+});
 
-test.todo('Should always set shared sound id as number or undefined when playing (even if the play returns null)');
+test('Should always set shared sound id as number or undefined when playing (even if the play returns null)', () => {
+  const audioSettings = { volume: 0.8 };
+  const playerSettings = { src: ['sound.webm'] };
+  const bleep = createBleep(audioSettings, playerSettings);
+  jest.spyOn(bleep._howl, 'state').mockImplementation(() => 'unloaded');
+  const howlLoad = jest.spyOn(bleep._howl, 'load').mockImplementation();
+  // Howler typings don't accept `null`, but if its state is 'unloaded' it actually returns null.
+  const howlPlay = jest.spyOn(bleep._howl, 'play').mockImplementation(() => null as any);
+  const playId = bleep.play();
+  expect(playId).toBeUndefined();
+  expect(howlLoad).toHaveBeenCalled();
+  expect(howlPlay).toHaveBeenCalled();
+});
 
 test('Should allow pausing the shared sound', () => {
   const audioSettings = { volume: 0.8 };

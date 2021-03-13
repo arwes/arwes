@@ -64,9 +64,14 @@ const createOrUpdateBleeps = (
       return;
     }
 
-    // TODO: Unload and create new bleep if src/format settings changed.
+    // If a bleep has updated `src` or `format` settings, it should be re-created.
+    // Otherwise it is updated to be fast and prevent more HTTP requests.
+    const hasBleepUpdatedSrc =
+      !!bleeps[bleepName]?._settings.src.find((v, i) => v !== playerSettings.src[i]);
+    const hasBleepUpdatedFormat =
+      !!bleeps[bleepName]?._settings.format?.find((v, i) => v !== playerSettings.format?.[i]);
 
-    if (bleeps[bleepName]) {
+    if (bleeps[bleepName] && !hasBleepUpdatedSrc && !hasBleepUpdatedFormat) {
       bleeps[bleepName] = updateBleep(bleeps[bleepName], processedAudioSettings, playerSettings);
     }
     else {

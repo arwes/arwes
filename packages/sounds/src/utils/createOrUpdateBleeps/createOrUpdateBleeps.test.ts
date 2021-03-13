@@ -90,6 +90,59 @@ test('Should create and update bleeps with common and category settings changes'
   });
 });
 
+test('Should create and not update bleeps with player "src" or "format" changes', () => {
+  const audioSettings = {
+    common: { volume: 1 }
+  };
+  const playersSettings1 = {
+    notify: { src: ['notify.webm'] },
+    click: { src: ['click.webm'] },
+    hover: { src: ['hover.webm'], format: ['webm'] }
+  };
+  const bleepsSettings: BleepsSettings = {
+    notify: { player: 'notify' },
+    click: { player: 'click' },
+    hover: { player: 'hover' }
+  };
+  const bleeps1 = createOrUpdateBleeps({}, audioSettings, playersSettings1, bleepsSettings);
+  // The individual bleeps are copied to properly compare them later.
+  const bleeps1Notify = bleeps1.notify;
+  const bleeps1Click = bleeps1.click;
+  const bleeps1Hover = bleeps1.hover;
+
+  expect(Object.keys(bleeps1)).toEqual(['notify', 'click', 'hover']);
+  expect(bleeps1.notify).toMatchObject({
+    _settings: { volume: 1, src: ['notify.webm'] }
+  });
+  expect(bleeps1.click).toMatchObject({
+    _settings: { volume: 1, src: ['click.webm'] }
+  });
+  expect(bleeps1.hover).toMatchObject({
+    _settings: { volume: 1, src: ['hover.webm'], format: ['webm'] }
+  });
+
+  const playersSettings2 = {
+    notify: { src: ['notify.webm'] }, // unchanged
+    click: { src: ['click.mp3'] }, // "src" changed
+    hover: { src: ['hover.webm'], format: [] } // "format" changed
+  };
+  const bleeps2 = createOrUpdateBleeps(bleeps1, audioSettings, playersSettings2, bleepsSettings);
+
+  expect(Object.keys(bleeps2)).toEqual(['notify', 'click', 'hover']);
+  expect(bleeps1Notify._howl).toBe(bleeps2.notify._howl); // Updated
+  expect(bleeps1Click._howl).not.toBe(bleeps2.click._howl); // Recreated
+  expect(bleeps1Hover._howl).not.toBe(bleeps2.hover._howl); // Recreated
+  expect(bleeps2.notify).toMatchObject({
+    _settings: { volume: 1, src: ['notify.webm'] }
+  });
+  expect(bleeps2.click).toMatchObject({
+    _settings: { volume: 1, src: ['click.mp3'] }
+  });
+  expect(bleeps2.hover).toMatchObject({
+    _settings: { volume: 1, src: ['hover.webm'], format: [] }
+  });
+});
+
 test('Should not create disabled common bleeps', () => {
   const audioSettings = {
     common: { disabled: true }
