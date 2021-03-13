@@ -3,8 +3,7 @@
 import {
   BLEEPS_TRANSITION,
   BLEEPS_INTERACTION,
-  BleepsSettings,
-  BleepsSetup
+  BleepsSettings
 } from '../../constants';
 import { createOrUpdateBleeps } from './createOrUpdateBleeps';
 
@@ -25,13 +24,12 @@ test('Should create bleeps with common and category settings', () => {
     hover: { src: ['hover.webm'] },
     type: { src: ['type.webm'], loop: true }
   };
-  const bleepsSetup: BleepsSetup = { audioSettings, playersSettings };
   const bleepsSettings: BleepsSettings = {
     click: { player: 'click' },
     hover: { player: 'hover', category: BLEEPS_INTERACTION },
     type: { player: 'type', category: BLEEPS_TRANSITION }
   };
-  const bleeps = createOrUpdateBleeps({}, bleepsSetup, bleepsSettings);
+  const bleeps = createOrUpdateBleeps({}, audioSettings, playersSettings, bleepsSettings);
   expect(Object.keys(bleeps)).toHaveLength(3);
   expect(bleeps.click).toMatchObject({
     _settings: { volume: 0.9, src: ['click.webm'] }
@@ -51,19 +49,17 @@ test('Should create and update bleeps with common and category settings changes'
     hover: { player: 'hover', category: BLEEPS_INTERACTION }
   };
 
-  const bleepsSetup1: BleepsSetup = {
-    audioSettings: {
-      common: { volume: 0.9 },
-      categories: {
-        [BLEEPS_INTERACTION]: { volume: 0.5 }
-      }
-    },
-    playersSettings: {
-      click: { src: ['click.webm'] },
-      hover: { src: ['hover.webm'] }
+  const audioSettings1 = {
+    common: { volume: 0.9 },
+    categories: {
+      [BLEEPS_INTERACTION]: { volume: 0.5 }
     }
   };
-  bleeps = createOrUpdateBleeps(bleeps, bleepsSetup1, bleepsSettings);
+  const playersSettings1 = {
+    click: { src: ['click.webm'] },
+    hover: { src: ['hover.webm'] }
+  };
+  bleeps = createOrUpdateBleeps(bleeps, audioSettings1, playersSettings1, bleepsSettings);
 
   expect(Object.keys(bleeps)).toHaveLength(2);
   expect(bleeps.click).toMatchObject({
@@ -73,19 +69,17 @@ test('Should create and update bleeps with common and category settings changes'
     _settings: { volume: 0.5, src: ['hover.webm'] }
   });
 
-  const bleepsSetup2: BleepsSetup = {
-    audioSettings: {
-      common: { volume: 1 },
-      categories: {
-        [BLEEPS_INTERACTION]: { volume: 0.4 }
-      }
-    },
-    playersSettings: {
-      click: { src: ['click.webm'] },
-      hover: { src: ['hover.webm'], loop: true }
+  const audioSettings2 = {
+    common: { volume: 1 },
+    categories: {
+      [BLEEPS_INTERACTION]: { volume: 0.4 }
     }
   };
-  bleeps = createOrUpdateBleeps(bleeps, bleepsSetup2, bleepsSettings);
+  const playersSettings2 = {
+    click: { src: ['click.webm'] },
+    hover: { src: ['hover.webm'], loop: true }
+  };
+  bleeps = createOrUpdateBleeps(bleeps, audioSettings2, playersSettings2, bleepsSettings);
 
   expect(Object.keys(bleeps)).toHaveLength(2);
   expect(bleeps.click).toMatchObject({
@@ -103,11 +97,10 @@ test('Should not create disabled common bleeps', () => {
   const playersSettings = {
     tap: { src: ['tap.webm'] }
   };
-  const bleepsSetup: BleepsSetup = { audioSettings, playersSettings };
   const bleepsSettings: BleepsSettings = {
     click: { player: 'tap' }
   };
-  const bleeps = createOrUpdateBleeps({}, bleepsSetup, bleepsSettings);
+  const bleeps = createOrUpdateBleeps({}, audioSettings, playersSettings, bleepsSettings);
   expect(bleeps).toEqual({});
 });
 
@@ -120,11 +113,10 @@ test('Should not create disabled category bleeps', () => {
   const playersSettings = {
     tap: { src: ['tap.webm'] }
   };
-  const bleepsSetup: BleepsSetup = { audioSettings, playersSettings };
   const bleepsSettings: BleepsSettings = {
     click: { player: 'tap', category: BLEEPS_TRANSITION }
   };
-  const bleeps = createOrUpdateBleeps({}, bleepsSetup, bleepsSettings);
+  const bleeps = createOrUpdateBleeps({}, audioSettings, playersSettings, bleepsSettings);
   expect(bleeps).toEqual({});
 });
 
@@ -133,11 +125,10 @@ test('Should not create disabled players bleeps', () => {
   const playersSettings = {
     tap: { src: ['tap.webm'], disabled: true }
   };
-  const bleepsSetup: BleepsSetup = { audioSettings, playersSettings };
   const bleepsSettings: BleepsSettings = {
     click: { player: 'tap' }
   };
-  const bleeps = createOrUpdateBleeps({}, bleepsSetup, bleepsSettings);
+  const bleeps = createOrUpdateBleeps({}, audioSettings, playersSettings, bleepsSettings);
   expect(bleeps).toEqual({});
 });
 
@@ -147,35 +138,31 @@ test('Should unload and remove disabled category bleeps on update', () => {
     click: { player: 'click', category: BLEEPS_INTERACTION }
   };
 
-  const bleepsSetup1: BleepsSetup = {
-    audioSettings: {
-      common: { volume: 1 },
-      categories: {
-        [BLEEPS_INTERACTION]: { volume: 0.5 }
-      }
-    },
-    playersSettings: {
-      click: { src: ['click.webm'] }
+  const audioSettings1 = {
+    common: { volume: 1 },
+    categories: {
+      [BLEEPS_INTERACTION]: { volume: 0.5 }
     }
   };
-  bleeps = createOrUpdateBleeps(bleeps, bleepsSetup1, bleepsSettings);
+  const playersSettings1 = {
+    click: { src: ['click.webm'] }
+  };
+  bleeps = createOrUpdateBleeps(bleeps, audioSettings1, playersSettings1, bleepsSettings);
   expect(bleeps.click).toMatchObject({
     _settings: { volume: 0.5, src: ['click.webm'] }
   });
 
-  const bleepsSetup2: BleepsSetup = {
-    audioSettings: {
-      common: { volume: 1 },
-      categories: {
-        [BLEEPS_INTERACTION]: { volume: 0.5, disabled: true }
-      }
-    },
-    playersSettings: {
-      click: { src: ['click.webm'] }
+  const audioSettings2 = {
+    common: { volume: 1 },
+    categories: {
+      [BLEEPS_INTERACTION]: { volume: 0.5, disabled: true }
     }
   };
+  const playersSettings2 = {
+    click: { src: ['click.webm'] }
+  };
   const spyUnload = jest.spyOn(bleeps.click, 'unload');
-  bleeps = createOrUpdateBleeps(bleeps, bleepsSetup2, bleepsSettings);
+  bleeps = createOrUpdateBleeps(bleeps, audioSettings2, playersSettings2, bleepsSettings);
   expect(spyUnload).toHaveBeenCalled();
   expect(bleeps.click).toBeUndefined();
 });
@@ -186,29 +173,25 @@ test('Should unload and remove disabled bleeps on update', () => {
     click: { player: 'click' }
   };
 
-  const bleepsSetup1: BleepsSetup = {
-    audioSettings: {
-      common: { volume: 1 }
-    },
-    playersSettings: {
-      click: { src: ['click.webm'] }
-    }
+  const audioSettings1 = {
+    common: { volume: 1 }
   };
-  bleeps = createOrUpdateBleeps(bleeps, bleepsSetup1, bleepsSettings);
+  const playersSettings1 = {
+    click: { src: ['click.webm'] }
+  };
+  bleeps = createOrUpdateBleeps(bleeps, audioSettings1, playersSettings1, bleepsSettings);
   expect(bleeps.click).toMatchObject({
     _settings: { volume: 1, src: ['click.webm'] }
   });
 
-  const bleepsSetup2: BleepsSetup = {
-    audioSettings: {
-      common: { volume: 1 }
-    },
-    playersSettings: {
-      click: { src: ['click.webm'], disabled: true }
-    }
+  const audioSettings2 = {
+    common: { volume: 1 }
+  };
+  const playersSettings2 = {
+    click: { src: ['click.webm'], disabled: true }
   };
   const spyUnload = jest.spyOn(bleeps.click, 'unload');
-  bleeps = createOrUpdateBleeps(bleeps, bleepsSetup2, bleepsSettings);
+  bleeps = createOrUpdateBleeps(bleeps, audioSettings2, playersSettings2, bleepsSettings);
   expect(spyUnload).toHaveBeenCalled();
   expect(bleeps.click).toBeUndefined();
 });
@@ -218,12 +201,11 @@ test('Should throw error if configured bleep has no valid provided player', () =
   const playersSettings = {
     tap: { src: ['tap.webm'], disabled: true }
   };
-  const bleepsSetup: BleepsSetup = { audioSettings, playersSettings };
   const bleepsSettings: BleepsSettings = {
     click: { player: 'click' } // player "click" does not exist
   };
   expect(() => {
-    createOrUpdateBleeps({}, bleepsSetup, bleepsSettings);
+    createOrUpdateBleeps({}, audioSettings, playersSettings, bleepsSettings);
   }).toThrow('Component bleep requires a provided player. Player "click" was not found.');
 });
 
@@ -232,11 +214,10 @@ test('Should throw error if bleep category does not exist', () => {
   const playersSettings = {
     tap: { src: ['tap.webm'], disabled: true }
   };
-  const bleepsSetup: BleepsSetup = { audioSettings, playersSettings };
   const bleepsSettings: any = {
     click: { player: 'click', category: 'xxx' }
   };
   expect(() => {
-    createOrUpdateBleeps({}, bleepsSetup, bleepsSettings);
+    createOrUpdateBleeps({}, audioSettings, playersSettings, bleepsSettings);
   }).toThrow('Bleep category "xxx" is not valid.');
 });

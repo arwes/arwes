@@ -1,68 +1,76 @@
 import {
   BLEEPS_CATEGORIES,
-  BleepsSettings,
   BleepCategoryName,
-  BleepsSetup,
+  BleepsAudioSettings,
+  BleepsPlayersSettings,
+  BleepsSettings,
   Bleeps
 } from '../../constants';
 import { createBleep } from '../createBleep';
 import { updateBleep } from '../updateBleep';
+import { unloadBleep } from '../unloadBleep';
 import { unloadBleeps } from '../unloadBleeps';
 
-const removeBleep = (bleeps: Bleeps, bleepName: string): void => {
-  bleeps[bleepName]?.unload();
-  delete bleeps[bleepName];
-};
-
-const createOrUpdateBleeps = (providedBleeps: Bleeps | undefined, bleepsSetup: BleepsSetup, bleepsSettings: BleepsSettings): Bleeps => {
+const createOrUpdateBleeps = (
+  providedBleeps: Bleeps | undefined,
+  audioSettings: BleepsAudioSettings,
+  playersSettings: BleepsPlayersSettings,
+  bleepsSettings: BleepsSettings
+): Bleeps => {
   const bleeps: Bleeps = providedBleeps ?? {};
 
-  if (bleepsSetup.audioSettings.common?.disabled) {
+  if (audioSettings.common?.disabled) {
     unloadBleeps(bleeps);
-    return {};
+    return bleeps;
   }
 
   Object.keys(bleepsSettings).forEach(bleepName => {
     const bleepSettings = bleepsSettings[bleepName];
 
     if (!bleepSettings) {
-      removeBleep(bleeps, bleepName);
+      unloadBleep(bleeps, bleepName);
       return;
     }
 
     const bleepCategory = bleepSettings.category as BleepCategoryName;
 
-    if (bleepCategory !== undefined && !BLEEPS_CATEGORIES.includes(bleepCategory)) {
+    if (
+      process.env.NODE_ENV !== 'production' &&
+      bleepCategory !== undefined &&
+      !BLEEPS_CATEGORIES.includes(bleepCategory)
+    ) {
       throw new Error(`Bleep category "${bleepCategory}" is not valid.`);
     }
 
-    const audioCategorySettings = bleepsSetup.audioSettings.categories?.[bleepCategory];
-    const audioSettings = {
-      ...bleepsSetup.audioSettings.common,
+    const audioCategorySettings = audioSettings.categories?.[bleepCategory];
+    const processedAudioSettings = {
+      ...audioSettings.common,
       ...audioCategorySettings
     };
 
-    if (audioSettings.disabled) {
-      removeBleep(bleeps, bleepName);
+    if (processedAudioSettings.disabled) {
+      unloadBleep(bleeps, bleepName);
       return;
     }
 
-    const playerSettings = bleepsSetup.playersSettings[bleepSettings.player];
+    const playerSettings = playersSettings[bleepSettings.player];
 
     if (!playerSettings) {
       throw new Error(`Component bleep requires a provided player. Player "${bleepSettings.player}" was not found.`);
     }
 
     if (playerSettings.disabled) {
-      removeBleep(bleeps, bleepName);
+      unloadBleep(bleeps, bleepName);
       return;
     }
 
+    // TODO: Unload and create new bleep if src/format settings changed.
+
     if (bleeps[bleepName]) {
-      bleeps[bleepName] = updateBleep(bleeps[bleepName], audioSettings, playerSettings);
+      bleeps[bleepName] = updateBleep(bleeps[bleepName], processedAudioSettings, playerSettings);
     }
     else {
-      bleeps[bleepName] = createBleep(audioSettings, playerSettings);
+      bleeps[bleepName] = createBleep(processedAudioSettings, playerSettings);
     }
   });
 

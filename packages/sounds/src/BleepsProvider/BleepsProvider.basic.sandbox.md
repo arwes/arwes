@@ -1,33 +1,35 @@
-```js
+```jsx
 const SOUND_CLICK_URL = '/assets/sounds/click.mp3';
 
-const ButtonComponent = ({ bleeps, children }) => {
+const Button = ({ children }) => {
+  const bleeps = useBleeps();
   const onClick = () => bleeps.tap.play();
   return <button onClick={onClick}>{children}</button>;
 };
 
-const bleepsSettings = {
-  tap: {
-    player: 'click'
-  }
-};
-
-const Button = withBleeps(bleepsSettings)(ButtonComponent);
-
 function Sandbox () {
-  const audio = {
+  const audioSettings = {
     common: {
       volume: 0.5
     }
   };
-  const players = {
+  const playersSettings = {
     click: {
       src: [SOUND_CLICK_URL]
     }
   };
+  const bleepsSettings = {
+    tap: {
+      player: 'click'
+    }
+  };
 
   return (
-    <BleepsProvider audio={audio} players={players}>
+    <BleepsProvider
+      audioSettings={audioSettings}
+      playersSettings={playersSettings}
+      bleepsSettings={bleepsSettings}
+    >
       <Button>Bleep!</Button>
     </BleepsProvider>
   );

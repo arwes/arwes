@@ -11,7 +11,7 @@ export const BLEEPS_CATEGORIES = [
   BLEEPS_NOTIFICATION
 ];
 
-// Bleeps Audio
+// Bleeps Audio Settings
 
 export interface BleepsAudioGroupSettings {
   volume?: number
@@ -29,7 +29,7 @@ export interface BleepsAudioSettings {
   categories?: BleepsAudioCategoriesSettings
 }
 
-// Bleeps Players
+// Bleeps Players Settings
 
 export type BleepPlayerName = string;
 
@@ -43,26 +43,18 @@ export interface BleepPlayerSettings {
 
 export type BleepsPlayersSettings = Record<BleepPlayerName, BleepPlayerSettings>;
 
-// Bleeps Provider
-
-export interface BleepsSetup {
-  audioSettings: BleepsAudioSettings
-  playersSettings: BleepsPlayersSettings
-}
-
-// Bleeps Consumer Configuration
+// Bleeps Settings
 
 export type BleepName = string;
 
 export interface BleepSettings {
   player: BleepPlayerName
   category?: BleepCategoryName
-  shared?: boolean
 }
 
 export type BleepsSettings = Record<BleepName, BleepSettings | undefined>;
 
-// Bleeps Consumer Injection
+// Bleeps
 
 export interface Bleep {
   play: () => void
@@ -78,3 +70,12 @@ export interface Bleep {
 }
 
 export type Bleeps = Record<BleepName, Bleep>;
+
+// Bleeps Provider
+
+export interface BleepsSetup {
+  audioSettings: BleepsAudioSettings
+  playersSettings: BleepsPlayersSettings
+  bleepsSettings: BleepsSettings
+  bleeps: Bleeps
+}

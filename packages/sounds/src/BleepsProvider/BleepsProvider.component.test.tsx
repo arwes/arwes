@@ -4,7 +4,7 @@ import React, { FC, useContext } from 'react';
 import { render, cleanup } from '@testing-library/react';
 
 import { makeErrorCatcher } from '../../test-utils/makeErrorCatcher';
-import { BleepsSetup } from '../constants';
+import { BleepsSettings, BleepsSetup } from '../constants';
 import { BleepsContext } from '../BleepsContext';
 import { BleepsProvider } from './BleepsProvider.component';
 
@@ -21,13 +21,46 @@ afterEach(() => {
   cleanup();
 });
 
-test('Should render children and provide audio settings and player settings', () => {
+test('Should receive audio settings, players settings, and bleeps settings, and provide them and respective bleeps', () => {
   let bleepsSetup: BleepsSetup | undefined;
   const Example: FC = () => {
     bleepsSetup = useContext(BleepsContext);
     return null;
   };
-  const audio = {
+  const audioSettings = { common: { volume: 0.7 }, categories: {} };
+  const playersSettings = { click: { src: ['click.webm'] } };
+  const bleepsSettings: BleepsSettings = { tap: { player: 'click' } };
+  render(
+    <BleepsProvider
+      audioSettings={audioSettings}
+      playersSettings={playersSettings}
+      bleepsSettings={bleepsSettings}
+    >
+      <Example />
+    </BleepsProvider>
+  );
+  expect(bleepsSetup?.audioSettings).toEqual(audioSettings);
+  expect(bleepsSetup?.playersSettings).toEqual(playersSettings);
+  expect(bleepsSetup?.bleepsSettings).toEqual(bleepsSettings);
+
+  // The actual bleeps API is not tested but rather then final settings.
+  expect(bleepsSetup?.bleeps).toMatchObject({
+    tap: {
+      _settings: {
+        src: ['click.webm'],
+        volume: 0.7
+      }
+    }
+  });
+});
+
+test('Should receive common and categories of audio settings, players settings, and bleeps settings, and provide them and respective bleeps', () => {
+  let bleepsSetup: BleepsSetup | undefined;
+  const Example: FC = () => {
+    bleepsSetup = useContext(BleepsContext);
+    return null;
+  };
+  const audioSettings = {
     common: {
       volume: 0.7
     },
@@ -40,22 +73,67 @@ test('Should render children and provide audio settings and player settings', ()
       }
     }
   };
-  const players = {
+  const playersSettings = {
     click: {
       src: ['click.webm']
     },
-    notification: {
-      src: ['notification.webm'],
+    typing: {
+      src: ['typing.webm'],
       loop: true
+    },
+    notify: {
+      src: ['notify.webm']
+    }
+  };
+  const bleepsSettings: BleepsSettings = {
+    click: {
+      player: 'click',
+      category: 'interaction'
+    },
+    typing: {
+      player: 'typing',
+      category: 'transition'
+    },
+    notify: {
+      player: 'notify',
+      category: 'notification'
     }
   };
   render(
-    <BleepsProvider audio={audio} players={players}>
+    <BleepsProvider
+      audioSettings={audioSettings}
+      playersSettings={playersSettings}
+      bleepsSettings={bleepsSettings}
+    >
       <Example />
     </BleepsProvider>
   );
-  expect(bleepsSetup?.audioSettings).toEqual(audio);
-  expect(bleepsSetup?.playersSettings).toEqual(players);
+  expect(bleepsSetup?.audioSettings).toEqual(audioSettings);
+  expect(bleepsSetup?.playersSettings).toEqual(playersSettings);
+  expect(bleepsSetup?.bleepsSettings).toEqual(bleepsSettings);
+
+  // The actual bleeps API is not tested but rather their final settings.
+  expect(bleepsSetup?.bleeps).toMatchObject({
+    click: {
+      _settings: {
+        src: ['click.webm'],
+        volume: 0.7
+      }
+    },
+    typing: {
+      _settings: {
+        src: ['typing.webm'],
+        volume: 0.5,
+        loop: true
+      }
+    },
+    notify: {
+      _settings: {
+        src: ['notify.webm'],
+        volume: 1
+      }
+    }
+  });
 });
 
 test('Should extend nested audio settings', () => {
@@ -64,7 +142,7 @@ test('Should extend nested audio settings', () => {
     bleepsSetup = useContext(BleepsContext);
     return null;
   };
-  const audio1 = {
+  const audioSettings1 = {
     common: {
       volume: 0.7
     },
@@ -77,7 +155,7 @@ test('Should extend nested audio settings', () => {
       }
     }
   };
-  const audio2 = {
+  const audioSettings2 = {
     common: {
       volume: 0.8,
       rate: 0.5
@@ -89,9 +167,9 @@ test('Should extend nested audio settings', () => {
     }
   };
   render(
-    <BleepsProvider audio={audio1}>
+    <BleepsProvider audioSettings={audioSettings1}>
       <div>
-        <BleepsProvider audio={audio2}>
+        <BleepsProvider audioSettings={audioSettings2}>
           <Example />
         </BleepsProvider>
       </div>
@@ -121,7 +199,7 @@ test('Should extend nested players settings', () => {
     bleepsSetup = useContext(BleepsContext);
     return null;
   };
-  const players1 = {
+  const playersSettings1 = {
     click: {
       src: ['click.mp3'],
       rate: 1
@@ -130,7 +208,7 @@ test('Should extend nested players settings', () => {
       src: ['notify.webm']
     }
   };
-  const players2 = {
+  const playersSettings2 = {
     click: {
       src: ['click.webm'],
       format: ['webm']
@@ -141,9 +219,9 @@ test('Should extend nested players settings', () => {
     }
   };
   render(
-    <BleepsProvider players={players1}>
+    <BleepsProvider playersSettings={playersSettings1}>
       <div>
-        <BleepsProvider players={players2}>
+        <BleepsProvider playersSettings={playersSettings2}>
           <Example />
         </BleepsProvider>
       </div>
@@ -166,8 +244,45 @@ test('Should extend nested players settings', () => {
   expect(bleepsSetup?.playersSettings).toEqual(expectedPlayers);
 });
 
+test('Should extend nested bleeps settings', () => {
+  let bleepsSetup: BleepsSetup | undefined;
+  const Example: FC = () => {
+    bleepsSetup = useContext(BleepsContext);
+    return null;
+  };
+
+  const playersSettings1 = {
+    click: { src: ['click.mp3'] }
+  };
+  const bleepsSettings1 = {
+    click: { player: 'click' }
+  };
+
+  const bleepsSettings2 = {
+    hover: { player: 'hover' }
+  };
+  const playersSettings2 = {
+    hover: { src: ['hover.mp3'] }
+  };
+
+  render(
+    <BleepsProvider playersSettings={playersSettings1} bleepsSettings={bleepsSettings1}>
+      <div>
+        <BleepsProvider playersSettings={playersSettings2} bleepsSettings={bleepsSettings2}>
+          <Example />
+        </BleepsProvider>
+      </div>
+    </BleepsProvider>
+  );
+  const expectedBleepsSettings = {
+    click: { player: 'click' },
+    hover: { player: 'hover' }
+  };
+  expect(bleepsSetup?.bleepsSettings).toEqual(expectedBleepsSettings);
+});
+
 test('Should throw error if audio categories are not valid', () => {
-  const audio: any = {
+  const audioSettings: any = {
     common: {
       volume: 0.7
     },
@@ -179,7 +294,7 @@ test('Should throw error if audio categories are not valid', () => {
   };
   render(
     <mockErrorCatcher.Catcher>
-      <BleepsProvider audio={audio}>
+      <BleepsProvider audioSettings={audioSettings}>
         <div />
       </BleepsProvider>
     </mockErrorCatcher.Catcher>

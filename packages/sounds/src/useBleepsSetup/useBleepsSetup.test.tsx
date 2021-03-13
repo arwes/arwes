@@ -25,26 +25,19 @@ test('Should provide bleeps setup if provider was found', () => {
     bleepsSetup = useBleepsSetup();
     return null;
   };
-  const audio = {
-    common: {
-      volume: 0.7
-    },
-    categories: {
-      notification: {
-        volume: 1
-      }
-    }
-  };
-  const players = {
-    click: {
-      src: ['click.webm']
-    }
-  };
+  const audioSettings = { common: { volume: 0.7 }, categories: {} };
+  const playersSettings = { click: { src: ['click.webm'] } };
+  const bleepsSettings = { click: { player: 'click' } };
   render(
-    <BleepsProvider audio={audio} players={players}>
+    <BleepsProvider
+      audioSettings={audioSettings}
+      playersSettings={playersSettings}
+      bleepsSettings={bleepsSettings}
+    >
       <Example />
     </BleepsProvider>
   );
-  expect(bleepsSetup?.audioSettings).toEqual(audio);
-  expect(bleepsSetup?.playersSettings).toEqual(players);
+  expect(bleepsSetup?.audioSettings).toEqual(audioSettings);
+  expect(bleepsSetup?.playersSettings).toEqual(playersSettings);
+  expect(bleepsSetup?.bleepsSettings).toEqual(bleepsSettings);
 });

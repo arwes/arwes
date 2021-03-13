@@ -12,4 +12,5 @@ test('Should unload all provided bleeps', () => {
   unloadBleeps(bleeps);
   expect(xUnload).toHaveBeenCalled();
   expect(yUnload).toHaveBeenCalled();
+  expect(bleeps).toEqual({});
 });
