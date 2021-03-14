@@ -2,8 +2,9 @@
 const FONT_FAMILY_ROOT = '"Titillium Web", sans-serif';
 const SOUND_TYPING_URL = '/assets/sounds/typing.mp3';
 
-const audio = { common: { volume: 0.4 } };
-const players = { typing: { src: [SOUND_TYPING_URL], loop: true } };
+const audioSettings = { common: { volume: 0.25 } };
+const playersSettings = { typing: { src: [SOUND_TYPING_URL], loop: true } };
+const bleepsSettings = { typing: { player: 'typing' } };
 const animatorGeneral = { duration: { enter: 150, exit: 150, stagger: 40 } };
 
 const Sandbox = () => {
@@ -16,7 +17,11 @@ const Sandbox = () => {
 
   return (
     <ArwesThemeProvider>
-      <BleepsProvider audio={audio} players={players}>
+      <BleepsProvider
+        audioSettings={audioSettings}
+        playersSettings={playersSettings}
+        bleepsSettings={bleepsSettings}
+      >
         <StylesBaseline styles={{
           body: { fontFamily: FONT_FAMILY_ROOT }
         }} />

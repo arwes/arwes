@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
-import { WithBleepsInputProps } from '@arwes/sounds';
+import { useBleeps } from '@arwes/sounds';
 
 import { ARWES_CORE_FRAME_CLASSNAME, ARWES_CORE_FRAME_BG_CLASSNAME } from '../constants';
 import { generateStyles } from './FrameUnderline.styles';
@@ -20,10 +20,9 @@ interface FrameUnderlineProps {
   rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
 }
 
-const FrameUnderline: FC<FrameUnderlineProps & HTMLAttributes<HTMLElement> & WithAnimatorInputProps & WithBleepsInputProps> = props => {
+const FrameUnderline: FC<FrameUnderlineProps & HTMLAttributes<HTMLElement> & WithAnimatorInputProps> = props => {
   const {
     animator,
-    bleeps,
     as: asProvided,
     palette,
     hover,
@@ -38,6 +37,8 @@ const FrameUnderline: FC<FrameUnderlineProps & HTMLAttributes<HTMLElement> & Wit
   const { animate } = animator;
 
   const theme = useTheme();
+  const bleeps = useBleeps();
+
   const styles = useMemo(
     () => generateStyles(theme, { animate, palette, hover, disabled }),
     [theme, animate, palette, hover, disabled]

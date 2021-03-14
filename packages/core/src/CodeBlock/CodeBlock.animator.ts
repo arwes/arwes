@@ -6,12 +6,12 @@ import { Bleeps } from '@arwes/sounds';
 type ContainerRef = MutableRefObject<HTMLElement>;
 
 const playBleeps = (bleeps: Bleeps): void => {
-  bleeps.transition?.play();
+  bleeps.readout?.play();
 };
 
 const stopBleeps = (bleeps: Bleeps): void => {
-  if (bleeps.transition?.getIsPlaying()) {
-    bleeps.transition?.stop();
+  if (bleeps.readout?.getIsPlaying()) {
+    bleeps.readout?.stop();
   }
 };
 

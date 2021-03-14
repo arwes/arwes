@@ -35,7 +35,7 @@ const transitionCard = (
   const { space } = theme;
 
   if (isEntering) {
-    bleeps.transitionIn?.play();
+    bleeps.object?.play();
 
     anime({
       targets: container.querySelector('.arwes-card__line-picture'),

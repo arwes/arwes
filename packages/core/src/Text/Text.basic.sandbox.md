@@ -2,8 +2,9 @@
 const FONT_FAMILY_ROOT = '"Titillium Web", sans-serif';
 const SOUND_TYPING_URL = '/assets/sounds/typing.mp3';
 
-const audio = { common: { volume: 0.1 } };
-const players = { typing: { src: [SOUND_TYPING_URL], loop: true } };
+const audioSettings = { common: { volume: 0.25 } };
+const playersSettings = { typing: { src: [SOUND_TYPING_URL], loop: true } };
+const bleepsSettings = { typing: { player: 'typing' } };
 const duration = { enter: 1000, exit: 1000 };
 
 function Sandbox () {
@@ -19,7 +20,11 @@ function Sandbox () {
       <StylesBaseline styles={{
         body: { fontFamily: FONT_FAMILY_ROOT }
       }} />
-      <BleepsProvider audio={audio} players={players}>
+      <BleepsProvider
+        audioSettings={audioSettings}
+        playersSettings={playersSettings}
+        bleepsSettings={bleepsSettings}
+      >
         <Text animator={{ duration, activate }}>
           Lorem ipsum dolor sit amet, <b>consectetur adipiscing</b> elit,
           sed do eiusmod tempor <i>incididunt <b>ut labore et dolore

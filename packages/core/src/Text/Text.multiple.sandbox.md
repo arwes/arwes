@@ -2,8 +2,9 @@
 const FONT_FAMILY_ROOT = '"Titillium Web", sans-serif';
 const SOUND_TYPING_URL = '/assets/sounds/typing.mp3';
 
-const audio = { common: { volume: 0.1 } };
-const players = { typing: { src: [SOUND_TYPING_URL], loop: true } };
+const audioSettings = { common: { volume: 0.25 } };
+const playersSettings = { typing: { src: [SOUND_TYPING_URL], loop: true } };
+const bleepsSettings = { typing: { player: 'typing' } };
 
 function Sandbox () {
   const [activate, setActivate] = React.useState(true);
@@ -18,7 +19,11 @@ function Sandbox () {
       <StylesBaseline styles={{
         body: { fontFamily: FONT_FAMILY_ROOT }
       }} />
-      <BleepsProvider audio={audio} players={players}>
+      <BleepsProvider
+        audioSettings={audioSettings}
+        playersSettings={playersSettings}
+        bleepsSettings={bleepsSettings}
+      >
         <AnimatorGeneralProvider animator={{
           duration: { enter: 200, exit: 200 }
         }}>

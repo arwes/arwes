@@ -8,17 +8,25 @@ const IMAGE_LG_URL = '/assets/images/wallpaper-large.jpg';
 const SOUND_OBJECT_URL = '/assets/sounds/object.mp3';
 const SOUND_TYPING_URL = '/assets/sounds/typing.mp3';
 
-const audio = { common: { volume: 0.4 } };
-const players = {
+const audioSettings = { common: { volume: 0.25 } };
+const playersSettings = {
   object: { src: [SOUND_OBJECT_URL] },
   typing: { src: [SOUND_TYPING_URL], loop: true }
+};
+const bleepsSettings = {
+  object: { player: 'object' },
+  typing: { player: 'typing' }
 };
 
 const Sandbox = () => {
   return (
     <ArwesThemeProvider>
       <StylesBaseline styles={{ body: { fontFamily: ROOT_FONT_FAMILY } }} />
-      <BleepsProvider audio={audio} players={players}>
+      <BleepsProvider
+        audioSettings={audioSettings}
+        playersSettings={playersSettings}
+        bleepsSettings={bleepsSettings}
+      >
         <Figure
           src={[
             IMAGE_XS_URL,

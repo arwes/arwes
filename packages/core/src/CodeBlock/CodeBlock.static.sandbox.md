@@ -5,13 +5,12 @@ const FONT_FAMILY_CODE = '"Source Code Pro", monospace';
 const Sandbox = () => {
   return (
     <ArwesThemeProvider>
-      <BleepsProvider audio={{ common: { disabled: true } }}>
-        <StylesBaseline styles={{
-          'html, body': { fontFamily: FONT_FAMILY_ROOT },
-          'code, pre': { fontFamily: FONT_FAMILY_CODE }
-        }} />
-        <CodeBlock animator={{ animate: false }} lang='jsx'>
-          {`const startCodeBlockAnimation = (
+      <StylesBaseline styles={{
+        'html, body': { fontFamily: FONT_FAMILY_ROOT },
+        'code, pre': { fontFamily: FONT_FAMILY_CODE }
+      }} />
+      <CodeBlock animator={{ animate: false }} lang='jsx'>
+        {`const startCodeBlockAnimation = (
   animator: AnimatorRef,
   ref: RootRef,
   theme: ArwesTheme
@@ -41,8 +40,7 @@ const Sandbox = () => {
     width: isEntering ? [0, '100%'] : ['100%', 0]
   });
 };`}
-        </CodeBlock>
-      </BleepsProvider>
+      </CodeBlock>
     </ArwesThemeProvider>
   );
 };

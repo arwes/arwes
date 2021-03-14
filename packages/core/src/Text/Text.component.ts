@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import { css, cx, keyframes } from '@emotion/css';
 import { jsx } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
-import { WithBleepsInputProps } from '@arwes/sounds';
+import { useBleeps } from '@arwes/sounds';
 
 import { TextAnimationRefs, startTextAnimation } from '../utils/textAnimations';
 import { generateStyles } from './Text.styles';
@@ -32,10 +32,9 @@ interface TextProps {
   rootRef?: MutableRefObject<HTMLElement | null> | ((node: HTMLElement) => void)
 }
 
-const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = props => {
+const Text: FC<TextProps & WithAnimatorInputProps> = props => {
   const {
     animator,
-    bleeps,
     as: providedAs,
     blink: hasBlink,
     blinkText,
@@ -61,6 +60,8 @@ const Text: FC<TextProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
     blinkNode,
     animationFrame
   });
+
+  const bleeps = useBleeps();
 
   animator.setupAnimateRefs(animateRefs, bleeps);
 

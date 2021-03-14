@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
-import { WithBleepsInputProps } from '@arwes/sounds';
+import { useBleeps } from '@arwes/sounds';
 
 import { Text, TextProps } from '../Text';
 import { generateStyles } from './CodeBlock.styles';
@@ -17,10 +17,9 @@ interface CodeBlockProps {
   rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
 }
 
-const CodeBlock: FC<CodeBlockProps & WithAnimatorInputProps & WithBleepsInputProps> = props => {
+const CodeBlock: FC<CodeBlockProps & WithAnimatorInputProps> = props => {
   const {
     animator,
-    bleeps,
     lang,
     contentTextProps,
     children,
@@ -31,6 +30,8 @@ const CodeBlock: FC<CodeBlockProps & WithAnimatorInputProps & WithBleepsInputPro
   const { animate } = animator;
 
   const theme = useTheme();
+  const bleeps = useBleeps();
+
   const styles = useMemo(() => generateStyles(theme, { animate }), [theme, animate]);
 
   const containerRef = useRef<HTMLDivElement | null>(null);

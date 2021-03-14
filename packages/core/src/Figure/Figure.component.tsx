@@ -15,7 +15,7 @@ import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { THEME_BREAKPOINTS_KEYS, ThemeSettingsBreakpoint } from '@arwes/design';
 import { WithAnimatorInputProps } from '@arwes/animation';
-import { WithBleepsInputProps } from '@arwes/sounds';
+import { useBleeps } from '@arwes/sounds';
 
 import { loadImage } from '../utils/loadImage';
 import { transitionAppear } from '../utils/appearTransitions';
@@ -38,10 +38,9 @@ interface FigureProps {
   rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
 }
 
-const Figure: FC<FigureProps & WithAnimatorInputProps & WithBleepsInputProps> = props => {
+const Figure: FC<FigureProps & WithAnimatorInputProps> = props => {
   const {
     animator,
-    bleeps,
     src,
     alt,
     fluid,
@@ -57,6 +56,8 @@ const Figure: FC<FigureProps & WithAnimatorInputProps & WithBleepsInputProps> = 
   const { animate } = animator;
 
   const theme = useTheme();
+  const bleeps = useBleeps();
+
   const styles = useMemo(
     () => generateStyles(theme, { animate, fluid }),
     [theme, animate, fluid]
@@ -289,4 +290,4 @@ Figure.defaultProps = {
   }
 };
 
-export { FigureProps, Figure };
+export { FigurePropsSrcListItem, FigureProps, Figure };

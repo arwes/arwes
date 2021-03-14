@@ -16,7 +16,7 @@ const useAnimateEntering = (
   styles: CSSObject,
   bleeps: Bleeps
 ): void => {
-  bleeps.transitionIn?.play();
+  bleeps.object?.play();
 
   const { duration } = animator;
   const container = containerRef.current;

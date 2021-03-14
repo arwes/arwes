@@ -9,8 +9,8 @@ import {
 } from './TableRow.component';
 import { animator } from './TableRow.animator';
 
-const TableRow: FC<TableRowProps & WithAnimatorOutputProps> =
-  withAnimator(animator)(Component as any) as any;
+// TODO: Fix props or HOC to properly use nested component props with withAnimator.
+const TableRow: FC<TableRowProps & WithAnimatorOutputProps> = withAnimator(animator)(Component as any);
 
 export {
   TableRowPropsColumn,

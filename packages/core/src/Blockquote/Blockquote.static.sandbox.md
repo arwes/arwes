@@ -16,17 +16,15 @@ const Example = ({ palette }) => (
 const Sandbox = () => {
   return (
     <ArwesThemeProvider>
-      <BleepsProvider audio={{ common: { disabled: true } }}>
-        <StylesBaseline styles={{
-          body: { fontFamily: FONT_FAMILY_ROOT }
-        }} />
-        <Animator animator={{ animate: false }}>
-          <Example />
-          <Example palette='secondary' />
-          <Example palette='success' />
-          <Example palette='error' />
-        </Animator>
-      </BleepsProvider>
+      <StylesBaseline styles={{
+        body: { fontFamily: FONT_FAMILY_ROOT }
+      }} />
+      <Animator animator={{ animate: false }}>
+        <Example />
+        <Example palette='secondary' />
+        <Example palette='success' />
+        <Example palette='error' />
+      </Animator>
     </ArwesThemeProvider>
   );
 };

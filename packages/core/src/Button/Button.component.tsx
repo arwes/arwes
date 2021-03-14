@@ -19,13 +19,16 @@ import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorOutputProps, AnimatorFlow } from '@arwes/animation';
-import { WithBleepsOutputProps, WithBleepsInputProps } from '@arwes/sounds';
+import { useBleeps } from '@arwes/sounds';
 
 import { FrameUnderline } from '../FrameUnderline';
 import { generateStyles } from './Button.styles';
 import { highlightFrameBgs } from './Button.effects';
 
-type ButtonPropsFrameComponent = ComponentType<HTMLAttributes<HTMLElement> & WithAnimatorOutputProps & WithBleepsOutputProps & { [prop: string]: any }>;
+// TODO: Should there be a common FrameCommonComponentProps interface to share
+// across components using composable frames? It could prevent the explicit
+// interface definition in multiple components.
+type ButtonPropsFrameComponent = ComponentType<HTMLAttributes<HTMLElement> & WithAnimatorOutputProps & { [prop: string]: any }>;
 
 interface ButtonProps {
   FrameComponent?: ButtonPropsFrameComponent
@@ -41,10 +44,9 @@ interface ButtonProps {
 // The component will receive the `animator` as `AnimatorInstanceSettings` and
 // not as `AnimatorRef` since it is encapsulating another animated component.
 // That's why the props accepts `WithAnimatorOutputProps`.
-const Button: FC<ButtonProps & WithAnimatorOutputProps & WithBleepsInputProps> = props => {
+const Button: FC<ButtonProps & WithAnimatorOutputProps> = props => {
   const {
     animator: animatorSettings,
-    bleeps,
     palette,
     disabled,
     active,
@@ -57,6 +59,8 @@ const Button: FC<ButtonProps & WithAnimatorOutputProps & WithBleepsInputProps> =
   const FrameComponent = props.FrameComponent as ButtonPropsFrameComponent;
 
   const theme = useTheme();
+  const bleeps = useBleeps();
+
   const styles = useMemo(
     () => generateStyles(theme, { palette, active, disabled }),
     [theme, palette, active, disabled]

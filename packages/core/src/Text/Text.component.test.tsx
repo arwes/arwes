@@ -12,9 +12,8 @@ test('Should render component classes and content with default "span" element', 
     setupAnimateRefs: () => {},
     flow: {}
   };
-  const bleeps: any = {};
   const { container } = render(
-    <Text animator={animator} bleeps={bleeps}>
+    <Text animator={animator}>
       Furutistic <b>Sci-Fi</b> UI <i>Web</i> Framework
     </Text>
   );

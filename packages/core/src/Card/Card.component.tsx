@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
-import { WithBleepsInputProps } from '@arwes/sounds';
+import { useBleeps } from '@arwes/sounds';
 
 import { Text } from '../Text';
 import { generateStyles } from './Card.styles';
@@ -23,10 +23,9 @@ interface CardProps {
   rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
 }
 
-const Card: FC<CardProps & WithAnimatorInputProps & WithBleepsInputProps> = props => {
+const Card: FC<CardProps & WithAnimatorInputProps> = props => {
   const {
     animator,
-    bleeps,
     image,
     title,
     options,
@@ -40,6 +39,8 @@ const Card: FC<CardProps & WithAnimatorInputProps & WithBleepsInputProps> = prop
   const { animate } = animator;
 
   const theme = useTheme();
+  const bleeps = useBleeps();
+
   const styles = useMemo(
     () => generateStyles(theme, { animate, landscape, hover }),
     [theme, animate, landscape, hover]

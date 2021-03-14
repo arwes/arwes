@@ -2,12 +2,12 @@ import { AnimatorClassSettings, AnimatorRef } from '@arwes/animation';
 import { Bleeps } from '@arwes/sounds';
 
 const playTableTransitionBleep = (bleeps: Bleeps): void => {
-  bleeps.transition?.play();
+  bleeps.readout?.play();
 };
 
 const stopTableTransitionBleep = (bleeps: Bleeps): void => {
-  if (bleeps.transition?.getIsPlaying()) {
-    bleeps.transition?.stop();
+  if (bleeps.readout?.getIsPlaying()) {
+    bleeps.readout?.stop();
   }
 };
 

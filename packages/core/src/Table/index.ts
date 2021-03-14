@@ -1,14 +1,10 @@
 import { FC } from 'react';
 import { WithAnimatorOutputProps, withAnimator } from '@arwes/animation';
-import { WithBleepsOutputProps, withBleeps } from '@arwes/sounds';
 
 import { TableProps, Table as Component } from './Table.component';
 import { animator } from './Table.animator';
-import { bleepsSettings } from './Table.bleeps';
 
-const Table: FC<TableProps & WithAnimatorOutputProps & WithBleepsOutputProps> =
-  withAnimator(animator)(
-    withBleeps(bleepsSettings)(Component as any) as any
-  ) as any;
+// TODO: Fix props or HOC to properly use nested component props with withAnimator.
+const Table: FC<TableProps & WithAnimatorOutputProps> = withAnimator(animator)(Component as any);
 
 export { TableProps, Table };

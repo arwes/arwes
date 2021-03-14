@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
-import { WithBleepsInputProps } from '@arwes/sounds';
+import { useBleeps } from '@arwes/sounds';
 
 import { TableRowPropsColumn, TableRowPropsColumnWidth, TableRow } from './TableRow';
 import { generateStyles } from './Table.styles';
@@ -24,10 +24,9 @@ interface TableProps {
   rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
 }
 
-const Table: FC<TableProps & WithAnimatorInputProps & WithBleepsInputProps> = props => {
+const Table: FC<TableProps & WithAnimatorInputProps> = props => {
   const {
     animator,
-    bleeps,
     headers,
     dataset,
     columnWidths,
@@ -38,6 +37,7 @@ const Table: FC<TableProps & WithAnimatorInputProps & WithBleepsInputProps> = pr
   } = props;
 
   const theme = useTheme();
+  const bleeps = useBleeps();
   const styles = useMemo(() => generateStyles(theme), [theme]);
 
   animator.setupAnimateRefs(bleeps);

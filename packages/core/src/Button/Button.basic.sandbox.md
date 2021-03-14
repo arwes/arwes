@@ -6,11 +6,16 @@ const SOUND_CLICK_URL = '/assets/sounds/click.mp3';
 
 const globalStyles = { body: { fontFamily: FONT_FAMILY_ROOT } };
 const animatorGeneral = { duration: { enter: 200, exit: 200 } };
-const audio = { common: { volume: 0.4 } };
-const players = {
+const audioSettings = { common: { volume: 0.25 } };
+const playersSettings = {
   assemble: { src: [SOUND_ASSEMBLE_URL], loop: true },
   typing: { src: [SOUND_TYPING_URL], loop: true },
   click: { src: [SOUND_CLICK_URL] }
+};
+const bleepsSettings = {
+  assemble: { player: 'assemble' },
+  typing: { player: 'typing' },
+  click: { player: 'click' }
 };
 
 const Sandbox = () => {
@@ -23,8 +28,12 @@ const Sandbox = () => {
 
   return (
     <ArwesThemeProvider>
-      <BleepsProvider audio={audio} players={players}>
-        <StylesBaseline styles={globalStyles} />
+      <StylesBaseline styles={globalStyles} />
+      <BleepsProvider
+        audioSettings={audioSettings}
+        playersSettings={playersSettings}
+        bleepsSettings={bleepsSettings}
+      >
         <AnimatorGeneralProvider animator={animatorGeneral}>
           <Button
             animator={{ activate }}

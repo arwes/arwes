@@ -4,10 +4,14 @@ const FONT_FAMILY_CODE = '"Source Code Pro", monospace';
 const SOUND_TYPING_URL = '/assets/sounds/typing.mp3';
 const SOUND_READOUT_URL = '/assets/sounds/readout.mp3';
 
-const audio = { common: { volume: 0.4 } };
-const players = {
+const audioSettings = { common: { volume: 0.25 } };
+const playersSettings = {
   typing: { src: [SOUND_TYPING_URL], loop: true },
   readout: { src: [SOUND_READOUT_URL], loop: true }
+};
+const bleepsSettings = {
+  typing: { player: 'typing' },
+  readout: { player: 'readout' }
 };
 const animatorGeneral = { duration: { enter: 300, exit: 300 } };
 
@@ -21,7 +25,11 @@ const Sandbox = () => {
 
   return (
     <ArwesThemeProvider>
-      <BleepsProvider audio={audio} players={players}>
+      <BleepsProvider
+        audioSettings={audioSettings}
+        playersSettings={playersSettings}
+        bleepsSettings={bleepsSettings}
+      >
         <StylesBaseline styles={{
           'html, body': { fontFamily: FONT_FAMILY_ROOT },
           'code, pre': { fontFamily: FONT_FAMILY_CODE }

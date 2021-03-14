@@ -7,10 +7,20 @@ import { ArwesTheme } from '../ArwesThemeProvider';
 
 type ContainerRef = MutableRefObject<HTMLDivElement>;
 
+const stopFrameUnderlineBleeps = (bleeps: Bleeps): void => {
+  if (bleeps.assemble?.getIsPlaying()) {
+    bleeps.assemble?.stop();
+  }
+};
+
 const transitionRemoveFrameUnderline = (
   animator: AnimatorRef,
-  containerRef: ContainerRef
+  containerRef: ContainerRef,
+  theme: ArwesTheme,
+  bleeps: Bleeps
 ): void => {
+  stopFrameUnderlineBleeps(bleeps);
+
   if (containerRef.current) {
     const container = containerRef.current;
     const animated = Array.from(
@@ -29,7 +39,9 @@ const transitionFrameUnderline = (
   theme: ArwesTheme,
   bleeps: Bleeps
 ): void => {
-  transitionRemoveFrameUnderline(animator, containerRef);
+  transitionRemoveFrameUnderline(animator, containerRef, theme, bleeps);
+
+  bleeps.assemble?.play();
 
   const { duration, flow } = animator;
   const isEntering = flow.entering || flow.entered;
@@ -52,8 +64,6 @@ const transitionFrameUnderline = (
     easing: 'easeOutSine',
     opacity: isEntering ? [0, 1] : [1, 0]
   });
-
-  bleeps?.transition.play();
 };
 
 const useAnimateEntered = (
@@ -62,7 +72,7 @@ const useAnimateEntered = (
   theme: ArwesTheme,
   bleeps: Bleeps
 ): void => {
-  bleeps?.transition.stop();
+  stopFrameUnderlineBleeps(bleeps);
 };
 
 const useAnimateExited = (
@@ -71,7 +81,7 @@ const useAnimateExited = (
   theme: ArwesTheme,
   bleeps: Bleeps
 ): void => {
-  bleeps?.transition.stop();
+  stopFrameUnderlineBleeps(bleeps);
 };
 
 const animator: AnimatorClassSettings = {
