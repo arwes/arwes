@@ -75,6 +75,10 @@ const createOrUpdateBleeps = (
       bleeps[bleepName] = updateBleep(bleeps[bleepName], processedAudioSettings, playerSettings);
     }
     else {
+      if (bleeps[bleepName]?.getIsPlaying()) {
+        bleeps[bleepName].stop();
+      }
+
       bleeps[bleepName] = createBleep(processedAudioSettings, playerSettings);
     }
   });

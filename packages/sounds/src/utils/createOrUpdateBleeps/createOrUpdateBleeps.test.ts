@@ -30,7 +30,7 @@ test('Should create bleeps with common and category settings', () => {
     type: { player: 'type', category: BLEEPS_TRANSITION }
   };
   const bleeps = createOrUpdateBleeps({}, audioSettings, playersSettings, bleepsSettings);
-  expect(Object.keys(bleeps)).toHaveLength(3);
+  expect(Object.keys(bleeps)).toEqual(['click', 'hover', 'type']);
   expect(bleeps.click).toMatchObject({
     _settings: { volume: 0.9, src: ['click.webm'] }
   });
@@ -61,7 +61,7 @@ test('Should create and update bleeps with common and category settings changes'
   };
   bleeps = createOrUpdateBleeps(bleeps, audioSettings1, playersSettings1, bleepsSettings);
 
-  expect(Object.keys(bleeps)).toHaveLength(2);
+  expect(Object.keys(bleeps)).toEqual(['click', 'hover']);
   expect(bleeps.click).toMatchObject({
     _settings: { volume: 0.9, src: ['click.webm'] }
   });
@@ -81,7 +81,7 @@ test('Should create and update bleeps with common and category settings changes'
   };
   bleeps = createOrUpdateBleeps(bleeps, audioSettings2, playersSettings2, bleepsSettings);
 
-  expect(Object.keys(bleeps)).toHaveLength(2);
+  expect(Object.keys(bleeps)).toEqual(['click', 'hover']);
   expect(bleeps.click).toMatchObject({
     _settings: { volume: 1, src: ['click.webm'] }
   });
@@ -141,6 +141,30 @@ test('Should create and not update bleeps with player "src" or "format" changes'
   expect(bleeps2.hover).toMatchObject({
     _settings: { volume: 1, src: ['hover.webm'], format: [] }
   });
+});
+
+test('Should stop current bleeps playing when they are re-created', () => {
+  const audioSettings = { common: { volume: 1 } };
+  const playersSettings1 = { click: { src: ['click.webm'] } };
+  const bleepsSettings: BleepsSettings = { click: { player: 'click' } };
+  const bleeps1 = createOrUpdateBleeps({}, audioSettings, playersSettings1, bleepsSettings);
+
+  // The current bleep is copied so it can be compared later.
+  const bleeps1Click = bleeps1.click;
+
+  expect(Object.keys(bleeps1)).toEqual(['click']);
+
+  // Simulate the bleep is playing.
+  jest.spyOn(bleeps1.click, 'getIsPlaying').mockImplementation(() => true);
+  const onStop = jest.spyOn(bleeps1.click, 'stop');
+
+  // "src" setting changed so the bleep is re-created.
+  const playersSettings2 = { click: { src: ['click.mp3'] } };
+  const bleeps2 = createOrUpdateBleeps(bleeps1, audioSettings, playersSettings2, bleepsSettings);
+
+  expect(Object.keys(bleeps2)).toEqual(['click']);
+  expect(bleeps1Click._howl).not.toBe(bleeps2.click._howl); // Recreated.
+  expect(onStop).toHaveBeenCalled();
 });
 
 test('Should not create disabled common bleeps', () => {
