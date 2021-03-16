@@ -58,8 +58,6 @@ export type BleepsSettings = Record<BleepName, BleepSettings | undefined>;
 
 export interface Bleep {
   play: () => void
-  pause: () => void
-  seek: (time: number) => void
   stop: () => void
   getIsPlaying: () => boolean
   getDuration: () => number

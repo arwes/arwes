@@ -22,8 +22,6 @@ test('Should create bleep with provided settings', () => {
       loop: true
     },
     play: expect.any(Function),
-    pause: expect.any(Function),
-    seek: expect.any(Function),
     stop: expect.any(Function),
     getIsPlaying: expect.any(Function),
     getDuration: expect.any(Function),
@@ -71,32 +69,6 @@ test('Should always set shared sound id as number or undefined when playing (eve
   expect(playId).toBeUndefined();
   expect(howlLoad).toHaveBeenCalled();
   expect(howlPlay).toHaveBeenCalled();
-});
-
-test('Should allow pausing the shared sound', () => {
-  const audioSettings = { volume: 0.8 };
-  const playerSettings = { src: ['sound.webm'] };
-  const bleep = createBleep(audioSettings, playerSettings);
-  const howlPlay = jest.spyOn(bleep._howl, 'play').mockImplementation(() => 777);
-  const howlPause = jest.spyOn(bleep._howl, 'pause');
-  bleep.play();
-  bleep.pause();
-  expect(howlPlay).toHaveBeenCalled();
-  expect(howlPause).toHaveBeenCalledTimes(1);
-  expect(howlPause).toHaveBeenNthCalledWith(1, 777);
-});
-
-test('Should allow seeking duration time of shared sound', () => {
-  const audioSettings = { volume: 0.8 };
-  const playerSettings = { src: ['sound.webm'] };
-  const bleep = createBleep(audioSettings, playerSettings);
-  const howlPlay = jest.spyOn(bleep._howl, 'play').mockImplementation(() => 777);
-  const howlSeek = jest.spyOn(bleep._howl, 'seek');
-  bleep.play();
-  bleep.seek(444);
-  expect(howlPlay).toHaveBeenCalled();
-  expect(howlSeek).toHaveBeenCalledTimes(1);
-  expect(howlSeek).toHaveBeenNthCalledWith(1, 444, 777);
 });
 
 test('Should allow stop play in shared sound', () => {

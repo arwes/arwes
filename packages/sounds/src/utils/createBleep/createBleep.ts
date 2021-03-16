@@ -28,21 +28,19 @@ const createBleep = (audioSettings: BleepsAudioGroupSettings, playerSettings: Bl
     // To prevent errors, the id to pass to play must be a number or undefined.
     lastId = newId || undefined;
   };
-  const pause = (): void => {
-    howl.pause(lastId);
-  };
-  const seek = (time: number): void => {
-    howl.seek(time, lastId);
-  };
+
   const stop = (): void => {
     howl.stop(lastId);
   };
+
   const getIsPlaying = (): boolean => {
     return howl.playing(lastId);
   };
+
   const getDuration = (): number => {
     return howl.duration();
   };
+
   const unload = (): void => {
     howl.unload();
   };
@@ -51,8 +49,6 @@ const createBleep = (audioSettings: BleepsAudioGroupSettings, playerSettings: Bl
     _settings: settings,
     _howl: howl,
     play,
-    pause,
-    seek,
     stop,
     getIsPlaying,
     getDuration,
