@@ -1,4 +1,4 @@
-```js
+```jsx
 const COLOR_ON = '#27efb5'; // cyan
 const COLOR_OFF = '#efb527'; // orange
 

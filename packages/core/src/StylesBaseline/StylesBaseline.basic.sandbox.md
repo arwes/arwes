@@ -3,13 +3,33 @@ const FONT_FAMILY_ROOT = '"Titillium Web", sans-serif';
 const FONT_FAMILY_CODE = '"Source Code Pro", monospace';
 const IMAGE_URL = '/assets/images/wallpaper-large.jpg';
 
-const fontScale = 1; // Default
-const space = 5; // Default
-const outline = 1; // Default
-const shadow = { blur: 1, spread: 1 }; // Default
+// Theme with default settings.
+let themeSettings = {};
+
+// The theme can receive configurations for the palette,
+// the scales, spacing, outlines, shadows, and more.
+// <<UNCOMMENT THE FOLLOWING CODE TO TEST THEME SETTINGS.>>
+/*
+const palette = {
+  primary: { main: '#40ffce' },
+  secondary: { main: '#c466dc' },
+  neutral: { main: '#001711' },
+  text: {
+    root: '#35efaa',
+    headings: '#40ffce',
+    link: '#c466dc',
+    linkHover: '#d491fa'
+  }
+};
+const fontScale = 1.5;
+const space = 8;
+const outline = 2;
+const shadow = { blur: 2 };
+themeSettings = { palette, fontScale, space, outline, shadow };
+*/
 
 render(
-  <ArwesThemeProvider themeSettings={{ fontScale, space, outline, shadow }}>
+  <ArwesThemeProvider themeSettings={themeSettings}>
     <StylesBaseline styles={{
       'html, body': { fontFamily: FONT_FAMILY_ROOT },
       'code, pre': { fontFamily: FONT_FAMILY_CODE }

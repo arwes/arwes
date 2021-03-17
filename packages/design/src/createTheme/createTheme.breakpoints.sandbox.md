@@ -1,4 +1,7 @@
 ```jsx
+// RESIZE THE BROWSER VIEWPORT TO TEST
+// THE MEDIA QUERIES STYLES.
+
 /* @jsx emotion.jsx */
 
 const Heading = ({ palette }) => (
