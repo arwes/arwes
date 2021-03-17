@@ -6,16 +6,16 @@ const IMAGE_XS_URL = '/assets/images/wallpaper.jpg';
 const IMAGE_MD_URL = '/assets/images/wallpaper-medium.jpg';
 const IMAGE_LG_URL = '/assets/images/wallpaper-large.jpg';
 const SOUND_OBJECT_URL = '/assets/sounds/object.mp3';
-const SOUND_TYPING_URL = '/assets/sounds/typing.mp3';
+const SOUND_TYPE_URL = '/assets/sounds/type.mp3';
 
 const audioSettings = { common: { volume: 0.25 } };
 const playersSettings = {
   object: { src: [SOUND_OBJECT_URL] },
-  typing: { src: [SOUND_TYPING_URL], loop: true }
+  type: { src: [SOUND_TYPE_URL], loop: true }
 };
 const bleepsSettings = {
   object: { player: 'object' },
-  typing: { player: 'typing' }
+  type: { player: 'type' }
 };
 
 const Sandbox = () => {

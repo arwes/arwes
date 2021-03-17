@@ -1,16 +1,16 @@
 ```jsx
 const FONT_FAMILY_ROOT = '"Titillium Web", sans-serif';
 const FONT_FAMILY_CODE = '"Source Code Pro", monospace';
-const SOUND_TYPING_URL = '/assets/sounds/typing.mp3';
+const SOUND_TYPE_URL = '/assets/sounds/type.mp3';
 const SOUND_READOUT_URL = '/assets/sounds/readout.mp3';
 
 const audioSettings = { common: { volume: 0.25 } };
 const playersSettings = {
-  typing: { src: [SOUND_TYPING_URL], loop: true },
+  type: { src: [SOUND_TYPE_URL], loop: true },
   readout: { src: [SOUND_READOUT_URL], loop: true }
 };
 const bleepsSettings = {
-  typing: { player: 'typing' },
+  type: { player: 'type' },
   readout: { player: 'readout' }
 };
 const animatorGeneral = { duration: { enter: 300, exit: 300 } };

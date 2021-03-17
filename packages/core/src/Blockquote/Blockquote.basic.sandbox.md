@@ -1,10 +1,10 @@
 ```jsx
 const FONT_FAMILY_ROOT = '"Titillium Web", sans-serif';
-const SOUND_TYPING_URL = '/assets/sounds/typing.mp3';
+const SOUND_TYPE_URL = '/assets/sounds/type.mp3';
 
 const audioSettings = { common: { volume: 0.25 } };
-const playersSettings = { typing: { src: [SOUND_TYPING_URL], loop: true } };
-const bleepsSettings = { typing: { player: 'typing' } };
+const playersSettings = { type: { src: [SOUND_TYPE_URL], loop: true } };
+const bleepsSettings = { type: { player: 'type' } };
 const animatorGeneral = { duration: { enter: 200, exit: 200 } };
 
 const Example = ({ palette }) => (

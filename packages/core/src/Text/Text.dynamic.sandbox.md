@@ -1,6 +1,6 @@
 ```jsx
 const FONT_FAMILY_ROOT = '"Titillium Web", sans-serif';
-const SOUND_TYPING_URL = '/assets/sounds/typing.mp3';
+const SOUND_TYPE_URL = '/assets/sounds/type.mp3';
 
 const childrenList = [
   '1) Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.',
@@ -8,8 +8,8 @@ const childrenList = [
   '3) Ut enim ad minim veniam, quis nostrud exercitation ullamco.'
 ];
 const audioSettings = { common: { volume: 0.25 } };
-const playersSettings = { typing: { src: [SOUND_TYPING_URL], loop: true } };
-const bleepsSettings = { typing: { player: 'typing' } };
+const playersSettings = { type: { src: [SOUND_TYPE_URL], loop: true } };
+const bleepsSettings = { type: { player: 'type' } };
 const duration = { enter: 1000, exit: 1000 };
 
 function Sandbox () {

@@ -63,8 +63,6 @@ const Text: FC<TextProps & WithAnimatorInputProps> = props => {
 
   const bleeps = useBleeps();
 
-  animator.setupAnimateRefs(animateRefs, bleeps);
-
   const styles = useMemo(
     () => generateStyles({ animate: animator.animate }),
     [animator.animate]
@@ -143,9 +141,14 @@ const Text: FC<TextProps & WithAnimatorInputProps> = props => {
     // The animation is re-run every time the children content changes when
     // animator is ENTERED.
     if (animator.flow.entered && !isChildrenContentEqual) {
-      startTextAnimation(animator, animateRefs, bleeps);
+      bleeps.type?.play();
+      startTextAnimation(animator, animateRefs, () => {
+        bleeps.type?.stop();
+      });
     }
   }, [children]);
+
+  animator.setupAnimateRefs(animateRefs, bleeps);
 
   return jsx(
     as as string,
