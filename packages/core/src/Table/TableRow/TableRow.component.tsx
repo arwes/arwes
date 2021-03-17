@@ -1,11 +1,12 @@
 /** @jsx jsx */
 import { FC, ReactNode, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { jsx, useTheme } from '@emotion/react';
+import { jsx } from '@emotion/react';
 import { cx } from '@emotion/css';
 import { WithAnimatorInputProps } from '@arwes/animation';
 
 import { TextAnimationRefs } from '../../utils/textAnimations';
+import { ArwesTheme } from '../../ArwesThemeProvider';
 import { generateStyles } from './TableRow.styles';
 import { TableRowTransitionRefs } from './TableRow.animator';
 
@@ -17,6 +18,7 @@ interface TableRowPropsColumn {
 type TableRowPropsColumnWidth = string | number;
 
 interface TableRowProps {
+  theme: ArwesTheme
   columns: TableRowPropsColumn[]
   columnWidths?: TableRowPropsColumnWidth[]
   isHeader?: boolean
@@ -24,9 +26,8 @@ interface TableRowProps {
 }
 
 const TableRow: FC<TableRowProps & WithAnimatorInputProps> = props => {
-  const { animator, isHeader, columns, columnWidths, condensed } = props;
+  const { animator, theme, isHeader, columns, columnWidths, condensed } = props;
 
-  const theme = useTheme();
   const styles = useMemo(
     () => generateStyles(theme, { animate: animator.animate, isHeader, condensed }),
     [theme, animator.animate, isHeader, condensed]

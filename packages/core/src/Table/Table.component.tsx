@@ -57,6 +57,7 @@ const Table: FC<TableProps & WithAnimatorInputProps> = props => {
         css={styles.container}
       >
         <TableRow
+          theme={theme}
           isHeader
           columns={headers}
           columnWidths={columnWidths}
@@ -64,6 +65,7 @@ const Table: FC<TableProps & WithAnimatorInputProps> = props => {
         />
         {dataset.map(row =>
           <TableRow
+            theme={theme}
             key={row.id}
             columns={row.columns}
             columnWidths={columnWidths}

@@ -31,7 +31,7 @@ const transitionRemoveTableRow = (animator: AnimatorRef, refs: TableRowTransitio
 
   if (refs.current.textAnimateRefsCollection.current.length) {
     refs.current.textAnimateRefsCollection.current.forEach(refs => {
-      stopTextAnimation(animator, refs, {});
+      stopTextAnimation(animator, refs);
     });
 
     refs.current.textAnimateRefsCollection.current = [];
@@ -74,7 +74,7 @@ const transitionTableRow = (
       ? rgba(theme.palette.text.root, isHeader ? 0.15 : 0.05)
       : '';
 
-    startTextAnimation(animator, cellTextAnimationRefs, {});
+    startTextAnimation(animator, cellTextAnimationRefs);
 
     anime({
       targets: cell,
