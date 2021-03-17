@@ -43,3 +43,5 @@ test('Should provide bleeps if provider bleeps setup was found', () => {
     click: { _settings: { src: ['click.webm'] } }
   });
 });
+
+// TODO: Test how the bleeps generics are converted into component bleeps.

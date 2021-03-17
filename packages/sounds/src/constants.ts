@@ -54,11 +54,18 @@ export interface BleepSettings {
 
 export type BleepsSettings = Record<BleepName, BleepSettings | undefined>;
 
-// Bleeps
+// Bleeps Generics
+// The generic bleeps interfaces are the bleeps references provided globally
+// to components. It would require to explicitely define the "instanceId"
+// or an identifier of the location it is being used. For example,
+// if three components use the bleeps, each of them has to provide an
+// identifier to known where are the calls coming from.
 
-export interface Bleep {
-  play: () => void
-  stop: () => void
+export type BleepGenericInstanceId = number | string;
+
+export interface BleepGeneric {
+  play: (instanceId: BleepGenericInstanceId) => void
+  stop: (instanceId: BleepGenericInstanceId) => void
   getIsPlaying: () => boolean
   getDuration: () => number
   unload: () => void
@@ -67,13 +74,25 @@ export interface Bleep {
   _howl: Howl
 }
 
+export type BleepsGenerics = Record<BleepName, BleepGeneric>;
+
+// Bleeps
+// These are the bleeps which the components would normally use, where the
+// identification was automatically generated and there is no need
+// to explicitely provide it.
+
+export interface Bleep extends BleepGeneric {
+  play: () => void
+  stop: () => void
+}
+
 export type Bleeps = Record<BleepName, Bleep>;
 
-// Bleeps Provider
+// Bleeps Provider/Setup
 
 export interface BleepsSetup {
   audioSettings: BleepsAudioSettings
   playersSettings: BleepsPlayersSettings
   bleepsSettings: BleepsSettings
-  bleeps: Bleeps
+  bleepsGenerics: BleepsGenerics
 }

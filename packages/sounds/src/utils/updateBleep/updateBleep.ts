@@ -1,10 +1,14 @@
 import {
   BleepsAudioGroupSettings,
   BleepPlayerSettings,
-  Bleep
+  BleepGeneric
 } from '../../constants';
 
-const updateBleep = (bleep: Bleep, audioSettings: BleepsAudioGroupSettings, playerSettings: BleepPlayerSettings): Bleep => {
+const updateBleep = (
+  bleep: BleepGeneric,
+  audioSettings: BleepsAudioGroupSettings,
+  playerSettings: BleepPlayerSettings
+): void => {
   const settings = {
     ...audioSettings,
     ...playerSettings
@@ -22,8 +26,6 @@ const updateBleep = (bleep: Bleep, audioSettings: BleepsAudioGroupSettings, play
   if (settings.loop !== undefined && settings.loop !== bleep._howl.loop()) {
     bleep._howl.loop(settings.loop);
   }
-
-  return bleep;
 };
 
 export { updateBleep };

@@ -143,7 +143,7 @@ test('Should create and not update bleeps with player "src" or "format" changes'
   });
 });
 
-test('Should stop current bleeps playing when they are re-created', () => {
+test('Should unload current bleeps playing when they are re-created', () => {
   const audioSettings = { common: { volume: 1 } };
   const playersSettings1 = { click: { src: ['click.webm'] } };
   const bleepsSettings: BleepsSettings = { click: { player: 'click' } };
@@ -156,7 +156,7 @@ test('Should stop current bleeps playing when they are re-created', () => {
 
   // Simulate the bleep is playing.
   jest.spyOn(bleeps1.click, 'getIsPlaying').mockImplementation(() => true);
-  const onStop = jest.spyOn(bleeps1.click, 'stop');
+  const onUnload = jest.spyOn(bleeps1.click, 'unload');
 
   // "src" setting changed so the bleep is re-created.
   const playersSettings2 = { click: { src: ['click.mp3'] } };
@@ -164,7 +164,7 @@ test('Should stop current bleeps playing when they are re-created', () => {
 
   expect(Object.keys(bleeps2)).toEqual(['click']);
   expect(bleeps1Click._howl).not.toBe(bleeps2.click._howl); // Recreated.
-  expect(onStop).toHaveBeenCalled();
+  expect(onUnload).toHaveBeenCalled();
 });
 
 test('Should not create disabled common bleeps', () => {

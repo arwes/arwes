@@ -7,7 +7,7 @@ import {
   BleepsPlayersSettings,
   BleepsSettings,
   BleepCategoryName,
-  Bleeps,
+  BleepsGenerics,
   BleepsSetup
 } from '../constants';
 import { BleepsContext } from '../BleepsContext';
@@ -26,7 +26,7 @@ const BleepsProvider: FC<BleepsProviderProps> = props => {
   // current playing bleeps before settings updates.
   // Also, bleeps can not be extended in multiple providers to independently
   // manage them by each provider in the tree.
-  const [bleeps] = useState<Bleeps>({});
+  const [bleepsGenerics] = useState<BleepsGenerics>({});
 
   const bleepsSetup: BleepsSetup = useMemo(() => {
     const parentAudioCategories = parentSetup?.audioSettings.categories;
@@ -77,9 +77,9 @@ const BleepsProvider: FC<BleepsProviderProps> = props => {
       ...props.bleepsSettings
     };
 
-    createOrUpdateBleeps(bleeps, audioSettings, playersSettings, bleepsSettings);
+    createOrUpdateBleeps(bleepsGenerics, audioSettings, playersSettings, bleepsSettings);
 
-    return { audioSettings, playersSettings, bleepsSettings, bleeps };
+    return { audioSettings, playersSettings, bleepsSettings, bleepsGenerics };
   }, [props.audioSettings, props.playersSettings, parentSetup]);
 
   return (

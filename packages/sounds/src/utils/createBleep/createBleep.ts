@@ -3,10 +3,11 @@ import { Howl } from 'howler';
 import {
   BleepsAudioGroupSettings,
   BleepPlayerSettings,
-  Bleep
+  BleepGenericInstanceId,
+  BleepGeneric
 } from '../../constants';
 
-const createBleep = (audioSettings: BleepsAudioGroupSettings, playerSettings: BleepPlayerSettings): Bleep => {
+const createBleep = (audioSettings: BleepsAudioGroupSettings, playerSettings: BleepPlayerSettings): BleepGeneric => {
   const { disabled, ...settings } = {
     ...audioSettings,
     ...playerSettings
@@ -15,13 +16,23 @@ const createBleep = (audioSettings: BleepsAudioGroupSettings, playerSettings: Bl
 
   let lastId: number | undefined;
 
-  const play = (): void => {
+  // In a loop sound, if the sound is played by multiple sources
+  // (e.g. multiple components multiple times), to stop the sound,
+  // all of the play() calls must also call stop().
+  // Otherwise, a race-condition issue can happen.
+  const sourcesAccount: Record<BleepGenericInstanceId, boolean> = {};
+
+  const play = (instanceId: BleepGenericInstanceId): void => {
     // Even if the audio is set up to be preloaded, sometimes the file
     // is not loaded, probably because the browser has locked the playback.
     if (howl.state() === 'unloaded') {
       howl.load();
     }
 
+    sourcesAccount[instanceId] = true;
+
+    // If the sound is being loaded, the play action will be
+    // queued until it is loaded.
     const newId = howl.play(lastId);
 
     // If the sound is being loaded, it returns null.
@@ -29,8 +40,16 @@ const createBleep = (audioSettings: BleepsAudioGroupSettings, playerSettings: Bl
     lastId = newId || undefined;
   };
 
-  const stop = (): void => {
-    howl.stop(lastId);
+  const stop = (instanceId: BleepGenericInstanceId): void => {
+    delete sourcesAccount[instanceId];
+
+    const noActiveSources = !Object.keys(sourcesAccount).length;
+
+    const canStop = settings.loop ? noActiveSources : true;
+
+    if (canStop && howl.playing(lastId)) {
+      howl.stop(lastId);
+    }
   };
 
   const getIsPlaying = (): boolean => {
