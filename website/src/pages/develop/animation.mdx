@@ -2,7 +2,7 @@ import { PageContentLayout } from '../../components/PageContentLayout';
 import { Sandbox } from '../../components/Sandbox';
 export default props => <PageContentLayout headProps={{ title: 'Animation' }} {...props} />;
 
-# Animation
+# `@arwes/animation`
 
 Assemble and disassemble user interfaces using animation controls in [React](https://reactjs.org).
 
@@ -31,6 +31,14 @@ The animation management tooling requires React v17 as a peer-dependency.
 ```bash
 npm install react@17
 npm install react-dom@17
+npm install prop-types
+```
+
+In TypeScript, the following type packages are needed:
+
+```bash
+npm install @types/react@17
+npm install @types/react-dom@17
 ```
 
 ## Animators
@@ -42,9 +50,9 @@ The `<Animator/>` component will work as an animated node in the system. It will
 be interconnected by sharing data and communicating with its parent and
 children counterparts.
 
-Normally, the `withAnimator` higher-order component (HOC) will handle the
-animator component setup instead of the component itself. So class/function
-components with specific initial settings can be created.
+Normally, the `withAnimator` [higher-order component (HOC)](https://reactjs.org/docs/higher-order-components.html)
+will handle the animator component setup instead of the component itself.
+So class/function components with specific initial settings can be created.
 
 A HTML button component can be animated like:
 

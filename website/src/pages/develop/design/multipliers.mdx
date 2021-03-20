@@ -1,0 +1,60 @@
+import { PageContentLayout } from '../../../components/PageContentLayout';
+export default props => <PageContentLayout headProps={{ title: 'Multipliers' }} {...props} />;
+
+# Multipliers
+
+Components designs characteristics like spacing, density, outline width, shadow
+strength, and others can be defined and customized using numeric factors which
+can be multiplied to get the desired values.
+
+A numeric factor value can be set up. Then a multiplier can be provided to get
+an specific value.
+
+For example, to get dynamic spacing with default factor:
+
+```tsx
+import { createTheme } from '@arwes/design';
+
+const theme = createTheme();
+
+theme.space(1); // 8
+theme.space(2); // 16
+theme.space(3); // 24
+theme.space(0); // 0
+
+// The default `space` factor is 8.
+```
+
+With a custom factor:
+
+```tsx
+const theme = createTheme({
+  space: 5
+});
+
+theme.space(1); // 5
+theme.space(2); // 10
+theme.space(3); // 15
+theme.space(0); // 0
+```
+
+The following multipliers are available by default:
+
+- `theme.shadow.space()` with default factor of `8`.
+- `theme.shadow.blur()` with default factor of `1`.
+- `theme.shadow.spread()` with default factor of `1`.
+- `theme.shadow.outline()` with default factor of `1`.
+
+## Custom Multipliers
+
+Other multipliers can be created using the utility: `createThemeFactorMultiplier`.
+
+```tsx
+import { createTheme, createThemeFactorMultiplier } from '@arwes/design';
+
+const theme = createTheme({
+  fontScale: createThemeFactorMultiplier(3)
+});
+
+theme.fontScale(2); // 6
+```

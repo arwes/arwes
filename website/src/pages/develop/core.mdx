@@ -1,0 +1,157 @@
+import { PageContentLayout } from '../../components/PageContentLayout';
+export default props => <PageContentLayout headProps={{ title: 'Core' }} {...props} />;
+
+# `@arwes/core`
+
+Framework core set of components.
+
+It contains the main components to build an standard Arwes user interface.
+
+It depends on the [design](/develop/design), [animation](/develop/animation),
+and [sounds](/develop/sounds) packages.
+
+## Installation
+
+All the tools are bundled and can be installed with the following NPM packages:
+
+```bash
+npm install @arwes/design
+npm install @arwes/animation
+npm install @arwes/sounds
+npm install @arwes/core
+```
+
+The Arwes packages require the following peer dependencies:
+
+```bash
+# react
+npm install react@17
+npm install react-dom@17
+npm install prop-types
+
+# design tools
+npm install @emotion/css@11
+npm install @emotion/react@11
+npm install polished@4
+
+# animations
+npm install animejs@3
+
+# sounds
+npm install howler@2.2
+```
+
+In TypeScript, the following type packages are needed:
+
+```bash
+npm install @types/react@17
+npm install @types/react-dom@17
+npm install @types/animejs@3
+npm install @types/howler@2.2
+```
+
+## Components
+
+The guides and API documentation for the core components is still under development.
+
+All the available components previews and examples can be tested in the
+playground sandboxes in the `@arwes/core` package.
+
+See: [playground.arwes.dev](https://playground.arwes.dev/core/StylesBaseline/basic).
+
+## Example
+
+A similar example as the sandbox [playground.arwes.dev/core/Figure/basic](https://playground.arwes.dev/core/Figure/basic)
+can be replicated in a local project like:
+
+```tsx
+import React, { FC, useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import { AnimatorGeneralProvider, Animator } from '@arwes/animation';
+import { BleepsProvider } from '@arwes/sounds';
+import { ArwesThemeProvider, StylesBaseline, Text, Figure } from '@arwes/core';
+
+// For the font-family to work, you would have to setup the Google Fonts link:
+// <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600&display=swap" />
+
+const ROOT_FONT_FAMILY = '"Titillium Web", sans-serif';
+const IMAGE_URL = 'https://playground.arwes.dev/assets/images/wallpaper.jpg';
+const SOUND_OBJECT_URL = 'https://playground.arwes.dev/assets/sounds/object.mp3';
+const SOUND_TYPE_URL = 'https://playground.arwes.dev/assets/sounds/type.mp3';
+
+const audioSettings = { common: { volume: 0.25 } };
+const playersSettings = {
+  object: { src: [SOUND_OBJECT_URL] },
+  type: { src: [SOUND_TYPE_URL], loop: true }
+};
+const bleepsSettings = {
+  object: { player: 'object' },
+  type: { player: 'type' }
+};
+const generalAnimator = { duration: { enter: 200, exit: 200 } };
+
+const App: FC = () => {
+  const [activate, setActivate] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setActivate(!activate), 2000);
+    return () => clearTimeout(timeout);
+  }, [activate]);
+
+  return (
+    <ArwesThemeProvider>
+      <StylesBaseline styles={{ body: { fontFamily: ROOT_FONT_FAMILY } }} />
+      <BleepsProvider
+        audioSettings={audioSettings}
+        playersSettings={playersSettings}
+        bleepsSettings={bleepsSettings}
+      >
+        <AnimatorGeneralProvider animator={generalAnimator}>
+          <Animator animator={{ activate, manager: 'stagger' }}>
+            <Text as='h1'>
+              Nebula
+            </Text>
+            <Text as='p'>
+              A nebula is an interstellar cloud of dust, hydrogen, helium and
+              other ionized gases. Originally, the term was used to describe any
+              diffused astronomical object, including galaxies beyond the Milky
+              Way. The Andromeda Galaxy, for instance, was once referred to as
+              the Andromeda Nebula (and spiral galaxies in general as "spiral
+              nebulae") before the true nature of galaxies was confirmed in the
+              early 20th century by Vesto Slipher, Edwin Hubble and others.
+            </Text>
+            <Figure
+              src={IMAGE_URL}
+              alt='A nebula'
+            >
+              A nebula is an interstellar cloud of dust, hydrogen, helium and
+              other ionized gases. Originally, the term was used to describe
+              any diffused astronomical object, including galaxies beyond
+              the Milky Way.
+            </Figure>
+            <Text as='p'>
+              Most nebulae are of vast size; some are hundreds of light-years in
+              diameter. A nebula that is visible to the human eye from Earth
+              would appear larger, but no brighter, from close by. The Orion
+              Nebula, the brightest nebula in the sky and occupying an area
+              twice the angular diameter of the full Moon, can be viewed with
+              the naked eye but was missed by early astronomers. Although denser
+              than the space surrounding them, most nebulae are far less dense
+              than any vacuum created on Earth – a nebular cloud the size of the
+              Earth would have a total mass of only a few kilograms.
+            </Text>
+          </Animator>
+        </AnimatorGeneralProvider>
+      </BleepsProvider>
+    </ArwesThemeProvider>
+  );
+};
+
+// Assuming there is a HTML element with id "root".
+ReactDOM.render(<App />, document.querySelector('#root'));
+```
+
+Other playground sandboxes can be replicated in a similar way.
+
+> Since the components are still development, their API is most likely to change
+over the releases. It is not recommended to use them for real projects yet.

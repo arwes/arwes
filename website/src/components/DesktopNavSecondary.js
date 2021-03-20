@@ -5,6 +5,16 @@ import { Link } from 'gatsby';
 
 import settings from '../../settings';
 
+const renderItemContent = text => {
+  const content = String(text);
+
+  if (/^`.+`$/.test(content)) {
+    return <code>{content.replace(/`/g, '')}</code>;
+  }
+
+  return text;
+};
+
 const styles = {
   root: {
     lineHeight: 1,
@@ -38,14 +48,14 @@ const DesktopNavSecondary = ({ location, className }) => {
           {primarySection.items.map((item, index) =>
             <li key={index}>
               <Link to={`/${primaryPath}/${item.path}`}>
-                {item.name}
+                {renderItemContent(item.name)}
               </Link>
               {!!item.items && !!item.items.length && (
                 <ul>
                   {item.items.map((subItem, subIndex) =>
                     <li key={subIndex}>
                       <Link to={`/${primaryPath}/${item.path}/${subItem.path}`}>
-                        {subItem.name}
+                        {renderItemContent(subItem.name)}
                       </Link>
                     </li>
                   )}
