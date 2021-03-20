@@ -1,6 +1,6 @@
 /** @jsx jsx */
+import { cx } from '@emotion/css';
 import { jsx } from '@emotion/react';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import prismThemeVSDark from 'prism-react-renderer/themes/vsDark';
@@ -47,7 +47,7 @@ const Code = ({ className, language, theme, children }) => (
           <div css={styles.language}>{language}</div>
         )}
         <pre
-          className={clsx(className, hlClassName)}
+          className={cx(className, hlClassName)}
           style={style}
           css={styles.pre}
         >

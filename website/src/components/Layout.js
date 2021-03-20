@@ -55,8 +55,8 @@ const Layout = ({ children }) => {
             color: theme.color.headings
           },
           h1: { fontSize: 28 },
-          h2: { fontSize: 26 },
-          h3: { fontSize: 24 },
+          h2: { fontSize: 26, marginTop: 40 },
+          h3: { fontSize: 24, marginTop: 30 },
           h4: { fontSize: 22 },
           h5: { fontSize: 20 },
           h6: { fontSize: 18 },
