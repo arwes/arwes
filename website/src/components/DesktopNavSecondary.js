@@ -4,16 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 
 import settings from '../../settings';
-
-const renderItemContent = text => {
-  const content = String(text);
-
-  if (/^`.+`$/.test(content)) {
-    return <code>{content.replace(/`/g, '')}</code>;
-  }
-
-  return text;
-};
+import { renderNavItemContent } from '../tools/renderNavItemContent';
 
 const styles = {
   root: {
@@ -48,14 +39,14 @@ const DesktopNavSecondary = ({ location, className }) => {
           {primarySection.items.map((item, index) =>
             <li key={index}>
               <Link to={`/${primaryPath}/${item.path}`}>
-                {renderItemContent(item.name)}
+                {renderNavItemContent(item.name)}
               </Link>
               {!!item.items && !!item.items.length && (
                 <ul>
                   {item.items.map((subItem, subIndex) =>
                     <li key={subIndex}>
                       <Link to={`/${primaryPath}/${item.path}/${subItem.path}`}>
-                        {renderItemContent(subItem.name)}
+                        {renderNavItemContent(subItem.name)}
                       </Link>
                     </li>
                   )}

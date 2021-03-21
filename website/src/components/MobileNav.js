@@ -6,6 +6,7 @@ import { Link } from 'gatsby';
 import { rgba } from 'polished';
 
 import settings from '../../settings';
+import { renderNavItemContent } from '../tools/renderNavItemContent';
 import { Button } from './Button';
 
 const styles = {
@@ -73,21 +74,21 @@ const MobileNavMenu = () => (
     {settings.hierarchy.map((item1, index1) =>
       <li key={index1}>
         <Link to={`/${item1.path}`}>
-          {item1.name}
+          {renderNavItemContent(item1.name)}
         </Link>
         {!!item1.items && !!item1.items.length && (
           <ul>
             {item1.items.map((item2, index2) =>
               <li key={index2}>
                 <Link to={`/${item1.path}/${item2.path}`}>
-                  {item2.name}
+                  {renderNavItemContent(item2.name)}
                 </Link>
                 {!!item2.items && !!item2.items.length && (
                   <ul>
                     {item2.items.map((item3, index3) =>
                       <li key={index3}>
                         <Link to={`/${item1.path}/${item2.path}/${item3.path}`}>
-                          {item3.name}
+                          {renderNavItemContent(item3.name)}
                         </Link>
                       </li>
                     )}
