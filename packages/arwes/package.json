@@ -1,6 +1,6 @@
 {
   "name": "@arwes/arwes",
-  "version": "1.0.0-alpha.16",
+  "version": "1.0.0-alpha.18",
   "publishConfig": {
     "access": "public"
   },

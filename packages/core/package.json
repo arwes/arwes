@@ -1,6 +1,6 @@
 {
   "name": "@arwes/core",
-  "version": "1.0.0-alpha.16",
+  "version": "1.0.0-alpha.18",
   "publishConfig": {
     "access": "public"
   },
@@ -42,8 +42,8 @@
     "react": "^17.0.1"
   },
   "devDependencies": {
-    "@arwes/animation": "1.0.0-alpha.16",
-    "@arwes/design": "1.0.0-alpha.17",
-    "@arwes/sounds": "1.0.0-alpha.16"
+    "@arwes/animation": "^1.0.0-alpha.18",
+    "@arwes/design": "^1.0.0-alpha.18",
+    "@arwes/sounds": "^1.0.0-alpha.18"
   }
 }
