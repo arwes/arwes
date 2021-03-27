@@ -11,18 +11,6 @@ import {
   Theme
 } from '../constants';
 
-const extractExtraFeatures = (providedSettings: ThemeSettings = {}): Record<string, any> => {
-  const {
-    breakpoints,
-    palette,
-    space,
-    outline,
-    shadow,
-    ...extraFeatures
-  } = providedSettings;
-  return extraFeatures;
-};
-
 const getThemeSetup = (providedSettings?: ThemeSettings, extendTheme?: Theme): ThemeSetup => {
   const breakpoints = Object.freeze({
     values: Object.freeze({
@@ -46,15 +34,13 @@ const getThemeSetup = (providedSettings?: ThemeSettings, extendTheme?: Theme): T
     spread: providedSettings?.shadow?.spread ?? extendTheme?.shadow.spread(1) ?? THEME_SHADOW_SPREAD_DEFAULT
   };
 
-  const extraFeatures = extractExtraFeatures(providedSettings);
-
   return Object.freeze({
+    ...providedSettings,
     breakpoints,
     palette,
     space,
     outline,
-    shadow,
-    extraFeatures
+    shadow
   });
 };
 

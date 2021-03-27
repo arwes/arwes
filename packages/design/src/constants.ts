@@ -88,7 +88,7 @@ export interface ThemeSetup {
   space: number
   outline: number
   shadow: ThemeSetupShadow
-  extraFeatures: Record<string, any>
+  [prop: string]: any
 }
 
 // THEME CONSUMER

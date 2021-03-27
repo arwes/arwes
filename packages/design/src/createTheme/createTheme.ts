@@ -21,7 +21,7 @@ const createTheme = (settings?: ThemeSettings, extendTheme?: Theme): Theme => {
   });
 
   return Object.freeze({
-    ...setup.extraFeatures,
+    ...setup,
     breakpoints,
     palette,
     space,
