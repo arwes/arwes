@@ -1,13 +1,35 @@
 import { PageContentLayout } from '../../components/PageContentLayout';
-export default props => <PageContentLayout headProps={{ title: 'Roadmap' }} {...props} />;
+export default props => <PageContentLayout
+  headProps={{ title: 'Roadmap' }}
+  styles={{
+    'main ul': {
+      paddingLeft: 0
+    },
+    'main ul li': {
+      marginBottom: '0.5em',
+      paddingLeft: 0,
+      '&::before': {
+        display: 'none'
+      },
+      'input[type="checkbox"]': {
+        display: 'inline-block',
+        width: 'auto',
+        marginRight: 2
+      }
+    }
+  }}
+  {...props}
+/>;
 
 # Roadmap
 
 > _**Last updated: March 20, 2021**_
 
-- Tasks are listed with their respective details in the [project boards](https://github.com/arwes/arwes/projects).
-- The order in the lists does not exactly represent priority, order, neither execution.
-- The roadmap is subject to changes according to the development progress.
+Tasks are listed with their respective details in the [project boards](https://github.com/arwes/arwes/projects).
+
+The order in the lists does not exactly represent priority, order, neither execution.
+
+The roadmap is subject to changes according to the development progress.
 
 ----
 

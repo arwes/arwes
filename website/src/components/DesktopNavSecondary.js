@@ -19,7 +19,11 @@ const styles = {
       paddingLeft: 20
     },
     '& li': {
-      fontSize: 16
+      fontSize: 16,
+
+      '&::before': {
+        display: 'none'
+      }
     },
     '& a': {
       display: 'block',

@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/react';
+import { jsx, useTheme } from '@emotion/react';
 import PropTypes from 'prop-types';
 import { LiveProvider, LiveEditor, withLive } from 'react-live';
 import prismThemeVSDark from 'prism-react-renderer/themes/vsDark';
@@ -7,75 +7,91 @@ import { rgba } from 'polished';
 import anime from 'animejs';
 import howler from 'howler';
 
+import * as design from '@repository/packages/design';
 import * as animation from '@repository/packages/animation';
 import * as sounds from '@repository/packages/sounds';
 
-const packagesScope = Object.assign({ anime, howler }, animation, sounds);
+const packagesScope = Object.assign({ anime, howler }, design, animation, sounds);
 
-const styles = {
+const generateStyles = ({ breakpoints, palette, typography }) => ({
   root: {
     position: 'relative',
     margin: '0 0 20px'
   },
 
-  result: theme => ({
+  result: {
     overflow: 'hidden',
     position: 'relative',
-    border: '1px solid ' + rgba(theme.color.content, 0.5)
-  }),
+    border: '1px solid ' + rgba(palette.text.root, 0.5)
+  },
   resultRender: {
     padding: 20
   },
-  resultError: theme => ({
+  resultError: {
     overflow: 'auto',
     margin: 0,
     border: 'none',
     padding: 20,
     background: 'none',
-    fontFamily: theme.typography.monospace,
-    color: theme.color.error
-  }),
+    fontFamily: typography.monospace,
+    color: palette.error.main
+  },
 
-  edition: theme => ({
+  edition: {
     position: 'relative',
     borderStyle: 'solid',
     borderWidth: '0 1px 1px 1px',
-    borderColor: rgba(theme.color.content, 0.5)
-  }),
-  editionLang: theme => ({
+    borderColor: rgba(palette.text.root, 0.5)
+  },
+  editionLang: {
     zIndex: 1,
     position: 'absolute',
     right: 1,
     top: 1,
     borderStyle: 'solid',
-    borderColor: rgba(theme.color.content, 0.5),
+    borderColor: rgba(palette.text.root, 0.5),
     borderWidth: '0 0 1px 1px',
     padding: 5,
-    backgroundColor: theme.color.section,
-    color: theme.color.content,
+    backgroundColor: palette.neutral.elevate(1),
+    color: palette.text.root,
     lineHeight: 1,
     fontSize: 14,
     textTransform: 'uppercase',
     userSelect: 'none'
-  }),
-  editionEditor: theme => ({
+  },
+  editionEditor: {
     overflow: 'auto',
 
-    [theme.breakpoints.tabletUp]: {
+    [breakpoints.up('md')]: {
       maxHeight: 600
     }
-  })
-};
+  },
 
-const cssStyles = {
-  liveEditor: theme => ({
+  liveEditor: {
     fontSize: '14px !important',
-    fontFamily: `${theme.typography.monospace} !important`,
+    fontFamily: `${typography.monospace} !important`,
 
     '& textarea': {
       outline: 'none !important',
-      color: `${theme.color.content} !important`,
-      background: `${theme.color.neutral} !important`,
+      color: `${palette.text.root} !important`,
+      background: `${palette.neutral.elevate(0)} !important`,
+
+      '&:hover': {
+        outline: 'none'
+      }
+    }
+  }
+});
+
+const cssStyles = {
+  liveEditor: ({ palette, typography }) => ({
+    fontSize: '14px !important',
+    fontFamily: `${typography.monospace} !important`,
+
+    '& textarea': {
+      outline: 'none !important',
+      color: `${palette.text.root} !important`,
+      background: `${palette.neutral.elevate(0)} !important`,
 
       '&:hover': {
         outline: 'none'
@@ -84,7 +100,7 @@ const cssStyles = {
   })
 };
 
-const SandboxResultComponent = ({ live }) => (
+const SandboxResultComponent = ({ styles, live }) => (
   <div css={styles.result}>
     {live.element && (
       <div css={styles.resultRender}>
@@ -100,6 +116,7 @@ const SandboxResultComponent = ({ live }) => (
 );
 
 SandboxResultComponent.propTypes = {
+  styles: PropTypes.object.isRequired,
   live: PropTypes.shape({
     element: PropTypes.any,
     error: PropTypes.any
@@ -109,6 +126,9 @@ SandboxResultComponent.propTypes = {
 const SandboxResult = withLive(SandboxResultComponent);
 
 const Sandbox = ({ className, children }) => {
+  const theme = useTheme();
+  const styles = generateStyles(theme);
+
   return (
     <div className={className} css={styles.root}>
       <LiveProvider
@@ -117,7 +137,7 @@ const Sandbox = ({ className, children }) => {
         theme={prismThemeVSDark}
         code={children}
       >
-        <SandboxResult />
+        <SandboxResult styles={styles} />
         <div css={styles.edition}>
           <div css={styles.editionLang}>JSX</div>
           <div css={styles.editionEditor}>

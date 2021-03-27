@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/react';
+import { jsx, useTheme } from '@emotion/react';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
@@ -9,11 +9,11 @@ import settings from '../../settings';
 import { renderNavItemContent } from '../tools/renderNavItemContent';
 import { Button } from './Button';
 
-const styles = {
+const generateStyles = ({ palette }) => ({
   root: {
     display: 'block'
   },
-  modal: theme => ({
+  modal: {
     zIndex: 1000,
     position: 'absolute',
     left: 0,
@@ -22,7 +22,7 @@ const styles = {
     bottom: 0,
     display: 'grid',
     padding: 20,
-    backgroundColor: rgba(theme.color.neutral, 0.75),
+    backgroundColor: rgba(palette.neutral.elevate(0), 0.75),
 
     '& ul': {
       margin: 0,
@@ -30,28 +30,27 @@ const styles = {
       listStyle: 'none'
     },
     '& li': {
-      lineHeight: 1,
+      lineHeight: 2,
       fontSize: 16
     },
     '& a': {
-      display: 'block',
-      padding: '10px 0'
+      display: 'block'
     }
-  }),
-  modalContent: theme => ({
+  },
+  modalContent: {
     display: 'grid',
     gridTemplateColumns: 'auto',
     gridTemplateRows: 'auto 1fr auto',
-    border: '1px solid ' + theme.color.border,
+    border: '1px solid ' + palette.primary.main,
     minHeight: 0, // Height overflow issue.
-    backgroundColor: theme.color.section
-  }),
-  modalHeader: theme => ({
-    borderBottom: '1px solid ' + theme.color.border,
+    backgroundColor: palette.neutral.elevate(2)
+  },
+  modalHeader: {
+    borderBottom: '1px solid ' + palette.primary.main,
     padding: 10,
     lineHeight: '30px',
-    backgroundColor: theme.color.section
-  }),
+    backgroundColor: palette.neutral.elevate(2)
+  },
   modalTitle: {
     margin: 0,
     lineHeight: 1,
@@ -61,13 +60,13 @@ const styles = {
     overflowY: 'auto',
     padding: 10
   },
-  modalFooter: theme => ({
+  modalFooter: {
     display: 'flex',
     justifyContent: 'flex-end',
-    borderTop: '1px solid ' + theme.color.border,
+    borderTop: '1px solid ' + palette.primary.main,
     padding: 10
-  })
-};
+  }
+});
 
 const MobileNavMenu = () => (
   <ul>
@@ -104,7 +103,11 @@ const MobileNavMenu = () => (
 );
 
 const MobileNav = ({ className }) => {
+  const theme = useTheme();
+  const styles = generateStyles(theme);
+
   const [isOpen, setIsOpen] = useState(false);
+
   const onClick = ({ target: { tagName } }) => {
     if (tagName === 'A' || tagName === 'BUTTON') {
       setIsOpen(!isOpen);
