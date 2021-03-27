@@ -2,7 +2,7 @@
 const COLOR_ON = '#27efb5'; // cyan
 const COLOR_OFF = '#efb527'; // orange
 
-function useAnimateEntering (animator, element) {
+function onAnimateEntering (animator, element) {
   anime({
     targets: element.current,
     easing: 'linear',
@@ -11,7 +11,7 @@ function useAnimateEntering (animator, element) {
   });
 }
 
-function useAnimateExiting (animator, element) {
+function onAnimateExiting (animator, element) {
   anime({
     targets: element.current,
     easing: 'linear',
@@ -37,8 +37,8 @@ function ItemComponent (props) {
 }
 
 const Item = withAnimator({
-  useAnimateEntering,
-  useAnimateExiting
+  onAnimateEntering,
+  onAnimateExiting
 })(ItemComponent);
 
 function Sandbox () {

@@ -20,24 +20,24 @@ beforeEach(() => {
 
 afterEach(cleanup);
 
-test('Should call "useAnimateMount" with animator object and setup refs on <Animator/> mount', () => {
+test('Should call "onAnimateMount" with animator object and setup refs on <Animator/> mount', () => {
   let animator: any;
   const ExampleComponent: FC = () => {
     animator = useAnimator();
     animator?.setupAnimateRefs('x', 'y', 'z');
     return null;
   };
-  const useAnimateMount = jest.fn();
+  const onAnimateMount = jest.fn();
   const ExampleApp: FC = () => {
     return (
-      <Animator animator={{ useAnimateMount }}>
+      <Animator animator={{ onAnimateMount }}>
         <ExampleComponent />
       </Animator>
     );
   };
   render(<ExampleApp />);
-  expect(useAnimateMount).toHaveBeenCalledTimes(1);
-  expect(useAnimateMount).toHaveBeenCalledWith(
+  expect(onAnimateMount).toHaveBeenCalledTimes(1);
+  expect(onAnimateMount).toHaveBeenCalledWith(
     expect.objectContaining({ flow: expect.objectContaining({ value: EXITED }) }),
     'x',
     'y',
@@ -45,17 +45,17 @@ test('Should call "useAnimateMount" with animator object and setup refs on <Anim
   );
 
   actJestMoveTimeTo(1000);
-  expect(useAnimateMount).toHaveBeenCalledTimes(1);
+  expect(onAnimateMount).toHaveBeenCalledTimes(1);
 });
 
-test('Should call "useAnimateUnmount" with animator object and setup refs on <Animator/> unmount', () => {
+test('Should call "onAnimateUnmount" with animator object and setup refs on <Animator/> unmount', () => {
   let animator: any;
   const ExampleComponent: FC = () => {
     animator = useAnimator();
     animator.setupAnimateRefs('x', 'y', 'z');
     return null;
   };
-  const useAnimateUnmount = jest.fn();
+  const onAnimateUnmount = jest.fn();
   const ExampleApp: FC = () => {
     const [show, setShow] = useState(true);
     useEffect(() => {
@@ -63,7 +63,7 @@ test('Should call "useAnimateUnmount" with animator object and setup refs on <An
     }, []);
     if (show) {
       return (
-        <Animator animator={{ useAnimateUnmount }}>
+        <Animator animator={{ onAnimateUnmount }}>
           <ExampleComponent />
         </Animator>
       );
@@ -72,14 +72,14 @@ test('Should call "useAnimateUnmount" with animator object and setup refs on <An
   };
   render(<ExampleApp />);
 
-  expect(useAnimateUnmount).toHaveBeenCalledTimes(0);
+  expect(onAnimateUnmount).toHaveBeenCalledTimes(0);
 
   actJestMoveTimeTo(999);
-  expect(useAnimateUnmount).toHaveBeenCalledTimes(0);
+  expect(onAnimateUnmount).toHaveBeenCalledTimes(0);
 
   actJestMoveTimeTo(1001);
-  expect(useAnimateUnmount).toHaveBeenCalledTimes(1);
-  expect(useAnimateUnmount).toHaveBeenCalledWith(
+  expect(onAnimateUnmount).toHaveBeenCalledTimes(1);
+  expect(onAnimateUnmount).toHaveBeenCalledWith(
     expect.objectContaining({ flow: expect.objectContaining({ value: EXITED }) }),
     'x',
     'y',
@@ -87,21 +87,21 @@ test('Should call "useAnimateUnmount" with animator object and setup refs on <An
   );
 });
 
-test('Should call "useAnimateEntered" with animator object and setup refs on flow entered', () => {
+test('Should call "onAnimateEntered" with animator object and setup refs on flow entered', () => {
   let animator: any;
   const ExampleComponent: FC = () => {
     animator = useAnimator();
     animator.setupAnimateRefs('x', 'y', 'z');
     return null;
   };
-  const useAnimateEntered = jest.fn();
+  const onAnimateEntered = jest.fn();
   const ExampleApp: FC = () => {
     const [activate, setActivate] = useState(false);
     useEffect(() => {
       setTimeout(() => setActivate(true), 1000);
     }, []);
     return (
-      <Animator animator={{ activate, useAnimateEntered }}>
+      <Animator animator={{ activate, onAnimateEntered }}>
         <ExampleComponent />
       </Animator>
     );
@@ -109,11 +109,11 @@ test('Should call "useAnimateEntered" with animator object and setup refs on flo
   render(<ExampleApp />);
 
   actJestMoveTimeTo(1099);
-  expect(useAnimateEntered).toHaveBeenCalledTimes(0);
+  expect(onAnimateEntered).toHaveBeenCalledTimes(0);
 
   actJestMoveTimeTo(1101);
-  expect(useAnimateEntered).toHaveBeenCalledTimes(1);
-  expect(useAnimateEntered).toHaveBeenCalledWith(
+  expect(onAnimateEntered).toHaveBeenCalledTimes(1);
+  expect(onAnimateEntered).toHaveBeenCalledWith(
     expect.objectContaining({ flow: expect.objectContaining({ value: ENTERED }) }),
     'x',
     'y',
@@ -121,7 +121,7 @@ test('Should call "useAnimateEntered" with animator object and setup refs on flo
   );
 });
 
-test('Should call "useAnimateEntering" with animator object and setup refs on flow entering', () => {
+test('Should call "onAnimateEntering" with animator object and setup refs on flow entering', () => {
   let animator: any;
   const ExampleComponent: FC = () => {
     animator = useAnimator();
@@ -129,14 +129,14 @@ test('Should call "useAnimateEntering" with animator object and setup refs on fl
     return null;
   };
 
-  const useAnimateEntering = jest.fn();
+  const onAnimateEntering = jest.fn();
   const ExampleApp: FC = () => {
     const [activate, setActivate] = useState(false);
     useEffect(() => {
       setTimeout(() => setActivate(true), 1000);
     }, []);
     return (
-      <Animator animator={{ activate, useAnimateEntering }}>
+      <Animator animator={{ activate, onAnimateEntering }}>
         <ExampleComponent />
       </Animator>
     );
@@ -144,11 +144,11 @@ test('Should call "useAnimateEntering" with animator object and setup refs on fl
   render(<ExampleApp />);
 
   actJestMoveTimeTo(999);
-  expect(useAnimateEntering).toHaveBeenCalledTimes(0);
+  expect(onAnimateEntering).toHaveBeenCalledTimes(0);
 
   actJestMoveTimeTo(1001);
-  expect(useAnimateEntering).toHaveBeenCalledTimes(1);
-  expect(useAnimateEntering).toHaveBeenCalledWith(
+  expect(onAnimateEntering).toHaveBeenCalledTimes(1);
+  expect(onAnimateEntering).toHaveBeenCalledWith(
     expect.objectContaining({ flow: expect.objectContaining({ value: ENTERING }) }),
     'x',
     'y',
@@ -156,24 +156,24 @@ test('Should call "useAnimateEntering" with animator object and setup refs on fl
   );
 
   actJestMoveTimeTo(2000);
-  expect(useAnimateEntering).toHaveBeenCalledTimes(1);
+  expect(onAnimateEntering).toHaveBeenCalledTimes(1);
 });
 
-test('Should call "useAnimateExiting" with animator object and setup refs on flow exiting', () => {
+test('Should call "onAnimateExiting" with animator object and setup refs on flow exiting', () => {
   let animator: any;
   const ExampleComponent: FC = () => {
     animator = useAnimator();
     animator.setupAnimateRefs('x', 'y', 'z');
     return null;
   };
-  const useAnimateExiting = jest.fn();
+  const onAnimateExiting = jest.fn();
   const ExampleApp: FC = () => {
     const [activate, setActivate] = useState(true);
     useEffect(() => {
       setTimeout(() => setActivate(false), 1000);
     }, []);
     return (
-      <Animator animator={{ activate, useAnimateExiting }}>
+      <Animator animator={{ activate, onAnimateExiting }}>
         <ExampleComponent />
       </Animator>
     );
@@ -181,11 +181,11 @@ test('Should call "useAnimateExiting" with animator object and setup refs on flo
   render(<ExampleApp />);
 
   actJestMoveTimeTo(999);
-  expect(useAnimateExiting).toHaveBeenCalledTimes(0);
+  expect(onAnimateExiting).toHaveBeenCalledTimes(0);
 
   actJestMoveTimeTo(1001);
-  expect(useAnimateExiting).toHaveBeenCalledTimes(1);
-  expect(useAnimateExiting).toHaveBeenCalledWith(
+  expect(onAnimateExiting).toHaveBeenCalledTimes(1);
+  expect(onAnimateExiting).toHaveBeenCalledWith(
     expect.objectContaining({ flow: expect.objectContaining({ value: EXITING }) }),
     'x',
     'y',
@@ -193,32 +193,32 @@ test('Should call "useAnimateExiting" with animator object and setup refs on flo
   );
 
   actJestMoveTimeTo(1101);
-  expect(useAnimateExiting).toHaveBeenCalledTimes(1);
+  expect(onAnimateExiting).toHaveBeenCalledTimes(1);
 });
 
-test('Should call "useAnimateExited" with animator object and setup refs on flow exited', () => {
+test('Should call "onAnimateExited" with animator object and setup refs on flow exited', () => {
   let animator: any;
   const ExampleComponent: FC = () => {
     animator = useAnimator();
     animator.setupAnimateRefs('x', 'y', 'z');
     return null;
   };
-  const useAnimateExited = jest.fn();
+  const onAnimateExited = jest.fn();
   const ExampleApp: FC = () => {
     const [activate, setActivate] = useState(true);
     useEffect(() => {
       setTimeout(() => setActivate(false), 1000);
     }, []);
     return (
-      <Animator animator={{ activate, useAnimateExited }}>
+      <Animator animator={{ activate, onAnimateExited }}>
         <ExampleComponent />
       </Animator>
     );
   };
   render(<ExampleApp />);
 
-  expect(useAnimateExited).toHaveBeenCalledTimes(1);
-  expect(useAnimateExited).toHaveBeenCalledWith(
+  expect(onAnimateExited).toHaveBeenCalledTimes(1);
+  expect(onAnimateExited).toHaveBeenCalledWith(
     expect.objectContaining({ flow: expect.objectContaining({ value: EXITED }) }),
     'x',
     'y',
@@ -226,11 +226,11 @@ test('Should call "useAnimateExited" with animator object and setup refs on flow
   );
 
   actJestMoveTimeTo(1099);
-  expect(useAnimateExited).toHaveBeenCalledTimes(1);
+  expect(onAnimateExited).toHaveBeenCalledTimes(1);
 
   actJestMoveTimeTo(1101);
-  expect(useAnimateExited).toHaveBeenCalledTimes(2);
-  expect(useAnimateExited.mock.calls[1]).toEqual([
+  expect(onAnimateExited).toHaveBeenCalledTimes(2);
+  expect(onAnimateExited.mock.calls[1]).toEqual([
     expect.objectContaining({ flow: expect.objectContaining({ value: EXITED }) }),
     'x',
     'y',
