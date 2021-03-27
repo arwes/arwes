@@ -24,7 +24,7 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
 
       // Fonts
       fontSize: `${16 * fontScale}px`,
-      lineHeight: 1.2,
+      lineHeight: 1.3,
       color: palette.text.root,
 
       // Scrollbars
@@ -35,12 +35,16 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
         height: space(1.5)
       },
       '& ::-webkit-scrollbar-thumb': {
-        background: palette.primary.dark2,
+        border: `${outline(1)}px solid ${palette.primary.dark1}`,
         '&:hover': {
-          background: palette.primary.dark1
+          border: `${outline(1)}px solid ${palette.primary.main}`
         }
       },
-      '& ::-webkit-scrollbar-track': {
+      [[
+        '& ::-webkit-scrollbar-thumb',
+        '& ::-webkit-scrollbar-track',
+        '& ::-webkit-scrollbar-corner'
+      ].join()]: {
         background: palette.neutral.elevate(2)
       },
 
@@ -115,9 +119,9 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
           display: 'block',
           position: 'absolute',
           left: '-1.3em',
-          top: '0.2em',
+          top: '0.05em',
           fontSize: '0.9em',
-          lineHeight: '1em',
+          lineHeight: 'inherit',
           fontWeight: 'inherit'
         }
       }
@@ -134,7 +138,7 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       borderStyle: 'solid',
       borderColor: palette.primary.dark1,
       padding: space(4),
-      fontSize: '1rem',
+      fontSize: '0.9rem',
       backgroundColor: highlightedContentBgColor1
     },
 
@@ -146,7 +150,11 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       paddingRight: space(4),
       paddingTop: space(2),
       paddingBottom: space(2),
-      backgroundColor: highlightedContentBgColor1
+      backgroundColor: highlightedContentBgColor1,
+
+      'p:last-of-type': {
+        marginBottom: 0
+      }
     },
 
     // TABLES
@@ -186,7 +194,6 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
     // ASSETS
 
     img: {
-      border: `1px solid ${palette.primary.dark2}`,
       maxWidth: '100%'
     },
 
@@ -348,7 +355,6 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       'pre',
       'blockquote',
       'table',
-      'img',
       'figure',
       'hr',
       'fieldset'

@@ -28,7 +28,10 @@ const StylesBaseline: FC<StylesBaselineProps> = props => {
 
 StylesBaseline.propTypes = {
   // @ts-expect-error
-  styles: PropTypes.object
+  styles: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.func
+  ])
 };
 
 export { StylesBaselineProps, StylesBaseline };

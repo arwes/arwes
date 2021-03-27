@@ -12,11 +12,15 @@ const generateStyles = (
 
   return {
     root: {
+      display: 'flex',
       margin: `0 0 ${space(4)}px`
     },
     container: {
       position: 'relative',
-      display: 'flex'
+      flex: 1,
+      display: 'flex',
+      minWidth: 0, // Fix overflow issue.
+      minHeight: 0 // Fix overflow issue.
     },
     bg: {
       position: 'absolute',

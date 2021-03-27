@@ -139,7 +139,6 @@ render(
       </tbody>
     </table>
 
-    <img src={IMAGE_URL} alt='Image' />
     <figure>
       <img src={IMAGE_URL} alt='Image' />
       <figcaption>Lorem ipsum lov sit amet.</figcaption>
