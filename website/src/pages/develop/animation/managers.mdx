@@ -46,7 +46,7 @@ const MenuComponent = ({ animator, children }) => {
 const menuAnimator = {
   duration: { enter: 200, exit: 200 },
 
-  useAnimateEntering (animator, ref) {
+  onAnimateEntering (animator, ref) {
     anime({
       targets: ref.current,
       duration: animator.duration.enter,
@@ -56,7 +56,7 @@ const menuAnimator = {
     });
   },
 
-  useAnimateExiting (animator, ref) {
+  onAnimateExiting (animator, ref) {
     anime({
       targets: ref.current,
       duration: animator.duration.enter,
@@ -90,7 +90,7 @@ const ItemComponent = ({ animator, children }) => {
 const itemAnimator = {
   duration: { enter: 200, exit: 200 },
 
-  useAnimateEntering (animator, ref) {
+  onAnimateEntering (animator, ref) {
     anime({
       targets: ref.current,
       duration: animator.duration.enter,
@@ -100,7 +100,7 @@ const itemAnimator = {
     });
   },
 
-  useAnimateExiting (animator, ref) {
+  onAnimateExiting (animator, ref) {
     anime({
       targets: ref.current,
       duration: animator.duration.enter,
