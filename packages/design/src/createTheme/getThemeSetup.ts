@@ -15,7 +15,6 @@ const extractExtraFeatures = (providedSettings: ThemeSettings = {}): Record<stri
   const {
     breakpoints,
     palette,
-    typography,
     space,
     outline,
     shadow,
