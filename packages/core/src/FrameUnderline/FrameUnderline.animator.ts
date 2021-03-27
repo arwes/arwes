@@ -66,7 +66,7 @@ const transitionFrameUnderline = (
   });
 };
 
-const useAnimateEntered = (
+const onAnimateEntered = (
   animator: AnimatorRef,
   containerRef: ContainerRef,
   theme: ArwesTheme,
@@ -75,7 +75,7 @@ const useAnimateEntered = (
   stopFrameUnderlineBleeps(bleeps);
 };
 
-const useAnimateExited = (
+const onAnimateExited = (
   animator: AnimatorRef,
   containerRef: ContainerRef,
   theme: ArwesTheme,
@@ -85,11 +85,11 @@ const useAnimateExited = (
 };
 
 const animator: AnimatorClassSettings = {
-  useAnimateEntering: transitionFrameUnderline,
-  useAnimateEntered,
-  useAnimateExiting: transitionFrameUnderline,
-  useAnimateExited,
-  useAnimateUnmount: transitionRemoveFrameUnderline
+  onAnimateEntering: transitionFrameUnderline,
+  onAnimateEntered,
+  onAnimateExiting: transitionFrameUnderline,
+  onAnimateExited,
+  onAnimateUnmount: transitionRemoveFrameUnderline
 };
 
 export { animator };

@@ -1,7 +1,7 @@
 import rgba from 'polished/lib/color/rgba';
 import anime from 'animejs';
 import { RefObject, MutableRefObject } from 'react';
-import { AnimatorRef } from '@arwes/animation';
+import { AnimatorRef, AnimatorClassSettings } from '@arwes/animation';
 
 import {
   TextAnimationRefs,
@@ -92,10 +92,10 @@ const transitionTableRow = (
   });
 };
 
-const animator = {
-  useAnimateEntering: transitionTableRow,
-  useAnimateExiting: transitionTableRow,
-  useAnimateUnmount: transitionRemoveTableRow
+const animator: AnimatorClassSettings = {
+  onAnimateEntering: transitionTableRow,
+  onAnimateExiting: transitionTableRow,
+  onAnimateUnmount: transitionRemoveTableRow
 };
 
 export { TableRowTransitionRefs, animator };

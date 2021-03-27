@@ -44,9 +44,9 @@ const transitionCard = (animator: AnimatorRef, containerRef: ContainerRef): void
 
 const animator: AnimatorClassSettings = {
   manager: 'stagger',
-  useAnimateEntering: transitionCard,
-  useAnimateExiting: transitionCard,
-  useAnimateUnmount: transitionRemoveBlockquote
+  onAnimateEntering: transitionCard,
+  onAnimateExiting: transitionCard,
+  onAnimateUnmount: transitionRemoveBlockquote
 };
 
 export { animator };

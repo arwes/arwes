@@ -76,9 +76,9 @@ const transitionCard = (
 
 const animator: AnimatorClassSettings = {
   manager: 'stagger',
-  useAnimateEntering: transitionCard,
-  useAnimateExiting: transitionCard,
-  useAnimateUnmount: transitionRemoveCard
+  onAnimateEntering: transitionCard,
+  onAnimateExiting: transitionCard,
+  onAnimateUnmount: transitionRemoveCard
 };
 
 export { animator };

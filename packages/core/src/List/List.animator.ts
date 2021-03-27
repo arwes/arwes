@@ -58,9 +58,9 @@ const transitionList = (animator: AnimatorRef, containerRef: ContainerRef, theme
 const animator: AnimatorClassSettings = {
   combine: true,
   manager: 'stagger',
-  useAnimateEntering: transitionList,
-  useAnimateExiting: transitionList,
-  useAnimateUnmount: transitionRemoveList
+  onAnimateEntering: transitionList,
+  onAnimateExiting: transitionList,
+  onAnimateUnmount: transitionRemoveList
 };
 
 export { animator };
