@@ -6,7 +6,7 @@ import { ArwesTheme } from '../ArwesThemeProvider';
 
 const highlightFrameBgs = (container: HTMLElement, theme: ArwesTheme, palette?: string): void => {
   const color = theme.palette[palette as string]?.main || theme.palette.primary.main;
-  const duration = theme.transitionDuration / 2;
+  const duration = theme.transitionDuration(0.5);
 
   const bgs: HTMLElement[] = Array.from(container.querySelectorAll(`.${ARWES_CORE_FRAME_BG_CLASSNAME}`));
 

@@ -7,7 +7,7 @@ const generateStyles = (
   theme: ArwesTheme,
   options: { animate: boolean }
 ): Record<string, CSSObject> => {
-  const { palette, space, outline, shadow } = theme;
+  const { palette, space, outline, shadowBlur } = theme;
   const { animate } = options;
 
   return {
@@ -55,7 +55,7 @@ const generateStyles = (
       top: outline(1),
       padding: `${space(0.5)}px ${space(1.5)}px`,
       color: palette.secondary.main,
-      textShadow: `0 0 ${shadow.blur(1)}px ${palette.secondary.main}`,
+      textShadow: `0 0 ${shadowBlur(1)}px ${palette.secondary.main}`,
       textTransform: 'uppercase'
     },
     langBg: {

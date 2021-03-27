@@ -4,7 +4,7 @@ import { CSSObject } from '@emotion/css';
 import { ArwesTheme } from '../ArwesThemeProvider';
 
 const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject> => {
-  const { palette, space, outline, shadow, fontScale, transitionDuration } = theme;
+  const { palette, space, outline, shadowBlur, fontScale, transitionDuration } = theme;
 
   const highlightedContentBgColor1 = rgba(palette.primary.light1, 0.05);
   const highlightedContentBgColor2 = rgba(palette.primary.light1, 0.1);
@@ -23,7 +23,7 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       WebkitTextSizeAdjust: '100%',
 
       // Fonts
-      fontSize: `${16 * fontScale}px`,
+      fontSize: `${16 * fontScale()}px`,
       lineHeight: 1.3,
       color: palette.text.root,
 
@@ -62,7 +62,7 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       color: palette.text.headings,
       textTransform: 'uppercase',
       letterSpacing: 0.5,
-      textShadow: `0 0 ${shadow.blur(2)}px ${palette.text.headings}`
+      textShadow: `0 0 ${shadowBlur(2)}px ${palette.text.headings}`
     },
     h1: { fontSize: '1.75rem' },
     h2: { fontSize: '1.625rem' },
@@ -95,7 +95,7 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       color: palette.text.link,
       outline: 'none',
       textDecoration: 'none',
-      transition: `color ${transitionDuration}ms ease-out`,
+      transition: `color ${transitionDuration()}ms ease-out`,
 
       '&:hover, &:focus': {
         color: palette.text.linkHover
@@ -188,7 +188,7 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       padding: `${space(1)}px ${space(1.5)}px`
     },
     tr: {
-      transition: `background-color ${transitionDuration}ms ease-out`
+      transition: `background-color ${transitionDuration()}ms ease-out`
     },
 
     // ASSETS
@@ -262,9 +262,9 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       color: palette.secondary.light1,
       backgroundColor: 'transparent',
       transition: [
-        `border-color ${transitionDuration}ms ease-out`,
-        `background-color ${transitionDuration}ms ease-out`,
-        `box-shadow ${transitionDuration}ms ease-out`
+        `border-color ${transitionDuration()}ms ease-out`,
+        `background-color ${transitionDuration()}ms ease-out`,
+        `box-shadow ${transitionDuration()}ms ease-out`
       ].join(', '),
 
       '&::placeholder': {

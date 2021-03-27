@@ -15,7 +15,7 @@ const generateStyles = (
   theme: ArwesTheme,
   options: { animate: boolean, length: number, size: number, full?: boolean }
 ): Record<string, CSSObject> => {
-  const { palette, space, outline, shadow } = theme;
+  const { palette, space, outline, shadowBlur } = theme;
   const { animate, length, size, full } = options;
 
   return {
@@ -40,17 +40,17 @@ const generateStyles = (
       borderStyle: 'solid',
       borderColor: palette.primary.main,
       borderWidth: outline(1),
-      boxShadow: `0 0 ${shadow.blur(1 * size)}px ${palette.primary.main}`,
+      boxShadow: `0 0 ${shadowBlur(1 * size)}px ${palette.primary.main}`,
       transform: 'skewX(330deg)',
       transformOrigin: 'center'
     },
     itemPrimaryActive: {
       backgroundColor: palette.primary.main,
-      boxShadow: `0 0 ${shadow.blur(2 * size)}px ${palette.primary.main}`
+      boxShadow: `0 0 ${shadowBlur(2 * size)}px ${palette.primary.main}`
     },
     itemSecondaryActive: {
       backgroundColor: palette.primary.dark2,
-      boxShadow: `0 0 ${shadow.blur(2 * size)}px ${palette.primary.dark2}`
+      boxShadow: `0 0 ${shadowBlur(2 * size)}px ${palette.primary.dark2}`
     },
     itemInactive: {
       backgroundColor: '',

@@ -17,7 +17,7 @@ const generateStyles = (
       flexDirection: 'row',
       marginBottom: space(1),
       fontWeight: isHeader ? 'bold' : 'normal',
-      transition: `background-color ${transitionDuration}ms ease-out`,
+      transition: `background-color ${transitionDuration()}ms ease-out`,
 
       '&:last-child': {
         marginBottom: 0
@@ -34,7 +34,7 @@ const generateStyles = (
       whiteSpace: 'normal',
       wordBreak: 'break-word',
       backgroundColor: animate ? undefined : rgba(palette.text.root, isHeader ? 0.15 : 0.05),
-      transition: `background-color ${transitionDuration}ms ease-out`,
+      transition: `background-color ${transitionDuration()}ms ease-out`,
 
       '&:last-child': {
         marginRight: 0

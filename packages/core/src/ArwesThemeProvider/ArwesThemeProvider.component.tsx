@@ -1,10 +1,19 @@
 import React, { FC, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from '@emotion/react';
-import { ThemeSettings, ThemePalette, Theme, createTheme } from '@arwes/design';
+import { ThemeSettings, ThemePalette, Theme, createTheme, ThemeSettingsPalette } from '@arwes/design';
+
+interface ArwesThemeSettingsPalette extends ThemeSettingsPalette {
+  text?: {
+    root?: string
+    headings?: string
+    link?: string
+    linkHover?: string
+  }
+}
 
 interface ArwesThemeSettings extends ThemeSettings {
-  fontScale?: number
+  palette?: ArwesThemeSettingsPalette
 }
 
 interface ArwesThemePalette extends ThemePalette {
@@ -18,8 +27,6 @@ interface ArwesThemePalette extends ThemePalette {
 
 interface ArwesTheme extends Theme {
   palette: ArwesThemePalette
-  fontScale: number
-  transitionDuration: number
 }
 
 interface ArwesThemeProviderProps {
@@ -55,23 +62,15 @@ const ArwesThemeProvider: FC<ArwesThemeProviderProps> = props => {
         neutral: {
           main: '#021114'
         },
+        ...themeSettings?.palette,
         text: {
           root: '#7efcf6',
           headings: '#00f8f8',
           link: '#ffa76c',
-          linkHover: '#ffc69f'
-        },
-        ...themeSettings?.palette
-      },
-      space: themeSettings?.space ?? 5,
-      outline: themeSettings?.outline ?? 1,
-      shadow: {
-        blur: 1,
-        spread: 1,
-        ...themeSettings?.shadow
-      },
-      fontScale: themeSettings?.fontScale ?? 1,
-      transitionDuration: themeSettings?.transitionDuration ?? 150
+          linkHover: '#ffc69f',
+          ...themeSettings?.palette?.text
+        }
+      }
     }) as ArwesTheme;
   }, []);
 

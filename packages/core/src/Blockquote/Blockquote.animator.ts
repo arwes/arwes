@@ -21,7 +21,7 @@ const transitionRemoveBlockquote = (animator: AnimatorRef, containerRef: Contain
 const transitionCard = (animator: AnimatorRef, containerRef: ContainerRef): void => {
   const { flow, duration } = animator;
   const isEntering = flow.entering || flow.entered;
-  const transitionDuration = isEntering ? duration.enter : duration.exit;
+  const durationTransition = isEntering ? duration.enter : duration.exit;
 
   const container = containerRef.current;
   const line = container.querySelector('.arwes-blockquote__line');
@@ -30,15 +30,15 @@ const transitionCard = (animator: AnimatorRef, containerRef: ContainerRef): void
   if (isEntering) {
     anime({
       targets: line,
-      duration: transitionDuration,
+      duration: durationTransition,
       easing: 'easeOutSine',
       height: [0, '100%']
     });
 
-    transitionAppear([line, bg], transitionDuration);
+    transitionAppear([line, bg], durationTransition);
   }
   else {
-    transitionDisappear([line, bg], transitionDuration);
+    transitionDisappear([line, bg], durationTransition);
   }
 };
 

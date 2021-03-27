@@ -10,7 +10,7 @@ const generateStyles = (
   theme: ArwesTheme,
   options: { palette?: string, active?: boolean, disabled?: boolean }
 ): Record<string, CSSObject> => {
-  const { shadow, transitionDuration } = theme;
+  const { shadowBlur, transitionDuration } = theme;
   const { active, disabled } = options;
 
   const defaultPalette = theme.palette.primary;
@@ -28,22 +28,22 @@ const generateStyles = (
       fontSize: '0.875rem',
       textTransform: 'uppercase',
       textDecoration: 'none',
-      textShadow: `0 0 ${shadow.blur(1)}px ${color}`,
+      textShadow: `0 0 ${shadowBlur(1)}px ${color}`,
       color,
       cursor: disabled ? 'default' : 'pointer',
       transition: ['color', 'text-shadow']
-        .map(prop => `${prop} ${transitionDuration}ms ease-out`)
+        .map(prop => `${prop} ${transitionDuration()}ms ease-out`)
         .join(','),
 
       [`& .${ARWES_CORE_FRAME_BG_CLASSNAME}`]: active && {
         backgroundColor: color,
         opacity: BUTTON_FRAME_BG_BASE_OPACITY,
-        transition: `opacity ${transitionDuration}ms ease-out`
+        transition: `opacity ${transitionDuration()}ms ease-out`
       },
 
       '&:hover, &:focus': !disabled && {
         color: colorHover,
-        textShadow: `0 0 ${shadow.blur(1)}px ${colorHover}`,
+        textShadow: `0 0 ${shadowBlur(1)}px ${colorHover}`,
 
         [`& .${ARWES_CORE_FRAME_BG_CLASSNAME}`]: active && {
           backgroundColor: colorHover
