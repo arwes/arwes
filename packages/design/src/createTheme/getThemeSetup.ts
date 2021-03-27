@@ -2,10 +2,12 @@ import {
   THEME_BREAKPOINTS_DEFAULT,
   THEME_PALETTE_TONAL_OFFSET_DEFAULT,
   THEME_PALETTE_ELEVATION_OFFSET_DEFAULT,
+  THEME_FONT_SCALE_DEFAULT,
   THEME_SPACE_DEFAULT,
   THEME_OUTLINE_DEFAULT,
   THEME_SHADOW_BLUR_DEFAULT,
   THEME_SHADOW_SPREAD_DEFAULT,
+  THEME_TRANSITION_DURATION_DEFAULT,
   ThemeSettings,
   ThemeSetup,
   Theme
@@ -27,20 +29,25 @@ const getThemeSetup = (providedSettings?: ThemeSettings, extendTheme?: Theme): T
     ...providedSettings?.palette
   };
 
+  const fontScale = providedSettings?.fontScale ?? extendTheme?.fontScale(1) ?? THEME_FONT_SCALE_DEFAULT;
   const space = providedSettings?.space ?? extendTheme?.space(1) ?? THEME_SPACE_DEFAULT;
+
   const outline = providedSettings?.outline ?? extendTheme?.outline(1) ?? THEME_OUTLINE_DEFAULT;
-  const shadow = {
-    blur: providedSettings?.shadow?.blur ?? extendTheme?.shadow.blur(1) ?? THEME_SHADOW_BLUR_DEFAULT,
-    spread: providedSettings?.shadow?.spread ?? extendTheme?.shadow.spread(1) ?? THEME_SHADOW_SPREAD_DEFAULT
-  };
+  const shadowBlur = providedSettings?.shadowBlur ?? extendTheme?.shadowBlur(1) ?? THEME_SHADOW_BLUR_DEFAULT;
+
+  const shadowSpread = providedSettings?.shadowSpread ?? extendTheme?.shadowSpread(1) ?? THEME_SHADOW_SPREAD_DEFAULT;
+  const transitionDuration = providedSettings?.transitionDuration ?? extendTheme?.transitionDuration(1) ?? THEME_TRANSITION_DURATION_DEFAULT;
 
   return Object.freeze({
     ...providedSettings,
     breakpoints,
     palette,
+    fontScale,
     space,
     outline,
-    shadow
+    shadowBlur,
+    shadowSpread,
+    transitionDuration
   });
 };
 
