@@ -1,4 +1,4 @@
-import { Howl } from 'howler';
+import { Howler, Howl } from 'howler';
 
 import {
   BleepsAudioGroupSettings,
@@ -12,9 +12,22 @@ const createBleep = (audioSettings: BleepsAudioGroupSettings, playerSettings: Bl
     ...audioSettings,
     ...playerSettings
   };
-  const howl = new Howl(settings);
 
+  // TODO: The Howler API does not provide a public interface to know if
+  // the browser audio is locked or not. But it has a private flag.
+  // This could potentially break this library if it changes unexpectedly,
+  // but there is no proper way to know.
+  const isGlobalAudioLocked = !(Howler as any)._audioUnlocked;
+
+  let isLocked: boolean = isGlobalAudioLocked;
   let lastId: number | undefined;
+
+  const howl = new Howl({
+    ...settings,
+    onunlock: () => {
+      isLocked = false;
+    }
+  });
 
   // In a loop sound, if the sound is played by multiple sources
   // (e.g. multiple components multiple times), to stop the sound,
@@ -27,6 +40,14 @@ const createBleep = (audioSettings: BleepsAudioGroupSettings, playerSettings: Bl
     // is not loaded, probably because the browser has locked the playback.
     if (howl.state() === 'unloaded') {
       howl.load();
+    }
+
+    // If the browser audio is locked, if the audio is played, it will be queued
+    // until the browser audio is unlocked. But if in-between the audio is stopped,
+    // the play is still queued. It is also accumulated, regardless of passing down
+    // the same playback id.
+    if (isLocked) {
+      return;
     }
 
     sourcesAccount[instanceId] = true;
@@ -47,13 +68,13 @@ const createBleep = (audioSettings: BleepsAudioGroupSettings, playerSettings: Bl
 
     const canStop = settings.loop ? noActiveSources : true;
 
-    if (canStop && howl.playing(lastId)) {
-      howl.stop(lastId);
+    if (canStop && howl.playing()) {
+      howl.stop();
     }
   };
 
   const getIsPlaying = (): boolean => {
-    return howl.playing(lastId);
+    return howl.playing();
   };
 
   const getDuration = (): number => {

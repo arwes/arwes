@@ -1,6 +1,37 @@
 /* eslint-env jest */
 
+import howler from 'howler';
+
 import { createBleep } from './createBleep';
+
+jest.mock('howler', () => {
+  const Howler = {
+    _audioUnlocked: true
+  };
+  class Howl {
+    constructor (settings: any) {
+      const self = this as any;
+      self.__testBleepHowlSettings = settings;
+    }
+
+    play (): void {}
+    stop (): void {}
+    playing (): void {}
+    state (): void {}
+    duration (): void {}
+    load (): void {}
+    unload (): void {}
+  }
+  return { Howler, Howl };
+});
+
+const howlerGlobalAPI: any = howler.Howler;
+const unlockGlobalAudio = (): any => (howlerGlobalAPI._audioUnlocked = true);
+const lockGlobalAudio = (): any => (howlerGlobalAPI._audioUnlocked = false);
+
+beforeEach(() => {
+  unlockGlobalAudio();
+});
 
 test('Should create bleep with provided settings', () => {
   const audioSettings = {
@@ -71,6 +102,36 @@ test('Should always set shared sound id as number or undefined when playing (eve
   expect(howlPlay).toHaveBeenCalled();
 });
 
+test('Should not play sound when global audio is locked', () => {
+  lockGlobalAudio();
+
+  const audioSettings = { volume: 0.8 };
+  const playerSettings = { src: ['sound.webm'] };
+  const bleep = createBleep(audioSettings, playerSettings);
+  const howlPlay = jest.spyOn(bleep._howl, 'play');
+  bleep.play('A');
+  expect(howlPlay).not.toHaveBeenCalled();
+});
+
+test('Should unlock bleep audio when it was locked and then unlocked to be playable', () => {
+  lockGlobalAudio();
+
+  const audioSettings = { volume: 0.8 };
+  const playerSettings = { src: ['sound.webm'] };
+  const bleep = createBleep(audioSettings, playerSettings);
+  const howlPlay = jest.spyOn(bleep._howl, 'play');
+  bleep.play('A');
+  expect(howlPlay).not.toHaveBeenCalled();
+
+  unlockGlobalAudio();
+
+  const bleepHowl: any = bleep._howl;
+  bleepHowl.__testBleepHowlSettings.onunlock();
+
+  bleep.play('A');
+  expect(howlPlay).toHaveBeenCalled();
+});
+
 test('Should allow stop play in shared sound only when it is already playing', () => {
   const audioSettings = { volume: 0.8 };
   const playerSettings = { src: ['sound.webm'] };
@@ -82,7 +143,6 @@ test('Should allow stop play in shared sound only when it is already playing', (
   bleep.stop('A');
   expect(howlPlay).toHaveBeenCalled();
   expect(howlStop).toHaveBeenCalledTimes(1);
-  expect(howlStop).toHaveBeenNthCalledWith(1, 777);
 });
 
 test('Should not stop sound if it is not playing', () => {
@@ -150,7 +210,7 @@ test('Should not manage non-loop sound play/stop multiple calls to prevent race-
   expect(howlStop).toHaveBeenCalled();
 });
 
-test('Should allow get the playing status in shared sound', () => {
+test('Should allow to get the playing status', () => {
   const audioSettings = { volume: 0.8 };
   const playerSettings = { src: ['sound.webm'] };
   const bleep = createBleep(audioSettings, playerSettings);
@@ -160,10 +220,9 @@ test('Should allow get the playing status in shared sound', () => {
   expect(bleep.getIsPlaying()).toBe(true);
   expect(howlPlay).toHaveBeenCalled();
   expect(howlPlaying).toHaveBeenCalledTimes(1);
-  expect(howlPlaying).toHaveBeenNthCalledWith(1, 777);
 });
 
-test('Should allow get duration of sound', () => {
+test('Should allow to get duration of sound', () => {
   const audioSettings = { volume: 0.8 };
   const playerSettings = { src: ['sound.webm'] };
   const bleep = createBleep(audioSettings, playerSettings);
@@ -172,7 +231,7 @@ test('Should allow get duration of sound', () => {
   expect(howlDuration).toHaveBeenCalledTimes(1);
 });
 
-test('Should allow get duration of sound', () => {
+test('Should allow to unload sound', () => {
   const audioSettings = { volume: 0.8 };
   const playerSettings = { src: ['sound.webm'] };
   const bleep = createBleep(audioSettings, playerSettings);
