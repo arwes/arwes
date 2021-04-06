@@ -1,7 +1,6 @@
 import { RefObject, MutableRefObject } from 'react';
 import { CSSObject, css } from '@emotion/css';
 import { AnimatorRef } from '@arwes/animation';
-import { Bleeps } from '@arwes/sounds';
 
 import { walkTextNodes } from '../walkTextNodes';
 import { setTextNodesEnteringContentLength } from '../setTextNodesEnteringContentLength';
@@ -30,7 +29,7 @@ const styles: Record<string, CSSObject> = {
   }
 };
 
-const stopTextAnimation = (animator: AnimatorRef, refs: TextAnimationRefs, bleeps: Bleeps): void => {
+const stopTextAnimation = (animator: AnimatorRef, refs: TextAnimationRefs): void => {
   const {
     rootRef,
     actualChildrenRef,
@@ -44,10 +43,6 @@ const stopTextAnimation = (animator: AnimatorRef, refs: TextAnimationRefs, bleep
   }
 
   window.cancelAnimationFrame(animationFrame.current);
-
-  if (bleeps.typing?.getIsPlaying()) {
-    bleeps.typing?.stop();
-  }
 
   if (rootRef.current && cloneNode.current) {
     rootRef.current.removeChild(cloneNode.current);
@@ -63,7 +58,7 @@ const stopTextAnimation = (animator: AnimatorRef, refs: TextAnimationRefs, bleep
   animationFrame.current = null;
 };
 
-const startTextAnimation = (animator: AnimatorRef, refs: TextAnimationRefs, bleeps: Bleeps): void => {
+const startTextAnimation = (animator: AnimatorRef, refs: TextAnimationRefs, callback?: () => void): void => {
   const {
     rootRef,
     actualChildrenRef,
@@ -72,7 +67,7 @@ const startTextAnimation = (animator: AnimatorRef, refs: TextAnimationRefs, blee
     animationFrame
   } = refs.current;
 
-  stopTextAnimation(animator, refs, bleeps);
+  stopTextAnimation(animator, refs);
 
   // If the animation is run when the element is already ENTERED, it should
   // restart the same entering animation.
@@ -153,13 +148,12 @@ const startTextAnimation = (animator: AnimatorRef, refs: TextAnimationRefs, blee
       addNextFrame(runFrame);
     }
     else {
-      stopTextAnimation(animator, refs, bleeps);
+      stopTextAnimation(animator, refs);
+      callback?.();
     }
   };
 
   addNextFrame(runFrame);
-
-  bleeps.typing?.play();
 };
 
 export {

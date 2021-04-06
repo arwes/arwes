@@ -11,34 +11,34 @@ const stopTableTransitionBleep = (bleeps: Bleeps): void => {
   }
 };
 
-const useAnimateEntering = (animator: AnimatorRef, bleeps: Bleeps): void => {
+const onAnimateEntering = (animator: AnimatorRef, bleeps: Bleeps): void => {
   playTableTransitionBleep(bleeps);
 };
 
-const useAnimateEntered = (animator: AnimatorRef, bleeps: Bleeps): void => {
+const onAnimateEntered = (animator: AnimatorRef, bleeps: Bleeps): void => {
   stopTableTransitionBleep(bleeps);
 };
 
-const useAnimateExiting = (animator: AnimatorRef, bleeps: Bleeps): void => {
+const onAnimateExiting = (animator: AnimatorRef, bleeps: Bleeps): void => {
   playTableTransitionBleep(bleeps);
 };
 
-const useAnimateExited = (animator: AnimatorRef, bleeps: Bleeps): void => {
+const onAnimateExited = (animator: AnimatorRef, bleeps: Bleeps): void => {
   stopTableTransitionBleep(bleeps);
 };
 
-const useAnimateUnmount = (animator: AnimatorRef, bleeps: Bleeps): void => {
+const onAnimateUnmount = (animator: AnimatorRef, bleeps: Bleeps): void => {
   stopTableTransitionBleep(bleeps);
 };
 
 const animator: AnimatorClassSettings = {
   combine: true,
   manager: 'stagger',
-  useAnimateEntering,
-  useAnimateEntered,
-  useAnimateExiting,
-  useAnimateExited,
-  useAnimateUnmount
+  onAnimateEntering,
+  onAnimateEntered,
+  onAnimateExiting,
+  onAnimateExited,
+  onAnimateUnmount
 };
 
 export { animator };

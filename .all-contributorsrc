@@ -43,6 +43,16 @@
         "code",
         "review"
       ]
+    },
+    {
+      "login": "Dessix",
+      "name": "Zoey",
+      "avatar_url": "https://avatars.githubusercontent.com/u/434942?v=4",
+      "profile": "https://github.com/Dessix",
+      "contributions": [
+        "ideas",
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 5

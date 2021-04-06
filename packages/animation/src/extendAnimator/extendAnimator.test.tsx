@@ -38,13 +38,13 @@ test('Should extend class animator settings and filter unknown settings for anim
     animator = props.animator;
     return null;
   };
-  const useAnimateEntering = (): void => { };
-  const useAnimateExiting = (): void => { };
+  const onAnimateEntering = (): void => { };
+  const onAnimateExiting = (): void => { };
   const classAnimator = {
     duration: { enter: 500 },
     merge: true,
-    useAnimateEntering,
-    useAnimateExiting,
+    onAnimateEntering,
+    onAnimateExiting,
     x: 1,
     y: 2
   };
@@ -55,8 +55,8 @@ test('Should extend class animator settings and filter unknown settings for anim
       enter: 500
     },
     merge: true,
-    useAnimateEntering,
-    useAnimateExiting
+    onAnimateEntering,
+    onAnimateExiting
   });
 });
 

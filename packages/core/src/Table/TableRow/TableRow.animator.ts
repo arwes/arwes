@@ -1,7 +1,7 @@
 import rgba from 'polished/lib/color/rgba';
 import anime from 'animejs';
 import { RefObject, MutableRefObject } from 'react';
-import { AnimatorRef } from '@arwes/animation';
+import { AnimatorRef, AnimatorClassSettings } from '@arwes/animation';
 
 import {
   TextAnimationRefs,
@@ -31,7 +31,7 @@ const transitionRemoveTableRow = (animator: AnimatorRef, refs: TableRowTransitio
 
   if (refs.current.textAnimateRefsCollection.current.length) {
     refs.current.textAnimateRefsCollection.current.forEach(refs => {
-      stopTextAnimation(animator, refs, {});
+      stopTextAnimation(animator, refs);
     });
 
     refs.current.textAnimateRefsCollection.current = [];
@@ -74,7 +74,7 @@ const transitionTableRow = (
       ? rgba(theme.palette.text.root, isHeader ? 0.15 : 0.05)
       : '';
 
-    startTextAnimation(animator, cellTextAnimationRefs, {});
+    startTextAnimation(animator, cellTextAnimationRefs);
 
     anime({
       targets: cell,
@@ -92,10 +92,10 @@ const transitionTableRow = (
   });
 };
 
-const animator = {
-  useAnimateEntering: transitionTableRow,
-  useAnimateExiting: transitionTableRow,
-  useAnimateUnmount: transitionRemoveTableRow
+const animator: AnimatorClassSettings = {
+  onAnimateEntering: transitionTableRow,
+  onAnimateExiting: transitionTableRow,
+  onAnimateUnmount: transitionRemoveTableRow
 };
 
 export { TableRowTransitionRefs, animator };

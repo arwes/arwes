@@ -7,7 +7,7 @@ const generateStyles = (
   theme: ArwesTheme,
   options: { animate?: boolean, palette?: string }
 ): Record<string, CSSObject> => {
-  const { space, outline, shadow } = theme;
+  const { space, outline, shadowBlur } = theme;
   const { animate } = options;
 
   const defaultPalette = theme.palette.primary;
@@ -43,7 +43,7 @@ const generateStyles = (
       width: outline(6),
       height: '100%',
       backgroundColor: color,
-      boxShadow: `0 0 ${shadow.blur(2)}px ${color}`,
+      boxShadow: `0 0 ${shadowBlur(2)}px ${color}`,
       opacity: animate ? 0 : undefined
     },
     content: {

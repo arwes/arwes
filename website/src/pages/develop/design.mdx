@@ -2,7 +2,7 @@ import { PageContentLayout } from '../../components/PageContentLayout';
 import { Sandbox } from '../../components/Sandbox';
 export default props => <PageContentLayout headProps={{ title: 'Design' }} {...props} />;
 
-# Design
+# `@arwes/design`
 
 Theming and styling tools with focus in [Emotion](https://emotion.sh) in [React](https://reactjs.org).
 
@@ -41,16 +41,14 @@ The following features can be configured:
 
 - [Breakpoints](/develop/design/breakpoints).
 - [Palette](/develop/design/palette).
-- [Typography](/develop/design/typography).
-- [Space](/develop/design/space).
-- [Shadow](/develop/design/shadow).
+- [Multipliers](/develop/design/multipliers).
 
 But any extra settings can be setup as needed.
 
 Then the theme can be used in any CSS-in-JS library theme provider or referenced
-directly by components to generate dynamic styles.
+directly by components to generate dynamic styles and animations.
 
-## Theme Extension
+### Theme Extension
 
 A new theme can be created by extending a previously created one.
 

@@ -5,10 +5,10 @@ export default props => <PageContentLayout headProps={{ title: 'Palette' }} {...
 
 The theme palette provides a collection of common color settings for the UI.
 
-There are some predefined basic and elevation colors. By default, they are setup
-with predefined color values, but these values are not intended to be used in
-production, but rather configured according to the project needs, since they
-do not follow a proper visual guideline.
+There are some predefined "basic" and "elevation" colors. By default, they are
+set up with predefined color values, but these values are not intended to be
+used in production, but rather configured according to the project needs,
+since they do not follow a proper visual guideline.
 
 ## Basic Colors
 
@@ -17,68 +17,92 @@ The palette is composed by the following basic colors:
 - `primary` - Primary interface component elements.
 - `secondary` - Complementary color.
 - `success` - Successful messages. It should tend to be green.
-- `info` - Information messages. It should tend to be blue.
-- `warn` - Warning messages. It should tend to be orange.
 - `error` - Error messages. It should tend to be red.
 
 Each color has the following variations:
 
-- `main` - The main color.
-- `dark` - A darker version of the main color.
-- `light` - A lighter version of the main color.
-- `contrast` - The contrast color of the main color.
+- `main`
+- `dark1`
+- `dark2`
+- `dark3`
+- `light1`
+- `light2`
+- `light3`
 
-If the variations are not configured, they are calculated. The basic colors use
-the following settings to calculate the color variations:
+Only the `main` color is required. If the other variations are not configured,
+they are calculated based on the palette setting `tonalOffset`.
 
-- `tonalOffset` - The color tone variation. It is used to calculate `dark` and
-`light` variations. From `0` to `1`, by default `0.2`. The higher the
+`tonalOffset` is the color tone variation factor. It is used to calculate dark
+and light variations. From `0` to `1`, by default `0.1`. The higher the
 number, the stronger the effect.
-- `contrastOffset` - The color tone contrast variation. From `0` to `1`, by
-default `0.45`. The higher the number, the stronger the contrast effect.
 
-An example of configuring the primary color with all its variations so no
+An example of configuring the `primary` color with all its variations so no
 calculations are made:
 
 ```tsx
+import { createTheme } from '@arwes/design';
+
 const theme = createTheme({
   palette: {
     primary: {
       main: '#0ff',
-      dark: '#099',
-      light: '#6ff',
-      contrast: '#001919'
+      dark1: '#0cc',
+      dark2: '#099',
+      dark3: '#066',
+      light1: '#3ff',
+      light2: '#6ff',
+      light3: '#9ff'
     }
   }
 });
 ```
 
-An example of configuring the secondary color with only the main color variation,
-leaving the remaining variations to be calculated with custom tone offsets:
+An example of configuring the `secondary` color with only the main color,
+leaving the remaining variations to be calculated with custom the tonal offset:
 
 ```tsx
 const theme = createTheme({
   palette: {
     tonalOffset: 0.15,
-    primary: {
-      main: '#0ff'
+    secondary: {
+      main: '#f0f'
     }
   }
 });
 ```
 
-The resulting theme palette will have all the color variations and
-it can be accessed like:
+The resulting theme palette will have all the color variations.
+
+The theme palette can be accessed like:
 
 ```tsx
+const theme = createTheme();
+
 theme.palette.primary.main; // '#0ff'
+theme.palette.primary.dark1; // '#0cc'
+// ...
+```
+
+Custom basic colors can be created using the utility `createThemePaletteBasic` like:
+
+```tsx
+import { createTheme, createThemePaletteBasic } from '@arwes/design';
+
+const theme = createTheme({
+  palette: {
+    yourOwnBasicPalette: createThemePaletteBasic({ main: '#00f' }, 0.1)
+  }
+});
+
+theme.palette.yourOwnBasicPalette.main; // '#00f'
+// ...
 ```
 
 ## Elevation Colors
 
-There are some colors used as levels or elevations to delimit and prioritize surfaces.
-The elevation effect is basically a color which becomes lighter or darker
-progressively for different surfaces according to the color luminosity.
+There are some colors used as "levels" or "elevations" to delimit or prioritize
+surfaces. The elevation effect is basically a color which becomes lighter or
+darker progressively for different surfaces according to the color luminosity.
 
 The palette is composed by the following elevation effect colors:
 
@@ -87,9 +111,9 @@ The palette is composed by the following elevation effect colors:
 The neutral color does not have variations automatically generated, but rather
 they are calculated when requested.
 
-The following settings are used to calculate the elevation of the color:
+To calculate the elevation of a color, the `elevationOffset` setting is used.
 
-- `elevationOffset` - The tone offset to darken or lighten according to the
+`elevationOffset` is the tone offset to darken or lighten according to the
 color luminosity. It goes from `0` to `1`, by default `0.025`.
 
 An example of defining the neutral color:
@@ -109,11 +133,28 @@ Then the color elevation can be calculated based on a multiplier number of the
 tone offset:
 
 ```tsx
-// Since it is a "dark" color, it is lighten.
+// Since it is a "dark" color, it is lightened.
 theme.palette.neutral.elevate(0); // '#111' (The unchanged color)
 theme.palette.neutral.elevate(1); // '#171717'
 theme.palette.neutral.elevate(2); // '#1e1e1e'
 theme.palette.neutral.elevate(3); // '#242424'
+// ...
+```
+
+Custom elevation colors can be created using the utility `createThemePaletteElevation`
+like:
+
+```tsx
+import { createTheme, createThemePaletteElevation } from '@arwes/design';
+
+const theme = createTheme({
+  palette: {
+    yourOwnElevationPalette: createThemePaletteElevation('#101', 0.025)
+  }
+});
+
+theme.palette.yourOwnElevationPalette.elevate(0); // '#101'
+// ...
 ```
 
 ## Extra Settings

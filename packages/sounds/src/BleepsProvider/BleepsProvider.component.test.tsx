@@ -44,7 +44,7 @@ test('Should receive audio settings, players settings, and bleeps settings, and 
   expect(bleepsSetup?.bleepsSettings).toEqual(bleepsSettings);
 
   // The actual bleeps API is not tested but rather then final settings.
-  expect(bleepsSetup?.bleeps).toMatchObject({
+  expect(bleepsSetup?.bleepsGenerics).toMatchObject({
     tap: {
       _settings: {
         src: ['click.webm'],
@@ -113,7 +113,7 @@ test('Should receive common and categories of audio settings, players settings, 
   expect(bleepsSetup?.bleepsSettings).toEqual(bleepsSettings);
 
   // The actual bleeps API is not tested but rather their final settings.
-  expect(bleepsSetup?.bleeps).toMatchObject({
+  expect(bleepsSetup?.bleepsGenerics).toMatchObject({
     click: {
       _settings: {
         src: ['click.webm'],

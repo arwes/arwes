@@ -7,12 +7,12 @@ const CLASS_ALLOWED_SETTINGS = [
   'merge',
   'combine',
   'manager',
-  'useAnimateMount',
-  'useAnimateEntering',
-  'useAnimateEntered',
-  'useAnimateExiting',
-  'useAnimateExited',
-  'useAnimateUnmount'
+  'onAnimateMount',
+  'onAnimateEntering',
+  'onAnimateEntered',
+  'onAnimateExiting',
+  'onAnimateExited',
+  'onAnimateUnmount'
 ];
 
 function filterClassAnimatorSettings (

@@ -58,29 +58,29 @@ const startCodeBlockAnimation = (animator: AnimatorRef, containerRef: ContainerR
   });
 };
 
-const useAnimateEntering = (animator: AnimatorRef, containerRef: ContainerRef, bleeps: Bleeps): void => {
+const onAnimateEntering = (animator: AnimatorRef, containerRef: ContainerRef, bleeps: Bleeps): void => {
   startCodeBlockAnimation(animator, containerRef);
   playBleeps(bleeps);
 };
 
-const useAnimateEntered = (animator: AnimatorRef, containerRef: ContainerRef, bleeps: Bleeps): void => {
+const onAnimateEntered = (animator: AnimatorRef, containerRef: ContainerRef, bleeps: Bleeps): void => {
   stopBleeps(bleeps);
 };
 
-const useAnimateExiting = (animator: AnimatorRef, containerRef: ContainerRef): void => {
+const onAnimateExiting = (animator: AnimatorRef, containerRef: ContainerRef): void => {
   startCodeBlockAnimation(animator, containerRef);
 };
 
-const useAnimateUnmount = (animator: AnimatorRef, containerRef: ContainerRef, bleeps: Bleeps): void => {
+const onAnimateUnmount = (animator: AnimatorRef, containerRef: ContainerRef, bleeps: Bleeps): void => {
   stopCodeBlockAnimation(animator, containerRef);
   stopBleeps(bleeps);
 };
 
 const animator: AnimatorClassSettings = {
-  useAnimateEntering,
-  useAnimateEntered,
-  useAnimateExiting,
-  useAnimateUnmount
+  onAnimateEntering,
+  onAnimateEntered,
+  onAnimateExiting,
+  onAnimateUnmount
 };
 
 export { animator };

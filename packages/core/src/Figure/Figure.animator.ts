@@ -9,7 +9,7 @@ import { transitionAppear, transitionDisappear } from '../utils/appearTransition
 
 type ContainerRef = MutableRefObject<HTMLElement>;
 
-const useAnimateEntering = (
+const onAnimateEntering = (
   animator: AnimatorRef,
   containerRef: ContainerRef,
   theme: ArwesTheme,
@@ -50,7 +50,7 @@ const useAnimateEntering = (
   );
 };
 
-const useAnimateExiting = (animator: AnimatorRef, containerRef: ContainerRef): void => {
+const onAnimateExiting = (animator: AnimatorRef, containerRef: ContainerRef): void => {
   const { duration } = animator;
   const container = containerRef.current;
 
@@ -64,7 +64,7 @@ const useAnimateExiting = (animator: AnimatorRef, containerRef: ContainerRef): v
   );
 };
 
-const useAnimateUnmount = (animator: AnimatorRef, containerRef: ContainerRef): void => {
+const onAnimateUnmount = (animator: AnimatorRef, containerRef: ContainerRef): void => {
   const container = containerRef.current;
 
   if (!container) {
@@ -81,9 +81,9 @@ const useAnimateUnmount = (animator: AnimatorRef, containerRef: ContainerRef): v
 };
 
 const animator: AnimatorClassSettings = {
-  useAnimateEntering,
-  useAnimateExiting,
-  useAnimateUnmount
+  onAnimateEntering,
+  onAnimateExiting,
+  onAnimateUnmount
 };
 
 export { animator };

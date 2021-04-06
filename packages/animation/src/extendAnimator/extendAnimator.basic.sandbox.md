@@ -4,7 +4,7 @@ const COLOR_OFF = '#efb527'; // orange
 
 // Item
 
-function useAnimateEntering (animator, element) {
+function onAnimateEntering (animator, element) {
   anime({
     targets: element.current,
     easing: 'linear',
@@ -13,7 +13,7 @@ function useAnimateEntering (animator, element) {
   });
 }
 
-function useAnimateExiting (animator, element) {
+function onAnimateExiting (animator, element) {
   anime({
     targets: element.current,
     easing: 'linear',
@@ -42,23 +42,23 @@ function ItemComponent (props) {
 }
 
 const Item = withAnimator({
-  useAnimateEntering,
-  useAnimateExiting
+  onAnimateEntering,
+  onAnimateExiting
 })(ItemComponent);
 
 // ItemExtended
 
-function useAnimateExited (animator, element) {
+function onAnimateExited (animator, element) {
   anime.set(element.current, { borderColor: 'red' });
 }
 
-function useAnimateEntered (animator, element) {
+function onAnimateEntered (animator, element) {
   anime.set(element.current, { borderColor: 'green' });
 }
 
 const ItemExtended = extendAnimator({
-  useAnimateExited,
-  useAnimateEntered
+  onAnimateExited,
+  onAnimateEntered
 })(Item);
 
 // Sandbox

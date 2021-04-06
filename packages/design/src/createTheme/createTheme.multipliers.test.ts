@@ -1,51 +1,44 @@
 /* eslint-env jest */
 
+import { THEME_FACTOR_MULTIPLIERS_NAMES } from '../constants';
 import { createTheme } from './createTheme';
 
-test('Should create spacing calculator based on provided factor with default value of 8', () => {
+test('Should create font scale calculator based on provided factor with default value of 1', () => {
   const theme = createTheme();
-  expect(theme.space(1)).toBe(8);
-  expect(theme.space(2)).toBe(16);
-  expect(theme.space(0.5)).toBe(4);
+  expect(theme.fontScale(1)).toBe(1);
+  expect(theme.fontScale(2)).toBe(2);
+});
+
+test('Should create spacing calculator based on provided factor with default value of 5', () => {
+  const theme = createTheme();
+  expect(theme.space(1)).toBe(5);
+  expect(theme.space(2)).toBe(10);
 });
 
 test('Should create outline calculator based on provided factor with default value of 1', () => {
   const theme = createTheme();
   expect(theme.outline(1)).toBe(1);
   expect(theme.outline(2)).toBe(2);
-  expect(theme.outline(0.5)).toBe(1);
 });
 
 test('Should create shadow blur and spread calculator based on provided factors with default value of 1 for each', () => {
   const theme = createTheme();
-  expect(theme.shadow.blur(1)).toBe(1);
-  expect(theme.shadow.blur(2)).toBe(2);
-  expect(theme.shadow.spread(1)).toBe(1);
-  expect(theme.shadow.spread(2)).toBe(2);
+  expect(theme.shadowBlur(1)).toBe(1);
+  expect(theme.shadowBlur(2)).toBe(2);
+  expect(theme.shadowSpread(1)).toBe(1);
+  expect(theme.shadowSpread(2)).toBe(2);
 });
 
-[
-  [
-    'space',
-    (value: any) => value !== undefined ? { space: value } : {},
-    (theme: any) => theme.space
-  ],
-  [
-    'outline',
-    (value: any) => value !== undefined ? { outline: value } : {},
-    (theme: any) => theme.outline
-  ],
-  [
-    'blur',
-    (value: any) => value !== undefined ? { shadow: { blur: value } } : {},
-    (theme: any) => theme.shadow.blur
-  ],
-  [
-    'spread',
-    (value: any) => value !== undefined ? { shadow: { spread: value } } : {},
-    (theme: any) => theme.shadow.spread
-  ]
-].forEach(([name, createSettings, getResult]: any) => {
+test('Should create transition duration calculator based on provided factor with default value of 100', () => {
+  const theme = createTheme();
+  expect(theme.transitionDuration(1)).toBe(100);
+  expect(theme.transitionDuration(2)).toBe(200);
+});
+
+THEME_FACTOR_MULTIPLIERS_NAMES.forEach((name: any) => {
+  const createSettings = (value: any): any => value !== undefined ? { [name]: value } : {};
+  const getResult = (theme: any): any => theme[name];
+
   describe(name, () => {
     test('Should allow to configure factor', () => {
       const theme = createTheme(createSettings(12));

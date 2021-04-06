@@ -7,7 +7,7 @@ const generateStyles = (
   theme: ArwesTheme,
   options: { animate?: boolean, landscape?: boolean, hover?: boolean }
 ): Record<string, CSSObject> => {
-  const { palette, space, outline, shadow, transitionDuration } = theme;
+  const { palette, space, outline, shadowBlur, transitionDuration } = theme;
   const { animate, landscape, hover } = options;
 
   const contentBg = rgba(palette.primary.light1, 0.05);
@@ -21,7 +21,7 @@ const generateStyles = (
         '&:focus .arwes-card__line-picture'
       ].join(',')]: hover && {
         backgroundColor: palette.secondary.light1,
-        boxShadow: `0 0 ${shadow.blur(1)}px ${palette.secondary.light1}`
+        boxShadow: `0 0 ${shadowBlur(1)}px ${palette.secondary.light1}`
       },
 
       [[
@@ -29,7 +29,7 @@ const generateStyles = (
         '&:focus .arwes-card__line-content'
       ].join(',')]: hover && {
         backgroundColor: palette.primary.light1,
-        boxShadow: `0 0 ${shadow.blur(1)}px ${palette.primary.light1}`
+        boxShadow: `0 0 ${shadowBlur(1)}px ${palette.primary.light1}`
       }
     },
     container: {
@@ -42,7 +42,7 @@ const generateStyles = (
     line: {
       position: 'absolute',
       transition: ['background-color', 'box-shadow']
-        .map(prop => `${prop} ${transitionDuration}ms ease-out`)
+        .map(prop => `${prop} ${transitionDuration()}ms ease-out`)
         .join(','),
       opacity: animate ? 0 : undefined
     },
@@ -78,7 +78,7 @@ const generateStyles = (
       width: outline(1),
       height: '100%',
       backgroundColor: palette.secondary.dark1,
-      boxShadow: `0 0 ${shadow.blur(1)}px ${palette.secondary.dark1}`
+      boxShadow: `0 0 ${shadowBlur(1)}px ${palette.secondary.dark1}`
     },
 
     content: {
@@ -121,7 +121,7 @@ const generateStyles = (
       width: '100%',
       height: outline(1),
       backgroundColor: palette.primary.dark1,
-      boxShadow: `0 0 ${shadow.blur(1)}px ${palette.primary.dark1}`
+      boxShadow: `0 0 ${shadowBlur(1)}px ${palette.primary.dark1}`
     }
   };
 };

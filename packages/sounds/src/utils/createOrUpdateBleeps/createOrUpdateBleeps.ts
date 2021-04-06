@@ -4,7 +4,7 @@ import {
   BleepsAudioSettings,
   BleepsPlayersSettings,
   BleepsSettings,
-  Bleeps
+  BleepsGenerics
 } from '../../constants';
 import { createBleep } from '../createBleep';
 import { updateBleep } from '../updateBleep';
@@ -12,12 +12,12 @@ import { unloadBleep } from '../unloadBleep';
 import { unloadBleeps } from '../unloadBleeps';
 
 const createOrUpdateBleeps = (
-  providedBleeps: Bleeps | undefined,
+  providedBleeps: BleepsGenerics | undefined,
   audioSettings: BleepsAudioSettings,
   playersSettings: BleepsPlayersSettings,
   bleepsSettings: BleepsSettings
-): Bleeps => {
-  const bleeps: Bleeps = providedBleeps ?? {};
+): BleepsGenerics => {
+  const bleeps: BleepsGenerics = providedBleeps ?? {};
 
   if (audioSettings.common?.disabled) {
     unloadBleeps(bleeps);
@@ -72,9 +72,11 @@ const createOrUpdateBleeps = (
       !!bleeps[bleepName]?._settings.format?.find((v, i) => v !== playerSettings.format?.[i]);
 
     if (bleeps[bleepName] && !hasBleepUpdatedSrc && !hasBleepUpdatedFormat) {
-      bleeps[bleepName] = updateBleep(bleeps[bleepName], processedAudioSettings, playerSettings);
+      updateBleep(bleeps[bleepName], processedAudioSettings, playerSettings);
     }
     else {
+      unloadBleep(bleeps, bleepName);
+
       bleeps[bleepName] = createBleep(processedAudioSettings, playerSettings);
     }
   });

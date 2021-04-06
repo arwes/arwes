@@ -9,7 +9,8 @@ The breakpoints tools are a simplified version of the [Material specification](h
 layout requirements. At a given breakpoint range, the layout adjusts to suit
 the screen size and orientation."
 
-The breakpoints define 6 screen ranges with default values:
+The theme object defines breakpoints for 6 screen ranges with the following
+default values:
 
 - `xs` (extra small) of `0px`.
 - `sm` (small) of `600px`.
@@ -20,7 +21,11 @@ The breakpoints define 6 screen ranges with default values:
 They can be configured with different values optionally:
 
 ```tsx
+import { createTheme } from '@arwes/design';
+
 const theme = createTheme({
+  // In this case, the "small" and "medium" breakpoints
+  // are updated accordingly.
   breakpoints: {
     values: {
       sm: 400,
@@ -30,11 +35,10 @@ const theme = createTheme({
 });
 ```
 
-In this case, the small and medium breakpoints are updated.
-
-These breakpoints values are used to create [CSS media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries)
+These breakpoints values can be used to create [CSS media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries)
 dynamically. The breakpoints functions can be executed in the components dynamic
-styles generation to add specific media queries.
+styles generation to add specific media queries or browser utilities like
+[matchMedia](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia).
 
 ## Breakpoint Up
 

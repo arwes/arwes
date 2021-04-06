@@ -1,15 +1,16 @@
 import { PageContentLayout } from '../../components/PageContentLayout';
 export default props => <PageContentLayout headProps={{ title: 'Sounds' }} {...props} />;
 
-# Sounds
+# `@arwes/sounds`
 
 Define, manage, and control interactive sound effects using [Howler](https://howlerjs.com)
 in [React](https://reactjs.org).
 
 Based on the [UI/UX guidelines](/project/guidelines), the sounds tools can be
 used for application interface sounds management. Futuristic science fiction
-user interfaces usually execute short experiential sounds such as beeps and bleeps
-on [events](/project/guidelines/events) or [state transitions](/project/guidelines/states).
+user interfaces usually execute short experiential sounds such as beeps, bleeps,
+processing loops, glitches, and chimes, on [events](/project/guidelines/events)
+or [state transitions](/project/guidelines/states).
 
 These tools are not intended for sounds with long durations such as music songs.
 
@@ -34,9 +35,13 @@ npm install @arwes/sounds
 The sounds management tooling requires React v17 and Howler v2.2 as peer-dependencies.
 
 ```bash
-npm install react@17
-npm install react-dom@17
-npm install howler@2.2
+npm install react@17 react-dom@17 prop-types howler@2.2
+```
+
+In TypeScript, the following type packages are needed:
+
+```bash
+npm install @types/react@17 @types/react-dom@17 @types/howler@2.2
 ```
 
 ## Bleeps
@@ -49,14 +54,9 @@ the [animation tools](/develop/animation).
 ## Providers
 
 Since bleeps in an application are shared among its components, there needs to be
-a global data provider of the audio settings and the player settings. Then these
-settings are consumed by components with specific configurations.
-
-The provider only provides the sounds settings, it does not create or process the
-bleep sounds themselves, since each component knows what sounds configurations
-are required.
-
-Audio settings and players settings are provided simultaneously.
+a global data provider of the audio settings, player settings, and bleeps settings.
+With the configured settings, the provider creates the bleeps to provide to the
+components.
 
 ### Audio Settings
 
@@ -71,7 +71,7 @@ component like:
 import React, { FC } from 'react';
 import { BleepsProvider, BleepsAudioSettings } from '@arwes/sounds';
 
-const audio: BleepsAudioSettings = {
+const audioSettings: BleepsAudioSettings = {
   common: {
     volume: 0.5, // default 1
     disabled: false // default false
@@ -79,27 +79,19 @@ const audio: BleepsAudioSettings = {
 };
 
 const App: FC = ({ children }) => (
-  <BleepsProvider audio={audio}>
+  <BleepsProvider audioSettings={audioSettings}>
     {children}
   </BleepsProvider>
 );
-
-export { App };
 ```
 
 Sound volume can go from `0` to `1`.
 
-If sounds are disabled, no bleeps are created in the components.
-
-With only audio settings, the components can not create bleeps yet. Players settings
-are required.
+If sounds are disabled, no bleeps are passed to the components.
 
 ### Players Settings
 
 A player settings define the sound file data.
-
-A bleep is created based on the applicable audio settings and the defined player
-settings.
 
 In an application component example, the players could be configured like:
 
@@ -107,52 +99,79 @@ In an application component example, the players could be configured like:
 import React, { FC } from 'react';
 import { BleepsProvider, BleepsPlayersSettings } from '@arwes/sounds';
 
-const players: BleepsPlayersSettings = {
-  click: {
+const playersSettings: BleepsPlayersSettings = {
+  click: { // On user click.
     src: ['/path/to/sounds/click.mp3']
   },
-  typing: {
-    src: ['/path/to/sounds/typing.mp3'],
+  type: { // Text typing loop sound.
+    src: ['/path/to/sounds/type.mp3'],
     loop: true
   }
 };
 
 const App: FC = ({ children }) => (
-  <BleepsProvider players={players}>
+  <BleepsProvider playersSettings={playersSettings}>
     {children}
   </BleepsProvider>
 );
-
-export { App };
 ```
 
 The `click` player will use the file `click.mp3` in MP3 format.
 
-The `typing` player will use the file `typing.mp3` in MP3 format as a loop sound.
+The `type` player will use the file `type.mp3` in MP3 format as a loop sound.
 It means that the player will play in a loop until explicitely stopped.
 
-Along with `audio` settings, the provider configures the sounds settings of
-an application.
+## Bleeps Settings
+
+The bleeps settings define which player to use and audio settings to use.
+
+Based on the application example players settings, the bleeps can be
+configured like:
+
+```tsx
+import React, { FC } from 'react';
+import { BleepsProvider, BleepsSettings } from '@arwes/sounds';
+
+const bleepsSettings: BleepsSettings = {
+  tap: {
+    player: 'click'
+  },
+  typing: {
+    player: 'type'
+  }
+};
+
+const App: FC = ({ children }) => (
+  <BleepsProvider bleepsSettings={bleepsSettings}>
+    {children}
+  </BleepsProvider>
+);
+```
+
+The bleep names can be the same or different from the player names.
+There can be multiple bleeps based on the same player settings.
+
+The bleeps can also have [categories](/develop/sounds/categories).
 
 ## Consumers
 
-A React component can consume bleeps using the `withBleeps` higher-order
-component (HOC). It requires a parent `BleepsProvider` provided settings to work.
+A React component can consume bleeps using the `useBleeps` React hook.
 
-A component bleep references a sound player and implements the audio settings.
+It requires a parent `BleepsProvider` with bleeps settings to receive the
+generated bleeps. In case there is no provider found, an empty bleeps object
+is returned.
 
-Assuming a `click` player provided by a parent provider, a button component can
+A bleep is a sound player and implements the audio settings applicable.
+
+Assuming a `tap` bleep provided by a parent provider, a button component can
 use it like this:
 
 ```tsx
 import React, { FC } from 'react';
-import { withBleeps, Bleeps, BleepsSettings } from '@arwes/sounds';
+import { useBleeps } from '@arwes/sounds';
 
-interface ButtonProps {
-  bleeps: Bleeps
-}
-
-const ButtonComponent: FC<ButtonProps> = ({ bleeps, children }) => {
+const ButtonComponent: FC = ({ children }) => {
+  const bleeps = useBleeps();
   const onClick = () => bleeps.tap.play();
   return (
     <button onClick={onClick}>
@@ -160,16 +179,6 @@ const ButtonComponent: FC<ButtonProps> = ({ bleeps, children }) => {
     </button>
   );
 };
-
-const buttonBleeps: BleepsSettings = {
-  tap: {
-    player: 'click'
-  }
-};
-
-const Button = withBleeps(buttonBleeps)(ButtonComponent);
-
-export { ButtonProps, Button };
 ```
 
 A complete example can look like this:
@@ -177,33 +186,35 @@ A complete example can look like this:
 ```arwes_sandbox
 const SOUND_CLICK_URL = 'https://playground.arwes.dev/assets/sounds/click.mp3';
 
-const ButtonComponent = ({ bleeps, children }) => {
+const Button = ({ children }) => {
+  const bleeps = useBleeps();
   const onClick = () => bleeps.tap.play();
   return <button onClick={onClick}>{children}</button>;
 };
 
-const bleepsSettings = {
-  tap: {
-    player: 'click'
-  }
-};
-
-const Button = withBleeps(bleepsSettings)(ButtonComponent);
-
 function App () {
-  const audio = {
+  const audioSettings = {
     common: {
       volume: 0.5
     }
   };
-  const players = {
+  const playersSettings = {
     click: {
       src: [SOUND_CLICK_URL]
     }
   };
+  const bleepsSettings = {
+    tap: {
+      player: 'click'
+    }
+  };
 
   return (
-    <BleepsProvider audio={audio} players={players}>
+    <BleepsProvider
+      audioSettings={audioSettings}
+      playersSettings={playersSettings}
+      bleepsSettings={bleepsSettings}
+    >
       <Button>Bleep!</Button>
     </BleepsProvider>
   );
@@ -214,13 +225,15 @@ render(<App />);
 
 If the applicable audio settings disable the bleep, the sound will not be available
 in the component. So if the component should work with enabled/disabled bleeps,
-it should check if it exists before using it.
+it should check if it exists before using it. You may use
+[optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining)
+for that.
 
 If the bleep is enabled and the player `click` does not exist, it will throw an error.
 
 ## Shared Sounds
 
-Bleeps are shared by all instances of the component. It means that if any of the
+By default, bleeps are shared by all components. It means that if any of the
 component instances try to play or stop the sound, it would be the same
 bleep sound. The same goes for all the other bleep API methods.
 
@@ -231,7 +244,7 @@ compromise performance.
 ## Preloading
 
 Bleeps are preloaded on creation time, not on definition time. So the sounds
-would be loaded when the components consuming bleeps are mounted.
+would be loaded when the provider is mounted.
 
 > Functionalities for custom sound loading are still in progress.
 
@@ -249,4 +262,4 @@ is to use `webm` audio format.
 
 ----
 
-You can see and play with more examples in the [playground](https://playground.arwes.dev/sounds/withBleeps/basic).
+You can see and play with more examples in the [playground](https://playground.arwes.dev/sounds/BleepsProvider/basic).

@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/react';
+import { jsx, useTheme } from '@emotion/react';
 import PropTypes from 'prop-types';
 
 import { Layout } from './Layout';
@@ -8,7 +8,7 @@ import { Header } from './Header';
 import { Footer } from './Footer';
 import { DesktopNavSecondary } from './DesktopNavSecondary';
 
-const styles = {
+const generateStyles = ({ breakpoints, palette }) => ({
   root: {
     position: 'absolute',
     left: 0,
@@ -23,10 +23,10 @@ const styles = {
     overflowY: 'auto',
     minHeight: 0 // Height overflow issue.
   },
-  content: theme => ({
+  content: {
     padding: 10,
 
-    [theme.breakpoints.tabletUp]: {
+    [breakpoints.up('md')]: {
       display: 'grid',
       gridTemplateColumns: '75% 25%',
       gridTemplateRows: 'auto',
@@ -34,27 +34,30 @@ const styles = {
       padding: 20,
       maxWidth: 1200
     }
-  }),
-  article: theme => ({
-    [theme.breakpoints.tabletUp]: {
-      borderRight: '1px solid' + theme.color.border,
+  },
+  article: {
+    [breakpoints.up('md')]: {
+      borderRight: '1px solid' + palette.primary.main,
       paddingRight: 20
     }
-  }),
-  desktopNavSecondary: theme => ({
+  },
+  desktopNavSecondary: {
     display: 'none',
     overflowY: 'auto',
 
-    [theme.breakpoints.tabletUp]: {
+    [breakpoints.up('md')]: {
       display: 'block',
       paddingLeft: 20
     }
-  })
-};
+  }
+});
 
-const PageContentLayout = ({ headProps, children, location }) => {
+const PageContentLayout = ({ headProps, styles: pageStyles, children, location }) => {
+  const theme = useTheme();
+  const styles = generateStyles(theme);
+
   return (
-    <Layout>
+    <Layout styles={pageStyles}>
       <Head {...headProps} />
       <div css={styles.root}>
         <Header />
@@ -77,6 +80,7 @@ const PageContentLayout = ({ headProps, children, location }) => {
 
 PageContentLayout.propTypes = {
   headProps: PropTypes.object,
+  styles: PropTypes.object,
   location: PropTypes.object,
   children: PropTypes.any
 };

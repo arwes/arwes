@@ -10,7 +10,7 @@ const Item = ({ palette }) => (
       borderBottom: `${theme.outline(2)}px solid ${color}`,
       padding: theme.space(2),
       backgroundColor: theme.palette.neutral.elevate(2),
-      textShadow: `0 0 ${theme.shadow.blur(1)}px ${color}`,
+      textShadow: `0 0 ${theme.shadowBlur(1)}px ${color}`,
       color
     };
   }}>

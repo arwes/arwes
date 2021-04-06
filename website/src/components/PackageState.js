@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 
 const styles = {
   root: {
+    marginBottom: 20,
+
     '& img': {
       display: 'inline-block'
     }

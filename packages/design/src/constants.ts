@@ -10,12 +10,21 @@ export const THEME_BREAKPOINTS_DEFAULT = Object.freeze({
 export const THEME_PALETTE_TONAL_OFFSET_DEFAULT = 0.1;
 export const THEME_PALETTE_ELEVATION_OFFSET_DEFAULT = 0.025;
 
-export const THEME_SPACE_DEFAULT = 8;
-
+export const THEME_FONT_SCALE_DEFAULT = 1;
+export const THEME_SPACE_DEFAULT = 5;
 export const THEME_OUTLINE_DEFAULT = 1;
-
 export const THEME_SHADOW_BLUR_DEFAULT = 1;
 export const THEME_SHADOW_SPREAD_DEFAULT = 1;
+export const THEME_TRANSITION_DURATION_DEFAULT = 100;
+
+export const THEME_FACTOR_MULTIPLIERS_NAMES = Object.freeze([
+  'fontScale',
+  'space',
+  'outline',
+  'shadowBlur',
+  'shadowSpread',
+  'transitionDuration'
+]);
 
 // THEME SETTINGS
 
@@ -46,17 +55,15 @@ export interface ThemeSettingsPalette {
   [prop: string]: any
 }
 
-export interface ThemeSettingsShadow {
-  blur?: number
-  spread?: number
-}
-
 export interface ThemeSettings {
   breakpoints?: ThemeSettingsBreakpoints
   palette?: ThemeSettingsPalette
+  fontScale?: number
   space?: number
   outline?: number
-  shadow?: ThemeSettingsShadow
+  shadowBlur?: number
+  shadowSpread?: number
+  transitionDuration?: number
   [prop: string]: any
 }
 
@@ -77,18 +84,16 @@ export interface ThemeSetupPalette extends ThemeSettingsPalette {
   elevationOffset: number
 }
 
-export interface ThemeSetupShadow {
-  blur: number
-  spread: number
-}
-
 export interface ThemeSetup {
   breakpoints: ThemeSetupBreakpoints
   palette: ThemeSetupPalette
+  fontScale: number
   space: number
   outline: number
-  shadow: ThemeSetupShadow
-  extraFeatures: Record<string, any>
+  shadowBlur: number
+  shadowSpread: number
+  transitionDuration: number
+  [prop: string]: any
 }
 
 // THEME CONSUMER
@@ -128,16 +133,14 @@ export interface ThemePalette {
 
 export type ThemeFactorMultiplier = (multiplier?: number) => number;
 
-export interface ThemeShadow {
-  blur: ThemeFactorMultiplier
-  spread: ThemeFactorMultiplier
-}
-
 export interface Theme {
   breakpoints: ThemeBreakpoints
   palette: ThemePalette
+  fontScale: ThemeFactorMultiplier
   space: ThemeFactorMultiplier
   outline: ThemeFactorMultiplier
-  shadow: ThemeShadow
+  shadowBlur: ThemeFactorMultiplier
+  shadowSpread: ThemeFactorMultiplier
+  transitionDuration: ThemeFactorMultiplier
   [prop: string]: any
 }

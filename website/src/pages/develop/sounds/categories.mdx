@@ -4,8 +4,8 @@ export default props => <PageContentLayout headProps={{ title: 'Bleeps Categorie
 # Bleeps Categories
 
 The bleeps in an application can be configured by predefined categories.
-Each category can have the audio settings which will be applicable to the bleeps
-configured in the respective categories. This can allow the user to have different
+Each category can have the audio settings which will be applicable to the
+respective bleeps. This can allow the user to have different
 audio settings for the application experience.
 
 An example application with audio settings by categories can look like:
@@ -15,10 +15,11 @@ import React, { FC } from 'react';
 import {
   BleepsProvider,
   BleepsAudioSettings,
-  BleepsPlayersSettings
+  BleepsPlayersSettings,
+  BleepsSettings
 } from '@arwes/sounds';
 
-const audio: BleepsAudioSettings = {
+const audioSettings: BleepsAudioSettings = {
   common: {
     volume: 0.75
   },
@@ -32,7 +33,7 @@ const audio: BleepsAudioSettings = {
   }
 };
 
-const players: BleepsPlayersSettings = {
+const playersSettings: BleepsPlayersSettings = {
   click: {
     src: ['/path/to/sounds/click.webm']
   },
@@ -41,50 +42,32 @@ const players: BleepsPlayersSettings = {
   }
 };
 
+const bleepsSettings: BleepsSettings = {
+  click: {
+    player: 'click',
+    category: 'interaction'
+  },
+  warning: {
+    player: 'warning',
+    category: 'notification'
+  }
+};
+
 const App: FC = ({ children }) => (
-  <BleepsProvider audio={audio} players={players}>
+  <BleepsProvider
+    audioSettings={audioSettings}
+    playersSettings={playersSettings}
+    bleepsSettings={bleepsSettings}
+  >
     {children}
   </BleepsProvider>
 );
-
-export { App };
 ```
 
 All bleeps would start with a volume of `0.75`. If they are `interaction` bleeps,
 volume is `0.5`, and if they are `notification` bleeps, volume is `1`.
 
 The categories can also be disabled with `disabled: true`.
-
-Then the components consuming the bleeps should define their bleeps with their
-respective categories.
-
-```tsx
-import React, { FC } from 'react';
-import { withBleeps, Bleeps, BleepsSettings } from '@arwes/sounds';
-
-interface ButtonProps {
-  bleeps: Bleeps
-}
-
-const ButtonComponent: FC<ButtonProps> = ({ bleeps, children }) => {
-  const onClick = () => bleeps.click.play();
-  return <button onClick={onClick}>{children}</button>;
-};
-
-const buttonBleeps: BleepsSettings = {
-  click: {
-    player: 'click',
-    category: 'interaction'
-  }
-};
-
-const Button = withBleeps(buttonBleeps)(ButtonComponent);
-
-export { ButtonProps, Button };
-```
-
-Following the `<App/>` example, the `<Button/>` component will have the
-`interaction` sound with volume of `0.5`.
 
 The following predefined categories are available:
 

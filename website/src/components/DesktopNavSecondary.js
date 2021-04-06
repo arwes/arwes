@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 
 import settings from '../../settings';
+import { renderNavItemContent } from '../tools/renderNavItemContent';
 
 const styles = {
   root: {
@@ -18,7 +19,11 @@ const styles = {
       paddingLeft: 20
     },
     '& li': {
-      fontSize: 16
+      fontSize: 16,
+
+      '&::before': {
+        display: 'none'
+      }
     },
     '& a': {
       display: 'block',
@@ -38,14 +43,14 @@ const DesktopNavSecondary = ({ location, className }) => {
           {primarySection.items.map((item, index) =>
             <li key={index}>
               <Link to={`/${primaryPath}/${item.path}`}>
-                {item.name}
+                {renderNavItemContent(item.name)}
               </Link>
               {!!item.items && !!item.items.length && (
                 <ul>
                   {item.items.map((subItem, subIndex) =>
                     <li key={subIndex}>
                       <Link to={`/${primaryPath}/${item.path}/${subItem.path}`}>
-                        {subItem.name}
+                        {renderNavItemContent(subItem.name)}
                       </Link>
                     </li>
                   )}

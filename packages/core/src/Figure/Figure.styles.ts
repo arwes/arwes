@@ -7,13 +7,13 @@ const generateStyles = (
   theme: ArwesTheme,
   options: { animate: boolean, fluid?: boolean }
 ): Record<string, CSSObject> => {
-  const { palette, space, outline, shadow } = theme;
+  const { palette, space, outline, shadowBlur } = theme;
   const { animate, fluid } = options;
 
   const containerPadding = space(2);
 
   const lineWidth = outline(1);
-  const lineShadowBlur = shadow.blur(2);
+  const lineShadowBlur = shadowBlur(2);
   const lineColor = palette.primary.main;
   const lineShadowColor = palette.primary.main;
   const lineLength = space(18);

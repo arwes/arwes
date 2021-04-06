@@ -1,8 +1,8 @@
-```js
+```jsx
 const COLOR_ON = '#27efb5'; // cyan
 const COLOR_OFF = '#efb527'; // orange
 
-function useAnimateEntering (animator, element) {
+function onAnimateEntering (animator, element) {
   anime({
     targets: element.current,
     easing: 'linear',
@@ -11,7 +11,7 @@ function useAnimateEntering (animator, element) {
   });
 }
 
-function useAnimateExiting (animator, element) {
+function onAnimateExiting (animator, element) {
   anime({
     targets: element.current,
     easing: 'linear',
@@ -41,8 +41,8 @@ function ItemComponent (props) {
 }
 
 const Item = withAnimator({
-  useAnimateEntering,
-  useAnimateExiting
+  onAnimateEntering,
+  onAnimateExiting
 })(ItemComponent);
 
 // The "manager" defines how will the children nodes be transitioned
@@ -63,6 +63,9 @@ const manager = parentNode => {
     const time = (rowPosition - 1) * staggerTime;
     return { node, time };
   });
+
+  // If the animator has enabled `combine`, it must return
+  // the total duration of the manager transition as `duration`.
 
   return { times };
 };

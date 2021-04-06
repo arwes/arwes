@@ -1,16 +1,16 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/react';
+import { jsx, useTheme } from '@emotion/react';
 import { Link } from 'gatsby';
 
 import { DesktopNavPrimary } from './DesktopNavPrimary';
 import { MobileNav } from './MobileNav';
 
-const styles = {
-  root: theme => ({
-    borderBottom: `1px solid ${theme.color.border}`,
-    backgroundColor: theme.color.section
-  }),
-  container: theme => ({
+const generateStyles = ({ breakpoints, palette }) => ({
+  root: {
+    borderBottom: `1px solid ${palette.primary.main}`,
+    backgroundColor: palette.neutral.elevate(1)
+  },
+  container: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -20,64 +20,69 @@ const styles = {
     maxWidth: 1200,
     lineHeight: '30px',
 
-    [theme.breakpoints.tabletUp]: {
+    [breakpoints.up('md')]: {
       padding: 20
     }
-  }),
+  },
   logoItem: {
     display: 'inline-block',
     verticalAlign: 'top',
     margin: 0
   },
-  logo: theme => ({
+  logo: {
     display: 'block',
     marginTop: 5,
 
-    [theme.breakpoints.tabletUp]: {
+    [breakpoints.up('md')]: {
       marginTop: 0
     }
-  }),
-  logoType: theme => ({
+  },
+  logoType: {
     marginRight: 5,
     height: 25,
 
-    [theme.breakpoints.tabletUp]: {
+    [breakpoints.up('md')]: {
       marginRight: 8,
       height: 30
     }
-  }),
-  logoText: theme => ({
+  },
+  logoText: {
     marginTop: 3,
     height: 20,
 
-    [theme.breakpoints.tabletUp]: {
+    [breakpoints.up('md')]: {
       marginTop: 3,
       height: 25
     }
-  }),
-  desktopNav: theme => ({
-    [theme.breakpoints.tabletDown]: {
+  },
+  desktopNav: {
+    [breakpoints.down('md')]: {
       display: 'none'
     }
-  }),
-  mobileNav: theme => ({
-    [theme.breakpoints.tabletUp]: {
+  },
+  mobileNav: {
+    [breakpoints.up('md')]: {
       display: 'none'
     }
-  })
-};
+  }
+});
 
-const Header = () => (
-  <header css={styles.root}>
-    <div css={styles.container}>
-      <Link css={styles.logo} to='/'>
-        <img css={[styles.logoItem, styles.logoType]} src='/logo.png' alt='Arwes Logotype' />
-        <img css={[styles.logoItem, styles.logoText]} src='/logo-horizontal-text.png' alt='Arwes Logotext' />
-      </Link>
-      <DesktopNavPrimary css={styles.desktopNav} />
-      <MobileNav css={styles.mobileNav} />
-    </div>
-  </header>
-);
+const Header = () => {
+  const theme = useTheme();
+  const styles = generateStyles(theme);
+
+  return (
+    <header css={styles.root}>
+      <div css={styles.container}>
+        <Link css={styles.logo} to='/'>
+          <img css={[styles.logoItem, styles.logoType]} src='/logo.png' alt='Arwes Logotype' />
+          <img css={[styles.logoItem, styles.logoText]} src='/logo-horizontal-text.png' alt='Arwes Logotext' />
+        </Link>
+        <DesktopNavPrimary css={styles.desktopNav} />
+        <MobileNav css={styles.mobileNav} />
+      </div>
+    </header>
+  );
+};
 
 export { Header };

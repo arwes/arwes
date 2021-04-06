@@ -41,18 +41,16 @@ module.exports = {
       path: 'develop',
       items: [
         {
-          name: 'Design',
+          name: '`@arwes/design`',
           path: 'design',
           items: [
             { name: 'Breakpoints', path: 'breakpoints' },
             { name: 'Palette', path: 'palette' },
-            { name: 'Typography', path: 'typography' },
-            { name: 'Space', path: 'space' },
-            { name: 'Shadow', path: 'shadow' }
+            { name: 'Multipliers', path: 'multipliers' }
           ]
         },
         {
-          name: 'Animation',
+          name: '`@arwes/animation`',
           path: 'animation',
           items: [
             { name: 'Nesting Animators', path: 'nesting' },
@@ -60,12 +58,17 @@ module.exports = {
           ]
         },
         {
-          name: 'Sounds',
+          name: '`@arwes/sounds`',
           path: 'sounds',
           items: [
             { name: 'Bleeps Categories', path: 'categories' },
             { name: 'Sound Accessibility', path: 'accessibility' }
           ]
+        },
+        {
+          name: '`@arwes/core`',
+          path: 'core',
+          items: []
         }
       ]
     },

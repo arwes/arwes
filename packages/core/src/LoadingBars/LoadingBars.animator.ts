@@ -6,9 +6,9 @@ import {
 } from './LoadingBars.effects';
 
 const animator: AnimatorClassSettings = {
-  useAnimateEntering: startLoadingBarsTransition,
-  useAnimateExiting: startLoadingBarsTransition,
-  useAnimateUnmount: stopLoadingBarsTransition
+  onAnimateEntering: startLoadingBarsTransition,
+  onAnimateExiting: startLoadingBarsTransition,
+  onAnimateUnmount: stopLoadingBarsTransition
 };
 
 export { animator };

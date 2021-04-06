@@ -4,7 +4,7 @@ import { CSSObject } from '@emotion/css';
 import { ArwesTheme } from '../ArwesThemeProvider';
 
 const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject> => {
-  const { palette, space, outline, shadow, fontScale, transitionDuration } = theme;
+  const { palette, space, outline, shadowBlur, fontScale, transitionDuration } = theme;
 
   const highlightedContentBgColor1 = rgba(palette.primary.light1, 0.05);
   const highlightedContentBgColor2 = rgba(palette.primary.light1, 0.1);
@@ -23,8 +23,8 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       WebkitTextSizeAdjust: '100%',
 
       // Fonts
-      fontSize: `${16 * fontScale}px`,
-      lineHeight: 1.2,
+      fontSize: `${16 * fontScale()}px`,
+      lineHeight: 1.3,
       color: palette.text.root,
 
       // Scrollbars
@@ -35,12 +35,16 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
         height: space(1.5)
       },
       '& ::-webkit-scrollbar-thumb': {
-        background: palette.primary.dark2,
+        border: `${outline(1)}px solid ${palette.primary.dark1}`,
         '&:hover': {
-          background: palette.primary.dark1
+          border: `${outline(1)}px solid ${palette.primary.main}`
         }
       },
-      '& ::-webkit-scrollbar-track': {
+      [[
+        '& ::-webkit-scrollbar-thumb',
+        '& ::-webkit-scrollbar-track',
+        '& ::-webkit-scrollbar-corner'
+      ].join()]: {
         background: palette.neutral.elevate(2)
       },
 
@@ -58,7 +62,7 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       color: palette.text.headings,
       textTransform: 'uppercase',
       letterSpacing: 0.5,
-      textShadow: `0 0 ${shadow.blur(2)}px ${palette.text.headings}`
+      textShadow: `0 0 ${shadowBlur(2)}px ${palette.text.headings}`
     },
     h1: { fontSize: '1.75rem' },
     h2: { fontSize: '1.625rem' },
@@ -91,7 +95,7 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       color: palette.text.link,
       outline: 'none',
       textDecoration: 'none',
-      transition: `color ${transitionDuration}ms ease-out`,
+      transition: `color ${transitionDuration()}ms ease-out`,
 
       '&:hover, &:focus': {
         color: palette.text.linkHover
@@ -115,9 +119,9 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
           display: 'block',
           position: 'absolute',
           left: '-1.3em',
-          top: '0.2em',
+          top: '0.05em',
           fontSize: '0.9em',
-          lineHeight: '1em',
+          lineHeight: 'inherit',
           fontWeight: 'inherit'
         }
       }
@@ -134,7 +138,7 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       borderStyle: 'solid',
       borderColor: palette.primary.dark1,
       padding: space(4),
-      fontSize: '1rem',
+      fontSize: '0.9rem',
       backgroundColor: highlightedContentBgColor1
     },
 
@@ -146,7 +150,11 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       paddingRight: space(4),
       paddingTop: space(2),
       paddingBottom: space(2),
-      backgroundColor: highlightedContentBgColor1
+      backgroundColor: highlightedContentBgColor1,
+
+      'p:last-of-type': {
+        marginBottom: 0
+      }
     },
 
     // TABLES
@@ -180,13 +188,12 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       padding: `${space(1)}px ${space(1.5)}px`
     },
     tr: {
-      transition: `background-color ${transitionDuration}ms ease-out`
+      transition: `background-color ${transitionDuration()}ms ease-out`
     },
 
     // ASSETS
 
     img: {
-      border: `1px solid ${palette.primary.dark2}`,
       maxWidth: '100%'
     },
 
@@ -255,9 +262,9 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       color: palette.secondary.light1,
       backgroundColor: 'transparent',
       transition: [
-        `border-color ${transitionDuration}ms ease-out`,
-        `background-color ${transitionDuration}ms ease-out`,
-        `box-shadow ${transitionDuration}ms ease-out`
+        `border-color ${transitionDuration()}ms ease-out`,
+        `background-color ${transitionDuration()}ms ease-out`,
+        `box-shadow ${transitionDuration()}ms ease-out`
       ].join(', '),
 
       '&::placeholder': {
@@ -348,7 +355,6 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       'pre',
       'blockquote',
       'table',
-      'img',
       'figure',
       'hr',
       'fieldset'

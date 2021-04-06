@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { MDXProvider } from '@mdx-js/react';
 
-import { ArwesThemeProvider } from './ArwesThemeProvider';
+import { ArwesThemeProvider } from '@repository/packages/core';
+
 import { Code } from './Code';
 import { Sandbox } from './Sandbox';
 
@@ -32,7 +33,12 @@ const components = {
 
 const WrapRootElement = ({ element }) => {
   return (
-    <ArwesThemeProvider>
+    <ArwesThemeProvider themeSettings={{
+      typography: {
+        content: '"Titillium Web", sans-serif',
+        monospace: '"Source Code Pro", monospace'
+      }
+    }}>
       <MDXProvider components={components}>
         {element}
       </MDXProvider>

@@ -3,13 +3,13 @@
 import { mergeClassAndInstanceAnimatorSettings } from './mergeClassAndInstanceAnimatorSettings';
 
 test('Should extend class and instance animator settings and filter unknown settings for animated component', () => {
-  const useAnimateEntering: any = () => null;
-  const useAnimateExiting: any = () => null;
+  const onAnimateEntering: any = () => null;
+  const onAnimateExiting: any = () => null;
   const classAnimator = {
     duration: { enter: 500 },
     merge: true,
-    useAnimateEntering,
-    useAnimateExiting,
+    onAnimateEntering,
+    onAnimateExiting,
     x: 1,
     y: 2
   };
@@ -26,8 +26,8 @@ test('Should extend class and instance animator settings and filter unknown sett
     },
     root: true,
     merge: false,
-    useAnimateEntering,
-    useAnimateExiting
+    onAnimateEntering,
+    onAnimateExiting
   };
   expect(received).toEqual(expected);
 });

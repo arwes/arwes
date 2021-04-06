@@ -6,7 +6,7 @@ const generateStyles = (
   theme: ArwesTheme,
   options: { animate: boolean, palette?: string, hover?: boolean, disabled?: boolean }
 ): Record<string, CSSObject> => {
-  const { space, outline, shadow, transitionDuration } = theme;
+  const { space, outline, shadowBlur, transitionDuration } = theme;
   const { animate, hover, disabled } = options;
 
   const defaultPalette = theme.palette.primary;
@@ -24,7 +24,7 @@ const generateStyles = (
         '&:focus .arwes-frame-underline__line'
       ].join(',')]: hover && !disabled && {
         backgroundColor: colorHover,
-        boxShadow: `0 0 ${shadow.blur(2)}px ${colorHover}`
+        boxShadow: `0 0 ${shadowBlur(2)}px ${colorHover}`
       }
     },
     container: {},
@@ -33,9 +33,9 @@ const generateStyles = (
       position: 'absolute',
       height: outline(2),
       backgroundColor: color,
-      boxShadow: `0 0 ${shadow.blur(2)}px ${color}`,
+      boxShadow: `0 0 ${shadowBlur(2)}px ${color}`,
       transition: ['background-color', 'box-shadow']
-        .map(prop => `${prop} ${transitionDuration}ms ease-out`)
+        .map(prop => `${prop} ${transitionDuration()}ms ease-out`)
         .join(','),
       opacity: animate ? 0 : undefined
     },

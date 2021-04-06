@@ -21,12 +21,12 @@ test('Should filter flow activation values', () => {
   'merge',
   'combine',
   'manager',
-  'useAnimateMount',
-  'useAnimateEntering',
-  'useAnimateEntered',
-  'useAnimateExiting',
-  'useAnimateExited',
-  'useAnimateUnmount'
+  'onAnimateMount',
+  'onAnimateEntering',
+  'onAnimateEntered',
+  'onAnimateExiting',
+  'onAnimateExited',
+  'onAnimateUnmount'
 ].forEach(propName => {
   test(`Should allow "${propName}" property`, () => {
     const received = filterClassAnimatorSettings({ [propName]: 123 });

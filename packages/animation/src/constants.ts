@@ -111,10 +111,10 @@ export type AnimatorSettingsManager = typeof PARALLEL | typeof SEQUENCE | typeof
 export type AnimatorManager = AnimatorSettingsManager;
 
 /**
- * The function type definition for the animator "animate hooks".
- * All the animate hooks would receive and return the same values.
+ * The function type definition for the animator "animate events".
+ * All the animate events would receive and return the same values.
  */
-export type AnimatorSettingsUseAnimate = (animator: AnimatorRef, ...refs: any[]) => void;
+export type AnimatorSettingsOnAnimate = (animator: AnimatorRef, ...refs: any[]) => void;
 
 /**
  * On `<Animator />` flow transition. It is called every time the animator transition
@@ -136,7 +136,7 @@ export interface AnimatorRef {
   flow: AnimatorFlow
 
   /**
-   * Send any data references to the "animate hooks" to handle HTML animations
+   * Send any data references to the "animate events" to handle HTML animations
    * when they are called. Usually, React HTMLElement references are used.
    */
   setupAnimateRefs: (...refs: any[]) => void
@@ -164,12 +164,12 @@ export interface AnimatorClassSettings {
   merge?: boolean
   combine?: boolean
   manager?: AnimatorSettingsManager
-  useAnimateMount?: AnimatorSettingsUseAnimate
-  useAnimateEntering?: AnimatorSettingsUseAnimate
-  useAnimateEntered?: AnimatorSettingsUseAnimate
-  useAnimateExiting?: AnimatorSettingsUseAnimate
-  useAnimateExited?: AnimatorSettingsUseAnimate
-  useAnimateUnmount?: AnimatorSettingsUseAnimate
+  onAnimateMount?: AnimatorSettingsOnAnimate
+  onAnimateEntering?: AnimatorSettingsOnAnimate
+  onAnimateEntered?: AnimatorSettingsOnAnimate
+  onAnimateExiting?: AnimatorSettingsOnAnimate
+  onAnimateExited?: AnimatorSettingsOnAnimate
+  onAnimateUnmount?: AnimatorSettingsOnAnimate
 }
 
 /**

@@ -320,12 +320,12 @@ const Animator: FC<AnimatorProps> = props => {
       parentAnimator?._subscribe(instanceId, child);
     }
 
-    animator.useAnimateMount?.(publicAnimatorRef, ...animateRefs.current);
+    animator.onAnimateMount?.(publicAnimatorRef, ...animateRefs.current);
 
     return () => {
       scheduler.stopAll();
 
-      animator.useAnimateUnmount?.(publicAnimatorRef, ...animateRefs.current);
+      animator.onAnimateUnmount?.(publicAnimatorRef, ...animateRefs.current);
 
       if (!root) {
         parentAnimator?._unsubscribe(instanceId);
@@ -351,10 +351,10 @@ const Animator: FC<AnimatorProps> = props => {
       animator.onTransition?.(flow);
 
       switch (flow.value) {
-        case ENTERING: animator.useAnimateEntering?.(publicAnimatorRef, ...animateRefs.current); break;
-        case ENTERED: animator.useAnimateEntered?.(publicAnimatorRef, ...animateRefs.current); break;
-        case EXITING: animator.useAnimateExiting?.(publicAnimatorRef, ...animateRefs.current); break;
-        case EXITED: animator.useAnimateExited?.(publicAnimatorRef, ...animateRefs.current); break;
+        case ENTERING: animator.onAnimateEntering?.(publicAnimatorRef, ...animateRefs.current); break;
+        case ENTERED: animator.onAnimateEntered?.(publicAnimatorRef, ...animateRefs.current); break;
+        case EXITING: animator.onAnimateExiting?.(publicAnimatorRef, ...animateRefs.current); break;
+        case EXITED: animator.onAnimateExited?.(publicAnimatorRef, ...animateRefs.current); break;
       }
 
       if (childActivations.current?.times.length) {
@@ -390,12 +390,12 @@ Animator.propTypes = {
       PropTypes.oneOf([PARALLEL, SEQUENCE, STAGGER]),
       PropTypes.func
     ]),
-    useAnimateMount: PropTypes.func,
-    useAnimateEntering: PropTypes.func,
-    useAnimateEntered: PropTypes.func,
-    useAnimateExiting: PropTypes.func,
-    useAnimateExited: PropTypes.func,
-    useAnimateUnmount: PropTypes.func,
+    onAnimateMount: PropTypes.func,
+    onAnimateEntering: PropTypes.func,
+    onAnimateEntered: PropTypes.func,
+    onAnimateExiting: PropTypes.func,
+    onAnimateExited: PropTypes.func,
+    onAnimateUnmount: PropTypes.func,
     activate: PropTypes.bool,
     onTransition: PropTypes.func
   }),

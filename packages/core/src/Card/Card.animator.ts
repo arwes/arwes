@@ -30,7 +30,7 @@ const transitionCard = (
 ): void => {
   const { flow, duration } = animator;
   const isEntering = flow.entering || flow.entered;
-  const transitionDuration = isEntering ? duration.enter : duration.exit;
+  const durationTransition = isEntering ? duration.enter : duration.exit;
   const container = containerRef.current;
   const { space } = theme;
 
@@ -39,27 +39,27 @@ const transitionCard = (
 
     anime({
       targets: container.querySelector('.arwes-card__line-picture'),
-      duration: transitionDuration,
+      duration: durationTransition,
       easing: 'easeOutSine',
       translateX: [space(4), 0]
     });
 
     anime({
       targets: container.querySelector('.arwes-card__line-content'),
-      duration: transitionDuration,
+      duration: durationTransition,
       easing: 'easeOutSine',
       translateY: [-space(4), 0]
     });
 
     transitionAppear(
       container.querySelectorAll('.arwes-card__line'),
-      transitionDuration
+      durationTransition
     );
 
     transitionAppear(
       container.querySelectorAll('.arwes-card__image, .arwes-card__content-bg'),
-      transitionDuration,
-      transitionDuration
+      durationTransition,
+      durationTransition
     );
   }
   else {
@@ -69,16 +69,16 @@ const transitionCard = (
         '.arwes-card__image',
         '.arwes-card__content-bg'
       ].join(',')),
-      transitionDuration
+      durationTransition
     );
   }
 };
 
 const animator: AnimatorClassSettings = {
   manager: 'stagger',
-  useAnimateEntering: transitionCard,
-  useAnimateExiting: transitionCard,
-  useAnimateUnmount: transitionRemoveCard
+  onAnimateEntering: transitionCard,
+  onAnimateExiting: transitionCard,
+  onAnimateUnmount: transitionRemoveCard
 };
 
 export { animator };
