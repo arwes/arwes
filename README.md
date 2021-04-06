@@ -1,4 +1,4 @@
-<!-- markdownlint-disable MD033 MD013 -->
+<!-- markdownlint-disable MD033 MD013 MD028 -->
 
 <div align="center">
   <img src="./website/static/arwes.jpg" alt="Arwes" />
@@ -58,6 +58,9 @@ and productions like [Star Citizen](http://robertsspaceindustries.com),
 It tries to inspire advanced space and alien technology.
 
 > The project is under development as alpha release. See [project details](https://arwes.dev/project).
+
+> Branch [`main`](https://github.com/arwes/arwes) is for releases and public content.
+Branch [`next`](https://github.com/arwes/arwes/tree/next) is for active development.
 
 ## Documentation
 

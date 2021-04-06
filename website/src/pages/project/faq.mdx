@@ -84,10 +84,10 @@ Since [React](https://reactjs.org) is a library with component logic written
 in JavaScript, we could "easily" use React components with other frameworks or
 vanilla JavaScript with additional setup.
 
-But Arwes components are highly interconnected with each other so many features
-would not work.
+But Arwes components are highly interconnected with each other so many important
+features will not work.
 
-For version 1.x, the project is recommended to be used only in React projects.
+For version 1.x, the project is recommended to be used only with React.
 
 ## What about SSR or the [JAMstack](https://jamstack.org)?
 
@@ -116,3 +116,15 @@ with Arwes customization but not for version 1.0.
 ## Why does Arwes use CSSinJS as a styling solution?
 
 See [A Unified Styling Language](https://medium.com/seek-blog/a-unified-styling-language-d0c208de2660).
+
+## What about using declarative HTML animation tools?
+
+The [Arwes animation system](/develop/animation) does not enforce any HTML animation
+tools. But the current recommended tools are imperative such as [animejs](https://animejs.com)
+and [GreenSock](http://greensock.com). Declarative tools like [react-spring](https://www.react-spring.io)
+or [Framer Motion](https://www.framer.com/motion) are not yet intuitive enough
+to setup and work with Arwes.
+
+Since the animation API is still in early testing, more production experience
+will be needed to properly create stable and versatile abstractions for creating
+and composing component animations with imperative and declarative methodologies.
