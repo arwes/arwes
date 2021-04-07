@@ -27,7 +27,16 @@ module.exports = {
         },
         { name: 'FAQ', path: 'faq' },
         { name: 'Roadmap', path: 'roadmap' },
-        { name: 'Contributing', path: 'contributing' },
+        {
+          name: 'Contributing',
+          path: 'contributing',
+          items: [
+            { name: 'Workflow', path: 'workflow' },
+            { name: 'Architecture', path: 'architecture' },
+            { name: 'Playground', path: 'playground' },
+            { name: 'Website', path: 'website' }
+          ]
+        },
         { name: 'Changelog', path: 'changelog' }
       ]
     },

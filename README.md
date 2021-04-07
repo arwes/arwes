@@ -36,7 +36,7 @@
     <a href="https://jestjs.io">
         <img src="https://img.shields.io/badge/tested%20with-jest-15c213.svg" alt="tested with: jest" />
     </a>
-    <a href="https://lernajs.io">
+    <a href="https://lerna.js.org">
         <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="lerna" />
     </a>
     <a href="http://commitizen.github.io/cz-cli">
