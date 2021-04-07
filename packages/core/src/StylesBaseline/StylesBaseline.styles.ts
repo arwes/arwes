@@ -34,18 +34,21 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
         width: space(1.5),
         height: space(1.5)
       },
-      '& ::-webkit-scrollbar-thumb': {
-        border: `${outline(1)}px solid ${palette.primary.dark1}`,
-        '&:hover': {
-          border: `${outline(1)}px solid ${palette.primary.main}`
-        }
-      },
       [[
         '& ::-webkit-scrollbar-thumb',
         '& ::-webkit-scrollbar-track',
         '& ::-webkit-scrollbar-corner'
       ].join()]: {
-        background: palette.neutral.elevate(2)
+        backgroundColor: palette.neutral.elevate(3)
+      },
+      '& ::-webkit-scrollbar-thumb': {
+        border: `${space(0.4)}px solid ${palette.neutral.elevate(3)}`,
+        backgroundColor: palette.primary.dark1,
+        transition: `background-color ${transitionDuration()}ms ease-out`,
+
+        '&:hover': {
+          backgroundColor: palette.primary.main
+        }
       },
 
       // Selection
@@ -62,7 +65,11 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       color: palette.text.headings,
       textTransform: 'uppercase',
       letterSpacing: 0.5,
-      textShadow: `0 0 ${shadowBlur(2)}px ${palette.text.headings}`
+      textShadow: `0 0 ${shadowBlur(2)}px ${palette.text.headings}`,
+
+      a: {
+        textShadow: `0 0 ${shadowBlur(2)}px ${palette.text.link}`
+      }
     },
     h1: { fontSize: '1.75rem' },
     h2: { fontSize: '1.625rem' },
@@ -97,6 +104,10 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       textDecoration: 'none',
       transition: `color ${transitionDuration()}ms ease-out`,
 
+      'h1, h2, h3, h4, h5, h6': {
+        textShadow: `0 0 ${shadowBlur(2)}px ${palette.text.link}`
+      },
+
       '&:hover, &:focus': {
         color: palette.text.linkHover
       }
@@ -111,18 +122,12 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       }
     },
     ul: {
-      listStyle: 'none',
       li: {
-        position: 'relative',
-        '&::before': {
-          content: '"≫"',
-          display: 'block',
-          position: 'absolute',
-          left: '-1.3em',
-          top: '0.05em',
-          fontSize: '0.9em',
-          lineHeight: 'inherit',
-          fontWeight: 'inherit'
+        '&::marker': {
+          content: '"≫ "',
+          display: 'inline-block',
+          marginTop: '0.05em',
+          fontSize: '0.9em'
         }
       }
     },
