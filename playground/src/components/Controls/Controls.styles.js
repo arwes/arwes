@@ -27,20 +27,11 @@ const styles = {
       margin: '15px 0'
     },
     '& ul': {
-      padding: '0 0 0 20px',
-      listStyle: 'none'
+      padding: '0 0 0 20px'
     },
     '& li': {
-      position: 'relative',
-
-      '&::before': {
-        content: '">"',
-        position: 'absolute',
-        left: -15,
-        top: 3,
-        lineHeight: '1em',
-        fontSize: '0.9em',
-        color: theme.color.content
+      '&::marker': {
+        content: '"> "'
       }
     },
     '& a': {
