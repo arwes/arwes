@@ -129,6 +129,16 @@ const playgroundConfigs = [
         ]
       },
       {
+        name: 'FrameLines',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/core/src/FrameLines/FrameLines.basic.sandbox.md').default },
+          { name: 'outlines', code: require('repository/packages/core/src/FrameLines/FrameLines.outlines.sandbox.md').default },
+          { name: 'origins', code: require('repository/packages/core/src/FrameLines/FrameLines.origins.sandbox.md').default },
+          { name: 'disabled', code: require('repository/packages/core/src/FrameLines/FrameLines.disabled.sandbox.md').default },
+          { name: 'static', code: require('repository/packages/core/src/FrameLines/FrameLines.static.sandbox.md').default }
+        ]
+      },
+      {
         name: 'Button',
         sandboxes: [
           { name: 'basic', code: require('repository/packages/core/src/Button/Button.basic.sandbox.md').default },
