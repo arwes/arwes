@@ -40,28 +40,28 @@ const onAnimateEntering = (
     }
   });
 
-  transitionAppear(
-    container.querySelectorAll([
+  transitionAppear({
+    targets: container.querySelectorAll([
       '.arwes-figure__asset',
       '.arwes-figure__description-bg'
     ].join(',')),
-    duration.enter,
-    duration.enter
-  );
+    duration: duration.enter,
+    delay: duration.enter
+  });
 };
 
 const onAnimateExiting = (animator: AnimatorRef, containerRef: ContainerRef): void => {
   const { duration } = animator;
   const container = containerRef.current;
 
-  transitionDisappear(
-    container.querySelectorAll([
+  transitionDisappear({
+    targets: container.querySelectorAll([
       '.arwes-figure__asset',
       '.arwes-figure__description-bg',
       '.arwes-figure__line'
     ].join(',')),
-    duration.enter
-  );
+    duration: duration.enter
+  });
 };
 
 const onAnimateUnmount = (animator: AnimatorRef, containerRef: ContainerRef): void => {

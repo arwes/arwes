@@ -51,26 +51,26 @@ const transitionCard = (
       translateY: [-space(4), 0]
     });
 
-    transitionAppear(
-      container.querySelectorAll('.arwes-card__line'),
-      durationTransition
-    );
+    transitionAppear({
+      targets: container.querySelectorAll('.arwes-card__line'),
+      duration: durationTransition
+    });
 
-    transitionAppear(
-      container.querySelectorAll('.arwes-card__image, .arwes-card__content-bg'),
-      durationTransition,
-      durationTransition
-    );
+    transitionAppear({
+      targets: container.querySelectorAll('.arwes-card__image, .arwes-card__content-bg'),
+      duration: durationTransition,
+      delay: durationTransition
+    });
   }
   else {
-    transitionDisappear(
-      container.querySelectorAll([
+    transitionDisappear({
+      targets: container.querySelectorAll([
         '.arwes-card__line',
         '.arwes-card__image',
         '.arwes-card__content-bg'
       ].join(',')),
-      durationTransition
-    );
+      duration: durationTransition
+    });
   }
 };
 

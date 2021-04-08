@@ -35,10 +35,16 @@ const transitionCard = (animator: AnimatorRef, containerRef: ContainerRef): void
       height: [0, '100%']
     });
 
-    transitionAppear([line, bg], durationTransition);
+    transitionAppear({
+      targets: [line, bg],
+      duration: durationTransition
+    });
   }
   else {
-    transitionDisappear([line, bg], durationTransition);
+    transitionDisappear({
+      targets: [line, bg],
+      duration: durationTransition
+    });
   }
 };
 

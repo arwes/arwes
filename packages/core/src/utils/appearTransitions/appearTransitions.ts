@@ -1,10 +1,12 @@
 import anime from 'animejs';
 
+import { AnimatedSettingsTransitionFunctionParams } from '../Animated';
+
 const transitionAppear = (
-  targets: anime.AnimeAnimParams['targets'],
-  duration: number,
-  delay: number = 0
+  params: AnimatedSettingsTransitionFunctionParams
 ): anime.AnimeTimelineInstance => {
+  const { targets, duration, delay = 0 } = params;
+
   return anime
     .timeline({
       targets,
@@ -17,10 +19,10 @@ const transitionAppear = (
 };
 
 const transitionDisappear = (
-  targets: anime.AnimeAnimParams['targets'],
-  duration: number,
-  delay: number = 0
+  params: AnimatedSettingsTransitionFunctionParams
 ): anime.AnimeTimelineInstance => {
+  const { targets, duration, delay = 0 } = params;
+
   return anime
     .timeline({
       targets,

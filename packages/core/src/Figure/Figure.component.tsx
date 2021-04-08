@@ -112,10 +112,10 @@ const Figure: FC<FigureProps & WithAnimatorInputProps> = props => {
           if (isMountedRef.current) {
             setIsLoading(false);
 
-            transitionAppear(
-              containerRef.current?.querySelector('.arwes-figure__asset'),
-              animator.duration.enter
-            );
+            transitionAppear({
+              targets: containerRef.current?.querySelector('.arwes-figure__asset'),
+              duration: animator.duration.enter
+            });
           }
         })
         .catch(() => {});
