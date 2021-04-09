@@ -1,5 +1,13 @@
-import { HTMLAttributes, CSSProperties, FC, useRef, useEffect, useMemo } from 'react';
-import { jsx } from '@emotion/react';
+import {
+  HTMLAttributes,
+  CSSProperties,
+  MutableRefObject,
+  createElement,
+  useRef,
+  useEffect,
+  useMemo,
+  ReactElement
+} from 'react';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
 import {
@@ -27,31 +35,34 @@ interface AnimatedSettings {
   exiting?: AnimatedSettingsTransition
 }
 
-// TODO: Set proper HTML element typings according to "as" prop value.
-// For now, all animated elements are asumed to be DIV elements.
-interface AnimatedProps extends HTMLAttributes<HTMLDivElement> {
-  as?: keyof HTMLElementTagNameMap
+interface AnimatedProps <E> {
+  as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
   animated?: AnimatedSettings
   className?: string
   style?: CSSProperties
+  rootRef?: MutableRefObject<E | null> | ((node: E) => void)
 }
 
-const Animated: FC<AnimatedProps> = props => {
+const Animated = <E = HTMLDivElement, T = HTMLAttributes<HTMLDivElement>> (props: AnimatedProps<E> & T): ReactElement => {
   const {
     as: asProvided,
     animated,
     className,
     style,
-    children,
+    rootRef: externalRef, // TODO: Use external ref.
     ...otherProps
   } = props;
 
   const as = useMemo(() => asProvided || 'div', []);
 
   // TODO: Add external root ref.
-  const rootRef = useRef<HTMLDivElement>();
+  const rootRef = useRef<HTMLElement>(null);
 
   const animator = useAnimator();
+
+  if (process.env.NODE_ENV !== 'production' && !animator) {
+    throw new Error('Animated component can only be used inside an Animator.');
+  }
 
   const dynamicStyle = animator?.animate
     ? animated?.initialStyle
@@ -59,7 +70,7 @@ const Animated: FC<AnimatedProps> = props => {
 
   useEffect(() => {
     return () => {
-      anime.remove(rootRef.current as HTMLDivElement);
+      anime.remove(rootRef.current as HTMLElement);
     };
   }, []);
 
@@ -129,7 +140,7 @@ const Animated: FC<AnimatedProps> = props => {
     }
   }, [animator?.flow]);
 
-  return jsx(as, {
+  return createElement(as, {
     ...otherProps,
     className,
     style: {
@@ -137,13 +148,11 @@ const Animated: FC<AnimatedProps> = props => {
       ...dynamicStyle
     },
     ref: rootRef
-  }, children);
+  });
 };
 
 Animated.propTypes = {
-  // @ts-expect-error
   as: PropTypes.string.isRequired,
-  // @ts-expect-error
   animated: PropTypes.shape({
     initialStyle: PropTypes.object,
     entering: PropTypes.oneOfType([
