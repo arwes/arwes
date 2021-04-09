@@ -6,6 +6,10 @@ test('Should expand single value to four sides', () => {
   expect(expandCSSBoxProp<number>(3, 0)).toEqual([3, 3, 3, 3]);
 });
 
+test('Should expand empty array value to four sides', () => {
+  expect(expandCSSBoxProp<string>([], 'x')).toEqual(['x', 'x', 'x', 'x']);
+});
+
 test('Should expand single array value to four sides', () => {
   expect(expandCSSBoxProp<boolean>([true], false)).toEqual([true, true, true, true]);
 });

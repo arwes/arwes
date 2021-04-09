@@ -4,6 +4,9 @@ function expandCSSBoxProp <T> (value: T | T[] | undefined, defaultValue: T): T[]
 
   if (Array.isArray(value)) {
     switch (value.length) {
+      case 0: {
+        break;
+      }
       case 1: {
         const data = value[0];
         expansion = [data, data, data, data];
@@ -19,10 +22,10 @@ function expandCSSBoxProp <T> (value: T | T[] | undefined, defaultValue: T): T[]
         expansion = [top, x, bottom, x];
         break;
       }
-    }
-
-    if (value.length >= 4) {
-      expansion = value;
+      default: {
+        expansion = value;
+        break;
+      }
     }
   }
   else {
