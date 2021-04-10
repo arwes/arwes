@@ -1,155 +1,75 @@
 /* @jsx jsx */
-import { FC, MutableRefObject, CSSProperties, useMemo, HTMLAttributes } from 'react';
-import PropTypes from 'prop-types';
+import { HTMLAttributes, ReactElement } from 'react';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
 
-import {
-  ARWES_CORE_FRAME_CLASSNAME,
-  ARWES_CORE_FRAME_LINE_CLASSNAME,
-  ARWES_CORE_FRAME_SHAPE_CLASSNAME,
-  ARWES_CORE_FRAME_BG_CLASSNAME,
-  ARWES_CORE_FRAME_CONTENT_CLASSNAME
-} from '../constants';
-import { expandCSSBoxProp } from '../utils/expandCSSBoxProp';
-import { transitionAppear, transitionDisappear } from '../utils/appearTransitions';
-import { Animated } from '../utils/Animated';
-import { generateStyles } from './FrameLines.styles';
+import { FrameProps, Frame } from '../utils/Frame';
 
-type TransformOrigin = CSSProperties['transformOrigin'];
-
-// TODO: Set proper HTML element typings according to "as" prop value.
-// For now, all animated elements are asumed to be DIV elements.
-interface FrameLinesProps extends HTMLAttributes<HTMLDivElement> {
-  as?: keyof HTMLElementTagNameMap
-  outlines?: number | number[]
-  origins?: TransformOrigin | TransformOrigin[]
-  palette?: string
-  active?: boolean
-  hover?: boolean
-  disabled?: boolean
-  shape?: boolean
-  className?: string
-  style?: CSSProperties
-  rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
+interface FrameLinesProps <E> extends FrameProps<E> {
+  longLineWidth?: number
+  smallLineWidth?: number
+  smallLineLength?: number
 }
 
-const FrameLines: FC<FrameLinesProps & WithAnimatorInputProps> = props => {
+function FrameLines <E = HTMLDivElement, P = HTMLAttributes<E>> (props: FrameLinesProps<E> & P & WithAnimatorInputProps): ReactElement {
   const {
     animator,
-    as: asProvided,
-    outlines: outlinesProvided,
-    origins: originsProvided,
-    palette,
-    active,
-    hover,
-    disabled,
-    shape,
     className,
-    style,
-    rootRef,
-    children,
+    longLineWidth,
+    smallLineWidth,
+    smallLineLength,
     ...otherProps
   } = props;
+  const { outline } = useTheme();
+  const llw = outline(longLineWidth);
+  const slw = outline(smallLineWidth);
+  const sll = outline(smallLineLength);
 
-  const theme = useTheme();
+  const longPolylines = [
+    [[0, 0], ['52%', 0]],
+    [['100%', 0], ['52%', 0]],
+    [[0, '100%'], ['52%', '100%']],
+    [['100%', '100%'], ['52%', '100%']]
+  ].map(polyline => ({
+    lines: polyline,
+    outline: llw
+  }));
 
-  const as = useMemo(() => asProvided || 'div', []);
+  const smallPolylines = [
+    [[0, llw], [sll, llw]], // left top
+    [['100%', llw], [`100% - ${sll}`, llw]], // right top
+    [[0, `100% - ${llw}`], [sll, `100% - ${llw}`]], // left bottom
+    [['100%', `100% - ${llw}`], [`100% - ${sll}`, `100% - ${llw}`]] // right bottom
+  ].map(polyline => ({
+    lines: polyline,
+    outline: slw
+  }));
 
-  const outlines = useMemo(
-    () => expandCSSBoxProp<number>(outlinesProvided, 1),
-    [outlinesProvided]
+  return (
+    <Frame<E>
+      {...otherProps}
+      className={cx('arwes-frame-underline', className)}
+      shapes={[
+        [
+          [0, 0],
+          [0, '100%'],
+          ['100%', '100%'],
+          ['100%', 0]
+        ]
+      ]}
+      polylines={[
+        ...longPolylines,
+        ...smallPolylines
+      ]}
+    />
   );
-
-  const origins = useMemo(
-    () => expandCSSBoxProp<TransformOrigin>(originsProvided, 'center'),
-    [originsProvided]
-  );
-
-  const styles = useMemo(
-    () => generateStyles(theme, { outlines, origins, palette, active, hover, disabled }),
-    [theme, outlines, origins, palette, active, hover, disabled]
-  );
-
-  return jsx(
-    as,
-    {
-      ...otherProps,
-      className: cx('arwes-frame-lines', ARWES_CORE_FRAME_CLASSNAME, className),
-      css: styles.root,
-      style,
-      ref: rootRef
-    },
-    !!shape && (
-      <Animated
-        className={ARWES_CORE_FRAME_SHAPE_CLASSNAME}
-        css={styles.shape}
-        animated={{
-          initialStyle: { opacity: 0 },
-          entering: transitionAppear,
-          exiting: transitionDisappear
-        }}
-      >
-        <div
-          className={ARWES_CORE_FRAME_BG_CLASSNAME}
-          css={styles.bg}
-        />
-      </Animated>
-    ),
-    outlines.map((outline, index) => {
-      if (!outline) return null;
-      const scaleAxis = index === 0 || index === 2 ? 'scaleX' : 'scaleY';
-      return (
-        <Animated
-          key={index}
-          className={ARWES_CORE_FRAME_LINE_CLASSNAME}
-          css={[styles.line, styles[`line${index}`]]}
-          animated={{
-            initialStyle: { transform: `${scaleAxis}(0)` },
-            entering: { [scaleAxis]: 1 },
-            exiting: { [scaleAxis]: 0 }
-          }}
-        />
-      );
-    }),
-    <div
-      className={ARWES_CORE_FRAME_CONTENT_CLASSNAME}
-      css={styles.content}
-    >
-      {children}
-    </div>
-  );
-};
-
-FrameLines.propTypes = {
-  // @ts-expect-error
-  as: PropTypes.string.isRequired,
-  // @ts-expect-error
-  outlines: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.arrayOf(PropTypes.number)
-  ]).isRequired,
-  // @ts-expect-error
-  origins: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string)
-  ]).isRequired,
-  palette: PropTypes.string,
-  active: PropTypes.bool,
-  hover: PropTypes.bool,
-  disabled: PropTypes.bool,
-  shape: PropTypes.bool,
-  className: PropTypes.string,
-  style: PropTypes.object,
-  rootRef: PropTypes.any
-};
+}
 
 FrameLines.defaultProps = {
-  as: 'div',
-  outlines: 1,
-  origins: 'center',
-  palette: 'primary'
+  longLineWidth: 1,
+  smallLineWidth: 1,
+  smallLineLength: 10
 };
 
 export { FrameLinesProps, FrameLines };

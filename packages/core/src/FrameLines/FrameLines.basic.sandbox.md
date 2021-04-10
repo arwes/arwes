@@ -23,8 +23,8 @@ const Sandbox = () => {
       >
         <StylesBaseline />
         <AnimatorGeneralProvider animator={animatorGeneral}>
-          <FrameLines animator={{ activate }}>
-            <div style={{ width: 200, height: 100 }} />
+          <FrameLines animator={{ activate }} hover>
+            <div style={{ width: 200, height: 50 }} />
           </FrameLines>
         </AnimatorGeneralProvider>
       </BleepsProvider>

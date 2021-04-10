@@ -25,10 +25,14 @@ const Sandbox = () => {
         <AnimatorGeneralProvider animator={animatorGeneral}>
           <FrameLines
             animator={{ activate }}
-            palette='secondary'
-            outlines={[2, 0, 4, 0]}
+            palette='error'
+            longLineWidth={2}
+            smallLineWidth={4}
+            smallLineLength={20}
+            hideShapes
+            hover
           >
-            <div style={{ width: 200, height: 100 }} />
+            <div style={{ width: 200, height: 50 }} />
           </FrameLines>
         </AnimatorGeneralProvider>
       </BleepsProvider>
