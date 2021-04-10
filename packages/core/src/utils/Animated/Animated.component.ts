@@ -30,11 +30,13 @@ type AnimatedSettingsTransitionTypes = AnimatedSettingsTransitionFunction | anim
 type AnimatedSettingsTransition = AnimatedSettingsTransitionTypes | AnimatedSettingsTransitionTypes[];
 
 interface AnimatedSettings {
-  initialStyle?: CSSProperties
+  initialAttributes?: { [name: string]: any }
+  initialStyles?: CSSProperties
   entering?: AnimatedSettingsTransition
   exiting?: AnimatedSettingsTransition
 }
 
+// TODO: "animated" are not properly being type checked.
 interface AnimatedProps <E> {
   as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
   animated?: AnimatedSettings
@@ -64,9 +66,9 @@ const Animated = <E = HTMLDivElement, T = HTMLAttributes<HTMLDivElement>> (props
     throw new Error('Animated component can only be used inside an Animator.');
   }
 
-  const dynamicStyle = animator?.animate
-    ? animated?.initialStyle
-    : null;
+  const { animate } = animator || {};
+  const dynamicStyles = animate ? animated?.initialStyles : null;
+  const initialAttributes = animate ? animated?.initialAttributes : null;
 
   useEffect(() => {
     return () => {
@@ -142,10 +144,11 @@ const Animated = <E = HTMLDivElement, T = HTMLAttributes<HTMLDivElement>> (props
 
   return createElement(as, {
     ...otherProps,
+    ...initialAttributes,
     className,
     style: {
       ...style,
-      ...dynamicStyle
+      ...dynamicStyles
     },
     ref: rootRef
   });
@@ -154,7 +157,8 @@ const Animated = <E = HTMLDivElement, T = HTMLAttributes<HTMLDivElement>> (props
 Animated.propTypes = {
   as: PropTypes.string.isRequired,
   animated: PropTypes.shape({
-    initialStyle: PropTypes.object,
+    initialAttributes: PropTypes.object,
+    initialStyles: PropTypes.object,
     entering: PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.object,
@@ -186,6 +190,7 @@ export {
   AnimatedSettingsTransitionFunctionParams,
   AnimatedSettingsTransitionFunction,
   AnimatedSettingsTransition,
+  AnimatedSettings,
   AnimatedProps,
   Animated
 };
