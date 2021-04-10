@@ -1,16 +1,10 @@
 ```jsx
-const FONT_FAMILY_ROOT = '"Titillium Web", sans-serif';
-
 const Sandbox = () => {
   return (
     <ArwesThemeProvider>
-      <StylesBaseline styles={{
-        body: { fontFamily: FONT_FAMILY_ROOT }
-      }} />
-      <FrameUnderline animator={{ animate: false }}>
-        <Text>
-          Futuristic Sci-Fi UI Web Framework
-        </Text>
+      <StylesBaseline />
+      <FrameUnderline animator={{ animate: false }} hover>
+        <div style={{ width: 200, height: 50 }} />
       </FrameUnderline>
     </ArwesThemeProvider>
   );

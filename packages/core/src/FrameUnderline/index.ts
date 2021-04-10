@@ -1,9 +1,9 @@
-import { FC } from 'react';
-import { WithAnimatorOutputProps, withAnimator } from '@arwes/animation';
+import { withAnimator } from '@arwes/animation';
 
 import { FrameUnderlineProps, FrameUnderline as Component } from './FrameUnderline.component';
-import { animator } from './FrameUnderline.animator';
 
-const FrameUnderline: FC<FrameUnderlineProps & WithAnimatorOutputProps> = withAnimator(animator)(Component);
+// TODO: withAnimator does not support a functional React component declared
+// in "function Component () {}" notation with "defaultProps".
+const FrameUnderline = withAnimator()(Component as any);
 
 export { FrameUnderlineProps, FrameUnderline };
