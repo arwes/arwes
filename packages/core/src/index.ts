@@ -1,6 +1,9 @@
 export * from './ArwesThemeProvider';
 export * from './StylesBaseline';
 
+export * from './FrameBox';
+export * from './FrameCorners';
+export * from './FramePentagon';
 export * from './FrameUnderline';
 export * from './FrameLines';
 

@@ -121,10 +121,33 @@ const playgroundConfigs = [
         ]
       },
       {
+        name: 'FrameBox',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/core/src/FrameBox/FrameBox.basic.sandbox.md').default },
+          { name: 'outlines', code: require('repository/packages/core/src/FrameBox/FrameBox.outlines.sandbox.md').default },
+          { name: 'origins', code: require('repository/packages/core/src/FrameBox/FrameBox.origins.sandbox.md').default },
+          { name: 'static', code: require('repository/packages/core/src/FrameBox/FrameBox.static.sandbox.md').default }
+        ]
+      },
+      {
+        name: 'FrameCorners',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/core/src/FrameCorners/FrameCorners.basic.sandbox.md').default },
+          { name: 'content-lines', code: require('repository/packages/core/src/FrameCorners/FrameCorners.content-lines.sandbox.md').default },
+          { name: 'static', code: require('repository/packages/core/src/FrameCorners/FrameCorners.static.sandbox.md').default }
+        ]
+      },
+      {
+        name: 'FramePentagon',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/core/src/FramePentagon/FramePentagon.basic.sandbox.md').default },
+          { name: 'static', code: require('repository/packages/core/src/FramePentagon/FramePentagon.static.sandbox.md').default }
+        ]
+      },
+      {
         name: 'FrameUnderline',
         sandboxes: [
           { name: 'basic', code: require('repository/packages/core/src/FrameUnderline/FrameUnderline.basic.sandbox.md').default },
-          { name: 'disabled', code: require('repository/packages/core/src/FrameUnderline/FrameUnderline.disabled.sandbox.md').default },
           { name: 'static', code: require('repository/packages/core/src/FrameUnderline/FrameUnderline.static.sandbox.md').default }
         ]
       },
@@ -132,9 +155,7 @@ const playgroundConfigs = [
         name: 'FrameLines',
         sandboxes: [
           { name: 'basic', code: require('repository/packages/core/src/FrameLines/FrameLines.basic.sandbox.md').default },
-          { name: 'outlines', code: require('repository/packages/core/src/FrameLines/FrameLines.outlines.sandbox.md').default },
-          { name: 'origins', code: require('repository/packages/core/src/FrameLines/FrameLines.origins.sandbox.md').default },
-          { name: 'disabled', code: require('repository/packages/core/src/FrameLines/FrameLines.disabled.sandbox.md').default },
+          { name: 'widths', code: require('repository/packages/core/src/FrameLines/FrameLines.widths.sandbox.md').default },
           { name: 'static', code: require('repository/packages/core/src/FrameLines/FrameLines.static.sandbox.md').default }
         ]
       },
