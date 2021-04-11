@@ -145,6 +145,15 @@ const playgroundConfigs = [
         ]
       },
       {
+        name: 'FrameHexagon',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/core/src/FrameHexagon/FrameHexagon.basic.sandbox.md').default },
+          { name: 'inverted', code: require('repository/packages/core/src/FrameHexagon/FrameHexagon.inverted.sandbox.md').default },
+          { name: 'square', code: require('repository/packages/core/src/FrameHexagon/FrameHexagon.square.sandbox.md').default },
+          { name: 'static', code: require('repository/packages/core/src/FrameHexagon/FrameHexagon.static.sandbox.md').default }
+        ]
+      },
+      {
         name: 'FrameUnderline',
         sandboxes: [
           { name: 'basic', code: require('repository/packages/core/src/FrameUnderline/FrameUnderline.basic.sandbox.md').default },

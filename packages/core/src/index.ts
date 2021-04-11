@@ -4,6 +4,7 @@ export * from './StylesBaseline';
 export * from './FrameBox';
 export * from './FrameCorners';
 export * from './FramePentagon';
+export * from './FrameHexagon';
 export * from './FrameUnderline';
 export * from './FrameLines';
 
