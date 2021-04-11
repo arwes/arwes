@@ -1,10 +1,10 @@
 /* @jsx jsx */
-import { HTMLAttributes, ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
 
-import { FRAME_POINT, FrameProps, Frame } from '../utils/Frame';
+import { FRAME_POLYLINE, FrameProps, Frame } from '../utils/Frame';
 
 interface FrameHexagonProps <E> extends FrameProps<E> {
   lineWidth?: number
@@ -12,15 +12,15 @@ interface FrameHexagonProps <E> extends FrameProps<E> {
   inverted?: boolean
 }
 
-function FrameHexagon <E = HTMLDivElement, P = HTMLAttributes<E>> (props: FrameHexagonProps<E> & P & WithAnimatorInputProps): ReactElement {
+function FrameHexagon <E> (props: FrameHexagonProps<E> & WithAnimatorInputProps): ReactElement {
   const { animator, className, lineWidth, squareSize, inverted, ...otherProps } = props;
   const { space, outline } = useTheme();
 
-  const ss = outline(squareSize);
+  const ss = squareSize as number;
 
   // Polylines without repeated points between them.
-  let polyline1: FRAME_POINT[][] = [];
-  let polyline2: FRAME_POINT[][] = [];
+  let polyline1: FRAME_POLYLINE = [];
+  let polyline2: FRAME_POLYLINE = [];
 
   if (!inverted) {
     polyline1 = [
@@ -48,14 +48,14 @@ function FrameHexagon <E = HTMLDivElement, P = HTMLAttributes<E>> (props: FrameH
   }
 
   return (
-    <Frame<E>
+    <Frame
       {...otherProps}
       className={cx('arwes-frame-hexagon', className)}
       css={{
         padding: `${space(2)}px ${space(4)}px`
       }}
       shapes={[
-        [...polyline1, ...polyline2]
+        polyline1.concat(polyline2)
       ]}
       polylines={[
         polyline1,
@@ -66,7 +66,7 @@ function FrameHexagon <E = HTMLDivElement, P = HTMLAttributes<E>> (props: FrameH
           polyline1[0]
         ]
       ]}
-      outline={outline(lineWidth)}
+      lineWidth={outline(lineWidth)}
     />
   );
 }

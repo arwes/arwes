@@ -23,13 +23,13 @@ const Sandbox = () => {
       >
         <StylesBaseline />
         <AnimatorGeneralProvider animator={animatorGeneral}>
-          <FrameBox
+          <FramePentagon
             animator={{ activate }}
-            palette='secondary'
-            outlines={[2, 0, 4, 0]}
+            inverted
+            hover
           >
             <div style={{ width: 200, height: 50 }} />
-          </FrameBox>
+          </FramePentagon>
         </AnimatorGeneralProvider>
       </BleepsProvider>
     </ArwesThemeProvider>

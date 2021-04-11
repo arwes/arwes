@@ -1,7 +1,6 @@
 /* @jsx jsx */
 import {
   MutableRefObject,
-  HTMLAttributes,
   SVGProps,
   ReactElement,
   ReactNode,
@@ -15,23 +14,26 @@ import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import anime from 'animejs';
 
+import { NoInfer } from '../types';
 import { transitionAppear, transitionDisappear } from '../appearTransitions';
 import { AnimatedSettings, Animated } from '../Animated';
 
-type FRAME_POINT = string | number;
-type FRAME_LINE = FRAME_POINT[];
-type FRAME_POLYLINE = FRAME_LINE[] | {
-  lines: FRAME_LINE[]
-  outline?: number
+type FRAME_DIMENSION = number | string;
+type FRAME_POINT = FRAME_DIMENSION[];
+type FRAME_POLYLINE = FRAME_POINT[];
+interface FRAME_POLYLINE_CUSTOM {
+  polyline: FRAME_POLYLINE
+  lineWidth?: number
   animated?: AnimatedSettings
   css?: CSSObject
-};
+}
+type FRAME_POLYLINE_GENERIC = FRAME_POLYLINE | FRAME_POLYLINE_CUSTOM;
 
-interface FrameProps <E = HTMLDivElement> {
+interface FrameProps <E> {
   as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
-  shapes?: FRAME_POINT[][][]
-  polylines?: FRAME_POLYLINE[]
-  outline?: number
+  shapes?: FRAME_POLYLINE[]
+  polylines?: FRAME_POLYLINE_GENERIC[]
+  lineWidth?: number
   palette?: string
   hideShapes?: boolean
   hidePolylines?: boolean
@@ -42,12 +44,12 @@ interface FrameProps <E = HTMLDivElement> {
   children?: ReactNode
 }
 
-function Frame <E = HTMLDivElement, P = HTMLAttributes<E>> (props: FrameProps<E> & P): ReactElement {
+function Frame <E, P> (props: FrameProps<E> & NoInfer<P>): ReactElement {
   const {
     as: asProvided,
     shapes,
     polylines,
-    outline,
+    lineWidth,
     hideShapes,
     hidePolylines,
     palette,
@@ -72,11 +74,11 @@ function Frame <E = HTMLDivElement, P = HTMLAttributes<E>> (props: FrameProps<E>
   const colorHover = colorPalette.light2;
 
   // TODO: Modularize functionalities.
-  const formatLine = (line: FRAME_LINE): string => {
+  const formatPoint = (point: FRAME_POINT): string => {
     const width = size.width - (blurPadding * 2);
     const height = size.height - (blurPadding * 2);
 
-    return line
+    return point
       .slice(0, 2)
       .map((value, index) => {
         if (typeof value === 'number') {
@@ -107,9 +109,9 @@ function Frame <E = HTMLDivElement, P = HTMLAttributes<E>> (props: FrameProps<E>
       })
       .join(',');
   };
-  const formatLines = (lines: FRAME_LINE[]): string => {
-    return lines
-      .map(formatLine)
+  const formatPolyline = (polyline: FRAME_POLYLINE): string => {
+    return polyline
+      .map(formatPoint)
       .map((point, index) => (index === 0 ? 'M' : 'L') + point)
       .join(' ');
   };
@@ -146,7 +148,7 @@ function Frame <E = HTMLDivElement, P = HTMLAttributes<E>> (props: FrameProps<E>
         '&:hover path[data-type=shape], &:focus path[data-type=shape]': hover && !disabled && {
           fill: colorHover
         },
-        '&:hover path[data-type=line], &:focus path[data-type=line]': hover && !disabled && {
+        '&:hover path[data-type=polyline], &:focus path[data-type=polyline]': hover && !disabled && {
           stroke: colorHover
         }
       }
@@ -175,15 +177,16 @@ function Frame <E = HTMLDivElement, P = HTMLAttributes<E>> (props: FrameProps<E>
             filter: `drop-shadow(0 0 ${blurPadding}px ${color})`
           }}
         >
-          <Animated
+          <Animated<SVGGElement, SVGProps<SVGGElement>>
             as='g'
             style={{ transform: `translate(${blurPadding}px, ${blurPadding}px)` }}
+            /* Hide polylines when animations are EXITED. */
             animated={{
               entering: { opacity: 1, easing: () => (progress: number): number => progress ? 1 : 0 },
               exiting: { opacity: 0, easing: () => (progress: number): number => progress === 1 ? 1 : 0 }
             }}
           >
-            <Animated
+            <Animated<SVGGElement, SVGProps<SVGGElement>>
               as='g'
               animated={{
                 initialStyles: { opacity: 0 },
@@ -195,7 +198,7 @@ function Frame <E = HTMLDivElement, P = HTMLAttributes<E>> (props: FrameProps<E>
                 <path
                   key={index}
                   data-type='shape'
-                  d={formatLines(shape)}
+                  d={formatPolyline(shape)}
                   css={{
                     strokeWidth: 0,
                     stroke: 'transparent',
@@ -206,18 +209,18 @@ function Frame <E = HTMLDivElement, P = HTMLAttributes<E>> (props: FrameProps<E>
                 />
               ))}
             </Animated>
-            {!hidePolylines && (polylines || []).map((polyline, index) => {
-              const lines = Array.isArray(polyline) ? polyline : polyline.lines;
-              const strokeWidth = (polyline as any).outline || outline;
-              const animated = (polyline as any).animated;
-              const css = (polyline as any).css;
+            {!hidePolylines && (polylines || []).map((item, index) => {
+              const polyline = Array.isArray(item) ? item : item.polyline;
+              const strokeWidth = (item as any).lineWidth || lineWidth;
+              const animated = (item as any).animated;
+              const css = (item as any).css;
 
               return (
                 <Animated<SVGPathElement, SVGProps<SVGPathElement>>
                   as='path'
                   key={index}
-                  data-type='line'
-                  d={formatLines(lines)}
+                  data-type='polyline'
+                  d={formatPolyline(polyline)}
                   css={{
                     strokeWidth,
                     stroke: color,
@@ -226,6 +229,8 @@ function Frame <E = HTMLDivElement, P = HTMLAttributes<E>> (props: FrameProps<E>
                     transition: `stroke ${theme.transitionDuration()}ms ease-out`,
                     ...css
                   }}
+                  /* To set the stroke-dashoffset animation, the path total length
+                     is required. A trick to reset it is to set a (way) bigger value. */
                   animated={animated || {
                     initialAttributes: { strokeDasharray: 999999 },
                     initialStyles: { strokeDashoffset: 999999 },
@@ -252,7 +257,7 @@ Frame.propTypes = {
   as: PropTypes.string.isRequired,
   shapes: PropTypes.array,
   polylines: PropTypes.array,
-  outline: PropTypes.number,
+  lineWidth: PropTypes.number,
   palette: PropTypes.string,
   hideShapes: PropTypes.bool,
   hidePolylines: PropTypes.bool,
@@ -265,14 +270,16 @@ Frame.defaultProps = {
   as: 'div',
   shapes: [],
   polylines: [],
-  outline: 1,
+  lineWidth: 1,
   palette: 'primary'
 };
 
 export {
+  FRAME_DIMENSION,
   FRAME_POINT,
-  FRAME_LINE,
   FRAME_POLYLINE,
+  FRAME_POLYLINE_CUSTOM,
+  FRAME_POLYLINE_GENERIC,
   FrameProps,
   Frame
 };

@@ -1,5 +1,4 @@
 import {
-  HTMLAttributes,
   CSSProperties,
   MutableRefObject,
   createElement,
@@ -15,6 +14,8 @@ import {
   EXITING,
   useAnimator
 } from '@arwes/animation';
+
+import { NoInfer } from '../types';
 
 interface AnimatedSettingsTransitionFunctionParams {
   targets: anime.AnimeAnimParams['targets']
@@ -36,7 +37,6 @@ interface AnimatedSettings {
   exiting?: AnimatedSettingsTransition
 }
 
-// TODO: "animated" are not properly being type checked.
 interface AnimatedProps <E> {
   as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
   animated?: AnimatedSettings
@@ -45,7 +45,7 @@ interface AnimatedProps <E> {
   rootRef?: MutableRefObject<E | null> | ((node: E) => void)
 }
 
-const Animated = <E = HTMLDivElement, T = HTMLAttributes<HTMLDivElement>> (props: AnimatedProps<E> & T): ReactElement => {
+const Animated = <E, T> (props: AnimatedProps<E> & NoInfer<T>): ReactElement => {
   const {
     as: asProvided,
     animated,

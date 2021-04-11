@@ -1,5 +1,5 @@
 /* @jsx jsx */
-import { HTMLAttributes, ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
@@ -11,13 +11,17 @@ interface FrameUnderlineProps <E> extends FrameProps<E> {
   squareSize?: number
 }
 
-function FrameUnderline <E = HTMLDivElement, P = HTMLAttributes<E>> (props: FrameUnderlineProps<E> & P & WithAnimatorInputProps): ReactElement {
+// TODO: There should be a way to properly set the type of HTMLElement/SVGElement
+// the frame is using. Currently, it is only defining the generic "E" to define
+// the element but not its element props.
+
+function FrameUnderline <E> (props: FrameUnderlineProps<E> & WithAnimatorInputProps): ReactElement {
   const { animator, className, lineWidth, squareSize, ...otherProps } = props;
   const { space, outline } = useTheme();
-  const ss = space(squareSize);
+  const ss = squareSize as number;
 
   return (
-    <Frame<E>
+    <Frame
       {...otherProps}
       className={cx('arwes-frame-underline', className)}
       css={{
@@ -39,14 +43,14 @@ function FrameUnderline <E = HTMLDivElement, P = HTMLAttributes<E>> (props: Fram
           ['100%', `100% - ${ss}`]
         ]
       ]}
-      outline={outline(lineWidth)}
+      lineWidth={outline(lineWidth)}
     />
   );
 }
 
 FrameUnderline.defaultProps = {
   lineWidth: 2,
-  squareSize: 3
+  squareSize: 15
 };
 
 export { FrameUnderlineProps, FrameUnderline };

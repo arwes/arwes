@@ -26,7 +26,7 @@ const Sandbox = () => {
           <FrameLines
             animator={{ activate }}
             palette='error'
-            longLineWidth={2}
+            largeLineWidth={2}
             smallLineWidth={4}
             smallLineLength={20}
             hideShapes

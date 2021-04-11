@@ -25,10 +25,8 @@ const Sandbox = () => {
         <AnimatorGeneralProvider animator={animatorGeneral}>
           <FrameBox
             animator={{ activate }}
-            palette='success'
-            linesWidths={2}
-            origins={['left', 'top', 'right', 'bottom']}
-            hover
+            palette='secondary'
+            linesWidths={[2, 0, 4, 0]}
           >
             <div style={{ width: 200, height: 50 }} />
           </FrameBox>

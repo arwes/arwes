@@ -27,7 +27,7 @@ const Sandbox = () => {
             animator={{ activate }}
             palette='error'
             cornerWidth={1}
-            cornerLength={4}
+            cornerLength={20}
             showContentLines
             contentLineWidth={1}
             hover

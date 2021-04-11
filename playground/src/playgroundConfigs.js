@@ -124,7 +124,7 @@ const playgroundConfigs = [
         name: 'FrameBox',
         sandboxes: [
           { name: 'basic', code: require('repository/packages/core/src/FrameBox/FrameBox.basic.sandbox.md').default },
-          { name: 'outlines', code: require('repository/packages/core/src/FrameBox/FrameBox.outlines.sandbox.md').default },
+          { name: 'lines', code: require('repository/packages/core/src/FrameBox/FrameBox.lines.sandbox.md').default },
           { name: 'origins', code: require('repository/packages/core/src/FrameBox/FrameBox.origins.sandbox.md').default },
           { name: 'static', code: require('repository/packages/core/src/FrameBox/FrameBox.static.sandbox.md').default }
         ]
@@ -141,6 +141,7 @@ const playgroundConfigs = [
         name: 'FramePentagon',
         sandboxes: [
           { name: 'basic', code: require('repository/packages/core/src/FramePentagon/FramePentagon.basic.sandbox.md').default },
+          { name: 'inverted', code: require('repository/packages/core/src/FramePentagon/FramePentagon.inverted.sandbox.md').default },
           { name: 'static', code: require('repository/packages/core/src/FramePentagon/FramePentagon.static.sandbox.md').default }
         ]
       },
