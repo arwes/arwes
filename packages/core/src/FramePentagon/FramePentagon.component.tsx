@@ -4,6 +4,7 @@ import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
 
+import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
 import { FRAME_POLYLINE, FrameProps, Frame } from '../utils/Frame';
 
 interface FramePentagonProps <E> extends FrameProps<E> {
@@ -14,6 +15,12 @@ interface FramePentagonProps <E> extends FrameProps<E> {
 
 function FramePentagon <E> (props: FramePentagonProps<E> & WithAnimatorInputProps): ReactElement {
   const { animator, className, lineWidth, squareSize, inverted, ...otherProps } = props;
+
+  useBleepsOnAnimator({
+    entering: 'assemble',
+    exiting: 'assemble'
+  });
+
   const { space, outline } = useTheme();
   const ss = squareSize as number;
 

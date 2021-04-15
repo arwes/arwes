@@ -6,6 +6,7 @@ import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
 
 import { expandCSSBoxProp } from '../utils/expandCSSBoxProp';
+import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
 import { FRAME_POLYLINE, FRAME_POLYLINE_CUSTOM, FrameProps, Frame } from '../utils/Frame';
 
 type FRAME_BOX_ORIGIN = 'left' | 'right' | 'top' | 'bottom' | 'center';
@@ -23,8 +24,13 @@ function FrameBox <E> (props: FrameBoxProps<E> & WithAnimatorInputProps): ReactE
     linesWidths,
     ...otherProps
   } = props;
-  const theme = useTheme();
 
+  useBleepsOnAnimator({
+    entering: 'assemble',
+    exiting: 'assemble'
+  });
+
+  const theme = useTheme();
   const originsList = expandCSSBoxProp(origins, 'center');
   const linesWidthsList = expandCSSBoxProp(linesWidths, 1).map(theme.outline);
 

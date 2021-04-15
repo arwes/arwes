@@ -4,6 +4,7 @@ import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
 
+import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
 import { FRAME_POLYLINE, FrameProps, Frame } from '../utils/Frame';
 
 interface FrameLinesProps <E> extends FrameProps<E> {
@@ -25,8 +26,13 @@ function FrameLines <E> (props: FrameLinesProps<E> & WithAnimatorInputProps): Re
     hideBottomLines,
     ...otherProps
   } = props;
-  const theme = useTheme();
 
+  useBleepsOnAnimator({
+    entering: 'assemble',
+    exiting: 'assemble'
+  });
+
+  const theme = useTheme();
   const llWidth = theme.outline(largeLineWidth);
   const slWidth = theme.outline(smallLineWidth);
   const slLength = smallLineLength as number;

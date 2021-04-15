@@ -5,6 +5,7 @@ import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
 
 import { FrameProps, Frame } from '../utils/Frame';
+import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
 
 interface FrameUnderlineProps <E> extends FrameProps<E> {
   lineWidth?: number
@@ -19,6 +20,11 @@ function FrameUnderline <E> (props: FrameUnderlineProps<E> & WithAnimatorInputPr
   const { animator, className, lineWidth, squareSize, ...otherProps } = props;
   const { space, outline } = useTheme();
   const ss = squareSize as number;
+
+  useBleepsOnAnimator({
+    entering: 'assemble',
+    exiting: 'assemble'
+  });
 
   return (
     <Frame

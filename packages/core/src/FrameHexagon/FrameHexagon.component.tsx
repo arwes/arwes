@@ -4,6 +4,7 @@ import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
 
+import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
 import { FRAME_POLYLINE, FrameProps, Frame } from '../utils/Frame';
 
 interface FrameHexagonProps <E> extends FrameProps<E> {
@@ -14,8 +15,13 @@ interface FrameHexagonProps <E> extends FrameProps<E> {
 
 function FrameHexagon <E> (props: FrameHexagonProps<E> & WithAnimatorInputProps): ReactElement {
   const { animator, className, lineWidth, squareSize, inverted, ...otherProps } = props;
-  const { space, outline } = useTheme();
 
+  useBleepsOnAnimator({
+    entering: 'assemble',
+    exiting: 'assemble'
+  });
+
+  const { space, outline } = useTheme();
   const ss = squareSize as number;
 
   // Polylines without repeated points between them.

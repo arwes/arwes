@@ -4,6 +4,7 @@ import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
 
+import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
 import { FRAME_POLYLINE_GENERIC, FrameProps, Frame } from '../utils/Frame';
 
 interface FrameCornersProps <E> extends FrameProps<E> {
@@ -23,8 +24,13 @@ function FrameCorners <E> (props: FrameCornersProps<E> & WithAnimatorInputProps)
     contentLineWidth,
     ...otherProps
   } = props;
-  const theme = useTheme();
 
+  useBleepsOnAnimator({
+    entering: 'assemble',
+    exiting: 'assemble'
+  });
+
+  const theme = useTheme();
   const cw = theme.outline(cornerWidth);
   const cl = cornerLength as number;
 
