@@ -2,18 +2,18 @@
 // The <Button /> component will pass its received `animator` prop directly to the
 // <FrameComponent /> to simplify the animator management.
 
+// TODO: There needs to be a better way to compose animator components
+// like the Button component manipulates the Framecomponent.
+
 /* @jsx jsx */
 import {
   FC,
-  ComponentType,
-  HTMLAttributes,
+  MutableRefObject,
   CSSProperties,
   MouseEvent,
-  MutableRefObject,
   useState,
   useMemo,
-  useRef,
-  useCallback
+  useRef
 } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
@@ -21,21 +21,17 @@ import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorOutputProps, AnimatorFlow } from '@arwes/animation';
 import { useBleeps } from '@arwes/sounds';
 
+import { FRAME_EFFECTS } from '../utils/Frame';
 import { FrameUnderline } from '../FrameUnderline';
 import { generateStyles } from './Button.styles';
-import { highlightFrameBgs } from './Button.effects';
-
-// TODO: Should there be a common FrameCommonComponentProps interface to share
-// across components using composable frames? It could prevent the explicit
-// interface definition in multiple components.
-type ButtonPropsFrameComponent = ComponentType<HTMLAttributes<HTMLElement> & WithAnimatorOutputProps & { [prop: string]: any }>;
 
 interface ButtonProps {
-  FrameComponent?: ButtonPropsFrameComponent
+  // TODO: Properly create a type for a common composable frame component.
+  FrameComponent?: any
   palette?: string
   active?: boolean
   disabled?: boolean
-  onClick?: (event: MouseEvent<HTMLElement>) => void
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void
   className?: string
   style?: CSSProperties
   rootRef?: MutableRefObject<HTMLButtonElement | null> | ((node: HTMLButtonElement) => void)
@@ -43,56 +39,37 @@ interface ButtonProps {
 
 // The component will receive the `animator` as `AnimatorInstanceSettings` and
 // not as `AnimatorRef` since it is encapsulating another animated component.
-// That's why the props accepts `WithAnimatorOutputProps`.
+// That's why the props accepts `WithAnimatorOutputProps`, not the input one.
 const Button: FC<ButtonProps & WithAnimatorOutputProps> = props => {
   const {
     animator: animatorSettings,
+    FrameComponent,
     palette,
     disabled,
     active,
     onClick,
     className,
     style,
-    rootRef: externalRootRef,
+    rootRef,
     children
   } = props;
-  const FrameComponent = props.FrameComponent as ButtonPropsFrameComponent;
 
   const theme = useTheme();
   const bleeps = useBleeps();
+  const styles = useMemo(() => generateStyles(theme, { palette, disabled }), [theme, palette, disabled]);
 
-  const styles = useMemo(
-    () => generateStyles(theme, { palette, active, disabled }),
-    [theme, palette, active, disabled]
-  );
+  const effectsRef = useRef<FRAME_EFFECTS | null>(null);
 
   // A copy of the <FrameComponent/> animator flow for the <Button/> functionalities.
   const [flow, setFlow] = useState<AnimatorFlow | null>(null);
 
-  const internalRootRef = useRef<HTMLButtonElement | null>(null);
-  const rootRef = useCallback((node: HTMLButtonElement) => {
-    internalRootRef.current = node;
-
-    if (typeof externalRootRef === 'function') {
-      externalRootRef(node);
-    }
-    else if (externalRootRef) {
-      externalRootRef.current = node;
-    }
-  }, []);
-
   const buttonOnClick = (event: MouseEvent<HTMLButtonElement>): void => {
-    const isAnimated = !!flow; // If flow, it means it's animated.
+    const isAnimated = !!flow; // If flow exist, it means it's animated.
     const isEntered = isAnimated ? flow?.entered : true; // No animated? Then it's entered.
-    const container = internalRootRef.current;
 
     if (!disabled && isEntered) {
-      if (container) {
-        highlightFrameBgs(container, theme, palette);
-      }
-
+      effectsRef.current?.highlight();
       bleeps.click?.play();
-
       onClick?.(event);
     }
   };
@@ -101,7 +78,7 @@ const Button: FC<ButtonProps & WithAnimatorOutputProps> = props => {
     <FrameComponent
       animator={{
         ...animatorSettings,
-        onTransition: flow => {
+        onTransition: (flow: AnimatorFlow) => {
           setFlow(flow);
           animatorSettings?.onTransition?.(flow);
         }
@@ -114,18 +91,14 @@ const Button: FC<ButtonProps & WithAnimatorOutputProps> = props => {
       ]}
       style={style}
       rootRef={rootRef}
+      effectsRef={effectsRef}
       palette={palette}
       disabled={disabled}
+      hideShapes={!active}
       hover
-      shape
       onClick={buttonOnClick}
     >
-      <div
-        className='arwes-button__content'
-        css={styles.content}
-      >
-        {children}
-      </div>
+      {children}
     </FrameComponent>
   );
 };

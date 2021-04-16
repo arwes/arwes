@@ -121,6 +121,25 @@ const playgroundConfigs = [
         ]
       },
       {
+        name: 'Button',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/core/src/Button/Button.basic.sandbox.md').default },
+          { name: 'palette', code: require('repository/packages/core/src/Button/Button.palette.sandbox.md').default },
+          { name: 'active', code: require('repository/packages/core/src/Button/Button.active.sandbox.md').default },
+          { name: 'frames', code: require('repository/packages/core/src/Button/Button.frames.sandbox.md').default },
+          { name: 'disabled', code: require('repository/packages/core/src/Button/Button.disabled.sandbox.md').default },
+          { name: 'static', code: require('repository/packages/core/src/Button/Button.static.sandbox.md').default }
+        ]
+      },
+      {
+        name: 'Card',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/core/src/Card/Card.basic.sandbox.md').default },
+          { name: 'landscape', code: require('repository/packages/core/src/Card/Card.landscape.sandbox.md').default },
+          { name: 'static', code: require('repository/packages/core/src/Card/Card.static.sandbox.md').default }
+        ]
+      },
+      {
         name: 'FrameBox',
         sandboxes: [
           { name: 'basic', code: require('repository/packages/core/src/FrameBox/FrameBox.basic.sandbox.md').default },
@@ -167,24 +186,6 @@ const playgroundConfigs = [
           { name: 'basic', code: require('repository/packages/core/src/FrameLines/FrameLines.basic.sandbox.md').default },
           { name: 'widths', code: require('repository/packages/core/src/FrameLines/FrameLines.widths.sandbox.md').default },
           { name: 'static', code: require('repository/packages/core/src/FrameLines/FrameLines.static.sandbox.md').default }
-        ]
-      },
-      {
-        name: 'Button',
-        sandboxes: [
-          { name: 'basic', code: require('repository/packages/core/src/Button/Button.basic.sandbox.md').default },
-          { name: 'palette', code: require('repository/packages/core/src/Button/Button.palette.sandbox.md').default },
-          { name: 'active', code: require('repository/packages/core/src/Button/Button.active.sandbox.md').default },
-          { name: 'disabled', code: require('repository/packages/core/src/Button/Button.disabled.sandbox.md').default },
-          { name: 'static', code: require('repository/packages/core/src/Button/Button.static.sandbox.md').default }
-        ]
-      },
-      {
-        name: 'Card',
-        sandboxes: [
-          { name: 'basic', code: require('repository/packages/core/src/Card/Card.basic.sandbox.md').default },
-          { name: 'landscape', code: require('repository/packages/core/src/Card/Card.landscape.sandbox.md').default },
-          { name: 'static', code: require('repository/packages/core/src/Card/Card.static.sandbox.md').default }
         ]
       }
     ]
