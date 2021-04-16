@@ -1,10 +1,12 @@
 /* @jsx jsx */
-import { FC, MutableRefObject, useRef, useMemo, CSSProperties } from 'react';
+import { FC, MutableRefObject, useMemo, CSSProperties } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animation';
 
+import { Animated } from '../utils/Animated';
+import { transitionAppear, transitionDisappear } from '../utils/appearTransitions';
 import { generateStyles } from './Blockquote.styles';
 
 interface BlockquoteProps {
@@ -15,18 +17,10 @@ interface BlockquoteProps {
 }
 
 const Blockquote: FC<BlockquoteProps & WithAnimatorInputProps> = props => {
-  const { animator, palette, className, style, rootRef, children } = props;
-  const { animate } = animator;
+  const { palette, className, style, rootRef, children } = props;
 
   const theme = useTheme();
-  const styles = useMemo(
-    () => generateStyles(theme, { animate, palette }),
-    [theme, animate, palette]
-  );
-
-  const containerRef = useRef<HTMLDivElement | null>(null);
-
-  animator.setupAnimateRefs(containerRef);
+  const styles = useMemo(() => generateStyles(theme, { palette }), [theme, palette]);
 
   return (
     <blockquote
@@ -35,25 +29,29 @@ const Blockquote: FC<BlockquoteProps & WithAnimatorInputProps> = props => {
       style={style}
       ref={rootRef}
     >
+      <Animated
+        className='arwes-blockquote__bg'
+        css={styles.bg}
+        animated={{
+          initialStyles: { opacity: 0 },
+          entering: transitionAppear,
+          exiting: transitionDisappear
+        }}
+      />
+      <Animated
+        className='arwes-blockquote__line'
+        css={styles.line}
+        animated={{
+          initialStyles: { opacity: 0, transform: 'scaleY(0)' },
+          entering: [transitionAppear, { scaleY: 1 }],
+          exiting: [transitionDisappear, { scaleY: 0 }]
+        }}
+      />
       <div
-        className='arwes-blockquote__container'
-        css={styles.container}
-        ref={containerRef}
+        className='arwes-blockquote__content'
+        css={styles.content}
       >
-        <div
-          className='arwes-blockquote__bg'
-          css={styles.bg}
-        />
-        <div
-          className='arwes-blockquote__line'
-          css={styles.line}
-        />
-        <div
-          className='arwes-blockquote__content'
-          css={styles.content}
-        >
-          {children}
-        </div>
+        {children}
       </div>
     </blockquote>
   );
