@@ -31,8 +31,8 @@ test('Should limit array to four data', () => {
 });
 
 test('Should set default value for undefined/null side values', () => {
-  expect(expandCSSBoxProp<number>([undefined], 7)).toEqual([7, 7, 7, 7]);
-  expect(expandCSSBoxProp<number>([undefined, null], 7)).toEqual([7, 7, 7, 7]);
-  expect(expandCSSBoxProp<number>([undefined, 3, null], 7)).toEqual([7, 3, 7, 3]);
-  expect(expandCSSBoxProp<number>([undefined, 2, null, 4], 7)).toEqual([7, 2, 7, 4]);
+  expect(expandCSSBoxProp<number>([undefined] as any[], 7)).toEqual([7, 7, 7, 7]);
+  expect(expandCSSBoxProp<number>([undefined, null] as any[], 7)).toEqual([7, 7, 7, 7]);
+  expect(expandCSSBoxProp<number>([undefined, 3, null] as any[], 7)).toEqual([7, 3, 7, 3]);
+  expect(expandCSSBoxProp<number>([undefined, 2, null, 4] as any[], 7)).toEqual([7, 2, 7, 4]);
 });
