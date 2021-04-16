@@ -29,6 +29,10 @@ interface FRAME_POLYLINE_CUSTOM {
 }
 type FRAME_POLYLINE_GENERIC = FRAME_POLYLINE | FRAME_POLYLINE_CUSTOM;
 
+interface FRAME_EFFECTS {
+  highlight: () => void
+}
+
 interface FrameProps <E> {
   as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
   shapes?: FRAME_POLYLINE[]
@@ -41,6 +45,7 @@ interface FrameProps <E> {
   disabled?: boolean
   className?: string
   rootRef?: MutableRefObject<E | null> | ((node: E) => void)
+  effectsRef?: MutableRefObject<FRAME_EFFECTS | null> | ((effects: FRAME_EFFECTS) => void)
   children?: ReactNode
 }
 
@@ -57,6 +62,7 @@ function Frame <E, P> (props: FrameProps<E> & NoInfer<P>): ReactElement {
     disabled,
     className,
     rootRef,
+    effectsRef,
     children,
     ...otherProps
   } = props;
@@ -119,17 +125,50 @@ function Frame <E, P> (props: FrameProps<E> & NoInfer<P>): ReactElement {
   useEffect(() => {
     const root = containerRef.current as HTMLDivElement;
 
+    if (effectsRef) {
+      const highlight = (): void => {
+        const shapes = root.querySelectorAll('path[data-type=shape]');
+        const startOpacity = hideShapes ? 0 : 0.1;
+        const endOpacity = 0.5;
+
+        anime
+          .timeline({
+            targets: shapes,
+            duration: theme.transitionDuration() / 4,
+            easing: 'easeOutSine'
+          })
+          .add({ opacity: [startOpacity, endOpacity] })
+          .add({ opacity: [endOpacity, startOpacity] });
+      };
+      const effects = { highlight };
+
+      if (typeof effectsRef === 'function') {
+        effectsRef(effects);
+      }
+      else {
+        effectsRef.current = effects;
+      }
+    }
+
     const onResize = (): void => {
       const { offsetWidth: width, offsetHeight: height } = root;
       setSize({ width, height });
     };
 
-    // TODO: ResizeObserver interface is not recoginized by TypeScript.
+    // TODO: ResizeObserver class is not recoginized by TypeScript.
     const win: any = window;
-    observerRef.current = new win.ResizeObserver(onResize);
-    observerRef.current.observe(root);
+    const ResizeObserver = win.ResizeObserver;
 
-    return () => observerRef.current?.disconnect();
+    if (ResizeObserver) {
+      observerRef.current = new ResizeObserver(onResize);
+      observerRef.current.observe(root);
+
+      return () => observerRef.current?.disconnect();
+    }
+    else {
+      // Resize only once initially.
+      onResize();
+    }
   }, []);
 
   return jsx(as,
@@ -169,6 +208,8 @@ function Frame <E, P> (props: FrameProps<E> & NoInfer<P>): ReactElement {
         <svg
           xmlns='http://www.w3.org/2000/svg'
           viewBox={`0 0 ${size.width} ${size.height}`}
+          // Even if it is still resized automatically, in case there is a delay
+          // or the ResizeObserver API is not available, the SVG should be resized.
           preserveAspectRatio='none'
           css={{
             display: 'block',
@@ -180,8 +221,9 @@ function Frame <E, P> (props: FrameProps<E> & NoInfer<P>): ReactElement {
           <Animated<SVGGElement, SVGProps<SVGGElement>>
             as='g'
             style={{ transform: `translate(${blurPadding}px, ${blurPadding}px)` }}
-            /* Hide polylines when animations are EXITED. */
+            // Hide polylines only when animations are EXITED.
             animated={{
+              initialStyles: { opacity: 0 },
               entering: { opacity: 1, easing: () => (progress: number): number => progress ? 1 : 0 },
               exiting: { opacity: 0, easing: () => (progress: number): number => progress === 1 ? 1 : 0 }
             }}
@@ -194,7 +236,7 @@ function Frame <E, P> (props: FrameProps<E> & NoInfer<P>): ReactElement {
                 exiting: transitionDisappear
               }}
             >
-              {!hideShapes && (shapes || []).map((shape, index) => (
+              {(shapes || []).map((shape, index) => (
                 <path
                   key={index}
                   data-type='shape'
@@ -203,7 +245,7 @@ function Frame <E, P> (props: FrameProps<E> & NoInfer<P>): ReactElement {
                     strokeWidth: 0,
                     stroke: 'transparent',
                     fill: color,
-                    opacity: 0.1,
+                    opacity: hideShapes ? 0 : 0.1,
                     transition: `fill ${theme.transitionDuration()}ms ease-out`
                   }}
                 />
@@ -229,8 +271,8 @@ function Frame <E, P> (props: FrameProps<E> & NoInfer<P>): ReactElement {
                     transition: `stroke ${theme.transitionDuration()}ms ease-out`,
                     ...css
                   }}
-                  /* To set the stroke-dashoffset animation, the path total length
-                     is required. A trick to reset it is to set a (way) bigger value. */
+                  // To set the stroke-dashoffset animation, the path total length
+                  // is required. A trick to reset it is to set a (way) bigger value.
                   animated={animated || {
                     initialAttributes: { strokeDasharray: 999999 },
                     initialStyles: { strokeDashoffset: 999999 },
@@ -280,6 +322,7 @@ export {
   FRAME_POLYLINE,
   FRAME_POLYLINE_CUSTOM,
   FRAME_POLYLINE_GENERIC,
+  FRAME_EFFECTS,
   FrameProps,
   Frame
 };

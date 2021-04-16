@@ -12,10 +12,6 @@ interface FrameUnderlineProps <E> extends FrameProps<E> {
   squareSize?: number
 }
 
-// TODO: There should be a way to properly set the type of HTMLElement/SVGElement
-// the frame is using. Currently, it is only defining the generic "E" to define
-// the element but not its element props.
-
 function FrameUnderline <E> (props: FrameUnderlineProps<E> & WithAnimatorInputProps): ReactElement {
   const { animator, className, lineWidth, squareSize, ...otherProps } = props;
   const { space, outline } = useTheme();
