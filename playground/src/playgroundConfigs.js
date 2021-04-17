@@ -161,6 +161,7 @@ const playgroundConfigs = [
         sandboxes: [
           { name: 'basic', code: require('repository/packages/core/src/FramePentagon/FramePentagon.basic.sandbox.md').default },
           { name: 'inverted', code: require('repository/packages/core/src/FramePentagon/FramePentagon.inverted.sandbox.md').default },
+          { name: 'square', code: require('repository/packages/core/src/FramePentagon/FramePentagon.square.sandbox.md').default },
           { name: 'static', code: require('repository/packages/core/src/FramePentagon/FramePentagon.static.sandbox.md').default }
         ]
       },
@@ -177,6 +178,7 @@ const playgroundConfigs = [
         name: 'FrameUnderline',
         sandboxes: [
           { name: 'basic', code: require('repository/packages/core/src/FrameUnderline/FrameUnderline.basic.sandbox.md').default },
+          { name: 'square', code: require('repository/packages/core/src/FrameUnderline/FrameUnderline.square.sandbox.md').default },
           { name: 'static', code: require('repository/packages/core/src/FrameUnderline/FrameUnderline.static.sandbox.md').default }
         ]
       },
