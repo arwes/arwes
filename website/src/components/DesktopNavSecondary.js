@@ -21,8 +21,8 @@ const styles = {
     '& li': {
       fontSize: 16,
 
-      '&::before': {
-        display: 'none'
+      '&::marker': {
+        content: '""'
       }
     },
     '& a': {
