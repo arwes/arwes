@@ -18,18 +18,17 @@ const generateStyles = ({ palette }) => ({
     borderStyle: 'solid',
     borderColor: rgba(palette.primary.main, 0.5),
     borderWidth: '0 0 1px 1px',
-    padding: 5,
+    padding: '2px 5px',
     backgroundColor: palette.neutral.elevate(1),
     color: palette.primary.main,
     lineHeight: 1,
-    fontSize: 14,
+    fontSize: 12,
     textTransform: 'uppercase',
     userSelect: 'none'
   },
   pre: {
     margin: 0,
-    fontSize: 14,
-    backgroundColor: `${palette.neutral.elevate(0)} !important`
+    fontSize: 14
   }
 });
 
@@ -52,7 +51,9 @@ const Code = ({ className, language, theme: codeTheme, children }) => {
           )}
           <pre
             className={cx(className, hlClassName)}
-            style={style}
+            style={Object.assign({}, style, {
+              backgroundColor: ''
+            })}
             css={styles.pre}
           >
             {tokens

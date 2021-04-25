@@ -74,7 +74,7 @@ const generateStyles = ({ breakpoints, palette, typography }) => ({
     '& textarea': {
       outline: 'none !important',
       color: `${palette.text.root} !important`,
-      background: `${palette.neutral.elevate(0)} !important`,
+      background: `${rgba(palette.primary.light1, 0.05)} !important`,
 
       '&:hover': {
         outline: 'none'
@@ -87,11 +87,12 @@ const cssStyles = {
   liveEditor: ({ palette, typography }) => ({
     fontSize: '14px !important',
     fontFamily: `${typography.monospace} !important`,
+    backgroundColor: 'transparent !important',
 
     '& textarea': {
       outline: 'none !important',
       color: `${palette.text.root} !important`,
-      background: `${palette.neutral.elevate(0)} !important`,
+      background: `${rgba(palette.primary.light1, 0.05)} !important`,
 
       '&:hover': {
         outline: 'none'
