@@ -85,4 +85,9 @@ ArwesThemeProvider.propTypes = {
   themeSettings: PropTypes.object
 };
 
-export { ArwesTheme, ArwesThemeProviderProps, ArwesThemeProvider };
+export {
+  ArwesTheme,
+  ArwesThemeSettings,
+  ArwesThemeProviderProps,
+  ArwesThemeProvider
+};
