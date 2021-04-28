@@ -27,12 +27,6 @@ const playgroundConfigs = [
         ]
       },
       {
-        name: 'extendAnimator',
-        sandboxes: [
-          { name: 'basic', code: require('repository/packages/animation/src/extendAnimator/extendAnimator.basic.sandbox.md').default }
-        ]
-      },
-      {
         name: 'Animator',
         sandboxes: [
           { name: 'basic', code: require('repository/packages/animation/src/Animator/Animator.basic.sandbox.md').default }
