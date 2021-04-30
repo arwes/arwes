@@ -1,4 +1,4 @@
-import { AnimatorClassSettings } from '@arwes/animation';
+import { AnimatorClassSettings } from '@arwes/animator';
 
 import {
   stopLoadingBarsTransition,

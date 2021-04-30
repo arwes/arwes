@@ -3,7 +3,7 @@ import { FC, ReactNode, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { jsx } from '@emotion/react';
 import { cx } from '@emotion/css';
-import { WithAnimatorInputProps } from '@arwes/animation';
+import { WithAnimatorInputProps } from '@arwes/animator';
 
 import { TextAnimationRefs } from '../../utils/textAnimations';
 import { ArwesTheme } from '../../ArwesThemeProvider';

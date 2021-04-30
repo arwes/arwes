@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { AnimatorClassSettings, WithAnimatorOutputProps, withAnimator } from '@arwes/animation';
+import { AnimatorClassSettings, WithAnimatorOutputProps, withAnimator } from '@arwes/animator';
 
 import { BlockquoteProps, Blockquote as Component } from './Blockquote.component';
 

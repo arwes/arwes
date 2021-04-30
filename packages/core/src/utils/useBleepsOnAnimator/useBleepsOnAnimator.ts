@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { ENTERED, ENTERING, EXITED, EXITING, useAnimator } from '@arwes/animation';
+import { ENTERED, ENTERING, EXITED, EXITING, useAnimator } from '@arwes/animator';
 import { BleepName, useBleeps } from '@arwes/sounds';
 
 interface BleepsOnTransitions {

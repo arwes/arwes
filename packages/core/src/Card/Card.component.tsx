@@ -3,7 +3,7 @@ import { FC, MutableRefObject, useRef, useMemo, ReactNode, CSSProperties } from 
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
-import { WithAnimatorInputProps } from '@arwes/animation';
+import { WithAnimatorInputProps } from '@arwes/animator';
 import { useBleeps } from '@arwes/sounds';
 
 import { Text } from '../Text';

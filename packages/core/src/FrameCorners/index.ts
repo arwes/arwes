@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { WithAnimatorOutputProps, withAnimator } from '@arwes/animation';
+import { WithAnimatorOutputProps, withAnimator } from '@arwes/animator';
 
 import { FrameCornersProps, FrameCorners as Component } from './FrameCorners.component';
 

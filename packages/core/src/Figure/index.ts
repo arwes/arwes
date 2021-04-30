@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { WithAnimatorOutputProps, withAnimator } from '@arwes/animation';
+import { WithAnimatorOutputProps, withAnimator } from '@arwes/animator';
 
 import { FigureProps, Figure as Component } from './Figure.component';
 import { animator } from './Figure.animator';

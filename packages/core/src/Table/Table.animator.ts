@@ -1,4 +1,4 @@
-import { AnimatorClassSettings, AnimatorRef } from '@arwes/animation';
+import { AnimatorClassSettings, AnimatorRef } from '@arwes/animator';
 import { Bleeps } from '@arwes/sounds';
 
 const playTableTransitionBleep = (bleeps: Bleeps): void => {
