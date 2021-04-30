@@ -13,10 +13,10 @@ import { CSSObject, jsx, useTheme } from '@emotion/react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import anime from 'animejs';
+import { AnimatedSettings, Animated } from '@arwes/animated';
 
 import { NoInfer } from '../types';
 import { transitionAppear, transitionDisappear } from '../appearTransitions';
-import { AnimatedSettings, Animated } from '../Animated';
 
 type FRAME_DIMENSION = number | string;
 type FRAME_POINT = FRAME_DIMENSION[];
