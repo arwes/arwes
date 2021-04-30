@@ -11,7 +11,7 @@ A child node will enter the animation flow when its parent flow is `entered`.
 It will exit the animation flow when its parent flow is `exiting`.
 
 By default, all direct children nodes of a parent node will enter the animation
-flow in `parallel`. This behaviour can be changed by defining an [animator manager](/develop/animation/managers).
+flow in `parallel`. This behaviour can be changed by defining an [animator manager](/develop/animator/managers).
 
 An animated `<Menu/>` and `<Item/>` components could be nested like:
 
@@ -144,4 +144,4 @@ The menu component animations run first. When they are completed, the menu items
 run.
 
 Since the menu component is not configured to have a manager, its children items
-are transitioned in `parallel`. This can be configured. See [animator managers](/develop/animation/managers).
+are transitioned in `parallel`. This can be configured. See [animator managers](/develop/animator/managers).

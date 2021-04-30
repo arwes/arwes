@@ -14,22 +14,22 @@ const playgroundConfigs = [
     ]
   },
   {
-    name: 'animation',
+    name: 'animator',
     components: [
       {
         name: 'withAnimator',
         sandboxes: [
-          { name: 'basic', code: require('repository/packages/animation/src/withAnimator/withAnimator.basic.sandbox.md').default },
-          { name: 'nesting', code: require('repository/packages/animation/src/withAnimator/withAnimator.nesting.sandbox.md').default },
-          { name: 'staggering', code: require('repository/packages/animation/src/withAnimator/withAnimator.staggering.sandbox.md').default },
-          { name: 'sequence', code: require('repository/packages/animation/src/withAnimator/withAnimator.sequence.sandbox.md').default },
-          { name: 'custom-manager', code: require('repository/packages/animation/src/withAnimator/withAnimator.custom-manager.sandbox.md').default }
+          { name: 'basic', code: require('repository/packages/animator/src/withAnimator/withAnimator.basic.sandbox.md').default },
+          { name: 'nesting', code: require('repository/packages/animator/src/withAnimator/withAnimator.nesting.sandbox.md').default },
+          { name: 'staggering', code: require('repository/packages/animator/src/withAnimator/withAnimator.staggering.sandbox.md').default },
+          { name: 'sequence', code: require('repository/packages/animator/src/withAnimator/withAnimator.sequence.sandbox.md').default },
+          { name: 'custom-manager', code: require('repository/packages/animator/src/withAnimator/withAnimator.custom-manager.sandbox.md').default }
         ]
       },
       {
         name: 'Animator',
         sandboxes: [
-          { name: 'basic', code: require('repository/packages/animation/src/Animator/Animator.basic.sandbox.md').default }
+          { name: 'basic', code: require('repository/packages/animator/src/Animator/Animator.basic.sandbox.md').default }
         ]
       }
     ]
