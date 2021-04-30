@@ -1,6 +1,6 @@
 import { RefObject, MutableRefObject } from 'react';
 import { CSSObject, css } from '@emotion/css';
-import { AnimatorRef } from '@arwes/animation';
+import { AnimatorRef } from '@arwes/animator';
 
 import { walkTextNodes } from '../walkTextNodes';
 import { setTextNodesEnteringContentLength } from '../setTextNodesEnteringContentLength';

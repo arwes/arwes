@@ -18,7 +18,7 @@ import {
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
-import { WithAnimatorOutputProps, AnimatorFlow } from '@arwes/animation';
+import { WithAnimatorOutputProps, AnimatorFlow } from '@arwes/animator';
 import { useBleeps } from '@arwes/sounds';
 
 import { FRAME_EFFECTS } from '../utils/Frame';

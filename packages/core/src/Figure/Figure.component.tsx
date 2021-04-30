@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { THEME_BREAKPOINTS_KEYS, ThemeSettingsBreakpoint } from '@arwes/design';
-import { WithAnimatorInputProps } from '@arwes/animation';
+import { WithAnimatorInputProps } from '@arwes/animator';
 import { useBleeps } from '@arwes/sounds';
 
 import { loadImage } from '../utils/loadImage';
