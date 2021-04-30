@@ -4,7 +4,7 @@ import howler from 'howler';
 
 import * as tools from 'repository/packages/tools';
 import * as design from 'repository/packages/design';
-import * as animation from 'repository/packages/animation';
+import * as animator from 'repository/packages/animator';
 import * as sounds from 'repository/packages/sounds';
 import * as core from 'repository/packages/core';
 import * as arwes from 'repository/packages/arwes';
@@ -19,7 +19,7 @@ function getPackagesScope () {
     howler,
     ...tools,
     ...design,
-    ...animation,
+    ...animator,
     ...sounds,
     ...core,
     ...arwes

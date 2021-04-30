@@ -8,10 +8,10 @@ import anime from 'animejs';
 import howler from 'howler';
 
 import * as design from '@repository/packages/design';
-import * as animation from '@repository/packages/animation';
+import * as animator from '@repository/packages/animator';
 import * as sounds from '@repository/packages/sounds';
 
-const packagesScope = Object.assign({ anime, howler }, design, animation, sounds);
+const packagesScope = Object.assign({ anime, howler }, design, animator, sounds);
 
 const generateStyles = ({ breakpoints, palette, typography }) => ({
   root: {

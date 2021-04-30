@@ -59,8 +59,8 @@ module.exports = {
           ]
         },
         {
-          name: '`@arwes/animation`',
-          path: 'animation',
+          name: '`@arwes/animator`',
+          path: 'animator',
           items: [
             { name: 'Nesting Animators', path: 'nesting' },
             { name: 'Animator Managers', path: 'managers' }
