@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { WithAnimatorOutputProps, withAnimator } from '@arwes/animation';
+import { WithAnimatorOutputProps, withAnimator } from '@arwes/animator';
 
 import { CardProps, Card as Component } from './Card.component';
 import { animator } from './Card.animator';

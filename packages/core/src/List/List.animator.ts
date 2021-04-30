@@ -1,6 +1,6 @@
 import anime from 'animejs';
 import { MutableRefObject } from 'react';
-import { AnimatorClassSettings, AnimatorRef } from '@arwes/animation';
+import { AnimatorClassSettings, AnimatorRef } from '@arwes/animator';
 
 import { ArwesTheme } from '../ArwesThemeProvider';
 

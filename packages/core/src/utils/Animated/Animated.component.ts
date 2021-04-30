@@ -13,7 +13,7 @@ import {
   ENTERING,
   EXITING,
   useAnimator
-} from '@arwes/animation';
+} from '@arwes/animator';
 
 import { NoInfer } from '../types';
 

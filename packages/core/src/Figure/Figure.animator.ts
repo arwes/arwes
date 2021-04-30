@@ -1,7 +1,7 @@
 import anime from 'animejs';
 import { MutableRefObject } from 'react';
 import { CSSObject } from '@emotion/css';
-import { AnimatorClassSettings, AnimatorRef } from '@arwes/animation';
+import { AnimatorClassSettings, AnimatorRef } from '@arwes/animator';
 import { Bleeps } from '@arwes/sounds';
 
 import { ArwesTheme } from '../ArwesThemeProvider';

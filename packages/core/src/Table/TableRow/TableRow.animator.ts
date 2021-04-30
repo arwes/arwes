@@ -1,7 +1,7 @@
 import rgba from 'polished/lib/color/rgba';
 import anime from 'animejs';
 import { RefObject, MutableRefObject } from 'react';
-import { AnimatorRef, AnimatorClassSettings } from '@arwes/animation';
+import { AnimatorRef, AnimatorClassSettings } from '@arwes/animator';
 
 import {
   TextAnimationRefs,

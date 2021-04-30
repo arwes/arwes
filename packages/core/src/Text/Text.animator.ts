@@ -1,4 +1,4 @@
-import { AnimatorRef, AnimatorClassSettings } from '@arwes/animation';
+import { AnimatorRef, AnimatorClassSettings } from '@arwes/animator';
 import { Bleeps } from '@arwes/sounds';
 
 import {
