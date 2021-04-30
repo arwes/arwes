@@ -2,7 +2,7 @@ import { PageContentLayout } from '../../components/PageContentLayout';
 import { Sandbox } from '../../components/Sandbox';
 export default props => <PageContentLayout headProps={{ title: 'Animation' }} {...props} />;
 
-# `@arwes/animation`
+# `@arwes/animator`
 
 Assemble and disassemble user interfaces using animation controls in [React](https://reactjs.org).
 
@@ -12,7 +12,7 @@ applications. Then the specific components animations or components events can
 be defined more easily, such as visual effects or sound playbacks when a
 component transition from one state to another.
 
-The animation tools require the [React](https://reactjs.org) component tree to
+The animator tools require the [React](https://reactjs.org) component tree to
 allow the dynamic communication between components.
 
 It goes hand in hand with the [sounds tools](/develop/sounds), though it is not
@@ -23,10 +23,10 @@ a dependency.
 All the tools are bundled and can be installed with the following NPM package:
 
 ```bash
-npm install @arwes/animation
+npm install @arwes/animator
 ```
 
-The animation management tooling requires React v17 as a peer-dependency.
+The animator management tooling requires React v17 as a peer-dependency.
 
 ```bash
 npm install react@17 react-dom@17 prop-types
@@ -55,7 +55,7 @@ A HTML button component can be animated like:
 
 ```tsx
 import React, { FC, useRef, MutableRefObject } from 'react';
-import { AnimatorRef, AnimatorClassSettings, withAnimator } from '@arwes/animation';
+import { AnimatorRef, AnimatorClassSettings, withAnimator } from '@arwes/animator';
 
 interface ButtonProps {
   // An animated component will receive the `animator` prop with
@@ -190,7 +190,7 @@ transition from `exited` to `entering` to `entered` and stay there.
 
 If the component is a child node, it will always listen to its closest parent node
 flow state to know when it should transition. See more in
-[Nesting Animators](/develop/animation/nesting).
+[Nesting Animators](/develop/animator/nesting).
 
 Normally, the root nodes are managed using its instance settings, and the children
 nodes are managed by their parent nodes.
@@ -208,7 +208,7 @@ In the example of the `<Button/>` component, it could receive instance
 settings like:
 
 ```tsx
-import { AnimatorInstanceSettings, ... } from '@arwes/animation';
+import { AnimatorInstanceSettings, ... } from '@arwes/animator';
 
 // ...
 
@@ -303,7 +303,7 @@ consistency.
 
 When an animated components exits, it is not unmounted.
 
-When [nesting animators](/develop/animation/nesting), the children nodes will
+When [nesting animators](/develop/animator/nesting), the children nodes will
 listen to their parent nodes so there is not management needed for them, it would
 be automatically handled by the animation tools.
 
@@ -318,7 +318,7 @@ something like this can be done:
 
 ```tsx
 import React, { FC } from 'react';
-import { AnimatorGeneralProvider, AnimatorGeneralProviderSettings } from '@arwes/animation';
+import { AnimatorGeneralProvider, AnimatorGeneralProviderSettings } from '@arwes/animator';
 
 const animatorGeneralSettings: AnimatorGeneralProviderSettings = {
   duration: { enter: 200, exit: 100 }
@@ -351,4 +351,4 @@ You can see more at [anime - suspend on visibility change](https://animejs.com/d
 
 ----
 
-You can see and play with more examples in the [playground](https://playground.arwes.dev/animation/withAnimator/basic).
+You can see and play with more examples in the [playground](https://playground.arwes.dev/animator/withAnimator/basic).

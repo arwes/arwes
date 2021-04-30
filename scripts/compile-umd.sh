@@ -32,7 +32,7 @@ logInfo "Compiling Arwes packages for UMD."
 
 build "tools"
 build "design"
-build "animation"
+build "animator"
 build "sounds"
 build "core"
 build "arwes"

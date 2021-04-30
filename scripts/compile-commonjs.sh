@@ -22,7 +22,7 @@ log "Compiling Arwes packages for CommonJS."
 
 build "tools"
 build "design"
-build "animation"
+build "animator"
 build "sounds"
 build "core"
 build "arwes"
