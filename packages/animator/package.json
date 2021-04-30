@@ -1,5 +1,5 @@
 {
-  "name": "@arwes/animation",
+  "name": "@arwes/animator",
   "version": "1.0.0-alpha.19",
   "publishConfig": {
     "access": "public"
@@ -28,7 +28,7 @@
     "dist"
   ],
   "main": "lib/index.js",
-  "unpkg": "dist/animation.min.js",
+  "unpkg": "dist/animator.min.js",
   "peerDependencies": {
     "prop-types": "*",
     "react": "17.x"
