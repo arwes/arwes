@@ -9,13 +9,9 @@ import {
 } from 'react';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
-import {
-  ENTERING,
-  EXITING,
-  useAnimator
-} from '@arwes/animator';
+import { ENTERING, EXITING, useAnimator } from '@arwes/animator';
 
-import { NoInfer } from '../types';
+import { NoInfer } from '../utils/types';
 
 interface AnimatedSettingsTransitionFunctionParams {
   targets: anime.AnimeAnimParams['targets']

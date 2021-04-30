@@ -1,6 +1,5 @@
 import anime from 'animejs';
-
-import { AnimatedSettingsTransitionFunctionParams } from '../Animated';
+import { AnimatedSettingsTransitionFunctionParams } from '@arwes/animated';
 
 const transitionAppear = (
   params: AnimatedSettingsTransitionFunctionParams

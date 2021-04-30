@@ -35,6 +35,17 @@ const playgroundConfigs = [
     ]
   },
   {
+    name: 'animated',
+    components: [
+      {
+        name: 'Animated',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/animated/src/Animated/Animated.basic.sandbox.md').default }
+        ]
+      }
+    ]
+  },
+  {
     name: 'sounds',
     components: [
       {
