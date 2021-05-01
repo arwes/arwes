@@ -1,11 +1,12 @@
 import {
+  HTMLProps,
   CSSProperties,
   MutableRefObject,
+  ReactElement,
   createElement,
   useRef,
   useEffect,
-  useMemo,
-  ReactElement
+  useMemo
 } from 'react';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
@@ -26,22 +27,22 @@ type AnimatedSettingsTransitionTypes = AnimatedSettingsTransitionFunction | anim
 
 type AnimatedSettingsTransition = AnimatedSettingsTransitionTypes | AnimatedSettingsTransitionTypes[];
 
-interface AnimatedSettings {
-  initialAttributes?: { [name: string]: any }
+interface AnimatedSettings <P = HTMLProps<HTMLElement>> {
+  initialAttributes?: P
   initialStyles?: CSSProperties
   entering?: AnimatedSettingsTransition
   exiting?: AnimatedSettingsTransition
 }
 
-interface AnimatedProps <E> {
+interface AnimatedProps <E = HTMLElement, P = HTMLProps<HTMLElement>> {
   as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
-  animated?: AnimatedSettings
+  animated?: AnimatedSettings<P>
   className?: string
   style?: CSSProperties
   rootRef?: MutableRefObject<E | null> | ((node: E) => void)
 }
 
-const Animated = <E, T> (props: AnimatedProps<E> & NoInfer<T>): ReactElement => {
+const Animated = <E = HTMLDivElement, P = HTMLProps<HTMLDivElement>> (props: AnimatedProps<E, P> & NoInfer<P>): ReactElement => {
   const {
     as: asProvided,
     animated,
