@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import React, { HTMLProps, SVGProps } from 'react';
+import React, { createRef, HTMLProps, SVGProps } from 'react';
 import { render, cleanup } from '@testing-library/react';
 import { Animator } from '@arwes/animator';
 
@@ -50,7 +50,38 @@ test('Should render custom SVG element content', () => {
   expect(container.innerHTML).toBe('<svg><path d="M0,0">Hello!</path></svg>');
 });
 
-test.todo('Should get HTML/SVG element reference with "rootRef" prop');
+test('Should get HTML/SVG element reference with "rootRef" ref prop', () => {
+  const rootRef = createRef<HTMLInputElement | null>();
+  const { container } = render(
+    <Animator>
+      <svg>
+        <Animated<HTMLInputElement, HTMLProps<HTMLInputElement>>
+          as='path'
+          rootRef={rootRef}
+        />
+      </svg>
+    </Animator>
+  );
+  expect(container.querySelector('path')).toBe(rootRef.current);
+});
+
+test('Should get HTML/SVG element reference with "rootRef" function prop', () => {
+  let rootElement: SVGPathElement | null = null;
+  const rootRef = (node: SVGPathElement): void => {
+    rootElement = node;
+  };
+  const { container } = render(
+    <Animator>
+      <svg>
+        <Animated<SVGPathElement, SVGProps<SVGPathElement>>
+          as='path'
+          rootRef={rootRef}
+        />
+      </svg>
+    </Animator>
+  );
+  expect(container.querySelector('path')).toBe(rootElement);
+});
 
 test('Should throw error if no parent <Animator/> is found', () => {
   const consoleError = jest.spyOn(console, 'error').mockImplementation();

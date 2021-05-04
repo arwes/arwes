@@ -6,7 +6,8 @@ import {
   createElement,
   useRef,
   useEffect,
-  useMemo
+  useMemo,
+  useCallback
 } from 'react';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
@@ -34,7 +35,7 @@ interface AnimatedSettings <P = HTMLProps<HTMLElement>> {
   exiting?: AnimatedSettingsTransition
 }
 
-interface AnimatedProps <E = HTMLElement, P = HTMLProps<HTMLElement>> {
+interface AnimatedProps <E extends HTMLElement | SVGElement = HTMLElement, P = HTMLProps<HTMLElement>> {
   as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
   animated?: AnimatedSettings<P>
   className?: string
@@ -42,20 +43,30 @@ interface AnimatedProps <E = HTMLElement, P = HTMLProps<HTMLElement>> {
   rootRef?: MutableRefObject<E | null> | ((node: E) => void)
 }
 
-const Animated = <E = HTMLDivElement, P = HTMLProps<HTMLDivElement>> (props: AnimatedProps<E, P> & NoInfer<P>): ReactElement => {
+const Animated = <E extends HTMLElement | SVGElement = HTMLDivElement, P = HTMLProps<HTMLDivElement>> (props: AnimatedProps<E, P> & NoInfer<P>): ReactElement => {
   const {
     as: asProvided,
     animated,
     className,
     style,
-    rootRef: externalRef, // TODO: Use external ref.
+    rootRef: externalRef,
     ...otherProps
   } = props;
 
   const as = useMemo(() => asProvided || 'div', []);
 
-  // TODO: Add external root ref.
-  const rootRef = useRef<HTMLElement>(null);
+  const internalRef = useRef<E | null>(null);
+
+  const rootRef = useCallback((node: E) => {
+    internalRef.current = node;
+
+    if (typeof externalRef === 'function') {
+      externalRef(node);
+    }
+    else if (externalRef) {
+      externalRef.current = node;
+    }
+  }, []);
 
   const animator = useAnimator();
 
@@ -69,7 +80,7 @@ const Animated = <E = HTMLDivElement, P = HTMLProps<HTMLDivElement>> (props: Ani
 
   useEffect(() => {
     return () => {
-      anime.remove(rootRef.current as HTMLElement);
+      anime.remove(internalRef.current);
     };
   }, []);
 
@@ -82,7 +93,7 @@ const Animated = <E = HTMLDivElement, P = HTMLProps<HTMLDivElement>> (props: Ani
       case ENTERING: {
         if (animated.entering) {
           const animationParams = {
-            targets: rootRef.current,
+            targets: internalRef.current,
             duration: animator.duration.enter
           };
 
@@ -99,7 +110,7 @@ const Animated = <E = HTMLDivElement, P = HTMLProps<HTMLDivElement>> (props: Ani
               anime({
                 easing: 'easeOutSine',
                 ...animation,
-                targets: rootRef.current,
+                targets: internalRef.current,
                 duration: animator.duration.enter
               });
             }
@@ -111,7 +122,7 @@ const Animated = <E = HTMLDivElement, P = HTMLProps<HTMLDivElement>> (props: Ani
       case EXITING: {
         if (animated.exiting) {
           const animationParams = {
-            targets: rootRef.current,
+            targets: internalRef.current,
             duration: animator.duration.exit
           };
 
@@ -128,7 +139,7 @@ const Animated = <E = HTMLDivElement, P = HTMLProps<HTMLDivElement>> (props: Ani
               anime({
                 easing: 'easeOutSine',
                 ...animation,
-                targets: rootRef.current,
+                targets: internalRef.current,
                 duration: animator.duration.exit
               });
             }
