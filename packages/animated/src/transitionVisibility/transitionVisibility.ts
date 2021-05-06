@@ -1,11 +1,11 @@
 import anime from 'animejs';
 
-import { AnimatedSettingsTransitionFunction, AnimatedSettings } from '../Animated';
+import { AnimatedSettingsTransitionFunction, AnimatedSettings } from '../constants';
 
 const transitionVisibilityIn: AnimatedSettingsTransitionFunction = params => {
   const { targets, duration, delay = 0 } = params;
 
-  return anime
+  anime
     .timeline({
       targets,
       easing: 'easeOutSine',
@@ -19,7 +19,7 @@ const transitionVisibilityIn: AnimatedSettingsTransitionFunction = params => {
 const transitionVisibilityOut: AnimatedSettingsTransitionFunction = params => {
   const { targets, duration, delay = 0 } = params;
 
-  return anime
+  anime
     .timeline({
       targets,
       easing: 'easeOutSine',

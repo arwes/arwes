@@ -7,7 +7,9 @@ import anime from 'animejs';
 
 import { makeJestMoveTimeTo } from '../../test-utils/makeJestMoveTimeTo';
 import { ActJestMoveTimeTo, makeActJestMoveTimeTo } from '../../test-utils/makeActJestMoveTimeTo';
-import { AnimatedSettingsTransitionFunction, Animated } from './Animated.component';
+
+import { AnimatedSettingsTransitionFunction } from '../constants';
+import { Animated } from './Animated.component';
 
 jest.useFakeTimers();
 jest.mock('animejs');
