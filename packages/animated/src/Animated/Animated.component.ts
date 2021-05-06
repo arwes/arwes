@@ -13,27 +13,9 @@ import PropTypes from 'prop-types';
 import anime from 'animejs';
 import { ENTERING, EXITING, useAnimator } from '@arwes/animator';
 
+import { AnimatedSettings, AnimatedSettingsTransitionTypes } from '../constants';
 import { NoInfer } from '../utils/types';
-
-interface AnimatedSettingsTransitionFunctionParams {
-  targets: anime.AnimeAnimParams['targets']
-  duration: number
-  delay?: number
-}
-
-type AnimatedSettingsTransitionFunction = (params: AnimatedSettingsTransitionFunctionParams) => void;
-
-// TODO: Use a stronger typing for anime parameters instead of "anime.AnimeParams".
-type AnimatedSettingsTransitionTypes = AnimatedSettingsTransitionFunction | anime.AnimeParams;
-
-type AnimatedSettingsTransition = AnimatedSettingsTransitionTypes | AnimatedSettingsTransitionTypes[];
-
-interface AnimatedSettings <P = HTMLProps<HTMLElement>> {
-  initialAttributes?: P
-  initialStyles?: CSSProperties
-  entering?: AnimatedSettingsTransition
-  exiting?: AnimatedSettingsTransition
-}
+import { formatAnimatedCSSPropsShorthands } from './formatAnimatedCSSPropsShorthands';
 
 interface AnimatedProps <E extends HTMLElement | SVGElement = HTMLElement, P = HTMLProps<HTMLElement>> {
   as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
@@ -75,7 +57,7 @@ const Animated = <E extends HTMLElement | SVGElement = HTMLDivElement, P = HTMLP
   }
 
   const { animate } = animator || {};
-  const dynamicStyles = animate ? animated?.initialStyles : null;
+  const dynamicStyles = animate ? formatAnimatedCSSPropsShorthands(animated?.initialStyles) : null;
   const initialAttributes = animate ? animated?.initialAttributes : null;
 
   useEffect(() => {
@@ -194,11 +176,4 @@ Animated.defaultProps = {
   as: 'div'
 };
 
-export {
-  AnimatedSettingsTransitionFunctionParams,
-  AnimatedSettingsTransitionFunction,
-  AnimatedSettingsTransition,
-  AnimatedSettings,
-  AnimatedProps,
-  Animated
-};
+export { AnimatedProps, Animated };
