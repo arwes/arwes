@@ -53,6 +53,16 @@
         "ideas",
         "review"
       ]
+    },
+    {
+      "login": "amir-arad",
+      "name": "Amir Arad",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6019373?v=4",
+      "profile": "https://github.com/amir-arad",
+      "contributions": [
+        "bug",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5
