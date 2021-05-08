@@ -1,10 +1,8 @@
-import { FC } from 'react';
-import { WithAnimatorOutputProps, withAnimator } from '@arwes/animator';
+import { Table as Component, TableProps } from './Table.component';
 
-import { TableProps, Table as Component } from './Table.component';
 import { animator } from './Table.animator';
+import { withAnimator } from '@arwes/animator';
 
-// TODO: Fix props or HOC to properly use nested component props with withAnimator.
-const Table: FC<TableProps & WithAnimatorOutputProps> = withAnimator(animator)(Component as any);
+const Table = withAnimator(animator)(Component);
 
 export { TableProps, Table };

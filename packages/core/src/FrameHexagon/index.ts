@@ -1,10 +1,7 @@
-import { FC } from 'react';
-import { WithAnimatorOutputProps, withAnimator } from '@arwes/animator';
+import { FrameHexagon as Component, FrameHexagonProps } from './FrameHexagon.component';
 
-import { FrameHexagonProps, FrameHexagon as Component } from './FrameHexagon.component';
+import { withAnimator } from '@arwes/animator';
 
-// TODO: withAnimator does not support a functional React component declared
-// in "function Component () {}" notation with "defaultProps".
-const FrameHexagon: FC<FrameHexagonProps<HTMLDivElement> & WithAnimatorOutputProps> = withAnimator()(Component as any);
+const FrameHexagon = withAnimator()(Component);
 
 export { FrameHexagonProps, FrameHexagon };

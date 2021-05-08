@@ -1,10 +1,7 @@
-import { FC } from 'react';
-import { WithAnimatorOutputProps, withAnimator } from '@arwes/animator';
+import { FrameBox as Component, FrameBoxProps } from './FrameBox.component';
 
-import { FrameBoxProps, FrameBox as Component } from './FrameBox.component';
+import { withAnimator } from '@arwes/animator';
 
-// TODO: withAnimator does not support a functional React component declared
-// in "function Component () {}" notation with "defaultProps".
-const FrameBox: FC<FrameBoxProps<HTMLDivElement> & WithAnimatorOutputProps> = withAnimator()(Component as any);
+const FrameBox = withAnimator()(Component);
 
 export { FrameBoxProps, FrameBox };

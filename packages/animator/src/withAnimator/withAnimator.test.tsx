@@ -1,9 +1,9 @@
 /* eslint-env jest */
 
-import React, { createRef, FC, ReactNode, useEffect } from 'react';
-import { render, cleanup, act } from '@testing-library/react';
+import { AnimatorClassSettings, AnimatorRef, ENTERED, ENTERING, EXITED } from '../constants';
+import React, { FC, ReactNode, createRef, useEffect } from 'react';
+import { act, cleanup, render } from '@testing-library/react';
 
-import { EXITED, ENTERED, ENTERING, AnimatorRef, AnimatorClassSettings } from '../constants';
 import { Animator } from '../Animator';
 import { withAnimator } from './withAnimator';
 
@@ -48,7 +48,7 @@ test('Should add <Animator/> wrapper and provide "animator" settings to componen
         animator = props.animator;
         return null;
       };
-      const ExampleNode = withAnimator<typeof ExampleComponent>(classSettings)(ExampleComponent);
+      const ExampleNode = withAnimator(classSettings)<typeof ExampleComponent>(ExampleComponent);
       render(<ExampleNode animator={instanceSettings} />);
       expect(animator.animate).toBe(false);
       expect(animator.flow.value).toBe(ENTERED);
