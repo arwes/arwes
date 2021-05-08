@@ -66,7 +66,7 @@
     "test-watch": "jest --watch",
     "test-coverage": "jest --coverage",
     "test-list": "jest --listTests",
-    "ci": "npm run bootstrap && npm run compile-commonjs && npm run lint && npm run test-coverage",
+    "ci": "sh ./scripts/ci.sh",
     "release": "npm run bootstrap && npm run compile && npm run lint && npm run test && lerna publish",
     "changelog": "auto-changelog --commit-limit false --template ./website/src/templates/changelog.hbs --output ./website/src/pages/project/changelog.mdx",
     "contributors-add": "all-contributors add",
