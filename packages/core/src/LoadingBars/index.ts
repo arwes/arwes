@@ -1,9 +1,8 @@
-import { FC } from 'react';
-import { WithAnimatorOutputProps, withAnimator } from '@arwes/animator';
+import { LoadingBars as Component, LoadingBarsProps } from './LoadingBars.component';
 
-import { LoadingBarsProps, LoadingBars as Component } from './LoadingBars.component';
 import { animator } from './LoadingBars.animator';
+import { withAnimator } from '@arwes/animator';
 
-const LoadingBars: FC<LoadingBarsProps & WithAnimatorOutputProps> = withAnimator(animator)(Component);
+const LoadingBars = withAnimator(animator)(Component);
 
 export { LoadingBarsProps, LoadingBars };

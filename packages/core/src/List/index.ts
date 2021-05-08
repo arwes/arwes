@@ -1,9 +1,8 @@
-import { FC } from 'react';
-import { WithAnimatorOutputProps, withAnimator } from '@arwes/animator';
+import { List as Component, ListProps } from './List.component';
 
-import { ListProps, List as Component } from './List.component';
 import { animator } from './List.animator';
+import { withAnimator } from '@arwes/animator';
 
-const List: FC<ListProps & WithAnimatorOutputProps> = withAnimator(animator)(Component);
+const List = withAnimator(animator)(Component);
 
 export { ListProps, List };

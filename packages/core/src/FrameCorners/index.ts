@@ -1,10 +1,7 @@
-import { FC } from 'react';
-import { WithAnimatorOutputProps, withAnimator } from '@arwes/animator';
+import { FrameCorners as Component, FrameCornersProps } from './FrameCorners.component';
 
-import { FrameCornersProps, FrameCorners as Component } from './FrameCorners.component';
+import { withAnimator } from '@arwes/animator';
 
-// TODO: withAnimator does not support a functional React component declared
-// in "function Component () {}" notation with "defaultProps".
-const FrameCorners: FC<FrameCornersProps<HTMLDivElement> & WithAnimatorOutputProps> = withAnimator()(Component as any);
+const FrameCorners = withAnimator()(Component);
 
 export { FrameCornersProps, FrameCorners };
