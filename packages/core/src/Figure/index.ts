@@ -1,10 +1,8 @@
-import { FC } from 'react';
-import { WithAnimatorOutputProps, withAnimator } from '@arwes/animator';
+import { Figure as Component, FigureProps } from './Figure.component';
 
-import { FigureProps, Figure as Component } from './Figure.component';
 import { animator } from './Figure.animator';
+import { withAnimator } from '@arwes/animator';
 
-// TODO: Fix props or HOC to properly use nested component props with withAnimator.
-const Figure: FC<FigureProps & WithAnimatorOutputProps> = withAnimator(animator)(Component as any);
+const Figure = withAnimator(animator)(Component);
 
 export { FigureProps, Figure };

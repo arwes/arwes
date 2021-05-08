@@ -1,9 +1,8 @@
-import { FC } from 'react';
-import { WithAnimatorOutputProps, withAnimator } from '@arwes/animator';
+import { Text as Component, TextProps } from './Text.component';
 
-import { TextProps, Text as Component } from './Text.component';
 import { animator } from './Text.animator';
+import { withAnimator } from '@arwes/animator';
 
-const Text: FC<TextProps & WithAnimatorOutputProps> = withAnimator(animator)(Component);
+const Text = withAnimator(animator)(Component);
 
 export { TextProps, Text };

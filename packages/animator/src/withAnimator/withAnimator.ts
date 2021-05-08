@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
-import { ComponentType, FC, createElement, forwardRef, Ref, ForwardRefExoticComponent, PropsWithoutRef, RefAttributes } from 'react';
-
 import { AnimatorClassSettings, AnimatorInstanceSettings, AnimatorRef } from '../constants';
-import { mergeClassAndInstanceAnimatorSettings } from '../utils/mergeClassAndInstanceAnimatorSettings';
+import { ComponentType, FC, ForwardRefExoticComponent, PropsWithoutRef, Ref, RefAttributes, createElement, forwardRef } from 'react';
+
 import { Animator } from '../Animator';
+import { mergeClassAndInstanceAnimatorSettings } from '../utils/mergeClassAndInstanceAnimatorSettings';
 import { useAnimator } from '../useAnimator';
 
 interface WithAnimatorInputProps {
@@ -15,8 +15,8 @@ interface WithAnimatorOutputProps {
   animator?: AnimatorInstanceSettings
 }
 
-function withAnimator<T extends ComponentType<P>, P extends WithAnimatorInputProps = WithAnimatorInputProps> (classAnimator?: AnimatorClassSettings) {
-  const withAnimatorWrapper = (InputComponent: T) => {
+function withAnimator (classAnimator?: AnimatorClassSettings) {
+  const withAnimatorWrapper = <T extends ComponentType<P>, P extends WithAnimatorInputProps = React.ComponentProps<T>>(InputComponent: T) => {
     interface AnimatorMiddlewareProps {
       InputComponent: T
       forwardedRef: Ref<T>
