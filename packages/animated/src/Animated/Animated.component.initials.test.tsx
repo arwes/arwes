@@ -26,6 +26,32 @@ test('Should add "animated.initialAttributes" and "animated.initialStyles" if An
   expect(element.style.color).toBe('red');
 });
 
+test('Should add "animated[].initialAttributes" and "animated[].initialStyles" if Animator is animated with array of object settings', () => {
+  const { container } = render(
+    <Animator>
+      <Animated<SVGPathElement, SVGProps<SVGPathElement>>
+        animated={[
+          {
+            initialAttributes: { fill: 'blue' },
+            initialStyles: { color: 'red' }
+          },
+          {
+            initialAttributes: { stroke: 'green' },
+            initialStyles: { background: 'yellow' }
+          }
+        ]}
+      >
+        Hello!
+      </Animated>
+    </Animator>
+  );
+  const element = container.firstChild as SVGPathElement;
+  expect(element.getAttribute('fill')).toBe('blue');
+  expect(element.getAttribute('stroke')).toBe('green');
+  expect(element.style.color).toBe('red');
+  expect(element.style.background).toBe('yellow');
+});
+
 test('Should not add "animated.initialAttributes" nor "animated.initialStyles" if Animator is not animated', () => {
   const { container } = render(
     <Animator animator={{ animate: false }}>

@@ -1,5 +1,6 @@
 import {
   HTMLProps,
+  SVGProps,
   CSSProperties,
   MutableRefObject,
   ReactElement,
@@ -13,19 +14,22 @@ import PropTypes from 'prop-types';
 import anime from 'animejs';
 import { ENTERING, EXITING, useAnimator } from '@arwes/animator';
 
-import { AnimatedSettings, AnimatedSettingsTransitionTypes } from '../constants';
+import { AnimatedSettings } from '../constants';
 import { NoInfer } from '../utils/types';
 import { formatAnimatedCSSPropsShorthands } from './formatAnimatedCSSPropsShorthands';
 
 interface AnimatedProps <E extends HTMLElement | SVGElement = HTMLElement, P = HTMLProps<HTMLElement>> {
   as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
-  animated?: AnimatedSettings<P>
+  animated?: AnimatedSettings<P> | Array<AnimatedSettings<P>>
   className?: string
   style?: CSSProperties
   rootRef?: MutableRefObject<E | null> | ((node: E) => void)
 }
 
-const Animated = <E extends HTMLElement | SVGElement = HTMLDivElement, P = HTMLProps<HTMLDivElement>> (props: AnimatedProps<E, P> & NoInfer<P>): ReactElement => {
+const Animated = <
+  E extends HTMLElement | SVGElement = HTMLDivElement,
+  P extends HTMLProps<HTMLElement> | SVGProps<SVGElement> = HTMLProps<HTMLDivElement>
+> (props: AnimatedProps<E, P> & NoInfer<P>): ReactElement => {
   const {
     as: asProvided,
     animated,
@@ -57,8 +61,9 @@ const Animated = <E extends HTMLElement | SVGElement = HTMLDivElement, P = HTMLP
   }
 
   const { animate } = animator || {};
-  const dynamicStyles = animate ? formatAnimatedCSSPropsShorthands(animated?.initialStyles) : null;
-  const initialAttributes = animate ? animated?.initialAttributes : null;
+
+  const animatedItemsReceived = Array.isArray(animated) ? animated : [animated];
+  const animatedItems = animatedItemsReceived.filter(Boolean) as Array<AnimatedSettings<P>>;
 
   useEffect(() => {
     return () => {
@@ -73,16 +78,13 @@ const Animated = <E extends HTMLElement | SVGElement = HTMLDivElement, P = HTMLP
 
     switch (animator.flow.value) {
       case ENTERING: {
-        if (animated.entering) {
-          const animationParams = {
-            targets: internalRef.current,
-            duration: animator.duration.enter
-          };
+        const animationParams = {
+          targets: internalRef.current,
+          duration: animator.duration.enter
+        };
 
-          const animations: AnimatedSettingsTransitionTypes[] =
-            Array.isArray(animated.entering)
-              ? animated.entering
-              : [animated.entering];
+        animatedItems.filter(item => item.entering).forEach(item => {
+          const animations = Array.isArray(item.entering) ? item.entering : [item.entering];
 
           animations.forEach(animation => {
             if (typeof animation === 'function') {
@@ -97,21 +99,19 @@ const Animated = <E extends HTMLElement | SVGElement = HTMLDivElement, P = HTMLP
               });
             }
           });
-        }
+        });
+
         break;
       }
 
       case EXITING: {
-        if (animated.exiting) {
-          const animationParams = {
-            targets: internalRef.current,
-            duration: animator.duration.exit
-          };
+        const animationParams = {
+          targets: internalRef.current,
+          duration: animator.duration.exit
+        };
 
-          const animations: AnimatedSettingsTransitionTypes[] =
-            Array.isArray(animated.exiting)
-              ? animated.exiting
-              : [animated.exiting];
+        animatedItems.filter(item => item.exiting).forEach(item => {
+          const animations = Array.isArray(item.exiting) ? item.exiting : [item.exiting];
 
           animations.forEach(animation => {
             if (typeof animation === 'function') {
@@ -126,11 +126,26 @@ const Animated = <E extends HTMLElement | SVGElement = HTMLDivElement, P = HTMLP
               });
             }
           });
-        }
+        });
+
         break;
       }
     }
   }, [animator?.flow]);
+
+  let initialAttributes: P | undefined;
+  if (animate) {
+    initialAttributes = animatedItems
+      .map(item => item?.initialAttributes)
+      .reduce((total: any, item) => ({ ...total, ...item }), {});
+  }
+
+  let dynamicStyles: CSSProperties | undefined;
+  if (animate) {
+    dynamicStyles = animatedItems
+      .map(item => formatAnimatedCSSPropsShorthands(item?.initialStyles))
+      .reduce((total, item) => ({ ...total, ...item }), {});
+  }
 
   return createElement(as, {
     ...otherProps,
@@ -144,32 +159,37 @@ const Animated = <E extends HTMLElement | SVGElement = HTMLDivElement, P = HTMLP
   });
 };
 
+const animatedSettingsPropType = PropTypes.shape({
+  initialAttributes: PropTypes.object,
+  initialStyles: PropTypes.object,
+  entering: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([
+        PropTypes.func,
+        PropTypes.object
+      ])
+    )
+  ]),
+  exiting: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([
+        PropTypes.func,
+        PropTypes.object
+      ])
+    )
+  ])
+});
+
 Animated.propTypes = {
   as: PropTypes.string.isRequired,
-  animated: PropTypes.shape({
-    initialAttributes: PropTypes.object,
-    initialStyles: PropTypes.object,
-    entering: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.object,
-      PropTypes.arrayOf(
-        PropTypes.oneOfType([
-          PropTypes.func,
-          PropTypes.object
-        ])
-      )
-    ]),
-    exiting: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.object,
-      PropTypes.arrayOf(
-        PropTypes.oneOfType([
-          PropTypes.func,
-          PropTypes.object
-        ])
-      )
-    ])
-  })
+  animated: PropTypes.oneOfType([
+    animatedSettingsPropType,
+    PropTypes.arrayOf(animatedSettingsPropType)
+  ])
 };
 
 Animated.defaultProps = {
