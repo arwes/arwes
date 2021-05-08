@@ -8,7 +8,7 @@ import anime from 'animejs';
 import { makeJestMoveTimeTo } from '../../test-utils/makeJestMoveTimeTo';
 import { ActJestMoveTimeTo, makeActJestMoveTimeTo } from '../../test-utils/makeActJestMoveTimeTo';
 
-import { AnimatedSettingsTransitionFunction } from '../constants';
+import { AnimatedSettings, AnimatedSettingsTransitionFunction } from '../constants';
 import { Animated } from './Animated.component';
 
 jest.useFakeTimers();
@@ -30,7 +30,7 @@ beforeEach(() => {
 
 afterEach(cleanup);
 
-describe('objects settings', () => {
+describe('Objects Settings', () => {
   test('Should transition "animated.entering" with object setting', () => {
     const Example: React.FC = () => {
       const [activate, setActivate] = React.useState(false);
@@ -99,9 +99,78 @@ describe('objects settings', () => {
       width: 913
     });
   });
+
+  test('Should run transitions on "animated" array of object transitions', () => {
+    const animated: AnimatedSettings[] = [
+      {
+        entering: { width: 200 },
+        exiting: { width: 20 }
+      },
+      {
+        entering: { height: 300 },
+        exiting: { height: 30 }
+      }
+    ];
+    const Example: React.FC = () => {
+      const [activate, setActivate] = React.useState(false);
+
+      React.useEffect(() => {
+        const t1 = setTimeout(() => setActivate(true), 1000);
+        const t2 = setTimeout(() => setActivate(false), 2000);
+        return () => {
+          clearTimeout(t1);
+          clearTimeout(t2);
+        };
+      }, []);
+
+      return (
+        <Animator animator={{ activate, duration: { enter: 80, exit: 90 } }}>
+          <Animated animated={animated} />
+        </Animator>
+      );
+    };
+    const { container } = render(<Example />);
+    const element = container.firstChild as HTMLDivElement;
+
+    actJestMoveTimeTo(999);
+    expect(anime).not.toHaveBeenCalled();
+
+    actJestMoveTimeTo(1001);
+    expect(anime).toHaveBeenCalledTimes(2);
+    expect(anime).toHaveBeenNthCalledWith(1, {
+      targets: element,
+      easing: 'easeOutSine',
+      duration: 80,
+      width: 200
+    });
+    expect(anime).toHaveBeenNthCalledWith(2, {
+      targets: element,
+      easing: 'easeOutSine',
+      duration: 80,
+      height: 300
+    });
+
+    actJestMoveTimeTo(1999);
+    expect(anime).toHaveBeenCalledTimes(2);
+
+    actJestMoveTimeTo(2001);
+    expect(anime).toHaveBeenCalledTimes(4);
+    expect(anime).toHaveBeenNthCalledWith(3, {
+      targets: element,
+      easing: 'easeOutSine',
+      duration: 90,
+      width: 20
+    });
+    expect(anime).toHaveBeenNthCalledWith(4, {
+      targets: element,
+      easing: 'easeOutSine',
+      duration: 90,
+      height: 30
+    });
+  });
 });
 
-describe('functions settings', () => {
+describe('Functions Settings', () => {
   test('Should transition "animated.entering" with function setting', () => {
     const entering: AnimatedSettingsTransitionFunction = jest.fn();
     const Example: React.FC = () => {
@@ -161,6 +230,104 @@ describe('functions settings', () => {
       duration: 814
     });
   });
+
+  test('Should run transitions on "animated" array of function transitions', () => {
+    const animated1Entering = jest.fn();
+    const animated1Exiting = jest.fn();
+    const animated2Entering = jest.fn();
+    const animated2Exiting = jest.fn();
+    const animated: AnimatedSettings[] = [
+      {
+        entering: animated1Entering,
+        exiting: animated1Exiting
+      },
+      {
+        entering: animated2Entering,
+        exiting: animated2Exiting
+      }
+    ];
+    const Example: React.FC = () => {
+      const [activate, setActivate] = React.useState(false);
+
+      React.useEffect(() => {
+        const t1 = setTimeout(() => setActivate(true), 1000);
+        const t2 = setTimeout(() => setActivate(false), 2000);
+        return () => {
+          clearTimeout(t1);
+          clearTimeout(t2);
+        };
+      }, []);
+
+      return (
+        <Animator animator={{ activate, duration: { enter: 80, exit: 90 } }}>
+          <Animated animated={animated} />
+        </Animator>
+      );
+    };
+    const { container } = render(<Example />);
+    const element = container.firstChild as HTMLDivElement;
+
+    actJestMoveTimeTo(999);
+    expect(animated1Entering).not.toHaveBeenCalled();
+    expect(animated1Exiting).not.toHaveBeenCalled();
+    expect(animated2Entering).not.toHaveBeenCalled();
+    expect(animated2Exiting).not.toHaveBeenCalled();
+
+    actJestMoveTimeTo(1001);
+    expect(animated1Entering).toHaveBeenCalledTimes(1);
+    expect(animated2Entering).toHaveBeenCalledTimes(1);
+    expect(animated1Entering).toHaveBeenCalledWith({
+      targets: element,
+      duration: 80
+    });
+    expect(animated2Entering).toHaveBeenCalledWith({
+      targets: element,
+      duration: 80
+    });
+    expect(animated1Exiting).not.toHaveBeenCalled();
+    expect(animated2Exiting).not.toHaveBeenCalled();
+
+    actJestMoveTimeTo(1999);
+    expect(animated1Entering).toHaveBeenCalledTimes(1);
+    expect(animated2Entering).toHaveBeenCalledTimes(1);
+    expect(animated1Exiting).not.toHaveBeenCalled();
+    expect(animated2Exiting).not.toHaveBeenCalled();
+
+    actJestMoveTimeTo(2001);
+    expect(animated1Entering).toHaveBeenCalledTimes(1);
+    expect(animated2Entering).toHaveBeenCalledTimes(1);
+    expect(animated1Exiting).toHaveBeenCalledTimes(1);
+    expect(animated2Exiting).toHaveBeenCalledTimes(1);
+    expect(animated1Exiting).toHaveBeenCalledWith({
+      targets: element,
+      duration: 90
+    });
+    expect(animated2Exiting).toHaveBeenCalledWith({
+      targets: element,
+      duration: 90
+    });
+  });
 });
 
-test.todo('Should transitions with "animated" object setting');
+test('Should not call "anime" if no settings are provided', () => {
+  const Example: React.FC = () => {
+    const [activate, setActivate] = React.useState(false);
+
+    React.useEffect(() => {
+      const timeout = setTimeout(() => setActivate(true), 1000);
+      return () => clearTimeout(timeout);
+    }, []);
+
+    return (
+      <Animator animator={{ activate }}>
+        <Animated />
+      </Animator>
+    );
+  };
+  render(<Example />);
+
+  actJestMoveTimeTo(1);
+  expect(anime).not.toHaveBeenCalled();
+  actJestMoveTimeTo(1001);
+  expect(anime).not.toHaveBeenCalled();
+});
