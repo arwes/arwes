@@ -1,5 +1,5 @@
 /* @jsx jsx */
-import { ReactElement } from 'react';
+import { FC } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
@@ -10,13 +10,14 @@ import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
 import { FRAME_POLYLINE, FRAME_POLYLINE_CUSTOM, FrameProps, Frame } from '../utils/Frame';
 
 type FRAME_BOX_ORIGIN = 'left' | 'right' | 'top' | 'bottom' | 'center';
+const FRAME_BOX_ORIGIN_VALUES: FRAME_BOX_ORIGIN[] = ['left', 'right', 'top', 'bottom', 'center'];
 
-interface FrameBoxProps <E> extends FrameProps<E> {
-  origins?: FRAME_BOX_ORIGIN[]
-  linesWidths?: number[]
+interface FrameBoxProps extends FrameProps {
+  origins?: FRAME_BOX_ORIGIN | FRAME_BOX_ORIGIN[]
+  linesWidths?: number | number[]
 }
 
-function FrameBox <E> (props: FrameBoxProps<E> & WithAnimatorInputProps): ReactElement {
+const FrameBox: FC<FrameBoxProps & WithAnimatorInputProps> = props => {
   const {
     animator,
     className,
@@ -88,12 +89,12 @@ function FrameBox <E> (props: FrameBoxProps<E> & WithAnimatorInputProps): ReactE
 
 FrameBox.propTypes = {
   origins: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string)
+    PropTypes.oneOf(FRAME_BOX_ORIGIN_VALUES),
+    PropTypes.arrayOf(PropTypes.oneOf(FRAME_BOX_ORIGIN_VALUES).isRequired)
   ]),
   linesWidths: PropTypes.oneOfType([
     PropTypes.number,
-    PropTypes.arrayOf(PropTypes.number)
+    PropTypes.arrayOf(PropTypes.number.isRequired)
   ])
 };
 
@@ -102,4 +103,9 @@ FrameBox.defaultProps = {
   linesWidths: 1
 };
 
-export { FrameBoxProps, FrameBox };
+export {
+  FRAME_BOX_ORIGIN,
+  FRAME_BOX_ORIGIN_VALUES,
+  FrameBoxProps,
+  FrameBox
+};

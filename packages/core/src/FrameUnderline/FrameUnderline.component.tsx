@@ -1,5 +1,5 @@
 /* @jsx jsx */
-import { ReactElement } from 'react';
+import { FC } from 'react';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animator';
@@ -7,12 +7,12 @@ import { WithAnimatorInputProps } from '@arwes/animator';
 import { FrameProps, Frame } from '../utils/Frame';
 import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
 
-interface FrameUnderlineProps <E> extends FrameProps<E> {
+interface FrameUnderlineProps extends FrameProps {
   lineWidth?: number
   squareSize?: number
 }
 
-function FrameUnderline <E> (props: FrameUnderlineProps<E> & WithAnimatorInputProps): ReactElement {
+const FrameUnderline: FC<FrameUnderlineProps & WithAnimatorInputProps> = props => {
   const { animator, className, lineWidth, squareSize, ...otherProps } = props;
   const { space, outline } = useTheme();
   const ss = squareSize as number;
@@ -48,7 +48,7 @@ function FrameUnderline <E> (props: FrameUnderlineProps<E> & WithAnimatorInputPr
       lineWidth={outline(lineWidth)}
     />
   );
-}
+};
 
 FrameUnderline.defaultProps = {
   lineWidth: 2,

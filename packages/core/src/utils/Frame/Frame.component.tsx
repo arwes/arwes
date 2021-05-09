@@ -13,10 +13,9 @@ import { CSSObject, jsx, useTheme } from '@emotion/react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import anime from 'animejs';
-import { AnimatedSettings, Animated } from '@arwes/animated';
+import { AnimatedSettings, Animated, transitionVisibility } from '@arwes/animated';
 
 import { NoInfer } from '../types';
-import { transitionAppear, transitionDisappear } from '../appearTransitions';
 
 type FRAME_DIMENSION = number | string;
 type FRAME_POINT = FRAME_DIMENSION[];
@@ -33,7 +32,7 @@ interface FRAME_EFFECTS {
   highlight: () => void
 }
 
-interface FrameProps <E> {
+interface FrameProps <E = HTMLDivElement> {
   as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
   shapes?: FRAME_POLYLINE[]
   polylines?: FRAME_POLYLINE_GENERIC[]
@@ -230,11 +229,7 @@ function Frame <E, P> (props: FrameProps<E> & NoInfer<P>): ReactElement {
           >
             <Animated<SVGGElement, SVGProps<SVGGElement>>
               as='g'
-              animated={{
-                initialStyles: { opacity: 0 },
-                entering: transitionAppear,
-                exiting: transitionDisappear
-              }}
+              animated={transitionVisibility as AnimatedSettings<SVGProps<SVGGElement>>}
             >
               {(shapes || []).map((shape, index) => (
                 <path

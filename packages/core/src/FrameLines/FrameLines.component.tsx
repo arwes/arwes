@@ -1,5 +1,5 @@
 /* @jsx jsx */
-import { ReactElement } from 'react';
+import { FC } from 'react';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animator';
@@ -7,7 +7,7 @@ import { WithAnimatorInputProps } from '@arwes/animator';
 import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
 import { FRAME_POLYLINE, FrameProps, Frame } from '../utils/Frame';
 
-interface FrameLinesProps <E> extends FrameProps<E> {
+interface FrameLinesProps extends FrameProps {
   largeLineWidth?: number
   smallLineWidth?: number
   smallLineLength?: number
@@ -15,7 +15,7 @@ interface FrameLinesProps <E> extends FrameProps<E> {
   hideBottomLines?: boolean
 }
 
-function FrameLines <E> (props: FrameLinesProps<E> & WithAnimatorInputProps): ReactElement {
+const FrameLines: FC<FrameLinesProps & WithAnimatorInputProps> = props => {
   const {
     animator,
     className,
@@ -97,7 +97,7 @@ function FrameLines <E> (props: FrameLinesProps<E> & WithAnimatorInputProps): Re
       ]}
     />
   );
-}
+};
 
 FrameLines.defaultProps = {
   largeLineWidth: 1,
