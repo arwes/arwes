@@ -7,12 +7,12 @@ import { WithAnimatorInputProps } from '@arwes/animator';
 
 import { expandCSSBoxProp } from '../utils/expandCSSBoxProp';
 import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
-import { FRAME_POLYLINE, FRAME_POLYLINE_CUSTOM, FrameProps, Frame } from '../utils/Frame';
+import { FRAME_SVG_POLYLINE, FRAME_SVG_POLYLINE_CUSTOM, FrameSVGProps, FrameSVG } from '../FrameSVG';
 
 type FRAME_BOX_ORIGIN = 'left' | 'right' | 'top' | 'bottom' | 'center';
 const FRAME_BOX_ORIGIN_VALUES: FRAME_BOX_ORIGIN[] = ['left', 'right', 'top', 'bottom', 'center'];
 
-interface FrameBoxProps extends FrameProps {
+interface FrameBoxProps extends FrameSVGProps {
   origins?: FRAME_BOX_ORIGIN | FRAME_BOX_ORIGIN[]
   linesWidths?: number | number[]
 }
@@ -35,14 +35,14 @@ const FrameBox: FC<FrameBoxProps & WithAnimatorInputProps> = props => {
   const originsList = expandCSSBoxProp(origins, 'center');
   const linesWidthsList = expandCSSBoxProp(linesWidths, 1).map(theme.outline);
 
-  const polylinesRaw: FRAME_POLYLINE[] = [
+  const polylinesRaw: FRAME_SVG_POLYLINE[] = [
     [[0, 0], ['100%', 0]], // top
     [['100%', 0], ['100%', '100%']], // right
     [['100%', '100%'], [0, '100%']], // bottom
     [[0, '100%'], [0, 0]] // left
   ];
 
-  type POLYLINES_FILTERED = FRAME_POLYLINE_CUSTOM | null;
+  type POLYLINES_FILTERED = FRAME_SVG_POLYLINE_CUSTOM | null;
 
   const polylinesFiltered: POLYLINES_FILTERED[] = polylinesRaw
     .map((polyline, index) => {
@@ -54,7 +54,7 @@ const FrameBox: FC<FrameBoxProps & WithAnimatorInputProps> = props => {
         return null;
       }
 
-      const polylineCustom: FRAME_POLYLINE_CUSTOM = {
+      const polylineCustom: FRAME_SVG_POLYLINE_CUSTOM = {
         polyline,
         lineWidth,
         css: { strokeLinecap: 'square' },
@@ -68,10 +68,10 @@ const FrameBox: FC<FrameBoxProps & WithAnimatorInputProps> = props => {
       return polylineCustom;
     });
 
-  const polylines = polylinesFiltered.filter(Boolean) as FRAME_POLYLINE_CUSTOM[];
+  const polylines = polylinesFiltered.filter(Boolean) as FRAME_SVG_POLYLINE_CUSTOM[];
 
   return (
-    <Frame
+    <FrameSVG
       {...otherProps}
       className={cx('arwes-frame-box', className)}
       shapes={[

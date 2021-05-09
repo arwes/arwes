@@ -15,27 +15,26 @@ import { cx } from '@emotion/css';
 import anime from 'animejs';
 import { AnimatedSettings, Animated, transitionVisibility } from '@arwes/animated';
 
-import { NoInfer } from '../types';
+import { NoInfer } from '../utils/types';
 
-type FRAME_DIMENSION = number | string;
-type FRAME_POINT = FRAME_DIMENSION[];
-type FRAME_POLYLINE = FRAME_POINT[];
-interface FRAME_POLYLINE_CUSTOM {
-  polyline: FRAME_POLYLINE
+type FRAME_SVG_DIMENSION = number | string;
+type FRAME_SVG_POINT = FRAME_SVG_DIMENSION[];
+type FRAME_SVG_POLYLINE = FRAME_SVG_POINT[];
+interface FRAME_SVG_POLYLINE_CUSTOM {
+  polyline: FRAME_SVG_POLYLINE
   lineWidth?: number
   animated?: AnimatedSettings
   css?: CSSObject
 }
-type FRAME_POLYLINE_GENERIC = FRAME_POLYLINE | FRAME_POLYLINE_CUSTOM;
-
-interface FRAME_EFFECTS {
+type FRAME_SVG_POLYLINE_GENERIC = FRAME_SVG_POLYLINE | FRAME_SVG_POLYLINE_CUSTOM;
+interface FRAME_SVG_EFFECTS {
   highlight: () => void
 }
 
-interface FrameProps <E = HTMLDivElement> {
+interface FrameSVGProps <E = HTMLDivElement> {
   as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
-  shapes?: FRAME_POLYLINE[]
-  polylines?: FRAME_POLYLINE_GENERIC[]
+  shapes?: FRAME_SVG_POLYLINE[]
+  polylines?: FRAME_SVG_POLYLINE_GENERIC[]
   lineWidth?: number
   palette?: string
   hideShapes?: boolean
@@ -44,11 +43,11 @@ interface FrameProps <E = HTMLDivElement> {
   disabled?: boolean
   className?: string
   rootRef?: MutableRefObject<E | null> | ((node: E) => void)
-  effectsRef?: MutableRefObject<FRAME_EFFECTS | null> | ((effects: FRAME_EFFECTS) => void)
+  effectsRef?: MutableRefObject<FRAME_SVG_EFFECTS | null> | ((effects: FRAME_SVG_EFFECTS) => void)
   children?: ReactNode
 }
 
-function Frame <E, P> (props: FrameProps<E> & NoInfer<P>): ReactElement {
+function FrameSVG <E, P> (props: FrameSVGProps<E> & NoInfer<P>): ReactElement {
   const {
     as: asProvided,
     shapes,
@@ -79,7 +78,7 @@ function Frame <E, P> (props: FrameProps<E> & NoInfer<P>): ReactElement {
   const colorHover = colorPalette.light2;
 
   // TODO: Modularize functionalities.
-  const formatPoint = (point: FRAME_POINT): string => {
+  const formatPoint = (point: FRAME_SVG_POINT): string => {
     const width = size.width - (blurPadding * 2);
     const height = size.height - (blurPadding * 2);
 
@@ -114,7 +113,7 @@ function Frame <E, P> (props: FrameProps<E> & NoInfer<P>): ReactElement {
       })
       .join(',');
   };
-  const formatPolyline = (polyline: FRAME_POLYLINE): string => {
+  const formatPolyline = (polyline: FRAME_SVG_POLYLINE): string => {
     return polyline
       .map(formatPoint)
       .map((point, index) => (index === 0 ? 'M' : 'L') + point)
@@ -290,7 +289,7 @@ function Frame <E, P> (props: FrameProps<E> & NoInfer<P>): ReactElement {
   );
 };
 
-Frame.propTypes = {
+FrameSVG.propTypes = {
   as: PropTypes.string.isRequired,
   shapes: PropTypes.array,
   polylines: PropTypes.array,
@@ -303,7 +302,7 @@ Frame.propTypes = {
   rootRef: PropTypes.any
 };
 
-Frame.defaultProps = {
+FrameSVG.defaultProps = {
   as: 'div',
   shapes: [],
   polylines: [],
@@ -312,12 +311,12 @@ Frame.defaultProps = {
 };
 
 export {
-  FRAME_DIMENSION,
-  FRAME_POINT,
-  FRAME_POLYLINE,
-  FRAME_POLYLINE_CUSTOM,
-  FRAME_POLYLINE_GENERIC,
-  FRAME_EFFECTS,
-  FrameProps,
-  Frame
+  FRAME_SVG_DIMENSION,
+  FRAME_SVG_POINT,
+  FRAME_SVG_POLYLINE,
+  FRAME_SVG_POLYLINE_CUSTOM,
+  FRAME_SVG_POLYLINE_GENERIC,
+  FRAME_SVG_EFFECTS,
+  FrameSVGProps,
+  FrameSVG
 };
