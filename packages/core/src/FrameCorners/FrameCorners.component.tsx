@@ -5,9 +5,9 @@ import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animator';
 
 import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
-import { FRAME_POLYLINE_GENERIC, FrameProps, Frame } from '../utils/Frame';
+import { FRAME_SVG_POLYLINE_GENERIC, FrameSVGProps, FrameSVG } from '../FrameSVG';
 
-interface FrameCornersProps extends FrameProps {
+interface FrameCornersProps extends FrameSVGProps {
   cornerWidth?: number
   cornerLength?: number
   showContentLines?: boolean
@@ -34,7 +34,7 @@ const FrameCorners: FC<FrameCornersProps & WithAnimatorInputProps> = props => {
   const cw = theme.outline(cornerWidth);
   const cl = cornerLength as number;
 
-  let contentPolylines: FRAME_POLYLINE_GENERIC[] = [];
+  let contentPolylines: FRAME_SVG_POLYLINE_GENERIC[] = [];
 
   if (showContentLines) {
     const yAnimated = {
@@ -72,7 +72,7 @@ const FrameCorners: FC<FrameCornersProps & WithAnimatorInputProps> = props => {
     }));
   }
 
-  const cornerPolylines: FRAME_POLYLINE_GENERIC[] = [
+  const cornerPolylines: FRAME_SVG_POLYLINE_GENERIC[] = [
     [[0, 0], [0, cl]],
     [[0, 0], [cl, 0]],
     [['100%', 0], [`100% - ${cl}`, 0]],
@@ -87,7 +87,7 @@ const FrameCorners: FC<FrameCornersProps & WithAnimatorInputProps> = props => {
   }));
 
   return (
-    <Frame
+    <FrameSVG
       {...otherProps}
       className={cx('arwes-frame-corners', className)}
       shapes={[

@@ -4,10 +4,10 @@ import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animator';
 
-import { FrameProps, Frame } from '../utils/Frame';
+import { FrameSVGProps, FrameSVG } from '../FrameSVG';
 import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
 
-interface FrameUnderlineProps extends FrameProps {
+interface FrameUnderlineProps extends FrameSVGProps {
   lineWidth?: number
   squareSize?: number
 }
@@ -23,7 +23,7 @@ const FrameUnderline: FC<FrameUnderlineProps & WithAnimatorInputProps> = props =
   });
 
   return (
-    <Frame
+    <FrameSVG
       {...otherProps}
       className={cx('arwes-frame-underline', className)}
       css={{

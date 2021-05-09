@@ -21,7 +21,7 @@ import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorOutputProps, AnimatorFlow } from '@arwes/animator';
 import { useBleeps } from '@arwes/sounds';
 
-import { FRAME_EFFECTS } from '../utils/Frame';
+import { FRAME_SVG_EFFECTS } from '../FrameSVG';
 import { FrameUnderline } from '../FrameUnderline';
 import { generateStyles } from './Button.styles';
 
@@ -58,7 +58,7 @@ const Button: FC<ButtonProps & WithAnimatorOutputProps> = props => {
   const bleeps = useBleeps();
   const styles = useMemo(() => generateStyles(theme, { palette, disabled }), [theme, palette, disabled]);
 
-  const effectsRef = useRef<FRAME_EFFECTS | null>(null);
+  const effectsRef = useRef<FRAME_SVG_EFFECTS | null>(null);
 
   // A copy of the <FrameComponent/> animator flow for the <Button/> functionalities.
   const [flow, setFlow] = useState<AnimatorFlow | null>(null);

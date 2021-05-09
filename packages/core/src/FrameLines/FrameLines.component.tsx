@@ -5,9 +5,9 @@ import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animator';
 
 import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
-import { FRAME_POLYLINE, FrameProps, Frame } from '../utils/Frame';
+import { FRAME_SVG_POLYLINE, FrameSVGProps, FrameSVG } from '../FrameSVG';
 
-interface FrameLinesProps extends FrameProps {
+interface FrameLinesProps extends FrameSVGProps {
   largeLineWidth?: number
   smallLineWidth?: number
   smallLineLength?: number
@@ -39,7 +39,7 @@ const FrameLines: FC<FrameLinesProps & WithAnimatorInputProps> = props => {
 
   // Large Polylines.
 
-  let largePolylines: FRAME_POLYLINE[] = [];
+  let largePolylines: FRAME_SVG_POLYLINE[] = [];
 
   if (!hideTopLines) {
     largePolylines = [
@@ -57,7 +57,7 @@ const FrameLines: FC<FrameLinesProps & WithAnimatorInputProps> = props => {
 
   // Small Polylines.
 
-  let smallPolylines: FRAME_POLYLINE[] = [];
+  let smallPolylines: FRAME_SVG_POLYLINE[] = [];
 
   if (!hideTopLines) {
     smallPolylines = [
@@ -74,7 +74,7 @@ const FrameLines: FC<FrameLinesProps & WithAnimatorInputProps> = props => {
   }
 
   return (
-    <Frame
+    <FrameSVG
       {...otherProps}
       className={cx('arwes-frame-lines', className)}
       shapes={[

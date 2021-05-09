@@ -5,9 +5,9 @@ import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animator';
 
 import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
-import { FRAME_POLYLINE, FrameProps, Frame } from '../utils/Frame';
+import { FRAME_SVG_POLYLINE, FrameSVGProps, FrameSVG } from '../FrameSVG';
 
-interface FrameHexagonProps extends FrameProps {
+interface FrameHexagonProps extends FrameSVGProps {
   lineWidth?: number
   squareSize?: number
   inverted?: boolean
@@ -25,8 +25,8 @@ const FrameHexagon: FC<FrameHexagonProps & WithAnimatorInputProps> = props => {
   const ss = squareSize as number;
 
   // Polylines without repeated points between them.
-  let polyline1: FRAME_POLYLINE = [];
-  let polyline2: FRAME_POLYLINE = [];
+  let polyline1: FRAME_SVG_POLYLINE = [];
+  let polyline2: FRAME_SVG_POLYLINE = [];
 
   if (!inverted) {
     polyline1 = [
@@ -54,7 +54,7 @@ const FrameHexagon: FC<FrameHexagonProps & WithAnimatorInputProps> = props => {
   }
 
   return (
-    <Frame
+    <FrameSVG
       {...otherProps}
       className={cx('arwes-frame-hexagon', className)}
       css={{
