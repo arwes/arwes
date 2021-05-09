@@ -1,5 +1,5 @@
 /* @jsx jsx */
-import { ReactElement } from 'react';
+import { FC } from 'react';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animator';
@@ -7,13 +7,13 @@ import { WithAnimatorInputProps } from '@arwes/animator';
 import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
 import { FRAME_POLYLINE, FrameProps, Frame } from '../utils/Frame';
 
-interface FrameHexagonProps <E> extends FrameProps<E> {
+interface FrameHexagonProps extends FrameProps {
   lineWidth?: number
   squareSize?: number
   inverted?: boolean
 }
 
-function FrameHexagon <E> (props: FrameHexagonProps<E> & WithAnimatorInputProps): ReactElement {
+const FrameHexagon: FC<FrameHexagonProps & WithAnimatorInputProps> = props => {
   const { animator, className, lineWidth, squareSize, inverted, ...otherProps } = props;
 
   useBleepsOnAnimator({
@@ -75,7 +75,7 @@ function FrameHexagon <E> (props: FrameHexagonProps<E> & WithAnimatorInputProps)
       lineWidth={outline(lineWidth)}
     />
   );
-}
+};
 
 FrameHexagon.defaultProps = {
   lineWidth: 1,

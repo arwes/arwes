@@ -1,5 +1,5 @@
 /* @jsx jsx */
-import { ReactElement } from 'react';
+import { FC } from 'react';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorInputProps } from '@arwes/animator';
@@ -7,13 +7,13 @@ import { WithAnimatorInputProps } from '@arwes/animator';
 import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
 import { FRAME_POLYLINE, FrameProps, Frame } from '../utils/Frame';
 
-interface FramePentagonProps <E> extends FrameProps<E> {
+interface FramePentagonProps extends FrameProps {
   lineWidth?: number
   squareSize?: number
   inverted?: boolean
 }
 
-function FramePentagon <E> (props: FramePentagonProps<E> & WithAnimatorInputProps): ReactElement {
+const FramePentagon: FC<FramePentagonProps & WithAnimatorInputProps> = props => {
   const { animator, className, lineWidth, squareSize, inverted, ...otherProps } = props;
 
   useBleepsOnAnimator({
@@ -72,7 +72,7 @@ function FramePentagon <E> (props: FramePentagonProps<E> & WithAnimatorInputProp
       lineWidth={outline(lineWidth)}
     />
   );
-}
+};
 
 FramePentagon.defaultProps = {
   lineWidth: 1,
