@@ -1,9 +1,9 @@
 import anime from 'animejs';
 import { MutableRefObject } from 'react';
 import { AnimatorClassSettings, AnimatorRef } from '@arwes/animator';
+import { transitionVisibilityIn, transitionVisibilityOut } from '@arwes/animated';
 import { Bleeps } from '@arwes/sounds';
 
-import { transitionAppear, transitionDisappear } from '../utils/appearTransitions';
 import { ArwesTheme } from '../ArwesThemeProvider';
 
 type ContainerRef = MutableRefObject<HTMLDivElement>;
@@ -51,19 +51,19 @@ const transitionCard = (
       translateY: [-space(4), 0]
     });
 
-    transitionAppear({
+    transitionVisibilityIn({
       targets: container.querySelectorAll('.arwes-card__line'),
       duration: durationTransition
     });
 
-    transitionAppear({
+    transitionVisibilityIn({
       targets: container.querySelectorAll('.arwes-card__image, .arwes-card__content-bg'),
       duration: durationTransition,
       delay: durationTransition
     });
   }
   else {
-    transitionDisappear({
+    transitionVisibilityOut({
       targets: container.querySelectorAll([
         '.arwes-card__line',
         '.arwes-card__image',
