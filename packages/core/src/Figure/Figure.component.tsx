@@ -15,10 +15,10 @@ import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { THEME_BREAKPOINTS_KEYS, ThemeSettingsBreakpoint } from '@arwes/design';
 import { WithAnimatorInputProps } from '@arwes/animator';
+import { transitionVisibilityIn } from '@arwes/animated';
 import { useBleeps } from '@arwes/sounds';
 
 import { loadImage } from '../utils/loadImage';
-import { transitionAppear } from '../utils/appearTransitions';
 import { TextProps, Text } from '../Text';
 import { LoadingBarsProps, LoadingBars } from '../LoadingBars';
 import { generateStyles } from './Figure.styles';
@@ -112,7 +112,7 @@ const Figure: FC<FigureProps & WithAnimatorInputProps> = props => {
           if (isMountedRef.current) {
             setIsLoading(false);
 
-            transitionAppear({
+            transitionVisibilityIn({
               targets: containerRef.current?.querySelector('.arwes-figure__asset'),
               duration: animator.duration.enter
             });

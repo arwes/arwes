@@ -2,10 +2,10 @@ import anime from 'animejs';
 import { MutableRefObject } from 'react';
 import { CSSObject } from '@emotion/css';
 import { AnimatorClassSettings, AnimatorRef } from '@arwes/animator';
+import { transitionVisibilityIn, transitionVisibilityOut } from '@arwes/animated';
 import { Bleeps } from '@arwes/sounds';
 
 import { ArwesTheme } from '../ArwesThemeProvider';
-import { transitionAppear, transitionDisappear } from '../utils/appearTransitions';
 
 type ContainerRef = MutableRefObject<HTMLElement>;
 
@@ -40,7 +40,7 @@ const onAnimateEntering = (
     }
   });
 
-  transitionAppear({
+  transitionVisibilityIn({
     targets: container.querySelectorAll([
       '.arwes-figure__asset',
       '.arwes-figure__description-bg'
@@ -54,7 +54,7 @@ const onAnimateExiting = (animator: AnimatorRef, containerRef: ContainerRef): vo
   const { duration } = animator;
   const container = containerRef.current;
 
-  transitionDisappear({
+  transitionVisibilityOut({
     targets: container.querySelectorAll([
       '.arwes-figure__asset',
       '.arwes-figure__description-bg',
