@@ -123,7 +123,7 @@ const Text: FC<TextProps & WithAnimatorInputProps> = props => {
     if (dynamicDuration) {
       const newChildrenTextContent = String(actualChildrenRef.current?.textContent || '');
       const factor = dynamicDurationFactor || FPS_NORMAL_DURATION;
-      const newDynamicDuration = Math.min(
+      const newDynamicDuration = Math.max(
         factor * newChildrenTextContent.length,
         animator.duration.enter
       );
