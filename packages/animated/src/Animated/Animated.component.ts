@@ -3,6 +3,7 @@ import {
   SVGProps,
   CSSProperties,
   MutableRefObject,
+  ReactNode,
   ReactElement,
   createElement,
   useRef,
@@ -24,6 +25,7 @@ interface AnimatedProps <E extends HTMLElement | SVGElement = HTMLElement, P = H
   className?: string
   style?: CSSProperties
   rootRef?: MutableRefObject<E | null> | ((node: E) => void)
+  children?: ReactNode
 }
 
 const Animated = <
