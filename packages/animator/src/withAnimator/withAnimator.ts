@@ -1,22 +1,28 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
-import { AnimatorClassSettings, AnimatorInstanceSettings, AnimatorRef } from '../constants';
-import { ComponentType, FC, ForwardRefExoticComponent, PropsWithoutRef, Ref, RefAttributes, createElement, forwardRef } from 'react';
+import {
+  ComponentType,
+  ComponentProps,
+  FC,
+  ForwardRefExoticComponent,
+  PropsWithoutRef,
+  Ref,
+  RefAttributes,
+  createElement,
+  forwardRef,
+  useMemo
+} from 'react';
+import { AnimatorClassSettings, AnimatorInstanceSettings } from '../constants';
 
 import { Animator } from '../Animator';
 import { mergeClassAndInstanceAnimatorSettings } from '../utils/mergeClassAndInstanceAnimatorSettings';
-import { useAnimator } from '../useAnimator';
-
-interface WithAnimatorInputProps {
-  animator: AnimatorRef
-}
 
 interface WithAnimatorOutputProps {
   animator?: AnimatorInstanceSettings
 }
 
 function withAnimator (classAnimator?: AnimatorClassSettings) {
-  const withAnimatorWrapper = <T extends ComponentType<P>, P extends WithAnimatorInputProps = React.ComponentProps<T>>(InputComponent: T) => {
+  const withAnimatorWrapper = <T extends ComponentType<P>, P = ComponentProps<T>>(InputComponent: T) => {
     interface AnimatorMiddlewareProps {
       InputComponent: T
       forwardedRef: Ref<T>
@@ -24,23 +30,22 @@ function withAnimator (classAnimator?: AnimatorClassSettings) {
 
     const AnimatorMiddleware: FC<AnimatorMiddlewareProps> = props => {
       const { InputComponent, forwardedRef, ...otherProps } = props;
-      const componentAnimator = useAnimator();
 
       return createElement(InputComponent, {
         ...(otherProps as P),
-        animator: componentAnimator,
         ref: forwardedRef
       });
     };
 
-    // The input component will receive the `animator: AnimatorRef` prop.
-    // But it will be excluded from the output component proptypes.
-    // The output component will optionally allow the `animator: AnimatorInstanceSettings` prop.
-    type C = Pick<P, Exclude<keyof P, keyof WithAnimatorInputProps>> & WithAnimatorOutputProps;
+    type C = P & WithAnimatorOutputProps;
 
     const OutputComponent = forwardRef<T, C>((props, forwardedRef) => {
       const { animator: instanceAnimator, ...otherProps } = props;
-      const resultAnimator = mergeClassAndInstanceAnimatorSettings(classAnimator, instanceAnimator);
+
+      const resultAnimator = useMemo(
+        () => mergeClassAndInstanceAnimatorSettings(classAnimator, instanceAnimator),
+        [instanceAnimator]
+      );
 
       return createElement(
         Animator,
@@ -62,4 +67,4 @@ function withAnimator (classAnimator?: AnimatorClassSettings) {
   return withAnimatorWrapper;
 }
 
-export { WithAnimatorInputProps, WithAnimatorOutputProps, withAnimator };
+export { WithAnimatorOutputProps, withAnimator };

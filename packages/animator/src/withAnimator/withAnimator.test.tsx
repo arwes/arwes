@@ -5,19 +5,16 @@ import React, { FC, ReactNode, createRef, useEffect } from 'react';
 import { act, cleanup, render } from '@testing-library/react';
 
 import { Animator } from '../Animator';
+import { useAnimator } from '../useAnimator';
 import { withAnimator } from './withAnimator';
 
 jest.useFakeTimers();
 afterEach(cleanup);
 
-interface ExampleComponentWithAnimatorProps {
-  animator: AnimatorRef
-}
-
-test('Should add <Animator/> wrapper and provide "animator" settings to component', () => {
+test('Should add <Animator/> component wrapper', () => {
   let animator: AnimatorRef | undefined;
-  const ExampleComponent: FC<ExampleComponentWithAnimatorProps> = props => {
-    animator = props.animator;
+  const ExampleComponent: FC = () => {
+    animator = useAnimator();
     return null;
   };
   const ExampleNode = withAnimator()(ExampleComponent);
@@ -44,11 +41,11 @@ test('Should add <Animator/> wrapper and provide "animator" settings to componen
       const instanceSettings = !isClassTestType ? settingsToSet : undefined;
 
       let animator: any;
-      const ExampleComponent: FC<ExampleComponentWithAnimatorProps> = props => {
-        animator = props.animator;
+      const ExampleComponent: FC = () => {
+        animator = useAnimator();
         return null;
       };
-      const ExampleNode = withAnimator(classSettings)<typeof ExampleComponent>(ExampleComponent);
+      const ExampleNode = withAnimator(classSettings)(ExampleComponent);
       render(<ExampleNode animator={instanceSettings} />);
       expect(animator.animate).toBe(false);
       expect(animator.flow.value).toBe(ENTERED);
@@ -64,8 +61,8 @@ test('Should add <Animator/> wrapper and provide "animator" settings to componen
       const instanceSettings = !isClassTestType ? settingsToSet : undefined;
 
       let animator: any;
-      const ExampleComponent: FC<ExampleComponentWithAnimatorProps> = props => {
-        animator = props.animator;
+      const ExampleComponent: FC = () => {
+        animator = useAnimator();
         return null;
       };
       const ExampleNode = withAnimator(classSettings)(ExampleComponent);
@@ -79,8 +76,8 @@ test('Should add <Animator/> wrapper and provide "animator" settings to componen
       const instanceSettings = !isClassTestType ? settingsToSet : undefined;
 
       let animator: any;
-      const ExampleComponent: FC<ExampleComponentWithAnimatorProps> = props => {
-        animator = props.animator;
+      const ExampleComponent: FC = () => {
+        animator = useAnimator();
         return null;
       };
       const ExampleNode = withAnimator(classSettings)(ExampleComponent);
@@ -102,8 +99,8 @@ test('Should add <Animator/> wrapper and provide "animator" settings to componen
       const instanceSettings = !isClassTestType ? settingsToSet : undefined;
 
       let animator: any;
-      const ExampleComponent: FC<ExampleComponentWithAnimatorProps> = props => {
-        animator = props.animator;
+      const ExampleComponent: FC = () => {
+        animator = useAnimator();
         return null;
       };
       const ExampleNode = withAnimator(classSettings)(ExampleComponent);
@@ -121,8 +118,8 @@ test('Should add <Animator/> wrapper and provide "animator" settings to componen
       const instanceSettings = !isClassTestType ? settingsToSet : undefined;
 
       let animator: any;
-      const ExampleComponent: FC<ExampleComponentWithAnimatorProps> = props => {
-        animator = props.animator;
+      const ExampleComponent: FC = () => {
+        animator = useAnimator();
         return null;
       };
       const ExampleNode = withAnimator(classSettings)(ExampleComponent);
@@ -138,8 +135,8 @@ test('Should add <Animator/> wrapper and provide "animator" settings to componen
 
 test('Should "animator.animate" setting take priority in instance setting', () => {
   let animator: any;
-  const ExampleComponent: FC<ExampleComponentWithAnimatorProps> = props => {
-    animator = props.animator;
+  const ExampleComponent: FC = () => {
+    animator = useAnimator();
     return null;
   };
   const ExampleNode = withAnimator({ animate: false })(ExampleComponent);
@@ -149,8 +146,8 @@ test('Should "animator.animate" setting take priority in instance setting', () =
 
 test('Should "animator.duration" setting take priority in instance setting', () => {
   let animator: any;
-  const ExampleComponent: FC<ExampleComponentWithAnimatorProps> = props => {
-    animator = props.animator;
+  const ExampleComponent: FC = () => {
+    animator = useAnimator();
     return null;
   };
   const ExampleNode = withAnimator({ duration: { enter: 300, exit: 300 } })(ExampleComponent);
@@ -160,8 +157,8 @@ test('Should "animator.duration" setting take priority in instance setting', () 
 
 test('Should "animator.root" setting take priority in instance setting', () => {
   let animator: any;
-  const ExampleComponent: FC<ExampleComponentWithAnimatorProps> = props => {
-    animator = props.animator;
+  const ExampleComponent: FC = () => {
+    animator = useAnimator();
     return null;
   };
   const ExampleNode = withAnimator({ root: true })(ExampleComponent);
@@ -179,8 +176,8 @@ test('Should "animator.root" setting take priority in instance setting', () => {
 
 test('Should "animator.merge" setting take priority in instance setting', () => {
   let animator: any;
-  const ExampleComponent: FC<ExampleComponentWithAnimatorProps> = props => {
-    animator = props.animator;
+  const ExampleComponent: FC = () => {
+    animator = useAnimator();
     return null;
   };
   const ExampleNode = withAnimator({ merge: true })(ExampleComponent);
@@ -194,8 +191,8 @@ test('Should "animator.merge" setting take priority in instance setting', () => 
 
 test('Should "animator.combine" setting take priority in instance setting', () => {
   let animator: any;
-  const ExampleComponent: FC<ExampleComponentWithAnimatorProps> = props => {
-    animator = props.animator;
+  const ExampleComponent: FC = () => {
+    animator = useAnimator();
     return null;
   };
   const ExampleNode = withAnimator({ combine: true })(ExampleComponent);
@@ -209,8 +206,8 @@ test('Should "animator.combine" setting take priority in instance setting', () =
 
 test('Should "animator.manager" setting take priority in instance setting', () => {
   let animator: any;
-  const ExampleComponent: FC<ExampleComponentWithAnimatorProps> = props => {
-    animator = props.animator;
+  const ExampleComponent: FC = () => {
+    animator = useAnimator();
     return null;
   };
   const ExampleNode = withAnimator({ manager: 'sequence' })(ExampleComponent);
@@ -223,7 +220,7 @@ test('Should "animator.manager" setting take priority in instance setting', () =
 });
 
 test('Should allow passing a "ref" to wrapped component', () => {
-  class ExampleComponent extends React.Component<ExampleComponentWithAnimatorProps> {
+  class ExampleComponent extends React.Component {
     render (): ReactNode {
       return null;
     }
@@ -233,8 +230,8 @@ test('Should allow passing a "ref" to wrapped component', () => {
     }
   }
 
-  interface ExampleComponentInterface extends React.ComponentClass<ExampleComponentWithAnimatorProps> {
-    new(props: ExampleComponentWithAnimatorProps, context?: any): ExampleComponent
+  interface ExampleComponentInterface extends React.ComponentClass {
+    new(props: any): ExampleComponent
     hello: () => number
   };
 
