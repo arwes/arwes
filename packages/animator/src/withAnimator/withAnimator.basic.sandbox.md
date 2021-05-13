@@ -21,8 +21,9 @@ function onAnimateExiting (animator, element) {
 }
 
 function ItemComponent (props) {
-  const { animator, children } = props;
+  const { children } = props;
   const element = React.useRef();
+  const animator = useAnimator();
 
   animator.setupAnimateRefs(element);
 
