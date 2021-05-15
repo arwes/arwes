@@ -3,7 +3,7 @@ import { FC, MutableRefObject, CSSProperties, useRef, useMemo, useCallback, useE
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
-import { WithAnimatorInputProps } from '@arwes/animator';
+import { AnimatorRef, useAnimator } from '@arwes/animator';
 
 import { generateStyles } from './LoadingBars.styles';
 import {
@@ -24,9 +24,8 @@ interface LoadingBarsProps {
   rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
 }
 
-const LoadingBars: FC<LoadingBarsProps & WithAnimatorInputProps> = props => {
+const LoadingBars: FC<LoadingBarsProps> = props => {
   const {
-    animator,
     determinate,
     full,
     className,
@@ -37,6 +36,8 @@ const LoadingBars: FC<LoadingBarsProps & WithAnimatorInputProps> = props => {
   const progress = props.progress as number;
   const size = props.size as number;
   const speed = props.speed as number;
+
+  const animator = useAnimator() as AnimatorRef;
   const { animate, flow } = animator;
 
   const theme = useTheme();

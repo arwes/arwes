@@ -3,7 +3,7 @@ import { FC, MutableRefObject, CSSProperties, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
-import { WithAnimatorInputProps } from '@arwes/animator';
+import { AnimatorRef, useAnimator } from '@arwes/animator';
 import { useBleeps } from '@arwes/sounds';
 
 import { TableRowPropsColumn, TableRowPropsColumnWidth, TableRow } from './TableRow';
@@ -24,9 +24,8 @@ interface TableProps {
   rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
 }
 
-const Table: FC<TableProps & WithAnimatorInputProps> = props => {
+const Table: FC<TableProps> = props => {
   const {
-    animator,
     headers,
     dataset,
     columnWidths,
@@ -36,6 +35,7 @@ const Table: FC<TableProps & WithAnimatorInputProps> = props => {
     rootRef
   } = props;
 
+  const animator = useAnimator() as AnimatorRef;
   const theme = useTheme();
   const bleeps = useBleeps();
   const styles = useMemo(() => generateStyles(theme), [theme]);

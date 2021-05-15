@@ -3,7 +3,7 @@ import { FC, MutableRefObject, useRef, useMemo, CSSProperties, useCallback } fro
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
-import { WithAnimatorInputProps } from '@arwes/animator';
+import { AnimatorRef, useAnimator } from '@arwes/animator';
 
 import { generateStyles } from './List.styles';
 
@@ -14,15 +14,16 @@ interface ListProps {
   rootRef?: MutableRefObject<HTMLElement | null> | ((node: HTMLElement) => void)
 }
 
-const List: FC<ListProps & WithAnimatorInputProps> = props => {
+const List: FC<ListProps> = props => {
   const {
-    animator,
     as: asProvided,
     rootRef: externalRef,
     className,
     style,
     children
   } = props;
+
+  const animator = useAnimator() as AnimatorRef;
   const { animate } = animator;
 
   const as = useMemo(() => asProvided || 'ul', []);

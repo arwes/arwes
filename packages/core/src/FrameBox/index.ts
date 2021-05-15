@@ -1,7 +1,8 @@
-import { FrameBox as Component, FrameBoxProps } from './FrameBox.component';
-
+import { memo } from 'react';
 import { withAnimator } from '@arwes/animator';
 
-const FrameBox = withAnimator()(Component);
+import { FrameBox as Component, FrameBoxProps } from './FrameBox.component';
+
+const FrameBox = withAnimator()(memo(Component));
 
 export { FrameBoxProps, FrameBox };

@@ -7,7 +7,8 @@ import {
   useRef,
   useState,
   useMemo,
-  useEffect
+  useEffect,
+  HTMLProps
 } from 'react';
 import { CSSObject, jsx, useTheme } from '@emotion/react';
 import PropTypes from 'prop-types';
@@ -31,7 +32,7 @@ interface FRAME_SVG_EFFECTS {
   highlight: () => void
 }
 
-interface FrameSVGProps <E = HTMLDivElement> {
+interface FrameSVGProps <E extends HTMLElement = HTMLDivElement> {
   as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
   shapes?: FRAME_SVG_POLYLINE[]
   polylines?: FRAME_SVG_POLYLINE_GENERIC[]
@@ -47,7 +48,10 @@ interface FrameSVGProps <E = HTMLDivElement> {
   children?: ReactNode
 }
 
-function FrameSVG <E, P> (props: FrameSVGProps<E> & NoInfer<P>): ReactElement {
+const FrameSVG = <
+  E extends HTMLElement = HTMLDivElement,
+  P extends HTMLProps<HTMLElement> = HTMLProps<E>
+> (props: FrameSVGProps<E> & NoInfer<P>): ReactElement => {
   const {
     as: asProvided,
     shapes,
@@ -172,7 +176,7 @@ function FrameSVG <E, P> (props: FrameSVGProps<E> & NoInfer<P>): ReactElement {
   return jsx(as,
     {
       ...otherProps,
-      className: cx('arwes-frame', className),
+      className: cx('arwes-frame-svg', className),
       ref: rootRef,
       css: {
         position: 'relative',
@@ -192,7 +196,7 @@ function FrameSVG <E, P> (props: FrameSVGProps<E> & NoInfer<P>): ReactElement {
     },
     <div
       ref={containerRef}
-      className='arwes-frame__structure'
+      className='arwes-frame-svg__structure'
       css={{
         position: 'absolute',
         left: -blurPadding,
@@ -281,7 +285,7 @@ function FrameSVG <E, P> (props: FrameSVGProps<E> & NoInfer<P>): ReactElement {
       )}
     </div>,
     <div
-      className='arwes-frame__content'
+      className='arwes-frame-svg__content'
       css={{ position: 'relative' }}
     >
       {children}

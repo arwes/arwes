@@ -3,7 +3,6 @@ import { FC } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
-import { WithAnimatorInputProps } from '@arwes/animator';
 
 import { expandCSSBoxProp } from '../utils/expandCSSBoxProp';
 import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
@@ -17,9 +16,8 @@ interface FrameBoxProps extends FrameSVGProps {
   linesWidths?: number | number[]
 }
 
-const FrameBox: FC<FrameBoxProps & WithAnimatorInputProps> = props => {
+const FrameBox: FC<FrameBoxProps> = props => {
   const {
-    animator,
     className,
     origins,
     linesWidths,

@@ -1,7 +1,8 @@
-import { FrameUnderline as Component, FrameUnderlineProps } from './FrameUnderline.component';
-
+import { memo } from 'react';
 import { withAnimator } from '@arwes/animator';
 
-const FrameUnderline = withAnimator()(Component);
+import { FrameUnderline as Component, FrameUnderlineProps } from './FrameUnderline.component';
+
+const FrameUnderline = withAnimator()(memo(Component));
 
 export { FrameUnderlineProps, FrameUnderline };

@@ -1,7 +1,8 @@
-import { FrameCorners as Component, FrameCornersProps } from './FrameCorners.component';
-
+import { memo } from 'react';
 import { withAnimator } from '@arwes/animator';
 
-const FrameCorners = withAnimator()(Component);
+import { FrameCorners as Component, FrameCornersProps } from './FrameCorners.component';
+
+const FrameCorners = withAnimator()(memo(Component));
 
 export { FrameCornersProps, FrameCorners };

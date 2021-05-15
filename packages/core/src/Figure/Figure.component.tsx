@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { THEME_BREAKPOINTS_KEYS, ThemeSettingsBreakpoint } from '@arwes/design';
-import { WithAnimatorInputProps } from '@arwes/animator';
+import { AnimatorRef, useAnimator } from '@arwes/animator';
 import { transitionVisibilityIn } from '@arwes/animated';
 import { useBleeps } from '@arwes/sounds';
 
@@ -38,9 +38,8 @@ interface FigureProps {
   rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
 }
 
-const Figure: FC<FigureProps & WithAnimatorInputProps> = props => {
+const Figure: FC<FigureProps> = props => {
   const {
-    animator,
     src,
     alt,
     fluid,
@@ -53,6 +52,8 @@ const Figure: FC<FigureProps & WithAnimatorInputProps> = props => {
     rootRef,
     children
   } = props;
+
+  const animator = useAnimator() as AnimatorRef;
   const { animate } = animator;
 
   const theme = useTheme();

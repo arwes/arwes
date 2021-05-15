@@ -1,7 +1,8 @@
-import { FramePentagon as Component, FramePentagonProps } from './FramePentagon.component';
-
+import { memo } from 'react';
 import { withAnimator } from '@arwes/animator';
 
-const FramePentagon = withAnimator()(Component);
+import { FramePentagon as Component, FramePentagonProps } from './FramePentagon.component';
+
+const FramePentagon = withAnimator()(memo(Component));
 
 export { FramePentagonProps, FramePentagon };

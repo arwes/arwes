@@ -2,7 +2,6 @@
 import { FC } from 'react';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
-import { WithAnimatorInputProps } from '@arwes/animator';
 
 import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
 import { FRAME_SVG_POLYLINE, FrameSVGProps, FrameSVG } from '../FrameSVG';
@@ -15,9 +14,8 @@ interface FrameLinesProps extends FrameSVGProps {
   hideBottomLines?: boolean
 }
 
-const FrameLines: FC<FrameLinesProps & WithAnimatorInputProps> = props => {
+const FrameLines: FC<FrameLinesProps> = props => {
   const {
-    animator,
     className,
     largeLineWidth,
     smallLineWidth,
