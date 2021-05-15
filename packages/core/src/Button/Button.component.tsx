@@ -7,7 +7,8 @@
 
 /* @jsx jsx */
 import {
-  FC,
+  ReactNode,
+  ReactElement,
   MutableRefObject,
   CSSProperties,
   MouseEvent,
@@ -35,12 +36,13 @@ interface ButtonProps {
   className?: string
   style?: CSSProperties
   rootRef?: MutableRefObject<HTMLButtonElement | null> | ((node: HTMLButtonElement) => void)
+  children?: ReactNode
 }
 
 // The component will receive the `animator` as `AnimatorInstanceSettings` and
 // not as `AnimatorRef` since it is encapsulating another animated component.
 // That's why the props accepts `WithAnimatorOutputProps`, not the input one.
-const Button: FC<ButtonProps & WithAnimatorOutputProps> = props => {
+const Button = (props: ButtonProps & WithAnimatorOutputProps): ReactElement => {
   const {
     animator: animatorSettings,
     FrameComponent,
@@ -111,7 +113,8 @@ Button.propTypes = {
   onClick: PropTypes.func,
   className: PropTypes.string,
   style: PropTypes.object,
-  rootRef: PropTypes.any
+  rootRef: PropTypes.any,
+  children: PropTypes.any
 };
 
 Button.defaultProps = {

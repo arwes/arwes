@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { FC, MutableRefObject, CSSProperties, useMemo } from 'react';
+import { ReactElement, MutableRefObject, CSSProperties, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
@@ -24,7 +24,7 @@ interface TableProps {
   rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
 }
 
-const Table: FC<TableProps> = props => {
+const Table = (props: TableProps): ReactElement => {
   const {
     headers,
     dataset,

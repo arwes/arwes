@@ -1,5 +1,5 @@
 /* @jsx jsx */
-import { FC } from 'react';
+import { ReactNode, ReactElement } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
@@ -14,9 +14,10 @@ const FRAME_BOX_ORIGIN_VALUES: FRAME_BOX_ORIGIN[] = ['left', 'right', 'top', 'bo
 interface FrameBoxProps extends FrameSVGProps {
   origins?: FRAME_BOX_ORIGIN | FRAME_BOX_ORIGIN[]
   linesWidths?: number | number[]
+  children?: ReactNode
 }
 
-const FrameBox: FC<FrameBoxProps> = props => {
+const FrameBox = (props: FrameBoxProps): ReactElement => {
   const {
     className,
     origins,
@@ -93,7 +94,8 @@ FrameBox.propTypes = {
   linesWidths: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.arrayOf(PropTypes.number.isRequired)
-  ])
+  ]),
+  children: PropTypes.any
 };
 
 FrameBox.defaultProps = {

@@ -1,9 +1,10 @@
 import { memo } from 'react';
 import { withAnimator } from '@arwes/animator';
 
-import { CodeBlockProps, CodeBlock as Component } from './CodeBlock.component';
+import { CodeBlock as Component } from './CodeBlock.component';
 import { animator } from './CodeBlock.animator';
 
 const CodeBlock = withAnimator(animator)(memo(Component));
 
-export { CodeBlockProps, CodeBlock };
+export * from './CodeBlock.component';
+export { CodeBlock };

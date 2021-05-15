@@ -1,5 +1,6 @@
 /* @jsx jsx */
-import { FC } from 'react';
+import { ReactNode, ReactElement } from 'react';
+import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 
@@ -11,9 +12,10 @@ interface FrameCornersProps extends FrameSVGProps {
   cornerLength?: number
   showContentLines?: boolean
   contentLineWidth?: number
+  children?: ReactNode
 }
 
-const FrameCorners: FC<FrameCornersProps> = props => {
+const FrameCorners = (props: FrameCornersProps): ReactElement => {
   const {
     className,
     cornerWidth,
@@ -103,6 +105,14 @@ const FrameCorners: FC<FrameCornersProps> = props => {
       lineWidth={cw}
     />
   );
+};
+
+FrameCorners.propTypes = {
+  cornerWidth: PropTypes.number,
+  cornerLength: PropTypes.number,
+  showContentLines: PropTypes.bool,
+  contentLineWidth: PropTypes.number,
+  children: PropTypes.any
 };
 
 FrameCorners.defaultProps = {

@@ -1,5 +1,5 @@
 /* @jsx jsx */
-import { FC, MutableRefObject, CSSProperties, useRef, useMemo } from 'react';
+import { ReactNode, ReactElement, MutableRefObject, CSSProperties, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
@@ -15,9 +15,10 @@ interface CodeBlockProps {
   className?: string
   style?: CSSProperties
   rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
+  children?: ReactNode
 }
 
-const CodeBlock: FC<CodeBlockProps> = props => {
+const CodeBlock = (props: CodeBlockProps): ReactElement => {
   const {
     lang,
     contentTextProps,
@@ -106,7 +107,8 @@ CodeBlock.propTypes = {
   contentTextProps: PropTypes.object,
   className: PropTypes.string,
   style: PropTypes.object,
-  rootRef: PropTypes.any
+  rootRef: PropTypes.any,
+  children: PropTypes.any
 };
 
 CodeBlock.defaultProps = {

@@ -1,5 +1,6 @@
 /* @jsx jsx */
-import { FC } from 'react';
+import { ReactNode, ReactElement } from 'react';
+import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 
@@ -12,9 +13,10 @@ interface FrameLinesProps extends FrameSVGProps {
   smallLineLength?: number
   hideTopLines?: boolean
   hideBottomLines?: boolean
+  children?: ReactNode
 }
 
-const FrameLines: FC<FrameLinesProps> = props => {
+const FrameLines = (props: FrameLinesProps): ReactElement => {
   const {
     className,
     largeLineWidth,
@@ -95,6 +97,15 @@ const FrameLines: FC<FrameLinesProps> = props => {
       ]}
     />
   );
+};
+
+FrameLines.propTypes = {
+  largeLineWidth: PropTypes.number,
+  smallLineWidth: PropTypes.number,
+  smallLineLength: PropTypes.number,
+  hideTopLines: PropTypes.bool,
+  hideBottomLines: PropTypes.bool,
+  children: PropTypes.any
 };
 
 FrameLines.defaultProps = {

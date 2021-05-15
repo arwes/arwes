@@ -1,9 +1,10 @@
 import { memo } from 'react';
 import { withAnimator } from '@arwes/animator';
 
-import { Blockquote as Component, BlockquoteProps } from './Blockquote.component';
+import { Blockquote as Component } from './Blockquote.component';
 import { animator } from './Blockquote.animator';
 
 const Blockquote = withAnimator(animator)(memo(Component));
 
-export { BlockquoteProps, Blockquote };
+export * from './Blockquote.component';
+export { Blockquote };

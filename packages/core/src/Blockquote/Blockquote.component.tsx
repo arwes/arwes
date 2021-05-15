@@ -1,5 +1,5 @@
 /* @jsx jsx */
-import { FC, MutableRefObject, CSSProperties, memo, useMemo } from 'react';
+import { MutableRefObject, CSSProperties, ReactNode, ReactElement, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
@@ -12,9 +12,10 @@ interface BlockquoteProps {
   className?: string
   style?: CSSProperties
   rootRef?: MutableRefObject<HTMLQuoteElement | null> | ((node: HTMLQuoteElement) => void)
+  children?: ReactNode
 }
 
-const Blockquote: FC<BlockquoteProps> = memo(props => {
+const Blockquote = (props: BlockquoteProps): ReactElement => {
   const { palette, className, style, rootRef, children } = props;
 
   const theme = useTheme();
@@ -52,13 +53,14 @@ const Blockquote: FC<BlockquoteProps> = memo(props => {
       </div>
     </blockquote>
   );
-});
+};
 
 Blockquote.propTypes = {
   palette: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.object,
-  rootRef: PropTypes.any
+  rootRef: PropTypes.any,
+  children: PropTypes.any
 };
 
 export { BlockquoteProps, Blockquote };
