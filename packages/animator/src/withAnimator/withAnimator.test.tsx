@@ -1,9 +1,9 @@
 /* eslint-env jest */
 
-import { AnimatorClassSettings, AnimatorRef, ENTERED, ENTERING, EXITED } from '../constants';
-import React, { FC, ReactNode, createRef, useEffect } from 'react';
+import React, { FC, ReactNode, useEffect, useRef } from 'react';
 import { act, cleanup, render } from '@testing-library/react';
 
+import { AnimatorClassSettings, AnimatorRef, ENTERED, ENTERING, EXITED } from '../constants';
 import { Animator } from '../Animator';
 import { useAnimator } from '../useAnimator';
 import { withAnimator } from './withAnimator';
@@ -235,10 +235,10 @@ test('Should allow passing a "ref" to wrapped component', () => {
     hello: () => number
   };
 
-  const ExampleNode = withAnimator()(ExampleComponent);
+  const ExampleNode = withAnimator()<typeof ExampleComponent>(ExampleComponent);
 
   const ExampleApp: FC = () => {
-    const ref = createRef<ExampleComponentInterface>();
+    const ref = useRef<ExampleComponentInterface>(null);
 
     useEffect(() => {
       expect(ref.current?.hello()).toBe(100);
