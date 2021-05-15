@@ -219,6 +219,23 @@ test('Should "animator.manager" setting take priority in instance setting', () =
   expect(animator).toMatchObject({ manager: 'stagger' });
 });
 
+test('Should accept function component with generic types', () => {
+  interface ExampleComponentProps <T> {
+    title: T
+    disabled?: boolean
+  }
+  const ExampleComponent = <T extends string = string> (props: ExampleComponentProps<T>): React.ReactElement => {
+    return <div>{props.title}</div>;
+  };
+  const ExampleNode = withAnimator()(ExampleComponent);
+  render(
+    <ExampleNode<string>
+      title='Hello!'
+      disabled={false}
+    />
+  );
+});
+
 test('Should allow passing a "ref" to wrapped component', () => {
   class ExampleComponent extends React.Component {
     render (): ReactNode {
