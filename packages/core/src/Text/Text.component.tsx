@@ -1,7 +1,9 @@
 import {
-  FC,
-  MutableRefObject,
+  HTMLProps,
   CSSProperties,
+  ReactNode,
+  ReactElement,
+  MutableRefObject,
   useRef,
   useMemo,
   useCallback,
@@ -11,16 +13,17 @@ import {
 import PropTypes from 'prop-types';
 import { css, cx, keyframes } from '@emotion/css';
 import { jsx } from '@emotion/react';
-import { WithAnimatorInputProps } from '@arwes/animator';
+import { AnimatorRef, useAnimator } from '@arwes/animator';
 import { useBleeps } from '@arwes/sounds';
 
 import { TextAnimationRefs, startTextAnimation } from '../utils/textAnimations';
 import { generateStyles } from './Text.styles';
+import { NoInfer } from '../utils/types';
 
 // Browser normally renders 60 frames per second for requested animations.
 const FPS_NORMAL_DURATION = 1000 / 60;
 
-interface TextProps {
+interface TextProps<E extends HTMLElement = HTMLSpanElement> {
   as?: keyof HTMLElementTagNameMap
   blink?: boolean
   blinkText?: string
@@ -29,12 +32,15 @@ interface TextProps {
   dynamicDurationFactor?: number
   className?: string
   style?: CSSProperties
-  rootRef?: MutableRefObject<HTMLElement | null> | ((node: HTMLElement) => void)
+  rootRef?: MutableRefObject<E | null> | ((node: E) => void)
+  children?: ReactNode
 }
 
-const Text: FC<TextProps & WithAnimatorInputProps> = props => {
+const Text = <
+  E extends HTMLElement = HTMLSpanElement,
+  P extends HTMLProps<HTMLElement> = HTMLProps<E>
+> (props: TextProps<E> & NoInfer<P>): ReactElement => {
   const {
-    animator,
     as: providedAs,
     blink: hasBlink,
     blinkText,
@@ -44,13 +50,14 @@ const Text: FC<TextProps & WithAnimatorInputProps> = props => {
     className,
     style,
     rootRef: providedRootRef,
-    children
+    children,
+    ...otherProps
   } = props;
 
-  const internalRootRef = useRef<HTMLElement | null>(null);
-  const actualChildrenRef = useRef<HTMLElement | null>(null);
-  const cloneNode = useRef<HTMLElement | null>(null);
-  const blinkNode = useRef<HTMLElement | null>(null);
+  const internalRootRef = useRef<E | null>(null);
+  const actualChildrenRef = useRef<HTMLSpanElement | null>(null);
+  const cloneNode = useRef<HTMLSpanElement | null>(null);
+  const blinkNode = useRef<HTMLSpanElement | null>(null);
   const animationFrame = useRef<number | null>(null);
 
   const animateRefs: TextAnimationRefs = useRef({
@@ -61,6 +68,7 @@ const Text: FC<TextProps & WithAnimatorInputProps> = props => {
     animationFrame
   });
 
+  const animator = useAnimator() as AnimatorRef;
   const bleeps = useBleeps();
 
   const styles = useMemo(
@@ -70,7 +78,7 @@ const Text: FC<TextProps & WithAnimatorInputProps> = props => {
 
   const as = useMemo(() => providedAs, []);
 
-  const rootRef = useCallback((node: HTMLElement) => {
+  const rootRef = useCallback((node: E) => {
     internalRootRef.current = node;
 
     if (typeof providedRootRef === 'function') {
@@ -108,6 +116,8 @@ const Text: FC<TextProps & WithAnimatorInputProps> = props => {
   // a string, then compare it each time it is changed.
   const childrenContent = useRef<string>('');
 
+  // TODO: Refactor this functionality to not use "useLayoutEffect" since it
+  // throws an error on SSR compilation.
   useLayoutEffect(() => {
     if (!animator.animate) {
       return;
@@ -153,6 +163,7 @@ const Text: FC<TextProps & WithAnimatorInputProps> = props => {
   return jsx(
     as as string,
     {
+      ...otherProps,
       className: cx('arwes-text', className),
       css: styles.root,
       style,
@@ -171,7 +182,6 @@ const Text: FC<TextProps & WithAnimatorInputProps> = props => {
 };
 
 Text.propTypes = {
-  // @ts-expect-error
   as: PropTypes.string,
   dynamicDuration: PropTypes.bool,
   dynamicDurationFactor: PropTypes.number,
