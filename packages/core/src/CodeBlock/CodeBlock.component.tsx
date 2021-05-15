@@ -3,7 +3,7 @@ import { FC, MutableRefObject, CSSProperties, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
-import { WithAnimatorInputProps } from '@arwes/animator';
+import { AnimatorRef, useAnimator } from '@arwes/animator';
 import { useBleeps } from '@arwes/sounds';
 
 import { Text, TextProps } from '../Text';
@@ -17,9 +17,8 @@ interface CodeBlockProps {
   rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
 }
 
-const CodeBlock: FC<CodeBlockProps & WithAnimatorInputProps> = props => {
+const CodeBlock: FC<CodeBlockProps> = props => {
   const {
-    animator,
     lang,
     contentTextProps,
     children,
@@ -27,6 +26,8 @@ const CodeBlock: FC<CodeBlockProps & WithAnimatorInputProps> = props => {
     style,
     rootRef
   } = props;
+
+  const animator = useAnimator() as AnimatorRef;
   const { animate } = animator;
 
   const theme = useTheme();

@@ -1,8 +1,9 @@
-import { LoadingBars as Component, LoadingBarsProps } from './LoadingBars.component';
-
-import { animator } from './LoadingBars.animator';
+import { memo } from 'react';
 import { withAnimator } from '@arwes/animator';
 
-const LoadingBars = withAnimator(animator)(Component);
+import { LoadingBars as Component, LoadingBarsProps } from './LoadingBars.component';
+import { animator } from './LoadingBars.animator';
+
+const LoadingBars = withAnimator(animator)(memo(Component));
 
 export { LoadingBarsProps, LoadingBars };

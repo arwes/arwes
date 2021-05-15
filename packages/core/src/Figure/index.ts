@@ -1,8 +1,9 @@
-import { Figure as Component, FigureProps } from './Figure.component';
-
-import { animator } from './Figure.animator';
+import { memo } from 'react';
 import { withAnimator } from '@arwes/animator';
 
-const Figure = withAnimator(animator)(Component);
+import { Figure as Component, FigureProps } from './Figure.component';
+import { animator } from './Figure.animator';
+
+const Figure = withAnimator(animator)(memo(Component));
 
 export { FigureProps, Figure };

@@ -1,7 +1,8 @@
-import { FrameHexagon as Component, FrameHexagonProps } from './FrameHexagon.component';
-
+import { memo } from 'react';
 import { withAnimator } from '@arwes/animator';
 
-const FrameHexagon = withAnimator()(Component);
+import { FrameHexagon as Component, FrameHexagonProps } from './FrameHexagon.component';
+
+const FrameHexagon = withAnimator()(memo(Component));
 
 export { FrameHexagonProps, FrameHexagon };

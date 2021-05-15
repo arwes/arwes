@@ -2,7 +2,6 @@
 import { FC } from 'react';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
-import { WithAnimatorInputProps } from '@arwes/animator';
 
 import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
 import { FRAME_SVG_POLYLINE, FrameSVGProps, FrameSVG } from '../FrameSVG';
@@ -13,8 +12,8 @@ interface FramePentagonProps extends FrameSVGProps {
   inverted?: boolean
 }
 
-const FramePentagon: FC<FramePentagonProps & WithAnimatorInputProps> = props => {
-  const { animator, className, lineWidth, squareSize, inverted, ...otherProps } = props;
+const FramePentagon: FC<FramePentagonProps> = props => {
+  const { className, lineWidth, squareSize, inverted, ...otherProps } = props;
 
   useBleepsOnAnimator({
     entering: 'assemble',

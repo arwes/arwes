@@ -3,7 +3,7 @@ import { FC, MutableRefObject, useRef, useMemo, ReactNode, CSSProperties } from 
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
-import { WithAnimatorInputProps } from '@arwes/animator';
+import { AnimatorRef, useAnimator } from '@arwes/animator';
 import { useBleeps } from '@arwes/sounds';
 
 import { Text } from '../Text';
@@ -23,9 +23,8 @@ interface CardProps {
   rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
 }
 
-const Card: FC<CardProps & WithAnimatorInputProps> = props => {
+const Card: FC<CardProps> = props => {
   const {
-    animator,
     image,
     title,
     options,
@@ -36,6 +35,8 @@ const Card: FC<CardProps & WithAnimatorInputProps> = props => {
     style,
     children
   } = props;
+
+  const animator = useAnimator() as AnimatorRef;
   const { animate } = animator;
 
   const theme = useTheme();

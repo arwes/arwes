@@ -3,7 +3,7 @@ import { FC, ReactNode, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { jsx } from '@emotion/react';
 import { cx } from '@emotion/css';
-import { WithAnimatorInputProps } from '@arwes/animator';
+import { AnimatorRef, useAnimator } from '@arwes/animator';
 
 import { TextAnimationRefs } from '../../utils/textAnimations';
 import { ArwesTheme } from '../../ArwesThemeProvider';
@@ -25,9 +25,10 @@ interface TableRowProps {
   condensed?: boolean
 }
 
-const TableRow: FC<TableRowProps & WithAnimatorInputProps> = props => {
-  const { animator, theme, isHeader, columns, columnWidths, condensed } = props;
+const TableRow: FC<TableRowProps> = props => {
+  const { theme, isHeader, columns, columnWidths, condensed } = props;
 
+  const animator = useAnimator() as AnimatorRef;
   const styles = useMemo(
     () => generateStyles(theme, { animate: animator.animate, isHeader, condensed }),
     [theme, animator.animate, isHeader, condensed]
