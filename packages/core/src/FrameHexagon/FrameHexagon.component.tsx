@@ -1,5 +1,6 @@
 /* @jsx jsx */
-import { FC } from 'react';
+import { ReactNode, ReactElement } from 'react';
+import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 
@@ -10,9 +11,10 @@ interface FrameHexagonProps extends FrameSVGProps {
   lineWidth?: number
   squareSize?: number
   inverted?: boolean
+  children?: ReactNode
 }
 
-const FrameHexagon: FC<FrameHexagonProps> = props => {
+const FrameHexagon = (props: FrameHexagonProps): ReactElement => {
   const { className, lineWidth, squareSize, inverted, ...otherProps } = props;
 
   useBleepsOnAnimator({
@@ -74,6 +76,13 @@ const FrameHexagon: FC<FrameHexagonProps> = props => {
       lineWidth={outline(lineWidth)}
     />
   );
+};
+
+FrameHexagon.propTypes = {
+  lineWidth: PropTypes.number,
+  squareSize: PropTypes.number,
+  inverted: PropTypes.bool,
+  children: PropTypes.any
 };
 
 FrameHexagon.defaultProps = {

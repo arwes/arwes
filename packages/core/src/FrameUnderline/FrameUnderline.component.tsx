@@ -1,5 +1,6 @@
 /* @jsx jsx */
-import { FC } from 'react';
+import { ReactNode, ReactElement } from 'react';
+import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 
@@ -9,9 +10,10 @@ import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
 interface FrameUnderlineProps extends FrameSVGProps {
   lineWidth?: number
   squareSize?: number
+  children?: ReactNode
 }
 
-const FrameUnderline: FC<FrameUnderlineProps> = props => {
+const FrameUnderline = (props: FrameUnderlineProps): ReactElement => {
   const { className, lineWidth, squareSize, ...otherProps } = props;
   const { space, outline } = useTheme();
   const ss = squareSize as number;
@@ -47,6 +49,12 @@ const FrameUnderline: FC<FrameUnderlineProps> = props => {
       lineWidth={outline(lineWidth)}
     />
   );
+};
+
+FrameUnderline.propTypes = {
+  lineWidth: PropTypes.number,
+  squareSize: PropTypes.number,
+  children: PropTypes.any
 };
 
 FrameUnderline.defaultProps = {

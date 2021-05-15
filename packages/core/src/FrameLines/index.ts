@@ -1,8 +1,9 @@
 import { memo } from 'react';
 import { withAnimator } from '@arwes/animator';
 
-import { FrameLines as Component, FrameLinesProps } from './FrameLines.component';
+import { FrameLines as Component } from './FrameLines.component';
 
 const FrameLines = withAnimator()(memo(Component));
 
-export { FrameLinesProps, FrameLines };
+export * from './FrameLines.component';
+export { FrameLines };

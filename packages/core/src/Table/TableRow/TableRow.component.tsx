@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { FC, ReactNode, useMemo, useRef } from 'react';
+import { ReactNode, ReactElement, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { jsx } from '@emotion/react';
 import { cx } from '@emotion/css';
@@ -25,7 +25,7 @@ interface TableRowProps {
   condensed?: boolean
 }
 
-const TableRow: FC<TableRowProps> = props => {
+const TableRow = (props: TableRowProps): ReactElement => {
   const { theme, isHeader, columns, columnWidths, condensed } = props;
 
   const animator = useAnimator() as AnimatorRef;

@@ -1,18 +1,10 @@
-import {
-  TableRow as Component,
-  TableRowProps,
-  TableRowPropsColumn,
-  TableRowPropsColumnWidth
-} from './TableRow.component';
-
-import { animator } from './TableRow.animator';
+import { memo } from 'react';
 import { withAnimator } from '@arwes/animator';
 
-const TableRow = withAnimator(animator)(Component);
+import { TableRow as Component } from './TableRow.component';
+import { animator } from './TableRow.animator';
 
-export {
-  TableRowPropsColumn,
-  TableRowPropsColumnWidth,
-  TableRowProps,
-  TableRow
-};
+const TableRow = withAnimator(animator)(memo(Component));
+
+export * from './TableRow.component';
+export { TableRow };

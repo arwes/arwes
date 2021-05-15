@@ -1,5 +1,13 @@
 /* @jsx jsx */
-import { FC, MutableRefObject, useRef, useMemo, CSSProperties, useCallback } from 'react';
+import {
+  ReactNode,
+  ReactElement,
+  MutableRefObject,
+  useRef,
+  useMemo,
+  CSSProperties,
+  useCallback
+} from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
@@ -11,10 +19,11 @@ interface ListProps {
   as?: 'ul' | 'ol'
   className?: string
   style?: CSSProperties
-  rootRef?: MutableRefObject<HTMLElement | null> | ((node: HTMLElement) => void)
+  rootRef?: MutableRefObject<HTMLUListElement | null> | ((node: HTMLUListElement) => void)
+  children?: ReactNode
 }
 
-const List: FC<ListProps> = props => {
+const List = (props: ListProps): ReactElement => {
   const {
     as: asProvided,
     rootRef: externalRef,
@@ -28,7 +37,7 @@ const List: FC<ListProps> = props => {
 
   const as = useMemo(() => asProvided || 'ul', []);
 
-  const internalRef = useRef<HTMLElement | null>(null);
+  const internalRef = useRef<HTMLUListElement | null>(null);
   const rootRef = useCallback(node => {
     internalRef.current = node;
 
@@ -58,7 +67,7 @@ const List: FC<ListProps> = props => {
 };
 
 List.propTypes = {
-  as: PropTypes.oneOf(['ul', 'ol']),
+  as: PropTypes.oneOf(['ul', 'ol']).isRequired,
   className: PropTypes.string,
   style: PropTypes.object,
   rootRef: PropTypes.any

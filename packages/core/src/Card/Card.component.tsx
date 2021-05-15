@@ -1,5 +1,5 @@
 /* @jsx jsx */
-import { FC, MutableRefObject, useRef, useMemo, ReactNode, CSSProperties } from 'react';
+import { ReactNode, ReactElement, MutableRefObject, useRef, useMemo, CSSProperties } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
@@ -21,9 +21,10 @@ interface CardProps {
   className?: string
   style?: CSSProperties
   rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
+  children?: ReactNode
 }
 
-const Card: FC<CardProps> = props => {
+const Card = (props: CardProps): ReactElement => {
   const {
     image,
     title,
@@ -143,7 +144,8 @@ Card.propTypes = {
   hover: PropTypes.bool,
   className: PropTypes.string,
   style: PropTypes.object,
-  rootRef: PropTypes.any
+  rootRef: PropTypes.any,
+  children: PropTypes.any
 };
 
 export { CardProps, Card };

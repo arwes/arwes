@@ -1,5 +1,6 @@
 /* @jsx jsx */
-import { FC } from 'react';
+import { ReactNode, ReactElement } from 'react';
+import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 
@@ -10,9 +11,10 @@ interface FramePentagonProps extends FrameSVGProps {
   lineWidth?: number
   squareSize?: number
   inverted?: boolean
+  children?: ReactNode
 }
 
-const FramePentagon: FC<FramePentagonProps> = props => {
+const FramePentagon = (props: FramePentagonProps): ReactElement => {
   const { className, lineWidth, squareSize, inverted, ...otherProps } = props;
 
   useBleepsOnAnimator({
@@ -71,6 +73,13 @@ const FramePentagon: FC<FramePentagonProps> = props => {
       lineWidth={outline(lineWidth)}
     />
   );
+};
+
+FramePentagon.propTypes = {
+  lineWidth: PropTypes.number,
+  squareSize: PropTypes.number,
+  inverted: PropTypes.bool,
+  children: PropTypes.any
 };
 
 FramePentagon.defaultProps = {

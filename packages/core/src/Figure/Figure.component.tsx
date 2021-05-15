@@ -1,6 +1,7 @@
 /* @jsx jsx */
 import {
-  FC,
+  ReactNode,
+  ReactElement,
   MutableRefObject,
   CSSProperties,
   useRef,
@@ -36,9 +37,10 @@ interface FigureProps {
   className?: string
   style?: CSSProperties
   rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
+  children?: ReactNode
 }
 
-const Figure: FC<FigureProps> = props => {
+const Figure = (props: FigureProps): ReactElement => {
   const {
     src,
     alt,
@@ -282,7 +284,8 @@ Figure.propTypes = {
   loadingProps: PropTypes.object,
   className: PropTypes.string,
   style: PropTypes.object,
-  rootRef: PropTypes.any
+  rootRef: PropTypes.any,
+  children: PropTypes.any
 };
 
 Figure.defaultProps = {

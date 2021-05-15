@@ -1,5 +1,13 @@
 /* @jsx jsx */
-import { FC, MutableRefObject, CSSProperties, useRef, useMemo, useCallback, useEffect } from 'react';
+import {
+  ReactElement,
+  MutableRefObject,
+  CSSProperties,
+  useRef,
+  useMemo,
+  useCallback,
+  useEffect
+} from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
@@ -24,7 +32,7 @@ interface LoadingBarsProps {
   rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
 }
 
-const LoadingBars: FC<LoadingBarsProps> = props => {
+const LoadingBars = (props: LoadingBarsProps): ReactElement => {
   const {
     determinate,
     full,
