@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 
+import { BleepsOnAnimator } from '../utils/BleepsOnAnimator';
 import { FrameSVGProps, FrameSVG } from '../FrameSVG';
-import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
 
 interface FrameUnderlineProps extends FrameSVGProps {
   lineWidth?: number
@@ -14,14 +14,9 @@ interface FrameUnderlineProps extends FrameSVGProps {
 }
 
 const FrameUnderline = (props: FrameUnderlineProps): ReactElement => {
-  const { className, lineWidth, squareSize, ...otherProps } = props;
+  const { className, lineWidth, squareSize, children, ...otherProps } = props;
   const { space, outline } = useTheme();
   const ss = squareSize as number;
-
-  useBleepsOnAnimator({
-    entering: 'assemble',
-    exiting: 'assemble'
-  });
 
   return (
     <FrameSVG
@@ -47,7 +42,13 @@ const FrameUnderline = (props: FrameUnderlineProps): ReactElement => {
         ]
       ]}
       lineWidth={outline(lineWidth)}
-    />
+    >
+      <BleepsOnAnimator
+        entering={{ name: 'assemble', loop: true }}
+        exiting={{ name: 'assemble', loop: true }}
+      />
+      {children}
+    </FrameSVG>
   );
 };
 

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 
-import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
+import { BleepsOnAnimator } from '../utils/BleepsOnAnimator';
 import { FRAME_SVG_POLYLINE, FrameSVGProps, FrameSVG } from '../FrameSVG';
 
 interface FrameHexagonProps extends FrameSVGProps {
@@ -15,12 +15,7 @@ interface FrameHexagonProps extends FrameSVGProps {
 }
 
 const FrameHexagon = (props: FrameHexagonProps): ReactElement => {
-  const { className, lineWidth, squareSize, inverted, ...otherProps } = props;
-
-  useBleepsOnAnimator({
-    entering: 'assemble',
-    exiting: 'assemble'
-  });
+  const { className, lineWidth, squareSize, inverted, children, ...otherProps } = props;
 
   const { space, outline } = useTheme();
   const ss = squareSize as number;
@@ -74,7 +69,13 @@ const FrameHexagon = (props: FrameHexagonProps): ReactElement => {
         ]
       ]}
       lineWidth={outline(lineWidth)}
-    />
+    >
+      <BleepsOnAnimator
+        entering={{ name: 'assemble', loop: true }}
+        exiting={{ name: 'assemble', loop: true }}
+      />
+      {children}
+    </FrameSVG>
   );
 };
 
