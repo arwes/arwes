@@ -38,11 +38,7 @@ const Blockquote = (props: BlockquoteProps): ReactElement => {
         css={styles.line}
         animated={[
           transitionVisibility,
-          {
-            initialStyles: { scaleY: 0 },
-            entering: { scaleY: 1 },
-            exiting: { scaleY: 0 }
-          }
+          { entering: { scaleY: 1 }, exiting: { scaleY: 0 } }
         ]}
       />
       <div
