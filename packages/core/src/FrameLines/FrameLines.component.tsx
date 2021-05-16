@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 
-import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
+import { BleepsOnAnimator } from '../utils/BleepsOnAnimator';
 import { FRAME_SVG_POLYLINE, FrameSVGProps, FrameSVG } from '../FrameSVG';
 
 interface FrameLinesProps extends FrameSVGProps {
@@ -24,13 +24,9 @@ const FrameLines = (props: FrameLinesProps): ReactElement => {
     smallLineLength,
     hideTopLines,
     hideBottomLines,
+    children,
     ...otherProps
   } = props;
-
-  useBleepsOnAnimator({
-    entering: 'assemble',
-    exiting: 'assemble'
-  });
 
   const theme = useTheme();
   const llWidth = theme.outline(largeLineWidth);
@@ -95,7 +91,13 @@ const FrameLines = (props: FrameLinesProps): ReactElement => {
           lineWidth: slWidth
         }))
       ]}
-    />
+    >
+      <BleepsOnAnimator
+        entering={{ name: 'assemble', loop: true }}
+        exiting={{ name: 'assemble', loop: true }}
+      />
+      {children}
+    </FrameSVG>
   );
 };
 

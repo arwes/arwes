@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 
-import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
+import { BleepsOnAnimator } from '../utils/BleepsOnAnimator';
 import { FRAME_SVG_POLYLINE_GENERIC, FrameSVGProps, FrameSVG } from '../FrameSVG';
 
 interface FrameCornersProps extends FrameSVGProps {
@@ -22,13 +22,9 @@ const FrameCorners = (props: FrameCornersProps): ReactElement => {
     cornerLength,
     showContentLines,
     contentLineWidth,
+    children,
     ...otherProps
   } = props;
-
-  useBleepsOnAnimator({
-    entering: 'assemble',
-    exiting: 'assemble'
-  });
 
   const theme = useTheme();
   const cw = theme.outline(cornerWidth);
@@ -103,7 +99,13 @@ const FrameCorners = (props: FrameCornersProps): ReactElement => {
         ...cornerPolylines
       ]}
       lineWidth={cw}
-    />
+    >
+      <BleepsOnAnimator
+        entering={{ name: 'assemble', loop: true }}
+        exiting={{ name: 'assemble', loop: true }}
+      />
+      {children}
+    </FrameSVG>
   );
 };
 

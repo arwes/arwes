@@ -5,7 +5,7 @@ import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 
 import { expandCSSBoxProp } from '../utils/expandCSSBoxProp';
-import { useBleepsOnAnimator } from '../utils/useBleepsOnAnimator';
+import { BleepsOnAnimator } from '../utils/BleepsOnAnimator';
 import { FRAME_SVG_POLYLINE, FRAME_SVG_POLYLINE_CUSTOM, FrameSVGProps, FrameSVG } from '../FrameSVG';
 
 type FRAME_BOX_ORIGIN = 'left' | 'right' | 'top' | 'bottom' | 'center';
@@ -22,13 +22,9 @@ const FrameBox = (props: FrameBoxProps): ReactElement => {
     className,
     origins,
     linesWidths,
+    children,
     ...otherProps
   } = props;
-
-  useBleepsOnAnimator({
-    entering: 'assemble',
-    exiting: 'assemble'
-  });
 
   const theme = useTheme();
   const originsList = expandCSSBoxProp(origins, 'center');
@@ -82,7 +78,13 @@ const FrameBox = (props: FrameBoxProps): ReactElement => {
         ]
       ]}
       polylines={polylines}
-    />
+    >
+      <BleepsOnAnimator
+        entering={{ name: 'assemble', loop: true }}
+        exiting={{ name: 'assemble', loop: true }}
+      />
+      {children}
+    </FrameSVG>
   );
 };
 
