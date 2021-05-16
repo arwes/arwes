@@ -36,8 +36,15 @@ const transitionVisibility: AnimatedSettings = {
   exiting: transitionVisibilityOut
 };
 
+const transitionVisibilityDelayed: AnimatedSettings = {
+  initialStyles: { opacity: 0 },
+  entering: params => transitionVisibilityIn({ ...params, delay: params.duration }),
+  exiting: transitionVisibilityOut
+};
+
 export {
   transitionVisibilityIn,
   transitionVisibilityOut,
-  transitionVisibility
+  transitionVisibility,
+  transitionVisibilityDelayed
 };
