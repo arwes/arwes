@@ -1,11 +1,11 @@
 /* @jsx jsx */
-import { ReactNode, ReactElement, MutableRefObject, useRef, useMemo, CSSProperties } from 'react';
+import { ReactNode, ReactElement, MutableRefObject, useMemo, CSSProperties } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
-import { AnimatorRef, useAnimator } from '@arwes/animator';
-import { useBleeps } from '@arwes/sounds';
+import { Animated, transitionVisibility, transitionVisibilityDelayed } from '@arwes/animated';
 
+import { BleepsOnAnimator } from '../utils/BleepsOnAnimator';
 import { Text } from '../Text';
 import { generateStyles } from './Card.styles';
 
@@ -37,20 +37,11 @@ const Card = (props: CardProps): ReactElement => {
     children
   } = props;
 
-  const animator = useAnimator() as AnimatorRef;
-  const { animate } = animator;
-
   const theme = useTheme();
-  const bleeps = useBleeps();
-
   const styles = useMemo(
-    () => generateStyles(theme, { animate, landscape, hover }),
-    [theme, animate, landscape, hover]
+    () => generateStyles(theme, { landscape, hover }),
+    [theme, landscape, hover]
   );
-
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  animator.setupAnimateRefs(containerRef, theme, bleeps);
 
   return (
     <article
@@ -59,26 +50,35 @@ const Card = (props: CardProps): ReactElement => {
       style={style}
       ref={rootRef}
     >
+      <BleepsOnAnimator
+        entering={{ name: 'object' }}
+      />
+
       <div
         className='arwes-card__container'
         css={styles.container}
-        ref={containerRef}
       >
         {!!image && (
           <div
             className='arwes-card__picture'
             css={styles.picture}
           >
-            <img
+            <Animated
+              as='img'
               className='arwes-card__image'
               css={styles.image}
               style={{ backgroundImage: `url(${image.src})` }}
               src={image.src}
               alt={image.alt || ''}
+              animated={transitionVisibilityDelayed}
             />
-            <div
+            <Animated
               className='arwes-card__line arwes-card__line-picture'
               css={[styles.line, styles.linePicture]}
+              animated={[
+                transitionVisibility,
+                { entering: { translateX: [theme.space(4), 0] } }
+              ]}
             />
           </div>
         )}
@@ -87,9 +87,10 @@ const Card = (props: CardProps): ReactElement => {
           className='arwes-card__content'
           css={styles.content}
         >
-          <div
+          <Animated
             className='arwes-card__content-bg'
             css={styles.contentBg}
+            animated={transitionVisibilityDelayed}
           />
 
           {!!title && (
@@ -123,9 +124,13 @@ const Card = (props: CardProps): ReactElement => {
             </div>
           )}
 
-          <div
+          <Animated
             className='arwes-card__line arwes-card__line-content'
             css={[styles.line, styles.lineContent]}
+            animated={[
+              transitionVisibility,
+              { entering: { translateY: [-theme.space(4), 0] } }
+            ]}
           />
         </div>
       </div>
