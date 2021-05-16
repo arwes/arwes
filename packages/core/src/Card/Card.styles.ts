@@ -5,10 +5,10 @@ import { ArwesTheme } from '../ArwesThemeProvider';
 
 const generateStyles = (
   theme: ArwesTheme,
-  options: { animate?: boolean, landscape?: boolean, hover?: boolean }
+  options: { landscape?: boolean, hover?: boolean }
 ): Record<string, CSSObject> => {
   const { palette, space, outline, shadowBlur, transitionDuration } = theme;
-  const { animate, landscape, hover } = options;
+  const { landscape, hover } = options;
 
   const contentBg = rgba(palette.primary.light1, 0.05);
 
@@ -41,10 +41,9 @@ const generateStyles = (
 
     line: {
       position: 'absolute',
-      transition: ['background-color', 'box-shadow']
-        .map(prop => `${prop} ${transitionDuration()}ms ease-out`)
-        .join(','),
-      opacity: animate ? 0 : undefined
+      transitionDuration: `${transitionDuration()}ms`,
+      transitionProperty: 'background-color, box-shadow',
+      transitionTimingFunction: 'ease-out'
     },
 
     picture: {
@@ -69,8 +68,7 @@ const generateStyles = (
       objectPosition: 'center',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-      backgroundColor: palette.neutral.elevate(2),
-      opacity: animate ? 0 : undefined
+      backgroundColor: palette.neutral.elevate(2)
     },
     linePicture: {
       left: 0,
@@ -96,8 +94,7 @@ const generateStyles = (
       right: 0,
       top: 0,
       bottom: 0,
-      backgroundColor: contentBg,
-      opacity: animate ? 0 : undefined
+      backgroundColor: contentBg
     },
     header: {
       marginBottom: space(4)
