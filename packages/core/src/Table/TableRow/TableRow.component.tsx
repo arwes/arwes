@@ -3,10 +3,10 @@ import { ReactNode, ReactElement, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { jsx } from '@emotion/react';
 import { cx } from '@emotion/css';
+import { Theme } from '@arwes/design';
 import { AnimatorRef, useAnimator } from '@arwes/animator';
 
 import { TextAnimationRefs } from '../../utils/textAnimations';
-import { ArwesTheme } from '../../ArwesThemeProvider';
 import { generateStyles } from './TableRow.styles';
 import { TableRowTransitionRefs } from './TableRow.animator';
 
@@ -18,7 +18,7 @@ interface TableRowPropsColumn {
 type TableRowPropsColumnWidth = string | number;
 
 interface TableRowProps {
-  theme: ArwesTheme
+  theme: Theme
   columns: TableRowPropsColumn[]
   columnWidths?: TableRowPropsColumnWidth[]
   isHeader?: boolean

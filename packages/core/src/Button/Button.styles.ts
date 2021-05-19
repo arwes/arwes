@@ -1,9 +1,8 @@
 import { CSSObject } from '@emotion/react';
-
-import { ArwesTheme } from '../ArwesThemeProvider';
+import { Theme } from '@arwes/design';
 
 const generateStyles = (
-  theme: ArwesTheme,
+  theme: Theme,
   options: { palette?: string, disabled?: boolean }
 ): Record<string, CSSObject> => {
   const { shadowBlur, transitionDuration } = theme;

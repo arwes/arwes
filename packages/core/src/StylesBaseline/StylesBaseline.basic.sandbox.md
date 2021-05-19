@@ -14,12 +14,7 @@ const palette = {
   primary: { main: '#40ffce' },
   secondary: { main: '#c466dc' },
   neutral: { main: '#001711' },
-  text: {
-    root: '#35efaa',
-    headings: '#40ffce',
-    link: '#c466dc',
-    linkHover: '#d491fa'
-  }
+  text: { main: '#35efaa' }
 };
 const fontScale = 1.5;
 const space = 8;

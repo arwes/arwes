@@ -1,6 +1,7 @@
 import rgba from 'polished/lib/color/rgba';
 import anime from 'animejs';
 import { RefObject, MutableRefObject } from 'react';
+import { Theme } from '@arwes/design';
 import { AnimatorRef, AnimatorClassSettings } from '@arwes/animator';
 
 import {
@@ -8,7 +9,6 @@ import {
   startTextAnimation,
   stopTextAnimation
 } from '../../utils/textAnimations';
-import { ArwesTheme } from '../../ArwesThemeProvider';
 
 type TableRowTransitionRefs = MutableRefObject<{
   rootRef: RefObject<HTMLDivElement>
@@ -41,7 +41,7 @@ const transitionRemoveTableRow = (animator: AnimatorRef, refs: TableRowTransitio
 const transitionTableRow = (
   animator: AnimatorRef,
   refs: TableRowTransitionRefs,
-  theme: ArwesTheme,
+  theme: Theme,
   isHeader: boolean
 ): void => {
   transitionRemoveTableRow(animator, refs);
@@ -71,7 +71,7 @@ const transitionTableRow = (
     refs.current.textAnimateRefsCollection.current.push(cellTextAnimationRefs);
 
     cell.style.backgroundColor = isEntering
-      ? rgba(theme.palette.text.root, isHeader ? 0.15 : 0.05)
+      ? rgba(theme.palette.text.main, isHeader ? 0.15 : 0.05)
       : '';
 
     startTextAnimation(animator, cellTextAnimationRefs);

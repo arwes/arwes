@@ -1,45 +1,18 @@
 import React, { ReactNode, ReactElement } from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from '@emotion/react';
-import { ThemeSettings, ThemePalette, Theme, createTheme, ThemeSettingsPalette } from '@arwes/design';
-
-interface ArwesThemeSettingsPalette extends ThemeSettingsPalette {
-  text?: {
-    root?: string
-    headings?: string
-    link?: string
-    linkHover?: string
-  }
-}
-
-interface ArwesThemeSettings extends ThemeSettings {
-  palette?: ArwesThemeSettingsPalette
-}
-
-interface ArwesThemePalette extends ThemePalette {
-  text: {
-    root: string
-    headings: string
-    link: string
-    linkHover: string
-  }
-}
-
-interface ArwesTheme extends Theme {
-  palette: ArwesThemePalette
-}
+import { ThemeSettings, Theme, createTheme } from '@arwes/design';
 
 interface ArwesThemeProviderProps {
-  themeSettings?: ArwesThemeSettings
+  themeSettings?: ThemeSettings
   children?: ReactNode
 }
 
 const ArwesThemeProvider = (props: ArwesThemeProviderProps): ReactElement => {
   const { themeSettings, children } = props;
 
-  const theme: ArwesTheme = createTheme({
+  const theme: Theme = createTheme({
     ...themeSettings,
-    breakpoints: themeSettings?.breakpoints,
     palette: {
       primary: {
         light3: '#befcfe',
@@ -59,19 +32,15 @@ const ArwesThemeProvider = (props: ArwesThemeProviderProps): ReactElement => {
         dark2: '#e24a0f',
         dark3: '#a32d08'
       },
+      text: {
+        main: '#7efcf6'
+      },
       neutral: {
         main: '#021114'
       },
-      ...themeSettings?.palette,
-      text: {
-        root: '#7efcf6',
-        headings: '#00f8f8',
-        link: '#ffa76c',
-        linkHover: '#ffc69f',
-        ...themeSettings?.palette?.text
-      }
+      ...themeSettings?.palette
     }
-  }) as ArwesTheme;
+  });
 
   return (
     <ThemeProvider theme={theme}>
@@ -85,9 +54,4 @@ ArwesThemeProvider.propTypes = {
   children: PropTypes.any
 };
 
-export {
-  ArwesTheme,
-  ArwesThemeSettings,
-  ArwesThemeProviderProps,
-  ArwesThemeProvider
-};
+export { ArwesThemeProviderProps, ArwesThemeProvider };

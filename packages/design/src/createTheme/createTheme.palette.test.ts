@@ -62,8 +62,21 @@ test('Should create default "error" palette with "red" color', () => {
   });
 });
 
+test('Should create default "text" palette with "cyan" color', () => {
+  const theme = createTheme();
+  expect(theme.palette.text).toEqual({
+    main: '#0ff',
+    dark1: '#0cc',
+    dark2: '#099',
+    dark3: '#066',
+    light1: '#3ff',
+    light2: '#6ff',
+    light3: '#9ff'
+  });
+});
+
 describe('basic colors', () => {
-  ['primary', 'secondary', 'success', 'error'].forEach(paletteName => {
+  ['primary', 'secondary', 'success', 'error', 'text'].forEach(paletteName => {
     test(`Should create "${paletteName}" palette with provided main color and tonalOffset`, () => {
       const tonalOffset = 0.12;
       const color = '#9acd32';
