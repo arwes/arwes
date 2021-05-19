@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { AnimatorRef, useAnimator } from '@arwes/animator';
-import { useBleeps } from '@arwes/sounds';
+import { useBleeps } from '@arwes/bleeps';
 
 import { TableRowPropsColumn, TableRowPropsColumnWidth, TableRow } from './TableRow';
 import { generateStyles } from './Table.styles';

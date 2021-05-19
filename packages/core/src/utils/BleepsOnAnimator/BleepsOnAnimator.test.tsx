@@ -3,13 +3,13 @@
 import React from 'react';
 import { render, act, cleanup } from '@testing-library/react';
 import { Animator } from '@arwes/animator';
-import { useBleeps } from '@arwes/sounds';
+import { useBleeps } from '@arwes/bleeps';
 
 import { BleepsOnAnimator } from './index';
 
 jest.useFakeTimers();
 
-jest.mock('@arwes/sounds', () => ({
+jest.mock('@arwes/bleeps', () => ({
   __esModule: true,
   useBleeps: jest.fn(() => ({}))
 }));

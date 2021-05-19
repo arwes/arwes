@@ -20,7 +20,7 @@ import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { WithAnimatorOutputProps, AnimatorFlow } from '@arwes/animator';
-import { useBleeps } from '@arwes/sounds';
+import { useBleeps } from '@arwes/bleeps';
 
 import { FRAME_SVG_EFFECTS } from '../FrameSVG';
 import { FrameUnderline } from '../FrameUnderline';

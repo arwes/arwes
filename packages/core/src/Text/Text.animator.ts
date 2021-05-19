@@ -1,5 +1,5 @@
 import { AnimatorRef, AnimatorClassSettings } from '@arwes/animator';
-import { Bleeps } from '@arwes/sounds';
+import { Bleeps } from '@arwes/bleeps';
 
 import {
   TextAnimationRefs,

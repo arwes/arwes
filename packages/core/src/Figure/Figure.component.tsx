@@ -17,7 +17,7 @@ import { jsx, useTheme } from '@emotion/react';
 import { THEME_BREAKPOINTS_KEYS, ThemeSettingsBreakpoint } from '@arwes/design';
 import { AnimatorRef, useAnimator } from '@arwes/animator';
 import { transitionVisibilityIn } from '@arwes/animated';
-import { useBleeps } from '@arwes/sounds';
+import { useBleeps } from '@arwes/bleeps';
 
 import { loadImage } from '../utils/loadImage';
 import { TextProps, Text } from '../Text';

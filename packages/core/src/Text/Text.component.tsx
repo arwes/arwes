@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
 import { css, cx, keyframes } from '@emotion/css';
 import { jsx } from '@emotion/react';
 import { AnimatorRef, useAnimator } from '@arwes/animator';
-import { useBleeps } from '@arwes/sounds';
+import { useBleeps } from '@arwes/bleeps';
 
 import { TextAnimationRefs, startTextAnimation } from '../utils/textAnimations';
 import { generateStyles } from './Text.styles';

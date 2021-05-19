@@ -33,7 +33,7 @@
     "@arwes/animator": "*",
     "@arwes/animated": "*",
     "@arwes/design": "*",
-    "@arwes/sounds": "*",
+    "@arwes/bleeps": "*",
     "@emotion/css": "^11.1.3",
     "@emotion/react": "^11.1.4",
     "animejs": "^3.2.1",
@@ -46,6 +46,6 @@
     "@arwes/animator": "^1.0.0-alpha.19",
     "@arwes/animated": "^1.0.0-alpha.19",
     "@arwes/design": "^1.0.0-alpha.19",
-    "@arwes/sounds": "^1.0.0-alpha.19"
+    "@arwes/bleeps": "^1.0.0-alpha.19"
   }
 }

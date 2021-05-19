@@ -1,5 +1,5 @@
 {
-  "name": "@arwes/sounds",
+  "name": "@arwes/bleeps",
   "version": "1.0.0-alpha.19",
   "publishConfig": {
     "access": "public"
@@ -28,7 +28,7 @@
     "dist"
   ],
   "main": "lib/index.js",
-  "unpkg": "dist/sounds.min.js",
+  "unpkg": "dist/bleeps.min.js",
   "peerDependencies": {
     "howler": "2.2.x",
     "prop-types": "*",
