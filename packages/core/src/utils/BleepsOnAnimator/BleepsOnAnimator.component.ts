@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { ENTERED, ENTERING, EXITED, EXITING, useAnimator } from '@arwes/animator';
-import { BleepName, useBleeps } from '@arwes/sounds';
+import { BleepName, useBleeps } from '@arwes/bleeps';
 
 interface BleepsOnAnimatorTransition {
   name: BleepName

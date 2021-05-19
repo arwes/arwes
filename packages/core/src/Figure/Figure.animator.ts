@@ -3,7 +3,7 @@ import { MutableRefObject } from 'react';
 import { CSSObject } from '@emotion/css';
 import { AnimatorClassSettings, AnimatorRef } from '@arwes/animator';
 import { transitionVisibilityIn, transitionVisibilityOut } from '@arwes/animated';
-import { Bleeps } from '@arwes/sounds';
+import { Bleeps } from '@arwes/bleeps';
 
 import { ArwesTheme } from '../ArwesThemeProvider';
 

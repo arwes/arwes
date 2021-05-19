@@ -1,7 +1,7 @@
 import anime from 'animejs';
 import { MutableRefObject } from 'react';
 import { AnimatorClassSettings, AnimatorRef } from '@arwes/animator';
-import { Bleeps } from '@arwes/sounds';
+import { Bleeps } from '@arwes/bleeps';
 
 type ContainerRef = MutableRefObject<HTMLElement>;
 

@@ -34,7 +34,7 @@ build "tools"
 build "design"
 build "animator"
 build "animated"
-build "sounds"
+build "bleeps"
 build "core"
 build "arwes"
 
