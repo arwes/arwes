@@ -67,8 +67,8 @@ module.exports = {
           ]
         },
         {
-          name: '`@arwes/sounds`',
-          path: 'sounds',
+          name: '`@arwes/bleeps`',
+          path: 'bleeps',
           items: [
             { name: 'Bleeps Categories', path: 'categories' },
             { name: 'Sound Accessibility', path: 'accessibility' }

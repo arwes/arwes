@@ -1,10 +1,9 @@
 import { PageContentLayout } from '../../components/PageContentLayout';
 export default props => <PageContentLayout headProps={{ title: 'Sounds' }} {...props} />;
 
-# `@arwes/sounds`
+# `@arwes/bleeps`
 
-Define, manage, and control interactive sound effects using [Howler](https://howlerjs.com)
-in [React](https://reactjs.org).
+Define, manage, and control interactive sound effects in [React](https://reactjs.org).
 
 Based on the [UI/UX guidelines](/project/guidelines), the sounds tools can be
 used for application interface sounds management. Futuristic science fiction
@@ -21,7 +20,7 @@ for sound management.
 It goes hand in hand with the [animator tools](/develop/animator), though
 it is not a dependency.
 
-It is advised to follow the [Sound Accessibility](/develop/sounds/accessibility)
+It is advised to follow the [Sound Accessibility](/develop/bleeps/accessibility)
 recommendations.
 
 ## Installation
@@ -29,7 +28,7 @@ recommendations.
 All the tools are bundled and can be installed with the following NPM package:
 
 ```bash
-npm install @arwes/sounds
+npm install @arwes/bleeps
 ```
 
 The sounds management tooling requires React v17 and Howler v2.2 as peer-dependencies.
@@ -62,14 +61,14 @@ components.
 
 The audio settings define the general audio sound settings which are normally
 transversal for sound control in an application. They can be applicable to all bleeps
-and to [categories of bleeps](/develop/sounds/categories).
+and to [categories of bleeps](/develop/bleeps/categories).
 
 For example, enabling all sounds with an specific volume can be set in a application
 component like:
 
 ```tsx
 import React, { FC } from 'react';
-import { BleepsProvider, BleepsAudioSettings } from '@arwes/sounds';
+import { BleepsProvider, BleepsAudioSettings } from '@arwes/bleeps';
 
 const audioSettings: BleepsAudioSettings = {
   common: {
@@ -97,7 +96,7 @@ In an application component example, the players could be configured like:
 
 ```tsx
 import React, { FC } from 'react';
-import { BleepsProvider, BleepsPlayersSettings } from '@arwes/sounds';
+import { BleepsProvider, BleepsPlayersSettings } from '@arwes/bleeps';
 
 const playersSettings: BleepsPlayersSettings = {
   click: { // On user click.
@@ -130,7 +129,7 @@ configured like:
 
 ```tsx
 import React, { FC } from 'react';
-import { BleepsProvider, BleepsSettings } from '@arwes/sounds';
+import { BleepsProvider, BleepsSettings } from '@arwes/bleeps';
 
 const bleepsSettings: BleepsSettings = {
   tap: {
@@ -151,7 +150,7 @@ const App: FC = ({ children }) => (
 The bleep names can be the same or different from the player names.
 There can be multiple bleeps based on the same player settings.
 
-The bleeps can also have [categories](/develop/sounds/categories).
+The bleeps can also have [categories](/develop/bleeps/categories).
 
 ## Consumers
 
@@ -168,7 +167,7 @@ use it like this:
 
 ```tsx
 import React, { FC } from 'react';
-import { useBleeps } from '@arwes/sounds';
+import { useBleeps } from '@arwes/bleeps';
 
 const ButtonComponent: FC = ({ children }) => {
   const bleeps = useBleeps();

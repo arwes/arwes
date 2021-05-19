@@ -46,15 +46,15 @@ const playgroundConfigs = [
     ]
   },
   {
-    name: 'sounds',
+    name: 'bleeps',
     components: [
       {
         name: 'BleepsProvider',
         sandboxes: [
-          { name: 'basic', code: require('repository/packages/sounds/src/BleepsProvider/BleepsProvider.basic.sandbox.md').default },
-          { name: 'categories', code: require('repository/packages/sounds/src/BleepsProvider/BleepsProvider.categories.sandbox.md').default },
-          { name: 'loops', code: require('repository/packages/sounds/src/BleepsProvider/BleepsProvider.loops.sandbox.md').default },
-          { name: 'dynamic', code: require('repository/packages/sounds/src/BleepsProvider/BleepsProvider.dynamic.sandbox.md').default }
+          { name: 'basic', code: require('repository/packages/bleeps/src/BleepsProvider/BleepsProvider.basic.sandbox.md').default },
+          { name: 'categories', code: require('repository/packages/bleeps/src/BleepsProvider/BleepsProvider.categories.sandbox.md').default },
+          { name: 'loops', code: require('repository/packages/bleeps/src/BleepsProvider/BleepsProvider.loops.sandbox.md').default },
+          { name: 'dynamic', code: require('repository/packages/bleeps/src/BleepsProvider/BleepsProvider.dynamic.sandbox.md').default }
         ]
       }
     ]

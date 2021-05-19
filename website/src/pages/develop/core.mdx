@@ -8,7 +8,7 @@ Framework core set of components.
 It contains the main components to build an standard Arwes user interface.
 
 It depends on the [design](/develop/design), [animator](/develop/animator),
-and [sounds](/develop/sounds) packages.
+and [sounds](/develop/bleeps) packages.
 
 > Since the components are still development, APIs are most likely to change
 over the releases. It is not recommended to use them for real/production
@@ -19,7 +19,7 @@ projects yet.
 All the tools are bundled and can be installed with the following NPM packages:
 
 ```bash
-npm install @arwes/design @arwes/animator @arwes/sounds @arwes/core
+npm install @arwes/design @arwes/animator @arwes/bleeps @arwes/core
 ```
 
 The Arwes packages require the following peer dependencies:
@@ -52,7 +52,7 @@ can be replicated in a local project like:
 import React, { FC, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { AnimatorGeneralProvider, Animator } from '@arwes/animator';
-import { BleepsProvider } from '@arwes/sounds';
+import { BleepsProvider } from '@arwes/bleeps';
 import { ArwesThemeProvider, StylesBaseline, Text, Figure } from '@arwes/core';
 
 // For the font-family to work, you would have to setup the Google Fonts link:

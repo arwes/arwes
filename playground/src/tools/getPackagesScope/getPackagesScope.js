@@ -6,7 +6,7 @@ import * as tools from 'repository/packages/tools';
 import * as design from 'repository/packages/design';
 import * as animator from 'repository/packages/animator';
 import * as animated from 'repository/packages/animated';
-import * as sounds from 'repository/packages/sounds';
+import * as bleeps from 'repository/packages/bleeps';
 import * as core from 'repository/packages/core';
 import * as arwes from 'repository/packages/arwes';
 
@@ -22,7 +22,7 @@ function getPackagesScope () {
     ...design,
     ...animator,
     ...animated,
-    ...sounds,
+    ...bleeps,
     ...core,
     ...arwes
   };
