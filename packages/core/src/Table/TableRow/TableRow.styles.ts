@@ -1,12 +1,11 @@
 import rgba from 'polished/lib/color/rgba';
 import { Interpolation } from '@emotion/react';
-
-import { ArwesTheme } from '../../ArwesThemeProvider';
+import { Theme } from '@arwes/design';
 
 const generateStyles = (
-  theme: ArwesTheme,
+  theme: Theme,
   options: { animate: boolean, isHeader?: boolean, condensed?: boolean }
-): Record<string, Interpolation<ArwesTheme>> => {
+): Record<string, Interpolation<Theme>> => {
   const { palette, space, outline, transitionDuration } = theme;
   const { animate, isHeader, condensed } = options;
 
@@ -23,7 +22,7 @@ const generateStyles = (
         marginBottom: 0
       },
       '&:hover, &:focus': {
-        backgroundColor: isHeader ? undefined : rgba(palette.text.root, 0.1)
+        backgroundColor: isHeader ? undefined : rgba(palette.text.main, 0.1)
       }
     },
     cell: {
@@ -33,7 +32,7 @@ const generateStyles = (
       minWidth: 0, // Fix underflow issue.
       whiteSpace: 'normal',
       wordBreak: 'break-word',
-      backgroundColor: animate ? undefined : rgba(palette.text.root, isHeader ? 0.15 : 0.05),
+      backgroundColor: animate ? undefined : rgba(palette.text.main, isHeader ? 0.15 : 0.05),
       transition: `background-color ${transitionDuration()}ms ease-out`,
 
       '&:last-child': {

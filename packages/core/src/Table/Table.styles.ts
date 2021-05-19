@@ -1,8 +1,7 @@
 import { CSSObject } from '@emotion/react';
+import { Theme } from '@arwes/design';
 
-import { ArwesTheme } from '../ArwesThemeProvider';
-
-const generateStyles = (theme: ArwesTheme): Record<string, CSSObject> => {
+const generateStyles = (theme: Theme): Record<string, CSSObject> => {
   const { space } = theme;
 
   return {

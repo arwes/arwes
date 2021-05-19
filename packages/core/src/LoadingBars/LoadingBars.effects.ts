@@ -2,8 +2,7 @@ import anime from 'animejs';
 import { MutableRefObject } from 'react';
 import { CSSObject } from '@emotion/react';
 import { AnimatorRef } from '@arwes/animator';
-
-import { ArwesTheme } from '../ArwesThemeProvider';
+import { Theme } from '@arwes/design';
 
 type LoadingBarsEffectsRefs = MutableRefObject<{
   rootRef: MutableRefObject<HTMLDivElement | null>
@@ -30,7 +29,7 @@ const stopLoadingBarsTransition = (
 const startLoadingBarsTransition = (
   animator: AnimatorRef,
   refs: LoadingBarsEffectsRefs,
-  theme: ArwesTheme
+  theme: Theme
 ): void => {
   stopLoadingBarsTransition(animator, refs);
 

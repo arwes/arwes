@@ -1,8 +1,7 @@
 import anime from 'animejs';
 import { MutableRefObject } from 'react';
 import { AnimatorClassSettings, AnimatorRef } from '@arwes/animator';
-
-import { ArwesTheme } from '../ArwesThemeProvider';
+import { Theme } from '@arwes/design';
 
 type ContainerRef = MutableRefObject<HTMLUListElement>;
 
@@ -15,7 +14,7 @@ const transitionRemoveList = (animator: AnimatorRef, containerRef: ContainerRef)
   }
 };
 
-const transitionList = (animator: AnimatorRef, containerRef: ContainerRef, theme: ArwesTheme): void => {
+const transitionList = (animator: AnimatorRef, containerRef: ContainerRef, theme: Theme): void => {
   transitionRemoveList(animator, containerRef);
 
   const { flow, duration } = animator;

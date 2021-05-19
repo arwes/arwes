@@ -1,9 +1,8 @@
 import rgba from 'polished/lib/color/rgba';
 import { CSSObject } from '@emotion/css';
+import { Theme } from '@arwes/design';
 
-import { ArwesTheme } from '../ArwesThemeProvider';
-
-const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject> => {
+const createGlobalGeneralStyles = (theme: Theme): Record<string, CSSObject> => {
   const { palette, space, outline, shadowBlur, fontScale, transitionDuration } = theme;
 
   const highlightedContentBgColor1 = rgba(palette.primary.light1, 0.05);
@@ -25,7 +24,7 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       // Fonts
       fontSize: `${16 * fontScale()}px`,
       lineHeight: 1.3,
-      color: palette.text.root,
+      color: palette.text.main,
 
       // Scrollbars
       scrollbarWidth: 'thin',
@@ -62,13 +61,13 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
 
     'h1, h2, h3, h4, h5, h6': {
       fontWeight: 'bold',
-      color: palette.text.headings,
+      color: palette.text.light1,
       textTransform: 'uppercase',
       letterSpacing: 0.5,
-      textShadow: `0 0 ${shadowBlur(2)}px ${palette.text.headings}`,
+      textShadow: `0 0 ${shadowBlur(2)}px ${palette.text.light1}`,
 
       a: {
-        textShadow: `0 0 ${shadowBlur(2)}px ${palette.text.link}`
+        textShadow: `0 0 ${shadowBlur(2)}px ${palette.secondary.main}`
       }
     },
     h1: { fontSize: '1.75rem' },
@@ -99,17 +98,17 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       top: '-0.5em'
     },
     a: {
-      color: palette.text.link,
+      color: palette.secondary.main,
       outline: 'none',
       textDecoration: 'none',
       transition: `color ${transitionDuration()}ms ease-out`,
 
       'h1, h2, h3, h4, h5, h6': {
-        textShadow: `0 0 ${shadowBlur(2)}px ${palette.text.link}`
+        textShadow: `0 0 ${shadowBlur(2)}px ${palette.secondary.main}`
       },
 
       '&:hover, &:focus': {
-        color: palette.text.linkHover
+        color: palette.secondary.light1
       }
     },
 
@@ -220,7 +219,7 @@ const createGlobalGeneralStyles = (theme: ArwesTheme): Record<string, CSSObject>
       height: 0,
       borderWidth: `0 0 ${outline(1)}px 0`,
       borderStyle: 'solid',
-      borderColor: palette.text.root
+      borderColor: palette.text.main
     },
 
     // FORMS

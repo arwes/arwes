@@ -17,6 +17,7 @@ const createThemePalette = (setup: ThemeSetup): ThemePalette => {
     secondary: createThemePaletteBasic({ main: '#ff0', ...setup.palette.secondary }, tonalOffset),
     success: createThemePaletteBasic({ main: '#0f0', ...setup.palette.success }, tonalOffset),
     error: createThemePaletteBasic({ main: '#f00', ...setup.palette.error }, tonalOffset),
+    text: createThemePaletteBasic({ main: '#0ff', ...setup.palette.text }, tonalOffset),
     neutral: createThemePaletteElevation(setup.palette.neutral?.main ?? '#000', elevationOffset)
   });
 };

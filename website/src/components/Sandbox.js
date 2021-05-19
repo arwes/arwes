@@ -22,7 +22,7 @@ const generateStyles = ({ breakpoints, palette, typography }) => ({
   result: {
     overflow: 'hidden',
     position: 'relative',
-    border: '1px solid ' + rgba(palette.text.root, 0.5)
+    border: '1px solid ' + rgba(palette.text.main, 0.5)
   },
   resultRender: {
     padding: 20
@@ -41,7 +41,7 @@ const generateStyles = ({ breakpoints, palette, typography }) => ({
     position: 'relative',
     borderStyle: 'solid',
     borderWidth: '0 1px 1px 1px',
-    borderColor: rgba(palette.text.root, 0.5)
+    borderColor: rgba(palette.text.main, 0.5)
   },
   editionLang: {
     zIndex: 1,
@@ -49,11 +49,11 @@ const generateStyles = ({ breakpoints, palette, typography }) => ({
     right: 1,
     top: 1,
     borderStyle: 'solid',
-    borderColor: rgba(palette.text.root, 0.5),
+    borderColor: rgba(palette.text.main, 0.5),
     borderWidth: '0 0 1px 1px',
     padding: 5,
     backgroundColor: palette.neutral.elevate(1),
-    color: palette.text.root,
+    color: palette.text.main,
     lineHeight: 1,
     fontSize: 14,
     textTransform: 'uppercase',
@@ -73,7 +73,7 @@ const generateStyles = ({ breakpoints, palette, typography }) => ({
 
     '& textarea': {
       outline: 'none !important',
-      color: `${palette.text.root} !important`,
+      color: `${palette.text.main} !important`,
       background: `${rgba(palette.primary.light1, 0.05)} !important`,
 
       '&:hover': {
@@ -91,7 +91,7 @@ const cssStyles = {
 
     '& textarea': {
       outline: 'none !important',
-      color: `${palette.text.root} !important`,
+      color: `${palette.text.main} !important`,
       background: `${rgba(palette.primary.light1, 0.05)} !important`,
 
       '&:hover': {

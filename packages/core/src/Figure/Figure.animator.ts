@@ -1,18 +1,17 @@
 import anime from 'animejs';
 import { MutableRefObject } from 'react';
 import { CSSObject } from '@emotion/css';
+import { Theme } from '@arwes/design';
 import { AnimatorClassSettings, AnimatorRef } from '@arwes/animator';
 import { transitionVisibilityIn, transitionVisibilityOut } from '@arwes/animated';
 import { Bleeps } from '@arwes/bleeps';
-
-import { ArwesTheme } from '../ArwesThemeProvider';
 
 type ContainerRef = MutableRefObject<HTMLElement>;
 
 const onAnimateEntering = (
   animator: AnimatorRef,
   containerRef: ContainerRef,
-  theme: ArwesTheme,
+  theme: Theme,
   styles: CSSObject,
   bleeps: Bleeps
 ): void => {

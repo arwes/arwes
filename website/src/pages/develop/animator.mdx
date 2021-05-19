@@ -55,20 +55,16 @@ A HTML button component can be animated like:
 
 ```tsx
 import React, { FC, useRef, MutableRefObject } from 'react';
-import { AnimatorRef, AnimatorClassSettings, withAnimator } from '@arwes/animator';
+import { AnimatorRef, AnimatorClassSettings, withAnimator, useAnimator } from '@arwes/animator';
 
-interface ButtonProps {
-  // An animated component will receive the `animator` prop with
-  // the animator API.
-  animator: AnimatorRef
-}
-
-const ButtonComponent: FC<ButtonProps> = props => {
+const ButtonComponent: FC = props => {
   const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const animator = useAnimator();
 
   // Here you can set any kind of data you want to pass to the
   // animator "animate events". In this case, a HTML button ref.
-  props.animator.setupAnimateRefs(buttonRef);
+  animator.setupAnimateRefs(buttonRef);
 
   return (
     <button ref={buttonRef}>
@@ -233,7 +229,8 @@ like this:
 ```arwes_sandbox
 function ButtonComponent (props) {
   const buttonRef = React.useRef();
-  props.animator.setupAnimateRefs(buttonRef);
+  const animator = useAnimator();
+  animator.setupAnimateRefs(buttonRef);
   return (
     <button ref={buttonRef} style={{ opacity: 0 }}>
       {props.children}

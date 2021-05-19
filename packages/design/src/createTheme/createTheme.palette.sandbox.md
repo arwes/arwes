@@ -54,6 +54,7 @@ function Sandbox () {
       secondary: { main: '#ff0' },
       success: { main: '#0f0' },
       error: { main: '#f00' },
+      text: { main: '#0ff' },
 
       // Default theme palette elevation colors.
       elevationOffset: 0.025,
@@ -71,6 +72,7 @@ function Sandbox () {
       <PaletteBasic palette='secondary' />
       <PaletteBasic palette='success' />
       <PaletteBasic palette='error' />
+      <PaletteBasic palette='text' />
       <br />
       <PaletteElevation palette='neutral' />
       <br />

@@ -1,6 +1,5 @@
 import { CSSObject } from '@emotion/react';
-
-import { ArwesTheme } from '../ArwesThemeProvider';
+import { Theme } from '@arwes/design';
 
 const rootFullStyles = {
   display: 'flex',
@@ -12,7 +11,7 @@ const rootFullStyles = {
 };
 
 const generateStyles = (
-  theme: ArwesTheme,
+  theme: Theme,
   options: { animate: boolean, length: number, size: number, full?: boolean }
 ): Record<string, CSSObject> => {
   const { palette, space, outline, shadowBlur } = theme;

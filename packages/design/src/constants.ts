@@ -51,6 +51,7 @@ export interface ThemeSettingsPalette {
   secondary?: ThemeSettingsPaletteBasic
   success?: ThemeSettingsPaletteBasic
   error?: ThemeSettingsPaletteBasic
+  text?: ThemeSettingsPaletteBasic
   neutral?: ThemeSettingsPaletteElevation
   [prop: string]: any
 }
@@ -127,6 +128,7 @@ export interface ThemePalette {
   secondary: ThemePaletteBasic
   success: ThemePaletteBasic
   error: ThemePaletteBasic
+  text: ThemePaletteBasic
   neutral: ThemePaletteElevation
   [prop: string]: any
 }
