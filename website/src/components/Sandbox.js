@@ -9,9 +9,9 @@ import howler from 'howler';
 
 import * as design from '@repository/packages/design';
 import * as animator from '@repository/packages/animator';
-import * as sounds from '@repository/packages/sounds';
+import * as bleeps from '@repository/packages/bleeps';
 
-const packagesScope = Object.assign({ anime, howler }, design, animator, sounds);
+const packagesScope = Object.assign({ anime, howler }, design, animator, bleeps);
 
 const generateStyles = ({ breakpoints, palette, typography }) => ({
   root: {
