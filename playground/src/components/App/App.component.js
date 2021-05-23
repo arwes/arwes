@@ -29,6 +29,8 @@ function App () {
   const [isPreviewActive, setIsPreviewActive] = useState(false);
   const [isControlsActive, setIsControlsActive] = useState(getIsDeviceLarge);
 
+  const isTwoPanels = isCodeActive && isPreviewActive;
+
   // If there is a sandbox available, there should be at least one of the panels
   // shown, either the code editor or the preview. Otherwise, both panels should
   // be disabled.
@@ -100,10 +102,7 @@ function App () {
           isHidden={!isControlsActive}
           onToggleControls={onToggleControls}
         />
-        <main css={[
-          styles.main,
-          isCodeActive && isPreviewActive && styles.isMainTwoPanels
-        ]}>
+        <main css={styles.main}>
           {!!sandboxConfig && (
             <LiveProvider
               code={getSandboxFileCode(sandboxConfig.code)}
@@ -113,12 +112,21 @@ function App () {
               noInline
             >
               {isCodeActive && (
-                <div css={[styles.panel, styles.editor, !isPreviewActive && styles.editorOnly]}>
+                <div css={[
+                  styles.panel,
+                  styles.editor,
+                  !isPreviewActive && styles.editorOnly,
+                  isTwoPanels && styles.isPanelHalf
+                ]}>
                   <SandboxEditor />
                 </div>
               )}
               {isPreviewActive && (
-                <div css={[styles.panel, styles.preview]}>
+                <div css={[
+                  styles.panel,
+                  styles.preview,
+                  isTwoPanels && styles.isPanelHalf
+                ]}>
                   <SandboxResult />
                 </div>
               )}

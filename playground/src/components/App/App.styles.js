@@ -36,44 +36,34 @@ const styles = {
     right: 0,
     top: 0,
     bottom: 0,
-    display: 'grid',
-    gridTemplateColumns: 'auto',
-    gridTemplateRows: 'auto 1fr auto'
+    display: 'flex',
+    flexDirection: 'column'
   },
   content: {
+    flex: 1,
     display: 'flex',
-    minHeight: 0, // Height overflow issue.
-
-    [theme.breakpoints.tabletUp]: {
-      display: 'grid',
-      gridTemplateColumns: '280px auto',
-      gridTemplateRows: 'auto'
-    }
+    minHeight: 0 // Height overflow issue.
   },
   controls: {
     minHeight: 0, // Height overflow issue.
 
     [theme.breakpoints.tabletUp]: {
+      width: 280,
       borderRight: `1px solid ${theme.color.border}`
     }
   },
   main: {
     flex: 1,
-    display: 'grid',
-    gridTemplateRows: 'auto',
-    gridTemplateColumns: '100%',
-    minHeight: 0, // Height overflow issue.
-
-    [theme.breakpoints.tabletUp]: {
-      flex: 'none'
-    }
-  },
-  isMainTwoPanels: {
-    gridTemplateColumns: '50% 50%'
+    display: 'flex',
+    minHeight: 0 // Height overflow issue.
   },
   panel: {
     position: 'relative',
-    overflow: 'auto'
+    overflow: 'auto',
+    width: '100%'
+  },
+  isPanelHalf: {
+    width: '50%'
   },
   editor: {
     borderRight: `1px solid ${rgba(theme.color.border, 0.5)}`,
