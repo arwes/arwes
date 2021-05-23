@@ -1,3 +1,5 @@
+// Extending https://necolas.github.io/normalize.css.
+
 import rgba from 'polished/lib/color/rgba';
 import { CSSObject } from '@emotion/css';
 import { Theme } from '@arwes/design';
@@ -61,10 +63,10 @@ const createGlobalGeneralStyles = (theme: Theme): Record<string, CSSObject> => {
 
     'h1, h2, h3, h4, h5, h6': {
       fontWeight: 'bold',
-      color: palette.text.light1,
+      color: palette.text.dark1,
       textTransform: 'uppercase',
       letterSpacing: 0.5,
-      textShadow: `0 0 ${shadowBlur(2)}px ${palette.text.light1}`,
+      textShadow: `0 0 ${shadowBlur(2)}px ${palette.text.dark1}`,
 
       a: {
         textShadow: `0 0 ${shadowBlur(2)}px ${palette.secondary.main}`
@@ -85,6 +87,7 @@ const createGlobalGeneralStyles = (theme: Theme): Record<string, CSSObject> => {
     small: {
       fontSize: '80%'
     },
+    // Prevent `sub` and `sup` elements from affecting the line height in all browsers.
     'sub, sup': {
       fontSize: '75%',
       lineHeight: 0,
@@ -111,6 +114,16 @@ const createGlobalGeneralStyles = (theme: Theme): Record<string, CSSObject> => {
         color: palette.secondary.light1
       }
     },
+    'abbr[title]': {
+      // Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+      borderBottom: 'none',
+      textDecoration: 'underline dotted'
+    },
+    'kbd, samp': {
+      // Correct the inheritance and scaling of font size in all browsers.
+      fontFamily: 'monospace, monospace',
+      fontSize: '1rem'
+    },
 
     // LISTS
 
@@ -134,11 +147,12 @@ const createGlobalGeneralStyles = (theme: Theme): Record<string, CSSObject> => {
     // CODES
 
     'code, pre': {
-      fontFamily: 'monospace'
+      // Correct the inheritance and scaling of font size in all browsers.
+      fontFamily: 'monospace, monospace'
     },
     pre: {
       display: 'block',
-      borderWidth: `${outline(1)}px 0 ${outline(1)}px 0`,
+      borderWidth: `${outline(1)}px 0`,
       borderStyle: 'solid',
       borderColor: palette.primary.dark1,
       padding: space(4),
@@ -225,75 +239,23 @@ const createGlobalGeneralStyles = (theme: Theme): Record<string, CSSObject> => {
     // FORMS
 
     fieldset: {
-      borderStyle: 'solid',
-      borderWidth: outline(1),
-      borderColor: palette.primary.dark2,
       padding: space(4)
     },
 
     'button, input, optgroup, select, textarea': {
       fontFamily: 'inherit',
       fontSize: '100%',
-      lineHeight: 1.2
+      lineHeight: 1.3
+    },
+
+    'button, select': {
+      // Remove the inheritance of text transform in Edge, Firefox, and IE.
+      textTransform: 'none'
     },
 
     'button, [type="button"], [type="reset"], [type="submit"]': {
-      display: 'inline-block',
-      outline: 'none',
-      border: 'none',
-      cursor: 'pointer',
-
       // Correct the inability to style clickable types in iOS and Safari.
-      WebkitAppearance: 'button',
-
-      '&:hover, &:focus': {
-        outline: 'none'
-      },
-      '&:disabled': {
-        cursor: 'auto'
-      }
-    },
-
-    'input, textarea, select': {
-      display: 'block',
-      outline: 'none',
-      borderWidth: `0 0 ${outline(2)}px 0`,
-      borderStyle: 'solid',
-      borderColor: palette.secondary.main,
-      padding: `${space(1)}px ${space(2)}px`,
-      width: '100%',
-      lineHeight: `${space(6)}px`,
-      color: palette.secondary.light1,
-      backgroundColor: 'transparent',
-      transition: [
-        `border-color ${transitionDuration()}ms ease-out`,
-        `background-color ${transitionDuration()}ms ease-out`,
-        `box-shadow ${transitionDuration()}ms ease-out`
-      ].join(', '),
-
-      '&::placeholder': {
-        color: rgba(palette.secondary.light1, 0.5)
-      },
-      '&:hover, &:focus': {
-        borderColor: palette.secondary.light1,
-        backgroundColor: rgba(palette.secondary.dark3, 0.3),
-        boxShadow: `0 0 ${outline(2)}px ${palette.secondary.dark3}`
-      },
-      '&:disabled': {
-        borderColor: palette.primary.dark2,
-        color: palette.primary.dark1,
-        backgroundColor: 'transparent',
-        boxShadow: 'none',
-        cursor: 'auto',
-
-        '&::placeholder': {
-          color: palette.primary.dark2
-        }
-      }
-    },
-    option: {
-      color: palette.secondary.light1,
-      backgroundColor: palette.secondary.dark3
+      WebkitAppearance: 'button'
     },
 
     // Show the overflow in Edge.
@@ -307,9 +269,18 @@ const createGlobalGeneralStyles = (theme: Theme): Record<string, CSSObject> => {
       '[type="button"]::-moz-focus-inner',
       '[type="reset"]::-moz-focus-inner',
       '[type="submit"]::-moz-focus-inner'
-    ].join(', ')]: {
+    ].join()]: {
       borderStyle: 'none',
       padding: 0
+    },
+    // Restore the focus styles unset by the previous rules.
+    [[
+      'button:-moz-focusring',
+      '[type="button"]:-moz-focusring',
+      '[type="reset"]:-moz-focusring',
+      '[type="submit"]:-moz-focusring'
+    ].join()]: {
+      outline: '1px dotted ButtonText'
     },
 
     // Add the correct vertical alignment in Chrome, Firefox, and Opera.
@@ -321,7 +292,7 @@ const createGlobalGeneralStyles = (theme: Theme): Record<string, CSSObject> => {
     [[
       '[type="number"]::-webkit-inner-spin-button',
       '[type="number"]::-webkit-outer-spin-button'
-    ].join('')]: {
+    ].join()]: {
       height: 'auto'
     },
 
@@ -344,6 +315,18 @@ const createGlobalGeneralStyles = (theme: Theme): Record<string, CSSObject> => {
       font: 'inherit'
     },
 
+    // INTERACTIVE
+
+    details: {
+      // Add the correct display in Edge, IE 10+, and Firefox.
+      display: 'block'
+    },
+
+    summary: {
+      // Add the correct display in all browsers.
+      display: 'list-item'
+    },
+
     // CONTENT BLOCK ELEMENTS
 
     [[
@@ -362,7 +345,7 @@ const createGlobalGeneralStyles = (theme: Theme): Record<string, CSSObject> => {
       'figure',
       'hr',
       'fieldset'
-    ].join(', ')]: {
+    ].join()]: {
       marginBottom: space(4)
     }
   };

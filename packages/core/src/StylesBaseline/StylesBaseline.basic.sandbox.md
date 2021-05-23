@@ -13,8 +13,8 @@ let themeSettings = {};
 const palette = {
   primary: { main: '#40ffce' },
   secondary: { main: '#c466dc' },
-  neutral: { main: '#001711' },
-  text: { main: '#35efaa' }
+  text: { main: '#35efaa' },
+  neutral: { main: '#001711' }
 };
 const fontScale = 1.5;
 const space = 8;
