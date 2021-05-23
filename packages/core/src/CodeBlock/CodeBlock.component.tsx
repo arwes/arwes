@@ -1,12 +1,12 @@
 /* @jsx jsx */
-import { ReactNode, ReactElement, MutableRefObject, CSSProperties, useRef, useMemo } from 'react';
+import { ReactNode, ReactElement, MutableRefObject, CSSProperties, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
-import { AnimatorRef, useAnimator } from '@arwes/animator';
-import { useBleeps } from '@arwes/bleeps';
+import { Animated, AnimatedSettings, transitionVisibility } from '@arwes/animated';
 
 import { Text, TextProps } from '../Text';
+import { BleepsOnAnimator } from '../utils/BleepsOnAnimator';
 import { generateStyles } from './CodeBlock.styles';
 
 interface CodeBlockProps {
@@ -28,17 +28,14 @@ const CodeBlock = (props: CodeBlockProps): ReactElement => {
     rootRef
   } = props;
 
-  const animator = useAnimator() as AnimatorRef;
-  const { animate } = animator;
-
   const theme = useTheme();
-  const bleeps = useBleeps();
+  const styles = useMemo(() => generateStyles(theme), [theme]);
 
-  const styles = useMemo(() => generateStyles(theme, { animate }), [theme, animate]);
-
-  const containerRef = useRef<HTMLDivElement | null>(null);
-
-  animator.setupAnimateRefs(containerRef, bleeps);
+  const lineAnimated: AnimatedSettings = {
+    initialStyles: { scaleX: 0 },
+    entering: { scaleX: 1 },
+    exiting: { scaleX: 0 }
+  };
 
   return (
     <div
@@ -47,19 +44,30 @@ const CodeBlock = (props: CodeBlockProps): ReactElement => {
       style={style}
       ref={rootRef}
     >
+      <BleepsOnAnimator
+        entering={{ name: 'assemble', loop: true }}
+        exiting={{ name: 'assemble', loop: true }}
+      />
+
       <div
         className='arwes-code-block__container'
         css={styles.container}
-        ref={containerRef}
       >
-        <div
+        <Animated
           className='arwes-code-block__bg'
           css={styles.bg}
+          animated={transitionVisibility}
         />
 
-        <div
+        <Animated
           className='arwes-code-block__wrap'
           css={styles.wrap}
+          // Hide element only when animations are EXITED.
+          animated={{
+            initialStyles: { opacity: 0 },
+            entering: { opacity: 1, easing: () => (progress: number): number => progress ? 1 : 0 },
+            exiting: { opacity: 0, easing: () => (progress: number): number => progress === 1 ? 1 : 0 }
+          }}
         >
           <Text
             {...contentTextProps}
@@ -68,20 +76,22 @@ const CodeBlock = (props: CodeBlockProps): ReactElement => {
           >
             {children}
           </Text>
-        </div>
+        </Animated>
 
         {!!lang && (
           <div
             className='arwes-code-block__lang'
             css={styles.lang}
           >
-            <div
+            <Animated
               className='arwes-code-block__lang-bg'
               css={styles.langBg}
+              animated={transitionVisibility}
             />
-            <div
+            <Animated
               className='arwes-code-block__line arwes-code-block__line-lang'
               css={[styles.line, styles.lineLang]}
+              animated={lineAnimated}
             />
             <Text blink={false}>
               {lang}
@@ -89,13 +99,15 @@ const CodeBlock = (props: CodeBlockProps): ReactElement => {
           </div>
         )}
 
-        <div
+        <Animated
           className='arwes-code-block__line arwes-code-block__line-top'
           css={[styles.line, styles.lineTop]}
+          animated={lineAnimated}
         />
-        <div
+        <Animated
           className='arwes-code-block__line arwes-code-block__line-bottom'
           css={[styles.line, styles.lineBottom]}
+          animated={lineAnimated}
         />
       </div>
     </div>

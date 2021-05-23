@@ -2,16 +2,16 @@
 const FONT_FAMILY_ROOT = '"Titillium Web", sans-serif';
 const FONT_FAMILY_CODE = '"Source Code Pro", monospace';
 const SOUND_TYPE_URL = '/assets/sounds/type.mp3';
-const SOUND_READOUT_URL = '/assets/sounds/readout.mp3';
+const SOUND_ASSEMBLE_URL = '/assets/sounds/assemble.mp3';
 
 const audioSettings = { common: { volume: 0.25 } };
 const playersSettings = {
   type: { src: [SOUND_TYPE_URL], loop: true },
-  readout: { src: [SOUND_READOUT_URL], loop: true }
+  assemble: { src: [SOUND_ASSEMBLE_URL], loop: true }
 };
 const bleepsSettings = {
   type: { player: 'type' },
-  readout: { player: 'readout' }
+  assemble: { player: 'assemble' }
 };
 const animatorGeneral = { duration: { enter: 300, exit: 300 } };
 

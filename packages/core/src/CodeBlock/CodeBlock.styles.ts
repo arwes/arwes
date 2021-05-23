@@ -2,12 +2,8 @@ import rgba from 'polished/lib/color/rgba';
 import { CSSObject } from '@emotion/react';
 import { Theme } from '@arwes/design';
 
-const generateStyles = (
-  theme: Theme,
-  options: { animate: boolean }
-): Record<string, CSSObject> => {
+const generateStyles = (theme: Theme): Record<string, CSSObject> => {
   const { palette, space, outline, shadowBlur } = theme;
-  const { animate } = options;
 
   return {
     root: {
@@ -28,8 +24,7 @@ const generateStyles = (
       right: 0,
       top: 0,
       bottom: 0,
-      backgroundColor: rgba(palette.primary.light2, 0.05),
-      opacity: animate ? 0 : undefined
+      backgroundColor: rgba(palette.primary.light2, 0.05)
     },
     wrap: {
       position: 'relative',
@@ -63,17 +58,17 @@ const generateStyles = (
       right: 0,
       top: 0,
       bottom: 0,
-      backgroundColor: palette.primary.dark3,
-      opacity: animate ? 0 : undefined
+      backgroundColor: palette.primary.dark3
     },
 
     line: {
       position: 'absolute',
       left: 0,
-      width: animate ? 0 : '100%',
+      width: '100%',
       height: outline(1),
       backgroundColor: palette.primary.dark1,
-      boxShadow: `0 0 ${outline(1)}px ${palette.primary.dark1}`
+      boxShadow: `0 0 ${outline(1)}px ${palette.primary.dark1}`,
+      transformOrigin: 'left'
     },
     lineTop: {
       top: 0
