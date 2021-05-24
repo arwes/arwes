@@ -19,7 +19,7 @@ import { AnimatedSettings } from '../constants';
 import { NoInfer } from '../utils/types';
 import { formatAnimatedCSSPropsShorthands } from './formatAnimatedCSSPropsShorthands';
 
-interface AnimatedProps <E extends HTMLElement | SVGElement = HTMLElement, P = HTMLProps<HTMLElement>> {
+interface AnimatedProps <E extends HTMLElement | SVGElement = HTMLDivElement, P = HTMLProps<HTMLDivElement>> {
   as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
   animated?: AnimatedSettings<P> | Array<AnimatedSettings<P>>
   className?: string

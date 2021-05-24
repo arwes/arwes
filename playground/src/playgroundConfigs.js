@@ -137,6 +137,14 @@ const playgroundConfigs = [
         ]
       },
       {
+        name: 'TextField',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/core/src/TextField/TextField.basic.sandbox.md').default },
+          { name: 'multiline', code: require('repository/packages/core/src/TextField/TextField.multiline.sandbox.md').default },
+          { name: 'static', code: require('repository/packages/core/src/TextField/TextField.static.sandbox.md').default }
+        ]
+      },
+      {
         name: 'Card',
         sandboxes: [
           { name: 'basic', code: require('repository/packages/core/src/Card/Card.basic.sandbox.md').default },

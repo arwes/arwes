@@ -11,6 +11,7 @@ export * from './Card';
 
 export * from './LoadingBars';
 export * from './Button';
+export * from './TextField';
 
 export * from './FrameSVG';
 export * from './FrameBox';
