@@ -346,15 +346,26 @@ const Animator: FC<AnimatorProps> = props => {
       setActivate(animator.activate !== false);
     }
 
+    const previousFlowValue = previousAnimatorRef.current?.flow.value;
     // If the flow value was changed in this update.
-    if (previousAnimatorRef.current?.flow.value !== flow.value) {
+    if (previousFlowValue !== flow.value) {
       animator.onTransition?.(flow);
 
       switch (flow.value) {
         case ENTERING: animator.onAnimateEntering?.(publicAnimatorRef, ...animateRefs.current); break;
-        case ENTERED: animator.onAnimateEntered?.(publicAnimatorRef, ...animateRefs.current); break;
+        case ENTERED:
+          if (previousFlowValue && previousFlowValue !== 'entering') {
+            animator.onAnimateEntering?.(publicAnimatorRef, ...animateRefs.current);
+          }
+          animator.onAnimateEntered?.(publicAnimatorRef, ...animateRefs.current);
+          break;
         case EXITING: animator.onAnimateExiting?.(publicAnimatorRef, ...animateRefs.current); break;
-        case EXITED: animator.onAnimateExited?.(publicAnimatorRef, ...animateRefs.current); break;
+        case EXITED:
+          if (previousFlowValue && previousFlowValue !== 'exiting') {
+            animator.onAnimateExiting?.(publicAnimatorRef, ...animateRefs.current);
+          }
+          animator.onAnimateExited?.(publicAnimatorRef, ...animateRefs.current);
+          break;
       }
 
       if (childActivations.current?.times.length) {
