@@ -63,6 +63,16 @@
         "bug",
         "code"
       ]
+    },
+    {
+      "login": "StephenCodesThings",
+      "name": "Stephen Bennett",
+      "avatar_url": "https://avatars.githubusercontent.com/u/126058?v=4",
+      "profile": "https://github.com/StephenCodesThings",
+      "contributions": [
+        "bug",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5

@@ -59,7 +59,7 @@ It tries to inspire advanced space and alien technology.
 
 > The project is under development as alpha release. See [project details](https://arwes.dev/project).
 
-> Branch [`main`](https://github.com/arwes/arwes) is for releases and public content.
+> Branch [`main`](https://github.com/arwes/arwes/tree/main) is for releases and public content.
 Branch [`next`](https://github.com/arwes/arwes/tree/next) is for active development.
 
 ## Documentation
@@ -108,6 +108,9 @@ Check out [roadmap](https://arwes.dev/project/roadmap) and [project boards](http
     <td align="center"><a href="https://github.com/jdpnielsen"><img src="https://avatars3.githubusercontent.com/u/8746698?v=4?s=140" width="140px;" alt=""/><br /><sub><b>Joshua Pratt</b></sub></a><br /><a href="https://github.com/arwes/arwes/commits?author=jdpnielsen" title="Code">💻</a> <a href="https://github.com/arwes/arwes/pulls?q=is%3Apr+reviewed-by%3Ajdpnielsen" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/Dessix"><img src="https://avatars.githubusercontent.com/u/434942?v=4?s=140" width="140px;" alt=""/><br /><sub><b>Zoey</b></sub></a><br /><a href="#ideas-Dessix" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/arwes/arwes/pulls?q=is%3Apr+reviewed-by%3ADessix" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/amir-arad"><img src="https://avatars.githubusercontent.com/u/6019373?v=4?s=140" width="140px;" alt=""/><br /><sub><b>Amir Arad</b></sub></a><br /><a href="https://github.com/arwes/arwes/issues?q=author%3Aamir-arad" title="Bug reports">🐛</a> <a href="https://github.com/arwes/arwes/commits?author=amir-arad" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/StephenCodesThings"><img src="https://avatars.githubusercontent.com/u/126058?v=4?s=140" width="140px;" alt=""/><br /><sub><b>Stephen Bennett</b></sub></a><br /><a href="https://github.com/arwes/arwes/issues?q=author%3AStephenCodesThings" title="Bug reports">🐛</a> <a href="https://github.com/arwes/arwes/commits?author=StephenCodesThings" title="Code">💻</a></td>
   </tr>
 </table>
 
