@@ -57,7 +57,7 @@ and productions like [Star Citizen](http://robertsspaceindustries.com),
 [Halo](https://www.halowaypoint.com/en-us/games), and [TRON: Legacy](http://www.imdb.com/title/tt1104001).
 It tries to inspire advanced space and alien technology.
 
-> The project is under development as alpha release. See [project details](https://arwes.dev/project).
+> The project is under development and released in alpha state. See [project details](https://arwes.dev/project).
 
 > Branch [`main`](https://github.com/arwes/arwes/tree/main) is for releases and public content.
 Branch [`next`](https://github.com/arwes/arwes/tree/next) is for active development.
