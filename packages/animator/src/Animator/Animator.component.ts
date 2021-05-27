@@ -354,14 +354,14 @@ const Animator: FC<AnimatorProps> = props => {
       switch (flow.value) {
         case ENTERING: animator.onAnimateEntering?.(publicAnimatorRef, ...animateRefs.current); break;
         case ENTERED:
-          if (previousFlowValue && previousFlowValue !== 'entering') {
+          if (previousFlowValue && previousFlowValue !== ENTERING) {
             animator.onAnimateEntering?.(publicAnimatorRef, ...animateRefs.current);
           }
           animator.onAnimateEntered?.(publicAnimatorRef, ...animateRefs.current);
           break;
         case EXITING: animator.onAnimateExiting?.(publicAnimatorRef, ...animateRefs.current); break;
         case EXITED:
-          if (previousFlowValue && previousFlowValue !== 'exiting') {
+          if (previousFlowValue && previousFlowValue !== EXITING) {
             animator.onAnimateExiting?.(publicAnimatorRef, ...animateRefs.current);
           }
           animator.onAnimateExited?.(publicAnimatorRef, ...animateRefs.current);
