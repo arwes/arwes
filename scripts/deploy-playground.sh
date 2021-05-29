@@ -1,8 +1,10 @@
 #!/bin/sh
 
+alias log="sh $(pwd)/scripts/log.sh"
+
 if [ -z $1 ]
 then
-  echo "Please specify git branch."
+  log "Please specify git branch."
   exit 1
 fi
 

@@ -1,31 +1,16 @@
 #!/bin/sh
 
-# Compile all the specified packages JavaScript source code with TypeScript compiler
-# to commonjs distribution files from "packages/[package]/src" to "packages/[package]/lib".
-
-log () {
-  echo "\033[1;36m$1\033[0m"
-}
-
-build () {
-  log "Compiling $1..."
-
-  cd ./packages/$1/
-
-  ../../node_modules/.bin/rimraf ./lib/
-  ../../node_modules/.bin/tsc -p tsconfig.build.json
-
-  cd ../../
-}
+alias log="sh $(pwd)/scripts/log.sh"
+alias compile="sh $(pwd)/scripts/compile-commonjs-package.sh"
 
 log "Compiling Arwes packages for CommonJS."
 
-build "tools"
-build "design"
-build "animator"
-build "animated"
-build "bleeps"
-build "core"
-build "arwes"
+compile tools
+compile design
+compile animator
+compile animated
+compile bleeps
+compile core
+compile arwes
 
 log "Compilation completed."

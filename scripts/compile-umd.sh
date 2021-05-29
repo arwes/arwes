@@ -1,41 +1,34 @@
 #!/bin/sh
 
-alias rimraf=./node_modules/.bin/rimraf
-alias webpack=./node_modules/.bin/webpack
-alias cross-env=./node_modules/.bin/cross-env
+alias log="sh $(pwd)/scripts/log.sh"
+alias rimraf="$(pwd)/node_modules/.bin/rimraf"
+alias webpack="$(pwd)/node_modules/.bin/webpack"
+alias cross-env="$(pwd)/node_modules/.bin/cross-env"
 
-logInfo () {
-  echo "\033[1;36m$1\033[0m"
-}
-
-logVerbose () {
-  echo "\033[0;36m$1\033[0m"
-}
-
-build () {
-  logInfo "Compiling @arwes/$1..."
+compile () {
+  log "Compiling \"$1\"..."
 
   COMPILE_OUT_PATH=./packages/$1/dist/
   COMPILE_SRC=./packages/$1/src/index.ts
 
-  logVerbose "Removing dist path..."
+  log "Removing dist path..."
   rimraf $COMPILE_OUT_PATH
 
-  logVerbose "Compiling development file..."
+  log "Compiling development file..."
   cross-env NODE_ENV=development COMPILE_NAME=$1 COMPILE_SRC=$COMPILE_SRC COMPILE_OUT_PATH=$COMPILE_OUT_PATH COMPILE_OUT_FILENAME=$1.js COMPILE_OUT_NAME=$1 webpack --config=./scripts/compile-umd.webpack.config.js
 
-  logVerbose "Compiling production file..."
+  log "Compiling production file..."
   cross-env NODE_ENV=production COMPILE_NAME=$1 COMPILE_SRC=$COMPILE_SRC COMPILE_OUT_PATH=$COMPILE_OUT_PATH COMPILE_OUT_FILENAME=$1.min.js COMPILE_OUT_NAME=$1 webpack --config=./scripts/compile-umd.webpack.config.js
 }
 
-logInfo "Compiling Arwes packages for UMD."
+log "Compiling Arwes packages for UMD."
 
-build "tools"
-build "design"
-build "animator"
-build "animated"
-build "bleeps"
-build "core"
-build "arwes"
+compile tools
+compile design
+compile animator
+compile animated
+compile bleeps
+compile core
+compile arwes
 
-logInfo "Compilation completed."
+log "Compilation completed."
