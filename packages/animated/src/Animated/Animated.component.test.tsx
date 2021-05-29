@@ -16,7 +16,10 @@ test('Should render DIV element content by default', () => {
       </Animated>
     </Animator>
   );
-  expect(container.innerHTML).toBe('<div class="hello">Hello!</div>');
+  const element = container.firstChild as HTMLElement;
+  expect(element.tagName).toBe('DIV');
+  expect(element.className).toBe('hello');
+  expect(element.innerHTML).toBe('Hello!');
 });
 
 test('Should render custom HTML element content', () => {
@@ -25,13 +28,17 @@ test('Should render custom HTML element content', () => {
       <Animated<HTMLAnchorElement, HTMLProps<HTMLAnchorElement>>
         as='a'
         href='#'
-        download
+        download='x'
       >
         Hello!
       </Animated>
     </Animator>
   );
-  expect(container.innerHTML).toBe('<a href="#" download="">Hello!</a>');
+  const element = container.firstChild as HTMLElement;
+  expect(element.tagName).toBe('A');
+  expect(element.getAttribute('href')).toBe('#');
+  expect(element.getAttribute('download')).toBe('x');
+  expect(element.innerHTML).toBe('Hello!');
 });
 
 test('Should render custom SVG element content', () => {
@@ -47,7 +54,12 @@ test('Should render custom SVG element content', () => {
       </svg>
     </Animator>
   );
-  expect(container.innerHTML).toBe('<svg><path d="M0,0">Hello!</path></svg>');
+  const svg = container.firstChild as HTMLElement;
+  const path = svg.firstChild as HTMLElement;
+  expect(svg.tagName).toBe('svg');
+  expect(path.tagName).toBe('path');
+  expect(path.getAttribute('d')).toBe('M0,0');
+  expect(path.innerHTML).toBe('Hello!');
 });
 
 test('Should get HTML/SVG element reference with "rootRef" ref prop', () => {

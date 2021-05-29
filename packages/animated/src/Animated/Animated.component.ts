@@ -74,7 +74,7 @@ const Animated = <
   }, []);
 
   useEffect(() => {
-    if (!animator || !animator.animate || !animated) {
+    if (!animator || !animator.animate || !animated || !animatedItems.length) {
       return;
     }
 
@@ -142,6 +142,14 @@ const Animated = <
       .reduce((total: any, item) => ({ ...total, ...item }), {});
   }
 
+  let specialStyles: CSSProperties | undefined;
+  if (animate && animator?.flow.exited) {
+    specialStyles = {
+      // Hide the element when it is EXITED.
+      visibility: 'hidden'
+    };
+  }
+
   let dynamicStyles: CSSProperties | undefined;
   if (animate) {
     dynamicStyles = animatedItems
@@ -155,6 +163,7 @@ const Animated = <
     className,
     style: {
       ...style,
+      ...specialStyles,
       ...dynamicStyles
     },
     ref: rootRef

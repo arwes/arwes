@@ -331,3 +331,34 @@ test('Should not call "anime" if no settings are provided', () => {
   actJestMoveTimeTo(1001);
   expect(anime).not.toHaveBeenCalled();
 });
+
+test('Should set "style.visibility=hidden" when EXITED', () => {
+  const Example: React.FC = () => {
+    const [activate, setActivate] = React.useState(true);
+
+    React.useEffect(() => {
+      const timeout = setTimeout(() => setActivate(false), 1000);
+      return () => clearTimeout(timeout);
+    }, []);
+
+    return (
+      <Animator animator={{ activate }}>
+        <Animated />
+      </Animator>
+    );
+  };
+  const { container } = render(<Example />);
+  const element = container.firstChild as HTMLElement;
+
+  // Since the component has initial state EXITED..
+  expect(element.style.visibility).toBe('hidden');
+
+  actJestMoveTimeTo(1);
+  expect(element.style.visibility).toBe('');
+
+  actJestMoveTimeTo(1099);
+  expect(element.style.visibility).toBe('');
+
+  actJestMoveTimeTo(1101);
+  expect(element.style.visibility).toBe('hidden');
+});
