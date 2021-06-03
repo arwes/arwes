@@ -15,6 +15,7 @@ const PaletteBasic = ({ palette }) => {
       display: 'flex',
       flexDirection: 'row'
     }}>
+      <Color color={theme.palette[palette].dark4} />
       <Color color={theme.palette[palette].dark3} />
       <Color color={theme.palette[palette].dark2} />
       <Color color={theme.palette[palette].dark1} />
@@ -22,6 +23,7 @@ const PaletteBasic = ({ palette }) => {
       <Color color={theme.palette[palette].light1} />
       <Color color={theme.palette[palette].light2} />
       <Color color={theme.palette[palette].light3} />
+      <Color color={theme.palette[palette].light4} />
     </div>
   );
 };
@@ -41,6 +43,8 @@ const PaletteElevation = ({ palette }) => {
       <Color color={theme.palette[palette].elevate(4)} />
       <Color color={theme.palette[palette].elevate(5)} />
       <Color color={theme.palette[palette].elevate(6)} />
+      <Color color={theme.palette[palette].elevate(7)} />
+      <Color color={theme.palette[palette].elevate(8)} />
     </div>
   );
 };

@@ -17,9 +17,11 @@ test('Should create default "primary" palette with "cyan" color', () => {
     dark1: '#0cc',
     dark2: '#099',
     dark3: '#066',
+    dark4: '#033',
     light1: '#3ff',
     light2: '#6ff',
-    light3: '#9ff'
+    light3: '#9ff',
+    light4: '#cff'
   });
 });
 
@@ -30,9 +32,11 @@ test('Should create default "secondary" palette with "yellow" color', () => {
     dark1: '#cc0',
     dark2: '#990',
     dark3: '#660',
+    dark4: '#330',
     light1: '#ff3',
     light2: '#ff6',
-    light3: '#ff9'
+    light3: '#ff9',
+    light4: '#ffc'
   });
 });
 
@@ -43,9 +47,11 @@ test('Should create default "success" palette with "green" color', () => {
     dark1: '#0c0',
     dark2: '#090',
     dark3: '#060',
+    dark4: '#030',
     light1: '#3f3',
     light2: '#6f6',
-    light3: '#9f9'
+    light3: '#9f9',
+    light4: '#cfc'
   });
 });
 
@@ -56,9 +62,11 @@ test('Should create default "error" palette with "red" color', () => {
     dark1: '#c00',
     dark2: '#900',
     dark3: '#600',
+    dark4: '#300',
     light1: '#f33',
     light2: '#f66',
-    light3: '#f99'
+    light3: '#f99',
+    light4: '#fcc'
   });
 });
 
@@ -69,9 +77,11 @@ test('Should create default "text" palette with "cyan" color', () => {
     dark1: '#0cc',
     dark2: '#099',
     dark3: '#066',
+    dark4: '#033',
     light1: '#3ff',
     light2: '#6ff',
-    light3: '#9ff'
+    light3: '#9ff',
+    light4: '#cff'
   });
 });
 
@@ -91,9 +101,11 @@ describe('basic colors', () => {
         dark1: darken(tonalOffset, color),
         dark2: darken(tonalOffset * 2, color),
         dark3: darken(tonalOffset * 3, color),
+        dark4: darken(tonalOffset * 4, color),
         light1: lighten(tonalOffset, color),
         light2: lighten(tonalOffset * 2, color),
-        light3: lighten(tonalOffset * 3, color)
+        light3: lighten(tonalOffset * 3, color),
+        light4: lighten(tonalOffset * 4, color)
       });
     });
 
@@ -102,16 +114,18 @@ describe('basic colors', () => {
       const dark1 = '#111';
       const dark2 = '#222';
       const dark3 = '#333';
-      const light1 = '#444';
-      const light2 = '#555';
-      const light3 = '#666';
+      const dark4 = '#444';
+      const light1 = '#555';
+      const light2 = '#666';
+      const light3 = '#777';
+      const light4 = '#888';
       const theme: any = createTheme({
         palette: {
-          [paletteName]: { main, dark1, dark2, dark3, light1, light2, light3 }
+          [paletteName]: { main, dark1, dark2, dark3, dark4, light1, light2, light3, light4 }
         }
       });
       expect(theme.palette[paletteName]).toEqual(
-        { main, dark1, dark2, dark3, light1, light2, light3 }
+        { main, dark1, dark2, dark3, dark4, light1, light2, light3, light4 }
       );
     });
   });

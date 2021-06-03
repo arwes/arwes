@@ -113,9 +113,11 @@ export interface ThemePaletteBasic {
   dark1: string
   dark2: string
   dark3: string
+  dark4: string
   light1: string
   light2: string
   light3: string
+  light4: string
 }
 export interface ThemePaletteElevation {
   main: string
