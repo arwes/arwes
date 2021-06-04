@@ -223,12 +223,6 @@ const FrameSVG = <
           <Animated<SVGGElement, SVGProps<SVGGElement>>
             as='g'
             style={{ transform: `translate(${blurPadding}px, ${blurPadding}px)` }}
-            // Hide polylines only when animations are EXITED.
-            animated={{
-              initialStyles: { opacity: 0 },
-              entering: { opacity: 1, easing: () => (progress: number): number => progress ? 1 : 0 },
-              exiting: { opacity: 0, easing: () => (progress: number): number => progress === 1 ? 1 : 0 }
-            }}
           >
             <Animated<SVGGElement, SVGProps<SVGGElement>>
               as='g'

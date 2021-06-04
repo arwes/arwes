@@ -62,12 +62,6 @@ const CodeBlock = (props: CodeBlockProps): ReactElement => {
         <Animated
           className='arwes-code-block__wrap'
           css={styles.wrap}
-          // Hide element only when animations are EXITED.
-          animated={{
-            initialStyles: { opacity: 0 },
-            entering: { opacity: 1, easing: () => (progress: number): number => progress ? 1 : 0 },
-            exiting: { opacity: 0, easing: () => (progress: number): number => progress === 1 ? 1 : 0 }
-          }}
         >
           <Text
             {...contentTextProps}
