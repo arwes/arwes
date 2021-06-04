@@ -14,30 +14,10 @@ const ArwesThemeProvider = (props: ArwesThemeProviderProps): ReactElement => {
   const theme: Theme = createTheme({
     ...themeSettings,
     palette: {
-      primary: {
-        light3: '#befcfe',
-        light2: '#7efcf6',
-        light1: '#3efbfb',
-        main: '#00f8f8',
-        dark1: '#05c6c1',
-        dark2: '#0b8481',
-        dark3: '#15333c'
-      },
-      secondary: {
-        light3: '#ffece1',
-        light2: '#ffe4d2',
-        light1: '#ffc69f',
-        main: '#ffa76c',
-        dark1: '#f66901',
-        dark2: '#e24a0f',
-        dark3: '#a32d08'
-      },
-      text: {
-        main: '#7efcf6'
-      },
-      neutral: {
-        main: '#021114'
-      },
+      primary: { main: '#00f8f8' },
+      secondary: { main: '#F8F800' },
+      text: { main: '#2CFFFF' },
+      neutral: { main: '#021114' },
       ...themeSettings?.palette
     }
   });

@@ -111,7 +111,7 @@ const createGlobalGeneralStyles = (theme: Theme): Record<string, CSSObject> => {
       },
 
       '&:hover, &:focus': {
-        color: palette.secondary.light1
+        color: palette.secondary.light2
       }
     },
     'abbr[title]': {
