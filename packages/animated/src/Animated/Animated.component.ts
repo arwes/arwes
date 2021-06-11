@@ -81,7 +81,7 @@ const Animated = <
     switch (animator.flow.value) {
       case ENTERING: {
         const animationParams = {
-          targets: internalRef.current,
+          targets: internalRef.current as HTMLElement,
           duration: animator.duration.enter
         };
 
@@ -108,7 +108,7 @@ const Animated = <
 
       case EXITING: {
         const animationParams = {
-          targets: internalRef.current,
+          targets: internalRef.current as HTMLElement,
           duration: animator.duration.exit
         };
 

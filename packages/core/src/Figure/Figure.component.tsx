@@ -116,7 +116,7 @@ const Figure = (props: FigureProps): ReactElement => {
             setIsLoading(false);
 
             transitionVisibilityIn({
-              targets: containerRef.current?.querySelector('.arwes-figure__asset'),
+              targets: containerRef.current?.querySelector('.arwes-figure__asset') as HTMLElement,
               duration: animator.duration.enter
             });
           }
