@@ -31,14 +31,17 @@ const Sandbox = () => {
           <Animator animator={{ activate, manager: 'stagger' }}>
             <form>
               {textFieldTypes.map((type, index) =>
-                <TextField
-                  key={index}
-                  type={type}
-                  placeholder={`Text field ${type}`}
-                  defaultValue=''
-                  palette='primary'
-                  style={{ marginBottom: 20 }}
-                />
+                <div key={index} style={{ marginBottom: 20 }}>
+                  <Text as='label' style={{ marginBottom: 10 }}>
+                    Text field {type}
+                  </Text>
+                  <TextField
+                    type={type}
+                    placeholder={`Text field ${type}`}
+                    defaultValue=''
+                    palette='primary'
+                  />
+                </div>
               )}
             </form>
           </Animator>

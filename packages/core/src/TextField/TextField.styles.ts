@@ -57,6 +57,17 @@ const generateStyles = (
         margin: 0
       },
 
+      '&:hover:not(:disabled, :read-only), &:focus:not(:disabled, :read-only)': {
+        outline: 'none',
+        backgroundColor: rgba(colorPalette.main, 0.05),
+        boxShadow: `0 0 ${shadowBlur(1)}px ${colorPalette.dark3}`,
+
+        // The "lineBottomOver" element.
+        '& + div': {
+          transform: 'scaleX(1)'
+        }
+      },
+
       // Remove browser validation styles.
       '&:required, &:invalid': {
         boxShadow: 'none'
@@ -70,16 +81,17 @@ const generateStyles = (
       ].join()]: {
         filter: 'none',
         border: 'none',
+
+        // Hack to define colors, since the basic style properties do not work.
         WebkitTextFillColor: colorPalette.main,
         WebkitBoxShadow: `0 0 0px 1000px ${colorPalette.dark3} inset`
       },
 
       '&::placeholder': {
-        color: rgba(colorPalette.light1, 0.5)
+        color: rgba(colorPalette.main, 0.5)
       },
 
       '&:disabled': {
-        borderColor: colorPalette.dark2,
         color: colorPalette.dark1,
         backgroundColor: 'transparent',
         boxShadow: 'none',
@@ -88,34 +100,44 @@ const generateStyles = (
         '&::placeholder': {
           color: colorPalette.dark2
         }
-      },
-
-      '&:hover, &:focus': {
-        borderColor: colorPalette.light1,
-        backgroundColor: rgba(colorPalette.dark3, 0.3),
-        boxShadow: `0 0 ${outline(2)}px ${colorPalette.dark3}`,
-
-        // The "lineOver" element.
-        '& + div': {
-          transform: 'scaleX(1)'
-        }
       }
     },
     line: {
       position: 'absolute',
-      left: 0,
-      right: 0,
       bottom: 0,
       borderBottomWidth: outline(1),
       borderBottomStyle: 'solid',
-      borderBottomColor: colorPalette.main,
-      boxShadow: `0 0 ${shadowBlur(1)}px ${colorPalette.main}`,
-      transition: `transform ${transitionDuration()}ms ease-out`,
+      borderBottomColor: colorPalette.dark1,
+      boxShadow: `0 0 ${shadowBlur(1)}px ${colorPalette.dark1}`,
       transformOrigin: 'left'
     },
-    lineOver: {
-      borderBottomColor: colorPalette.light2,
-      boxShadow: `0 0 ${shadowBlur(2)}px ${colorPalette.light2}`,
+    lineBottom: {
+      left: 0,
+      right: 0,
+
+      '&::before, &::after': {
+        content: '""',
+        display: 'block',
+        position: 'absolute',
+        bottom: 0,
+        borderBottomWidth: outline(1),
+        borderBottomStyle: 'solid',
+        borderBottomColor: colorPalette.light1,
+        width: '0.5rem'
+      },
+      '&::before': {
+        left: 0
+      },
+      '&::after': {
+        right: 0
+      }
+    },
+    lineBottomOver: {
+      left: 0,
+      right: 0,
+      borderBottomColor: colorPalette.light1,
+      boxShadow: `0 0 ${shadowBlur(1)}px ${colorPalette.light1}`,
+      transition: `transform ${transitionDuration()}ms ease-out`,
       transform: 'scaleX(0)'
     }
   };

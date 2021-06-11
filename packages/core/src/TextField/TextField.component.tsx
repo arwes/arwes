@@ -29,7 +29,7 @@ interface TextFieldProps <E extends HTMLInputElement | HTMLTextAreaElement = HTM
   onChange?: (event: ChangeEvent<E>) => void
   onInput?: (event: FormEvent<E>) => void
   inputProps?: HTMLProps<E>
-  hideLine?: boolean
+  hideLines?: boolean
   palette?: string
   className?: string
   style?: CSSProperties
@@ -53,7 +53,7 @@ const TextField = (props: TextFieldProps): ReactElement => {
     onChange,
     onInput,
     inputProps,
-    hideLine,
+    hideLines,
     palette,
     className,
     style,
@@ -83,9 +83,9 @@ const TextField = (props: TextFieldProps): ReactElement => {
           exiting: { translateX: theme.space(1) }
         }}
       >
-        {!hideLine &&
+        {!hideLines &&
           <Animated
-            css={styles.line}
+            css={[styles.line, styles.lineBottom]}
             animated={{
               initialStyles: { scaleX: 0 },
               entering: { scaleX: 1 },
@@ -111,9 +111,15 @@ const TextField = (props: TextFieldProps): ReactElement => {
           type={multiline ? undefined : type}
           className={cx('arwes-text-field__input', inputProps?.className)}
           css={styles.input}
+          animated={{
+            exiting: ({ targets }) => {
+              // If the input has focus while invisibile, user would be able to type on it.
+              (targets as HTMLElement).blur();
+            }
+          }}
         />
-        {!hideLine &&
-          <div css={[styles.line, styles.lineOver]} />
+        {!hideLines &&
+          <div css={[styles.line, styles.lineBottomOver]} />
         }
       </Animated>
     </div>
@@ -136,6 +142,7 @@ TextField.propTypes = {
   onChange: PropTypes.func,
   onInput: PropTypes.func,
   inputProps: PropTypes.object,
+  hideLines: PropTypes.bool,
   palette: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.object,
