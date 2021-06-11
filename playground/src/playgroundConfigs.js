@@ -141,6 +141,7 @@ const playgroundConfigs = [
         sandboxes: [
           { name: 'basic', code: require('repository/packages/core/src/TextField/TextField.basic.sandbox.md').default },
           { name: 'multiline', code: require('repository/packages/core/src/TextField/TextField.multiline.sandbox.md').default },
+          { name: 'labels', code: require('repository/packages/core/src/TextField/TextField.labels.sandbox.md').default },
           { name: 'static', code: require('repository/packages/core/src/TextField/TextField.static.sandbox.md').default }
         ]
       },
@@ -150,6 +151,13 @@ const playgroundConfigs = [
           { name: 'basic', code: require('repository/packages/core/src/Card/Card.basic.sandbox.md').default },
           { name: 'landscape', code: require('repository/packages/core/src/Card/Card.landscape.sandbox.md').default },
           { name: 'static', code: require('repository/packages/core/src/Card/Card.static.sandbox.md').default }
+        ]
+      },
+      {
+        name: 'FrameSVG',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/core/src/FrameSVG/FrameSVG.basic.sandbox.md').default },
+          { name: 'static', code: require('repository/packages/core/src/FrameSVG/FrameSVG.static.sandbox.md').default }
         ]
       },
       {

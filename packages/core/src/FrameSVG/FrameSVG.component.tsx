@@ -75,7 +75,7 @@ const FrameSVG = <
   const containerRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<any>(null);
 
-  const blurPadding = theme.shadowBlur(2);
+  const blurPadding = theme.shadowBlur(1);
   const defaultPalette = theme.palette.primary;
   const colorPalette = theme.palette[palette as string] ?? defaultPalette;
   const color = disabled ? colorPalette.dark2 : colorPalette.main;
