@@ -13,11 +13,15 @@ import {
 } from 'react';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
-import { ENTERING, EXITING, useAnimator } from '@arwes/animator';
+import { ENTERING, ENTERED, useAnimator } from '@arwes/animator';
 
-import { AnimatedSettings } from '../constants';
+import { AnimatedSettings, AnimatedSettingsTransition } from '../constants';
 import { NoInfer } from '../utils/types';
 import { formatAnimatedCSSPropsShorthands } from './formatAnimatedCSSPropsShorthands';
+
+const ANIME_ANIMATION_DEFAULTS = {
+  easing: 'easeOutSine'
+};
 
 interface AnimatedProps <E extends HTMLElement | SVGElement = HTMLDivElement, P = HTMLProps<HTMLDivElement>> {
   as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
@@ -58,7 +62,7 @@ const Animated = <
 
   const animator = useAnimator();
 
-  if (process.env.NODE_ENV !== 'production' && !animator) {
+  if (!animator) {
     throw new Error('Animated component can only be used inside an Animator.');
   }
 
@@ -78,61 +82,36 @@ const Animated = <
       return;
     }
 
-    switch (animator.flow.value) {
-      case ENTERING: {
-        const animationParams = {
-          targets: internalRef.current as HTMLElement,
-          duration: animator.duration.enter
-        };
+    const flowValue = animator.flow.value;
+    const durationTransition = flowValue === ENTERING || flowValue === ENTERED
+      ? animator.duration.enter
+      : animator.duration.exit;
 
-        animatedItems.filter(item => item.entering).forEach(item => {
-          const animations = Array.isArray(item.entering) ? item.entering : [item.entering];
+    animatedItems
+      .filter(item => item[flowValue])
+      .forEach(animatedItem => {
+        const animationsReceived = Array.isArray(animatedItem[flowValue])
+          ? animatedItem[flowValue]
+          : [animatedItem[flowValue]];
+        const animations = animationsReceived as AnimatedSettingsTransition[];
 
-          animations.forEach(animation => {
-            if (typeof animation === 'function') {
-              animation(animationParams);
-            }
-            else {
-              anime({
-                easing: 'easeOutSine',
-                ...animation,
-                targets: internalRef.current,
-                duration: animator.duration.enter
-              });
-            }
-          });
+        animations.forEach(animation => {
+          if (typeof animation === 'function') {
+            animation({
+              target: internalRef.current as E,
+              duration: durationTransition
+            });
+          }
+          else {
+            anime({
+              ...ANIME_ANIMATION_DEFAULTS,
+              ...animation,
+              targets: internalRef.current,
+              duration: durationTransition
+            });
+          }
         });
-
-        break;
-      }
-
-      case EXITING: {
-        const animationParams = {
-          targets: internalRef.current as HTMLElement,
-          duration: animator.duration.exit
-        };
-
-        animatedItems.filter(item => item.exiting).forEach(item => {
-          const animations = Array.isArray(item.exiting) ? item.exiting : [item.exiting];
-
-          animations.forEach(animation => {
-            if (typeof animation === 'function') {
-              animation(animationParams);
-            }
-            else {
-              anime({
-                easing: 'easeOutSine',
-                ...animation,
-                targets: internalRef.current,
-                duration: animator.duration.exit
-              });
-            }
-          });
-        });
-
-        break;
-      }
-    }
+      });
   }, [animator?.flow]);
 
   let initialAttributes: P | undefined;
@@ -170,29 +149,24 @@ const Animated = <
   });
 };
 
+const animatedSettingsItemPropType = PropTypes.oneOfType([
+  PropTypes.func,
+  PropTypes.object,
+  PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.object
+    ])
+  )
+]);
+
 const animatedSettingsPropType = PropTypes.shape({
   initialAttributes: PropTypes.object,
   initialStyles: PropTypes.object,
-  entering: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.object,
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([
-        PropTypes.func,
-        PropTypes.object
-      ])
-    )
-  ]),
-  exiting: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.object,
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([
-        PropTypes.func,
-        PropTypes.object
-      ])
-    )
-  ])
+  entering: animatedSettingsItemPropType,
+  entered: animatedSettingsItemPropType,
+  exiting: animatedSettingsItemPropType,
+  exited: animatedSettingsItemPropType
 });
 
 Animated.propTypes = {

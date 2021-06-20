@@ -54,7 +54,7 @@ describe('Objects Settings', () => {
     const { container } = render(<Example />);
     const element = container.firstChild as HTMLDivElement;
 
-    actJestMoveTimeTo(1);
+    actJestMoveTimeTo(999);
     expect(anime).not.toHaveBeenCalled();
 
     actJestMoveTimeTo(1001);
@@ -63,6 +63,41 @@ describe('Objects Settings', () => {
       easing: 'easeOutSine',
       duration: 127,
       opacity: 1
+    });
+  });
+
+  test('Should transition "animated.entered" with object setting', () => {
+    const Example: React.FC = () => {
+      const [activate, setActivate] = React.useState(false);
+
+      React.useEffect(() => {
+        const timeout = setTimeout(() => setActivate(true), 1000);
+        return () => clearTimeout(timeout);
+      }, []);
+
+      return (
+        <Animator animator={{ activate, duration: { enter: 127 } }}>
+          <Animated
+            animated={{
+              entered: { width: 100 }
+            }}
+          />
+        </Animator>
+      );
+    };
+
+    const { container } = render(<Example />);
+    const element = container.firstChild as HTMLDivElement;
+
+    actJestMoveTimeTo(1000 + 127 - 1);
+    expect(anime).not.toHaveBeenCalled();
+
+    actJestMoveTimeTo(1000 + 127 + 1);
+    expect(anime).toHaveBeenCalledWith({
+      targets: element,
+      easing: 'easeOutSine',
+      duration: 127,
+      width: 100
     });
   });
 
@@ -97,6 +132,49 @@ describe('Objects Settings', () => {
       easing: 'easeOutSine',
       duration: 176,
       width: 913
+    });
+  });
+
+  test('Should transition "animated.exited" with object setting', () => {
+    const Example: React.FC = () => {
+      const [activate, setActivate] = React.useState(true);
+
+      React.useEffect(() => {
+        const timeout = setTimeout(() => setActivate(false), 1000);
+        return () => clearTimeout(timeout);
+      }, []);
+
+      return (
+        <Animator animator={{ activate, duration: { exit: 176 } }}>
+          <Animated
+            animated={{
+              exited: { scale: 1.75 }
+            }}
+          />
+        </Animator>
+      );
+    };
+    const { container } = render(<Example />);
+    const element = container.firstChild as HTMLDivElement;
+
+    // Initial call.
+    expect(anime).toHaveBeenNthCalledWith(1, {
+      targets: element,
+      easing: 'easeOutSine',
+      duration: 176,
+      scale: 1.75
+    });
+
+    actJestMoveTimeTo(1000 + 176 - 1);
+    expect(anime).toHaveBeenCalledTimes(1);
+
+    actJestMoveTimeTo(1000 + 176 + 1);
+    expect(anime).toHaveBeenCalledTimes(2);
+    expect(anime).toHaveBeenNthCalledWith(2, {
+      targets: element,
+      easing: 'easeOutSine',
+      duration: 176,
+      scale: 1.75
     });
   });
 
@@ -191,12 +269,42 @@ describe('Functions Settings', () => {
     const { container } = render(<Example />);
     const element = container.firstChild as HTMLDivElement;
 
-    actJestMoveTimeTo(1);
+    actJestMoveTimeTo(999);
     expect(entering).not.toHaveBeenCalled();
 
     actJestMoveTimeTo(1001);
     expect(entering).toHaveBeenCalledWith({
-      targets: element,
+      target: element,
+      duration: 127
+    });
+  });
+
+  test('Should transition "animated.entered" with function setting', () => {
+    const entered: AnimatedSettingsTransitionFunction = jest.fn();
+    const Example: React.FC = () => {
+      const [activate, setActivate] = React.useState(false);
+
+      React.useEffect(() => {
+        const timeout = setTimeout(() => setActivate(true), 1000);
+        return () => clearTimeout(timeout);
+      }, []);
+
+      return (
+        <Animator animator={{ activate, duration: { enter: 127 } }}>
+          <Animated animated={{ entered }} />
+        </Animator>
+      );
+    };
+
+    const { container } = render(<Example />);
+    const element = container.firstChild as HTMLDivElement;
+
+    actJestMoveTimeTo(1000 + 127 - 1);
+    expect(entered).not.toHaveBeenCalled();
+
+    actJestMoveTimeTo(1000 + 127 + 1);
+    expect(entered).toHaveBeenCalledWith({
+      target: element,
       duration: 127
     });
   });
@@ -226,7 +334,43 @@ describe('Functions Settings', () => {
 
     actJestMoveTimeTo(1001);
     expect(exiting).toHaveBeenCalledWith({
-      targets: element,
+      target: element,
+      duration: 814
+    });
+  });
+
+  test('Should transition "animated.exited" with function setting', () => {
+    const exited: AnimatedSettingsTransitionFunction = jest.fn();
+    const Example: React.FC = () => {
+      const [activate, setActivate] = React.useState(true);
+
+      React.useEffect(() => {
+        const timeout = setTimeout(() => setActivate(false), 1000);
+        return () => clearTimeout(timeout);
+      }, []);
+
+      return (
+        <Animator animator={{ activate, duration: { exit: 814 } }}>
+          <Animated animated={{ exited }} />
+        </Animator>
+      );
+    };
+
+    const { container } = render(<Example />);
+    const element = container.firstChild as HTMLDivElement;
+
+    expect(exited).toHaveBeenNthCalledWith(1, {
+      target: element,
+      duration: 814
+    });
+
+    actJestMoveTimeTo(1000 + 814 - 1);
+    expect(exited).toHaveBeenCalledTimes(1);
+
+    actJestMoveTimeTo(1000 + 814 + 1);
+    expect(exited).toHaveBeenCalledTimes(2);
+    expect(exited).toHaveBeenNthCalledWith(2, {
+      target: element,
       duration: 814
     });
   });
@@ -277,11 +421,11 @@ describe('Functions Settings', () => {
     expect(animated1Entering).toHaveBeenCalledTimes(1);
     expect(animated2Entering).toHaveBeenCalledTimes(1);
     expect(animated1Entering).toHaveBeenCalledWith({
-      targets: element,
+      target: element,
       duration: 80
     });
     expect(animated2Entering).toHaveBeenCalledWith({
-      targets: element,
+      target: element,
       duration: 80
     });
     expect(animated1Exiting).not.toHaveBeenCalled();
@@ -299,11 +443,11 @@ describe('Functions Settings', () => {
     expect(animated1Exiting).toHaveBeenCalledTimes(1);
     expect(animated2Exiting).toHaveBeenCalledTimes(1);
     expect(animated1Exiting).toHaveBeenCalledWith({
-      targets: element,
+      target: element,
       duration: 90
     });
     expect(animated2Exiting).toHaveBeenCalledWith({
-      targets: element,
+      target: element,
       duration: 90
     });
   });

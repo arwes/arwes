@@ -21,15 +21,12 @@ export interface AnimatedCSSPropsShorthands {
 export type AnimatedCSSProps = CSSProperties & AnimatedCSSPropsShorthands;
 
 export interface AnimatedSettingsTransitionFunctionParams {
-  // TODO: Shouldn't this be called "target" or "element"?
-  targets: HTMLElement | SVGElement | Array<HTMLElement | SVGElement> | NodeListOf<HTMLElement | SVGElement>
+  target: HTMLElement | SVGElement
   duration: number
-  delay?: number
 }
 
 export type AnimatedSettingsTransitionFunction = (params: AnimatedSettingsTransitionFunctionParams) => void;
 
-// TODO: Use a stronger typing for anime parameters instead of "anime.AnimeParams".
 export type AnimatedSettingsTransitionTypes = AnimatedSettingsTransitionFunction | anime.AnimeParams;
 
 export type AnimatedSettingsTransition = AnimatedSettingsTransitionTypes | AnimatedSettingsTransitionTypes[];
@@ -38,5 +35,7 @@ export interface AnimatedSettings <P = HTMLProps<HTMLElement>> {
   initialAttributes?: P
   initialStyles?: AnimatedCSSProps
   entering?: AnimatedSettingsTransition
+  entered?: AnimatedSettingsTransition
   exiting?: AnimatedSettingsTransition
+  exited?: AnimatedSettingsTransition
 }

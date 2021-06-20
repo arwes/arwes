@@ -1,13 +1,19 @@
 import anime from 'animejs';
 
-import { AnimatedSettingsTransitionFunction, AnimatedSettings } from '../constants';
+import { AnimatedSettings } from '../constants';
 
-const transitionVisibilityIn: AnimatedSettingsTransitionFunction = params => {
-  const { targets, duration, delay = 0 } = params;
+interface TransitionVisibilityParams {
+  target: HTMLElement | SVGElement | Array<HTMLElement | SVGElement> | NodeListOf<HTMLElement | SVGElement>
+  duration: number
+  delay?: number
+}
+
+const transitionVisibilityIn = (params: TransitionVisibilityParams): void => {
+  const { target, duration, delay = 0 } = params;
 
   anime
     .timeline({
-      targets,
+      targets: target,
       easing: 'easeOutSine',
       duration: duration / 3
     })
@@ -16,12 +22,12 @@ const transitionVisibilityIn: AnimatedSettingsTransitionFunction = params => {
     .add({ opacity: [0.5, 1] });
 };
 
-const transitionVisibilityOut: AnimatedSettingsTransitionFunction = params => {
-  const { targets, duration, delay = 0 } = params;
+const transitionVisibilityOut = (params: TransitionVisibilityParams): void => {
+  const { target, duration, delay } = params;
 
   anime
     .timeline({
-      targets,
+      targets: target,
       easing: 'easeOutSine',
       duration: duration / 3
     })
@@ -38,7 +44,7 @@ const transitionVisibility: AnimatedSettings = {
 
 const transitionVisibilityDelayed: AnimatedSettings = {
   initialStyles: { opacity: 0 },
-  entering: params => transitionVisibilityIn({ ...params, delay: params.duration }),
+  entered: transitionVisibilityIn,
   exiting: transitionVisibilityOut
 };
 

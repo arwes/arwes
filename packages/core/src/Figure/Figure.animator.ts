@@ -40,7 +40,7 @@ const onAnimateEntering = (
   });
 
   transitionVisibilityIn({
-    targets: container.querySelectorAll([
+    target: container.querySelectorAll([
       '.arwes-figure__asset',
       '.arwes-figure__description-bg'
     ].join(',')),
@@ -54,7 +54,7 @@ const onAnimateExiting = (animator: AnimatorRef, containerRef: ContainerRef): vo
   const container = containerRef.current;
 
   transitionVisibilityOut({
-    targets: container.querySelectorAll([
+    target: container.querySelectorAll([
       '.arwes-figure__asset',
       '.arwes-figure__description-bg',
       '.arwes-figure__line'
