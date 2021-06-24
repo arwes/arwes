@@ -27,7 +27,7 @@ const generateStyles = (
       lineHeight: '2rem',
       fontSize: '1rem',
       color: colorPalette.main,
-      backgroundColor: 'transparent',
+      backgroundColor: rgba(colorPalette.dark2, 0.05),
       boxShadow: 'none',
       transitionProperty: 'background-color, box-shadow',
       transitionDuration: `${transitionDuration()}ms`,
@@ -59,12 +59,11 @@ const generateStyles = (
 
       '&:hover:not(:disabled, :read-only), &:focus:not(:disabled, :read-only)': {
         outline: 'none',
-        backgroundColor: rgba(colorPalette.main, 0.05),
+        backgroundColor: rgba(colorPalette.dark2, 0.1),
         boxShadow: `0 0 ${shadowBlur(1)}px ${colorPalette.dark3}`,
 
-        // The "lineBottomOver" element.
-        '& + div': {
-          transform: 'scaleX(1)'
+        '& ~ .arwes-text-field__line-base::before, & ~ .arwes-text-field__line-base::after': {
+          transform: 'scaleX(2)'
         }
       },
 
@@ -104,16 +103,14 @@ const generateStyles = (
     },
     line: {
       position: 'absolute',
+      left: 0,
+      right: 0,
       bottom: 0,
       borderBottomWidth: outline(1),
       borderBottomStyle: 'solid',
       borderBottomColor: colorPalette.dark1,
       boxShadow: `0 0 ${shadowBlur(1)}px ${colorPalette.dark1}`,
-      transformOrigin: 'left'
-    },
-    lineBottom: {
-      left: 0,
-      right: 0,
+      transformOrigin: 'left',
 
       '&::before, &::after': {
         content: '""',
@@ -123,22 +120,17 @@ const generateStyles = (
         borderBottomWidth: outline(1),
         borderBottomStyle: 'solid',
         borderBottomColor: colorPalette.light1,
-        width: '0.5rem'
+        width: '0.5rem',
+        transition: `transform ${transitionDuration()}ms ease-out`
       },
       '&::before': {
-        left: 0
+        left: 0,
+        transformOrigin: 'left'
       },
       '&::after': {
-        right: 0
+        right: 0,
+        transformOrigin: 'right'
       }
-    },
-    lineBottomOver: {
-      left: 0,
-      right: 0,
-      borderBottomColor: colorPalette.light1,
-      boxShadow: `0 0 ${shadowBlur(1)}px ${colorPalette.light1}`,
-      transition: `transform ${transitionDuration()}ms ease-out`,
-      transform: 'scaleX(0)'
     }
   };
 };

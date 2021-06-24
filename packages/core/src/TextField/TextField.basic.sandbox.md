@@ -7,8 +7,6 @@ const playersSettings = { type: { src: [SOUND_TYPE_URL], loop: true } };
 const bleepsSettings = { type: { player: 'type' } };
 const animatorGeneral = { duration: { enter: 200, exit: 200, stagger: 75 } };
 
-const textFieldTypes = ['text', 'email', 'search', 'password', 'tel', 'url', 'number'];
-
 const Sandbox = () => {
   const [activate, setActivate] = React.useState(true);
 
@@ -20,7 +18,8 @@ const Sandbox = () => {
   return (
     <ArwesThemeProvider>
       <StylesBaseline styles={{
-        body: { fontFamily: FONT_FAMILY_ROOT }
+        body: { fontFamily: FONT_FAMILY_ROOT },
+        '.arwes-text-field': { marginBottom: 20 }
       }} />
       <BleepsProvider
         audioSettings={audioSettings}
@@ -30,16 +29,51 @@ const Sandbox = () => {
         <AnimatorGeneralProvider animator={animatorGeneral}>
           <Animator animator={{ activate, manager: 'stagger' }}>
             <form>
-              {textFieldTypes.map((type, index) =>
-                <TextField
-                  key={index}
-                  type={type}
-                  placeholder={`Text field ${type}`}
-                  defaultValue=''
-                  palette='primary'
-                  style={{ marginBottom: 20 }}
-                />
-              )}
+              <TextField
+                placeholder='Text field placeholder'
+                defaultValue=''
+              />
+
+              <TextField
+                multiline
+                placeholder='Text field placeholder'
+                defaultValue=''
+              />
+
+              <TextField
+                placeholder={`A nebula is an interstellar cloud of dust,
+hydrogen, helium and other ionized gases. Originally, the term was used
+to describe any diffused astronomical object, including galaxies beyond
+the Milky Way.`}
+                defaultValue={`A nebula is an interstellar cloud of dust,
+hydrogen, helium and other ionized gases. Originally, the term was used
+to describe any diffused astronomical object, including galaxies beyond
+the Milky Way.`}
+              />
+
+              <TextField
+                placeholder='ReadOnly text field placeholder'
+                defaultValue='ReadOnly text field value'
+                readOnly
+              />
+
+              <TextField
+                placeholder='Disabled text field placeholder'
+                defaultValue='Disabled text field value'
+                disabled
+              />
+
+              <TextField
+                placeholder='AutoFocus text field placeholder'
+                defaultValue='AutoFocus text field value'
+                autoFocus
+              />
+
+              <TextField
+                placeholder='Palette text field placeholder'
+                defaultValue='Palette text field value'
+                palette='secondary'
+              />
             </form>
           </Animator>
         </AnimatorGeneralProvider>

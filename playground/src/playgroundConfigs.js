@@ -140,6 +140,7 @@ const playgroundConfigs = [
         name: 'TextField',
         sandboxes: [
           { name: 'basic', code: require('repository/packages/core/src/TextField/TextField.basic.sandbox.md').default },
+          { name: 'types', code: require('repository/packages/core/src/TextField/TextField.types.sandbox.md').default },
           { name: 'multiline', code: require('repository/packages/core/src/TextField/TextField.multiline.sandbox.md').default },
           { name: 'labels', code: require('repository/packages/core/src/TextField/TextField.labels.sandbox.md').default },
           { name: 'static', code: require('repository/packages/core/src/TextField/TextField.static.sandbox.md').default }

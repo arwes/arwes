@@ -1,11 +1,20 @@
 /* @jsx jsx */
-import { HTMLProps, MutableRefObject, CSSProperties, ReactElement, FormEvent, ChangeEvent, useMemo } from 'react';
+import {
+  HTMLProps,
+  MutableRefObject,
+  CSSProperties,
+  ReactElement,
+  ChangeEvent,
+  useMemo,
+  useEffect
+} from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
+import { useBleeps } from '@arwes/bleeps';
 import { Animated } from '@arwes/animated';
 
-import { BleepsOnAnimator } from '../utils/BleepsOnAnimator';
+import { createTransitionerTextSimple, TransitionerTextSimple } from '../utils/createTransitionerTextSimple';
 import { generateStyles } from './TextField.styles';
 
 type TEXT_FIELD_TYPE = 'text' | 'email' | 'search' | 'password' | 'tel' | 'url' | 'number';
@@ -27,13 +36,12 @@ interface TextFieldProps <E extends HTMLInputElement | HTMLTextAreaElement = HTM
   defaultValue?: string | number
   value?: string | number
   onChange?: (event: ChangeEvent<E>) => void
-  onInput?: (event: FormEvent<E>) => void
   inputProps?: HTMLProps<E>
   hideLines?: boolean
   palette?: string
   className?: string
   style?: CSSProperties
-  rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
+  rootRef?: MutableRefObject<E | null> | ((node: E) => void)
 }
 
 const TextField = (props: TextFieldProps): ReactElement => {
@@ -51,7 +59,6 @@ const TextField = (props: TextFieldProps): ReactElement => {
     defaultValue,
     value,
     onChange,
-    onInput,
     inputProps,
     hideLines,
     palette,
@@ -61,7 +68,17 @@ const TextField = (props: TextFieldProps): ReactElement => {
   } = props;
 
   const theme = useTheme();
+  const bleeps = useBleeps();
   const styles = useMemo(() => generateStyles(theme, { palette }), [theme, palette]);
+
+  let transitionerTextSimple: TransitionerTextSimple | null = null;
+
+  useEffect(() => {
+    return () => {
+      transitionerTextSimple?.cancel();
+      bleeps.type?.stop();
+    };
+  }, []);
 
   return (
     <div
@@ -70,30 +87,16 @@ const TextField = (props: TextFieldProps): ReactElement => {
       style={style}
       ref={rootRef}
     >
-      <BleepsOnAnimator
-        entering={{ name: 'type', loop: true }}
-        exiting={{ name: 'type', loop: true }}
-      />
       <Animated
         className='arwes-text-field__container'
         css={styles.container}
         animated={{
-          initialStyles: { translateX: theme.space(1) },
+          initialStyles: { translateX: theme.space(2) },
           entering: { translateX: 0 },
-          exiting: { translateX: theme.space(1) }
+          exiting: { translateX: theme.space(2) }
         }}
       >
-        {!hideLines &&
-          <Animated
-            css={[styles.line, styles.lineBottom]}
-            animated={{
-              initialStyles: { scaleX: 0 },
-              entering: { scaleX: 1 },
-              exiting: { scaleX: 0 }
-            }}
-          />
-        }
-        <Animated
+        <Animated<HTMLInputElement>
           name={name}
           placeholder={placeholder}
           autoComplete={autoComplete}
@@ -102,24 +105,80 @@ const TextField = (props: TextFieldProps): ReactElement => {
           spellCheck={spellCheck}
           required={required}
           disabled={disabled}
+          tabIndex={readOnly ? -1 : 0}
+          {...inputProps}
           defaultValue={defaultValue}
           value={value}
           onChange={onChange}
-          onInput={onInput}
-          {...inputProps}
           as={multiline ? 'textarea' : 'input'}
           type={multiline ? undefined : type}
           className={cx('arwes-text-field__input', inputProps?.className)}
           css={styles.input}
           animated={{
-            exiting: ({ targets }) => {
+            initialAttributes: {
+              placeholder: ''
+            },
+            entering: ({ target }) => {
+              target.setAttribute('placeholder', '');
+            },
+            entered: ({ target, duration }) => {
+              // If animated and autoFocus, the element is invisible in the beginning.
+              // So once it is visible, provide compatibility for the auto focus.
+              // This can conflict with other HTML elements, but it's responsitibility
+              // of the programmer to define which element should have the initial focus.
+              if (autoFocus) {
+                target.focus();
+              }
+
+              if (placeholder) {
+                bleeps.type?.play();
+
+                transitionerTextSimple?.cancel();
+                transitionerTextSimple = createTransitionerTextSimple({
+                  text: placeholder,
+                  duration,
+                  onChange: (newText: string): void => {
+                    target.setAttribute('placeholder', newText);
+                  },
+                  onComplete: () => {
+                    bleeps.type?.stop();
+                  }
+                });
+              }
+            },
+            exiting: ({ target, duration }) => {
               // If the input has focus while invisibile, user would be able to type on it.
-              (targets as HTMLElement).blur();
+              target.blur();
+
+              if (placeholder) {
+                bleeps.type?.play();
+
+                transitionerTextSimple?.cancel();
+                transitionerTextSimple = createTransitionerTextSimple({
+                  text: placeholder,
+                  duration,
+                  isEntering: false,
+                  onChange: (newText: string): void => {
+                    target.setAttribute('placeholder', newText);
+                  },
+                  onComplete: () => {
+                    bleeps.type?.stop();
+                  }
+                });
+              }
             }
           }}
         />
         {!hideLines &&
-          <div css={[styles.line, styles.lineBottomOver]} />
+          <Animated
+            className='arwes-text-field__line-base'
+            css={styles.line}
+            animated={{
+              initialStyles: { scaleX: 0 },
+              entering: { scaleX: 1 },
+              exiting: { scaleX: 0 }
+            }}
+          />
         }
       </Animated>
     </div>
@@ -140,7 +199,6 @@ TextField.propTypes = {
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
-  onInput: PropTypes.func,
   inputProps: PropTypes.object,
   hideLines: PropTypes.bool,
   palette: PropTypes.string,

@@ -1,27 +1,20 @@
 ```jsx
 const FONT_FAMILY_ROOT = '"Titillium Web", sans-serif';
 
-const fieldStyle = { marginBottom: 20 };
-
 const Sandbox = () => {
   return (
     <ArwesThemeProvider>
       <StylesBaseline styles={{
-        body: { fontFamily: FONT_FAMILY_ROOT }
+        body: { fontFamily: FONT_FAMILY_ROOT },
+        '.arwes-checkbox': { marginBottom: 20 }
       }} />
       <Animator animator={{ animate: false }}>
         <form>
-          <Checkbox
-            defaultChecked={true}
-            style={fieldStyle}
-          >
+          <Checkbox defaultChecked={true}>
             <Text>Input checkbox element.</Text>
           </Checkbox>
 
-          <Checkbox
-            defaultChecked={false}
-            style={fieldStyle}
-          >
+          <Checkbox defaultChecked={false}>
             <Text>A nebula is an interstellar cloud of dust, hydrogen,
             helium and other ionized gases. Originally, the term was
             used to describe any diffused astronomical object, including
@@ -31,7 +24,6 @@ const Sandbox = () => {
           <Checkbox
             defaultChecked={true}
             readOnly
-            style={fieldStyle}
           >
             <Text>ReadOnly input checkbox element.</Text>
           </Checkbox>
@@ -39,28 +31,25 @@ const Sandbox = () => {
           <Checkbox
             defaultChecked={true}
             disabled
-            style={fieldStyle}
           >
             <Text>Disabled input checkbox element.</Text>
           </Checkbox>
 
           <Checkbox
             defaultChecked={false}
-            palette='secondary'
-            style={fieldStyle}
+            autoFocus
           >
-            <Text>Palette input checkbox element.</Text>
+            <Text>
+              AutoFocus input checkbox element.
+              <b>Press SPACE key to update.</b>
+            </Text>
           </Checkbox>
 
           <Checkbox
-            autoFocus
             defaultChecked={false}
-            style={fieldStyle}
+            palette='secondary'
           >
-            <Text>
-              Autofocus input checkbox element.
-              <b>Press SPACE key on load.</b>
-            </Text>
+            <Text>Palette input checkbox element.</Text>
           </Checkbox>
 
         </form>

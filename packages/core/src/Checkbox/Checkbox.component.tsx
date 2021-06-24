@@ -94,6 +94,7 @@ const Checkbox = (props: CheckboxProps): ReactElement => {
             readOnly={readOnly}
             required={required}
             disabled={disabled}
+            tabIndex={readOnly ? -1 : 0}
             {...inputProps}
             defaultChecked={defaultChecked}
             checked={checked}
@@ -101,7 +102,6 @@ const Checkbox = (props: CheckboxProps): ReactElement => {
             type='checkbox'
             className={cx('arwes-checkbox__input', inputProps?.className)}
             css={styles.input}
-            tabIndex={readOnly ? -1 : 0}
           />
           <div className='arwes-checkbox__bg' css={styles.bg} />
           <div className='arwes-checkbox__box' css={[styles.box, styles.boxLT]} />
