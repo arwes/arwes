@@ -42,8 +42,9 @@ const menuStyle = {
   translateX: -20
 };
 
-const MenuComponent = ({ animator, children }) => {
+const MenuComponent = ({ children }) => {
   const ref = React.useRef();
+  const animator = useAnimator();
   animator.setupAnimateRefs(ref);
   return <ul ref={ref} style={menuStyle}>{children}</ul>;
 };
@@ -86,8 +87,9 @@ const itemStyle = {
   translateY: -10
 };
 
-const ItemComponent = ({ animator, children }) => {
+const ItemComponent = ({ children }) => {
   const ref = React.useRef();
+  const animator = useAnimator();
   animator.setupAnimateRefs(ref);
   return <li ref={ref} style={itemStyle}>{children}</li>;
 };
