@@ -146,6 +146,13 @@ const playgroundConfigs = [
         ]
       },
       {
+        name: 'Checkbox',
+        sandboxes: [
+          { name: 'basic', code: require('repository/packages/core/src/Checkbox/Checkbox.basic.sandbox.md').default },
+          { name: 'static', code: require('repository/packages/core/src/Checkbox/Checkbox.static.sandbox.md').default }
+        ]
+      },
+      {
         name: 'Card',
         sandboxes: [
           { name: 'basic', code: require('repository/packages/core/src/Card/Card.basic.sandbox.md').default },
