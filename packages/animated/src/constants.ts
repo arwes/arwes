@@ -18,7 +18,7 @@ export interface AnimatedCSSPropsShorthands {
   scaleZ?: number | string
 }
 
-export type AnimatedCSSProps = CSSProperties & AnimatedCSSPropsShorthands;
+export type AnimatedCSSProps = Omit<CSSProperties, keyof AnimatedCSSPropsShorthands> & AnimatedCSSPropsShorthands;
 
 export interface AnimatedSettingsTransitionFunctionParams {
   target: HTMLElement | SVGElement

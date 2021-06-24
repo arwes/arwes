@@ -1,9 +1,9 @@
-import anime from 'animejs';
+import anime, { AnimeAnimParams } from 'animejs';
 
 import { AnimatedSettings } from '../constants';
 
 interface TransitionVisibilityParams {
-  target: HTMLElement | SVGElement | Array<HTMLElement | SVGElement> | NodeListOf<HTMLElement | SVGElement>
+  target: AnimeAnimParams['targets']
   duration: number
   delay?: number
 }
