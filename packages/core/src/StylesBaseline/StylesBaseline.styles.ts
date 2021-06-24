@@ -30,7 +30,7 @@ const createGlobalGeneralStyles = (theme: Theme): Record<string, CSSObject> => {
 
       // Scrollbars
       scrollbarWidth: 'thin',
-      scrollbarColor: palette.primary.dark2 + ' ' + palette.neutral.elevate(2),
+      scrollbarColor: palette.primary.dark3 + ' ' + palette.primary.dark4,
       '& ::-webkit-scrollbar': {
         width: space(1.5),
         height: space(1.5)
@@ -40,15 +40,18 @@ const createGlobalGeneralStyles = (theme: Theme): Record<string, CSSObject> => {
         '& ::-webkit-scrollbar-track',
         '& ::-webkit-scrollbar-corner'
       ].join()]: {
-        backgroundColor: palette.neutral.elevate(3)
+        backgroundColor: palette.primary.dark4
       },
       '& ::-webkit-scrollbar-thumb': {
-        border: `${space(0.4)}px solid ${palette.neutral.elevate(3)}`,
-        backgroundColor: palette.primary.dark1,
+        border: `${space(0.4)}px solid ${palette.primary.dark4}`,
+        backgroundColor: palette.primary.dark3,
         transition: `background-color ${transitionDuration()}ms ease-out`,
 
         '&:hover': {
-          backgroundColor: palette.primary.main
+          backgroundColor: palette.primary.dark2
+        },
+        '&:active': {
+          backgroundColor: palette.primary.dark1
         }
       },
 
