@@ -26,9 +26,10 @@ const generateStyles = (
       textShadow: `0 0 ${shadowBlur(1)}px ${color}`,
       color,
       cursor: disabled ? 'default' : 'pointer',
-      transition: ['color', 'text-shadow']
-        .map(prop => `${prop} ${transitionDuration()}ms ease-out`)
-        .join(),
+      transitionProperty: 'color, text-shadow',
+      transitionDuration: `${transitionDuration()}ms`,
+      transitionTimingFunction: 'ease-out',
+      WebkitTapHighlightColor: 'transparent',
 
       '&:hover, &:focus': !disabled && {
         textShadow: `0 0 ${shadowBlur(1)}px ${colorHover}`,
