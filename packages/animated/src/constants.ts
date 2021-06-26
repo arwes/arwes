@@ -1,4 +1,5 @@
 import { CSSProperties, HTMLProps } from 'react';
+import { AnimeParams } from 'animejs';
 
 export interface AnimatedCSSPropsShorthands {
   translateX?: number | string
@@ -23,6 +24,7 @@ export type AnimatedCSSProps = Omit<CSSProperties, keyof AnimatedCSSPropsShortha
 export interface AnimatedSettingsTransitionFunctionParams {
   target: HTMLElement | SVGElement
   duration: number
+  transitionTarget: (params: AnimeParams & { selector?: string }) => void
 }
 
 export type AnimatedSettingsTransitionFunction = (params: AnimatedSettingsTransitionFunctionParams) => void;

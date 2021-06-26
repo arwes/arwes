@@ -12,7 +12,7 @@ import {
   useCallback
 } from 'react';
 import PropTypes from 'prop-types';
-import anime from 'animejs';
+import anime, { AnimeParams } from 'animejs';
 import { ENTERING, ENTERED, useAnimator } from '@arwes/animator';
 
 import { AnimatedSettings, AnimatedSettingsTransition } from '../constants';
@@ -82,10 +82,25 @@ const Animated = <
       return;
     }
 
+    const target = internalRef.current as E;
     const flowValue = animator.flow.value;
     const durationTransition = flowValue === ENTERING || flowValue === ENTERED
       ? animator.duration.enter
       : animator.duration.exit;
+    const transitionTarget = (params: AnimeParams & { selector?: string }): void => {
+      const { selector, ...otherParams } = params;
+
+      const targets = selector
+        ? target?.querySelectorAll(selector)
+        : params.target || params.targets || target;
+
+      anime({
+        ...ANIME_ANIMATION_DEFAULTS,
+        ...otherParams,
+        targets,
+        duration: durationTransition
+      });
+    };
 
     animatedItems
       .filter(item => item[flowValue])
@@ -98,15 +113,16 @@ const Animated = <
         animations.forEach(animation => {
           if (typeof animation === 'function') {
             animation({
-              target: internalRef.current as E,
-              duration: durationTransition
+              target,
+              duration: durationTransition,
+              transitionTarget
             });
           }
           else {
             anime({
               ...ANIME_ANIMATION_DEFAULTS,
               ...animation,
-              targets: internalRef.current,
+              targets: target,
               duration: durationTransition
             });
           }
