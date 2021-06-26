@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { useBleeps } from '@arwes/bleeps';
+import { Animated } from '@arwes/animated';
 
 import { generateStyles } from './Checkbox.styles';
 
@@ -80,9 +81,14 @@ const Checkbox = (props: CheckboxProps): ReactElement => {
       style={style}
       ref={rootRef}
     >
-      <div
+      <Animated
         className='arwes-checkbox__container'
         css={styles.container}
+        animated={{
+          initialStyles: { translateX: theme.space(2) },
+          entering: { translateX: 0 },
+          exiting: { translateX: theme.space(2) }
+        }}
       >
         <div
           className='arwes-checkbox__shapes'
@@ -103,19 +109,67 @@ const Checkbox = (props: CheckboxProps): ReactElement => {
             className={cx('arwes-checkbox__input', inputProps?.className)}
             css={styles.input}
           />
-          <div className='arwes-checkbox__bg' css={styles.bg} />
-          <div className='arwes-checkbox__box' css={[styles.box, styles.boxLT]} />
-          <div className='arwes-checkbox__box' css={[styles.box, styles.boxLB]} />
-          <div className='arwes-checkbox__box' css={[styles.box, styles.boxRT]} />
-          <div className='arwes-checkbox__box' css={[styles.box, styles.boxRB]} />
-          <div className='arwes-checkbox__mark' css={styles.mark} />
+          <Animated
+            className='arwes-checkbox__bg'
+            css={styles.bg}
+            animated={{
+              initialStyles: { scale: 0 },
+              entering: { scale: 1 },
+              exiting: { scale: 0 }
+            }}
+          />
+          <Animated
+            className='arwes-checkbox__box'
+            css={[styles.box, styles.boxLT]}
+            animated={{
+              initialStyles: { scale: 0 },
+              entering: { scale: 1 },
+              exiting: { scale: 0 }
+            }}
+          />
+          <Animated
+            className='arwes-checkbox__box'
+            css={[styles.box, styles.boxLB]}
+            animated={{
+              initialStyles: { scale: 0 },
+              entering: { scale: 1 },
+              exiting: { scale: 0 }
+            }}
+          />
+          <Animated
+            className='arwes-checkbox__box'
+            css={[styles.box, styles.boxRT]}
+            animated={{
+              initialStyles: { scale: 0 },
+              entering: { scale: 1 },
+              exiting: { scale: 0 }
+            }}
+          />
+          <Animated
+            className='arwes-checkbox__box'
+            css={[styles.box, styles.boxRB]}
+            animated={{
+              initialStyles: { scale: 0 },
+              entering: { scale: 1 },
+              exiting: { scale: 0 }
+            }}
+          />
+          <Animated
+            className='arwes-checkbox__mark'
+            css={styles.mark}
+            animated={{
+              initialStyles: { opacity: 0 },
+              entering: { opacity: 1 },
+              exiting: { opacity: 0 }
+            }}
+          />
         </div>
         {!!children && (
           <div className='arwes-checkbox__content' css={styles.content}>
             {children}
           </div>
         )}
-      </div>
+      </Animated>
     </label>
   );
 };

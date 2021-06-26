@@ -122,25 +122,29 @@ const generateStyles = (
       left: 0,
       top: 0,
       borderLeftWidth: lineWidth,
-      borderTopWidth: lineWidth
+      borderTopWidth: lineWidth,
+      transformOrigin: 'left top'
     },
     boxLB: {
       left: 0,
       bottom: 0,
       borderLeftWidth: lineWidth,
-      borderBottomWidth: lineWidth
+      borderBottomWidth: lineWidth,
+      transformOrigin: 'left bottom'
     },
     boxRT: {
       right: 0,
       top: 0,
       borderRightWidth: lineWidth,
-      borderTopWidth: lineWidth
+      borderTopWidth: lineWidth,
+      transformOrigin: 'right top'
     },
     boxRB: {
       right: 0,
       bottom: 0,
       borderRightWidth: lineWidth,
-      borderBottomWidth: lineWidth
+      borderBottomWidth: lineWidth,
+      transformOrigin: 'right bottom'
     },
     mark: {
       margin: 'auto',
