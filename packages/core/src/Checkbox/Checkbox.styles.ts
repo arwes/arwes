@@ -32,7 +32,11 @@ const generateStyles = (
   return {
     root: {
       display: 'block',
-      verticalAlign: 'middle',
+      verticalAlign: 'middle'
+    },
+    container: {
+      display: 'flex',
+      flexDirection: 'row',
       cursor: isHoverFocusEnabled ? 'pointer' : 'default',
       WebkitTapHighlightColor: 'transparent',
 
@@ -54,10 +58,6 @@ const generateStyles = (
           '&:focus .arwes-checkbox__mark'
         ].join()]: markHoverStyles
       })
-    },
-    container: {
-      display: 'flex',
-      flexDirection: 'row'
     },
     shapes: {
       position: 'relative',

@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { useBleeps } from '@arwes/bleeps';
-import { Animated } from '@arwes/animated';
+import { Animated, transitionOpacity } from '@arwes/animated';
 
 import { generateStyles } from './Checkbox.styles';
 
@@ -33,7 +33,7 @@ interface CheckboxProps {
   palette?: string
   className?: string
   style?: CSSProperties
-  rootRef?: MutableRefObject<HTMLLabelElement | null> | ((node: HTMLLabelElement) => void)
+  rootRef?: MutableRefObject<HTMLDivElement | null> | ((node: HTMLDivElement) => void)
   children?: ReactNode
 }
 
@@ -74,27 +74,34 @@ const Checkbox = (props: CheckboxProps): ReactElement => {
     bleeps.toggle?.play();
   }, [readOnly, onChange]);
 
+  const decoAnimated = {
+    initialStyles: { scale: 0 },
+    entering: { scale: 1 },
+    exiting: { scale: 0 }
+  };
+
   return (
-    <label
+    <div
       className={cx('arwes-checkbox', className)}
       css={styles.root}
       style={style}
       ref={rootRef}
     >
-      <Animated
+      <Animated<HTMLLabelElement>
+        as='label'
         className='arwes-checkbox__container'
         css={styles.container}
         animated={{
-          initialStyles: { translateX: theme.space(2) },
+          initialStyles: { translateX: theme.space() },
           entering: { translateX: 0 },
-          exiting: { translateX: theme.space(2) }
+          exiting: { translateX: theme.space() }
         }}
       >
         <div
           className='arwes-checkbox__shapes'
           css={styles.shapes}
         >
-          <input
+          <Animated<HTMLInputElement>
             name={name}
             autoFocus={autoFocus}
             readOnly={readOnly}
@@ -102,67 +109,30 @@ const Checkbox = (props: CheckboxProps): ReactElement => {
             disabled={disabled}
             tabIndex={readOnly ? -1 : 0}
             {...inputProps}
+            as='input'
             defaultChecked={defaultChecked}
             checked={checked}
             onChange={onChangeProxy}
             type='checkbox'
             className={cx('arwes-checkbox__input', inputProps?.className)}
             css={styles.input}
-          />
-          <Animated
-            className='arwes-checkbox__bg'
-            css={styles.bg}
             animated={{
-              initialStyles: { scale: 0 },
-              entering: { scale: 1 },
-              exiting: { scale: 0 }
+              entered: ({ target }) => {
+                if (autoFocus) {
+                  target.focus();
+                }
+              },
+              exiting: ({ target }) => {
+                target.blur();
+              }
             }}
           />
-          <Animated
-            className='arwes-checkbox__box'
-            css={[styles.box, styles.boxLT]}
-            animated={{
-              initialStyles: { scale: 0 },
-              entering: { scale: 1 },
-              exiting: { scale: 0 }
-            }}
-          />
-          <Animated
-            className='arwes-checkbox__box'
-            css={[styles.box, styles.boxLB]}
-            animated={{
-              initialStyles: { scale: 0 },
-              entering: { scale: 1 },
-              exiting: { scale: 0 }
-            }}
-          />
-          <Animated
-            className='arwes-checkbox__box'
-            css={[styles.box, styles.boxRT]}
-            animated={{
-              initialStyles: { scale: 0 },
-              entering: { scale: 1 },
-              exiting: { scale: 0 }
-            }}
-          />
-          <Animated
-            className='arwes-checkbox__box'
-            css={[styles.box, styles.boxRB]}
-            animated={{
-              initialStyles: { scale: 0 },
-              entering: { scale: 1 },
-              exiting: { scale: 0 }
-            }}
-          />
-          <Animated
-            className='arwes-checkbox__mark'
-            css={styles.mark}
-            animated={{
-              initialStyles: { opacity: 0 },
-              entering: { opacity: 1 },
-              exiting: { opacity: 0 }
-            }}
-          />
+          <Animated className='arwes-checkbox__bg' css={styles.bg} animated={decoAnimated} />
+          <Animated className='arwes-checkbox__box' css={[styles.box, styles.boxLT]} animated={decoAnimated} />
+          <Animated className='arwes-checkbox__box' css={[styles.box, styles.boxLB]} animated={decoAnimated} />
+          <Animated className='arwes-checkbox__box' css={[styles.box, styles.boxRT]} animated={decoAnimated} />
+          <Animated className='arwes-checkbox__box' css={[styles.box, styles.boxRB]} animated={decoAnimated} />
+          <Animated className='arwes-checkbox__mark' css={styles.mark} animated={transitionOpacity} />
         </div>
         {!!children && (
           <div className='arwes-checkbox__content' css={styles.content}>
@@ -170,7 +140,7 @@ const Checkbox = (props: CheckboxProps): ReactElement => {
           </div>
         )}
       </Animated>
-    </label>
+    </div>
   );
 };
 
