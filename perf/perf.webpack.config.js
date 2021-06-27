@@ -3,23 +3,43 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const { NODE_ENV = 'development', TEST_NAME } = process.env;
+const { NODE_ENV = 'development', TEST_NAMES } = process.env;
 const REPOSITORY_PATH = path.join(__dirname, '..');
 const tsConfigFilePath = path.join(__dirname, 'tsconfig.webpack.json');
 
-if (!TEST_NAME) {
-  throw new Error('No valid TEST_NAME was provided.');
+if (!TEST_NAMES) {
+  throw new Error('No valid TEST_NAMES was provided.');
 }
+
+const testNames = TEST_NAMES.split(',');
+
+const entries = testNames.reduce((all, testName) => ({
+  ...all,
+  [testName]: `./src/tests/${testName}/index.tsx`
+}), {});
+
+const output = {
+  path: path.join(__dirname, 'public'),
+  filename: pathData => {
+    const { name: testName } = pathData.chunk;
+    return `tests/${testName}/index.js`;
+  }
+};
+
+const templates = testNames.map(testName => {
+  return new HtmlWebpackPlugin({
+    publicPath: '/',
+    template: path.join(__dirname, 'src/tests', testName, 'index.html'),
+    filename: `tests/${testName}/index.html`,
+    chunks: [testName],
+    showErrors: true
+  });
+});
 
 module.exports = {
   mode: NODE_ENV,
-  entry: {
-    app: `./src/tests/${TEST_NAME}/index.tsx`
-  },
-  output: {
-    path: path.join(__dirname, 'public/tests', TEST_NAME),
-    filename: '[name].js'
-  },
+  entry: entries,
+  output,
   module: {
     rules: [
       {
@@ -54,11 +74,7 @@ module.exports = {
     }
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src/tests', TEST_NAME, 'index.html'),
-      filename: `tests/${TEST_NAME}/index.html`,
-      showErrors: true
-    }),
+    ...templates,
     new CopyWebpackPlugin({
       patterns: [{
         from: path.join(REPOSITORY_PATH, 'static'),
@@ -79,7 +95,6 @@ module.exports = {
     compress: true,
     host: '127.0.0.1',
     port: 9100,
-    open: true,
-    openPage: `tests/${TEST_NAME}`
+    open: true
   }
 };
