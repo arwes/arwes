@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
-import { Animator } from '@arwes/animator';
+import { Animator, ENTERED, ENTERING, EXITED, EXITING } from '@arwes/animator';
 import anime from 'animejs';
 
 import { makeJestMoveTimeTo } from '../../test-utils/makeJestMoveTimeTo';
@@ -275,7 +275,8 @@ describe('Functions Settings', () => {
     actJestMoveTimeTo(1001);
     expect(entering).toHaveBeenCalledWith({
       target: element,
-      duration: 127
+      duration: 127,
+      transitionTarget: expect.any(Function)
     });
   });
 
@@ -305,7 +306,8 @@ describe('Functions Settings', () => {
     actJestMoveTimeTo(1000 + 127 + 1);
     expect(entered).toHaveBeenCalledWith({
       target: element,
-      duration: 127
+      duration: 127,
+      transitionTarget: expect.any(Function)
     });
   });
 
@@ -335,7 +337,8 @@ describe('Functions Settings', () => {
     actJestMoveTimeTo(1001);
     expect(exiting).toHaveBeenCalledWith({
       target: element,
-      duration: 814
+      duration: 814,
+      transitionTarget: expect.any(Function)
     });
   });
 
@@ -361,7 +364,8 @@ describe('Functions Settings', () => {
 
     expect(exited).toHaveBeenNthCalledWith(1, {
       target: element,
-      duration: 814
+      duration: 814,
+      transitionTarget: expect.any(Function)
     });
 
     actJestMoveTimeTo(1000 + 814 - 1);
@@ -371,7 +375,8 @@ describe('Functions Settings', () => {
     expect(exited).toHaveBeenCalledTimes(2);
     expect(exited).toHaveBeenNthCalledWith(2, {
       target: element,
-      duration: 814
+      duration: 814,
+      transitionTarget: expect.any(Function)
     });
   });
 
@@ -422,11 +427,13 @@ describe('Functions Settings', () => {
     expect(animated2Entering).toHaveBeenCalledTimes(1);
     expect(animated1Entering).toHaveBeenCalledWith({
       target: element,
-      duration: 80
+      duration: 80,
+      transitionTarget: expect.any(Function)
     });
     expect(animated2Entering).toHaveBeenCalledWith({
       target: element,
-      duration: 80
+      duration: 80,
+      transitionTarget: expect.any(Function)
     });
     expect(animated1Exiting).not.toHaveBeenCalled();
     expect(animated2Exiting).not.toHaveBeenCalled();
@@ -444,11 +451,84 @@ describe('Functions Settings', () => {
     expect(animated2Exiting).toHaveBeenCalledTimes(1);
     expect(animated1Exiting).toHaveBeenCalledWith({
       target: element,
-      duration: 90
+      duration: 90,
+      transitionTarget: expect.any(Function)
     });
     expect(animated2Exiting).toHaveBeenCalledWith({
       target: element,
-      duration: 90
+      duration: 90,
+      transitionTarget: expect.any(Function)
+    });
+  });
+
+  [ENTERING, ENTERED, EXITING, EXITED].forEach(transitionName => {
+    test(`Should provide "transitionTarget" on "${transitionName}" and execute transition on target element`, () => {
+      const transitionFn: AnimatedSettingsTransitionFunction = params => {
+        params.transitionTarget({ translateX: 777 });
+      };
+      const Example: React.FC = () => {
+        const [activate, setActivate] = React.useState(true);
+
+        React.useEffect(() => {
+          const timeout = setTimeout(() => setActivate(false), 1000);
+          return () => clearTimeout(timeout);
+        }, []);
+
+        return (
+          <Animator animator={{ activate }}>
+            <Animated animated={{ [transitionName]: transitionFn }} />
+          </Animator>
+        );
+      };
+      const { container } = render(<Example />);
+      const element = container.firstChild as HTMLDivElement;
+
+      // Enough time for all types of transitions to execute.
+      actJestMoveTimeTo(2000);
+      expect(anime).toHaveBeenCalledWith({
+        targets: element,
+        easing: 'easeOutSine',
+        duration: 100, // Transition durations default.
+        translateX: 777
+      });
+    });
+
+    test(`Should provide "transitionTarget" on "${transitionName}" and execute transition on target element with CSS selector`, () => {
+      const transitionFn: AnimatedSettingsTransitionFunction = params => {
+        params.transitionTarget({
+          selector: '.child-element',
+          scaleY: 444
+        });
+      };
+      const Example: React.FC = () => {
+        const [activate, setActivate] = React.useState(true);
+
+        React.useEffect(() => {
+          const timeout = setTimeout(() => setActivate(false), 1000);
+          return () => clearTimeout(timeout);
+        }, []);
+
+        return (
+          <Animator animator={{ activate }}>
+            <Animated animated={{ [transitionName]: transitionFn }}>
+              <div className='child-element' />
+            </Animated>
+          </Animator>
+        );
+      };
+      const { container } = render(<Example />);
+
+      // Since it uses querySelectorAll inside.
+      const selectorElementsTarget = container.querySelectorAll('.child-element');
+
+      // Enough time for all types of transitions to execute.
+      actJestMoveTimeTo(2000);
+      expect(anime).toHaveBeenCalledWith({
+        targets: selectorElementsTarget,
+        easing: 'easeOutSine',
+        duration: 100, // Transition durations default.
+        scaleY: 444
+      });
     });
   });
 });
@@ -506,3 +586,5 @@ test('Should set "style.visibility=hidden" when EXITED', () => {
   actJestMoveTimeTo(1101);
   expect(element.style.visibility).toBe('hidden');
 });
+
+test.todo('Animated transition transitionTarget');
