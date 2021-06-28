@@ -8,14 +8,14 @@ import { Checkbox } from './index';
 
 afterEach(cleanup);
 
-test('Should render label element with class "arwes-checkbox"', () => {
+test('Should render element with class "arwes-checkbox"', () => {
   const { container } = render(
     <ArwesThemeProvider>
       <Checkbox />
     </ArwesThemeProvider>
   );
   const element = container.firstChild as HTMLDivElement;
-  expect(element.tagName).toBe('LABEL');
+  expect(element.tagName).toBe('DIV');
   expect(element.classList.contains('arwes-checkbox')).toBeTruthy();
 });
 
@@ -106,9 +106,10 @@ test('Should not allow to toggle input checkbox when "disabled"', () => {
     </ArwesThemeProvider>
   );
   const element = container.firstChild as HTMLDivElement;
+  const elementContainer = element.querySelector('label.arwes-checkbox__container') as HTMLLabelElement;
   const input = container.querySelector('input') as HTMLInputElement;
   expect(input.checked).toBe(true);
-  fireEvent.click(element);
+  fireEvent.click(elementContainer);
   expect(input.checked).toBe(true);
 });
 
@@ -120,9 +121,10 @@ describe('defaultChecked value', () => {
       </ArwesThemeProvider>
     );
     const element = container.firstChild as HTMLDivElement;
+    const elementContainer = element.querySelector('label.arwes-checkbox__container') as HTMLLabelElement;
     const input = container.querySelector('input') as HTMLInputElement;
     expect(input.checked).toBe(false);
-    fireEvent.click(element);
+    fireEvent.click(elementContainer);
     expect(input.checked).toBe(true);
   });
 
@@ -133,9 +135,10 @@ describe('defaultChecked value', () => {
       </ArwesThemeProvider>
     );
     const element = container.firstChild as HTMLDivElement;
+    const elementContainer = element.querySelector('label.arwes-checkbox__container') as HTMLLabelElement;
     const input = container.querySelector('input') as HTMLInputElement;
     expect(input.checked).toBe(true);
-    fireEvent.click(element);
+    fireEvent.click(elementContainer);
     expect(input.checked).toBe(false);
   });
 });
@@ -155,9 +158,10 @@ describe('checked value', () => {
     };
     const { container } = render(<Example />);
     const element = container.firstChild as HTMLDivElement;
+    const elementContainer = element.querySelector('label.arwes-checkbox__container') as HTMLLabelElement;
     const input = container.querySelector('input') as HTMLInputElement;
     expect(input.checked).toBe(false);
-    fireEvent.click(element);
+    fireEvent.click(elementContainer);
     expect(input.checked).toBe(true);
   });
 
@@ -175,9 +179,10 @@ describe('checked value', () => {
     };
     const { container } = render(<Example />);
     const element = container.firstChild as HTMLDivElement;
+    const elementContainer = element.querySelector('label.arwes-checkbox__container') as HTMLLabelElement;
     const input = container.querySelector('input') as HTMLInputElement;
     expect(input.checked).toBe(true);
-    fireEvent.click(element);
+    fireEvent.click(elementContainer);
     expect(input.checked).toBe(false);
   });
 });
