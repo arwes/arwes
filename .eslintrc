@@ -8,6 +8,7 @@
     "packages/*/dist",
     "playground",
     "website",
+    "perf/public",
     "__deprecated__"
   ],
   "parser": "@typescript-eslint/parser",
