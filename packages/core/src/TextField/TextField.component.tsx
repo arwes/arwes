@@ -6,13 +6,14 @@ import {
   ReactElement,
   ChangeEvent,
   useMemo,
+  useRef,
   useEffect
 } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { useBleeps } from '@arwes/bleeps';
-import { Animated } from '@arwes/animated';
+import { Animated, transitionOpacityDelayed } from '@arwes/animated';
 
 import { createTransitionerTextSimple, TransitionerTextSimple } from '../utils/createTransitionerTextSimple';
 import { generateStyles } from './TextField.styles';
@@ -69,13 +70,17 @@ const TextField = (props: TextFieldProps): ReactElement => {
 
   const theme = useTheme();
   const bleeps = useBleeps();
-  const styles = useMemo(() => generateStyles(theme, { palette }), [theme, palette]);
 
-  let transitionerTextSimple: TransitionerTextSimple | null = null;
+  const styles = useMemo(
+    () => generateStyles(theme, { palette, multiline, disabled, readOnly }),
+    [theme, palette, multiline, disabled, readOnly]
+  );
+
+  const transitionerTextSimpleRef = useRef<TransitionerTextSimple | null>(null);
 
   useEffect(() => {
     return () => {
-      transitionerTextSimple?.cancel();
+      transitionerTextSimpleRef.current?.cancel();
       bleeps.type?.stop();
     };
   }, []);
@@ -90,11 +95,92 @@ const TextField = (props: TextFieldProps): ReactElement => {
       <Animated
         className='arwes-text-field__container'
         css={styles.container}
-        animated={{
-          initialStyles: { translateX: theme.space(2) },
-          entering: { translateX: 0 },
-          exiting: { translateX: theme.space(2) }
-        }}
+        animated={[
+          {
+            initialStyles: { translateX: theme.space() },
+            entering: { translateX: 0 },
+            exiting: { translateX: theme.space() }
+          },
+          {
+            entering: ({ target }) => {
+              const animatedTextElement = target.querySelector('.arwes-text-field__animated-text') as HTMLDivElement;
+              const inputElement = target.querySelector('.arwes-text-field__input') as HTMLInputElement;
+
+              animatedTextElement.style.opacity = '0';
+              inputElement.style.opacity = '0';
+            },
+            entered: ({ target, duration }) => {
+              const animatedTextElement = target.querySelector('.arwes-text-field__animated-text') as HTMLDivElement;
+              const inputElement = target.querySelector('.arwes-text-field__input') as HTMLInputElement;
+
+              animatedTextElement.style.opacity = '1';
+              inputElement.style.opacity = '0';
+
+              const text = inputElement.value || placeholder || '';
+
+              if (inputElement.value) {
+                Object.assign(animatedTextElement.style, styles.animatedTextIsTextValuePlainStyles);
+              }
+              else {
+                Object.assign(animatedTextElement.style, styles.animatedTextIsTextPlaceholderPlainStyles);
+              }
+
+              if (text) {
+                bleeps.type?.play();
+
+                transitionerTextSimpleRef.current?.cancel();
+                transitionerTextSimpleRef.current = createTransitionerTextSimple({
+                  duration,
+                  text,
+                  onChange: (newText: string): void => {
+                    animatedTextElement.textContent = newText;
+                  },
+                  onComplete: () => {
+                    bleeps.type?.stop();
+
+                    animatedTextElement.style.opacity = '0';
+                    inputElement.style.opacity = '1';
+                  }
+                });
+              }
+            },
+            exiting: ({ target, duration }) => {
+              const animatedTextElement = target.querySelector('.arwes-text-field__animated-text') as HTMLDivElement;
+              const inputElement = target.querySelector('.arwes-text-field__input') as HTMLInputElement;
+
+              animatedTextElement.style.opacity = '1';
+              inputElement.style.opacity = '0';
+
+              const text = inputElement.value || placeholder || '';
+
+              if (text) {
+                bleeps.type?.play();
+
+                transitionerTextSimpleRef.current?.cancel();
+                transitionerTextSimpleRef.current = createTransitionerTextSimple({
+                  // If the text is too long, exit it quickly so the other elements
+                  // don't disappear ant the text is left hanging alone.
+                  duration: duration / 2,
+                  text,
+                  isEntering: false,
+                  onChange: (newText: string): void => {
+                    animatedTextElement.textContent = newText;
+                  },
+                  onComplete: () => {
+                    bleeps.type?.stop();
+                  }
+                });
+              }
+            },
+            exited: ({ target }) => {
+              const animatedTextElement = target.querySelector('.arwes-text-field__animated-text') as HTMLDivElement;
+              const inputElement = target.querySelector('.arwes-text-field__input') as HTMLInputElement;
+
+              animatedTextElement.style.opacity = '0';
+              inputElement.style.opacity = '0';
+            }
+          }
+        ]}
       >
         <Animated<HTMLInputElement>
           name={name}
@@ -115,63 +201,31 @@ const TextField = (props: TextFieldProps): ReactElement => {
           className={cx('arwes-text-field__input', inputProps?.className)}
           css={styles.input}
           animated={{
-            initialAttributes: {
-              placeholder: ''
+            initialStyles: {
+              opacity: 0
             },
-            entering: ({ target }) => {
-              target.setAttribute('placeholder', '');
-            },
-            entered: ({ target, duration }) => {
-              // If animated and autoFocus, the element is invisible in the beginning.
-              // So once it is visible, provide compatibility for the auto focus.
-              // This can conflict with other HTML elements, but it's responsitibility
-              // of the programmer to define which element should have the initial focus.
+            entered: ({ target }) => {
               if (autoFocus) {
                 target.focus();
               }
-
-              if (placeholder) {
-                bleeps.type?.play();
-
-                transitionerTextSimple?.cancel();
-                transitionerTextSimple = createTransitionerTextSimple({
-                  text: placeholder,
-                  duration,
-                  onChange: (newText: string): void => {
-                    target.setAttribute('placeholder', newText);
-                  },
-                  onComplete: () => {
-                    bleeps.type?.stop();
-                  }
-                });
-              }
             },
-            exiting: ({ target, duration }) => {
-              // If the input has focus while invisibile, user would be able to type on it.
+            exiting: ({ target }) => {
               target.blur();
-
-              if (placeholder) {
-                bleeps.type?.play();
-
-                transitionerTextSimple?.cancel();
-                transitionerTextSimple = createTransitionerTextSimple({
-                  text: placeholder,
-                  duration,
-                  isEntering: false,
-                  onChange: (newText: string): void => {
-                    target.setAttribute('placeholder', newText);
-                  },
-                  onComplete: () => {
-                    bleeps.type?.stop();
-                  }
-                });
-              }
             }
           }}
         />
+        <div
+          className='arwes-text-field__animated-text'
+          css={styles.animatedText}
+        />
+        <Animated
+          className='arwes-text-field__bg'
+          css={styles.bg}
+          animated={transitionOpacityDelayed}
+        />
         {!hideLines &&
           <Animated
-            className='arwes-text-field__line-base'
+            className='arwes-text-field__line'
             css={styles.line}
             animated={{
               initialStyles: { scaleX: 0 },

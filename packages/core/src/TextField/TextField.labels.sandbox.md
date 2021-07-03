@@ -13,7 +13,8 @@ const Sandbox = () => {
   const [activate, setActivate] = React.useState(true);
 
   React.useEffect(() => {
-    const timeout = setTimeout(() => setActivate(!activate), 4000);
+    const time = activate ? 4000 : 1000;
+    const timeout = setTimeout(() => setActivate(!activate), time);
     return () => clearTimeout(timeout);
   }, [activate]);
 

@@ -73,9 +73,7 @@ const createTransitionerTextSimple = (params: CreateTransitionerTextSimpleParams
   currentAnimationFrame = window.requestAnimationFrame(nextAnimation);
 
   const cancel = (): void => {
-    if (typeof currentAnimationFrame === 'number') {
-      window.cancelAnimationFrame(currentAnimationFrame);
-    }
+    window.cancelAnimationFrame(currentAnimationFrame as number);
   };
 
   const transitionerTextSimple: TransitionerTextSimple = { cancel };

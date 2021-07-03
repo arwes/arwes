@@ -4,33 +4,52 @@ import { Theme } from '@arwes/design';
 
 const generateStyles = (
   theme: Theme,
-  options: { palette?: string }
+  options: { palette?: string, multiline?: boolean, disabled?: boolean, readOnly?: boolean }
 ): Record<string, CSSObject> => {
   const { outline, shadowBlur, transitionDuration } = theme;
+  const { multiline, disabled, readOnly } = options;
 
-  const defaultPalette = theme.palette.primary;
-  const colorPalette = theme.palette[options.palette as string] ?? defaultPalette;
+  const isHoverFocusEnabled = !disabled && !readOnly;
+
+  const paletteUsed = theme.palette[options.palette as string] ?? theme.palette.primary;
+  const color = disabled ? paletteUsed.dark2 : paletteUsed.main;
+  const colorTextValue = color;
+  const colorTextPlaceholder = rgba(color, 0.5);
+
+  const lineWidth = `${outline(1)}px`;
+  const shadowBlurWidth = `${shadowBlur(1)}px`;
+  const transitionDurationMs = `${transitionDuration()}ms`;
+
+  // Since Firefox doesn't vertically align text properly for <input/> elements,
+  // a different layout is set for <textarea/> and <input/> elements.
+  const textBoxStyles = {
+    padding: multiline ? '0.5rem' : '0 0.5rem',
+    height: multiline ? undefined : '2rem',
+    minHeight: multiline ? '2rem' : undefined,
+    lineHeight: multiline ? 'inherit' : '2rem',
+    fontSize: '1rem'
+  };
 
   return {
     root: {
-      position: 'relative',
       display: 'block'
     },
-    container: {},
+    container: {
+      position: 'relative'
+    },
     input: {
+      ...textBoxStyles,
+      zIndex: 10,
+      position: 'relative',
       display: 'block',
       outline: 'none',
       border: 'none',
-      padding: '0 0.5rem',
       width: '100%',
-      minHeight: '2rem',
-      lineHeight: '2rem',
-      fontSize: '1rem',
-      color: colorPalette.main,
-      backgroundColor: rgba(colorPalette.dark2, 0.05),
+      color: colorTextValue,
+      backgroundColor: 'transparent',
       boxShadow: 'none',
       transitionProperty: 'background-color, box-shadow',
-      transitionDuration: `${transitionDuration()}ms`,
+      transitionDuration: transitionDurationMs,
       transitionTimingFunction: 'ease-out',
 
       // TEXTAREA specific styles.
@@ -57,15 +76,23 @@ const generateStyles = (
         margin: 0
       },
 
-      '&:hover:not(:disabled, :read-only), &:focus:not(:disabled, :read-only)': {
-        outline: 'none',
-        backgroundColor: rgba(colorPalette.dark2, 0.1),
-        boxShadow: `0 0 ${shadowBlur(1)}px ${colorPalette.dark3}`,
+      ...(isHoverFocusEnabled && {
+        '&:hover, &:focus': {
+          outline: 'none',
+          boxShadow: 'none',
 
-        '& ~ .arwes-text-field__line-base::before, & ~ .arwes-text-field__line-base::after': {
-          transform: 'scaleX(2)'
+          '& ~ .arwes-text-field__bg': {
+            backgroundColor: rgba(color, 0.1),
+            boxShadow: `0 0 ${shadowBlurWidth} ${rgba(color, 0.1)}`
+          },
+          [[
+            '& ~ .arwes-text-field__line::before',
+            '& ~ .arwes-text-field__line::after'
+          ].join()]: {
+            transform: 'scaleX(2)'
+          }
         }
-      },
+      }),
 
       // Remove browser validation styles.
       '&:required, &:invalid': {
@@ -82,34 +109,55 @@ const generateStyles = (
         border: 'none',
 
         // Hack to define colors, since the basic style properties do not work.
-        WebkitTextFillColor: colorPalette.main,
-        WebkitBoxShadow: `0 0 0px 1000px ${colorPalette.dark3} inset`
+        WebkitTextFillColor: color,
+        WebkitBoxShadow: `0 0 0px 1000px ${paletteUsed.dark4} inset`
       },
 
       '&::placeholder': {
-        color: rgba(colorPalette.main, 0.5)
-      },
-
-      '&:disabled': {
-        color: colorPalette.dark1,
-        backgroundColor: 'transparent',
-        boxShadow: 'none',
-        cursor: 'auto',
-
-        '&::placeholder': {
-          color: colorPalette.dark2
-        }
+        color: colorTextPlaceholder,
+        opacity: 1 // Firefox style reset.
       }
+    },
+    bg: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+      backgroundColor: rgba(color, 0.05),
+      boxShadow: `0 0 ${shadowBlurWidth} ${rgba(color, 0.05)}`,
+      transitionProperty: 'background-color, box-shadow',
+      transitionDuration: transitionDurationMs,
+      transitionTimingFunction: 'ease-out'
+    },
+    animatedText: {
+      ...textBoxStyles,
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+      overflow: 'hidden'
+    },
+    // Plain styles props to apply to the "animatedText" element when
+    // there is NOT an input value, so it is a placeholder text.
+    animatedTextIsTextPlaceholderPlainStyles: {
+      color: colorTextPlaceholder
+    },
+    // Plain styles props to apply to the "animatedText" element when
+    // there is an input value.
+    animatedTextIsTextValuePlainStyles: {
+      color: colorTextValue
     },
     line: {
       position: 'absolute',
       left: 0,
       right: 0,
       bottom: 0,
-      borderBottomWidth: outline(1),
+      borderBottomWidth: lineWidth,
       borderBottomStyle: 'solid',
-      borderBottomColor: colorPalette.dark1,
-      boxShadow: `0 0 ${shadowBlur(1)}px ${colorPalette.dark1}`,
+      borderBottomColor: paletteUsed.dark1,
+      boxShadow: `0 0 ${shadowBlurWidth} ${paletteUsed.dark1}`,
       transformOrigin: 'left',
 
       '&::before, &::after': {
@@ -117,11 +165,13 @@ const generateStyles = (
         display: 'block',
         position: 'absolute',
         bottom: 0,
-        borderBottomWidth: outline(1),
+        borderBottomWidth: lineWidth,
         borderBottomStyle: 'solid',
-        borderBottomColor: colorPalette.light1,
+        borderBottomColor: paletteUsed.light1,
         width: '0.5rem',
-        transition: `transform ${transitionDuration()}ms ease-out`
+        transitionProperty: 'transform',
+        transitionDuration: transitionDurationMs,
+        transitionTimingFunction: 'ease-out'
       },
       '&::before': {
         left: 0,

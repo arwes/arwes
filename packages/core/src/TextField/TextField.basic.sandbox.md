@@ -11,7 +11,8 @@ const Sandbox = () => {
   const [activate, setActivate] = React.useState(true);
 
   React.useEffect(() => {
-    const timeout = setTimeout(() => setActivate(!activate), 4000);
+    const time = activate ? 4000 : 1000;
+    const timeout = setTimeout(() => setActivate(!activate), time);
     return () => clearTimeout(timeout);
   }, [activate]);
 
@@ -41,14 +42,34 @@ const Sandbox = () => {
               />
 
               <TextField
-                placeholder={`A nebula is an interstellar cloud of dust,
-hydrogen, helium and other ionized gases. Originally, the term was used
-to describe any diffused astronomical object, including galaxies beyond
-the Milky Way.`}
-                defaultValue={`A nebula is an interstellar cloud of dust,
-hydrogen, helium and other ionized gases. Originally, the term was used
-to describe any diffused astronomical object, including galaxies beyond
-the Milky Way.`}
+                placeholder={[
+                  'A nebula is an interstellar cloud of dust, hydrogen, helium and',
+                  'other ionized gases. Originally, the term was used to describe',
+                  'any diffused astronomical object, including galaxies beyond the',
+                  'Milky Way.',
+                ].join(' ')}
+                defaultValue={[
+                  'A nebula is an interstellar cloud of dust, hydrogen, helium and',
+                  'other ionized gases. Originally, the term was used to describe',
+                  'any diffused astronomical object, including galaxies beyond the',
+                  'Milky Way.',
+                ].join(' ')}
+              />
+
+              <TextField
+                multiline
+                placeholder={[
+                  'A nebula is an interstellar cloud of dust, hydrogen, helium and',
+                  'other ionized gases. Originally, the term was used to describe',
+                  'any diffused astronomical object, including galaxies beyond the',
+                  'Milky Way.',
+                ].join(' ')}
+                defaultValue={[
+                  'A nebula is an interstellar cloud of dust, hydrogen, helium and',
+                  'other ionized gases. Originally, the term was used to describe',
+                  'any diffused astronomical object, including galaxies beyond the',
+                  'Milky Way.',
+                ].join(' ')}
               />
 
               <TextField
