@@ -35,7 +35,10 @@ const generateStyles = (
       display: 'block'
     },
     container: {
-      position: 'relative'
+      position: 'relative',
+      display: 'block',
+      cursor: isHoverFocusEnabled ? 'pointer' : 'default',
+      WebkitTapHighlightColor: 'transparent'
     },
     input: {
       ...textBoxStyles,

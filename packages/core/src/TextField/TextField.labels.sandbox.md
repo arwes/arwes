@@ -7,8 +7,6 @@ const playersSettings = { type: { src: [SOUND_TYPE_URL], loop: true } };
 const bleepsSettings = { type: { player: 'type' } };
 const animatorGeneral = { duration: { enter: 200, exit: 200, stagger: 75 } };
 
-const textFieldTypes = ['text', 'email', 'search', 'password', 'tel', 'url', 'number'];
-
 const Sandbox = () => {
   const [activate, setActivate] = React.useState(true);
 
@@ -31,19 +29,25 @@ const Sandbox = () => {
         <AnimatorGeneralProvider animator={animatorGeneral}>
           <Animator animator={{ activate, manager: 'stagger' }}>
             <form>
-              {textFieldTypes.map((type, index) =>
-                <div key={index} style={{ marginBottom: 20 }}>
-                  <Text as='label' style={{ marginBottom: 10 }}>
-                    Text field {type}
-                  </Text>
-                  <TextField
-                    type={type}
-                    placeholder={`Text field ${type}`}
-                    defaultValue=''
-                    palette='primary'
-                  />
-                </div>
-              )}
+              <label style={{ display: 'block', marginBottom: 20 }}>
+                <Text style={{ display: 'block', marginBottom: 10 }}>
+                  Text Field Label
+                </Text>
+                <TextField
+                  placeholder='Text field placeholder'
+                  defaultValue=''
+                />
+              </label>
+
+              <label style={{ display: 'block', marginBottom: 20 }}>
+                <Text style={{ display: 'block', marginBottom: 10 }}>
+                  Text Field Label
+                </Text>
+                <TextField
+                  placeholder='Text field placeholder'
+                  defaultValue='Text field value'
+                />
+              </label>
             </form>
           </Animator>
         </AnimatorGeneralProvider>

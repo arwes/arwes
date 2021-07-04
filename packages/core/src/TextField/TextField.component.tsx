@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { jsx, useTheme } from '@emotion/react';
 import { useBleeps } from '@arwes/bleeps';
-import { Animated, transitionOpacityDelayed } from '@arwes/animated';
+import { Animated, transitionOpacity } from '@arwes/animated';
 
 import { createTransitionerTextSimple, TransitionerTextSimple } from '../utils/createTransitionerTextSimple';
 import { generateStyles } from './TextField.styles';
@@ -92,7 +92,8 @@ const TextField = (props: TextFieldProps): ReactElement => {
       style={style}
       ref={rootRef}
     >
-      <Animated
+      <Animated<HTMLLabelElement>
+        as='label'
         className='arwes-text-field__container'
         css={styles.container}
         animated={[
@@ -221,7 +222,7 @@ const TextField = (props: TextFieldProps): ReactElement => {
         <Animated
           className='arwes-text-field__bg'
           css={styles.bg}
-          animated={transitionOpacityDelayed}
+          animated={transitionOpacity}
         />
         {!hideLines &&
           <Animated

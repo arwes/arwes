@@ -19,7 +19,8 @@ const Sandbox = () => {
   return (
     <ArwesThemeProvider>
       <StylesBaseline styles={{
-        body: { fontFamily: FONT_FAMILY_ROOT }
+        body: { fontFamily: FONT_FAMILY_ROOT },
+        '.arwes-text-field': { marginBottom: 20 }
       }} />
       <BleepsProvider
         audioSettings={audioSettings}
@@ -29,14 +30,24 @@ const Sandbox = () => {
         <AnimatorGeneralProvider animator={animatorGeneral}>
           <Animator animator={{ activate, manager: 'stagger' }}>
             <TextField
-              multiline
-              placeholder='Multiline text field'
-              style={{ marginBottom: 20 }}
+              placeholder='Text field placeholder'
+              hideLines
+            />
+            <TextField
+              placeholder='Text field placeholder'
+              defaultValue='Text field value'
+              hideLines
             />
             <TextField
               multiline
-              placeholder='Multiline text field'
-              defaultValue='Multiline text field'
+              placeholder='Text field placeholder'
+              hideLines
+            />
+            <TextField
+              multiline
+              placeholder='Text field placeholder'
+              defaultValue='Text field value'
+              hideLines
             />
           </Animator>
         </AnimatorGeneralProvider>
