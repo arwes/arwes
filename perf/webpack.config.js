@@ -20,7 +20,7 @@ const testsEntries = testNames.reduce((all, testName) => ({
 
 const testsTemplates = testNames.map(testName => {
   return new HtmlWebpackPlugin({
-    publicPath: '/',
+    publicPath: '/perf',
     template: path.join(__dirname, 'src/tests', testName, 'index.html'),
     filename: `tests/${testName}/index.html`,
     chunks: [testName],
@@ -36,7 +36,8 @@ module.exports = {
     index: './src/index.ts'
   },
   output: {
-    path: path.join(__dirname, 'public'),
+    publicPath: '/perf',
+    path: path.join(__dirname, 'public/perf'),
     filename: pathData => {
       const { name: testName } = pathData.chunk;
       return `tests/${testName}/index.js`;
@@ -78,7 +79,7 @@ module.exports = {
   plugins: [
     ...testsTemplates,
     new HtmlWebpackPlugin({
-      publicPath: '/',
+      publicPath: '/perf',
       template: path.join(__dirname, 'src/index.html'),
       filename: 'index.html',
       chunks: ['index'],
@@ -98,12 +99,14 @@ module.exports = {
     })
   ],
   devServer: {
+    publicPath: '/perf',
     contentBase: path.join(__dirname, 'public'),
     watchContentBase: true,
     disableHostCheck: true,
     compress: true,
     host: '127.0.0.1',
     port: 9100,
-    open: true
+    open: true,
+    openPage: 'perf'
   }
 };

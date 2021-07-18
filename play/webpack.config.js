@@ -10,9 +10,9 @@ module.exports = {
   mode: NODE_ENV || 'development',
   entry: './src/index.js',
   output: {
-    path: path.join(__dirname, 'public'),
+    path: path.join(__dirname, 'public/play'),
     filename: 'play.js',
-    publicPath: '/'
+    publicPath: '/play'
   },
   module: {
     rules: [
@@ -38,8 +38,9 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      publicPath: '/play',
       template: path.join(__dirname, 'src/index.html'),
-      filename: path.join(__dirname, 'public/index.html')
+      filename: path.join(__dirname, 'public/play/index.html')
     }),
     new CopyWebpackPlugin({
       patterns: [{
@@ -55,13 +56,19 @@ module.exports = {
     })
   ],
   devServer: {
+    publicPath: '/play',
     contentBase: path.join(__dirname, 'public'),
-    historyApiFallback: true,
+    historyApiFallback: {
+      rewrites: [
+        { from: /^\/play/, to: '/play' }
+      ]
+    },
     watchContentBase: true,
     disableHostCheck: true,
     compress: true,
     host: '127.0.0.1',
     port: 9000,
-    open: true
+    open: true,
+    openPage: 'play'
   }
 };

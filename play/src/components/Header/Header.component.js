@@ -21,7 +21,7 @@ function Header ({
       css={styles.root}
     >
       <a href='/'>
-        <h1 css={styles.title}>Arwes Play</h1>
+        <h1 css={styles.title}>Arwes Playground</h1>
       </a>
       <div css={styles.options}>
         {isCodeEnabled && (

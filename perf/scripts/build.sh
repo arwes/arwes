@@ -9,9 +9,9 @@ then
   log "No test names provided."
   log "Tests names can be provided as first parameter separated by comma."
   log "Using all available performance tests."
-  cross-env NODE_ENV=production webpack
+  cross-env NODE_ENV=production webpack --progress
 else
   log "Building performance tests \"$1\"..."
-  cross-env NODE_ENV=production TEST_NAMES=$1 webpack
+  cross-env NODE_ENV=production TEST_NAMES=$1 webpack --progress
   log "Tests \"$1\" were built."
 fi

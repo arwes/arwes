@@ -10,7 +10,7 @@ import { App } from './components/App';
 anime.suspendWhenDocumentHidden = false;
 
 render(
-  <BrowserRouter>
+  <BrowserRouter basename='/play'>
     <Route>
       <RouterControlsProvider>
         <App />
