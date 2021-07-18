@@ -12,4 +12,4 @@ fi
 
 log "Building and watching performance tests \"$1\"..."
 
-cross-env TEST_NAMES=$1 webpack serve --config ./perf.webpack.config.js
+cross-env TEST_NAMES=$1 webpack serve --config ./webpack.config.js

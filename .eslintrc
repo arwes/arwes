@@ -7,8 +7,9 @@
     "packages/*/lib",
     "packages/*/dist",
     "playground",
-    "website",
-    "perf/public",
+    "public",
+    "static",
+    ".cache",
     "__deprecated__"
   ],
   "parser": "@typescript-eslint/parser",

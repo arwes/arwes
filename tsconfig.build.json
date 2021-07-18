@@ -7,6 +7,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
     "jsx": "react",
     "baseUrl": ".",
     "paths": {
@@ -16,6 +17,8 @@
   "exclude": [
     "node_modules",
     "lib",
-    "dist"
+    "dist",
+    "static",
+    "public"
   ]
 }
