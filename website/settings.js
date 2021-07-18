@@ -33,7 +33,8 @@ module.exports = {
           items: [
             { name: 'Workflow', path: 'workflow' },
             { name: 'Architecture', path: 'architecture' },
-            { name: 'Playground', path: 'playground' },
+            { name: 'Play', path: 'play' },
+            { name: 'Perf', path: 'perf' },
             { name: 'Website', path: 'website' }
           ]
         },

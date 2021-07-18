@@ -1,30 +1,39 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/react';
 
-import { Layout } from '../components/Layout';
-import { Head } from '../components/Head';
+import { Page } from '../components/Page';
 
 const styles = {
-  root: {
-    padding: 20,
+  container: {
+    display: 'flex'
+  },
+  content: {
+    margin: 'auto',
+    padding: '1rem',
+    textAlign: 'center',
 
-    '& h1': {
+    h1: {
       margin: '0 0 20px'
     },
-    '& p': {
+    p: {
       margin: '0 0 20px'
     }
   }
 };
 
 const NotFoundPage = () => (
-  <Layout>
-    <Head title='404: Not found' />
-    <div css={styles.root}>
+  <Page
+    containerCSS={styles.container}
+    headProps={{
+      title: '404: Not found'
+    }}
+    isContent={false}
+  >
+    <div css={styles.content}>
       <h1>404: Not Found</h1>
       <p>The place you are looking for does not exist in this galaxy.</p>
     </div>
-  </Layout>
+  </Page>
 );
 
 export default NotFoundPage;

@@ -22,8 +22,9 @@ const generateStyles = ({ breakpoints, palette }) => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     borderTop: `1px solid ${palette.primary.main}`,
-    textAlign: 'center',
     padding: '1rem 0.5rem',
+    fontSize: '0.875rem',
+    textAlign: 'center',
 
     'a + a': {
       marginLeft: '1rem'
@@ -32,7 +33,7 @@ const generateStyles = ({ breakpoints, palette }) => ({
     [breakpoints.up('sm')]: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      padding: '1.5rem'
+      fontSize: '1rem'
     },
     [breakpoints.up('md')]: {
       padding: '1rem'
@@ -61,6 +62,7 @@ const Footer = () => {
             </a>
             <a href='/play' target='play'>Play</a>
             <a href='/perf' target='perf'>Perf</a>
+            <a href='https://version1-breakpoint1.arwes.dev' target='version1-breakpoint1'>Previous Version</a>
           </div>
           <div>
             <a href='https://discord.gg/s5sbTkw' target='discord' rel='noreferrer'>Discord</a>

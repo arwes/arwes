@@ -1,5 +1,5 @@
-import { PageContentLayout } from '../../components/PageContentLayout';
-export default props => <PageContentLayout headProps={{ title: 'Core' }} {...props} />;
+import { Page } from '../../components/Page';
+export default props => <Page headProps={{ title: 'Core' }} {...props} />;
 
 # `@arwes/core`
 
@@ -41,11 +41,11 @@ The guides and API documentation for the core components is still under developm
 All the available components previews and examples can be tested in the
 playground sandboxes in the `@arwes/core` package.
 
-See: [playground.arwes.dev](https://playground.arwes.dev/core/StylesBaseline/basic).
+See: [playground app](/play/p/core/StylesBaseline/basic).
 
 ## Example
 
-A similar example as the sandbox [playground.arwes.dev/core/Figure/basic](https://playground.arwes.dev/core/Figure/basic)
+A similar example as the sandbox [Figure basic](/play/p/core/Figure/basic)
 can be replicated in a local project like:
 
 ```tsx
@@ -57,11 +57,12 @@ import { ArwesThemeProvider, StylesBaseline, Text, Figure } from '@arwes/core';
 
 // For the font-family to work, you would have to setup the Google Fonts link:
 // <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600&display=swap" />
-
 const ROOT_FONT_FAMILY = '"Titillium Web", sans-serif';
-const IMAGE_URL = 'https://playground.arwes.dev/assets/images/wallpaper.jpg';
-const SOUND_OBJECT_URL = 'https://playground.arwes.dev/assets/sounds/object.mp3';
-const SOUND_TYPE_URL = 'https://playground.arwes.dev/assets/sounds/type.mp3';
+
+// These are some examples assets URLs.
+const IMAGE_URL = '/assets/images/wallpaper.jpg';
+const SOUND_OBJECT_URL = '/assets/sounds/object.mp3';
+const SOUND_TYPE_URL = '/assets/sounds/type.mp3';
 
 const audioSettings = { common: { volume: 0.25 } };
 const playersSettings = {

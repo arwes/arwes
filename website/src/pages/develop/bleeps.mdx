@@ -1,5 +1,5 @@
-import { PageContentLayout } from '../../components/PageContentLayout';
-export default props => <PageContentLayout headProps={{ title: 'Sounds' }} {...props} />;
+import { Page } from '../../components/Page';
+export default props => <Page headProps={{ title: 'Sounds' }} {...props} />;
 
 # `@arwes/bleeps`
 
@@ -183,7 +183,7 @@ const ButtonComponent: FC = ({ children }) => {
 A complete example can look like this:
 
 ```arwes_sandbox
-const SOUND_CLICK_URL = 'https://playground.arwes.dev/assets/sounds/click.mp3';
+const SOUND_CLICK_URL = 'https://arwes.dev/assets/sounds/click.mp3';
 
 const Button = ({ children }) => {
   const bleeps = useBleeps();
@@ -261,4 +261,4 @@ is to use `webm` audio format.
 
 ----
 
-You can see and play with more examples in the [playground](https://playground.arwes.dev/sounds/BleepsProvider/basic).
+You can see and play with more examples in the [Play app](/play/p/sounds/BleepsProvider/basic).
