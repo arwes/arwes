@@ -1,5 +1,5 @@
 {
-  "name": "arwes-playground",
+  "name": "arwes-play",
   "version": "1.0.0",
   "private": true,
   "engines": {
@@ -36,9 +36,8 @@
     "webpack-dev-server": "^3.11.2"
   },
   "scripts": {
+    "clean": "rimraf ./public",
     "develop": "webpack serve",
-    "build": "cross-env NODE_ENV=production webpack --progress",
-    "lint": "eslint .",
-    "lint-fix": "eslint . --fix"
+    "build": "cross-env NODE_ENV=production webpack --progress"
   }
 }

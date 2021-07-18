@@ -47,6 +47,7 @@
     "lerna": "^4.0.0",
     "markdownlint": "^0.23.1",
     "markdownlint-cli": "^0.27.1",
+    "rimraf": "^3.0.2",
     "ts-jest": "^27.0.3",
     "ts-loader": "^9.2.3",
     "tsconfig-paths-webpack-plugin": "^3.5.1",
