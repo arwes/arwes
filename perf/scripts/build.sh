@@ -6,12 +6,12 @@ alias webpack="$(pwd)/node_modules/.bin/webpack"
 
 if [ -z $1 ]
 then
-  log "No valid test names. Provide test names separated by comma as first parameter."
-  exit 1
+  log "No test names provided."
+  log "Tests names can be provided as first parameter separated by comma."
+  log "Using all available performance tests."
+  cross-env NODE_ENV=production webpack
+else
+  log "Building performance tests \"$1\"..."
+  cross-env NODE_ENV=production TEST_NAMES=$1 webpack
+  log "Tests \"$1\" were built."
 fi
-
-log "Building performance tests \"$1\"..."
-
-cross-env NODE_ENV=production TEST_NAMES=$1 webpack --config ./webpack.config.js
-
-log "Test \"$1\" was built."

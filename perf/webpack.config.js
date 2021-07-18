@@ -3,30 +3,22 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+const allPerfTestsList = require('./perfTestsList.json');
+
 const { NODE_ENV = 'development', TEST_NAMES } = process.env;
 const REPOSITORY_PATH = path.join(__dirname, '..');
 const tsConfigFilePath = path.join(__dirname, 'tsconfig.webpack.json');
 
-if (!TEST_NAMES) {
-  throw new Error('No valid TEST_NAMES was provided.');
-}
+const testNames = TEST_NAMES
+  ? TEST_NAMES.split(',')
+  : allPerfTestsList;
 
-const testNames = TEST_NAMES.split(',');
-
-const entries = testNames.reduce((all, testName) => ({
+const testsEntries = testNames.reduce((all, testName) => ({
   ...all,
   [testName]: `./src/tests/${testName}/index.tsx`
 }), {});
 
-const output = {
-  path: path.join(__dirname, 'public'),
-  filename: pathData => {
-    const { name: testName } = pathData.chunk;
-    return `tests/${testName}/index.js`;
-  }
-};
-
-const templates = testNames.map(testName => {
+const testsTemplates = testNames.map(testName => {
   return new HtmlWebpackPlugin({
     publicPath: '/',
     template: path.join(__dirname, 'src/tests', testName, 'index.html'),
@@ -38,8 +30,18 @@ const templates = testNames.map(testName => {
 
 module.exports = {
   mode: NODE_ENV,
-  entry: entries,
-  output,
+  devtool: NODE_ENV === 'production' ? false : 'eval-source-map',
+  entry: {
+    ...testsEntries,
+    index: './src/index.ts'
+  },
+  output: {
+    path: path.join(__dirname, 'public'),
+    filename: pathData => {
+      const { name: testName } = pathData.chunk;
+      return `tests/${testName}/index.js`;
+    }
+  },
   module: {
     rules: [
       {
@@ -74,7 +76,14 @@ module.exports = {
     }
   },
   plugins: [
-    ...templates,
+    ...testsTemplates,
+    new HtmlWebpackPlugin({
+      publicPath: '/',
+      template: path.join(__dirname, 'src/index.html'),
+      filename: 'index.html',
+      chunks: ['index'],
+      showErrors: true
+    }),
     new CopyWebpackPlugin({
       patterns: [{
         from: path.join(REPOSITORY_PATH, 'static'),

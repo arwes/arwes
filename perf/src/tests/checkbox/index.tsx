@@ -27,8 +27,6 @@ const App = (): ReactElement => {
         }}
       />
 
-      <h1>Arwes Performance Test | Checkbox</h1>
-
       <Profiler id='test' onRender={onTestsRender}>
         {Array(testsRendersNumber).fill(null).map((_, index) => (
           <Checkbox
