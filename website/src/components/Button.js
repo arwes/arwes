@@ -8,28 +8,28 @@ const generateStyles = ({ breakpoints, palette }) => ({
     outline: 'none',
     margin: 0,
     border: 'none',
-    padding: '8px 0',
+    padding: '0.5rem 0',
     userSelect: 'none',
     verticalAlign: 'middle',
     lineHeight: 1,
-    fontSize: 12,
+    fontSize: '0.875rem',
     textTransform: 'uppercase',
-    color: palette.text.link,
+    color: palette.secondary.dark1,
     fontWeight: 'normal',
     backgroundColor: 'transparent',
     cursor: 'pointer',
     transition: 'color 150ms ease-out',
 
     '&:hover, &:focus': {
-      color: palette.text.linkHover
+      color: palette.secondary.light1
     },
     [breakpoints.up('md')]: {
-      fontSize: 16
+      fontSize: '1rem'
     }
   },
   box: {
     border: `1px solid ${palette.primary.main}`,
-    padding: '8px 16px',
+    padding: '0.5rem 1rem',
     backgroundColor: palette.neutral.elevate(2)
   }
 });

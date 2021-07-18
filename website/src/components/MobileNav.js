@@ -13,6 +13,9 @@ const generateStyles = ({ palette }) => ({
   root: {
     display: 'block'
   },
+  buttonOpen: {
+    verticalAlign: 'middle'
+  },
   modal: {
     zIndex: 1000,
     position: 'absolute',
@@ -21,50 +24,60 @@ const generateStyles = ({ palette }) => ({
     top: 0,
     bottom: 0,
     display: 'grid',
-    padding: 20,
-    backgroundColor: rgba(palette.neutral.elevate(0), 0.75),
+    padding: '2rem',
+    backgroundColor: rgba(palette.neutral.elevate(0), 0.5),
 
-    '& ul': {
+    ul: {
       margin: 0,
-      padding: '0 0 0 20px',
+      padding: 0,
       listStyle: 'none'
     },
-    '& li': {
+    li: {
       lineHeight: 2,
-      fontSize: 16
+      fontSize: '1rem',
+
+      '&::marker': {
+        content: '""'
+      }
     },
-    '& a': {
+    a: {
       display: 'block'
+    },
+    'ul ul': {
+      paddingLeft: '1rem'
     }
   },
   modalContent: {
     display: 'grid',
     gridTemplateColumns: 'auto',
     gridTemplateRows: 'auto 1fr auto',
-    border: '1px solid ' + palette.primary.main,
+    margin: '0 auto',
     minHeight: 0, // Height overflow issue.
-    backgroundColor: palette.neutral.elevate(2)
+    width: '100%',
+    maxWidth: 400,
+    backgroundColor: rgba(palette.neutral.elevate(2), 0.9)
   },
   modalHeader: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     borderBottom: '1px solid ' + palette.primary.main,
-    padding: 10,
-    lineHeight: '30px',
-    backgroundColor: palette.neutral.elevate(2)
+    padding: '1rem 1.5rem',
+    userSelect: 'none'
   },
   modalTitle: {
     margin: 0,
-    lineHeight: 1,
-    fontSize: 20
+    lineHeight: '1rem',
+    fontSize: '1rem',
+    verticalAlign: 'middle'
+  },
+  buttonClose: {
+    padding: 0,
+    lineHeight: '1rem'
   },
   modalBody: {
     overflowY: 'auto',
-    padding: 10
-  },
-  modalFooter: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    borderTop: '1px solid ' + palette.primary.main,
-    padding: 10
+    padding: '1rem 1.5rem'
   }
 });
 
@@ -116,7 +129,11 @@ const MobileNav = ({ className }) => {
 
   return (
     <nav css={styles.root} className={className}>
-      <Button onClick={onClick} isBox={false}>
+      <Button
+        css={styles.buttonOpen}
+        onClick={onClick}
+        isBox={false}
+      >
         Open Menu
       </Button>
       {isOpen && (
@@ -124,12 +141,10 @@ const MobileNav = ({ className }) => {
           <div css={styles.modalContent} onClick={onClick}>
             <div css={styles.modalHeader}>
               <h1 css={styles.modalTitle}>Menu</h1>
+              <Button css={styles.buttonClose} isBox={false}>Close Menu</Button>
             </div>
             <div css={styles.modalBody}>
               <MobileNavMenu />
-            </div>
-            <div css={styles.modalFooter}>
-              <Button isBox={false}>Close Menu</Button>
             </div>
           </div>
         </div>

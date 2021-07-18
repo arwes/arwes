@@ -7,21 +7,27 @@ import { MobileNav } from './MobileNav';
 
 const generateStyles = ({ breakpoints, palette }) => ({
   root: {
-    borderBottom: `1px solid ${palette.primary.main}`,
-    backgroundColor: palette.neutral.elevate(1)
+    userSelect: 'none'
   },
   container: {
+    margin: '0 auto',
+    padding: '0 0.5rem',
+    width: '100%',
+    maxWidth: 1600,
+
+    [breakpoints.up('md')]: {
+      padding: '0.5rem 1rem 0'
+    }
+  },
+  content: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    margin: '0 auto',
-    padding: 10,
-    width: '100%',
-    maxWidth: 1200,
-    lineHeight: '30px',
+    borderBottom: `1px solid ${palette.primary.main}`,
+    padding: '0.5rem',
 
     [breakpoints.up('md')]: {
-      padding: 20
+      padding: '1rem'
     }
   },
   logoItem: {
@@ -56,6 +62,8 @@ const generateStyles = ({ breakpoints, palette }) => ({
     }
   },
   desktopNav: {
+    lineHeight: '25px',
+
     [breakpoints.down('md')]: {
       display: 'none'
     }
@@ -74,12 +82,14 @@ const Header = () => {
   return (
     <header css={styles.root}>
       <div css={styles.container}>
-        <Link css={styles.logo} to='/'>
-          <img css={[styles.logoItem, styles.logoType]} src='/logo.png' alt='Arwes Logotype' />
-          <img css={[styles.logoItem, styles.logoText]} src='/logo-horizontal-text.png' alt='Arwes Logotext' />
-        </Link>
-        <DesktopNavPrimary css={styles.desktopNav} />
-        <MobileNav css={styles.mobileNav} />
+        <div css={styles.content}>
+          <Link css={styles.logo} to='/'>
+            <img css={[styles.logoItem, styles.logoType]} src='/logo.png' alt='Arwes Logotype' />
+            <img css={[styles.logoItem, styles.logoText]} src='/logo-horizontal-text.png' alt='Arwes Logotext' />
+          </Link>
+          <DesktopNavPrimary css={styles.desktopNav} />
+          <MobileNav css={styles.mobileNav} />
+        </div>
       </div>
     </header>
   );

@@ -22,13 +22,13 @@ const generateStyles = ({ palette }) => ({
     backgroundColor: palette.neutral.elevate(1),
     color: palette.primary.main,
     lineHeight: 1,
-    fontSize: 12,
+    fontSize: '0.7rem',
     textTransform: 'uppercase',
     userSelect: 'none'
   },
   pre: {
     margin: 0,
-    fontSize: 14
+    fontSize: '0.8rem'
   }
 });
 

@@ -10,24 +10,22 @@ const styles = {
   root: {
     lineHeight: 1,
 
-    '& ul': {
+    ul: {
       margin: 0,
       padding: 0,
       listStyle: 'none'
     },
-    '& ul ul': {
-      paddingLeft: 20
-    },
-    '& li': {
-      fontSize: 16,
-
+    li: {
       '&::marker': {
         content: '""'
       }
     },
-    '& a': {
+    a: {
       display: 'block',
-      padding: '5px 0'
+      padding: '0.4rem 0'
+    },
+    'ul ul': {
+      paddingLeft: '1rem'
     }
   }
 };

@@ -7,9 +7,14 @@ import { StylesBaseline } from '../../../packages/core';
 const Layout = ({ styles, children }) => {
   return (
     <>
-      <StylesBaseline styles={({ typography }) => ({
+      <StylesBaseline styles={({ breakpoints, typography }) => ({
         'html, body': {
-          fontFamily: typography.content
+          fontFamily: typography.content,
+          fontSize: 16,
+
+          [breakpoints.up('md')]: {
+            fontSize: 18
+          }
         },
         h2: {
           marginTop: 40

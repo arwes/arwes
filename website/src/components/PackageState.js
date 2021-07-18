@@ -26,11 +26,11 @@ const PackageState = ({ name, status, projectBoard }) => (
   <div css={styles.root}>
     {!!projectBoard && (
       <Fragment>
-        <a href={projectBoard} target='_blank'>
+        <a href={projectBoard} target='_blank' rel="noreferrer">
           <img src={packageStatuses[status]} alt="status" />
         </a>
         {' '}
-        <a href={projectBoard} target='_blank'>
+        <a href={projectBoard} target='_blank' rel="noreferrer">
           <img src="https://img.shields.io/badge/see-planning_tasks-047755" alt="GitHub Project" />
         </a>
       </Fragment>
@@ -39,11 +39,11 @@ const PackageState = ({ name, status, projectBoard }) => (
       <img src={packageStatuses[status]} alt="status" />
     )}
     {' '}
-    <a href={`https://www.npmjs.com/package/@arwes/${name}`} target='_blank'>
+    <a href={`https://www.npmjs.com/package/@arwes/${name}`} target='_blank' rel="noreferrer">
       <img src={`https://img.shields.io/npm/dm/@arwes/${name}.svg`} alt="downloads" />
     </a>
     {' '}
-    <a href={`https://bundlephobia.com/result?p=@arwes/${name}`} target='_blank'>
+    <a href={`https://bundlephobia.com/result?p=@arwes/${name}`} target='_blank' rel="noreferrer">
       <img src={`https://img.shields.io/bundlephobia/minzip/@arwes/${name}`} alt="npm bundle size" />
     </a>
   </div>

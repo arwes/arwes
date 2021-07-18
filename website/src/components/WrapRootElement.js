@@ -91,8 +91,4 @@ const WrapRootElement = ({ element }) => {
   );
 };
 
-WrapRootElement.propTypes = {
-  element: PropTypes.any
-};
-
 export { WrapRootElement };

@@ -5,21 +5,16 @@ import { Link } from 'gatsby';
 
 import settings from '../../settings';
 
-const generateStyles = ({ breakpoints }) => ({
+const generateStyles = () => ({
   root: {
     display: 'block',
 
-    '& a': {
-      fontSize: 12
+    a: {
+      verticalAlign: 'middle',
+      fontSize: '1rem'
     },
-    '& a + a': {
-      marginLeft: 10
-    },
-
-    [breakpoints.up('md')]: {
-      '& a': {
-        fontSize: 16
-      }
+    'a + a': {
+      marginLeft: '1rem'
     }
   }
 });
@@ -33,7 +28,6 @@ const DesktopNavPrimary = ({ className }) => {
       {settings.hierarchy.map(({ name, path }) =>
         <Link key={name} to={`/${path}`}>{name}</Link>
       )}
-      <a href='https://playground.arwes.dev' target='playground'>Playground</a>
     </nav>
   );
 };

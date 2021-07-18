@@ -25,13 +25,13 @@ const generateStyles = ({ breakpoints, palette, typography }) => ({
     border: '1px solid ' + rgba(palette.text.main, 0.5)
   },
   resultRender: {
-    padding: 20
+    padding: '1rem'
   },
   resultError: {
     overflow: 'auto',
     margin: 0,
     border: 'none',
-    padding: 20,
+    padding: '1rem',
     background: 'none',
     fontFamily: typography.monospace,
     color: palette.error.main
@@ -55,7 +55,7 @@ const generateStyles = ({ breakpoints, palette, typography }) => ({
     backgroundColor: palette.neutral.elevate(1),
     color: palette.text.main,
     lineHeight: 1,
-    fontSize: 14,
+    fontSize: '0.7rem',
     textTransform: 'uppercase',
     userSelect: 'none'
   },
@@ -68,7 +68,7 @@ const generateStyles = ({ breakpoints, palette, typography }) => ({
   },
 
   liveEditor: {
-    fontSize: '14px !important',
+    fontSize: '0.8rem !important',
     fontFamily: `${typography.monospace} !important`,
 
     '& textarea': {
@@ -85,7 +85,7 @@ const generateStyles = ({ breakpoints, palette, typography }) => ({
 
 const cssStyles = {
   liveEditor: ({ palette, typography }) => ({
-    fontSize: '14px !important',
+    fontSize: '0.8rem !important',
     fontFamily: `${typography.monospace} !important`,
     backgroundColor: 'transparent !important',
 
