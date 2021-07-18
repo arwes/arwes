@@ -1,7 +1,8 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/react';
 
-import lernaSettings from 'repository/lerna.json';
+import lernaSettings from '@repository/lerna.json';
+
 import { styles } from './Footer.styles';
 
 function Footer ({ className }) {

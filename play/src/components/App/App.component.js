@@ -4,9 +4,10 @@ import { useState, useEffect } from 'react';
 import { LiveProvider } from 'react-live';
 import prismThemeVSDark from 'prism-react-renderer/themes/vsDark';
 
-import { useSelectedPlayground } from 'playground/src/tools/useSelectedPlayground';
-import { getSandboxFileCode } from 'playground/src/tools/getSandboxFileCode';
-import { getPackagesScope } from 'playground/src/tools/getPackagesScope';
+import { useSelectedPlayground } from '@play/src/tools/useSelectedPlayground';
+import { getSandboxFileCode } from '@play/src/tools/getSandboxFileCode';
+import { getPackagesScope } from '@play/src/tools/getPackagesScope';
+
 import { theme } from '../../theme';
 import { Header } from '../Header';
 import { Controls } from '../Controls';

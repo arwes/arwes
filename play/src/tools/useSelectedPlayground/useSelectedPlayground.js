@@ -1,11 +1,12 @@
-import { playgroundConfigs } from '../../playgroundConfigs';
+import { playConfigs } from '@play/playConfigs';
+
 import { useRouterControls } from '../useRouterControls';
 
 function useSelectedPlayground () {
   const { controls } = useRouterControls();
 
-  const packagesNames = playgroundConfigs.map(playground => playground.name);
-  const packageConfig = playgroundConfigs.find(playground => playground.name === controls.packageName);
+  const packagesNames = playConfigs.map(playground => playground.name);
+  const packageConfig = playConfigs.find(playground => playground.name === controls.packageName);
 
   let componentsNames = [];
   let componentConfig;

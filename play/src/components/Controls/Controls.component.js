@@ -3,8 +3,8 @@ import { jsx } from '@emotion/react';
 import { useRef, useEffect } from 'react';
 import anime from 'animejs';
 
-import { useSelectedPlayground } from 'playground/src/tools/useSelectedPlayground';
-import { useRouterControls } from 'playground/src/tools/useRouterControls';
+import { useSelectedPlayground } from '@play/src/tools/useSelectedPlayground';
+import { useRouterControls } from '@play/src/tools/useRouterControls';
 import { Select } from '../Select';
 import { Button } from '../Button';
 import { styles } from './Controls.styles';

@@ -11,7 +11,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.join(__dirname, 'public'),
-    filename: 'playground.js',
+    filename: 'play.js',
     publicPath: '/'
   },
   module: {
@@ -32,8 +32,8 @@ module.exports = {
   },
   resolve: {
     alias: {
-      repository: path.join(process.cwd(), '..'),
-      playground: process.cwd()
+      '@repository': path.join(process.cwd(), '..'),
+      '@play': process.cwd()
     }
   },
   plugins: [
