@@ -20,7 +20,7 @@ function Header ({
       className={className}
       css={styles.root}
     >
-      <a href='/'>
+      <a href='/play'>
         <h1 css={styles.title}>Arwes Playground</h1>
       </a>
       <div css={styles.options}>

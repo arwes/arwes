@@ -16,7 +16,7 @@ function RouterControlsProvider ({ children }) {
   const [controls, setControls] = useState(initialControls);
 
   const onRouteChange = () => {
-    const route = location.pathname.split('/').filter(Boolean);
+    const route = location.pathname.split('/').slice(2).filter(Boolean);
     const [packageName = '', componentName = '', sandboxName = ''] = route;
 
     setControls({ packageName, componentName, sandboxName });
@@ -36,7 +36,7 @@ function RouterControlsProvider ({ children }) {
 
     const newControls = { ...controls, ...controlsSideEffectChanges, [name]: value };
     const params = [newControls.packageName, newControls.componentName, newControls.sandboxName];
-    const route = '/' + params.filter(Boolean).join('/');
+    const route = '/p/' + params.filter(Boolean).join('/');
 
     changeRoute(route);
   };
