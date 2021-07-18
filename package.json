@@ -72,7 +72,7 @@
     "test-list": "jest --listTests",
     "ci": "sh ./scripts/ci.sh",
     "release": "npm run bootstrap && npm run compile && npm run lint && npm run test && lerna publish",
-    "changelog": "auto-changelog --commit-limit false --template ./website/src/templates/changelog.hbs --output ./website/src/pages/project/changelog.mdx",
+    "changelog": "auto-changelog",
     "contributors-add": "all-contributors add",
     "readme-contributors-generate": "all-contributors generate",
     "readme-community-generate": "node ./scripts/readme-community-generate.js"
@@ -80,6 +80,15 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "auto-changelog": {
+    "handlebarsSetup": "./website/src/templates/changelog-setup.js",
+    "template": "./website/src/templates/changelog.hbs",
+    "output": "./website/src/pages/project/changelog.mdx",
+    "commitLimit": false,
+    "replaceText": {
+      "#(\\d+)": "[`#$1`](https://github.com/arwes/arwes/issues/$1)"
     }
   }
 }
