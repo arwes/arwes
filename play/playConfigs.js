@@ -23,7 +23,8 @@ const playConfigs = [
           { name: 'nesting', code: require('@repository/packages/animator/src/withAnimator/withAnimator.nesting.sandbox.md').default },
           { name: 'staggering', code: require('@repository/packages/animator/src/withAnimator/withAnimator.staggering.sandbox.md').default },
           { name: 'sequence', code: require('@repository/packages/animator/src/withAnimator/withAnimator.sequence.sandbox.md').default },
-          { name: 'custom-manager', code: require('@repository/packages/animator/src/withAnimator/withAnimator.custom-manager.sandbox.md').default }
+          { name: 'custom-manager', code: require('@repository/packages/animator/src/withAnimator/withAnimator.custom-manager.sandbox.md').default },
+          { name: 'delayed-child', code: require('@repository/packages/animator/src/withAnimator/withAnimator.delayed-child.sandbox.md').default }
         ]
       },
       {
@@ -96,7 +97,8 @@ const playConfigs = [
         name: 'Table',
         sandboxes: [
           { name: 'basic', code: require('@repository/packages/core/src/Table/Table.basic.sandbox.md').default },
-          { name: 'static', code: require('@repository/packages/core/src/Table/Table.static.sandbox.md').default }
+          { name: 'static', code: require('@repository/packages/core/src/Table/Table.static.sandbox.md').default },
+          { name: 'dynamic', code: require('@repository/packages/core/src/Table/Table.dynamic.sandbox.md').default }
         ]
       },
       {
