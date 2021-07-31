@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "engines": {
-    "node": ">=14"
+    "node": "^14.17"
   },
   "dependencies": {
     "@mdx-js/mdx": "^1.6.22",
