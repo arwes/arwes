@@ -71,7 +71,7 @@
     "test-watch": "jest --watch",
     "test-coverage": "jest --coverage",
     "test-list": "jest --listTests",
-    "ci": "sh ./scripts/ci.sh",
+    "integration": "sh ./scripts/integration.sh",
     "release": "npm run bootstrap && npm run compile && npm run lint && npm run test && lerna publish",
     "changelog": "auto-changelog",
     "contributors-add": "all-contributors add",

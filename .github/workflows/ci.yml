@@ -1,5 +1,5 @@
 # This workflow will do a clean install of node dependencies
-# and run the test/build commands for `npm run ci`
+# and test/build the project.
 
 name: ci
 
@@ -24,4 +24,4 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci && npm run ci
+    - run: npm ci && npm run integration
