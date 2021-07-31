@@ -1,4 +1,4 @@
-import { FC, createElement, useState, useRef, useEffect } from 'react';
+import { ReactNode, ReactElement, createElement, useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -39,9 +39,10 @@ let classInstanceIdCounter = 0;
 
 interface AnimatorProps {
   animator?: AnimatorSettings
+  children?: ReactNode
 }
 
-const Animator: FC<AnimatorProps> = props => {
+const Animator = (props: AnimatorProps): ReactElement => {
   const { animator = animatorEmptySettings, children } = props;
 
   const parentAnimatorGeneral = useAnimatorGeneral();
@@ -386,7 +387,6 @@ const Animator: FC<AnimatorProps> = props => {
 };
 
 Animator.propTypes = {
-  // @ts-expect-error
   animator: PropTypes.shape({
     duration: PropTypes.shape({
       enter: PropTypes.number,
