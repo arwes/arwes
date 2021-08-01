@@ -1,14 +1,15 @@
 const path = require('path');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const babelConfig = require('./babel.config');
+const tsConfigFilePath = path.join(__dirname, 'tsconfig.webpack.json');
 
 const { NODE_ENV } = process.env;
 
 module.exports = {
   mode: NODE_ENV || 'development',
-  entry: './src/index.js',
+  entry: './src/index.tsx',
   output: {
     path: path.join(__dirname, 'public/play'),
     filename: 'play.js',
@@ -17,12 +18,17 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /(node_modules)/,
-        use: {
-          loader: 'babel-loader',
-          options: babelConfig
-        }
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              configFile: tsConfigFilePath,
+              transpileOnly: true
+            }
+          }
+        ]
       },
       {
         test: /\.md$/i,
@@ -31,9 +37,14 @@ module.exports = {
     ]
   },
   resolve: {
+    extensions: ['.js', '.ts', '.tsx'],
+    plugins: [
+      new TsconfigPathsPlugin({
+        configFile: tsConfigFilePath
+      })
+    ],
     alias: {
-      '@repository': path.join(process.cwd(), '..'),
-      '@play': process.cwd()
+      '@repository': path.join(process.cwd(), '..')
     }
   },
   plugins: [

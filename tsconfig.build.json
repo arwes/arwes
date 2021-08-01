@@ -11,7 +11,8 @@
     "jsx": "react",
     "baseUrl": ".",
     "paths": {
-      "@arwes/*": ["packages/*/src"]
+      "@arwes/*": ["packages/*/src"],
+      "@repository/*": ["./*"]
     }
   },
   "exclude": [
