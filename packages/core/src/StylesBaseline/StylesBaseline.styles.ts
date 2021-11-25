@@ -29,11 +29,11 @@ const createGlobalGeneralStyles = (theme: Theme): Record<string, CSSObject> => {
       color: palette.text.main,
 
       // Scrollbars
-      scrollbarWidth: 'thin',
+      scrollbarWidth: 'auto',
       scrollbarColor: palette.primary.dark3 + ' ' + palette.primary.dark4,
       '& ::-webkit-scrollbar': {
-        width: space(1.5),
-        height: space(1.5)
+        width: space(2),
+        height: space(2)
       },
       [[
         '& ::-webkit-scrollbar-thumb',
@@ -107,14 +107,17 @@ const createGlobalGeneralStyles = (theme: Theme): Record<string, CSSObject> => {
       color: palette.secondary.main,
       outline: 'none',
       textDecoration: 'none',
-      transition: `color ${transitionDuration()}ms ease-out`,
+      transitionProperty: 'color, text-shadow',
+      transitionDuration: `${transitionDuration()}ms`,
+      transitionTimingFunction: 'ease-out',
 
       'h1, h2, h3, h4, h5, h6': {
         textShadow: `0 0 ${shadowBlur(2)}px ${palette.secondary.main}`
       },
 
       '&:hover, &:focus': {
-        color: palette.secondary.light2
+        color: palette.secondary.light1,
+        textShadow: `0 0 ${shadowBlur(1)}px ${palette.text.light1}`
       }
     },
     'abbr[title]': {
@@ -152,6 +155,9 @@ const createGlobalGeneralStyles = (theme: Theme): Record<string, CSSObject> => {
     'code, pre': {
       // Correct the inheritance and scaling of font size in all browsers.
       fontFamily: 'monospace, monospace'
+    },
+    code: {
+      fontSize: '90%'
     },
     pre: {
       display: 'block',
