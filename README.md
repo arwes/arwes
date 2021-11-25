@@ -10,40 +10,40 @@
 
 <div align="center">
     <a href="https://npmjs.org/package/@arwes/core">
-        <img src="https://img.shields.io/npm/v/@arwes/core.svg" alt="version" />
+        <img src="https://img.shields.io/npm/v/@arwes/core.svg?style=flat-square" alt="version" />
     </a>
     <a href="https://github.com/arwes/arwes/actions">
-        <img src="https://github.com/arwes/arwes/workflows/ci/badge.svg" alt="ci" />
+        <img src="https://github.com/arwes/arwes/workflows/ci/badge.svg?style=flat-square" alt="ci" />
     </a>
     <a href="https://github.com/arwes/arwes">
-        <img src="https://img.shields.io/github/stars/arwes/arwes.svg?style=social&label=stars" alt="github stars" />
+        <img src="https://img.shields.io/github/stars/arwes/arwes.svg?style=flat-square&label=stars" alt="github stars" />
     </a>
     <a href="https://npmjs.org/package/@arwes/core">
-        <img src="https://img.shields.io/npm/dm/@arwes/core.svg" alt="downloads" />
+        <img src="https://img.shields.io/npm/dm/@arwes/core.svg?style=flat-square" alt="downloads" />
     </a>
     <a href="https://twitter.com/arwesjs">
-        <img src="https://img.shields.io/twitter/follow/arwesjs.svg?label=%40arwesjs&style=social" alt="Twitter Follow" />
+        <img src="https://img.shields.io/twitter/follow/arwesjs.svg?label=%40arwesjs&style=flat-square&logo=twitter" alt="Twitter Follow" />
     </a>
     <a href="https://discord.gg/s5sbTkw">
-        <img src="https://img.shields.io/badge/chat-discord-blue.svg" alt="chat on discord" />
+        <img src="https://img.shields.io/badge/chat-discord-blue.svg?style=flat-square&logo=discord" alt="chat on discord" />
     </a>
 </div>
 
 <div align="center">
     <a href="https://standardjs.com">
-        <img src="https://img.shields.io/badge/code_style-standardjs-d2bb09.svg" alt="code style: standardjs" />
+        <img src="https://img.shields.io/badge/code_style-standardjs-d2bb09.svg?style=flat-square" alt="code style: standardjs" />
     </a>
     <a href="https://jestjs.io">
-        <img src="https://img.shields.io/badge/tested%20with-jest-15c213.svg" alt="tested with: jest" />
+        <img src="https://img.shields.io/badge/tested%20with-jest-15c213.svg?style=flat-square" alt="tested with: jest" />
     </a>
     <a href="https://lerna.js.org">
-        <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="lerna" />
+        <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg?style=flat-square" alt="lerna" />
     </a>
     <a href="http://commitizen.github.io/cz-cli">
-        <img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt="Commitizen friendly" />
+        <img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square" alt="Commitizen friendly" />
     </a>
     <a href="https://github.com/arwes/arwes/blob/main/LICENSE">
-        <img src="https://img.shields.io/github/license/arwes/arwes.svg?maxAge=2592000" alt="license" />
+        <img src="https://img.shields.io/github/license/arwes/arwes.svg?maxAge=2592000&style=flat-square" alt="license" />
     </a>
 </div>
 
