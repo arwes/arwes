@@ -1,7 +1,0 @@
-node_modules
-packages/*/lib
-packages/*/dist
-playground/public
-performance/public
-website/public
-CHANGELOG.md
