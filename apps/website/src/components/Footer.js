@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, useTheme } from '@emotion/react';
 
-import lernaSettings from '../../../lerna.json';
+import lernaSettings from '../../../../lerna.json';
 
 const generateStyles = ({ breakpoints, palette }) => ({
   root: {

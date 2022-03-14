@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Global } from '@emotion/react';
 
-import { StylesBaseline } from '../../../packages/core';
+import { StylesBaseline } from '../../../../packages/core/lib';
 
 const Layout = ({ styles, children }) => {
   return (

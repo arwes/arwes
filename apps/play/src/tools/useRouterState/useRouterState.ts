@@ -1,6 +1,6 @@
 import { useLocation, useHistory } from 'react-router-dom';
 
-import { playConfigs } from '@repository/play/playConfigs';
+import { playConfigs } from '@repository/apps/play/playConfigs';
 import {
   RouterState,
   ROUTER_STATE_URL_OPTION_CONTROLS,
