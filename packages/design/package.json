@@ -22,6 +22,7 @@
   "bugs": {
     "url": "https://github.com/arwes/arwes/issues"
   },
+  "funding": "https://github.com/sponsors/romelperez",
   "license": "MIT",
   "files": [
     "lib",
