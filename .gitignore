@@ -24,7 +24,6 @@ typings/
 .lock-wscript
 .tmp
 .sass-cache
-.DS_STORE
 .netbeans
 .idea
 .npm
@@ -32,6 +31,7 @@ typings/
 .node_repl_history
 .vagrant
 .eslintcache
+.DS_STORE
 .DS_Store
 Thumbs.db
 dump.rdb
