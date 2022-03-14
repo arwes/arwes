@@ -1,1 +1,1 @@
-export const tools = '@arwes/tools';
+export * from './types';
