@@ -50,7 +50,7 @@
     "build": "npm run build-esm && npm run build-cjs && npm run build-umd",
     "build-esm": "sh ../../scripts/pkg-build-esm.sh",
     "build-cjs": "sh ../../scripts/pkg-build-cjs.sh",
-    "build-umd": "sh ../../scripts/pkg-build-umd.sh tools",
+    "build-umd": "sh ../../scripts/pkg-build-umd.sh",
     "dev": "sh ../../scripts/pkg-build-esm.sh --watch"
   }
 }
