@@ -42,6 +42,4 @@ yarn.lock
 yarn-error.log
 yarn-error.log*
 .yarn-integrity
-
-/packages/*/lib
-/packages/*/dist
+*.tsbuildinfo

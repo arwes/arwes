@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "target": "ES2018",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "jsx": "react",
+    "baseUrl": ".",
+    "rootDir": ".",
+    "paths": {}
+  },
+  "exclude": [
+    "node_modules",
+    "**/node_modules",
+    "**/static",
+    "**/public",
+    "**/build",
+    "**/out",
+    "**/.next",
+    "**/__deprecated__",
+    "**/__testUtils__"
+  ]
+}
