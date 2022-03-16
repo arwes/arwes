@@ -35,13 +35,21 @@
     ],
     "build-esm": [
       {
-        "target": "build",
+        "target": "build-esm",
+        "projects": "dependencies"
+      },
+      {
+        "target": "build-cjs",
         "projects": "dependencies"
       }
     ],
     "build-cjs": [
       {
-        "target": "build",
+        "target": "build-esm",
+        "projects": "dependencies"
+      },
+      {
+        "target": "build-cjs",
         "projects": "dependencies"
       }
     ],
