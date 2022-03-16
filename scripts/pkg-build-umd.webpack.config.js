@@ -8,6 +8,7 @@ const {
   BUILD_OUT_NAME
 } = process.env;
 const CWD = process.cwd();
+const MOCKS = path.join(__dirname, 'pkg-build-umd-mocks');
 
 module.exports = {
   mode: NODE_ENV || 'development',
@@ -19,7 +20,20 @@ module.exports = {
     libraryTarget: 'umd'
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx']
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    alias: {
+      '@arwes/tools$': path.join(MOCKS, 'arwes/tools.js'),
+      '@arwes/theme$': path.join(MOCKS, 'arwes/theme.js'),
+      '@arwes/styles$': path.join(MOCKS, 'arwes/styles.js'),
+      '@arwes/animator$': path.join(MOCKS, 'arwes/animator.js'),
+      '@arwes/animated$': path.join(MOCKS, 'arwes/animated.js'),
+      '@arwes/bleeps$': path.join(MOCKS, 'arwes/bleeps.js'),
+      '@arwes/core$': path.join(MOCKS, 'arwes/core.js'),
+      '@arwes/arwes$': path.join(MOCKS, 'arwes/arwes.js'),
+      react$: path.join(MOCKS, 'react.js'),
+      '@emotion/react$': path.join(MOCKS, 'emotion/react.js'),
+      motion$: path.join(MOCKS, 'motion.js')
+    }
   },
   module: {
     rules: [
