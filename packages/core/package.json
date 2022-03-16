@@ -39,12 +39,12 @@
   "main": "./build/cjs/index.js",
   "unpkg": "./build/umd/core.min.js",
   "peerDependencies": {
-    "@arwes/tools": "*",
-    "@arwes/theme": "*",
-    "@arwes/styles": "*",
-    "@arwes/animator": "*",
-    "@arwes/animated": "*",
-    "@arwes/bleeps": "*",
+    "@arwes/tools": "^1.0.0-alpha.19",
+    "@arwes/theme": "^1.0.0-alpha.19",
+    "@arwes/styles": "^1.0.0-alpha.19",
+    "@arwes/animator": "^1.0.0-alpha.19",
+    "@arwes/animated": "^1.0.0-alpha.19",
+    "@arwes/bleeps": "^1.0.0-alpha.19",
     "@emotion/react": "^11.8.2",
     "motion": "^10.6.2",
     "react": "^17.0.2"

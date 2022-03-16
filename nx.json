@@ -35,19 +35,19 @@
     ],
     "build-esm": [
       {
-        "target": "build-esm",
+        "target": "build",
         "projects": "dependencies"
       }
     ],
     "build-cjs": [
       {
-        "target": "build-cjs",
+        "target": "build",
         "projects": "dependencies"
       }
     ],
     "build-umd": [
       {
-        "target": "build-umd",
+        "target": "build",
         "projects": "dependencies"
       }
     ],
