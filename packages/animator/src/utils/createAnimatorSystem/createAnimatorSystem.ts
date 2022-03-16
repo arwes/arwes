@@ -1,4 +1,4 @@
-import { createTOScheduler } from '@arwes/tools';
+import { TOOLS_IS_BROWSER, createTOScheduler } from '@arwes/tools';
 
 import type {
   AnimatorSystemNodeId,
@@ -94,13 +94,15 @@ const createAnimatorSystem = (): AnimatorSystem => {
       parent.children.add(node);
     }
 
-    node.scheduler.start('setup', 0, () => {
-      const nodeScoped = node as AnimatorSystemNode;
+    if (TOOLS_IS_BROWSER) {
+      node.scheduler.start('setup', 0, () => {
+        const nodeScoped = node as AnimatorSystemNode;
 
-      machine.onCreate?.(nodeScoped);
-      transition(machine.initialState);
-      machine.onInitialTransition?.(nodeScoped);
-    });
+        machine.onCreate?.(nodeScoped);
+        transition(machine.initialState);
+        machine.onInitialTransition?.(nodeScoped);
+      });
+    }
 
     return node;
   };

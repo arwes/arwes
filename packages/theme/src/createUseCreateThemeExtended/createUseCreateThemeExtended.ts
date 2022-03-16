@@ -1,6 +1,7 @@
 import { useMemo, useRef, useEffect, useState } from 'react';
 
 import type { PartialDeep } from '@arwes/tools';
+
 import type {
   ThemeExtensionColorScheme,
   ThemeCreatorStructure,
@@ -9,6 +10,11 @@ import type {
   ThemeCreatorOptions
 } from '../types';
 import { createCreateTheme } from '../createCreateTheme';
+
+type UseCreateTheme<ThemeSettings, Theme> = (
+  getThemeSettingsExtended: () => ThemeSettingsExtend<ThemeSettings>,
+  dependencies: unknown[]
+) => ThemeExtend<Theme>;
 
 const themeOptionsDefault: ThemeCreatorOptions = {
   getCacheColorScheme: (): string | undefined | null => {
@@ -23,10 +29,9 @@ const createUseCreateThemeExtended = <ThemeSettings, Theme>(
   themeStructure: ThemeCreatorStructure,
   themeSettingsDefaults: ThemeSettings,
   themeOptions: ThemeCreatorOptions = themeOptionsDefault
-) => {
+): UseCreateTheme<ThemeSettings, Theme> => {
   type ThemeSettingsPartial = PartialDeep<ThemeSettings>;
   type ThemeSettingsExtended = ThemeSettingsExtend<ThemeSettings>;
-  type ThemeExtended = ThemeExtend<Theme>;
 
   interface MediaListener {
     media: string
@@ -60,10 +65,7 @@ const createUseCreateThemeExtended = <ThemeSettings, Theme>(
   const getSystemThemeColorScheme = (): ThemeExtensionColorScheme['colorScheme'] =>
     createMediaThemeColorSchemeLight().matches ? 'light' : 'dark';
 
-  const useCreateTheme = (
-    getThemeSettingsExtended: () => ThemeSettingsExtended,
-    dependencies: any[]
-  ): ThemeExtended => {
+  const useCreateTheme: UseCreateTheme<ThemeSettings, Theme> = (getThemeSettingsExtended, dependencies) => {
     const themeSettingsExtendedRef = useRef<ThemeSettingsExtended>(null as any);
     const mediasListenersRef = useRef<MediasListeners>([]);
     const themeColorSchemeRef = useRef<ThemeColorScheme>(themeColorSchemeDefaults);
@@ -121,8 +123,8 @@ const createUseCreateThemeExtended = <ThemeSettings, Theme>(
           const { media } = mediaItem;
           const settings = mediaItem.settings as ThemeSettingsPartial;
           const mediaQueryList = window.matchMedia(mediaItem.media);
-          const onChange = () => updateRef.current();
-          const getIsActive = () => mediaQueryList.matches;
+          const onChange = (): void => updateRef.current();
+          const getIsActive = (): boolean => mediaQueryList.matches;
 
           mediaQueryList.addEventListener('change', onChange);
 
@@ -138,11 +140,11 @@ const createUseCreateThemeExtended = <ThemeSettings, Theme>(
           const media = `(prefers-color-scheme: ${item.scheme})`;
           const settings = item.settings as ThemeSettingsPartial;
           const mediaQueryList = window.matchMedia(media);
-          const onChange = () => {
+          const onChange = (): void => {
             setupCurrentThemeColorScheme();
             updateRef.current();
           };
-          const getIsActive = () => {
+          const getIsActive = (): boolean => {
             if (themeColorSchemeRef.current.control === 'system') {
               return mediaQueryList.matches;
             }
@@ -221,4 +223,5 @@ const createUseCreateThemeExtended = <ThemeSettings, Theme>(
   return useCreateTheme;
 };
 
+export type { UseCreateTheme };
 export { createUseCreateThemeExtended };

@@ -1,19 +1,20 @@
 /* eslint-env jest */
 /* istanbul ignore file */
 
-type JestMoveTimeTo = (timeToMove: number) => void;
+type JestMoveTimeTo = (timeToMoveMs: number) => void;
 
-function makeJestMoveTimeTo(): JestMoveTimeTo {
+function makeJestMoveTimeTo (): JestMoveTimeTo {
   let currentTimeMoved = 0;
 
-  function jestMoveTimeTo(timeToMove: number): void {
-    const timeOffset = timeToMove - currentTimeMoved;
+  function jestMoveTimeTo (timeToMoveSeconds: number): void {
+    const timeToMoveMs = timeToMoveSeconds * 1000;
+    const timeOffset = timeToMoveMs - currentTimeMoved;
 
     if (timeOffset <= 0) {
       throw new Error('Time to move must be greater than current time moved.');
     }
 
-    currentTimeMoved = timeToMove;
+    currentTimeMoved = timeToMoveMs;
 
     jest.advanceTimersByTime(timeOffset);
   };

@@ -10,13 +10,13 @@ interface AnimatorGeneralProviderProps extends AnimatorGeneralProviderSettings {
 const AnimatorGeneralProvider = (props: AnimatorGeneralProviderProps): ReactElement => {
   const { children, ...animatorGeneralSettings } = props;
 
-  const animatorGeneralSettingsRef = useRef(animatorGeneralSettings);
+  const animatorGeneralSettingsRef = useRef<AnimatorGeneralProviderSettings>(animatorGeneralSettings);
 
   animatorGeneralSettingsRef.current = animatorGeneralSettings;
 
   const animatorGeneralInterface: AnimatorGeneralInterface = useMemo(() => {
     // TODO: Merge with existing parent general animator settings.
-    const getSettings = () => animatorGeneralSettingsRef.current;
+    const getSettings = (): AnimatorGeneralProviderSettings => animatorGeneralSettingsRef.current;
     return Object.freeze({ getSettings });
   }, []);
 

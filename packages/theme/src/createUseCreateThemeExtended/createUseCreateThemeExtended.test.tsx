@@ -1,6 +1,6 @@
 /** eslint-env jest */
 
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { render } from '@testing-library/react';
 
 import type {
@@ -45,7 +45,7 @@ test('Should create create theme hook', () => {
   };
   const useCreateThemeExtended = createUseCreateThemeExtended<ThemeSettings, Theme>(themeStructure, themeSettingsDefaults);
   let theme: ThemeExtended | undefined;
-  const Example = () => {
+  const Example = (): ReactElement | null => {
     theme = useCreateThemeExtended(() => {
       const settings: ThemeSettingsExtended = {
         common: {

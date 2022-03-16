@@ -1,5 +1,3 @@
-import { TOOLS_IS_BROWSER } from '../constants';
-
 type TOSchedulerId = number | string;
 type TOSchedulerCallback = () => unknown;
 
@@ -37,10 +35,6 @@ function createTOScheduler (): TOScheduler {
   };
 
   const start = (a: TOSchedulerId | number, b: TOSchedulerCallback | number, c?: TOSchedulerCallback): void => {
-    if (!TOOLS_IS_BROWSER) {
-      return;
-    }
-
     const id = c ? a : ID_DEFAULT;
     const delay = ((c ? b : a) as number) * 1000;
     const callback: () => unknown = c || b as TOSchedulerCallback;

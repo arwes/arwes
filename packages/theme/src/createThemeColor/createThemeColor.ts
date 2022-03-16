@@ -1,4 +1,4 @@
-import type { ThemeSettingsColor } from '../types';
+import type { ThemeSettingsColor, ThemeColor } from '../types';
 
 const minMax = (min: number, max: number) => (value: number) => Math.min(max, Math.max(min, value));
 const minMax0to1 = minMax(0, 1);
@@ -16,7 +16,7 @@ const patchColor = (color: number[], patch: Array<number | undefined | null>): n
   return [color[0], patch[0] ?? color[1], patch[1] ?? color[2], patch[2] ?? color[3]];
 };
 
-const createThemeColor = (settings: ThemeSettingsColor) => {
+const createThemeColor = (settings: ThemeSettingsColor): ThemeColor => {
   if (typeof settings === 'function') {
     const createColor = settings;
 
