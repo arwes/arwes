@@ -8,9 +8,7 @@ test('Should create an empty animator system', () => {
   expect(system).toEqual({
     setup: expect.any(Function),
     register: expect.any(Function),
-    unregister: expect.any(Function),
-    subscribe: expect.any(Function),
-    unsubscribe: expect.any(Function)
+    unregister: expect.any(Function)
   });
 });
 

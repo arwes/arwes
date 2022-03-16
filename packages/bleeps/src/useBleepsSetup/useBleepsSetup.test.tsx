@@ -30,14 +30,16 @@ test('Should provide bleeps setup if provider was found', () => {
   const bleepsSettings = { click: { player: 'click' } };
   render(
     <BleepsProvider
-      audioSettings={audioSettings}
-      playersSettings={playersSettings}
-      bleepsSettings={bleepsSettings}
+      settings={{
+        audio: audioSettings,
+        players: playersSettings,
+        bleeps: bleepsSettings
+      }}
     >
       <Example />
     </BleepsProvider>
   );
-  expect(bleepsSetup?.audioSettings).toEqual(audioSettings);
-  expect(bleepsSetup?.playersSettings).toEqual(playersSettings);
-  expect(bleepsSetup?.bleepsSettings).toEqual(bleepsSettings);
+  expect(bleepsSetup?.settings.audio).toEqual(audioSettings);
+  expect(bleepsSetup?.settings.players).toEqual(playersSettings);
+  expect(bleepsSetup?.settings.bleeps).toEqual(bleepsSettings);
 });

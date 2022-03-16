@@ -33,7 +33,7 @@ function createTOScheduler (): TOScheduler {
   };
 
   const stopAll = (): void => {
-    Object.keys(ledger).forEach(stop);
+    Array.from(ledger.keys()).forEach(stop);
   };
 
   const start = (a: TOSchedulerId | number, b: TOSchedulerCallback | number, c?: TOSchedulerCallback): void => {
