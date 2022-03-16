@@ -4,12 +4,10 @@
     "node_modules",
     "build",
     "coverage",
-    "packages/*/lib",
-    "packages/*/dist",
-    "playground",
     "public",
     "static",
     ".cache",
+    ".next",
     "__deprecated__"
   ],
   "parser": "@typescript-eslint/parser",

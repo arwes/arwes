@@ -1,7 +1,7 @@
 node_modules
-packages/*/lib
-packages/*/dist
-playground/public
-performance/public
-website/public
-CHANGELOG.md
+build
+public
+static
+.cache
+.next
+__deprecated__
