@@ -25,31 +25,40 @@
   "funding": "https://github.com/sponsors/romelperez",
   "license": "MIT",
   "files": [
-    "lib",
-    "dist"
+    "build"
   ],
-  "main": "lib/index.js",
-  "unpkg": "dist/core.min.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": "./build/cjs/index.js",
+      "default": "./build/esm/index.js"
+    }
+  },
+  "types": "./build/esm/index.d.ts",
+  "module": "./build/esm/index.js",
+  "main": "./build/cjs/index.js",
+  "unpkg": "./build/umd/core.min.js",
   "peerDependencies": {
-    "@arwes/animated": "*",
+    "@arwes/tools": "*",
+    "@arwes/theme": "*",
+    "@arwes/styles": "*",
     "@arwes/animator": "*",
+    "@arwes/animated": "*",
     "@arwes/bleeps": "*",
-    "@arwes/design": "*",
-    "@emotion/css": "^11.1.3",
-    "@emotion/react": "^11.1.4",
-    "animejs": "^3.2.1",
-    "howler": "2.2.x",
-    "polished": "^4.1.0",
-    "prop-types": "*",
-    "react": "^17.0.1"
+    "@emotion/react": "*",
+    "motion": "*",
+    "react": "*"
   },
   "dependencies": {
     "tslib": "^2.3.1"
   },
-  "devDependencies": {
-    "@arwes/animated": "^1.0.0-alpha.19",
-    "@arwes/animator": "^1.0.0-alpha.19",
-    "@arwes/bleeps": "^1.0.0-alpha.19",
-    "@arwes/design": "^1.0.0-alpha.19"
+  "devDependencies": {},
+  "scripts": {
+    "clean": "sh ../../scripts/pkg-clean.sh",
+    "build": "npm run build-esm && npm run build-cjs && npm run build-umd",
+    "build-esm": "sh ../../scripts/pkg-build-esm.sh",
+    "build-cjs": "sh ../../scripts/pkg-build-cjs.sh",
+    "build-umd": "sh ../../scripts/pkg-build-umd.sh",
+    "dev": "sh ../../scripts/pkg-build-esm.sh --watch"
   }
 }
