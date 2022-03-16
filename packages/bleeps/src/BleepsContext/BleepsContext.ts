@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import { BleepsSetup } from '../constants';
+import type { BleepsSetup } from '../types';
 
 const BleepsContext = createContext<BleepsSetup | undefined>(undefined);
 

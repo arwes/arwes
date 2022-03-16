@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { BleepName, Bleep, Bleeps } from '../constants';
+import type { BleepName, Bleep, Bleeps } from '../types';
 import { useBleepsSetup } from '../useBleepsSetup';
 
 let instanceIdCounter = 0;
@@ -21,9 +21,9 @@ function useBleeps (): Bleeps {
     }
 
     return Object
-      .keys(bleepsSetup.bleepsGenerics)
+      .keys(bleepsSetup.bleeps)
       .map(bleepName => {
-        const bleepGeneric = bleepsSetup.bleepsGenerics[bleepName];
+        const bleepGeneric = bleepsSetup.bleeps[bleepName];
 
         const bleepItem: BleepItem = {
           name: bleepName,

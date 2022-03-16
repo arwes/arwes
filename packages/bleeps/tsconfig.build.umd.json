@@ -1,0 +1,6 @@
+{
+  "extends": "../../tsconfig.build.umd.json",
+  "compilerOptions": {
+    "rootDir": "src"
+  }
+}

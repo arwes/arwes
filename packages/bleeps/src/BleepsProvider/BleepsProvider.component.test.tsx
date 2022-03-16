@@ -3,8 +3,8 @@
 import React, { FC, useContext } from 'react';
 import { render, cleanup } from '@testing-library/react';
 
-import { makeErrorCatcher } from '../../test-utils/makeErrorCatcher';
-import { BleepsSettings, BleepsSetup } from '../constants';
+import { makeErrorCatcher } from '../../__testUtils__/makeErrorCatcher';
+import type { BleepsSettings, BleepsSetup } from '../types';
 import { BleepsContext } from '../BleepsContext';
 import { BleepsProvider } from './BleepsProvider.component';
 

@@ -1,11 +1,11 @@
 import { Howler, Howl } from 'howler';
 
-import {
+import type {
   BleepsAudioGroupSettings,
   BleepPlayerSettings,
   BleepGenericInstanceId,
   BleepGeneric
-} from '../../constants';
+} from '../../types';
 
 const createBleep = (audioSettings: BleepsAudioGroupSettings, playerSettings: BleepPlayerSettings): BleepGeneric => {
   const { disabled, ...settings } = {
@@ -62,7 +62,7 @@ const createBleep = (audioSettings: BleepsAudioGroupSettings, playerSettings: Bl
   };
 
   const stop = (instanceId: BleepGenericInstanceId): void => {
-    delete sourcesAccount[instanceId];
+    delete sourcesAccount[instanceId]; // eslint-disable-line @typescript-eslint/no-dynamic-delete
 
     const noActiveSources = !Object.keys(sourcesAccount).length;
 

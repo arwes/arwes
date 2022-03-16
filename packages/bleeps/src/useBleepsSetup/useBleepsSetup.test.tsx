@@ -3,7 +3,7 @@
 import React, { FC } from 'react';
 import { render, cleanup } from '@testing-library/react';
 
-import { BleepsSetup } from '../constants';
+import type { BleepsSetup } from '../types';
 import { BleepsProvider } from '../BleepsProvider';
 import { useBleepsSetup } from './useBleepsSetup';
 

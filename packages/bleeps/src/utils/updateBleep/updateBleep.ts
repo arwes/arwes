@@ -1,8 +1,8 @@
-import {
+import type {
   BleepsAudioGroupSettings,
   BleepPlayerSettings,
   BleepGeneric
-} from '../../constants';
+} from '../../types';
 
 const updateBleep = (
   bleep: BleepGeneric,

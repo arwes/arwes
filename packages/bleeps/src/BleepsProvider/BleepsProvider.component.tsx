@@ -1,25 +1,27 @@
-import React, { FC, useContext, useState, useMemo } from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode, ReactElement, useContext, useState, useMemo } from 'react';
 
-import {
-  BLEEPS_CATEGORIES,
+import type {
   BleepsAudioSettings,
   BleepsPlayersSettings,
   BleepsSettings,
   BleepCategoryName,
   BleepsGenerics,
   BleepsSetup
-} from '../constants';
+} from '../types';
+import { BLEEPS_CATEGORIES } from '../constants';
 import { BleepsContext } from '../BleepsContext';
 import { createOrUpdateBleeps } from '../utils/createOrUpdateBleeps';
 
 interface BleepsProviderProps {
-  audioSettings?: BleepsAudioSettings
-  playersSettings?: BleepsPlayersSettings
-  bleepsSettings?: BleepsSettings
+  settings: {
+    audio?: BleepsAudioSettings
+    players?: BleepsPlayersSettings
+    bleeps?: BleepsSettings
+  }
+  children: ReactNode
 }
 
-const BleepsProvider: FC<BleepsProviderProps> = props => {
+const BleepsProvider = (props: BleepsProviderProps): ReactElement => {
   const parentSetup = useContext(BleepsContext);
 
   // The bleeps object reference is always kept to properly unload/remove/update
@@ -29,8 +31,9 @@ const BleepsProvider: FC<BleepsProviderProps> = props => {
   const [bleepsGenerics] = useState<BleepsGenerics>({});
 
   const bleepsSetup: BleepsSetup = useMemo(() => {
-    const parentAudioCategories = parentSetup?.audioSettings.categories;
-    const localAudioCategories = props.audioSettings?.categories;
+    const parentSetupSettings = parentSetup?.settings;
+    const parentAudioCategories = parentSetupSettings?.audio.categories;
+    const localAudioCategories = props.settings?.audio?.categories;
     const audioCategories = { ...parentAudioCategories };
 
     if (localAudioCategories) {
@@ -53,34 +56,43 @@ const BleepsProvider: FC<BleepsProviderProps> = props => {
 
     const audioSettings: BleepsAudioSettings = {
       common: {
-        ...parentSetup?.audioSettings.common,
-        ...props.audioSettings?.common
+        ...parentSetupSettings?.audio.common,
+        ...props.settings.audio?.common
       },
       categories: audioCategories
     };
 
-    const parentPlayersSettings = parentSetup?.playersSettings;
+    const parentPlayersSettings = parentSetupSettings?.players;
     const playersSettings: BleepsPlayersSettings = { ...parentPlayersSettings };
 
-    if (props.playersSettings) {
-      Object.keys(props.playersSettings).forEach(playerName => {
+    if (props.settings.players) {
+      Object.keys(props.settings.players).forEach(playerName => {
         playersSettings[playerName] = {
           ...playersSettings[playerName],
-          ...props.playersSettings?.[playerName]
+          ...props.settings.players?.[playerName]
         };
       });
     }
 
-    const parentBleepsSettings = parentSetup?.bleepsSettings;
+    const parentBleepsSettings = parentSetupSettings?.bleeps;
     const bleepsSettings: BleepsSettings = {
       ...parentBleepsSettings,
-      ...props.bleepsSettings
+      ...props.settings.bleeps
     };
 
     createOrUpdateBleeps(bleepsGenerics, audioSettings, playersSettings, bleepsSettings);
 
-    return { audioSettings, playersSettings, bleepsSettings, bleepsGenerics };
-  }, [props.audioSettings, props.playersSettings, parentSetup]);
+    return {
+      settings: {
+        audio: audioSettings,
+        players: playersSettings,
+        bleeps: bleepsSettings
+      },
+      bleeps: bleepsGenerics
+    };
+  }, [props.settings, parentSetup]);
+
+  // TODO: Review performance recommendations for the memo dependencies.
 
   return (
     <BleepsContext.Provider value={bleepsSetup}>
@@ -89,28 +101,5 @@ const BleepsProvider: FC<BleepsProviderProps> = props => {
   );
 };
 
-const bleepsAudioGroupSettingsProps = PropTypes.shape({
-  volume: PropTypes.number,
-  rate: PropTypes.number,
-  preload: PropTypes.bool,
-  disabled: PropTypes.bool
-});
-
-BleepsProvider.propTypes = {
-  // @ts-expect-error
-  audioSettings: PropTypes.shape({
-    common: bleepsAudioGroupSettingsProps,
-    categories: PropTypes.shape({
-      background: bleepsAudioGroupSettingsProps,
-      transition: bleepsAudioGroupSettingsProps,
-      interaction: bleepsAudioGroupSettingsProps,
-      notification: bleepsAudioGroupSettingsProps
-    })
-  }),
-  // @ts-expect-error
-  playersSettings: PropTypes.object,
-  // @ts-expect-error
-  bleepsSettings: PropTypes.object
-};
-
-export { BleepsProviderProps, BleepsProvider };
+export type { BleepsProviderProps };
+export { BleepsProvider };
