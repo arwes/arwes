@@ -41,6 +41,7 @@
   "peerDependencies": {
     "@arwes/animator": "^1.0.0-alpha.19",
     "@arwes/tools": "^1.0.0-alpha.19",
+    "motion": "^10.6.2",
     "react": "^17.0.2"
   },
   "dependencies": {
