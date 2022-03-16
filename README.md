@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD033 MD013 MD028 -->
 
 <div align="center">
-  <img src="./website/static/arwes.jpg" alt="Arwes" />
+  <img src="./apps/website/static/arwes.jpg" alt="Arwes" />
 </div>
 
 <p align="center" style="margin-top: 16px; font-size: 1.2rem;">
@@ -79,8 +79,8 @@ released in February, 2018, and **it is now deprecated**.
 <!-- ARWES-COMMUNITY-APPS:START -->
 <table>
 <tr>
-<td align="center"><a href="https://soulextract.com"><img src="./website/static/community/apps/images/soulextract.com.jpg" width="252px;" alt="SoulExtract.com" /></a><br /><a href="https://soulextract.com">SoulExtract.com</a><br /><a href="https://github.com/soulextract/soulextract.com"><sub>soulextract/soulextract.com</sub></a></td>
-<td align="center"><a href="https://romelperez.dev"><img src="./website/static/community/apps/images/romelperez.dev.jpg" width="252px;" alt="RomelPerez.dev" /></a><br /><a href="https://romelperez.dev">RomelPerez.dev</a><br /><a href="https://github.com/romelperez/romelperez.dev"><sub>romelperez/romelperez.dev</sub></a></td>
+<td align="center"><a href="https://soulextract.com"><img src="./apps/website/static/community/apps/images/soulextract.com.jpg" width="252px;" alt="SoulExtract.com" /></a><br /><a href="https://soulextract.com">SoulExtract.com</a><br /><a href="https://github.com/soulextract/soulextract.com"><sub>soulextract/soulextract.com</sub></a></td>
+<td align="center"><a href="https://romelperez.dev"><img src="./apps/website/static/community/apps/images/romelperez.dev.jpg" width="252px;" alt="RomelPerez.dev" /></a><br /><a href="https://romelperez.dev">RomelPerez.dev</a><br /><a href="https://github.com/romelperez/romelperez.dev"><sub>romelperez/romelperez.dev</sub></a></td>
 </tr>
 </table>
 <!-- ARWES-COMMUNITY-APPS:END -->
