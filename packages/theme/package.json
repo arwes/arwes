@@ -40,7 +40,7 @@
   "unpkg": "./build/umd/theme.min.js",
   "peerDependencies": {
     "@arwes/tools": "^1.0.0-alpha.19",
-    "react": "^17.x.x"
+    "react": "^17.0.2"
   },
   "dependencies": {
     "csstype": "^3.0.11",

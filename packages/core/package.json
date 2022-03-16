@@ -45,9 +45,9 @@
     "@arwes/animator": "*",
     "@arwes/animated": "*",
     "@arwes/bleeps": "*",
-    "@emotion/react": "*",
-    "motion": "*",
-    "react": "*"
+    "@emotion/react": "^11.8.2",
+    "motion": "^10.6.2",
+    "react": "^17.0.2"
   },
   "dependencies": {
     "tslib": "^2.3.1"

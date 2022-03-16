@@ -39,8 +39,8 @@
   "main": "./build/cjs/index.js",
   "unpkg": "./build/umd/styles.min.js",
   "peerDependencies": {
-    "@emotion/react": "*",
-    "react": "*"
+    "@emotion/react": "^11.8.2",
+    "react": "^17.0.2"
   },
   "dependencies": {
     "tslib": "^2.3.1"
