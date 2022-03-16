@@ -25,13 +25,32 @@
   "funding": "https://github.com/sponsors/romelperez",
   "license": "MIT",
   "files": [
-    "lib",
-    "dist"
+    "build"
   ],
-  "main": "lib/index.js",
-  "unpkg": "dist/animator.min.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": "./build/cjs/index.js",
+      "default": "./build/esm/index.js"
+    }
+  },
+  "types": "./build/esm/index.d.ts",
+  "module": "./build/esm/index.js",
+  "main": "./build/cjs/index.js",
+  "unpkg": "./build/umd/animator.min.js",
   "peerDependencies": {
-    "prop-types": "*",
-    "react": "17.x"
+    "@arwes/tools": "^1.0.0-alpha.19",
+    "react": "^17.x.x"
+  },
+  "dependencies": {
+    "tslib": "^2.3.1"
+  },
+  "scripts": {
+    "clean": "sh ../../scripts/pkg-clean.sh",
+    "build": "npm run build-esm && npm run build-cjs && npm run build-umd",
+    "build-esm": "sh ../../scripts/pkg-build-esm.sh",
+    "build-cjs": "sh ../../scripts/pkg-build-cjs.sh",
+    "build-umd": "sh ../../scripts/pkg-build-umd.sh",
+    "dev": "sh ../../scripts/pkg-build-esm.sh --watch"
   }
 }
