@@ -8,6 +8,8 @@ import {
   useEffect
 } from 'react';
 
+import { TOOLS_IS_BROWSER } from '@arwes/tools';
+
 import type {
   AnimatorSystemNode,
   AnimatorSettings,
@@ -111,7 +113,7 @@ const Animator = (props: AnimatorProps): ReactElement => {
 
   prevAnimatorRef.current = animatorInterface;
 
-  if (prevAnimatorRef.current) {
+  if (TOOLS_IS_BROWSER && prevAnimatorRef.current) {
     prevAnimatorRef.current.node.onSettingsChange();
   }
 
