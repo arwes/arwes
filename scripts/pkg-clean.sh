@@ -1,4 +1,4 @@
 #!/bin/sh
 
 rm -rf ./build
-rm .tsbuildinfo
+rm -f .tsbuildinfo
