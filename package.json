@@ -68,7 +68,7 @@
     "test-coverage": "jest --coverage",
     "test-list": "jest --listTests",
     "integration": "sh ./scripts/integration.sh",
-    "release": "nx run-many --target=build --all && npm run lint && npm run test && lerna publish",
+    "release": "nx run-many --target=build --all --parallel=8 && npm run lint && npm run test && lerna publish",
     "changelog": "auto-changelog",
     "contributors-add": "all-contributors add",
     "readme-contributors-generate": "all-contributors generate",
