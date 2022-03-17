@@ -1,67 +1,72 @@
-/* @jsx jsx */
-import { ReactElement, Profiler, useState, useRef, useEffect } from 'react';
-import { jsx } from '@emotion/react';
+import React, { ReactElement, Profiler, useState, useRef, useEffect } from 'react';
 import { render } from 'react-dom';
-import { Animator, useAnimator } from '@arwes/animator';
 
-const testsRendersNumber = 1000;
-const onTestsRender = (id: string, phase: string, duration: number): void => {
+import { AnimatorGeneralProvider, Animator, useAnimator } from '@arwes/animator';
+
+const TEST_RENDER_NUMBER = 3000;
+
+const TEST_ON_RENDER = (id: string, phase: string, duration: number): void => {
   if (phase === 'mount') {
     console.log(`mount: ${duration} ms`);
   }
 };
 
-const Test = (): ReactElement => {
+const Item = (): ReactElement => {
   const elementRef = useRef<HTMLDivElement>(null);
   const animator = useAnimator();
 
-  animator?.setupAnimateRefs(elementRef);
+  useEffect(() => {
+    animator?.node.subscribers.add(node => {
+      const element = elementRef.current as HTMLDivElement;
 
-  return <div className='item' ref={elementRef} />;
+      switch (node.getState()) {
+        case 'exited': element.style.opacity = '0.1'; break;
+        case 'entering': element.style.opacity = '0.6'; break;
+        case 'exiting': element.style.opacity = '0.6'; break;
+        case 'entered': element.style.opacity = '1'; break;
+      }
+    });
+  }, []);
+
+  return <div ref={elementRef} className='item' />;
 };
 
-const App = (): ReactElement => {
-  const [activate, setActivate] = useState(true);
+const Test = (): ReactElement => {
+  const [active, setActive] = useState(false);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setActivate(!activate), 2000);
-    return () => clearTimeout(timeout);
-  }, [activate]);
+    const tid = setTimeout(() => setActive(!active), 2000);
+    return () => clearTimeout(tid);
+  }, [active]);
 
   return (
-    <Profiler id='test' onRender={onTestsRender}>
-      <Animator animator={{ activate }}>
-        {Array(testsRendersNumber).fill(null).map((_, index) =>
+    <AnimatorGeneralProvider duration={{ enter: 0.5, exit: 0.5 }}>
+      <Animator active={active}>
+        {Array(TEST_RENDER_NUMBER).fill(null).map((_, index) =>
           <Animator
             key={index}
-            animator={{
-              duration: { enter: 500, exit: 500 },
-              onAnimateEntering: (animator, elementRef: any) => {
-                elementRef.current.style.opacity = 1;
-
-                if (index === 0) {
-                  console.time('allAnimationsEntering');
-                }
-                else if (index + 1 === testsRendersNumber) {
-                  console.timeEnd('allAnimationsEntering');
-                }
-              },
-              onAnimateExiting: (animator, elementRef: any) => {
-                elementRef.current.style.opacity = 0;
-
-                if (index === 0) {
-                  console.time('allAnimationsExiting');
-                }
-                else if (index + 1 === testsRendersNumber) {
-                  console.timeEnd('allAnimationsExiting');
-                }
+            onTransition={node => {
+              const state = node.getState();
+              if (index === 0) {
+                console.time(state);
+              }
+              else if (index + 1 === TEST_RENDER_NUMBER) {
+                console.timeEnd(state);
               }
             }}
           >
-            <Test />
+            <Item />
           </Animator>
         )}
       </Animator>
+    </AnimatorGeneralProvider>
+  );
+};
+
+const App = (): ReactElement => {
+  return (
+    <Profiler id='test' onRender={TEST_ON_RENDER}>
+      <Test />
     </Profiler>
   );
 };

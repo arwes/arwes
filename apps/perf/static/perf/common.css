@@ -1,0 +1,13 @@
+html,
+body {
+  margin: 10px;
+  font-family: monospace;
+  font-size: 18px;
+  line-height: 1.3;
+  color: #eee;
+  background-color: #111;
+}
+
+a {
+  color: #cff;
+}

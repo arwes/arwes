@@ -1,24 +1,29 @@
 {
-  "name": "arwes-perf",
+  "name": "@arwes/app-perf",
   "version": "1.0.0",
   "private": true,
   "engines": {
-    "node": ">=16.14",
-    "npm": ">=8.3"
+    "node": "^16.14",
+    "npm": "^8.3"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@arwes/tools": "^1.0.0-alpha.19",
+    "@arwes/theme": "^1.0.0-alpha.19",
+    "@arwes/styles": "^1.0.0-alpha.19",
+    "@arwes/animator": "^1.0.0-alpha.19",
+    "@arwes/animated": "^1.0.0-alpha.19",
+    "@arwes/bleeps": "^1.0.0-alpha.19",
+    "@arwes/core": "^1.0.0-alpha.19",
+    "@arwes/arwes": "^1.0.0-alpha.19"
+  },
   "devDependencies": {
     "copy-webpack-plugin": "^9.0.1",
-    "cross-env": "^7.0.3",
-    "html-webpack-plugin": "^5.3.2",
-    "rimraf": "^3.0.2",
-    "webpack": "^5.45.1",
-    "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2"
+    "html-webpack-plugin": "^5.3.2"
   },
   "scripts": {
-    "clean": "rimraf ./public",
-    "develop": "sh ./scripts/develop.sh",
-    "build": "sh ./scripts/build.sh"
+    "clean": "rimraf ./build",
+    "build": "sh ./scripts/build.sh",
+    "dev": "sh ./scripts/dev.sh",
+    "start": "serve ./build -p 9100"
   }
 }

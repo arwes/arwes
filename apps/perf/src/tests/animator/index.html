@@ -5,23 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Animator | Arwes Perf</title>
+    <link rel="stylesheet" href="/perf/common.css">
     <style>
-      html, body {
-        background-color: #111;
-        color: #eee;
-      }
       .item {
         display: inline-block;
         margin: 2px;
         width: 20px;
         height: 20px;
-        background: #233;
+        background: #0ff;
         opacity: 0;
       }
     </style>
   </head
   <body>
     <h1>Arwes Perf | Animator</h1>
+    <p>
+      1 root <code>Animator</code> with 3000 children <code>Animator</code>s
+      managed in parallel, each child with a DIV element which updates the DIV
+      opacity on state transition. Every 2 seconds the root state is updated.
+    </p>
     <div id="root"></div>
   </body>
 </html>
