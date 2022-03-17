@@ -6,7 +6,7 @@ import { mergeThemeStyles } from './utils/mergeThemeStyles';
 
 const useStyles = (
   stylesList: [Styles, Styles | false | null | undefined],
-  dependencies: any[]
+  dependencies: unknown[]
 ): Styles => {
   const [baseStyles, userStyles] = stylesList;
 

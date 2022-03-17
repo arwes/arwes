@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* istanbul ignore file */
 
-type JestMoveTimeTo = (timeToMoveMs: number) => void;
+type JestMoveTimeTo = (timeToMoveSeconds: number) => void;
 
 function makeJestMoveTimeTo (): JestMoveTimeTo {
   let currentTimeMoved = 0;
