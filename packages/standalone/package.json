@@ -1,0 +1,66 @@
+{
+  "name": "arwes",
+  "version": "1.0.0-alpha.19",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Futuristic Sci-Fi UI Web Framework",
+  "keywords": [
+    "arwes",
+    "ui",
+    "front-end",
+    "framework",
+    "scifi",
+    "sci-fi",
+    "science-fiction"
+  ],
+  "homepage": "https://arwes.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arwes/arwes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/arwes/arwes/issues"
+  },
+  "funding": "https://github.com/sponsors/romelperez",
+  "license": "MIT",
+  "files": [
+    "build"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": "./build/cjs/index.js",
+      "default": "./build/esm/index.js"
+    }
+  },
+  "types": "./build/esm/index.d.ts",
+  "module": "./build/esm/index.js",
+  "main": "./build/cjs/index.js",
+  "unpkg": "./build/umd/arwes.min.js",
+  "peerDependencies": {
+    "@emotion/react": "^11.8.2",
+    "motion": "^10.6.2",
+    "react": "^17.0.2"
+  },
+  "dependencies": {
+    "@arwes/tools": "^1.0.0-alpha.19",
+    "@arwes/theme": "^1.0.0-alpha.19",
+    "@arwes/styles": "^1.0.0-alpha.19",
+    "@arwes/animator": "^1.0.0-alpha.19",
+    "@arwes/animated": "^1.0.0-alpha.19",
+    "@arwes/bleeps": "^1.0.0-alpha.19",
+    "@arwes/core": "^1.0.0-alpha.19",
+    "@arwes/arwes": "^1.0.0-alpha.19",
+    "tslib": "^2.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "clean": "sh ../../scripts/pkg-clean.sh",
+    "build": "npm run build-esm && npm run build-cjs && npm run build-umd",
+    "build-esm": "sh ../../scripts/pkg-build-esm.sh",
+    "build-cjs": "sh ../../scripts/pkg-build-cjs.sh",
+    "build-umd": "sh ./scripts/build-umd.sh",
+    "dev": "sh ../../scripts/pkg-build-esm.sh --watch"
+  }
+}
