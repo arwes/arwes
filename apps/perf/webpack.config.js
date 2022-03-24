@@ -103,14 +103,15 @@ module.exports = {
     })
   ],
   devServer: {
-    publicPath: '/perf',
-    contentBase: path.join(__dirname, 'build'),
-    watchContentBase: true,
-    disableHostCheck: true,
+    static: {
+      publicPath: '/perf',
+      directory: path.join(__dirname, 'build'),
+      watch: true
+    },
+    allowedHosts: 'all',
     compress: true,
     host: '127.0.0.1',
     port: 9100,
-    open: true,
-    openPage: 'perf'
+    open: '/perf'
   }
 };
