@@ -1,6 +1,56 @@
-import { ArwesPackageConfig } from './src/constants';
+window.noxtronSandboxes = [
+  {
+    name: '@arwes/animated',
+    children: [
+      {
+        name: 'Animated',
+        children: [
+          {
+            name: 'basic',
+            language: 'typescript',
+            code: 'render(\n  <h1\n    className="title"\n    style={{ margin: "20px", color: "yellow", background: "black" }}\n  >\n    SomeProvider basic!\n  </h1>\n);\n'
+          },
+          {
+            name: 'combination',
+            language: 'typescript',
+            code: 'render(\n  <h1\n    className="title"\n    style={{ margin: "20px", color: "magenta", background: "black" }}\n  >\n    SomeProvider medium!\n  </h1>\n);\n'
+          }
+        ]
+      }
+    ]
+  }
+];
+
+// TODO:
+/*
+import type { ArwesPackageConfig } from './src/types';
 
 const playConfigs: ArwesPackageConfig[] = [
+  {
+    name: 'animator',
+    components: [
+      {
+        name: 'Animator',
+        sandboxes: [
+          { name: 'basic', code: require('@repository/packages/animator/src/Animator/Animator.basic.sandbox.md').default }
+        ]
+      }
+    ]
+  },
+  {
+    name: 'standalone',
+    components: [
+      {
+        name: 'index',
+        sandboxes: [
+          { name: 'basic', code: require('@repository/packages/standalone/src/index.basic.sandbox.md').default }
+        ]
+      }
+    ]
+  }
+
+  // ....
+
   {
     name: 'design',
     components: [
@@ -226,5 +276,4 @@ const playConfigs: ArwesPackageConfig[] = [
     ]
   }
 ];
-
-export { playConfigs };
+*/

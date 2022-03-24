@@ -3,20 +3,42 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const tsConfigFilePath = path.join(__dirname, 'tsconfig.webpack.json');
-
 const { NODE_ENV } = process.env;
+
+const CWD = __dirname;
+const REPOSITORY_PATH = path.join(CWD, '../../');
+const TSCONFIG_FILE_PATH = path.join(CWD, 'tsconfig.json');
+const SRC_PATH = path.join(CWD, 'src');
+const STATIC_PATH = path.join(CWD, 'static');
+const BUILD_PATH = path.join(CWD, 'build');
+
+const BASE_PATH = '/play';
+const PLAYGROUND_PATH = `${BASE_PATH}/index.html`;
+const SANDBOX_PATH = `${BASE_PATH}/sandbox/index.html`;
 
 module.exports = {
   mode: NODE_ENV || 'development',
-  entry: './src/index.tsx',
+  entry: {
+    playground: path.join(SRC_PATH, 'playground.tsx'),
+    sandbox: path.join(SRC_PATH, 'sandbox.tsx')
+  },
   output: {
-    path: path.join(__dirname, 'public/play'),
-    filename: 'play.js',
-    publicPath: '/play'
+    path: path.join(BUILD_PATH, BASE_PATH),
+    filename: 'e2e-[name].js',
+    publicPath: BASE_PATH,
+    clean: true
   },
   module: {
+    // Allow dependencies as expressions. Required for @babel/standalone.
+    exprContextCritical: false,
     rules: [
+      // Remove the need for Strict ESModules fully specified paths.
+      {
+        test: /\.m?js/,
+        resolve: {
+          fullySpecified: false
+        }
+      },
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
@@ -24,7 +46,7 @@ module.exports = {
           {
             loader: 'ts-loader',
             options: {
-              configFile: tsConfigFilePath,
+              configFile: TSCONFIG_FILE_PATH,
               transpileOnly: true
             }
           }
@@ -37,49 +59,52 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.ts', '.tsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
     plugins: [
       new TsconfigPathsPlugin({
-        configFile: tsConfigFilePath
+        configFile: TSCONFIG_FILE_PATH
       })
     ],
     alias: {
-      '@repository': path.join(process.cwd(), '..')
+      '@repository': REPOSITORY_PATH
     }
   },
   plugins: [
     new HtmlWebpackPlugin({
-      publicPath: '/play',
-      template: path.join(__dirname, 'src/index.html'),
-      filename: path.join(__dirname, 'public/play/index.html')
+      publicPath: BASE_PATH,
+      template: path.join(SRC_PATH, 'playground.html'),
+      filename: path.join(BUILD_PATH, PLAYGROUND_PATH),
+      chunks: ['playground']
+    }),
+    new HtmlWebpackPlugin({
+      publicPath: BASE_PATH,
+      template: path.join(SRC_PATH, 'sandbox.html'),
+      filename: path.join(BUILD_PATH, SANDBOX_PATH),
+      chunks: ['sandbox']
     }),
     new CopyWebpackPlugin({
       patterns: [{
-        from: path.join(__dirname, '../static'),
-        to: path.join(__dirname, 'public')
+        from: path.join(REPOSITORY_PATH, 'static'),
+        to: BUILD_PATH
       }]
     }),
     new CopyWebpackPlugin({
       patterns: [{
-        from: path.join(__dirname, 'static'),
-        to: path.join(__dirname, 'public')
+        from: STATIC_PATH,
+        to: BUILD_PATH
       }]
     })
   ],
   devServer: {
-    publicPath: '/play',
-    contentBase: path.join(__dirname, 'public'),
-    historyApiFallback: {
-      rewrites: [
-        { from: /^\/play/, to: '/play' }
-      ]
+    static: {
+      publicPath: BASE_PATH,
+      directory: BUILD_PATH,
+      watch: true
     },
-    watchContentBase: true,
-    disableHostCheck: true,
+    allowedHosts: 'all',
     compress: true,
     host: '127.0.0.1',
     port: 9000,
-    open: true,
-    openPage: 'play'
+    open: BASE_PATH
   }
 };
