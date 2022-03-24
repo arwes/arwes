@@ -1,10 +1,10 @@
 {
-  "name": "arwes-website",
+  "name": "@arwes/app-website",
   "version": "1.0.0",
   "private": true,
   "engines": {
-    "node": ">=16.14",
-    "npm": ">=8.3"
+    "node": "^16.14",
+    "npm": "^8.3"
   },
   "dependencies": {
     "@mdx-js/mdx": "^1.6.22",
