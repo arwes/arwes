@@ -11,7 +11,9 @@
     "jsx": "react",
     "baseUrl": ".",
     "rootDir": ".",
-    "paths": {}
+    "paths": {
+      "@repository": ["./"]
+    }
   },
   "exclude": [
     "node_modules",

@@ -7,7 +7,9 @@
     "npm": "^8.3"
   },
   "dependencies": {
-    "noxtron": "^0.1.0"
+    "@mdi/js": "^6.6.95",
+    "@mdi/react": "^1.5.0",
+    "noxtron": "^0.2.1"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^9.0.1",
