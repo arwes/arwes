@@ -17,9 +17,9 @@ import type {
   AnimatorControl,
   AnimatorInterface
 } from '../types';
-import { AnimatorContext } from '../utils/AnimatorContext';
-import { AnimatorGeneralContext } from '../utils/AnimatorGeneralContext';
-import { createAnimatorSystem } from '../utils/createAnimatorSystem';
+import { AnimatorContext } from '../utils/AnimatorContext/index';
+import { AnimatorGeneralContext } from '../utils/AnimatorGeneralContext/index';
+import { createAnimatorSystem } from '../utils/createAnimatorSystem/index';
 import { animatorDefaults } from './defaults';
 
 interface AnimatorProps extends AnimatorSettings {

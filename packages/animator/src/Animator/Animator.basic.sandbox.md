@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { animate } from 'motion';
 import { Animator, useAnimator } from '@arwes/animator';
 
-const Item = props => {
+const Item = () => {
   const elementRef = React.useRef();
   const animator = useAnimator();
 
