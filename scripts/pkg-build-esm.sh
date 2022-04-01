@@ -2,4 +2,4 @@
 
 mkdir -p ./build/esm
 echo "{ \"type\": \"module\" }" >| ./build/esm/package.json
-npx tsc -p ./tsconfig.build.esm.json $1
+npx ttsc -p ./tsconfig.build.esm.json $1

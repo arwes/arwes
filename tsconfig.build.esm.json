@@ -3,6 +3,11 @@
   "compilerOptions": {
     "module": "ESNext",
     "declaration": true,
-    "incremental": true
+    "incremental": true,
+    "plugins": [
+      {
+        "transform": "@build-script/typescript-transformer-append-js-extension"
+      }
+    ]
   }
 }
