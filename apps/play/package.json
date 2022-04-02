@@ -9,17 +9,22 @@
   "dependencies": {
     "@mdi/js": "^6.6.95",
     "@mdi/react": "^1.5.0",
-    "noxtron": "^0.2.1"
+    "css-loader": "^6.7.1",
+    "empanada": "^0.2.2",
+    "monaco-editor": "^0.33.0",
+    "noxtron": "^0.3.0",
+    "style-loader": "^3.3.1"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^9.0.1",
     "html-webpack-plugin": "^5.3.2",
+    "monaco-editor-webpack-plugin": "^7.0.1",
     "raw-loader": "^4.0.2"
   },
   "scripts": {
     "clean": "rimraf ./build",
     "build": "cross-env NODE_ENV=production webpack --progress",
     "dev": "webpack serve",
-    "start": "serve ./build -p 9000"
+    "start": "http-server ./build --port 9000 --gzip true -o /play"
   }
 }

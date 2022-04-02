@@ -1,9 +1,11 @@
+/* eslint-disable import/no-webpack-loader-syntax */
+
 import React, { HTMLProps, ReactElement } from 'react';
 import { render } from 'react-dom';
 import { mdiLabelOutline, mdiDiscord, mdiGithub, mdiTwitter } from '@mdi/js';
 import Icon from '@mdi/react';
-import type { NTUserConfig, NTSandbox } from 'noxtron/build/cjs/apps';
-import { Playground } from 'noxtron/build/cjs/apps/playground';
+import type { NTPlaygroundSettings } from 'noxtron';
+import { Playground } from 'noxtron/build/playground';
 
 import lernaSettings from '@repository/lerna.json';
 
@@ -22,25 +24,45 @@ const ArwesIcon = (): ReactElement => (
   />
 );
 
-const sandboxes: NTSandbox[] = [
-  {
-    name: '@arwes/animator',
-    children: [
-      {
-        name: 'Animator',
-        children: [
-          { name: 'basic', language: 'typescript', code: getMdCode(require('@repository/packages/animator/src/Animator/Animator.basic.sandbox.md').default) }
-        ]
-      }
-    ]
-  }
-];
-
-const config: NTUserConfig = {
-  sandboxes,
+const settings: NTPlaygroundSettings = {
   basePath: '/play',
   playgroundPath: '/play',
   sandboxPath: '/play/sandbox/',
+  codeLanguage: 'typescript',
+  typeDefinitions: [
+    {
+      filename: 'file:///node_modules/csstype/index.d.ts',
+      code: require('!raw-loader?esModule=false!csstype/index.d.ts')
+    },
+    {
+      filename: 'file:///node_modules/@types/prop-types/index.d.ts',
+      code: require('!raw-loader?esModule=false!@types/prop-types/index.d.ts')
+    },
+    {
+      filename: 'file:///node_modules/@types/react/index.d.ts',
+      code: require('!raw-loader?esModule=false!@types/react/index.d.ts')
+    },
+    {
+      filename: 'file:///node_modules/@types/react-dom/index.d.ts',
+      code: require('!raw-loader?esModule=false!@types/react-dom/index.d.ts')
+    }
+  ],
+  sandboxes: [
+    {
+      name: '@arwes/animator',
+      children: [
+        {
+          name: 'Animator',
+          children: [
+            {
+              name: 'basic',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animator/src/Animator/Animator.basic.sandbox.md'))
+            }
+          ]
+        }
+      ]
+    }
+  ],
   title: {
     mobile: (
       <img
@@ -121,4 +143,4 @@ const config: NTUserConfig = {
   }
 };
 
-render(<Playground config={config} />, document.querySelector('#root'));
+render(<Playground settings={settings} />, document.querySelector('#root'));
