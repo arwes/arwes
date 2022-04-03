@@ -5,6 +5,7 @@ import * as motion from 'motion';
 import * as empanada from 'empanada';
 import { setupSandbox } from 'noxtron/build/sandbox';
 
+import * as tools from '@arwes/tools';
 import * as animator from '@arwes/animator';
 import * as animated from '@arwes/animated';
 
@@ -15,6 +16,7 @@ setupSandbox({
     { name: '@emotion/react', pkg: emotionReact },
     { name: 'motion', pkg: motion },
     { name: 'empanada', pkg: empanada },
+    { name: '@arwes/tools', pkg: tools },
     { name: '@arwes/animator', pkg: animator },
     { name: '@arwes/animated', pkg: animated }
   ]

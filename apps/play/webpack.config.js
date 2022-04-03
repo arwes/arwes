@@ -5,16 +5,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 const { NODE_ENV } = process.env;
-
 const CWD = __dirname;
 const REPOSITORY_PATH = path.join(CWD, '../../');
 const TSCONFIG_FILE_PATH = path.join(CWD, 'tsconfig.json');
 const SRC_PATH = path.join(CWD, 'src');
 const BUILD_PATH = path.join(CWD, 'build');
-
 const BASE_PATH = '/play/'; // Must end with "/".
-const PLAYGROUND_HTML_PATH = `${BASE_PATH}/index.html`;
-const SANDBOX_HTML_PATH = `${BASE_PATH}/sandbox/index.html`;
 
 module.exports = {
   mode: NODE_ENV || 'development',
@@ -49,7 +45,7 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       },
       {
-        test: /(\.md|\.txt)$/i,
+        test: /\.md$/i,
         use: 'raw-loader'
       }
     ]
@@ -73,13 +69,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       publicPath: BASE_PATH,
       template: path.join(SRC_PATH, 'playground.html'),
-      filename: path.join(BUILD_PATH, PLAYGROUND_HTML_PATH),
+      filename: path.join(BUILD_PATH, BASE_PATH, 'index.html'),
       chunks: ['playground']
     }),
     new HtmlWebpackPlugin({
       publicPath: BASE_PATH,
       template: path.join(SRC_PATH, 'sandbox.html'),
-      filename: path.join(BUILD_PATH, SANDBOX_HTML_PATH),
+      filename: path.join(BUILD_PATH, BASE_PATH, 'sandbox/index.html'),
       chunks: ['sandbox']
     }),
     new CopyWebpackPlugin({
