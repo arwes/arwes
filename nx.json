@@ -59,6 +59,12 @@
         "projects": "dependencies"
       }
     ],
+    "build-types": [
+      {
+        "target": "build-types",
+        "projects": "dependencies"
+      }
+    ],
     "dev": [
       {
         "target": "build-esm",

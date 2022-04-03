@@ -31,6 +31,9 @@
     ".": {
       "import": "./build/esm/index.js",
       "require": "./build/cjs/index.js"
+    },
+    "./build/": {
+      "default": "./build/"
     }
   },
   "types": "./build/esm/index.d.ts",
@@ -54,10 +57,11 @@
   "devDependencies": {},
   "scripts": {
     "clean": "sh ../../scripts/pkg-clean.sh",
-    "build": "npm run build-esm && npm run build-cjs && npm run build-umd",
+    "build": "npm run build-esm && npm run build-cjs && npm run build-umd && npm run build-types",
     "build-esm": "sh ../../scripts/pkg-build-esm.sh",
     "build-cjs": "sh ../../scripts/pkg-build-cjs.sh",
     "build-umd": "sh ../../scripts/pkg-build-umd.sh",
+    "build-types": "sh ../../scripts/pkg-build-types.sh",
     "dev": "sh ../../scripts/pkg-build-esm.sh --watch"
   }
 }
