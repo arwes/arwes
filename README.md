@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD033 MD013 MD028 -->
 
 <div align="center">
-  <img src="./apps/website/static/arwes.jpg" alt="Arwes" />
+  <img src="./static/arwes.jpg" alt="Arwes" />
 </div>
 
 <p align="center" style="margin-top: 16px; font-size: 1.2rem;">
@@ -51,8 +51,8 @@
 
 [Arwes](https://arwes.dev) is a web framework to build user interfaces based on
 futuristic science fiction designs, animations, and sound effects. The concepts
-behind are opinionated with influences from [Cyberprep](https://aesthetics.fandom.com/wiki/Cyberprep),
-[Cyberpunk](https://en.wikipedia.org/wiki/Cyberpunk), and [Synthwave](https://en.wikipedia.org/wiki/Synthwave),
+behind are opinionated with influences from [Cyberprep](https://aesthetics.fandom.com/wiki/Cyberprep)
+and [Synthwave](https://en.wikipedia.org/wiki/Synthwave),
 and productions like [Star Citizen](http://robertsspaceindustries.com),
 [Halo](https://www.halowaypoint.com/en-us/games), and [TRON: Legacy](http://www.imdb.com/title/tt1104001).
 It tries to inspire advanced space and alien technology.
@@ -60,14 +60,17 @@ It tries to inspire advanced space and alien technology.
 > The project is under development and released in alpha state not ready for
 production yet. See [project details](https://arwes.dev/project).
 
-> Branch [`main`](https://github.com/arwes/arwes/tree/main) is for releases and public content.
-Branch [`next`](https://github.com/arwes/arwes/tree/next) is for active development.
+> Branch [`main`](https://github.com/arwes/arwes/tree/main) is for releases and
+public content deployed at [arwes.dev](https://arwes.dev).
+
+> Branch [`next`](https://github.com/arwes/arwes/tree/next) is for active development
+deployed at [next.arwes.dev](https://next.arwes.dev).
 
 ## Documentation
 
 See **[arwes.dev](https://arwes.dev)**.
 
-The previous version was moved to [version1-breakpoint1.arwes.dev](https://version1-breakpoint1.arwes.dev)
+> The previous version was moved to [version1-breakpoint1.arwes.dev](https://version1-breakpoint1.arwes.dev)
 with the branch [`version1-breakpoint1`](https://github.com/arwes/arwes/tree/version1-breakpoint1)
 where you can find the components and the website source code. This package was
 released in February, 2018, and **it is now deprecated**.
@@ -79,8 +82,8 @@ released in February, 2018, and **it is now deprecated**.
 <!-- ARWES-COMMUNITY-APPS:START -->
 <table>
 <tr>
-<td align="center"><a href="https://soulextract.com"><img src="./apps/website/static/community/apps/images/soulextract.com.jpg" width="252px;" alt="SoulExtract.com" /></a><br /><a href="https://soulextract.com">SoulExtract.com</a><br /><a href="https://github.com/soulextract/soulextract.com"><sub>soulextract/soulextract.com</sub></a></td>
-<td align="center"><a href="https://romelperez.dev"><img src="./apps/website/static/community/apps/images/romelperez.dev.jpg" width="252px;" alt="RomelPerez.dev" /></a><br /><a href="https://romelperez.dev">RomelPerez.dev</a><br /><a href="https://github.com/romelperez/romelperez.dev"><sub>romelperez/romelperez.dev</sub></a></td>
+<td align="center"><a href="https://soulextract.com"><img src="./static/community/apps/images/soulextract.com.jpg" width="252px;" alt="SoulExtract.com" /></a><br /><a href="https://soulextract.com">SoulExtract.com</a><br /><a href="https://github.com/soulextract/soulextract.com"><sub>soulextract/soulextract.com</sub></a></td>
+<td align="center"><a href="https://romelperez.dev"><img src="./static/community/apps/images/romelperez.dev.jpg" width="252px;" alt="RomelPerez.dev" /></a><br /><a href="https://romelperez.dev">RomelPerez.dev</a><br /><a href="https://github.com/romelperez/romelperez.dev"><sub>romelperez/romelperez.dev</sub></a></td>
 </tr>
 </table>
 <!-- ARWES-COMMUNITY-APPS:END -->
