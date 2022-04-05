@@ -11,7 +11,8 @@ const packageName = folderName === 'standalone' ? 'arwes' : `@arwes/${folderName
 const search = new RegExp(`declare module '${packageName}' {(.|\r?\n)+}`);
 const fix = `
 declare module '${packageName}' {
-  export * from '${packageName}/index';
+  import main = require('${packageName}/index');
+  export = main;
 }
 `;
 const typesFilePath = path.join(__dirname, '../packages', folderName, 'build/types/index.d.ts');
