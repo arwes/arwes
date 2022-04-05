@@ -3,7 +3,7 @@
 import React, { FC } from 'react';
 import { render, cleanup } from '@testing-library/react';
 
-import { Bleeps } from '../constants';
+import type { Bleeps } from '../types';
 import { BleepsProvider } from '../BleepsProvider';
 import { useBleeps } from './useBleeps';
 
@@ -30,9 +30,11 @@ test('Should provide bleeps if provider bleeps setup was found', () => {
   const bleepsSettings = { click: { player: 'click' } };
   render(
     <BleepsProvider
-      audioSettings={audioSettings}
-      playersSettings={playersSettings}
-      bleepsSettings={bleepsSettings}
+      settings={{
+        audio: audioSettings,
+        players: playersSettings,
+        bleeps: bleepsSettings
+      }}
     >
       <Example />
     </BleepsProvider>

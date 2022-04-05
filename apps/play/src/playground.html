@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <meta id="noxtron-initial-theme-color" name="theme-color" content="#171717" />
+    <style id="noxtron-initial-styles">
+      html { background: #171717; }
+    </style>
+    <script>
+      (function () {
+        const params = window.location.search
+          .split('&')
+          .map((param) => param.toLowerCase().replace('?', ''));
+        const isLight = params.find((fragment) => fragment === 'dark=false');
+
+        if (isLight) {
+          const initialThemeColorElement = document.querySelector('#noxtron-initial-theme-color');
+          const initialStylesElement = document.querySelector('#noxtron-initial-styles');
+          initialThemeColorElement.setAttribute('content', '#f7f7f7');
+          initialStylesElement.innerHTML = ' html { background: #f7f7f7; } ';
+        }
+      })();
+    </script>
+
+    <title>Arwes Playground</title>
+    <meta name="description" content="Futuristic Sci-Fi UI Web Framework.">
+    <meta property="og:title" content="Arwes Playground">
+    <meta property="og:site_name" content="Arwes">
+    <meta property="og:description" content="Futuristic Sci-Fi UI Web Framework.">
+    <meta property="og:image" content="https://arwes.dev/arwes.jpg">
+    <meta property="og:url" content="https://arwes.dev/play">
+    <meta property="og:type" content="website">
+    <meta name="twitter:image:alt" content="Arwes Playground">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@arwesjs">
+
+    <link rel="icon" href="https://arwes.dev/logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&family=Titillium+Web:wght@400;700&display=swap">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

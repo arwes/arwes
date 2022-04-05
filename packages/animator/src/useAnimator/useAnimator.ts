@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 
-import { AnimatorRef } from '../constants';
-import { AnimatorContext } from '../AnimatorContext';
+import type { AnimatorInterface } from '../types';
+import { AnimatorContext } from '../utils/AnimatorContext/index';
 
-function useAnimator (): AnimatorRef | undefined {
+const useAnimator = (): AnimatorInterface | undefined => {
   return useContext(AnimatorContext);
-}
+};
 
 export { useAnimator };

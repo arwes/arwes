@@ -1,9 +1,9 @@
 /* eslint-env jest */
 
+import type { BleepsSettings } from '../../types';
 import {
   BLEEPS_TRANSITION,
-  BLEEPS_INTERACTION,
-  BleepsSettings
+  BLEEPS_INTERACTION
 } from '../../constants';
 import { createOrUpdateBleeps } from './createOrUpdateBleeps';
 

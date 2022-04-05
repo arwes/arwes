@@ -1,16 +1,16 @@
 ```jsx
-const SOUND_TYPING_URL = '/assets/sounds/typing.mp3';
+const SOUND_TYPE_URL = '/assets/sounds/type.mp3';
 
 const ButtonTyping = ({ children }) => {
   const bleeps = useBleeps();
   const [status, setStatus] = React.useState('Not typing');
 
   const onClick = () => {
-    if (bleeps.typing.getIsPlaying()) {
-      bleeps.typing.stop();
+    if (bleeps.type.getIsPlaying()) {
+      bleeps.type.stop();
       setStatus('Not typing.');
     } else {
-      bleeps.typing.play();
+      bleeps.type.play();
       setStatus('Typing...');
     }
   };
@@ -18,7 +18,7 @@ const ButtonTyping = ({ children }) => {
   // If the component is unmounted and there are
   // bleeps playing, they should be stopped.
   React.useEffect(() => {
-    return () => bleeps.typing.stop();
+    return () => bleeps.type.stop();
   }, []);
 
   return <button onClick={onClick}>{status}</button>;
@@ -31,14 +31,14 @@ function Sandbox () {
     }
   };
   const playersSettings = {
-    typing: {
-      src: [SOUND_TYPING_URL],
+    type: {
+      src: [SOUND_TYPE_URL],
       loop: true
     }
   };
   const bleepsSettings = {
-    typing: {
-      player: 'typing'
+    type: {
+      player: 'type'
     }
   };
 

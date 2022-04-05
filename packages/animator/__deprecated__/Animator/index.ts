@@ -1,0 +1,1 @@
+export * from './Animator.component';

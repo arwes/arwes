@@ -1,1 +1,2 @@
-export * from './Animated.component';
+// TODO: Should it be memoized?
+export * from './Animated';

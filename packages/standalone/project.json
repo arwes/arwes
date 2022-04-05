@@ -1,0 +1,4 @@
+{
+  "name": "standalone",
+  "root": "packages/standalone"
+}

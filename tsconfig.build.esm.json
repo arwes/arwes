@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.build.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "declaration": true,
+    "incremental": true,
+    "plugins": [
+      {
+        "transform": "@build-script/typescript-transformer-append-js-extension"
+      }
+    ]
+  }
+}

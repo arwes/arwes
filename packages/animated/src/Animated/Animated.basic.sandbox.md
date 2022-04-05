@@ -1,32 +1,40 @@
-```jsx
-const duration = { enter: 200, exit: 200 };
+```tsx
+import React, { ReactElement, useState, useEffect } from 'react';
+import { render } from 'react-dom';
+import { Animator } from '@arwes/animator';
+import { Animated } from '@arwes/animated';
 
-const Sandbox = () => {
-  const [activate, setActivate] = React.useState(true);
-
-  React.useEffect(() => {
-    const timeout = setTimeout(() => setActivate(!activate), 2000);
-    return () => clearTimeout(timeout);
-  }, [activate]);
-
+const Item = (): ReactElement => {
   return (
-    <Animator animator={{ activate, duration }}>
+    <Animator>
       <Animated
-        as='div'
-        style={{
-          width: 300,
-          height: 50,
-          backgroundColor: 'cyan'
-        }}
+        style={{ margin: 10, width: 40, height: 20, backgroundColor: '#777' }}
         animated={{
-          initialStyles: { opacity: 0, width: 0 },
-          entering: { opacity: 1, width: 300 },
-          exiting: { opacity: 0, width: 0 }
+          initialStyle: { x: 0, backgroundColor: '#0ff' },
+          transitions: {
+            entering: { x: [0, 100], backgroundColor: '#ff0' },
+            exiting: { x: [100, 0], backgroundColor: '#0ff' }
+          }
         }}
       />
     </Animator>
   );
 };
 
-render(<Sandbox />);
+const Sandbox = (): ReactElement => {
+  const [active, setActive] = useState(true);
+
+  useEffect(() => {
+    const tid = setTimeout(() => setActive(!active), 2000);
+    return () => clearTimeout(tid);
+  }, [active]);
+
+  return (
+    <Animator active={active} manager='stagger' combine>
+      {Array(10).fill(0).map((_, i) => <Item key={i} />)}
+    </Animator>
+  );
+};
+
+render(<Sandbox />, document.querySelector('#root'));
 ```

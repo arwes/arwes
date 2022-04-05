@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 
-import { AnimatorGeneralProviderRef } from '../constants';
-import { AnimatorGeneralContext } from '../AnimatorGeneralContext';
+import type { AnimatorGeneralInterface } from '../types';
+import { AnimatorGeneralContext } from '../utils/AnimatorGeneralContext/index';
 
-function useAnimatorGeneral (): AnimatorGeneralProviderRef | undefined {
+const useAnimatorGeneral = (): AnimatorGeneralInterface | undefined => {
   return useContext(AnimatorGeneralContext);
-}
+};
 
 export { useAnimatorGeneral };

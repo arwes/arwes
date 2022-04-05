@@ -1,1 +1,1 @@
-export const arwes = '@arwes/arwes';
+export const ARWES_NAME = '@arwes/arwes';

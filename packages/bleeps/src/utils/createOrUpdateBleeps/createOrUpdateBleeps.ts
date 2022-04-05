@@ -1,11 +1,11 @@
-import {
-  BLEEPS_CATEGORIES,
+import type {
   BleepCategoryName,
   BleepsAudioSettings,
   BleepsPlayersSettings,
   BleepsSettings,
   BleepsGenerics
-} from '../../constants';
+} from '../../types';
+import { BLEEPS_CATEGORIES } from '../../constants';
 import { createBleep } from '../createBleep';
 import { updateBleep } from '../updateBleep';
 import { unloadBleep } from '../unloadBleep';

@@ -1,8 +1,5 @@
-export * from './constants';
-
-export * from './AnimatorGeneralProvider';
-export * from './useAnimatorGeneral';
-
-export * from './Animator';
-export * from './useAnimator';
-export * from './withAnimator';
+export * from './types';
+export * from './Animator/index';
+export * from './useAnimator/index';
+export * from './AnimatorGeneralProvider/index';
+export * from './useAnimatorGeneral/index';
