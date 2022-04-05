@@ -1,27 +1,15 @@
 ```tsx
-// AN Animator dismissed will not its animator interface so the components
-// expecting it to subscribe to will not be able to do so.
-// Children animators will work as root animators since they don't receive a valid
-// parent animator to subscribe to.
-// The option is useful for removing all components animations which
-// depend on the animator transitions.
-
 import React, { ReactNode, ReactElement, useState, useRef, useEffect } from 'react';
 import { render } from 'react-dom';
 import { animate } from 'motion';
-import { AnimatorSystemNode, AnimatorProps, Animator, useAnimator } from '@arwes/animator';
+import { AnimatorProps, Animator, useAnimator } from '@arwes/animator';
 
 const AnimatorUIListener = (): ReactElement => {
   const elementRef = useRef<HTMLDivElement>(null);
   const animator = useAnimator();
 
   useEffect(() => {
-    // If the Animator is dismissed, it will provide an undefined value.
-    if (!animator) {
-      return;
-    }
-
-    const subscriber = (node: AnimatorSystemNode) => {
+    animator.node.subscribers.add(node => {
       const { duration } = node.control.getSettings();
 
       switch (node.getState()) {
@@ -42,13 +30,7 @@ const AnimatorUIListener = (): ReactElement => {
           break;
         }
       }
-    };
-
-    animator.node.subscribers.add(subscriber);
-
-    return () => {
-      animator.node.subscribers.delete(subscriber);
-    };
+    });
   }, []);
 
   return (
@@ -86,24 +68,18 @@ const Sandbox = (): ReactElement => {
   return (
     <Animator active={active} combine>
       <Item>
-        <Item>
-          <Item />
-          <Item />
-        </Item>
-        <Item>
-          <Item />
-          <Item />
-        </Item>
+        <Item />
+        <Item />
+        <Item />
+        <Item />
       </Item>
       <Item>
-        <Item animator={{ dismissed: true }}>
-          <Item />
-          <Item />
-        </Item>
-        <Item>
-          <Item />
-          <Item />
-        </Item>
+        <Item />
+        {/* The item will have its corresponding Animator disabled, so
+        it will work with the closest parent Animator. */}
+        <Item animator={{ disabled: true }} />
+        <Item />
+        <Item />
       </Item>
     </Animator>
   );

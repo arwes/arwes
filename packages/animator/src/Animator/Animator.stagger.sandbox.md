@@ -2,19 +2,14 @@
 import React, { ReactElement, useState, useRef, useEffect } from 'react';
 import { render } from 'react-dom';
 import { animate } from 'motion';
-import {
-  AnimatorSystemNode,
-  AnimatorGeneralProvider,
-  Animator,
-  useAnimator
-} from '@arwes/animator';
+import { AnimatorSystemNode, Animator, useAnimator } from '@arwes/animator';
 
 const AnimatorUIListener = (): ReactElement => {
   const elementRef = useRef<HTMLDivElement>(null);
   const animator = useAnimator();
 
   useEffect(() => {
-    const subscriber = (node: AnimatorSystemNode) => {
+    animator.node.subscribers.add(node => {
       const { duration } = node.control.getSettings();
 
       switch (node.getState()) {
@@ -35,13 +30,7 @@ const AnimatorUIListener = (): ReactElement => {
           break;
         }
       }
-    };
-
-    animator.node.subscribers.add(subscriber);
-
-    return () => {
-      animator.node.subscribers.delete(subscriber);
-    };
+    });
   }, []);
 
   return (
@@ -69,17 +58,9 @@ const Sandbox = (): ReactElement => {
   }, [active]);
 
   return (
-    <AnimatorGeneralProvider
-      duration={{ enter: 0.1, exit: 0.1, stagger: 0.3 }}
-    >
-      <Animator active={active} manager='stagger'>
-        <Item />
-        <Item />
-        <Item />
-        <Item />
-        <Item />
-      </Animator>
-    </AnimatorGeneralProvider>
+    <Animator active={active} manager='stagger' combine>
+      {Array(10).fill(0).map((_, i) => <Item key={i} />)}
+    </Animator>
   );
 };
 

@@ -113,40 +113,85 @@ const settings: NTPlaygroundSettings = {
       name: '@arwes/animator',
       children: [
         {
-          name: 'basic',
-          code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animator/src/basic.sandbox.md'))
+          name: 'Animator',
+          children: [
+            {
+              name: 'basic',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animator/src/Animator/Animator.basic.sandbox.md'))
+            },
+            {
+              name: 'nested',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animator/src/Animator/Animator.nested.sandbox.md'))
+            },
+            {
+              name: 'combine',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animator/src/Animator/Animator.combine.sandbox.md'))
+            },
+            {
+              name: 'root',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animator/src/Animator/Animator.root.sandbox.md'))
+            },
+            {
+              name: 'stagger',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animator/src/Animator/Animator.stagger.sandbox.md'))
+            },
+            {
+              name: 'disabled',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animator/src/Animator/Animator.disabled.sandbox.md'))
+            },
+            {
+              name: 'dismissed',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animator/src/Animator/Animator.dismissed.sandbox.md'))
+            },
+            {
+              name: 'dynamicRendering',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animator/src/Animator/Animator.dynamicRendering.sandbox.md'))
+            }
+          ]
         },
         {
-          name: 'generalSettings',
-          code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animator/src/generalSettings.sandbox.md'))
+          name: 'AnimatorGeneralProvider',
+          children: [
+            {
+              name: 'basic',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animator/src/AnimatorGeneralProvider/AnimatorGeneralProvider.basic.sandbox.md'))
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: '@arwes/animated',
+      children: [
+        {
+          name: 'Animated',
+          children: [
+            {
+              name: 'basic',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animated/src/Animated/Animated.basic.sandbox.md'))
+            },
+            {
+              name: 'functions',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animated/src/Animated/Animated.functions.sandbox.md'))
+            },
+            {
+              name: 'composition',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animated/src/Animated/Animated.composition.sandbox.md'))
+            },
+            {
+              name: 'disabled',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animated/src/Animated/Animated.disabled.sandbox.md'))
+            }
+          ]
         },
         {
-          name: 'nested',
-          code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animator/src/nested.sandbox.md'))
-        },
-        {
-          name: 'combine',
-          code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animator/src/combine.sandbox.md'))
-        },
-        {
-          name: 'root',
-          code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animator/src/root.sandbox.md'))
-        },
-        {
-          name: 'stagger',
-          code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animator/src/stagger.sandbox.md'))
-        },
-        {
-          name: 'disabled',
-          code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animator/src/disabled.sandbox.md'))
-        },
-        {
-          name: 'dismissed',
-          code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animator/src/dismissed.sandbox.md'))
-        },
-        {
-          name: 'dynamicRendering',
-          code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animator/src/dynamicRendering.sandbox.md'))
+          name: 'animations',
+          children: [
+            {
+              name: 'basic',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animated/src/animations/animations.basic.sandbox.md'))
+            }
+          ]
         }
       ]
     }
