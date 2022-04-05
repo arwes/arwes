@@ -1,0 +1,11 @@
+{
+  "name": "@arwes/app-website",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "^16.14",
+    "npm": "^8.3"
+  },
+  "dependencies": {},
+  "scripts": {}
+}
