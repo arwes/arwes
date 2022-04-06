@@ -15,7 +15,8 @@
           "build",
           "build-esm",
           "build-cjs",
-          "build-umd"
+          "build-umd",
+          "build-types"
         ]
       }
     }
@@ -37,31 +38,23 @@
       {
         "target": "build-esm",
         "projects": "dependencies"
-      },
-      {
-        "target": "build-cjs",
-        "projects": "dependencies"
       }
     ],
     "build-cjs": [
       {
         "target": "build-esm",
         "projects": "dependencies"
-      },
-      {
-        "target": "build-cjs",
-        "projects": "dependencies"
       }
     ],
     "build-umd": [
       {
-        "target": "build",
+        "target": "build-esm",
         "projects": "dependencies"
       }
     ],
     "build-types": [
       {
-        "target": "build-types",
+        "target": "build-esm",
         "projects": "dependencies"
       }
     ],
