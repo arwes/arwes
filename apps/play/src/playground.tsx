@@ -9,6 +9,8 @@ import { Playground } from 'noxtron/build/playground';
 
 import lernaSettings from '@repository/lerna.json';
 
+const GA_TRACKING_ID = 'UA-50433259-2';
+
 const getMdCode = (md: string): string => md.replace(/```.*\r?\n/g, '');
 
 const Link = (props: HTMLProps<HTMLAnchorElement>): ReactElement => (
@@ -23,6 +25,23 @@ const ArwesIcon = (): ReactElement => (
     style={{ display: 'inline-block', marginRight: '5px', width: '1em', height: '1em' }}
   />
 );
+
+if (process.env.NODE_ENV === 'production' && window.location.host.includes('arwes.dev')) {
+  const gtagScript = document.createElement('script');
+  gtagScript.async = true;
+  gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_TRACKING_ID;
+  document.head.appendChild(gtagScript);
+  const win = window as any;
+  win.dataLayer = win.dataLayer || [];
+  function gtag (): void {
+    win.dataLayer.push(arguments);
+  }
+  win.gtag = gtag;
+  // @ts-expect-error
+  gtag('js', new Date());
+  // @ts-expect-error
+  gtag('config', GA_TRACKING_ID);
+}
 
 const settings: NTPlaygroundSettings = {
   basePath: '/play/',
@@ -285,6 +304,12 @@ const settings: NTPlaygroundSettings = {
         </Link>
       ]
     ]
+  },
+  onSandboxChange: () => {
+    // Google Analytics page tracking.
+    const win = window as any;
+    const { pathname, search } = window.location;
+    win.gtag?.('config', GA_TRACKING_ID, { page_path: `${pathname}${search}` });
   }
 };
 
