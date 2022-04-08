@@ -83,7 +83,7 @@ released in February, 2018, and **it is now deprecated**.
 <table>
 <tr>
 <td align="center"><a href="https://soulextract.com"><img src="./static/community/apps/images/soulextract.com.jpg" width="252px;" alt="SoulExtract.com" /></a><br /><a href="https://soulextract.com">SoulExtract.com</a><br /><a href="https://github.com/soulextract/soulextract.com"><sub>soulextract/soulextract.com</sub></a></td>
-<td align="center"><a href="https://romelperez.dev"><img src="./static/community/apps/images/romelperez.dev.jpg" width="252px;" alt="RomelPerez.dev" /></a><br /><a href="https://romelperez.dev">RomelPerez.dev</a><br /><a href="https://github.com/romelperez/romelperez.dev"><sub>romelperez/romelperez.dev</sub></a></td>
+<td align="center"><a href="https://romelperez.dev"><img src="./static/community/apps/images/romelperez.dev.jpg" width="252px;" alt="RomelPerez.dev" /></a><br /><a href="https://romelperez.dev">RomelPerez.dev</a><br /><sub>--</sub></td>
 </tr>
 </table>
 <!-- ARWES-COMMUNITY-APPS:END -->
