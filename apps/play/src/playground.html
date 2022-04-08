@@ -38,9 +38,24 @@
         padding: 0;
         width: 100px;
         height: 100px;
-        transform: translate(-50%, -50%);
+        transition-property: opacity, transform;
+        transition-duration: 300ms;
+        transition-timing-function: ease-out;
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(-45deg);
       }
     </style>
+    <script>
+      (function () {
+        setTimeout(function () {
+          const loadingElement = document.querySelector('.arwes-playground-loading');
+          if (loadingElement) {
+            loadingElement.style.opacity = '1';
+            loadingElement.style.transform = 'translate(-50%, -50%)';
+          }
+        }, 100);
+      })();
+    </script>
 
     <title>Arwes Playground</title>
     <meta name="description" content="Futuristic Sci-Fi UI Web Framework.">
