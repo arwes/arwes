@@ -1,6 +1,6 @@
 {
-  "name": "standalone",
-  "root": "packages/standalone",
+  "name": "animator",
+  "root": "packages/animator",
   "targets": {
     "build": {
       "executor": "@nrwl/workspace:run-script",

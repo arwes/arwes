@@ -30,7 +30,6 @@
     "raw-loader": "^4.0.2"
   },
   "scripts": {
-    "clean": "rimraf ./build",
     "build": "cross-env NODE_ENV=production webpack --progress",
     "dev": "webpack serve",
     "start": "http-server ./build --port 9000 --gzip true -o /play"

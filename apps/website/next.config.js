@@ -6,7 +6,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
  */
 const nextConfig = {
   poweredByHeader: false,
-  distDir: 'build',
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.plugins.push(

@@ -1,6 +1,6 @@
 {
-  "name": "standalone",
-  "root": "packages/standalone",
+  "name": "arwes",
+  "root": "packages/arwes",
   "targets": {
     "build": {
       "executor": "@nrwl/workspace:run-script",
