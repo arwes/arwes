@@ -9,7 +9,7 @@ import type {
   ThemeExtend,
   ThemeCreatorOptions
 } from '../types';
-import { createCreateTheme } from '../createCreateTheme';
+import { createCreateTheme } from '../createCreateTheme/index';
 
 type UseCreateTheme<ThemeSettings, Theme> = (
   getThemeSettingsExtended: () => ThemeSettingsExtend<ThemeSettings>,
