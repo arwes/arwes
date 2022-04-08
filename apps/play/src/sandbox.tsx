@@ -8,6 +8,7 @@ import { setupSandbox } from 'noxtron/build/sandbox';
 import * as tools from '@arwes/tools';
 import * as animator from '@arwes/animator';
 import * as animated from '@arwes/animated';
+import * as theme from '@arwes/theme';
 
 setupSandbox({
   dependencies: [
@@ -18,6 +19,7 @@ setupSandbox({
     { name: 'empanada', pkg: empanada },
     { name: '@arwes/tools', pkg: tools },
     { name: '@arwes/animator', pkg: animator },
-    { name: '@arwes/animated', pkg: animated }
+    { name: '@arwes/animated', pkg: animated },
+    { name: '@arwes/theme', pkg: theme }
   ]
 });

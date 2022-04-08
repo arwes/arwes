@@ -11,9 +11,13 @@ echo "\n[DEBUG] Fetching updates..."
 git fetch origin $1
 git reset --hard origin/$1
 
+echo "\n[DEBUG] Using local node version..."
+
+nvm use
+
 echo "\n[DEBUG] Installing dependencies..."
 
-npx npm install
+npm install
 
 echo "\n[DEBUG] Building project..."
 

@@ -7,7 +7,7 @@ import Icon from '@mdi/react';
 import type { NTPlaygroundSettings } from 'noxtron';
 import { Playground } from 'noxtron/build/playground';
 
-import lernaSettings from '@repository/lerna.json';
+import LERNA_SETTINGS from '@repository/lerna.json';
 
 const GA_TRACKING_ID = 'UA-50433259-2';
 
@@ -26,6 +26,7 @@ const ArwesIcon = (): ReactElement => (
   />
 );
 
+// Google Analytics.
 if (process.env.NODE_ENV === 'production' && window.location.host.includes('arwes.dev')) {
   const gtagScript = document.createElement('script');
   gtagScript.async = true;
@@ -125,9 +126,40 @@ const settings: NTPlaygroundSettings = {
     {
       filename: 'file:///node_modules/@arwes/animated/index.d.ts',
       code: require('!raw-loader?esModule=false!@arwes/animated/build/types/index.d.ts')
+    },
+    {
+      filename: 'file:///node_modules/@arwes/theme/index.d.ts',
+      code: require('!raw-loader?esModule=false!@arwes/theme/build/types/index.d.ts')
     }
   ],
   sandboxes: [
+    {
+      name: '@arwes/theme',
+      children: [
+        {
+          name: 'createThemeColor',
+          children: [
+            {
+              name: 'basic',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/theme/src/createThemeColor/createThemeColor.basic.sandbox.md'))
+            },
+            {
+              name: 'variations',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/theme/src/createThemeColor/createThemeColor.variations.sandbox.md'))
+            }
+          ]
+        },
+        {
+          name: 'createCreateTheme',
+          children: [
+            {
+              name: 'basic',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/theme/src/createCreateTheme/createCreateTheme.basic.sandbox.md'))
+            }
+          ]
+        }
+      ]
+    },
     {
       name: '@arwes/animator',
       children: [
@@ -266,8 +298,8 @@ const settings: NTPlaygroundSettings = {
   links: {
     mobile: [
       [
-        <Link href={`https://github.com/arwes/arwes/releases/tag/v${lernaSettings.version}`} target='github'>
-          <LinkIcon path={mdiLabelOutline} /> v{lernaSettings.version}
+        <Link href={`https://github.com/arwes/arwes/releases/tag/v${LERNA_SETTINGS.version}`} target='github'>
+          <LinkIcon path={mdiLabelOutline} /> v{LERNA_SETTINGS.version}
         </Link>,
         <Link href='/' target='website'>
           <ArwesIcon /> Website
@@ -279,8 +311,8 @@ const settings: NTPlaygroundSettings = {
     ],
     desktop: [
       [
-        <Link href={`https://github.com/arwes/arwes/releases/tag/v${lernaSettings.version}`} target='github'>
-          <LinkIcon path={mdiLabelOutline} /> v{lernaSettings.version}
+        <Link href={`https://github.com/arwes/arwes/releases/tag/v${LERNA_SETTINGS.version}`} target='github'>
+          <LinkIcon path={mdiLabelOutline} /> v{LERNA_SETTINGS.version}
         </Link>,
         <Link href='/' target='website'>
           <ArwesIcon /> Website
