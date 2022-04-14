@@ -150,11 +150,29 @@ const settings: NTPlaygroundSettings = {
           ]
         },
         {
+          name: 'createThemeStyle',
+          children: [
+            {
+              name: 'basic',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/theme/src/createThemeStyle/createThemeStyle.basic.sandbox.md'))
+            }
+          ]
+        },
+        {
           name: 'createCreateTheme',
           children: [
             {
               name: 'basic',
               code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/theme/src/createCreateTheme/createCreateTheme.basic.sandbox.md'))
+            }
+          ]
+        },
+        {
+          name: 'createUseCreateThemeExtended',
+          children: [
+            {
+              name: 'basic',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/theme/src/createUseCreateThemeExtended/createUseCreateThemeExtended.basic.sandbox.md'))
             }
           ]
         }
