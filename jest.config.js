@@ -15,6 +15,9 @@ module.exports = {
     '/build/',
     '/out/',
     '/public/',
-    '/__deprecated__/'
+    '/www/',
+    '/__deprecated__/',
+    '/.cache/',
+    '/.next/'
   ]
 };
