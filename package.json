@@ -79,7 +79,7 @@
     "contributors-add": "all-contributors add",
     "readme-contributors-generate": "all-contributors generate",
     "readme-community-generate": "node ./scripts/readme-community-generate.js",
-    "deploy": "sh ./scripts/deploy.sh"
+    "www-build": "sh ./scripts/www-build.sh"
   },
   "config": {
     "commitizen": {
