@@ -6,9 +6,12 @@
     "coverage",
     "public",
     "static",
+    "out",
+    "www",
+    "__deprecated__",
     ".cache",
     ".next",
-    "__deprecated__"
+    "apps/website/next-env.d.ts"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {

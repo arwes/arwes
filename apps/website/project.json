@@ -1,0 +1,19 @@
+{
+  "name": "website",
+  "root": "apps/website",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/workspace:run-script",
+      "options": {
+        "script": "build"
+      },
+      "outputs": ["out", "public"],
+      "dependsOn": [
+        {
+          "target": "build",
+          "projects": "dependencies"
+        }
+      ]
+    }
+  }
+}

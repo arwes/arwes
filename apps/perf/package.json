@@ -21,9 +21,8 @@
     "html-webpack-plugin": "^5.3.2"
   },
   "scripts": {
-    "clean": "rimraf ./build",
     "build": "sh ./scripts/build.sh",
     "dev": "sh ./scripts/dev.sh",
-    "start": "serve ./build -p 9100"
+    "start": "http-server ./build --port 9100 --gzip true -o /perf"
   }
 }

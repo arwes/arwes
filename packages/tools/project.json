@@ -1,6 +1,6 @@
 {
-  "name": "standalone",
-  "root": "packages/standalone",
+  "name": "tools",
+  "root": "packages/tools",
   "targets": {
     "build": {
       "executor": "@nrwl/workspace:run-script",

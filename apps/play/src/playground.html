@@ -7,7 +7,9 @@
 
     <meta id="noxtron-initial-theme-color" name="theme-color" content="#171717" />
     <style id="noxtron-initial-styles">
-      html { background: #171717; }
+      html {
+        background: #171717;
+      }
     </style>
     <script>
       (function () {
@@ -24,25 +26,62 @@
         }
       })();
     </script>
+    <style>
+      .arwes-playground-loading {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        display: block;
+        outline: none;
+        border: none;
+        margin: 0;
+        padding: 0;
+        width: 100px;
+        height: 100px;
+        transition-property: opacity, transform;
+        transition-duration: 300ms;
+        transition-timing-function: ease-out;
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+    </style>
+    <script>
+      (function () {
+        setTimeout(function () {
+          const loadingElement = document.querySelector('.arwes-playground-loading');
+          if (loadingElement) {
+            loadingElement.style.opacity = '1';
+            loadingElement.style.transform = 'translate(-50%, -50%)';
+          }
+        }, 100);
+      })();
+    </script>
 
     <title>Arwes Playground</title>
     <meta name="description" content="Futuristic Sci-Fi UI Web Framework.">
     <meta property="og:title" content="Arwes Playground">
     <meta property="og:site_name" content="Arwes">
     <meta property="og:description" content="Futuristic Sci-Fi UI Web Framework.">
-    <meta property="og:image" content="https://arwes.dev/arwes.jpg">
-    <meta property="og:url" content="https://arwes.dev/play">
+    <!-- TODO: For next development environment. -->
+    <meta property="og:image" content="https://next.arwes.dev/arwes.jpg">
+    <meta property="og:url" content="https://next.arwes.dev/play">
     <meta property="og:type" content="website">
     <meta name="twitter:image:alt" content="Arwes Playground">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@arwesjs">
 
-    <link rel="icon" href="https://arwes.dev/logo.png" type="image/png">
+    <link rel="icon" href="https://next.arwes.dev/logo.png" type="image/png">
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&family=Titillium+Web:wght@400;700&display=swap">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <img
+        class="arwes-playground-loading"
+        src="https://next.arwes.dev/logo.png"
+        alt="Arwes Playground"
+      />
+    </div>
   </body>
 </html>

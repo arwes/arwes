@@ -11,7 +11,6 @@
     "next": "^12.1.4"
   },
   "scripts": {
-    "clean": "rm -rf ./.next && rm -rf ./build",
     "dev": "next dev -p 9200",
     "build": "next build && next export",
     "start": "http-server ./out --port 9200 --gzip true -o /"

@@ -22,7 +22,7 @@ const appsRowsHTML = appsItems
       '<br />',
       `<a href="${url}">${name}</a>`,
       '<br />',
-      `<a href="${repository}"><sub>${repositoryName}</sub></a>`,
+      repository ? `<a href="${repository}"><sub>${repositoryName}</sub></a>` : '<sub>--</sub>',
       '</td>'
     ].join('')
   )

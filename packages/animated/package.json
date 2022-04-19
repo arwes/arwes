@@ -50,7 +50,6 @@
     "tslib": "^2.3.1"
   },
   "scripts": {
-    "clean": "sh ../../scripts/pkg-clean.sh",
     "build": "npm run build-esm && npm run build-cjs && npm run build-umd && npm run build-types",
     "build-esm": "sh ../../scripts/pkg-build-esm.sh",
     "build-cjs": "sh ../../scripts/pkg-build-cjs.sh",

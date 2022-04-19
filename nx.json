@@ -11,6 +11,7 @@
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
+        "parallel": 8,
         "cacheableOperations": [
           "build",
           "build-esm",
@@ -22,42 +23,6 @@
     }
   },
   "targetDependencies": {
-    "clean": [
-      {
-        "target": "clean",
-        "projects": "dependencies"
-      }
-    ],
-    "build": [
-      {
-        "target": "build",
-        "projects": "dependencies"
-      }
-    ],
-    "build-esm": [
-      {
-        "target": "build-esm",
-        "projects": "dependencies"
-      }
-    ],
-    "build-cjs": [
-      {
-        "target": "build-esm",
-        "projects": "dependencies"
-      }
-    ],
-    "build-umd": [
-      {
-        "target": "build-esm",
-        "projects": "dependencies"
-      }
-    ],
-    "build-types": [
-      {
-        "target": "build-esm",
-        "projects": "dependencies"
-      }
-    ],
     "dev": [
       {
         "target": "build-esm",

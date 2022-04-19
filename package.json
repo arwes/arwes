@@ -18,9 +18,9 @@
     "@build-script/typescript-transformer-append-js-extension": "^1.0.7",
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
-    "@nrwl/cli": "^13.9.0",
-    "@nrwl/tao": "^13.9.0",
-    "@nrwl/workspace": "^13.9.0",
+    "@nrwl/cli": "^13.10.0",
+    "@nrwl/tao": "^13.10.0",
+    "@nrwl/workspace": "^13.10.0",
     "@testing-library/react": "^12.1.4",
     "@types/jest": "^27.4.1",
     "@types/react": "^17.0.40",
@@ -72,13 +72,14 @@
     "test-watch": "jest --watch",
     "test-coverage": "jest --coverage",
     "test-list": "jest --listTests",
+    "clean": "sh ./scripts/clean.sh",
     "integration": "sh ./scripts/integration.sh",
     "release": "nx run-many --target=build --all --parallel=8 && npm run lint && npm run test && lerna publish",
     "changelog": "auto-changelog",
     "contributors-add": "all-contributors add",
     "readme-contributors-generate": "all-contributors generate",
     "readme-community-generate": "node ./scripts/readme-community-generate.js",
-    "deploy": "sh ./scripts/deploy.sh"
+    "www-build": "sh ./scripts/www-build.sh"
   },
   "config": {
     "commitizen": {

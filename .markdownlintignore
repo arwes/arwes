@@ -2,6 +2,8 @@ node_modules
 build
 public
 static
+out
+www
+__deprecated__
 .cache
 .next
-__deprecated__

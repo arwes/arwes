@@ -1,10 +1,10 @@
 import type { PartialDeep } from '@arwes/tools';
 
 import type { ThemeCreatorStructure } from '../types';
-import { createThemeMultiplier } from '../createThemeMultiplier';
-import { createThemeColor } from '../createThemeColor';
-import { createThemeStyle } from '../createThemeStyle';
-import { createThemeBreakpoints } from '../createThemeBreakpoints';
+import { createThemeMultiplier } from '../createThemeMultiplier/index';
+import { createThemeColor } from '../createThemeColor/index';
+import { createThemeStyle } from '../createThemeStyle/index';
+import { createThemeBreakpoints } from '../createThemeBreakpoints/index';
 
 // TODO: Set typing.
 const extendDeepObject = (structure: any, defaults: any, extension: any): any => {
@@ -41,14 +41,14 @@ const createDeepThemeSetup = (structure: any, settings: any): any => {
 };
 
 type CreateTheme<ThemeSettings, Theme> = (
-  themeSettingsExtensions: PartialDeep<ThemeSettings> | undefined | Array<PartialDeep<ThemeSettings> | undefined>
+  themeSettingsExtensions?: PartialDeep<ThemeSettings> | Array<PartialDeep<ThemeSettings> | undefined> | undefined
 ) => Theme;
 
 const createCreateTheme = <ThemeSettings, Theme>(
   themeStructure: ThemeCreatorStructure,
   themeSettingsDefaults: ThemeSettings
 ): CreateTheme<ThemeSettings, Theme> => {
-  const createTheme: CreateTheme<ThemeSettings, Theme> = themeSettingsExtensions => {
+  const createTheme: CreateTheme<ThemeSettings, Theme> = (themeSettingsExtensions = {}) => {
     let themeSettings: ThemeSettings | undefined;
 
     if (Array.isArray(themeSettingsExtensions)) {
