@@ -159,6 +159,23 @@ const settings: NTPlaygroundSettings = {
           ]
         },
         {
+          name: 'createThemeBreakpoints',
+          children: [
+            {
+              name: 'basic',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/theme/src/createThemeBreakpoints/createThemeBreakpoints.basic.sandbox.md'))
+            },
+            {
+              name: 'series',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/theme/src/createThemeBreakpoints/createThemeBreakpoints.series.sandbox.md'))
+            },
+            {
+              name: 'labels',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/theme/src/createThemeBreakpoints/createThemeBreakpoints.labels.sandbox.md'))
+            }
+          ]
+        },
+        {
           name: 'createCreateTheme',
           children: [
             {
