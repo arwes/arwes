@@ -1,6 +1,6 @@
 import type { ThemeSettingsBreakpoints, ThemeBreakpoints } from '../types';
 
-const createThemeBreakpoints = (settings: ThemeSettingsBreakpoints): ThemeBreakpoints => {
+const createThemeBreakpoints = (settings: ThemeSettingsBreakpoints = []): ThemeBreakpoints => {
   const getBreakpointValue = (key: string | number): string => {
     if (typeof key === 'string') {
       for (const item of settings) {
