@@ -12,8 +12,11 @@ const SRC_PATH = path.join(CWD, 'src');
 const BUILD_PATH = path.join(CWD, 'build');
 const BASE_PATH = '/play/'; // Must end with "/".
 
+const mode = NODE_ENV || 'development';
+const isProduction = mode === 'production';
+
 module.exports = {
-  mode: NODE_ENV || 'development',
+  mode,
   devtool: false,
   entry: {
     playground: path.join(SRC_PATH, 'playground.tsx'),
@@ -78,19 +81,23 @@ module.exports = {
       filename: path.join(BUILD_PATH, BASE_PATH, 'sandbox/index.html'),
       chunks: ['sandbox']
     }),
-    new CopyWebpackPlugin({
+    isProduction && new CopyWebpackPlugin({
       patterns: [{
         from: path.join(REPOSITORY_PATH, 'static'),
         to: BUILD_PATH
       }]
     })
-  ],
+  ].filter(Boolean),
   devServer: {
-    static: {
-      publicPath: BASE_PATH,
+    static: [{
       directory: BUILD_PATH,
+      publicPath: BASE_PATH,
       watch: true
-    },
+    }, {
+      directory: path.join(REPOSITORY_PATH, 'static'),
+      publicPath: '/',
+      watch: true
+    }],
     allowedHosts: 'all',
     compress: true,
     host: '127.0.0.1',
