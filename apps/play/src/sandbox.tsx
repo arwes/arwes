@@ -9,6 +9,7 @@ import * as tools from '@arwes/tools';
 import * as animator from '@arwes/animator';
 import * as animated from '@arwes/animated';
 import * as theme from '@arwes/theme';
+import * as styles from '@arwes/styles';
 
 setupSandbox({
   dependencies: [
@@ -20,6 +21,7 @@ setupSandbox({
     { name: '@arwes/tools', pkg: tools },
     { name: '@arwes/animator', pkg: animator },
     { name: '@arwes/animated', pkg: animated },
-    { name: '@arwes/theme', pkg: theme }
+    { name: '@arwes/theme', pkg: theme },
+    { name: '@arwes/styles', pkg: styles }
   ]
 });

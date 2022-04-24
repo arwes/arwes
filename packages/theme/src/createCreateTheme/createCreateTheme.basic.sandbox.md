@@ -33,38 +33,40 @@ interface Theme {
   }
 }
 
+const themeStructure: ThemeCreatorStructure = {
+  space: 'multiplier',
+  outline: 'multiplier',
+  font: 'style',
+  palette: {
+    primary: 'color',
+    secondary: 'color'
+  }
+};
+
+const themeDefaults: ThemeSettings = {
+  // Values to be multiplied by a provided integer.
+  space: 5,
+  outline: 1,
+  // A list of styles with any CSS properties.
+  font: [
+    { fontFamily: 'monospace', fontSize: '30px' },
+    { fontFamily: 'sans-serif', fontSize: '21px' }
+  ],
+  palette: {
+    // A function to return a HSLA value as [number, number, number, number?].
+    primary: i => [180, 70, i * 5, 1],
+    secondary: i => [60, 70, i * 5, 1]
+  }
+};
+
+const createTheme = createCreateTheme<ThemeSettings, Theme>(themeStructure, themeDefaults);
+
 const Sandbox = (): ReactElement => {
   const theme: Theme = useMemo(() => {
-    const themeStructure: ThemeCreatorStructure = {
-      space: 'multiplier',
-      outline: 'multiplier',
-      font: 'style',
-      palette: {
-        primary: 'color',
-        secondary: 'color'
-      }
+    const themeExtensions = {
+      outline: 3
     };
-    const themeDefaults: ThemeSettings = {
-      // Values to be multiplied by a provided integer.
-      space: 5,
-      outline: 1,
-      // A list of styles with any CSS properties.
-      font: [
-        { fontFamily: 'monospace', fontSize: '30px' },
-        { fontFamily: 'sans-serif', fontSize: '21px' }
-      ],
-      palette: {
-        // A function to return a HSLA value as [number, number, number, number?].
-        primary: i => [180, 70, i * 5, 1],
-        secondary: i => [60, 70, i * 5, 1]
-      }
-    };
-
-    const createTheme = createCreateTheme<ThemeSettings, Theme>(themeStructure, themeDefaults);
-    const theme = createTheme({
-      // Theme settings extension...
-    });
-
+    const theme = createTheme(themeExtensions);
     return theme;
   }, []);
 

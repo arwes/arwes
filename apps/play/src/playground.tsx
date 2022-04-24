@@ -120,16 +120,20 @@ const settings: NTPlaygroundSettings = {
       code: require('!raw-loader?esModule=false!@arwes/tools/build/types/index.d.ts')
     },
     {
+      filename: 'file:///node_modules/@arwes/theme/index.d.ts',
+      code: require('!raw-loader?esModule=false!@arwes/theme/build/types/index.d.ts')
+    },
+    {
+      filename: 'file:///node_modules/@arwes/styles/index.d.ts',
+      code: require('!raw-loader?esModule=false!@arwes/styles/build/types/index.d.ts')
+    },
+    {
       filename: 'file:///node_modules/@arwes/animator/index.d.ts',
       code: require('!raw-loader?esModule=false!@arwes/animator/build/types/index.d.ts')
     },
     {
       filename: 'file:///node_modules/@arwes/animated/index.d.ts',
       code: require('!raw-loader?esModule=false!@arwes/animated/build/types/index.d.ts')
-    },
-    {
-      filename: 'file:///node_modules/@arwes/theme/index.d.ts',
-      code: require('!raw-loader?esModule=false!@arwes/theme/build/types/index.d.ts')
     }
   ],
   sandboxes: [
@@ -190,6 +194,37 @@ const settings: NTPlaygroundSettings = {
             {
               name: 'basic',
               code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/theme/src/createUseCreateThemeExtended/createUseCreateThemeExtended.basic.sandbox.md'))
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: '@arwes/styles',
+      children: [
+        {
+          name: 'useStyles',
+          children: [
+            {
+              name: 'basic',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/styles/src/useStyles/useStyles.basic.sandbox.md'))
+            },
+            {
+              name: 'props',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/styles/src/useStyles/useStyles.props.sandbox.md'))
+            }
+          ]
+        },
+        {
+          name: 'useThemeStyles',
+          children: [
+            {
+              name: 'basic',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/styles/src/useThemeStyles/useThemeStyles.basic.sandbox.md'))
+            },
+            {
+              name: 'props',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/styles/src/useThemeStyles/useThemeStyles.props.sandbox.md'))
             }
           ]
         }
