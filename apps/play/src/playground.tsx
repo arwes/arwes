@@ -134,6 +134,10 @@ const settings: NTPlaygroundSettings = {
     {
       filename: 'file:///node_modules/@arwes/animated/index.d.ts',
       code: require('!raw-loader?esModule=false!@arwes/animated/build/types/index.d.ts')
+    },
+    {
+      filename: 'file:///node_modules/@arwes/bleeps/index.d.ts',
+      code: require('!raw-loader?esModule=false!@arwes/bleeps/build/types/index.d.ts')
     }
   ],
   sandboxes: [
@@ -311,6 +315,32 @@ const settings: NTPlaygroundSettings = {
             {
               name: 'basic',
               code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/animated/src/animations/animations.basic.sandbox.md'))
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: '@arwes/bleeps',
+      children: [
+        {
+          name: 'BleepsProvider',
+          children: [
+            {
+              name: 'basic',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/bleeps/src/BleepsProvider/BleepsProvider.basic.sandbox.md'))
+            },
+            {
+              name: 'loops',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/bleeps/src/BleepsProvider/BleepsProvider.loops.sandbox.md'))
+            },
+            {
+              name: 'categories',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/bleeps/src/BleepsProvider/BleepsProvider.categories.sandbox.md'))
+            },
+            {
+              name: 'dynamic',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/bleeps/src/BleepsProvider/BleepsProvider.dynamic.sandbox.md'))
             }
           ]
         }

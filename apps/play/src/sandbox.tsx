@@ -10,6 +10,7 @@ import * as animator from '@arwes/animator';
 import * as animated from '@arwes/animated';
 import * as theme from '@arwes/theme';
 import * as styles from '@arwes/styles';
+import * as bleeps from '@arwes/bleeps';
 
 setupSandbox({
   dependencies: [
@@ -22,6 +23,7 @@ setupSandbox({
     { name: '@arwes/animator', pkg: animator },
     { name: '@arwes/animated', pkg: animated },
     { name: '@arwes/theme', pkg: theme },
-    { name: '@arwes/styles', pkg: styles }
+    { name: '@arwes/styles', pkg: styles },
+    { name: '@arwes/bleeps', pkg: bleeps }
   ]
 });
