@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 import type { BleepName, Bleep, Bleeps } from '../types';
-import { useBleepsSetup } from '../useBleepsSetup';
+import { useBleepsSetup } from '../useBleepsSetup/index';
 
 let instanceIdCounter = 0;
 
