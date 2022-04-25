@@ -19,8 +19,8 @@ module.exports = {
   mode,
   devtool: false,
   entry: {
-    playground: path.join(SRC_PATH, 'playground.tsx'),
-    sandbox: path.join(SRC_PATH, 'sandbox.tsx')
+    playground: path.join(SRC_PATH, 'playground/playground.tsx'),
+    sandbox: path.join(SRC_PATH, 'sandbox/sandbox.tsx')
   },
   output: {
     path: path.join(BUILD_PATH, BASE_PATH),
@@ -71,13 +71,13 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       publicPath: BASE_PATH,
-      template: path.join(SRC_PATH, 'playground.html'),
+      template: path.join(SRC_PATH, 'playground/playground.html'),
       filename: path.join(BUILD_PATH, BASE_PATH, 'index.html'),
       chunks: ['playground']
     }),
     new HtmlWebpackPlugin({
       publicPath: BASE_PATH,
-      template: path.join(SRC_PATH, 'sandbox.html'),
+      template: path.join(SRC_PATH, 'sandbox/sandbox.html'),
       filename: path.join(BUILD_PATH, BASE_PATH, 'sandbox/index.html'),
       chunks: ['sandbox']
     }),
