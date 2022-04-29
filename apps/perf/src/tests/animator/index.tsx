@@ -1,4 +1,4 @@
-import React, { ReactElement, Profiler, useState, useRef, useEffect } from 'react';
+import React, { ReactElement, Profiler, Fragment, useState, useRef, useEffect } from 'react';
 import { render } from 'react-dom';
 
 import { AnimatorGeneralProvider, Animator, useAnimator } from '@arwes/animator';
@@ -20,9 +20,9 @@ const Item = (): ReactElement => {
       const element = elementRef.current as HTMLDivElement;
 
       switch (node.getState()) {
-        case 'exited': element.style.opacity = '0.1'; break;
-        case 'entering': element.style.opacity = '0.6'; break;
-        case 'exiting': element.style.opacity = '0.6'; break;
+        case 'exited': element.style.opacity = '0.05'; break;
+        case 'entering': element.style.opacity = '0.5'; break;
+        case 'exiting': element.style.opacity = '0.5'; break;
         case 'entered': element.style.opacity = '1'; break;
       }
     });
@@ -40,26 +40,29 @@ const Test = (): ReactElement => {
   }, [active]);
 
   return (
-    <AnimatorGeneralProvider duration={{ enter: 0.5, exit: 0.5 }}>
-      <Animator active={active}>
-        {Array(TEST_RENDER_NUMBER).fill(null).map((_, index) =>
-          <Animator
-            key={index}
-            onTransition={node => {
-              const state = node.getState();
-              if (index === 0) {
-                console.time(state);
-              }
-              else if (index + 1 === TEST_RENDER_NUMBER) {
-                console.timeEnd(state);
-              }
-            }}
-          >
-            <Item />
-          </Animator>
-        )}
-      </Animator>
-    </AnimatorGeneralProvider>
+    <Fragment>
+      <p>Root animator state: <b>{active ? 'active' : 'deactivated'}</b></p>
+      <AnimatorGeneralProvider duration={{ enter: 0.5, exit: 0.5 }}>
+        <Animator active={active} combine>
+          {Array(TEST_RENDER_NUMBER).fill(null).map((_, index) =>
+            <Animator
+              key={index}
+              onTransition={node => {
+                const state = node.getState();
+                if (index === 0) {
+                  console.time(state);
+                }
+                else if (index + 1 === TEST_RENDER_NUMBER) {
+                  console.timeEnd(state);
+                }
+              }}
+            >
+              <Item />
+            </Animator>
+          )}
+        </Animator>
+      </AnimatorGeneralProvider>
+    </Fragment>
   );
 };
 
