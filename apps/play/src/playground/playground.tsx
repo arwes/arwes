@@ -138,6 +138,10 @@ const settings: NTPlaygroundSettings = {
     {
       filename: 'file:///node_modules/@arwes/bleeps/index.d.ts',
       code: require('!raw-loader?esModule=false!@arwes/bleeps/build/types/index.d.ts')
+    },
+    {
+      filename: 'file:///node_modules/@arwes/patterns/index.d.ts',
+      code: require('!raw-loader?esModule=false!@arwes/patterns/build/types/index.d.ts')
     }
   ],
   sandboxes: [
@@ -341,6 +345,24 @@ const settings: NTPlaygroundSettings = {
             {
               name: 'dynamic',
               code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/bleeps/src/BleepsProvider/BleepsProvider.dynamic.sandbox.md'))
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: '@arwes/patterns',
+      children: [
+        {
+          name: 'Puffs',
+          children: [
+            {
+              name: 'basic',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/patterns/src/Puffs/Puffs.basic.sandbox.md'))
+            },
+            {
+              name: 'randomDirections',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/patterns/src/Puffs/Puffs.randomDirections.sandbox.md'))
             }
           ]
         }
