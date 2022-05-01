@@ -8,7 +8,7 @@ export interface PuffsProps {
   quantity: number
   interval?: number
   duration?: number
-  margin?: number
+  padding?: number
   /** Position X offset fixed and variation values. */
   xOffset?: [number, number]
   /** Position Y offset fixed and variation values. */

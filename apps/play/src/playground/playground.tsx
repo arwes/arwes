@@ -365,6 +365,19 @@ const settings: NTPlaygroundSettings = {
               code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/patterns/src/Puffs/Puffs.randomDirections.sandbox.md'))
             }
           ]
+        },
+        {
+          name: 'Dots',
+          children: [
+            {
+              name: 'basic',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/patterns/src/Dots/Dots.basic.sandbox.md'))
+            },
+            {
+              name: 'variation',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/patterns/src/Dots/Dots.variation.sandbox.md'))
+            }
+          ]
         }
       ]
     }

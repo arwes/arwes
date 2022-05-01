@@ -6,11 +6,11 @@ import { PuffsProps } from './Puffs.types';
 
 const defaultProps: Required<Pick<
 PuffsProps,
-'interval' | 'duration' | 'margin' | 'xOffset' | 'yOffset' | 'radiusInitial' | 'radiusOffset'
+'interval' | 'duration' | 'padding' | 'xOffset' | 'yOffset' | 'radiusInitial' | 'radiusOffset'
 >> = {
   interval: 5,
   duration: 4,
-  margin: 50,
+  padding: 50,
   xOffset: [0, 0],
   yOffset: [-10, -100],
   radiusInitial: 4,
@@ -26,7 +26,7 @@ const PuffsComponent = (props: PuffsProps): ReactElement => {
     quantity,
     interval,
     duration,
-    margin,
+    padding,
     xOffset,
     yOffset,
     radiusInitial,
@@ -50,8 +50,8 @@ const PuffsComponent = (props: PuffsProps): ReactElement => {
       canvas.height = height;
 
       const puffs = Array(quantity).fill(0).map(() => {
-        const x = margin + (Math.random() * (width - (margin * 2)));
-        const y = margin + (Math.random() * (height - (margin * 2)));
+        const x = padding + (Math.random() * (width - (padding * 2)));
+        const y = padding + (Math.random() * (height - (padding * 2)));
         const r = radiusInitial;
 
         const xo = xOffset[0] + (Math.random() * xOffset[1]);
