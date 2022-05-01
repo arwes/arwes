@@ -361,6 +361,10 @@ const settings: NTPlaygroundSettings = {
               code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/patterns/src/Puffs/Puffs.basic.sandbox.md'))
             },
             {
+              name: 'customDirection',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/patterns/src/Puffs/Puffs.customDirection.sandbox.md'))
+            },
+            {
               name: 'randomDirections',
               code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/patterns/src/Puffs/Puffs.randomDirections.sandbox.md'))
             }
