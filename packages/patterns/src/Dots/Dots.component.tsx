@@ -3,34 +3,7 @@ import { animate } from 'motion';
 import { cx, mergeRefs } from '@arwes/tools';
 
 import { DotsPropsOrigin, DotsProps } from './Dots.types';
-
-const getDistanceBetweenTwoPoints = (x1: number, y1: number, x2: number, y2: number): number => {
-  return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
-};
-
-const getDistanceFromOriginProgress = (
-  width: number,
-  height: number,
-  x1: number,
-  y1: number,
-  origin: DotsPropsOrigin
-): number => {
-  switch (origin) {
-    case 'left': return x1 / width;
-    case 'right': return 1 - x1 / width;
-    case 'top': return y1 / height;
-    case 'bottom': return 1 - y1 / height;
-    case 'center': origin = [0.5, 0.5]; break;
-  }
-
-  const [x2Progress, y2Progress] = origin;
-  const x2 = width * x2Progress;
-  const y2 = height * y2Progress;
-  const distanceFromOrigin = getDistanceBetweenTwoPoints(x1, y1, x2, y2);
-  const containerLength = getDistanceBetweenTwoPoints(0, 0, width, height);
-
-  return distanceFromOrigin / containerLength;
-};
+import { getDistanceFromOriginToCornerPercentage } from './getDistanceFromOriginToCornerPercentage';
 
 const getAlpha = (
   width: number,
@@ -40,10 +13,8 @@ const getAlpha = (
   origin: DotsPropsOrigin,
   progress: number
 ): number => {
-  const distanceFromOriginProgress = getDistanceFromOriginProgress(width, height, x, y, origin);
-
-  const alphaProgress = progress / distanceFromOriginProgress;
-
+  const distanceFromOriginPercentage = getDistanceFromOriginToCornerPercentage(width, height, x, y, origin);
+  const alphaProgress = progress / distanceFromOriginPercentage;
   return Math.max(0, Math.min(1, alphaProgress));
 };
 
@@ -51,7 +22,7 @@ const defaultProps: Required<Pick<DotsProps, 'type' | 'duration' | 'distance' | 
   type: 'box',
   duration: 2,
   distance: 30,
-  size: 2,
+  size: 4,
   origin: 'center'
 };
 
@@ -94,9 +65,10 @@ const DotsComponent = (props: DotsProps): ReactElement => {
 
         for (let yIndex = 0; yIndex < yLength; yIndex++) {
           const y = (yMargin / 2) + (yIndex * distance);
+          const alpha = getAlpha(width, height, x, y, origin, progress);
 
           ctx.beginPath();
-          ctx.globalAlpha = getAlpha(width, height, x, y, origin, progress);
+          ctx.globalAlpha = alpha;
           if (type === 'box') {
             ctx.rect(x - (size / 2), y - (size / 2), size, size);
           }
@@ -110,7 +82,7 @@ const DotsComponent = (props: DotsProps): ReactElement => {
       }
     };
 
-    const animationControl = animate(runFrame, { duration, easing: 'linear' });
+    const animationControl = animate(runFrame, { duration, easing: 'ease-in' });
 
     return () => {
       animationControl?.cancel();
