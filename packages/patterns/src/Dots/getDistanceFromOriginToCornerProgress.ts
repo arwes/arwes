@@ -4,7 +4,7 @@ const getDistanceBetweenTwoPoints = (x1: number, y1: number, x2: number, y2: num
   return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 };
 
-const getDistanceFromOriginToCornerPercentage = (
+const getDistanceFromOriginToCornerProgress = (
   width: number,
   height: number,
   x1: number,
@@ -31,4 +31,4 @@ const getDistanceFromOriginToCornerPercentage = (
   return distanceFromOrigin / maxDistanceToCorner;
 };
 
-export { getDistanceFromOriginToCornerPercentage };
+export { getDistanceFromOriginToCornerProgress };

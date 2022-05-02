@@ -6,9 +6,12 @@ export interface DotsProps {
   elementRef?: ForwardedRef<HTMLCanvasElement>
   className?: string
   style?: CSSProperties
+  /** Dot color. */
   color: string
   /** Shape of the dot. */
   type?: 'box' | 'circle'
+  /** Render animations. */
+  active?: boolean
   /** Transition duration in seconds. */
   duration?: number
   /** Distance between each dot center in pixels. */
@@ -22,4 +25,8 @@ export interface DotsProps {
    * [0.2, 0.8] is x=20% and y=80% as origin.
    */
   origin?: DotsPropsOrigin
+  /**
+   * Invert the animation to work "to origin" point instead "from origin" point.
+   */
+  originInverted?: boolean
 };

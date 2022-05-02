@@ -14,6 +14,7 @@
     "@arwes/core": "^1.0.0-alpha.19",
     "@arwes/styles": "^1.0.0-alpha.19",
     "@arwes/theme": "^1.0.0-alpha.19",
+    "@arwes/patterns": "^1.0.0-alpha.19",
     "@arwes/tools": "^1.0.0-alpha.19",
     "@mdi/js": "^6.6.95",
     "@mdi/react": "^1.5.0",

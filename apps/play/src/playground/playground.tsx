@@ -354,6 +354,23 @@ const settings: NTPlaygroundSettings = {
       name: '@arwes/patterns',
       children: [
         {
+          name: 'Dots',
+          children: [
+            {
+              name: 'basic',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/patterns/src/Dots/Dots.basic.sandbox.md'))
+            },
+            {
+              name: 'variation',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/patterns/src/Dots/Dots.variation.sandbox.md'))
+            },
+            {
+              name: 'tiles',
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/patterns/src/Dots/Dots.tiles.sandbox.md'))
+            }
+          ]
+        },
+        {
           name: 'Puffs',
           children: [
             {
@@ -367,19 +384,6 @@ const settings: NTPlaygroundSettings = {
             {
               name: 'randomDirections',
               code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/patterns/src/Puffs/Puffs.randomDirections.sandbox.md'))
-            }
-          ]
-        },
-        {
-          name: 'Dots',
-          children: [
-            {
-              name: 'basic',
-              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/patterns/src/Dots/Dots.basic.sandbox.md'))
-            },
-            {
-              name: 'variation',
-              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/patterns/src/Dots/Dots.variation.sandbox.md'))
             }
           ]
         }

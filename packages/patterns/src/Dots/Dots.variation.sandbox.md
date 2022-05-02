@@ -1,9 +1,16 @@
 ```tsx
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import { render } from 'react-dom';
 import { Dots } from '@arwes/patterns';
 
 const Sandbox = (): ReactElement => {
+  const [active, setActive] = useState(true);
+
+  useEffect(() => {
+    const iid = setInterval(() => setActive(active => !active), 1200);
+    return () => clearInterval(iid);
+  }, []);
+
   return (
     <div style={{
       position: 'relative',
@@ -11,12 +18,15 @@ const Sandbox = (): ReactElement => {
       height: '80vh'
     }}>
       <Dots
-        color='hsla(60, 100%, 75%, 0.5)'
+        color='hsla(60, 100%, 75%, 0.25)'
         type='circle'
-        duration={4}
-        distance={30}
-        size={4}
+        active={active}
+        duration={1}
+        distance={20}
+        size={2}
+        // x=0% y=100% or left-bottom corner.
         origin={[0, 1]}
+        originInverted
       />
     </div>
   );

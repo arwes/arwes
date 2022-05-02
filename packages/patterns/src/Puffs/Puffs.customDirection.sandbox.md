@@ -11,7 +11,7 @@ const Sandbox = (): ReactElement => {
       height: '80vh'
     }}>
       <Puffs
-        color='hsla(0, 0%, 75%, 0.5)'
+        color='hsla(180, 100%, 75%, 0.5)'
         quantity={100}
         interval={3}
         duration={2}

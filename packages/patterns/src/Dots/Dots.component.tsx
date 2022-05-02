@@ -2,24 +2,12 @@ import React, { ReactElement, useRef, useEffect } from 'react';
 import { animate } from 'motion';
 import { cx, mergeRefs } from '@arwes/tools';
 
-import { DotsPropsOrigin, DotsProps } from './Dots.types';
-import { getDistanceFromOriginToCornerPercentage } from './getDistanceFromOriginToCornerPercentage';
+import { DotsProps } from './Dots.types';
+import { getDistanceFromOriginToCornerProgress } from './getDistanceFromOriginToCornerProgress';
 
-const getAlpha = (
-  width: number,
-  height: number,
-  x: number,
-  y: number,
-  origin: DotsPropsOrigin,
-  progress: number
-): number => {
-  const distanceFromOriginPercentage = getDistanceFromOriginToCornerPercentage(width, height, x, y, origin);
-  const alphaProgress = progress / distanceFromOriginPercentage;
-  return Math.max(0, Math.min(1, alphaProgress));
-};
-
-const defaultProps: Required<Pick<DotsProps, 'type' | 'duration' | 'distance' | 'size' | 'origin'>> = {
+const defaultProps: Required<Pick<DotsProps, 'active' | 'type' | 'duration' | 'distance' | 'size' | 'origin'>> = {
   type: 'box',
+  active: true,
   duration: 2,
   distance: 30,
   size: 4,
@@ -33,10 +21,12 @@ const DotsComponent = (props: DotsProps): ReactElement => {
     style,
     color,
     type,
+    active,
     duration,
     distance,
     size,
-    origin
+    origin,
+    originInverted
   } = { ...defaultProps, ...props };
 
   const elementRef = useRef<HTMLCanvasElement>(null);
@@ -45,8 +35,8 @@ const DotsComponent = (props: DotsProps): ReactElement => {
     const canvas = elementRef.current as HTMLCanvasElement;
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
 
-    const width = canvas.offsetWidth;
-    const height = canvas.offsetHeight;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
 
     canvas.width = width;
     canvas.height = height;
@@ -65,16 +55,27 @@ const DotsComponent = (props: DotsProps): ReactElement => {
 
         for (let yIndex = 0; yIndex < yLength; yIndex++) {
           const y = (yMargin / 2) + (yIndex * distance);
-          const alpha = getAlpha(width, height, x, y, origin, progress);
+
+          const distanceFromOriginProgress =
+            getDistanceFromOriginToCornerProgress(width, height, x, y, origin);
+
+          const distancePercentage = (active && originInverted) || (!active && !originInverted)
+            ? 1 - distanceFromOriginProgress
+            : distanceFromOriginProgress;
+
+          const alphaProgress = progress / distancePercentage;
+          const alpha = Math.max(0, Math.min(1, alphaProgress));
 
           ctx.beginPath();
-          ctx.globalAlpha = alpha;
+          ctx.globalAlpha = active ? alpha : 1 - alpha;
+
           if (type === 'box') {
             ctx.rect(x - (size / 2), y - (size / 2), size, size);
           }
           else {
             ctx.arc(x, y, size, 0, 2 * Math.PI);
           }
+
           ctx.fillStyle = color;
           ctx.fill();
           ctx.closePath();
@@ -82,12 +83,12 @@ const DotsComponent = (props: DotsProps): ReactElement => {
       }
     };
 
-    const animationControl = animate(runFrame, { duration, easing: 'ease-in' });
+    const animationControl = animate(runFrame, { duration, easing: 'ease-in-out' });
 
     return () => {
       animationControl?.cancel();
     };
-  }, []);
+  }, [active]);
 
   return (
     <canvas

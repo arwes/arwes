@@ -43,8 +43,8 @@ const PuffsComponent = (props: PuffsProps): ReactElement => {
     let timeoutId: number | undefined;
 
     const render = (): void => {
-      const width = canvas.offsetWidth;
-      const height = canvas.offsetHeight;
+      const width = canvas.clientWidth;
+      const height = canvas.clientHeight;
 
       canvas.width = width;
       canvas.height = height;
