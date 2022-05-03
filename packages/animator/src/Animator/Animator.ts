@@ -20,7 +20,7 @@ import type {
 import { AnimatorContext } from '../utils/AnimatorContext/index';
 import { AnimatorGeneralContext } from '../utils/AnimatorGeneralContext/index';
 import { createAnimatorSystem } from '../utils/createAnimatorSystem/index';
-import { animatorDefaults } from './defaults';
+import { ANIMATOR_DEFAULT_PROPS } from '../constants';
 
 interface AnimatorProps extends AnimatorSettings {
   root?: boolean
@@ -68,12 +68,12 @@ const Animator = (props: AnimatorProps): ReactElement => {
       const animatorGeneralSettings = animatorGeneralInterface?.getSettings();
 
       return {
-        ...animatorDefaults,
+        ...ANIMATOR_DEFAULT_PROPS,
         ...animatorGeneralSettings,
         ...settingsRef.current,
         ...dynamicSettingsRef.current,
         duration: {
-          ...animatorDefaults.duration,
+          ...ANIMATOR_DEFAULT_PROPS.duration,
           ...animatorGeneralSettings?.duration,
           ...settingsRef.current?.duration,
           ...dynamicSettingsRef.current?.duration
