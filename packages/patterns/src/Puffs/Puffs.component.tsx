@@ -1,15 +1,15 @@
 import React, { ReactElement, useRef, useEffect } from 'react';
 import { animate } from 'motion';
 import { cx, mergeRefs } from '@arwes/tools';
+import { ANIMATOR_DEFAULT_KEYS, AnimatorSystemNode, useAnimator } from '@arwes/animator';
 
 import { PuffsProps } from './Puffs.types';
 
+const { ENTERING, EXITING } = ANIMATOR_DEFAULT_KEYS;
+
 const defaultProps: Required<Pick<
-PuffsProps,
-'interval' | 'duration' | 'padding' | 'xOffset' | 'yOffset' | 'radiusInitial' | 'radiusOffset'
+PuffsProps, 'padding' | 'xOffset' | 'yOffset' | 'radiusInitial' | 'radiusOffset'
 >> = {
-  interval: 5,
-  duration: 4,
   padding: 50,
   xOffset: [0, 0],
   yOffset: [-10, -100],
@@ -17,37 +17,59 @@ PuffsProps,
   radiusOffset: [4, 40]
 };
 
-const PuffsComponent = (props: PuffsProps): ReactElement => {
+const Puffs = (props: PuffsProps): ReactElement => {
+  const propsFull = { ...defaultProps, ...props };
   const {
     elementRef: elementRefExternal,
     className,
-    style,
-    color,
-    quantity,
-    interval,
-    duration,
-    padding,
-    xOffset,
-    yOffset,
-    radiusInitial,
-    radiusOffset
-  } = { ...defaultProps, ...props };
+    style
+  } = propsFull;
 
+  const animator = useAnimator();
   const elementRef = useRef<HTMLCanvasElement>(null);
+  const propsFullRef = useRef(propsFull);
+
+  propsFullRef.current = propsFull;
 
   useEffect(() => {
-    const canvas = elementRef.current as HTMLCanvasElement;
-    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+    if (!animator) {
+      return;
+    }
 
     let animationControl: { cancel: () => void } | undefined;
-    let timeoutId: number | undefined;
 
-    const render = (): void => {
+    const cancelAnimationSubscriptions = (): void => {
+      animationControl?.cancel();
+    };
+
+    const animatorSubscription = (node: AnimatorSystemNode): void => {
+      const state = node.getState();
+
+      if (state !== ENTERING && state !== EXITING) {
+        return;
+      }
+
+      cancelAnimationSubscriptions();
+
+      const active = state === ENTERING;
+      const { duration } = node.control.getSettings();
+      const transitionDuration = (active ? duration?.enter : duration?.exit) || 0;
+
+      const canvas = elementRef.current as HTMLCanvasElement;
+      const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+
+      const {
+        color,
+        quantity,
+        padding,
+        xOffset,
+        yOffset,
+        radiusInitial,
+        radiusOffset
+      } = propsFullRef.current;
+
       const width = canvas.clientWidth;
       const height = canvas.clientHeight;
-
-      canvas.width = width;
-      canvas.height = height;
 
       const puffs = Array(quantity).fill(0).map(() => {
         const x = padding + (Math.random() * (width - (padding * 2)));
@@ -61,7 +83,10 @@ const PuffsComponent = (props: PuffsProps): ReactElement => {
         return { x, y, r, xo, yo, ro };
       });
 
-      const runFrame = (progress: number): void => {
+      const draw = (progress: number): void => {
+        canvas.width = width;
+        canvas.height = height;
+
         ctx.clearRect(0, 0, width, height);
 
         // From: 0 at 0% to 1 at 50% to 0 at 100%.
@@ -84,17 +109,16 @@ const PuffsComponent = (props: PuffsProps): ReactElement => {
         });
       };
 
-      animationControl = animate(runFrame, { duration });
-      timeoutId = window.setTimeout(() => render(), interval * 1000);
+      animationControl = animate(draw, { duration: transitionDuration });
     };
 
-    render();
+    animator.node.subscribers.add(animatorSubscription);
 
     return () => {
-      animationControl?.cancel();
-      window.clearTimeout(timeoutId);
+      animator.node.subscribers.delete(animatorSubscription);
+      cancelAnimationSubscriptions();
     };
-  }, [color, quantity]);
+  }, [animator]);
 
   return (
     <canvas
@@ -116,7 +140,7 @@ const PuffsComponent = (props: PuffsProps): ReactElement => {
   );
 };
 
-PuffsComponent.defaultProps = defaultProps;
+Puffs.defaultProps = defaultProps;
 
 export type { PuffsProps };
-export { PuffsComponent };
+export { Puffs };

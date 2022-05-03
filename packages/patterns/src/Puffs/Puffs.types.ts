@@ -4,19 +4,14 @@ export interface PuffsProps {
   elementRef?: ForwardedRef<HTMLCanvasElement>
   className?: string
   style?: CSSProperties
+  /**
+   * Puff color.
+   */
   color: string
   /**
    * Number of puffs to create.
    */
   quantity: number
-  /**
-   * Time interval to animate all puffs.
-   */
-  interval?: number
-  /**
-   * Duration of the animation to appear and disappear the puffs.
-   */
-  duration?: number
   /**
    * Extra padding space in pixels of the canvas so the puffs have space to
    * move when animating.

@@ -1,4 +1,4 @@
-import { CSSProperties, ForwardedRef } from 'react';
+import type { CSSProperties, ForwardedRef } from 'react';
 
 export type DotsPropsOrigin = 'left' | 'right' | 'top' | 'bottom' | 'center' | [number, number];
 
@@ -6,17 +6,21 @@ export interface DotsProps {
   elementRef?: ForwardedRef<HTMLCanvasElement>
   className?: string
   style?: CSSProperties
-  /** Dot color. */
+  /**
+   * Dot color.
+   */
   color: string
-  /** Shape of the dot. */
+  /**
+   * Shape of the dot.
+   */
   type?: 'box' | 'circle'
-  /** Render animations. */
-  active?: boolean
-  /** Transition duration in seconds. */
-  duration?: number
-  /** Distance between each dot center in pixels. */
+  /**
+   * Distance between each dot center in pixels.
+   */
   distance?: number
-  /** Dot size in pixels. */
+  /**
+   * Dot size in pixels.
+   */
   size?: number
   /**
    * Rectangle container axis or point [x, y] as percentages of the rectangle
