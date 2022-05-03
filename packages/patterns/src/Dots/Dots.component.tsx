@@ -77,8 +77,10 @@ const Dots = (props: DotsProps): ReactElement => {
         const xMargin = width % distance;
         const yMargin = height % distance;
 
-        canvas.width = width;
-        canvas.height = height;
+        if (canvas.width !== width || canvas.height !== height) {
+          canvas.width = width;
+          canvas.height = height;
+        }
 
         ctx.clearRect(0, 0, width, height);
 

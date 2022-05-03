@@ -1,7 +1,3 @@
-// TODO: Handle canvas resizing.
-// TODO: Allow only one set of animation per interval.
-// TODO: Allow empty space between intervals.
-
 import React, { ReactElement, useRef, useEffect } from 'react';
 import { animate } from 'motion';
 import { cx, mergeRefs } from '@arwes/tools';
@@ -9,9 +5,7 @@ import { ANIMATOR_DEFAULT_KEYS, AnimatorSystemNode, useAnimator } from '@arwes/a
 
 import { PuffsProps } from './Puffs.types';
 
-interface AnimateControl {
-  cancel: () => void
-}
+type AnimateControl = ReturnType<typeof animate>;
 
 interface Puff {
   x: number
@@ -24,20 +18,21 @@ interface Puff {
 
 const { ENTERING, ENTERED, EXITING, EXITED } = ANIMATOR_DEFAULT_KEYS;
 
-const easeOutSine = (initial: number, change: number, duration: number, time: number): number => {
-  return change * Math.sin(time / duration * (Math.PI / 2)) + initial;
-};
+const easeOutSine = (valueInitial: number, valueChange: number, duration: number, time: number): number =>
+  valueChange * Math.sin(time / duration * (Math.PI / 2)) + valueInitial;
 
-const mmo01 = (value: number): number => Math.min(1, Math.max(0, value === 1 ? 1 : value % 1));
+const mmo01 = (value: number): number =>
+  Math.min(1, Math.max(0, value === 1 ? 1 : value % 1));
 
 const defaultProps: Required<Pick<
-PuffsProps, 'padding' | 'xOffset' | 'yOffset' | 'radiusInitial' | 'radiusOffset'
+PuffsProps, 'padding' | 'xOffset' | 'yOffset' | 'radiusInitial' | 'radiusOffset' | 'sets'
 >> = {
   padding: 50,
   xOffset: [0, 0],
   yOffset: [-10, -100],
   radiusInitial: 4,
-  radiusOffset: [4, 40]
+  radiusOffset: [4, 40],
+  sets: 5
 };
 
 const Puffs = (props: PuffsProps): ReactElement => {
@@ -64,10 +59,12 @@ const Puffs = (props: PuffsProps): ReactElement => {
 
     let canvasControl: AnimateControl | undefined;
     let puffsControl: AnimateControl | undefined;
+    let puffsEmptyTimeoutId: number | undefined;
 
     const cancelAnimationSubscriptions = (): void => {
       canvasControl?.cancel();
       puffsControl?.cancel();
+      window.clearTimeout(puffsEmptyTimeoutId);
     };
 
     const animatorSubscription = (node: AnimatorSystemNode): void => {
@@ -85,13 +82,14 @@ const Puffs = (props: PuffsProps): ReactElement => {
             xOffset,
             yOffset,
             radiusInitial,
-            radiusOffset
+            radiusOffset,
+            sets
           } = propsFullRef.current;
 
-          const width = canvas.clientWidth;
-          const height = canvas.clientHeight;
+          const puffsSetQuantity = Math.round(quantity / sets);
+          const puffsSetOffset = 1 / sets;
 
-          const createPuff = (): Puff => {
+          const createPuff = (width: number, height: number): Puff => {
             const x = padding + (Math.random() * (width - (padding * 2)));
             const y = padding + (Math.random() * (height - (padding * 2)));
             const r = radiusInitial;
@@ -103,9 +101,21 @@ const Puffs = (props: PuffsProps): ReactElement => {
             return { x, y, r, xo, yo, ro };
           };
 
+          const createPuffsSets = (width: number, height: number): Puff[][] => {
+            return Array(sets)
+              .fill(null)
+              .map(() =>
+                Array(puffsSetQuantity)
+                  .fill(null)
+                  .map(() => createPuff(width, height))
+              );
+          };
+
           const drawPuffs = (puffs: Puff[], progress: number): void => {
-            // From: 0 at 0% to 1 at 50% to 0 at 100%.
-            ctx.globalAlpha = progress <= 0.5 ? progress * 2 : -2 * progress + 2;
+            // From: 0 at 0%, 1 at 50%, 0 at 100%.
+            ctx.globalAlpha = progress <= 0.5
+              ? progress * 2
+              : -2 * progress + 2;
 
             puffs.forEach(puff => {
               const x = puff.x + (progress * puff.xo);
@@ -124,22 +134,29 @@ const Puffs = (props: PuffsProps): ReactElement => {
             });
           };
 
-          const puffsSetQuantity = Math.round(quantity / 2);
-          const puffs1 = Array(puffsSetQuantity).fill(null).map(createPuff);
-          const puffs2 = Array(puffsSetQuantity).fill(null).map(createPuff);
-          const puffs3 = Array(puffsSetQuantity).fill(null).map(createPuff);
-          const puffs4 = Array(puffsSetQuantity).fill(null).map(createPuff);
+          let puffsSets: Puff[][] = [];
 
           const draw = (intervalProgress: number): void => {
-            canvas.width = width;
-            canvas.height = height;
+            const width = canvas.clientWidth;
+            const height = canvas.clientHeight;
+            const isSizeDiff = canvas.width !== width || canvas.height !== height;
+
+            if (isSizeDiff) {
+              canvas.width = width;
+              canvas.height = height;
+            }
+
+            if (isSizeDiff || !puffsSets.length) {
+              puffsSets = createPuffsSets(width, height);
+            }
 
             ctx.clearRect(0, 0, width, height);
 
-            drawPuffs(puffs1, easeOutSine(0, 1, 1, mmo01(intervalProgress)));
-            drawPuffs(puffs2, easeOutSine(0, 1, 1, mmo01(intervalProgress + 0.25)));
-            drawPuffs(puffs3, easeOutSine(0, 1, 1, mmo01(intervalProgress + 0.5)));
-            drawPuffs(puffs4, easeOutSine(0, 1, 1, mmo01(intervalProgress + 0.75)));
+            puffsSets.forEach((puffs, index) => {
+              const puffsOffset = puffsSetOffset * index;
+              const puffsProgress = mmo01(intervalProgress + puffsOffset);
+              drawPuffs(puffs, easeOutSine(0, 1, 1, puffsProgress));
+            });
           };
 
           canvasControl = animate(
@@ -148,11 +165,21 @@ const Puffs = (props: PuffsProps): ReactElement => {
             { duration: duration?.enter }
           );
 
-          puffsControl = animate(draw, {
-            duration: duration?.interval,
-            repeat: Infinity,
-            easing: 'linear'
-          });
+          const runPuffsAnimation = (): void => {
+            puffsControl = animate(
+              (progress: number): void => {
+                draw(progress);
+                if (progress >= 1) {
+                  const emptyDuration = (duration?.intervalPause || 0) * 1000;
+                  window.clearTimeout(puffsEmptyTimeoutId);
+                  window.setTimeout(runPuffsAnimation, emptyDuration);
+                }
+              },
+              { duration: duration?.interval, easing: 'linear' }
+            );
+          };
+
+          runPuffsAnimation();
 
           break;
         }

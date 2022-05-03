@@ -38,8 +38,12 @@ export interface PuffsProps {
   /**
    * Puff radius offset fixed and variation values in pixels.
    * @example
-   * [4, 8] means the puff radius will be at least 4 pixels plus a random value
-   * between 0 and 8 more.
+   * [4, 8] means the puff radius offset will be at least 4 pixels plus a random
+   * value between 0 and 8 more.
    */
   radiusOffset?: [number, number]
+  /**
+   * Sets of puffs per interval animation.
+   */
+  sets?: number
 };
