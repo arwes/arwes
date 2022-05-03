@@ -26,7 +26,7 @@ const Sandbox = (): ReactElement => {
           parent container fully. */}
         <Puffs
           color='hsla(180, 100%, 75%, 0.5)'
-          quantity={50}
+          quantity={100}
         />
       </div>
     </Animator>
