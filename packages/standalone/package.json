@@ -52,7 +52,7 @@
     "@arwes/animator": "^1.0.0-alpha.19",
     "@arwes/animated": "^1.0.0-alpha.19",
     "@arwes/bleeps": "^1.0.0-alpha.19",
-    "@arwes/patterns": "^1.0.0-alpha.19",
+    "@arwes/bgs": "^1.0.0-alpha.19",
     "@arwes/core": "^1.0.0-alpha.19",
     "@arwes/arwes": "^1.0.0-alpha.19",
     "tslib": "^2.3.1"

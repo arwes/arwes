@@ -2,7 +2,7 @@
 import React, { ReactElement } from 'react';
 import { render } from 'react-dom';
 import { Animator } from '@arwes/animator';
-import { Puffs } from '@arwes/patterns';
+import { Puffs } from '@arwes/bgs';
 
 const Sandbox = (): ReactElement => {
   return (

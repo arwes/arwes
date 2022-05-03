@@ -34,10 +34,32 @@ img {
   background: radial-gradient(50% 50% at 50% 50%, #04252B 0%, #002424 0.01%, #001515 100%);
 }
 
+/* BG */
+
+.bg {
+  z-index: 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  width: calc(100% - 40px);
+  max-width: 885px;
+}
+
+.bg img {
+  width: 100%;
+  height: 100%;
+}
+
+.arwes-patterns-dots {
+  z-index: 1;
+}
+
 /* CONTENT */
 
 .main {
-  z-index: 1;
+  z-index: 2;
   position: relative;
   padding: 20px;
   text-align: center;
@@ -77,6 +99,7 @@ img {
 /* FOOTER */
 
 .footer {
+  z-index: 3;
   position: absolute;
   left: 20px;
   right: 20px;
@@ -137,23 +160,6 @@ img {
 .button--secondary:hover {
   color: #f6f6a2;
   background: rgba(204, 204, 0, 0.08);
-}
-
-/* BG */
-
-.bg {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  transform-origin: center;
-  width: calc(100% - 40px);
-  max-width: 885px;
-}
-
-.bg img {
-  width: 100%;
-  height: 100%;
 }
 
 /* TABLET UP */

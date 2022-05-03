@@ -140,8 +140,8 @@ const settings: NTPlaygroundSettings = {
       code: require('!raw-loader?esModule=false!@arwes/bleeps/build/types/index.d.ts')
     },
     {
-      filename: 'file:///node_modules/@arwes/patterns/index.d.ts',
-      code: require('!raw-loader?esModule=false!@arwes/patterns/build/types/index.d.ts')
+      filename: 'file:///node_modules/@arwes/bgs/index.d.ts',
+      code: require('!raw-loader?esModule=false!@arwes/bgs/build/types/index.d.ts')
     }
   ],
   sandboxes: [
@@ -351,22 +351,22 @@ const settings: NTPlaygroundSettings = {
       ]
     },
     {
-      name: '@arwes/patterns',
+      name: '@arwes/bgs',
       children: [
         {
           name: 'Dots',
           children: [
             {
               name: 'basic',
-              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/patterns/src/Dots/Dots.basic.sandbox.md'))
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/bgs/src/Dots/Dots.basic.sandbox.md'))
             },
             {
               name: 'variation',
-              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/patterns/src/Dots/Dots.variation.sandbox.md'))
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/bgs/src/Dots/Dots.variation.sandbox.md'))
             },
             {
               name: 'tiles',
-              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/patterns/src/Dots/Dots.tiles.sandbox.md'))
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/bgs/src/Dots/Dots.tiles.sandbox.md'))
             }
           ]
         },
@@ -375,15 +375,15 @@ const settings: NTPlaygroundSettings = {
           children: [
             {
               name: 'basic',
-              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/patterns/src/Puffs/Puffs.basic.sandbox.md'))
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/bgs/src/Puffs/Puffs.basic.sandbox.md'))
             },
             {
               name: 'customDirection',
-              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/patterns/src/Puffs/Puffs.customDirection.sandbox.md'))
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/bgs/src/Puffs/Puffs.customDirection.sandbox.md'))
             },
             {
               name: 'randomDirections',
-              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/patterns/src/Puffs/Puffs.randomDirections.sandbox.md'))
+              code: getMdCode(require('!raw-loader?esModule=false!@repository/packages/bgs/src/Puffs/Puffs.randomDirections.sandbox.md'))
             }
           ]
         }

@@ -1,6 +1,6 @@
 {
-  "name": "patterns",
-  "root": "packages/patterns",
+  "name": "bgs",
+  "root": "packages/bgs",
   "targets": {
     "build": {
       "executor": "@nrwl/workspace:run-script",
