@@ -7,7 +7,7 @@ const Sandbox = (): ReactElement => {
   const [active, setActive] = useState(true);
 
   useEffect(() => {
-    const iid = setInterval(() => setActive(active => !active), 2200);
+    const iid = setInterval(() => setActive(active => !active), 2100);
     return () => clearInterval(iid);
   }, []);
 
@@ -20,7 +20,7 @@ const Sandbox = (): ReactElement => {
       {/* It creates a canvas element which will ocupy the positioned
         parent container fully. */}
       <Dots
-        color='hsla(180, 100%, 75%, 0.25)'
+        color='hsla(180, 100%, 75%, 0.4)'
         active={active}
         duration={2}
       />

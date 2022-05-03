@@ -15,39 +15,46 @@ const defaultProps: Required<Pick<DotsProps, 'active' | 'type' | 'duration' | 'd
 };
 
 const DotsComponent = (props: DotsProps): ReactElement => {
+  const propsFull = { ...defaultProps, ...props };
   const {
     elementRef: elementRefExternal,
     className,
     style,
-    color,
-    type,
     active,
-    duration,
-    distance,
-    size,
-    origin,
-    originInverted
-  } = { ...defaultProps, ...props };
+    duration
+  } = propsFull;
 
   const elementRef = useRef<HTMLCanvasElement>(null);
+  const propsFullRef = useRef(propsFull);
+
+  propsFullRef.current = propsFull;
 
   useEffect(() => {
     const canvas = elementRef.current as HTMLCanvasElement;
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
 
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
+    const draw = (progress: number): void => {
+      const {
+        color,
+        type,
+        distance,
+        size,
+        origin,
+        originInverted
+      } = propsFullRef.current;
 
-    canvas.width = width;
-    canvas.height = height;
+      const width = canvas.clientWidth;
+      const height = canvas.clientHeight;
 
-    const xLength = 1 + Math.floor(width / distance);
-    const yLength = 1 + Math.floor(height / distance);
+      const xLength = 1 + Math.floor(width / distance);
+      const yLength = 1 + Math.floor(height / distance);
 
-    const xMargin = width % distance;
-    const yMargin = height % distance;
+      const xMargin = width % distance;
+      const yMargin = height % distance;
 
-    const runFrame = (progress: number): void => {
+      canvas.width = width;
+      canvas.height = height;
+
       ctx.clearRect(0, 0, width, height);
 
       for (let xIndex = 0; xIndex < xLength; xIndex++) {
@@ -83,10 +90,21 @@ const DotsComponent = (props: DotsProps): ReactElement => {
       }
     };
 
-    const animationControl = animate(runFrame, { duration, easing: 'ease-in-out' });
+    const animationControl = animate(draw, { duration, easing: 'ease-in-out' });
 
-    return () => {
+    let resizeObserver: ResizeObserver | undefined;
+    if (window.ResizeObserver) {
+      resizeObserver = new window.ResizeObserver(() => {
+        if (active && animationControl.currentTime && animationControl.currentTime >= duration) {
+          draw(1);
+        }
+      });
+      resizeObserver.observe(canvas);
+    }
+
+    return (): void => {
       animationControl?.cancel();
+      resizeObserver?.disconnect();
     };
   }, [active]);
 
