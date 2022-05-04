@@ -27,7 +27,7 @@ interface CardProps {
 
 const createCardBaseStyles: StylesThemeCreator<CardProps> = (theme, props) => ({
   root: {
-    display: 'inline-block',
+    display: 'block',
     margin: theme.space,
     padding: theme.space,
     fontFamily: theme.fontFamily,
@@ -98,19 +98,19 @@ const Sandbox = (): ReactElement => {
   return (
     <ThemeProvider theme={appTheme}>
       <Card title='useThemeStyles'>
-        Arwes styles useThemeStyles hook with default styles
+        default styles
       </Card>
       <Card title='useThemeStyles' styles={customPlainStyles}>
-        Arwes styles useThemeStyles hook with custom plain styles
+        custom plain styles
       </Card>
       <Card title='useThemeStyles' styles={customThemeStyles}>
-        Arwes styles useThemeStyles hook with custom theme styles
+        custom theme styles
       </Card>
       <Card title='useThemeStyles' disabled>
-        Arwes styles useThemeStyles hook with props customization
+        props customization
       </Card>
       <Card title='useThemeStyles' styles={false}>
-        Arwes styles useThemeStyles hook with removed styles
+        removed styles
       </Card>
     </ThemeProvider>
   );

@@ -14,7 +14,7 @@ interface CardProps {
 
 const createCardBaseStyles: StylesCreator<CardProps> = props => ({
   root: {
-    display: 'inline-block',
+    display: 'block',
     margin: 20,
     padding: 20,
     fontFamily: 'monospace',
@@ -75,19 +75,19 @@ const Sandbox = (): ReactElement => {
   return (
     <Fragment>
       <Card title='useStyles'>
-        Arwes styles useStyles hook with default styles
+        default styles
       </Card>
       <Card title='useStyles' styles={customPlainStyles}>
-        Arwes styles useStyles hook with custom plain styles
+        custom plain styles
       </Card>
       <Card title='useStyles' styles={customFunctionStyles}>
-        Arwes styles useStyles hook with custom function styles
+        custom function styles
       </Card>
       <Card title='useStyles' disabled>
-        Arwes styles useStyles hook with props customization
+        props customization
       </Card>
       <Card title='useStyles' styles={false}>
-        Arwes styles useStyles hook with removed styles
+        removed styles
       </Card>
     </Fragment>
   );

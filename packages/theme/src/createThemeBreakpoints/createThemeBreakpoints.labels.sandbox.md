@@ -19,24 +19,18 @@ const Sandbox = (): ReactElement => {
         styles={{
           '.box': {
             margin: 20,
-            width: 100,
-            height: 100,
-            backgroundColor: '#0ff',
+            width: 150,
+            height: 150,
+            backgroundColor: 'cyan',
 
             [bps.up('small')]: {
-              width: 200,
-              height: 200,
-              backgroundColor: '#f0f'
+              backgroundColor: 'magenta'
             },
             [bps.up('medium')]: {
-              width: 300,
-              height: 300,
-              backgroundColor: '#ff0'
+              backgroundColor: 'yellow'
             },
             [bps.up('large')]: {
-              width: 400,
-              height: 400,
-              backgroundColor: '#0f0'
+              backgroundColor: 'green'
             },
 
             [bps.down('medium')]: {

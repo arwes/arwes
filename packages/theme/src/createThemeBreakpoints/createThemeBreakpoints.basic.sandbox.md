@@ -15,24 +15,18 @@ const Sandbox = (): ReactElement => {
         styles={{
           '.box': {
             margin: 20,
-            width: 100,
-            height: 100,
-            backgroundColor: '#0ff',
+            width: 150,
+            height: 150,
+            backgroundColor: 'cyan',
 
             [bps.up('400px')]: {
-              width: 200,
-              height: 200,
-              backgroundColor: '#f0f'
+              backgroundColor: 'magenta'
             },
             [bps.up('800px')]: {
-              width: 300,
-              height: 300,
-              backgroundColor: '#ff0'
+              backgroundColor: 'yellow'
             },
             [bps.up('1200px')]: {
-              width: 400,
-              height: 400,
-              backgroundColor: '#0f0'
+              backgroundColor: 'green'
             },
 
             [bps.down('800px')]: {
@@ -40,7 +34,7 @@ const Sandbox = (): ReactElement => {
             },
 
             [bps.between('800px', '1200px')]: {
-              transform: 'rotate(45deg)'
+              transform: 'skew(-10deg)'
             }
           }
         }}
