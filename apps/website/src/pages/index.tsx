@@ -1,6 +1,8 @@
 import React, { Fragment, ReactElement, useEffect } from 'react';
 import Head from 'next/head';
 import { animate } from 'motion';
+import { Animator } from '@arwes/animator';
+import { Dots } from '@arwes/bgs';
 
 const $$ = (selector: string): HTMLElement[] => Array.from(document.querySelectorAll(selector));
 
@@ -81,6 +83,14 @@ const PageIndex = (): ReactElement => {
             src='/assets/images/arwesLogoImage.svg'
           />
         </div>
+        <Animator duration={{ enter: 0.75, exit: 0.75 }}>
+          <Dots
+            color='hsla(180, 29%, 72%, 0.04)'
+            size={5}
+            distance={30}
+            originInverted
+          />
+        </Animator>
       </div>
     </Fragment>
   );

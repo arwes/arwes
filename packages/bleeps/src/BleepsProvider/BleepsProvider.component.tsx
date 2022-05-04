@@ -9,8 +9,8 @@ import type {
   BleepsSetup
 } from '../types';
 import { BLEEPS_CATEGORIES } from '../constants';
-import { BleepsContext } from '../BleepsContext';
-import { createOrUpdateBleeps } from '../utils/createOrUpdateBleeps';
+import { BleepsContext } from '../BleepsContext/index';
+import { createOrUpdateBleeps } from '../utils/createOrUpdateBleeps/index';
 
 interface BleepsProviderProps {
   settings: {

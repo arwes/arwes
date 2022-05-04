@@ -6,10 +6,10 @@ import type {
   BleepsGenerics
 } from '../../types';
 import { BLEEPS_CATEGORIES } from '../../constants';
-import { createBleep } from '../createBleep';
-import { updateBleep } from '../updateBleep';
-import { unloadBleep } from '../unloadBleep';
-import { unloadBleeps } from '../unloadBleeps';
+import { createBleep } from '../createBleep/index';
+import { updateBleep } from '../updateBleep/index';
+import { unloadBleep } from '../unloadBleep/index';
+import { unloadBleeps } from '../unloadBleeps/index';
 
 const createOrUpdateBleeps = (
   providedBleeps: BleepsGenerics | undefined,

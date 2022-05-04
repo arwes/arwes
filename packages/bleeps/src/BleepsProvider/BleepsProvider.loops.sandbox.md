@@ -1,14 +1,24 @@
-```jsx
+```tsx
+import React, { ReactElement, useState, useEffect } from 'react';
+import { render } from 'react-dom';
+import {
+  BleepsAudioSettings,
+  BleepsPlayersSettings,
+  BleepsSettings,
+  BleepsProvider,
+  useBleeps
+} from '@arwes/bleeps';
+
 const SOUND_TYPE_URL = '/assets/sounds/type.mp3';
 
-const ButtonTyping = ({ children }) => {
+const ButtonTyping = (): ReactElement => {
   const bleeps = useBleeps();
-  const [status, setStatus] = React.useState('Not typing');
+  const [status, setStatus] = useState('Not typing');
 
-  const onClick = () => {
+  const onClick = (): void => {
     if (bleeps.type.getIsPlaying()) {
       bleeps.type.stop();
-      setStatus('Not typing.');
+      setStatus('Not typing');
     } else {
       bleeps.type.play();
       setStatus('Typing...');
@@ -17,26 +27,26 @@ const ButtonTyping = ({ children }) => {
 
   // If the component is unmounted and there are
   // bleeps playing, they should be stopped.
-  React.useEffect(() => {
+  useEffect(() => {
     return () => bleeps.type.stop();
   }, []);
 
-  return <button onClick={onClick}>{status}</button>;
+  return <button onClick={onClick}>Bleep: {status}</button>;
 };
 
-function Sandbox () {
-  const audioSettings = {
+const Sandbox = (): ReactElement => {
+  const audioSettings: BleepsAudioSettings = {
     common: {
       volume: 0.4
     }
   };
-  const playersSettings = {
+  const playersSettings: BleepsPlayersSettings = {
     type: {
       src: [SOUND_TYPE_URL],
       loop: true
     }
   };
-  const bleepsSettings = {
+  const bleepsSettings: BleepsSettings = {
     type: {
       player: 'type'
     }
@@ -44,14 +54,16 @@ function Sandbox () {
 
   return (
     <BleepsProvider
-      audioSettings={audioSettings}
-      playersSettings={playersSettings}
-      bleepsSettings={bleepsSettings}
+      settings={{
+        audio: audioSettings,
+        players: playersSettings,
+        bleeps: bleepsSettings
+      }}
     >
       <ButtonTyping />
     </BleepsProvider>
   );
-}
+};
 
-render(<Sandbox />);
+render(<Sandbox />, document.querySelector('#root'));
 ```

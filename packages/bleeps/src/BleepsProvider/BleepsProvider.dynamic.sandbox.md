@@ -1,15 +1,23 @@
-```jsx
+```tsx
+import React, { ReactElement, useState, useEffect } from 'react';
+import { render } from 'react-dom';
+import {
+  BleepsAudioSettings,
+  BleepsPlayersSettings,
+  BleepsSettings,
+  BleepsProvider,
+  useBleeps
+} from '@arwes/bleeps';
+
 const SOUND_CLICK_URL = '/assets/sounds/click.mp3';
 const VOLUME_LOW = 0.1;
 const VOLUME_HIGH = 1;
 
-const Button = ({ children }) => {
+const Button = ({ children }): ReactElement => {
   const bleeps = useBleeps();
-  const onClick = () => {
+  const onClick = (): void => {
     // A bleep will not come if it is disabled in settings.
-    if (bleeps.tap) {
-      bleeps.tap.play();
-    }
+    bleeps.tap?.play();
   };
   return <button onClick={onClick}>{children}</button>;
 };
@@ -17,43 +25,47 @@ const Button = ({ children }) => {
 // Since the players and bleeps settings are not updated,
 // they are set outside of the function scope
 // so they are constant.
-const playersSettings = {
+const playersSettings: BleepsPlayersSettings = {
   click: {
     src: [SOUND_CLICK_URL]
   }
 };
-const bleepsSettings = {
+const bleepsSettings: BleepsSettings = {
   tap: {
     player: 'click'
   }
 };
 
-function Sandbox () {
-  const [volume, setVolume] = React.useState(VOLUME_HIGH);
-  const [disabled, setDisabled] = React.useState(false);
-  const [audioSettings, setAudioSettings] = React.useState(() => ({
+const Sandbox = (): ReactElement => {
+  const [volume, setVolume] = useState(VOLUME_HIGH);
+  const [disabled, setDisabled] = useState(false);
+  const [audioSettings, setAudioSettings] = useState<BleepsAudioSettings>(() => ({
     common: { volume, disabled }
   }));
 
-  const onDisableChange = () => {
+  const onDisableChange = (): void => {
     setDisabled(!disabled);
   };
-  const getIsVolumeHigh = () => {
+  const getIsVolumeHigh = (): boolean => {
     return audioSettings.common.volume === VOLUME_HIGH;
   };
-  const onVolumeChange = () => {
+  const onVolumeChange = (): void => {
     setVolume(getIsVolumeHigh() ? VOLUME_LOW : VOLUME_HIGH);
   };
 
-  React.useEffect(() => {
-    setAudioSettings({ common: { volume, disabled } });
+  useEffect(() => {
+    setAudioSettings({
+      common: { volume, disabled }
+    });
   }, [volume, disabled]);
 
   return (
     <BleepsProvider
-      audioSettings={audioSettings}
-      playersSettings={playersSettings}
-      bleepsSettings={bleepsSettings}
+      settings={{
+        audio: audioSettings,
+        players: playersSettings,
+        bleeps: bleepsSettings
+      }}
     >
       <div>
         <button onClick={onVolumeChange}>
@@ -74,7 +86,7 @@ function Sandbox () {
       </div>
     </BleepsProvider>
   );
-}
+};
 
-render(<Sandbox />);
+render(<Sandbox />, document.querySelector('#root'));
 ```

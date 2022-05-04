@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 import { useTheme } from '@emotion/react';
 
-import { Styles, StylesCreator, StylesCreatorFunction } from './types';
-import { STYLES_EMPTY } from './constants';
-import { mergeThemeStyles } from './utils/mergeThemeStyles';
+import { Styles, StylesThemeCreator, StylesThemeCreatorFunction } from '../types';
+import { STYLES_EMPTY } from '../constants';
+import { mergeThemeStyles } from '../utils/mergeThemeStyles';
 
 const useThemeStyles = <P = undefined>(
-  styleCreators: [StylesCreatorFunction<P>, StylesCreator<P>],
+  styleCreators: [StylesThemeCreatorFunction<P>, StylesThemeCreator<P>],
   props: P,
   dependencies: unknown[]
 ): Styles => {
@@ -29,7 +29,8 @@ const useThemeStyles = <P = undefined>(
       const userStyles = createUserStyles(theme, props);
       return mergeThemeStyles(baseStyles, userStyles);
     }
-    else if (typeof createUserStyles === 'object' && createUserStyles !== null) {
+
+    if (typeof createUserStyles === 'object' && createUserStyles !== null) {
       return mergeThemeStyles(baseStyles, createUserStyles);
     }
 

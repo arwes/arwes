@@ -19,5 +19,8 @@ module.exports = {
     '/__deprecated__/',
     '/.cache/',
     '/.next/'
+  ],
+  setupFiles: [
+    'jest-canvas-mock'
   ]
 };

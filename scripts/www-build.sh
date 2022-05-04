@@ -6,7 +6,7 @@ npm install
 
 echo "\n[DEBUG] Building project..."
 
-npx cross-env NODE_ENV=production npx nx run-many --target build --all
+npx cross-env NODE_ENV=production npx nx run-many --target build --all --parallel=8
 
 echo "\n[DEBUG] Creating www bundle..."
 

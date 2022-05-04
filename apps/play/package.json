@@ -14,13 +14,14 @@
     "@arwes/core": "^1.0.0-alpha.19",
     "@arwes/styles": "^1.0.0-alpha.19",
     "@arwes/theme": "^1.0.0-alpha.19",
+    "@arwes/bgs": "^1.0.0-alpha.19",
     "@arwes/tools": "^1.0.0-alpha.19",
     "@mdi/js": "^6.6.95",
     "@mdi/react": "^1.5.0",
     "css-loader": "^6.7.1",
     "empanada": "^0.2.2",
     "monaco-editor": "^0.33.0",
-    "noxtron": "^0.6.0",
+    "noxtron": "^0.6.1",
     "style-loader": "^3.3.1"
   },
   "devDependencies": {

@@ -3,13 +3,13 @@ import React, { ReactElement } from 'react';
 import { render } from 'react-dom';
 import { createThemeStyle } from '@arwes/theme';
 
-const Sandbox = (): ReactElement => {
-  const style = createThemeStyle([
-    { fontSize: '30px', color: 'red' },
-    { fontSize: '24px', color: 'blue' },
-    { fontSize: '18px', color: 'green' }
-  ]);
+const style = createThemeStyle([
+  { fontSize: '30px', color: 'red' },
+  { fontSize: '24px', color: 'blue' },
+  { fontSize: '18px', color: 'green' }
+]);
 
+const Sandbox = (): ReactElement => {
   return (
     <div>
       <p style={{ ...style(0) }}>Futuristic Sci-Fi UI Web Framework</p>

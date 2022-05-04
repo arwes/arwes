@@ -13,12 +13,10 @@
     </style>
     <script>
       (function () {
-        const params = window.location.search
-          .split('&')
-          .map((param) => param.toLowerCase().replace('?', ''));
-        const isLight = params.find((fragment) => fragment === 'dark=false');
+        const params = window.location.search.replace(/^\?/, '').split('&');
+        const paramDark = params.find((param) => param.startsWith('dark='));
 
-        if (isLight) {
+        if (paramDark === 'dark=false') {
           const initialThemeColorElement = document.querySelector('#noxtron-initial-theme-color');
           const initialStylesElement = document.querySelector('#noxtron-initial-styles');
           initialThemeColorElement.setAttribute('content', '#f7f7f7');

@@ -39,7 +39,7 @@
   "types": "./build/esm/index.d.ts",
   "module": "./build/esm/index.js",
   "main": "./build/cjs/index.js",
-  "unpkg": "./build/umd/animator.min.js",
+  "unpkg": "./build/umd/umd.min.js",
   "peerDependencies": {
     "@arwes/tools": "^1.0.0-alpha.19",
     "react": "^17.0.2"

@@ -1,4 +1,4 @@
-import React, { ReactElement, Profiler, useState, useEffect } from 'react';
+import React, { ReactElement, Profiler, Fragment, useState, useEffect } from 'react';
 import { render } from 'react-dom';
 
 import { Animator } from '@arwes/animator';
@@ -21,27 +21,30 @@ const Test = (): ReactElement => {
   }, [active]);
 
   return (
-    <Animator
-      active={active}
-      duration={{ enter: 0.5, exit: 0.5 }}
-    >
-      {Array(TEST_RENDER_NUMBER).fill(null).map((_, index) => (
-        <Animated
-          key={index}
-          className='item'
-          animated={{
-            initialStyle: {
-              scale: 0.2,
-              rotate: 90
-            },
-            transitions: {
-              entering: { scale: [0.2, 1], rotate: [90, 0] },
-              exiting: { scale: [1, 0.2], rotate: [0, 90] }
-            }
-          }}
-        />
-      ))}
-    </Animator>
+    <Fragment>
+      <p>Root animator state: <b>{active ? 'active' : 'deactivated'}</b></p>
+      <Animator
+        active={active}
+        duration={{ enter: 0.5, exit: 0.5 }}
+      >
+        {Array(TEST_RENDER_NUMBER).fill(null).map((_, index) => (
+          <Animated
+            key={index}
+            className='item'
+            animated={{
+              initialStyle: {
+                scale: 0.2,
+                rotate: 90
+              },
+              transitions: {
+                entering: { scale: [0.2, 1], rotate: [90, 0] },
+                exiting: { scale: [1, 0.2], rotate: [0, 90] }
+              }
+            }}
+          />
+        ))}
+      </Animator>
+    </Fragment>
   );
 };
 

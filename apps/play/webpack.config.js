@@ -12,12 +12,15 @@ const SRC_PATH = path.join(CWD, 'src');
 const BUILD_PATH = path.join(CWD, 'build');
 const BASE_PATH = '/play/'; // Must end with "/".
 
+const mode = NODE_ENV || 'development';
+const isProduction = mode === 'production';
+
 module.exports = {
-  mode: NODE_ENV || 'development',
+  mode,
   devtool: false,
   entry: {
-    playground: path.join(SRC_PATH, 'playground.tsx'),
-    sandbox: path.join(SRC_PATH, 'sandbox.tsx')
+    playground: path.join(SRC_PATH, 'playground/playground.tsx'),
+    sandbox: path.join(SRC_PATH, 'sandbox/sandbox.tsx')
   },
   output: {
     path: path.join(BUILD_PATH, BASE_PATH),
@@ -68,29 +71,33 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       publicPath: BASE_PATH,
-      template: path.join(SRC_PATH, 'playground.html'),
+      template: path.join(SRC_PATH, 'playground/playground.html'),
       filename: path.join(BUILD_PATH, BASE_PATH, 'index.html'),
       chunks: ['playground']
     }),
     new HtmlWebpackPlugin({
       publicPath: BASE_PATH,
-      template: path.join(SRC_PATH, 'sandbox.html'),
+      template: path.join(SRC_PATH, 'sandbox/sandbox.html'),
       filename: path.join(BUILD_PATH, BASE_PATH, 'sandbox/index.html'),
       chunks: ['sandbox']
     }),
-    new CopyWebpackPlugin({
+    isProduction && new CopyWebpackPlugin({
       patterns: [{
         from: path.join(REPOSITORY_PATH, 'static'),
         to: BUILD_PATH
       }]
     })
-  ],
+  ].filter(Boolean),
   devServer: {
-    static: {
-      publicPath: BASE_PATH,
+    static: [{
       directory: BUILD_PATH,
+      publicPath: BASE_PATH,
       watch: true
-    },
+    }, {
+      directory: path.join(REPOSITORY_PATH, 'static'),
+      publicPath: '/',
+      watch: true
+    }],
     allowedHosts: 'all',
     compress: true,
     host: '127.0.0.1',

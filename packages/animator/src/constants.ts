@@ -1,4 +1,4 @@
-import type { AnimatorSystemNode, AnimatorSettingsMachine } from '../types';
+import type { AnimatorSystemNode, AnimatorSettingsMachine } from './types';
 
 // States
 const ENTERED = 'entered';
@@ -16,6 +16,22 @@ const EXIT_END = 'exitEnd';
 const PARALLEL = 'parallel';
 const SEQUENCE = 'sequence';
 const STAGGER = 'stagger';
+
+const ANIMATOR_DEFAULT_KEYS = {
+  ENTERED,
+  ENTERING,
+  EXITING,
+  EXITED,
+
+  ENTER_START,
+  ENTER_END,
+  EXIT_START,
+  EXIT_END,
+
+  PARALLEL,
+  SEQUENCE,
+  STAGGER
+} as const;
 
 interface AnimatorManager {
   name: string
@@ -75,7 +91,7 @@ const createAnimatorManager = (parent: AnimatorSystemNode, manager?: string): An
   }
 };
 
-const animatorDefaultMachine: AnimatorSettingsMachine = Object.freeze({
+const ANIMATOR_DEFAULT_MACHINE: AnimatorSettingsMachine = Object.freeze({
   initialState: EXITED,
   states: {
     [EXITED]: {
@@ -204,20 +220,27 @@ const animatorDefaultMachine: AnimatorSettingsMachine = Object.freeze({
   }
 });
 
-const animatorDefaultDuration = Object.freeze({
+const ANIMATOR_DEFAULT_DURATION = Object.freeze({
   enter: 0.4,
   exit: 0.4,
   delay: 0,
   offset: 0,
-  stagger: 0.04
+  stagger: 0.04,
+  interval: 4
 });
 
-const animatorDefaultManager = PARALLEL;
+const ANIMATOR_DEFAULT_MANAGER = PARALLEL;
 
-const animatorDefaults = {
-  machine: animatorDefaultMachine,
-  duration: animatorDefaultDuration,
-  manager: animatorDefaultManager
+const ANIMATOR_DEFAULT_PROPS = {
+  machine: ANIMATOR_DEFAULT_MACHINE,
+  duration: ANIMATOR_DEFAULT_DURATION,
+  manager: ANIMATOR_DEFAULT_MANAGER
 };
 
-export { animatorDefaults };
+export {
+  ANIMATOR_DEFAULT_KEYS,
+  ANIMATOR_DEFAULT_MACHINE,
+  ANIMATOR_DEFAULT_DURATION,
+  ANIMATOR_DEFAULT_MANAGER,
+  ANIMATOR_DEFAULT_PROPS
+};

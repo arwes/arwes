@@ -8,9 +8,7 @@ import {
   createElement,
   useRef,
   useEffect,
-  useMemo,
-  memo,
-  forwardRef
+  useMemo
 } from 'react';
 import { animate } from 'motion';
 
@@ -33,7 +31,7 @@ interface AnimatedProps<E extends HTMLElement | SVGElement = HTMLDivElement, P =
   children?: ReactNode
 }
 
-const AnimatedComponent = <
+const Animated = <
   E extends HTMLElement | SVGElement = HTMLDivElement,
   P extends HTMLProps<HTMLElement> | SVGProps<SVGElement> = HTMLProps<HTMLDivElement>
 >(props: AnimatedProps<E, P> & NoInfer<P>): ReactElement => {
@@ -138,16 +136,6 @@ const AnimatedComponent = <
     ref: mergeRefs(externalElementRef, elementRef)
   });
 };
-
-// TODO: Fix type.
-const Animated: typeof AnimatedComponent = memo(
-  forwardRef((props: AnimatedProps, forwardedRef: any) => (
-    createElement(AnimatedComponent, {
-      elementRef: forwardedRef,
-      ...props
-    })
-  ))
-) as any;
 
 export type { AnimatedProps };
 export { Animated };
