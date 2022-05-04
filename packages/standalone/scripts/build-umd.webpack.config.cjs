@@ -5,7 +5,7 @@ const CWD = process.cwd();
 const MOCKS = path.join(__dirname, '../../../scripts/pkg-build-umd-mocks');
 
 const mode = NODE_ENV || 'development';
-const outFilename = mode === 'production' ? 'arwes.min.js' : 'arwes.js';
+const outFilename = mode === 'production' ? 'umd.min.js' : 'umd.js';
 
 module.exports = {
   mode,

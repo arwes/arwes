@@ -39,7 +39,7 @@
   "types": "./build/esm/index.d.ts",
   "module": "./build/esm/index.js",
   "main": "./build/cjs/index.js",
-  "unpkg": "./build/umd/arwes.min.js",
+  "unpkg": "./build/umd/umd.min.js",
   "peerDependencies": {
     "@emotion/react": "^11.8.2",
     "react": "^17.0.2"
