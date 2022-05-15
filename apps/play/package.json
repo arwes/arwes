@@ -10,25 +10,25 @@
     "@arwes/animated": "^1.0.0-alpha.19",
     "@arwes/animator": "^1.0.0-alpha.19",
     "@arwes/arwes": "^1.0.0-alpha.19",
+    "@arwes/bgs": "^1.0.0-alpha.19",
     "@arwes/bleeps": "^1.0.0-alpha.19",
     "@arwes/core": "^1.0.0-alpha.19",
     "@arwes/styles": "^1.0.0-alpha.19",
     "@arwes/theme": "^1.0.0-alpha.19",
-    "@arwes/bgs": "^1.0.0-alpha.19",
     "@arwes/tools": "^1.0.0-alpha.19",
     "@mdi/js": "^6.6.95",
     "@mdi/react": "^1.5.0",
-    "css-loader": "^6.7.1",
     "empanada": "^0.2.2",
     "monaco-editor": "^0.33.0",
-    "noxtron": "^0.6.1",
-    "style-loader": "^3.3.1"
+    "noxtron": "^0.6.3"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^9.0.1",
+    "css-loader": "^6.7.1",
     "html-webpack-plugin": "^5.3.2",
     "monaco-editor-webpack-plugin": "^7.0.1",
-    "raw-loader": "^4.0.2"
+    "raw-loader": "^4.0.2",
+    "style-loader": "^3.3.1"
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --progress",
