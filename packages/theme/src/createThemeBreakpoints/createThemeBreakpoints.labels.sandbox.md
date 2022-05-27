@@ -38,7 +38,7 @@ const Sandbox = (): ReactElement => {
             },
 
             [bps.between('medium', 'large')]: {
-              transform: 'rotate(45deg)'
+              transform: 'skew(-10deg)'
             }
           }
         }}
