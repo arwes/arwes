@@ -25,7 +25,7 @@
         <img src="https://img.shields.io/twitter/follow/arwesjs.svg?label=%40arwesjs&style=flat-square&logo=twitter" alt="Twitter Follow" />
     </a>
     <a href="https://discord.gg/s5sbTkw">
-        <img src="https://img.shields.io/badge/chat-discord-blue.svg?style=flat-square&logo=discord" alt="chat on discord" />
+      <img src="https://img.shields.io/discord/457381046497968128?color=5865F2&logo=discord&logoColor=white" alt="Join us on Discord">
     </a>
 </div>
 
@@ -57,8 +57,8 @@ and productions like [Star Citizen](http://robertsspaceindustries.com),
 [Halo](https://www.halowaypoint.com/en-us/games), and [TRON: Legacy](http://www.imdb.com/title/tt1104001).
 It tries to inspire advanced space and alien technology.
 
-> The project is under development and released in alpha state not ready for
-production yet. See [project details](https://arwes.dev/project).
+> The project is under development and not ready for production yet.
+See [project details](https://arwes.dev/project).
 
 > Branch [`main`](https://github.com/arwes/arwes/tree/main) is for releases and
 public content deployed at [arwes.dev](https://arwes.dev).
@@ -66,14 +66,14 @@ public content deployed at [arwes.dev](https://arwes.dev).
 > Branch [`next`](https://github.com/arwes/arwes/tree/next) is for active development
 deployed at [next.arwes.dev](https://next.arwes.dev).
 
-## Documentation
-
-See **[arwes.dev](https://arwes.dev)**.
-
 > The previous version was moved to [version1-breakpoint1.arwes.dev](https://version1-breakpoint1.arwes.dev)
 with the branch [`version1-breakpoint1`](https://github.com/arwes/arwes/tree/version1-breakpoint1)
 where you can find the components and the website source code. This package was
 released in February, 2018, and **it is now deprecated**.
+
+## Documentation
+
+See **[arwes.dev](https://arwes.dev)**.
 
 ## Community
 
@@ -98,7 +98,8 @@ Review [frequently asked questions](https://arwes.dev/project/faq) and
 
 ## Roadmap
 
-Check out [roadmap](https://arwes.dev/project/roadmap) and [project boards](https://github.com/arwes/arwes/projects).
+Check out [project boards](https://github.com/arwes/arwes/projects) and
+[roadmap](https://arwes.dev/project/roadmap).
 
 ## Contributors
 
