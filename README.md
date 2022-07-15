@@ -84,6 +84,7 @@ released in February, 2018, and **it is now deprecated**.
 <tr>
 <td align="center"><a href="https://soulextract.com"><img src="./static/community/apps/images/soulextract.com.jpg" width="252px;" alt="SoulExtract.com" /></a><br /><a href="https://soulextract.com">SoulExtract.com</a><br /><a href="https://github.com/soulextract/soulextract.com"><sub>soulextract/soulextract.com</sub></a></td>
 <td align="center"><a href="https://romelperez.dev"><img src="./static/community/apps/images/romelperez.dev.jpg" width="252px;" alt="RomelPerez.dev" /></a><br /><a href="https://romelperez.dev">RomelPerez.dev</a><br /><sub>--</sub></td>
+<td align="center"><a href="https://archiverpg.com"><img src="./static/community/apps/images/archiverpg.com.jpg" width="252px;" alt="ArchiveRPG.com" /></a><br /><a href="https://archiverpg.com">ArchiveRPG.com</a><br /><sub>--</sub></td>
 </tr>
 </table>
 <!-- ARWES-COMMUNITY-APPS:END -->
