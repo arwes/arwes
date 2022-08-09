@@ -41,9 +41,9 @@
   "main": "./build/cjs/index.js",
   "unpkg": "./build/umd/umd.min.js",
   "peerDependencies": {
-    "@emotion/react": "^11.8.2",
-    "motion": "^10.6.2",
-    "react": "^17.0.2"
+    "@emotion/react": "11",
+    "motion": "10",
+    "react": "18"
   },
   "dependencies": {
     "@arwes/tools": "^1.0.0-alpha.19",

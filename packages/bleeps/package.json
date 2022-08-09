@@ -41,7 +41,7 @@
   "main": "./build/cjs/index.js",
   "unpkg": "./build/umd/umd.min.js",
   "peerDependencies": {
-    "react": "^17.0.2"
+    "react": "18"
   },
   "dependencies": {
     "@types/howler": "2.2.x",
