@@ -3,8 +3,6 @@ const glob = require('glob');
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
-  verbose: true,
-  testURL: 'http://localhost/',
   testMatch: glob
     .sync('./packages/*')
     .map(path => path.replace(/^\./, '<rootDir>'))
