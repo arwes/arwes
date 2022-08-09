@@ -11,7 +11,13 @@ const extendDeepObject = (structure: any, defaults: any, extension: any): any =>
   const newObject: any = {};
   Object.keys(structure).forEach(key => {
     if (typeof structure[key] === 'object') {
-      newObject[key] = extendDeepObject(structure[key], defaults[key], extension[key]);
+      if (structure[key] === null) {
+        throw new Error('Theme structure values can not be null.');
+      }
+      if (!defaults[key] || typeof defaults[key] !== 'object') {
+        throw new Error('Theme default value should match theme structure object.');
+      }
+      newObject[key] = extendDeepObject(structure[key], defaults[key], extension?.[key]);
     }
     else {
       newObject[key] = extension?.[key] ?? defaults[key];
