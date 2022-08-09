@@ -1,26 +1,21 @@
 const path = require('path');
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
-const { NODE_ENV } = process.env;
-const CWD = __dirname;
-const REPOSITORY_PATH = path.join(CWD, '../../');
-const TSCONFIG_FILE_PATH = path.join(CWD, 'tsconfig.json');
-const SRC_PATH = path.join(CWD, 'src');
-const BUILD_PATH = path.join(CWD, 'build');
+const REPOSITORY_PATH = path.join(__dirname, '../../');
+const SRC_PATH = path.join(__dirname, 'src');
+const BUILD_PATH = path.join(__dirname, 'build');
 const BASE_PATH = '/play/'; // Must end with "/".
 
-const mode = NODE_ENV || 'development';
+const mode = process.env.NODE_ENV || 'development';
 const isProduction = mode === 'production';
 
 module.exports = {
   mode,
   devtool: false,
   entry: {
-    playground: path.join(SRC_PATH, 'playground/playground.tsx'),
-    sandbox: path.join(SRC_PATH, 'sandbox/sandbox.tsx')
+    playground: path.join(SRC_PATH, 'playground/playground.jsx'),
+    sandbox: path.join(SRC_PATH, 'sandbox/sandbox.jsx')
   },
   output: {
     path: path.join(BUILD_PATH, BASE_PATH),
@@ -31,21 +26,14 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: 'ts-loader',
-            options: {
-              configFile: TSCONFIG_FILE_PATH,
-              transpileOnly: true
-            }
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react']
           }
-        ]
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        }
       },
       {
         test: /\.md$/i,
@@ -54,21 +42,11 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
-    plugins: [
-      new TsconfigPathsPlugin({
-        configFile: TSCONFIG_FILE_PATH
-      })
-    ],
     alias: {
       '@repository': REPOSITORY_PATH
     }
   },
   plugins: [
-    new MonacoWebpackPlugin({
-      publicPath: BASE_PATH,
-      languages: ['javascript', 'typescript']
-    }),
     new HtmlWebpackPlugin({
       publicPath: BASE_PATH,
       template: path.join(SRC_PATH, 'playground/playground.html'),
@@ -84,18 +62,30 @@ module.exports = {
     isProduction && new CopyWebpackPlugin({
       patterns: [{
         from: path.join(REPOSITORY_PATH, 'static'),
-        to: BUILD_PATH
+        to: BUILD_PATH,
+        info: { minimized: true }
+      }]
+    }),
+    isProduction && new CopyWebpackPlugin({
+      patterns: [{
+        from: path.join(REPOSITORY_PATH, 'node_modules/noxtron/build/umd/'),
+        to: path.join(BUILD_PATH, BASE_PATH, 'noxtron/'),
+        info: { minimized: true }
       }]
     })
   ].filter(Boolean),
   devServer: {
     static: [{
-      directory: BUILD_PATH,
-      publicPath: BASE_PATH,
-      watch: true
-    }, {
       directory: path.join(REPOSITORY_PATH, 'static'),
       publicPath: '/',
+      watch: true
+    }, {
+      directory: path.join(REPOSITORY_PATH, 'node_modules/noxtron/build/umd/'),
+      publicPath: path.join(BASE_PATH, 'noxtron/'),
+      watch: true
+    }, {
+      directory: BUILD_PATH,
+      publicPath: BASE_PATH,
       watch: true
     }],
     allowedHosts: 'all',

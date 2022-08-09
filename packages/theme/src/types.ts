@@ -8,7 +8,9 @@ export type ThemeSettingsMultiplierFunction = (index: number) => number;
 
 export type ThemeSettingsMultiplier = number | number[] | ThemeSettingsMultiplierFunction;
 
-export type ThemeSettingsColor = number[][] | ((index: number) => number[]);
+export type ThemeSettingsColor =
+  | Array<[number, number, number, number?] | string>
+  | ((index: number) => [number, number, number, number?] | string);
 
 export type ThemeSettingsStyle = ThemeStyleValue[];
 
@@ -23,7 +25,7 @@ export type ThemeSettingsBreakpoints = string[] | ThemeSettingsBreakpointsKeyLis
 
 export type ThemeMultiplier = (index: number) => number;
 
-export type ThemeColor = (index: number, colorPatch?: Array<number | undefined | null>) => string;
+export type ThemeColor = (index: number) => string;
 
 export type ThemeStyleValue = CSSProperties;
 

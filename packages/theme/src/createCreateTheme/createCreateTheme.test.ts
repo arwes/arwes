@@ -30,7 +30,7 @@ test('Should create theme creator with plain theme structure object', () => {
     font: 'style',
     other: 'other'
   };
-  const themeDefaults = {
+  const themeDefaults: ThemeSettings = {
     space: 1,
     color: () => [0, 0, 0, 0],
     font: [{ fontSize: '10px' }],
@@ -95,7 +95,7 @@ test('Should create theme creator with deep theme structure object', () => {
       o2: 'other'
     }
   };
-  const themeDefaults = {
+  const themeDefaults: ThemeSettings = {
     space: 1,
     width: 10,
     colors: {

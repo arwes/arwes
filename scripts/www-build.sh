@@ -10,7 +10,7 @@ npx cross-env NODE_ENV=production npx nx run-many --target build --all --paralle
 
 echo "\n[DEBUG] Creating www bundle..."
 
-rm -rf ./www
+rm -rf ./www ./www.zip
 mkdir -p ./www
 cp -r ./static/* ./www
 cp -r ./apps/website/out/* ./www

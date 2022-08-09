@@ -24,6 +24,6 @@
   "scripts": {
     "build": "sh ./scripts/build.sh",
     "dev": "sh ./scripts/dev.sh",
-    "start": "http-server ./build --port 9100 --gzip true -o /perf"
+    "start": "serve ./build -p 9100"
   }
 }

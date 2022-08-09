@@ -51,7 +51,7 @@ const PageIndex = (): ReactElement => {
         <main className='main'>
           <h1 className='hidden'>
             <img
-              src='/logo-horizontal-text.png'
+              src='/logotype.png'
               alt='Arwes'
             />
           </h1>

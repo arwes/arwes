@@ -15,6 +15,6 @@
   "scripts": {
     "dev": "next dev -p 9200",
     "build": "next build && next export",
-    "start": "http-server ./out --port 9200 --gzip true -o /"
+    "start": "serve ./out -p 9200"
   }
 }

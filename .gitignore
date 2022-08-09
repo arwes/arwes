@@ -8,6 +8,7 @@ build
 build/Release
 typings/
 *.tgz
+*.zip
 .nyc_output
 .pnp/
 .pnp.js

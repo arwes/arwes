@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import * as emotionReact from '@emotion/react';
 import * as motion from 'motion';
 import * as empanada from 'empanada';
-import { setupSandbox } from 'noxtron/build/sandbox';
 
 import * as tools from '@arwes/tools';
 import * as theme from '@arwes/theme';
@@ -13,7 +12,7 @@ import * as animated from '@arwes/animated';
 import * as bleeps from '@arwes/bleeps';
 import * as bgs from '@arwes/bgs';
 
-setupSandbox({
+window.noxtron.setupSandbox(() => ({
   dependencies: [
     { name: 'react', pkg: React },
     { name: 'react-dom', pkg: ReactDOM },
@@ -28,4 +27,4 @@ setupSandbox({
     { name: '@arwes/bleeps', pkg: bleeps },
     { name: '@arwes/bgs', pkg: bgs }
   ]
-});
+}));
