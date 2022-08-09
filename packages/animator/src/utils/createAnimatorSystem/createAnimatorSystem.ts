@@ -80,7 +80,7 @@ const createAnimatorSystem = (): AnimatorSystem => {
     node = Object.freeze({
       id,
       control,
-      parent: parent,
+      parent,
       children: new Set<AnimatorSystemNode>(),
       subscribers: new Set<AnimatorSystemNodeSubscriber>(),
       scheduler: createTOScheduler(),
