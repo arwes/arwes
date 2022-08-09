@@ -34,17 +34,24 @@ img {
   background: radial-gradient(50% 50% at 50% 50%, #04252B 0%, #002424 0.01%, #001515 100%);
 }
 
+/* PATTERNS */
+
+.arwes-patterns-dots {
+  z-index: 1;
+}
+
 /* BG */
 
 .bg {
-  z-index: 0;
   position: absolute;
+  z-index: 2;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   transform-origin: center;
   width: calc(100% - 40px);
   max-width: 885px;
+  opacity: 0.01;
 }
 
 .bg img {
@@ -52,14 +59,10 @@ img {
   height: 100%;
 }
 
-.arwes-patterns-dots {
-  z-index: 1;
-}
-
 /* CONTENT */
 
 .main {
-  z-index: 2;
+  z-index: 100;
   position: relative;
   padding: 20px;
   text-align: center;
@@ -99,7 +102,7 @@ img {
 /* FOOTER */
 
 .footer {
-  z-index: 3;
+  z-index: 100;
   position: absolute;
   left: 20px;
   right: 20px;
