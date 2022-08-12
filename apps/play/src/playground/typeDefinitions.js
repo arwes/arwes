@@ -26,42 +26,46 @@ export const typeDefinitions = [
     filename: 'file:///node_modules/@types/react-dom/index.d.ts',
     code: require('!raw-loader?esModule=false!../../../../node_modules/@types/react-dom/index.d.ts')
   },
+  {
+    filename: 'file:///node_modules/@types/react-dom/client.d.ts',
+    code: require('!raw-loader?esModule=false!../../../../node_modules/@types/react-dom/client.d.ts')
+  },
 
   // @emotion/react
   {
-    filename: 'file:///node_modules/@emotion/react/types/index.d.ts',
+    filename: 'file:///node_modules/@emotion/react/index.d.ts',
     code: require('!raw-loader?esModule=false!../../../../node_modules/@emotion/react/types/index.d.ts')
   },
   {
-    filename: 'file:///node_modules/@emotion/react/types/css-prop.d.ts',
+    filename: 'file:///node_modules/@emotion/react/css-prop.d.ts',
     code: require('!raw-loader?esModule=false!../../../../node_modules/@emotion/react/types/css-prop.d.ts')
   },
   {
-    filename: 'file:///node_modules/@emotion/react/types/helper.d.ts',
+    filename: 'file:///node_modules/@emotion/react/helper.d.ts',
     code: require('!raw-loader?esModule=false!../../../../node_modules/@emotion/react/types/helper.d.ts')
   },
   {
-    filename: 'file:///node_modules/@emotion/react/types/jsx-dev-runtime.d.ts',
+    filename: 'file:///node_modules/@emotion/react/jsx-dev-runtime.d.ts',
     code: require('!raw-loader?esModule=false!../../../../node_modules/@emotion/react/types/jsx-dev-runtime.d.ts')
   },
   {
-    filename: 'file:///node_modules/@emotion/react/types/jsx-namespace.d.ts',
+    filename: 'file:///node_modules/@emotion/react/jsx-namespace.d.ts',
     code: require('!raw-loader?esModule=false!../../../../node_modules/@emotion/react/types/jsx-namespace.d.ts')
   },
   {
-    filename: 'file:///node_modules/@emotion/react/types/jsx-runtime.d.ts',
+    filename: 'file:///node_modules/@emotion/react/jsx-runtime.d.ts',
     code: require('!raw-loader?esModule=false!../../../../node_modules/@emotion/react/types/jsx-runtime.d.ts')
   },
   {
-    filename: 'file:///node_modules/@emotion/react/types/theming.d.ts',
+    filename: 'file:///node_modules/@emotion/react/theming.d.ts',
     code: require('!raw-loader?esModule=false!../../../../node_modules/@emotion/react/types/theming.d.ts')
   },
   {
-    filename: 'file:///node_modules/@emotion/serialize/types/index.d.ts',
+    filename: 'file:///node_modules/@emotion/serialize/index.d.ts',
     code: require('!raw-loader?esModule=false!../../../../node_modules/@emotion/serialize/types/index.d.ts')
   },
   {
-    filename: 'file:///node_modules/@emotion/utils/types/index.d.ts',
+    filename: 'file:///node_modules/@emotion/utils/index.d.ts',
     code: require('!raw-loader?esModule=false!../../../../node_modules/@emotion/utils/types/index.d.ts')
   },
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReactDOMClient from 'react-dom/client';
 import * as emotionReact from '@emotion/react';
 import * as motion from 'motion';
 import * as empanada from 'empanada';
@@ -16,6 +17,7 @@ window.noxtron.setupSandbox(() => ({
   dependencies: [
     { name: 'react', pkg: React },
     { name: 'react-dom', pkg: ReactDOM },
+    { name: 'react-dom/client', pkg: ReactDOMClient },
     { name: '@emotion/react', pkg: emotionReact },
     { name: 'motion', pkg: motion },
     { name: 'empanada', pkg: empanada },

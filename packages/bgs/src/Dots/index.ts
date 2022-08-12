@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { Dots as DotsComponent } from './Dots.component';
+import { Dots as DotsComponent } from './Dots';
 
 const Dots: typeof DotsComponent = memo(DotsComponent) as any;
 
