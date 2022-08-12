@@ -2,8 +2,6 @@ import {
   HTMLProps,
   SVGProps,
   CSSProperties,
-  ForwardedRef,
-  ReactNode,
   ReactElement,
   createElement,
   useRef,
@@ -21,15 +19,7 @@ import type {
   AnimatedSettingsTransitionFunctionReturn
 } from '../types';
 import { formatAnimatedCSSPropsShorthands } from '../utils/formatAnimatedCSSPropsShorthands/index';
-
-interface AnimatedProps<E extends HTMLElement | SVGElement = HTMLDivElement, P = HTMLProps<E>> {
-  elementRef?: ForwardedRef<E>
-  className?: string
-  style?: CSSProperties
-  animated?: AnimatedSettings<P> | Array<AnimatedSettings<P>>
-  as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
-  children?: ReactNode
-}
+import { AnimatedProps } from './Animated.types';
 
 const Animated = <
   E extends HTMLElement | SVGElement = HTMLDivElement,
@@ -137,5 +127,4 @@ const Animated = <
   });
 };
 
-export type { AnimatedProps };
 export { Animated };
