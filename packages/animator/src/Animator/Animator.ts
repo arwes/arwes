@@ -1,6 +1,5 @@
 import {
   ReactElement,
-  ReactNode,
   createElement,
   useMemo,
   useContext,
@@ -21,13 +20,7 @@ import { AnimatorContext } from '../utils/AnimatorContext/index';
 import { AnimatorGeneralContext } from '../utils/AnimatorGeneralContext/index';
 import { createAnimatorSystem } from '../utils/createAnimatorSystem/index';
 import { ANIMATOR_DEFAULT_PROPS } from '../constants';
-
-interface AnimatorProps extends AnimatorSettings {
-  root?: boolean
-  disabled?: boolean
-  dismissed?: boolean
-  children?: ReactNode
-}
+import { AnimatorProps } from './Animator.types';
 
 const Animator = (props: AnimatorProps): ReactElement => {
   const { root, disabled, dismissed, children, ...settings } = props;
@@ -128,5 +121,4 @@ const Animator = (props: AnimatorProps): ReactElement => {
   return createElement(AnimatorContext.Provider, { value: animatorInterface }, children);
 };
 
-export type { AnimatorProps };
 export { Animator };
