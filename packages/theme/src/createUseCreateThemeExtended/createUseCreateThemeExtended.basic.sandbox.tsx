@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, Global } from '@emotion/react';
-import { ReactElement, StrictMode } from 'react';
+import { ReactElement } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   ThemeSettingsMultiplier,
@@ -130,4 +130,4 @@ const Sandbox = (): ReactElement => {
 };
 
 const root = createRoot(document.querySelector('#root') as HTMLElement);
-root.render(<StrictMode><Sandbox /></StrictMode>);
+root.render(<Sandbox />);

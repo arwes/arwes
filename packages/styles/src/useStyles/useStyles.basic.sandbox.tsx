@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/react';
-import { ReactNode, ReactElement, StrictMode, Fragment } from 'react';
+import { ReactNode, ReactElement, Fragment } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Styles, StylesCreator, useStyles } from '@arwes/styles';
 
@@ -67,4 +67,4 @@ const Sandbox = (): ReactElement => {
 };
 
 const root = createRoot(document.querySelector('#root') as HTMLElement);
-root.render(<StrictMode><Sandbox /></StrictMode>);
+root.render(<Sandbox />);

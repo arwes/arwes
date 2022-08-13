@@ -1,6 +1,6 @@
 // Change the browser viewport width to test.
 
-import React, { ReactElement, StrictMode, Fragment } from 'react';
+import React, { ReactElement, Fragment } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Global } from '@emotion/react';
 import { createThemeBreakpoints } from '@arwes/theme';
@@ -48,4 +48,4 @@ const Sandbox = (): ReactElement => {
 };
 
 const root = createRoot(document.querySelector('#root') as HTMLElement);
-root.render(<StrictMode><Sandbox /></StrictMode>);
+root.render(<Sandbox />);

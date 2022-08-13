@@ -1,7 +1,6 @@
-import { useMemo, useRef, useEffect, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
-import type { PartialDeep } from '@arwes/tools';
-
+import { PartialDeep, useOnChange } from '@arwes/tools';
 import type {
   ThemeExtensionColorScheme,
   ThemeCreatorStructure,
@@ -208,7 +207,7 @@ const createUseCreateThemeExtended = <ThemeSettings, Theme>(
       return { ...themeBase, ...themeColorScheme };
     }, [countUpdate]);
 
-    useEffect(() => {
+    useOnChange(() => {
       setupCurrentThemeColorScheme();
       setupMediasListeners();
 

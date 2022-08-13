@@ -5,5 +5,6 @@ export * from './loadImage/index';
 export * from './createTOScheduler/index';
 export * from './memo/index';
 export * from './mergeRefs/index';
-export * from './useOnUpdate/index';
+export * from './useOnMount/index';
+export * from './useOnChange/index';
 export * from './usePreviousValue/index';

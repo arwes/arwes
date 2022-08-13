@@ -1,6 +1,6 @@
 // A child Animator as root, will create a new system of Animator nodes.
 
-import React, { ReactNode, ReactElement, StrictMode, useState, useRef, useEffect } from 'react';
+import React, { ReactNode, ReactElement, useState, useRef, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { animate } from 'motion';
 import { AnimatorSystemNode, AnimatorProps, Animator, useAnimator, AnimatorInterface } from '@arwes/animator';
@@ -66,19 +66,15 @@ const Item = (props: ItemProps): ReactElement => {
 };
 
 const Sandbox = (): ReactElement => {
-  const [active1, setActive1] = useState(true); // Start as activated.
-  const [active2, setActive2] = useState(false); // Start as deactivated.
+  const [active, setActive] = useState(true);
 
   useEffect(() => {
-    const tid = setTimeout(() => {
-      setActive1(!active1);
-      setActive2(!active2);
-    }, 2000);
-    return () => clearTimeout(tid);
-  }, [active1]); // (Only read one to prevent race condition error.)
+    const tid = setInterval(() => setActive(active => !active), 2000);
+    return () => clearInterval(tid);
+  }, []);
 
   return (
-    <Animator active={active1} combine>
+    <Animator active={active} combine>
       <Item>
         <Item>
           <Item>
@@ -91,7 +87,7 @@ const Sandbox = (): ReactElement => {
           </Item>
         </Item>
         <Item>
-          <Item animator={{ root: true, active: active2 }}>
+          <Item animator={{ root: true, active: !active }}>
             <Item />
             <Item />
           </Item>
@@ -107,4 +103,4 @@ const Sandbox = (): ReactElement => {
 };
 
 const root = createRoot(document.querySelector('#root') as HTMLElement);
-root.render(<StrictMode><Sandbox /></StrictMode>);
+root.render(<Sandbox />);

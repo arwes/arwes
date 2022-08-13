@@ -1,4 +1,4 @@
-import React, { ReactElement, StrictMode } from 'react';
+import React, { ReactElement } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createThemeStyle } from '@arwes/theme';
 
@@ -20,4 +20,4 @@ const Sandbox = (): ReactElement => {
 };
 
 const root = createRoot(document.querySelector('#root') as HTMLElement);
-root.render(<StrictMode><Sandbox /></StrictMode>);
+root.render(<Sandbox />);

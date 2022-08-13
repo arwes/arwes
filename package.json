@@ -9,7 +9,7 @@
   ],
   "dependencies": {
     "@emotion/react": "^11.10.0",
-    "motion": "^10.13.2",
+    "motion": "^10.13.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -17,9 +17,9 @@
     "@build-script/typescript-transformer-append-js-extension": "^1.0.7",
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
-    "@nrwl/cli": "^14.5.4",
-    "@nrwl/tao": "^14.5.4",
-    "@nrwl/workspace": "^14.5.4",
+    "@nrwl/cli": "^14.5.5",
+    "@nrwl/tao": "^14.5.5",
+    "@nrwl/workspace": "^14.5.5",
     "@testing-library/react": "^13.3.0",
     "@types/jest": "^28.1.6",
     "@types/react": "^18.0.17",
@@ -40,7 +40,7 @@
     "jest": "^28.1.3",
     "jest-canvas-mock": "^2.4.0",
     "jest-environment-jsdom": "^28.1.3",
-    "lerna": "^5.4.0",
+    "lerna": "^5.4.1",
     "markdownlint": "^0.26.2",
     "markdownlint-cli": "^0.32.1",
     "npm-dts": "^1.3.12",
@@ -53,7 +53,7 @@
     "typescript": "4.7.x",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.9.3"
+    "webpack-dev-server": "^4.10.0"
   },
   "scripts": {
     "postinstall": "husky install",

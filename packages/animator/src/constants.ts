@@ -214,7 +214,7 @@ const ANIMATOR_DEFAULT_MACHINE: AnimatorSettingsMachine = Object.freeze({
       }
     }
 
-    if (manager.name !== settings.manager) {
+    if (!manager || manager.name !== settings.manager) {
       node.context.manager = createAnimatorManager(node, settings.manager);
     }
   }

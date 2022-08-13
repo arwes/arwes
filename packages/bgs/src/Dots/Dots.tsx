@@ -1,6 +1,6 @@
-import React, { ReactElement, useRef, useEffect } from 'react';
+import React, { ReactElement, useRef } from 'react';
 import { animate } from 'motion';
-import { cx, mergeRefs } from '@arwes/tools';
+import { cx, mergeRefs, useOnChange } from '@arwes/tools';
 import { ANIMATOR_DEFAULT_KEYS, AnimatorSystemNode, useAnimator } from '@arwes/animator';
 
 import { DotsProps } from './Dots.types';
@@ -29,7 +29,7 @@ const Dots = (props: DotsProps): ReactElement => {
 
   propsFullRef.current = propsFull;
 
-  useEffect(() => {
+  useOnChange(() => {
     if (!animator) {
       return;
     }
@@ -144,7 +144,7 @@ const Dots = (props: DotsProps): ReactElement => {
   return (
     <canvas
       ref={mergeRefs(elementRef, elementRefExternal)}
-      className={cx('arwes-patterns-dots', className)}
+      className={cx('arwes-bgs-dots', className)}
       style={{
         position: 'absolute',
         left: 0,
@@ -163,5 +163,4 @@ const Dots = (props: DotsProps): ReactElement => {
 
 Dots.defaultProps = defaultProps as DotsProps;
 
-export type { DotsProps };
 export { Dots };

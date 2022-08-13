@@ -1,4 +1,4 @@
-import React, { ReactElement, StrictMode, Fragment, useMemo } from 'react';
+import React, { ReactElement, Fragment, useMemo } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Global } from '@emotion/react';
 import {
@@ -97,4 +97,4 @@ const Sandbox = (): ReactElement => {
 };
 
 const root = createRoot(document.querySelector('#root') as HTMLElement);
-root.render(<StrictMode><Sandbox /></StrictMode>);
+root.render(<Sandbox />);

@@ -1,4 +1,4 @@
-import React, { ReactElement, StrictMode, useState, useEffect } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { animate } from 'motion';
 import { Animator } from '@arwes/animator';
@@ -33,9 +33,9 @@ const Sandbox = (): ReactElement => {
   const [active, setActive] = useState(true);
 
   useEffect(() => {
-    const tid = setTimeout(() => setActive(!active), 2000);
-    return () => clearTimeout(tid);
-  }, [active]);
+    const tid = setInterval(() => setActive(active => !active), 2000);
+    return () => clearInterval(tid);
+  }, []);
 
   return (
     <Animator active={active} manager='stagger' combine>
@@ -45,4 +45,4 @@ const Sandbox = (): ReactElement => {
 };
 
 const root = createRoot(document.querySelector('#root') as HTMLElement);
-root.render(<StrictMode><Sandbox /></StrictMode>);
+root.render(<Sandbox />);

@@ -5,12 +5,11 @@ import {
   ReactElement,
   createElement,
   useRef,
-  useEffect,
   useMemo
 } from 'react';
 import { animate } from 'motion';
 
-import { NoInfer, mergeRefs } from '@arwes/tools';
+import { NoInfer, mergeRefs, useOnChange } from '@arwes/tools';
 import { AnimatorSystemNode, useAnimator } from '@arwes/animator';
 
 import type {
@@ -46,7 +45,7 @@ const Animated = <
 
   animatedSettingsRef.current = animatedSettingsList;
 
-  useEffect(() => {
+  useOnChange(() => {
     if (!animator) {
       return;
     }

@@ -1,6 +1,6 @@
-import React, { ReactElement, useRef, useEffect } from 'react';
+import React, { ReactElement, useRef } from 'react';
 import { animate } from 'motion';
-import { cx, mergeRefs } from '@arwes/tools';
+import { cx, mergeRefs, useOnChange } from '@arwes/tools';
 import { ANIMATOR_DEFAULT_KEYS, AnimatorSystemNode, useAnimator } from '@arwes/animator';
 
 import { PuffsProps } from './Puffs.types';
@@ -49,7 +49,7 @@ const Puffs = (props: PuffsProps): ReactElement => {
 
   propsFullRef.current = propsFull;
 
-  useEffect(() => {
+  useOnChange(() => {
     if (!animator) {
       return;
     }
@@ -217,7 +217,7 @@ const Puffs = (props: PuffsProps): ReactElement => {
   return (
     <canvas
       ref={mergeRefs(elementRef, elementRefExternal)}
-      className={cx('arwes-patterns-puffs', className)}
+      className={cx('arwes-bgs-puffs', className)}
       style={{
         position: 'absolute',
         left: 0,
@@ -236,5 +236,4 @@ const Puffs = (props: PuffsProps): ReactElement => {
 
 Puffs.defaultProps = defaultProps as PuffsProps;
 
-export type { PuffsProps };
 export { Puffs };

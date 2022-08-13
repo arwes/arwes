@@ -1,4 +1,4 @@
-import React, { ReactElement, StrictMode, useState, useRef, useEffect } from 'react';
+import React, { ReactElement, useState, useRef, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { animate } from 'motion';
 import { AnimatorGeneralProvider, Animator, useAnimator, AnimatorInterface } from '@arwes/animator';
@@ -73,4 +73,4 @@ const Sandbox = (): ReactElement => {
 };
 
 const root = createRoot(document.querySelector('#root') as HTMLElement);
-root.render(<StrictMode><Sandbox /></StrictMode>);
+root.render(<Sandbox />);

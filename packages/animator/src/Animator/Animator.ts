@@ -1,14 +1,6 @@
-import {
-  ReactElement,
-  createElement,
-  useMemo,
-  useContext,
-  useRef,
-  useEffect
-} from 'react';
+import { ReactElement, createElement, useMemo, useContext, useRef } from 'react';
 
-import { TOOLS_IS_BROWSER } from '@arwes/tools';
-
+import { TOOLS_IS_BROWSER, useOnMount } from '@arwes/tools';
 import type {
   AnimatorSystemNode,
   AnimatorSettings,
@@ -110,13 +102,13 @@ const Animator = (props: AnimatorProps): ReactElement => {
     prevAnimatorRef.current.node.onSettingsChange();
   }
 
-  useEffect(() => {
+  useOnMount(() => {
     return () => {
       if (prevAnimatorRef.current) {
         prevAnimatorRef.current.system.unregister(prevAnimatorRef.current.node);
       }
     };
-  }, []);
+  });
 
   return createElement(AnimatorContext.Provider, { value: animatorInterface }, children);
 };

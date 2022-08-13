@@ -1,4 +1,4 @@
-import React, { ReactElement, StrictMode, useState, useEffect } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   BleepsAudioSettings,
@@ -66,4 +66,4 @@ const Sandbox = (): ReactElement => {
 };
 
 const root = createRoot(document.querySelector('#root') as HTMLElement);
-root.render(<StrictMode><Sandbox /></StrictMode>);
+root.render(<Sandbox />);
