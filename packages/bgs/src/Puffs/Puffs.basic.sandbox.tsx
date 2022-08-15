@@ -21,8 +21,7 @@ const Sandbox = (): ReactElement => {
         width: '80vw',
         height: '80vh'
       }}>
-        {/* It creates a canvas element which will ocupy the positioned
-          parent container fully. */}
+        {/* Canvas element will ocupy the positioned parent element. */}
         <Puffs
           color='hsla(180, 100%, 75%, 0.5)'
           quantity={20}

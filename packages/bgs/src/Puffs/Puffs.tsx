@@ -1,6 +1,6 @@
 import React, { ReactElement, useRef } from 'react';
 import { animate } from 'motion';
-import { cx, mergeRefs, useOnChange } from '@arwes/tools';
+import { cx, mergeRefs, useOnChange, easeOutSine } from '@arwes/tools';
 import { ANIMATOR_DEFAULT_KEYS, AnimatorSystemNode, useAnimator } from '@arwes/animator';
 
 import { PuffsProps } from './Puffs.types';
@@ -18,11 +18,7 @@ interface Puff {
 
 const { ENTERING, ENTERED, EXITING, EXITED } = ANIMATOR_DEFAULT_KEYS;
 
-const easeOutSine = (valueInitial: number, valueChange: number, duration: number, time: number): number =>
-  valueChange * Math.sin(time / duration * (Math.PI / 2)) + valueInitial;
-
-const mmo01 = (value: number): number =>
-  Math.min(1, Math.max(0, value === 1 ? 1 : value % 1));
+const minmaxOverflow01 = (value: number): number => Math.min(1, Math.max(0, value === 1 ? 1 : value % 1));
 
 const defaultProps: Required<Pick<
 PuffsProps, 'padding' | 'xOffset' | 'yOffset' | 'radiusInitial' | 'radiusOffset' | 'sets'
@@ -139,23 +135,20 @@ const Puffs = (props: PuffsProps): ReactElement => {
           const draw = (intervalProgress: number): void => {
             const width = canvas.clientWidth;
             const height = canvas.clientHeight;
-            const isSizeDiff = canvas.width !== width || canvas.height !== height;
+            const isResized = canvas.width !== width || canvas.height !== height;
 
-            if (isSizeDiff) {
-              canvas.width = width;
-              canvas.height = height;
-            }
-
-            if (isSizeDiff || !puffsSets.length) {
+            if (isResized || !puffsSets.length) {
               puffsSets = createPuffsSets(width, height);
             }
 
+            canvas.width = width;
+            canvas.height = height;
             ctx.clearRect(0, 0, width, height);
 
             puffsSets.forEach((puffs, index) => {
               const puffsOffset = puffsSetOffset * index;
-              const puffsProgress = mmo01(intervalProgress + puffsOffset);
-              drawPuffs(puffs, easeOutSine(0, 1, 1, puffsProgress));
+              const puffsProgress = minmaxOverflow01(intervalProgress + puffsOffset);
+              drawPuffs(puffs, easeOutSine(puffsProgress));
             });
           };
 

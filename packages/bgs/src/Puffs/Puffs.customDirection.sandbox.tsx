@@ -17,6 +17,7 @@ const Sandbox = (): ReactElement => {
       <Puffs
         color='hsla(60, 100%, 75%, 0.5)'
         quantity={100}
+        padding={0}
         // Move to the right.
         xOffset={[10, 50]}
         // Move to the top.

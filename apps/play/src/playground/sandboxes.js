@@ -138,7 +138,15 @@ export const sandboxes = [
       {
         name: 'GridLines',
         children: [
-          { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/bgs/src/GridLines/GridLines.basic.sandbox.tsx') }
+          { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/bgs/src/GridLines/GridLines.basic.sandbox.tsx') },
+          { name: 'dashes', code: require('!raw-loader?esModule=false!@repository/packages/bgs/src/GridLines/GridLines.dashes.sandbox.tsx') }
+        ]
+      },
+      {
+        name: 'MovingLines',
+        children: [
+          { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/bgs/src/MovingLines/MovingLines.basic.sandbox.tsx') },
+          { name: 'composition', code: require('!raw-loader?esModule=false!@repository/packages/bgs/src/MovingLines/MovingLines.composition.sandbox.tsx') }
         ]
       }
     ]
