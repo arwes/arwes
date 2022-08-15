@@ -13,21 +13,15 @@ const Sandbox = (): ReactElement => {
 
   return (
     <Animator active={active} duration={{ enter: 1, exit: 1 }}>
-      <div style={{
-        position: 'relative',
-        width: '80vw',
-        height: '80vh'
-      }}>
-        <Dots
-          color='hsla(60, 100%, 75%, 0.25)'
-          type='circle'
-          distance={20}
-          size={2}
-          // x=0% y=100% or left-bottom corner.
-          origin={[0, 1]}
-          originInverted
-        />
-      </div>
+      <Dots
+        color='hsla(60, 100%, 75%, 0.25)'
+        type='circle'
+        distance={20}
+        size={2}
+        // x=0% y=100% or left-bottom corner.
+        origin={[0, 1]}
+        originInverted
+      />
     </Animator>
   );
 };

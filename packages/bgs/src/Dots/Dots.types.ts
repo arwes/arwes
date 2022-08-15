@@ -9,7 +9,7 @@ export interface DotsProps {
   /**
    * Dot color.
    */
-  color: string
+  color?: string
   /**
    * Shape of the dot.
    */

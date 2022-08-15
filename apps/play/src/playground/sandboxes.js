@@ -134,6 +134,12 @@ export const sandboxes = [
           { name: 'customDirection', code: require('!raw-loader?esModule=false!@repository/packages/bgs/src/Puffs/Puffs.customDirection.sandbox.tsx') },
           { name: 'randomDirections', code: require('!raw-loader?esModule=false!@repository/packages/bgs/src/Puffs/Puffs.randomDirections.sandbox.tsx') }
         ]
+      },
+      {
+        name: 'GridLines',
+        children: [
+          { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/bgs/src/GridLines/GridLines.basic.sandbox.tsx') }
+        ]
       }
     ]
   }

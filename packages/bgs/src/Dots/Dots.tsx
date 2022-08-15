@@ -8,7 +8,8 @@ import { getDistanceFromOriginToCornerProgress } from './getDistanceFromOriginTo
 
 const { ENTERING, EXITING } = ANIMATOR_DEFAULT_KEYS;
 
-const defaultProps: Required<Pick<DotsProps, 'type' | 'distance' | 'size' | 'origin'>> = {
+const defaultProps: Required<Pick<DotsProps, 'color' | 'type' | 'distance' | 'size' | 'origin'>> = {
+  color: '#777',
   type: 'box',
   distance: 30,
   size: 4,
@@ -77,6 +78,7 @@ const Dots = (props: DotsProps): ReactElement => {
         const xMargin = width % distance;
         const yMargin = height % distance;
 
+        // Only assign size if they changed.
         if (canvas.width !== width || canvas.height !== height) {
           canvas.width = width;
           canvas.height = height;
