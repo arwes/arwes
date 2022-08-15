@@ -14,6 +14,8 @@
     "**/__deprecated__",
     "**/__testUtils__",
     "**/*.test.ts",
-    "**/*.test.tsx"
+    "**/*.test.tsx",
+    "**/*.sandbox.ts",
+    "**/*.sandbox.tsx"
   ]
 }

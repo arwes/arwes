@@ -1,8 +1,7 @@
-import { memo } from 'react';
+import { memo } from '@arwes/tools';
+import { Puffs as PuffsComponent } from './Puffs';
 
-import { Puffs as PuffsComponent } from './Puffs.component';
-
-const Puffs: typeof PuffsComponent = memo(PuffsComponent) as any;
+const Puffs = memo(PuffsComponent);
 
 export * from './Puffs.types';
 export { Puffs };

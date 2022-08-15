@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.14]
+        node-version: [16.16]
 
     steps:
     - uses: actions/checkout@v2
@@ -24,4 +24,5 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci && npm run integration
+    - run: npm ci
+    - run: npm run integration

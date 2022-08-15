@@ -101,7 +101,7 @@ const ANIMATOR_DEFAULT_MACHINE: AnimatorSettingsMachine = Object.freeze({
     },
     [ENTERING]: {
       onEntry: {
-        schedule: node => {
+        schedule: (node: AnimatorSystemNode) => {
           const { duration: { delay = 0, enter = 0 } = {} } = node.control.getSettings();
           return {
             duration: delay + enter,
@@ -121,7 +121,7 @@ const ANIMATOR_DEFAULT_MACHINE: AnimatorSettingsMachine = Object.freeze({
     },
     [EXITING]: {
       onEntry: {
-        schedule: node => ({
+        schedule: (node: AnimatorSystemNode) => ({
           duration: node.control.getSettings().duration?.exit || 0,
           action: EXIT_END
         })
@@ -132,12 +132,12 @@ const ANIMATOR_DEFAULT_MACHINE: AnimatorSettingsMachine = Object.freeze({
       }
     }
   },
-  onCreate: node => {
+  onCreate: (node: AnimatorSystemNode) => {
     const settings = node.control.getSettings();
 
     node.context.manager = createAnimatorManager(node, settings.manager);
   },
-  onTransition: node => {
+  onTransition: (node: AnimatorSystemNode) => {
     const state = node.getState();
     const { combine } = node.control.getSettings();
     const manager = node.context.manager as AnimatorManager;
@@ -174,7 +174,7 @@ const ANIMATOR_DEFAULT_MACHINE: AnimatorSettingsMachine = Object.freeze({
       }
     }
   },
-  onInitialTransition: node => {
+  onInitialTransition: (node: AnimatorSystemNode) => {
     if (node.parent) {
       const settings = node.control.getSettings();
 
@@ -198,7 +198,7 @@ const ANIMATOR_DEFAULT_MACHINE: AnimatorSettingsMachine = Object.freeze({
       }
     }
   },
-  onSettingsChange: node => {
+  onSettingsChange: (node: AnimatorSystemNode) => {
     const state = node.getState();
     const settings = node.control.getSettings();
     const manager = node.context.manager as AnimatorManager;
@@ -214,7 +214,7 @@ const ANIMATOR_DEFAULT_MACHINE: AnimatorSettingsMachine = Object.freeze({
       }
     }
 
-    if (manager.name !== settings.manager) {
+    if (!manager || manager.name !== settings.manager) {
       node.context.manager = createAnimatorManager(node, settings.manager);
     }
   }

@@ -1,1 +1,1 @@
-export * from './BleepsProvider.component';
+export * from './BleepsProvider';

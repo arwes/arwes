@@ -11,5 +11,5 @@ test('Should render canvas element with arwes class', () => {
   const { container } = render(<Dots color='cyan' />);
   const element = container.firstChild as HTMLElement;
   expect(element.tagName).toBe('CANVAS');
-  expect(element.classList.contains('arwes-patterns-dots')).toBeTruthy();
+  expect(element.classList.contains('arwes-bgs-dots')).toBeTruthy();
 });

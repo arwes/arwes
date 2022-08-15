@@ -1,8 +1,7 @@
-import { memo } from 'react';
+import { memo } from '@arwes/tools';
+import { Dots as Component } from './Dots';
 
-import { Dots as DotsComponent } from './Dots.component';
-
-const Dots: typeof DotsComponent = memo(DotsComponent) as any;
+const Dots = memo(Component);
 
 export * from './Dots.types';
 export { Dots };

@@ -1,9 +1,8 @@
-import { memo } from 'react';
-
-import { Animator as AnimatorComponent } from './Animator';
+import { memo } from '@arwes/tools';
+import { Animator as Component } from './Animator';
 
 // TODO: Optimize props comparision.
-const Animator: typeof AnimatorComponent = memo(AnimatorComponent) as any;
+const Animator = memo(Component);
 
-export * from './Animator';
+export * from './Animator.types';
 export { Animator };

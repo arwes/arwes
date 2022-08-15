@@ -1,15 +1,6 @@
-import {
-  ReactElement,
-  ReactNode,
-  createElement,
-  useMemo,
-  useContext,
-  useRef,
-  useEffect
-} from 'react';
+import { ReactElement, createElement, useMemo, useContext, useRef } from 'react';
 
-import { TOOLS_IS_BROWSER } from '@arwes/tools';
-
+import { TOOLS_IS_BROWSER, useOnMount } from '@arwes/tools';
 import type {
   AnimatorSystemNode,
   AnimatorSettings,
@@ -21,13 +12,7 @@ import { AnimatorContext } from '../utils/AnimatorContext/index';
 import { AnimatorGeneralContext } from '../utils/AnimatorGeneralContext/index';
 import { createAnimatorSystem } from '../utils/createAnimatorSystem/index';
 import { ANIMATOR_DEFAULT_PROPS } from '../constants';
-
-interface AnimatorProps extends AnimatorSettings {
-  root?: boolean
-  disabled?: boolean
-  dismissed?: boolean
-  children?: ReactNode
-}
+import { AnimatorProps } from './Animator.types';
 
 const Animator = (props: AnimatorProps): ReactElement => {
   const { root, disabled, dismissed, children, ...settings } = props;
@@ -117,16 +102,15 @@ const Animator = (props: AnimatorProps): ReactElement => {
     prevAnimatorRef.current.node.onSettingsChange();
   }
 
-  useEffect(() => {
+  useOnMount(() => {
     return () => {
       if (prevAnimatorRef.current) {
         prevAnimatorRef.current.system.unregister(prevAnimatorRef.current.node);
       }
     };
-  }, []);
+  });
 
   return createElement(AnimatorContext.Provider, { value: animatorInterface }, children);
 };
 
-export type { AnimatorProps };
 export { Animator };
