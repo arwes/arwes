@@ -3,6 +3,8 @@ export * from './constants';
 export * from './cx/index';
 export * from './loadImage/index';
 export * from './createTOScheduler/index';
+export * from './randomizeList/index';
+export * from './easings/index';
 export * from './memo/index';
 export * from './mergeRefs/index';
 export * from './useOnMount/index';
