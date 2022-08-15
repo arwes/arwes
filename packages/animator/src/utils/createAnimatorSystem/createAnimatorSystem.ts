@@ -10,6 +10,20 @@ import type {
 
 // TODO: Animator with "combine" should have its duration as the total duration
 // of its children's durations.
+// TODO: The scheduling right now is as follows:
+// 1. Animator setup node
+// 2. System create node
+// 3. System schedules node setup
+// 3. Animator schedules control change
+// 3. Component subscribes to node
+// 4. System node setup
+// 5. System node transition
+// 6. Machine run control change
+// 6. System node transitions if applicable
+// The sequence of events is not playing with the React scheduling system.
+// And the initial schedules (setup and change) complicates the system.
+// There should be a simpler way to sync with the React system to setup and
+// properly detect for control changes for transitions.
 
 const createAnimatorSystem = (): AnimatorSystem => {
   let idCounter = 0;
@@ -72,7 +86,9 @@ const createAnimatorSystem = (): AnimatorSystem => {
     const onSettingsChange = (): void => {
       const nodeScoped = node as AnimatorSystemNode;
 
-      nodeScoped.scheduler.start('change', 0, () => {
+      // Schedule after React useEffects have taken effect so the potential
+      // subscribers have been subscribed and the node setup has been done.
+      nodeScoped.scheduler.start('change', 1, () => {
         machine.onSettingsChange?.(nodeScoped);
       });
     };
@@ -95,7 +111,9 @@ const createAnimatorSystem = (): AnimatorSystem => {
     }
 
     if (TOOLS_IS_BROWSER) {
-      node.scheduler.start('setup', 0, () => {
+      // Schedule after React useEffects have taken effect so the potential
+      // subscribers have been subscribed and before any node change.
+      node.scheduler.start('setup', 1, () => {
         const nodeScoped = node as AnimatorSystemNode;
 
         machine.onCreate?.(nodeScoped);
