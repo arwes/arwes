@@ -88,7 +88,7 @@ const createAnimatorSystem = (): AnimatorSystem => {
 
       // Schedule after React useEffects have taken effect so the potential
       // subscribers have been subscribed and the node setup has been done.
-      nodeScoped.scheduler.start('change', 1, () => {
+      nodeScoped.scheduler.start('change', 0.001, () => {
         machine.onSettingsChange?.(nodeScoped);
       });
     };
@@ -113,7 +113,7 @@ const createAnimatorSystem = (): AnimatorSystem => {
     if (TOOLS_IS_BROWSER) {
       // Schedule after React useEffects have taken effect so the potential
       // subscribers have been subscribed and before any node change.
-      node.scheduler.start('setup', 1, () => {
+      node.scheduler.start('setup', 0.001, () => {
         const nodeScoped = node as AnimatorSystemNode;
 
         machine.onCreate?.(nodeScoped);
