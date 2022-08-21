@@ -2,9 +2,11 @@
 
 import type {
   ThemeSettingsMultiplier,
+  ThemeSettingsUnit,
   ThemeSettingsColor,
   ThemeSettingsStyle,
   ThemeMultiplier,
+  ThemeUnit,
   ThemeColor,
   ThemeStyle,
   ThemeCreatorStructure
@@ -14,24 +16,28 @@ import { createCreateTheme } from './createCreateTheme';
 test('Should create theme creator with plain theme structure object', () => {
   interface ThemeSettings {
     space: ThemeSettingsMultiplier
+    size: ThemeSettingsUnit
     color: ThemeSettingsColor
     font: ThemeSettingsStyle
     other: string
   }
   interface Theme {
     space: ThemeMultiplier
+    size: ThemeUnit
     color: ThemeColor
     font: ThemeStyle
     other: string
   }
   const themeStructure: ThemeCreatorStructure = {
     space: 'multiplier',
+    size: 'unit',
     color: 'color',
     font: 'style',
     other: 'other'
   };
   const themeDefaults: ThemeSettings = {
     space: 1,
+    size: () => '20px',
     color: () => [0, 0, 0, 0],
     font: [{ fontSize: '10px' }],
     other: 'something else'
@@ -42,6 +48,7 @@ test('Should create theme creator with plain theme structure object', () => {
   });
   expect(theme).toBeInstanceOf(Object);
   expect(theme.space).toBeInstanceOf(Function);
+  expect(theme.size).toBeInstanceOf(Function);
   expect(theme.color).toBeInstanceOf(Function);
   expect(theme.font).toBeInstanceOf(Function);
   expect(theme.other).toBe('something else');
@@ -130,4 +137,25 @@ test('Should create theme creator with deep theme structure object', () => {
   expect(theme.others).toBeInstanceOf(Object);
   expect(theme.others.o1).toBe('hello');
   expect(theme.others.o2).toBe(100);
+});
+
+test('Should throw error if theme structure object has invalid key', () => {
+  interface ThemeSettings {
+    space: ThemeSettingsMultiplier
+    size: ThemeSettingsUnit
+  }
+  interface Theme {
+    space: ThemeMultiplier
+    size: ThemeUnit
+  }
+  const themeStructure: ThemeCreatorStructure = {
+    space: 'multiplier',
+    size: 'xxx' as any as ThemeCreatorStructure
+  };
+  const themeDefaults: ThemeSettings = {
+    space: 1,
+    size: () => '20px'
+  };
+  const createTheme = createCreateTheme<ThemeSettings, Theme>(themeStructure, themeDefaults);
+  expect(() => createTheme()).toThrow('Invalid theme structure key "xxx" provided.');
 });

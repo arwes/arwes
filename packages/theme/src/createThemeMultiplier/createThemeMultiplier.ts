@@ -1,6 +1,6 @@
 import type { ThemeSettingsMultiplierFunction, ThemeSettingsMultiplier } from '../types';
 
-const createThemeMultiplier = (settings: ThemeSettingsMultiplier) => (index: number) => {
+const createThemeMultiplier = (settings: ThemeSettingsMultiplier) => (index: number): number => {
   if (Number.isFinite(settings)) {
     const baseValue = settings as number;
     return baseValue * index;
