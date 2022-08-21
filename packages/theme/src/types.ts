@@ -25,7 +25,11 @@ export type ThemeSettingsBreakpoints = string[] | ThemeSettingsBreakpointsKeyLis
 
 export type ThemeMultiplier = (index: number) => number;
 
-export type ThemeColor = (index: number) => string;
+export interface ThemeColorOptions {
+  alpha?: number
+}
+
+export type ThemeColor = (index: number, options?: ThemeColorOptions) => string;
 
 export type ThemeStyleValue = CSSProperties;
 
