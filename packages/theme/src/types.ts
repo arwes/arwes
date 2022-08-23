@@ -5,8 +5,10 @@ import type { PartialDeep } from '@arwes/tools';
 // Theme Settings
 
 export type ThemeSettingsMultiplierFunction = (index: number) => number;
-
 export type ThemeSettingsMultiplier = number | number[] | ThemeSettingsMultiplierFunction;
+
+export type ThemeSettingsUnitFunction = (index: number) => string;
+export type ThemeSettingsUnit = string[] | ThemeSettingsUnitFunction;
 
 export type ThemeSettingsColor =
   | Array<[number, number, number, number?] | string>
@@ -25,10 +27,14 @@ export type ThemeSettingsBreakpoints = string[] | ThemeSettingsBreakpointsKeyLis
 
 export type ThemeMultiplier = (index: number) => number;
 
-export type ThemeColor = (index: number) => string;
+export type ThemeUnit = (index: number | number[]) => string;
+
+export interface ThemeColorOptions {
+  alpha?: number
+}
+export type ThemeColor = (index: number, options?: ThemeColorOptions) => string;
 
 export type ThemeStyleValue = CSSProperties;
-
 export type ThemeStyle = (index: number) => ThemeStyleValue;
 
 export interface ThemeBreakpoints {
@@ -41,7 +47,7 @@ export interface ThemeBreakpoints {
 // Theme Creators
 
 export interface ThemeCreatorStructure {
-  [key: string]: 'multiplier' | 'color' | 'style' | 'breakpoints' | 'other' | ThemeCreatorStructure
+  [key: string]: 'multiplier' | 'unit' | 'color' | 'style' | 'breakpoints' | 'other' | ThemeCreatorStructure
 }
 
 export interface ThemeCreatorOptions {

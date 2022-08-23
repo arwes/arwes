@@ -11,27 +11,24 @@ const color = createThemeColor(i => [180, 75, i * 5, 1]);
 
 const Sandbox = (): ReactElement => {
   return (
-    <StrictMode>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row'
-        }}
-      >
-        {Array(20).fill(0).map((_, variantIndex) => (
-          <div
-            key={variantIndex}
-            style={{
-              width: 20,
-              height: 100,
-              background: color(variantIndex)
-            }}
-          />
-        ))}
-      </div>
-    </StrictMode>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'row'
+      }}
+    >
+      {Array(20).fill(0).map((_, variantIndex) => (
+        <div
+          key={variantIndex}
+          style={{
+            width: 20,
+            height: 100,
+            background: color(variantIndex)
+          }}
+        />
+      ))}
+    </div>
   );
 };
 
-const root = createRoot(document.querySelector('#root') as HTMLElement);
-root.render(<Sandbox />);
+createRoot(document.querySelector('#root') as HTMLElement).render(<Sandbox />);

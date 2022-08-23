@@ -2,6 +2,7 @@ import type { PartialDeep } from '@arwes/tools';
 
 import type { ThemeCreatorStructure } from '../types';
 import { createThemeMultiplier } from '../createThemeMultiplier/index';
+import { createThemeUnit } from '../createThemeUnit/index';
 import { createThemeColor } from '../createThemeColor/index';
 import { createThemeStyle } from '../createThemeStyle/index';
 import { createThemeBreakpoints } from '../createThemeBreakpoints/index';
@@ -36,10 +37,12 @@ const createDeepThemeSetup = (structure: any, settings: any): any => {
     else {
       switch (structure[key]) {
         case 'multiplier': newObject[key] = createThemeMultiplier(settings[key]); break;
+        case 'unit': newObject[key] = createThemeUnit(settings[key]); break;
         case 'color': newObject[key] = createThemeColor(settings[key]); break;
         case 'style': newObject[key] = createThemeStyle(settings[key]); break;
         case 'breakpoints': newObject[key] = createThemeBreakpoints(settings[key]); break;
         case 'other': newObject[key] = settings[key]; break;
+        default: throw new Error(`Invalid theme structure key "${structure[key]}" provided.`);
       }
     }
   });
