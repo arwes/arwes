@@ -1,6 +1,6 @@
 {
-  "name": "core",
-  "root": "packages/core",
+  "name": "react",
+  "root": "packages/react",
   "targets": {
     "build": {
       "executor": "@nrwl/workspace:run-script",
