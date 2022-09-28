@@ -1,7 +1,8 @@
 import React, { ReactElement, Profiler, Fragment, useState, useRef, useEffect } from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
-import { AnimatorGeneralProvider, Animator, useAnimator } from '@arwes/animator';
+import { AnimatorSystemNode } from '@arwes/animator';
+import { AnimatorGeneralProvider, Animator, useAnimator } from '@arwes/react-animator';
 
 const TEST_RENDER_NUMBER = 3000;
 
@@ -16,7 +17,7 @@ const Item = (): ReactElement => {
   const animator = useAnimator();
 
   useEffect(() => {
-    animator?.node.subscribers.add(node => {
+    animator?.node.subscribers.add((node: AnimatorSystemNode) => {
       const element = elementRef.current as HTMLDivElement;
 
       switch (node.getState()) {
@@ -47,7 +48,7 @@ const Test = (): ReactElement => {
           {Array(TEST_RENDER_NUMBER).fill(null).map((_, index) =>
             <Animator
               key={index}
-              onTransition={node => {
+              onTransition={(node: AnimatorSystemNode) => {
                 const state = node.getState();
                 if (index === 0) {
                   console.time(state);
@@ -74,4 +75,4 @@ const App = (): ReactElement => {
   );
 };
 
-render(<App />, document.querySelector('#root'));
+createRoot(document.querySelector('#root') as HTMLElement).render(<App />);

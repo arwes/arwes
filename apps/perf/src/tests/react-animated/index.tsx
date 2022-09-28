@@ -1,8 +1,8 @@
 import React, { ReactElement, Profiler, Fragment, useState, useEffect } from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
-import { Animator } from '@arwes/animator';
-import { Animated } from '@arwes/animated';
+import { Animator } from '@arwes/react-animator';
+import { Animated } from '@arwes/react-animated';
 
 const TEST_RENDER_NUMBER = 1000;
 
@@ -56,4 +56,4 @@ const App = (): ReactElement => {
   );
 };
 
-render(<App />, document.querySelector('#root'));
+createRoot(document.querySelector('#root') as HTMLElement).render(<App />);
