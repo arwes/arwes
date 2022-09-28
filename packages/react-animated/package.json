@@ -1,5 +1,5 @@
 {
-  "name": "@arwes/animated",
+  "name": "@arwes/react-animated",
   "version": "1.0.0-alpha.19",
   "publishConfig": {
     "access": "public"
@@ -40,6 +40,14 @@
   "module": "./build/esm/index.js",
   "main": "./build/cjs/index.js",
   "unpkg": "./build/umd/umd.min.js",
+  "peerDependencies": {
+    "@arwes/animator": "^1.0.0-alpha.19",
+    "@arwes/react-animator": "^1.0.0-alpha.19",
+    "@arwes/react-tools": "^1.0.0-alpha.19",
+    "@arwes/tools": "^1.0.0-alpha.19",
+    "motion": "10",
+    "react": "18"
+  },
   "dependencies": {
     "tslib": "^2.3.1"
   },

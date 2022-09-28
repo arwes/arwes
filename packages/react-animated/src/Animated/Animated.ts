@@ -9,15 +9,17 @@ import {
 } from 'react';
 import { animate } from 'motion';
 
-import { NoInfer, mergeRefs, useOnChange } from '@arwes/tools';
-import { AnimatorSystemNode, useAnimator } from '@arwes/animator';
+import { NoInfer } from '@arwes/tools';
+import { mergeRefs, useOnChange } from '@arwes/react-tools';
+import { AnimatorSystemNode } from '@arwes/animator';
+import { useAnimator } from '@arwes/react-animator';
 
 import type {
   AnimatedSettings,
   AnimatedSettingsTransition,
   AnimatedSettingsTransitionFunctionReturn
 } from '../types';
-import { formatAnimatedCSSPropsShorthands } from '../utils/formatAnimatedCSSPropsShorthands/index';
+import { formatAnimatedCSSPropsShorthands } from '../internal/formatAnimatedCSSPropsShorthands/index';
 import { AnimatedProps } from './Animated.types';
 
 const Animated = <
