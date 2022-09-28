@@ -1,7 +1,5 @@
 import type { Properties as CSSProperties } from 'csstype';
 
-import type { PartialDeep } from '@arwes/tools';
-
 // Theme Settings
 
 export type ThemeSettingsMultiplierFunction = (index: number) => number;
@@ -54,36 +52,3 @@ export interface ThemeCreatorOptions {
   getCacheColorScheme: () => string | null | undefined
   setCacheColorScheme: (colorScheme: string) => void
 }
-
-// Theme Extensions
-
-export interface ThemeSettingsExtensionColorScheme {
-  colorScheme: 'light' | 'dark'
-  colorSchemeControl: 'user' | 'system'
-  setColorScheme: (scheme: 'light' | 'dark' | null) => void
-}
-
-export type ThemeSettingsExtendColorScheme<ThemeSettings> = ThemeSettings & ThemeSettingsExtensionColorScheme;
-
-export interface ThemeSettingsExtend<
-  T,
-  ThemeSettings = ThemeSettingsExtendColorScheme<T>,
-  ThemeSettingsPartial = PartialDeep<ThemeSettings>
-> {
-  common?: ThemeSettingsPartial
-  colorSchemes?: {
-    light?: ThemeSettingsPartial
-    dark?: ThemeSettingsPartial
-  }
-  medias?: {
-    [media: string]: ThemeSettingsPartial | undefined
-  }
-}
-
-export interface ThemeExtensionColorScheme {
-  colorScheme: 'light' | 'dark'
-  colorSchemeControl: 'user' | 'system'
-  setColorScheme: (scheme: 'light' | 'dark' | null) => void
-}
-
-export type ThemeExtend<T> = T & ThemeExtensionColorScheme;

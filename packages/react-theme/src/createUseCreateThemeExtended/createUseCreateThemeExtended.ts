@@ -1,14 +1,9 @@
 import { useMemo, useRef, useState } from 'react';
+import { PartialDeep } from '@arwes/tools';
+import { useOnChange } from '@arwes/react-tools';
+import { ThemeCreatorStructure, ThemeCreatorOptions, createCreateTheme } from '@arwes/theme';
 
-import { PartialDeep, useOnChange } from '@arwes/tools';
-import type {
-  ThemeExtensionColorScheme,
-  ThemeCreatorStructure,
-  ThemeSettingsExtend,
-  ThemeExtend,
-  ThemeCreatorOptions
-} from '../types';
-import { createCreateTheme } from '../createCreateTheme/index';
+import type { ThemeExtensionColorScheme, ThemeSettingsExtend, ThemeExtend } from '../types';
 
 type UseCreateTheme<ThemeSettings, Theme> = (
   getThemeSettingsExtended: () => ThemeSettingsExtend<ThemeSettings>,

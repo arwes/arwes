@@ -2,7 +2,6 @@
 
 import React, { ReactElement } from 'react';
 import { render } from '@testing-library/react';
-
 import type {
   ThemeColor,
   ThemeMultiplier,
@@ -10,10 +9,10 @@ import type {
   ThemeSettingsMultiplier,
   ThemeSettingsStyle,
   ThemeStyle,
-  ThemeCreatorStructure,
-  ThemeExtend,
-  ThemeSettingsExtend
-} from '../types';
+  ThemeCreatorStructure
+} from '@arwes/theme';
+
+import type { ThemeExtend, ThemeSettingsExtend } from '../types';
 import { createUseCreateThemeExtended } from './createUseCreateThemeExtended';
 
 test('Should create create theme hook', () => {

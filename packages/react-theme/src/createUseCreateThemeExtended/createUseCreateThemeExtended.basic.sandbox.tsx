@@ -9,11 +9,13 @@ import {
   ThemeMultiplier,
   ThemeColor,
   ThemeStyle,
-  ThemeCreatorStructure,
+  ThemeCreatorStructure
+} from '@arwes/theme';
+import {
   ThemeSettingsExtend,
   ThemeExtend,
   createUseCreateThemeExtended
-} from '@arwes/theme';
+} from '@arwes/react-theme';
 
 interface ThemeSettings {
   space: ThemeSettingsMultiplier

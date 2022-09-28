@@ -5,4 +5,3 @@ export * from './createThemeColor/index';
 export * from './createThemeStyle/index';
 export * from './createThemeBreakpoints/index';
 export * from './createCreateTheme/index';
-export * from './createUseCreateThemeExtended/index';
