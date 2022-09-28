@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import { Styles, StylesCreatorFunction, StylesCreator } from '../types';
 import { STYLES_EMPTY } from '../constants';
-import { mergeThemeStyles } from '../utils/mergeThemeStyles';
+import { mergeThemeStyles } from '../internal/mergeThemeStyles';
 
 const useStyles = <P = undefined>(
   stylesList: [StylesCreatorFunction<P>, StylesCreator<P>],

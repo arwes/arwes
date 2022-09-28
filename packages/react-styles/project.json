@@ -1,6 +1,6 @@
 {
-  "name": "styles",
-  "root": "packages/styles",
+  "name": "react-styles",
+  "root": "packages/react-styles",
   "targets": {
     "build": {
       "executor": "@nrwl/workspace:run-script",

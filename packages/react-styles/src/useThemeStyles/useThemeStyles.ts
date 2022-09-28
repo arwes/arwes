@@ -3,7 +3,7 @@ import { useTheme } from '@emotion/react';
 
 import { Styles, StylesThemeCreator, StylesThemeCreatorFunction } from '../types';
 import { STYLES_EMPTY } from '../constants';
-import { mergeThemeStyles } from '../utils/mergeThemeStyles';
+import { mergeThemeStyles } from '../internal/mergeThemeStyles';
 
 const useThemeStyles = <P = undefined>(
   styleCreators: [StylesThemeCreatorFunction<P>, StylesThemeCreator<P>],
