@@ -1,7 +1,10 @@
 import React, { ReactElement, useRef } from 'react';
 import { animate } from 'motion';
-import { cx, randomizeList, mergeRefs, useOnChange, easeInOutCubic } from '@arwes/tools';
-import { ANIMATOR_DEFAULT_KEYS, AnimatorSystemNode, useAnimator } from '@arwes/animator';
+import { cx, randomizeList } from '@arwes/tools';
+import { mergeRefs, useOnChange } from '@arwes/react-tools';
+import { easeInOutCubic } from '@arwes/animated';
+import { ANIMATOR_DEFAULT_KEYS, AnimatorSystemNode } from '@arwes/animator';
+import { useAnimator } from '@arwes/react-animator';
 
 import { MovingLinesProps, MovingLinesLineConfig, MovingLinesLine } from './MovingLines.types';
 

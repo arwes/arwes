@@ -1,7 +1,10 @@
 import React, { ReactElement, useRef } from 'react';
 import { animate } from 'motion';
-import { cx, mergeRefs, useOnChange, easeOutSine } from '@arwes/tools';
-import { ANIMATOR_DEFAULT_KEYS, AnimatorSystemNode, useAnimator } from '@arwes/animator';
+import { cx } from '@arwes/tools';
+import { mergeRefs, useOnChange } from '@arwes/react-tools';
+import { easeOutSine } from '@arwes/animated';
+import { ANIMATOR_DEFAULT_KEYS, AnimatorSystemNode } from '@arwes/animator';
+import { useAnimator } from '@arwes/react-animator';
 
 import { PuffsProps } from './Puffs.types';
 

@@ -1,5 +1,5 @@
 {
-  "name": "@arwes/bgs",
+  "name": "@arwes/react-bgs",
   "version": "1.0.0-alpha.19",
   "publishConfig": {
     "access": "public"
@@ -41,7 +41,12 @@
   "main": "./build/cjs/index.js",
   "unpkg": "./build/umd/umd.min.js",
   "peerDependencies": {
-    "motion": "10",
+    "@arwes/animator": "^1.0.0-alpha.19",
+    "@arwes/animated": "^1.0.0-alpha.19",
+    "@arwes/bgs": "^1.0.0-alpha.19",
+    "@arwes/tools": "^1.0.0-alpha.19",
+    "@arwes/react-tools": "^1.0.0-alpha.19",
+    "@arwes/react-animator": "^1.0.0-alpha.19",
     "react": "18"
   },
   "dependencies": {

@@ -1,4 +1,4 @@
-import { memo } from '@arwes/tools';
+import { memo } from '@arwes/react-tools';
 import { Dots as Component } from './Dots';
 
 const Dots = memo(Component);

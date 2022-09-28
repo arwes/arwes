@@ -1,4 +1,4 @@
-import { memo } from '@arwes/tools';
+import { memo } from '@arwes/react-tools';
 import { GridLines as Component } from './GridLines';
 
 const GridLines = memo(Component);
