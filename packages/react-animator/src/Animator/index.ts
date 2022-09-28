@@ -1,4 +1,4 @@
-import { memo } from '@arwes/tools';
+import { memo } from '@arwes/react-tools';
 import { Animator as Component } from './Animator';
 
 // TODO: Optimize props comparision.

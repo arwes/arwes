@@ -1,4 +1,4 @@
-import { memo } from '@arwes/tools';
+import { memo } from '@arwes/react-tools';
 import { AnimatorGeneralProvider as Component } from './AnimatorGeneralProvider';
 
 // TODO: Optimize props comparision.

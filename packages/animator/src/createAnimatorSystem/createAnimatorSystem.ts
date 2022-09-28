@@ -6,7 +6,7 @@ import type {
   AnimatorSystemNode,
   AnimatorSystem,
   AnimatorControl
-} from '../../types';
+} from '../types';
 
 // TODO: Animator with "combine" should have its duration as the total duration
 // of its children's durations.

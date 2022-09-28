@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import type { AnimatorControl } from '../../types';
+import type { AnimatorControl } from '../types';
 import { createAnimatorSystem } from './createAnimatorSystem';
 
 test('Should create an empty animator system', () => {

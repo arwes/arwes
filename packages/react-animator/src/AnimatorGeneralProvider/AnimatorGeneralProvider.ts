@@ -1,7 +1,7 @@
 import { createElement, ReactElement, useRef, useMemo } from 'react';
 
 import type { AnimatorGeneralProviderSettings, AnimatorGeneralInterface } from '../types';
-import { AnimatorGeneralContext } from '../utils/AnimatorGeneralContext/index';
+import { AnimatorGeneralContext } from '../internal/AnimatorGeneralContext/index';
 import { AnimatorGeneralProviderProps } from './AnimatorGeneralProvider.types';
 
 const AnimatorGeneralProvider = (props: AnimatorGeneralProviderProps): ReactElement => {

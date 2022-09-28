@@ -1,17 +1,18 @@
 import { ReactElement, createElement, useMemo, useContext, useRef } from 'react';
 
-import { TOOLS_IS_BROWSER, useOnMount } from '@arwes/tools';
-import type {
+import { TOOLS_IS_BROWSER } from '@arwes/tools';
+import { useOnMount } from '@arwes/react-tools';
+import {
   AnimatorSystemNode,
   AnimatorSettings,
   AnimatorSystem,
   AnimatorControl,
-  AnimatorInterface
-} from '../types';
-import { AnimatorContext } from '../utils/AnimatorContext/index';
-import { AnimatorGeneralContext } from '../utils/AnimatorGeneralContext/index';
-import { createAnimatorSystem } from '../utils/createAnimatorSystem/index';
-import { ANIMATOR_DEFAULT_PROPS } from '../constants';
+  AnimatorInterface,
+  ANIMATOR_DEFAULT_PROPS,
+  createAnimatorSystem
+} from '@arwes/animator';
+import { AnimatorContext } from '../internal/AnimatorContext/index';
+import { AnimatorGeneralContext } from '../internal/AnimatorGeneralContext/index';
 import { AnimatorProps } from './Animator.types';
 
 const Animator = (props: AnimatorProps): ReactElement => {
