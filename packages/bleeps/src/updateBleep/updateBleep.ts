@@ -2,7 +2,7 @@ import type {
   BleepsAudioGroupSettings,
   BleepPlayerSettings,
   BleepGeneric
-} from '../../types';
+} from '../types';
 
 const updateBleep = (
   bleep: BleepGeneric,

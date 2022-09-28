@@ -5,7 +5,7 @@ import type {
   BleepPlayerSettings,
   BleepGenericInstanceId,
   BleepGeneric
-} from '../../types';
+} from '../types';
 
 const createBleep = (audioSettings: BleepsAudioGroupSettings, playerSettings: BleepPlayerSettings): BleepGeneric => {
   const { disabled, ...settings } = {

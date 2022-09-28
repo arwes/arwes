@@ -1,16 +1,15 @@
 import React, { ReactNode, ReactElement, useContext, useState, useMemo } from 'react';
-
 import type {
   BleepsAudioSettings,
   BleepsPlayersSettings,
   BleepsSettings,
   BleepCategoryName,
-  BleepsGenerics,
-  BleepsSetup
-} from '../types';
-import { BLEEPS_CATEGORIES } from '../constants';
-import { BleepsContext } from '../BleepsContext/index';
-import { createOrUpdateBleeps } from '../utils/createOrUpdateBleeps/index';
+  BleepsGenerics
+} from '@arwes/bleeps';
+import { BLEEPS_CATEGORIES, createOrUpdateBleeps } from '@arwes/bleeps';
+
+import type { BleepsSetup } from '../types';
+import { BleepsContext } from '../internal/BleepsContext/index';
 
 interface BleepsProviderProps {
   settings: {

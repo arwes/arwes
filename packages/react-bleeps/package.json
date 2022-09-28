@@ -1,5 +1,5 @@
 {
-  "name": "@arwes/bleeps",
+  "name": "@arwes/react-bleeps",
   "version": "1.0.0-alpha.19",
   "publishConfig": {
     "access": "public"
@@ -40,10 +40,11 @@
   "module": "./build/esm/index.js",
   "main": "./build/cjs/index.js",
   "unpkg": "./build/umd/umd.min.js",
-  "peerDependencies": {},
+  "peerDependencies": {
+    "@arwes/bleeps": "^1.0.0-alpha.19",
+    "react": "18"
+  },
   "dependencies": {
-    "@types/howler": "2.2.x",
-    "howler": "2.2.x",
     "tslib": "^2.3.1"
   },
   "devDependencies": {},

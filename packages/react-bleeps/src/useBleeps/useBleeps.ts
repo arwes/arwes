@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import type { BleepName, Bleep, Bleeps } from '../types';
+import type { BleepName, Bleep, Bleeps } from '@arwes/bleeps';
 import { useBleepsSetup } from '../useBleepsSetup/index';
 
 let instanceIdCounter = 0;

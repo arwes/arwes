@@ -4,8 +4,8 @@ import type {
   BleepsPlayersSettings,
   BleepsSettings,
   BleepsGenerics
-} from '../../types';
-import { BLEEPS_CATEGORIES } from '../../constants';
+} from '../types';
+import { BLEEPS_CATEGORIES } from '../constants';
 import { createBleep } from '../createBleep/index';
 import { updateBleep } from '../updateBleep/index';
 import { unloadBleep } from '../unloadBleep/index';

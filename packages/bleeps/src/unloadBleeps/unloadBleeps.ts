@@ -1,4 +1,4 @@
-import type { BleepsGenerics } from '../../types';
+import type { BleepsGenerics } from '../types';
 import { unloadBleep } from '../unloadBleep/index';
 
 const unloadBleeps = (bleeps: BleepsGenerics): void => {

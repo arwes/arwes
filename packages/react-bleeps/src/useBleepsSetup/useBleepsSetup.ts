@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
 import type { BleepsSetup } from '../types';
-import { BleepsContext } from '../BleepsContext/index';
+import { BleepsContext } from '../internal/BleepsContext/index';
 
 function useBleepsSetup (): BleepsSetup | undefined {
   return useContext(BleepsContext);

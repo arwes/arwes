@@ -1,10 +1,10 @@
 /* eslint-env jest */
 
-import type { BleepsSettings } from '../../types';
+import type { BleepsSettings } from '../types';
 import {
   BLEEPS_TRANSITION,
   BLEEPS_INTERACTION
-} from '../../constants';
+} from '../constants';
 import { createOrUpdateBleeps } from './createOrUpdateBleeps';
 
 test('Should create bleeps with common and category settings', () => {
