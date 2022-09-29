@@ -1,8 +1,8 @@
 import React, { Fragment, ReactElement, useEffect } from 'react';
 import Head from 'next/head';
 import { animate } from 'motion';
-import { Animator } from '@arwes/animator';
-import { Dots } from '@arwes/bgs';
+import { Animator } from '@arwes/react-animator';
+import { Dots } from '@arwes/react-bgs';
 
 const $$ = (selector: string): HTMLElement[] => Array.from(document.querySelectorAll(selector));
 

@@ -6,8 +6,8 @@
     "node": "^16.16"
   },
   "dependencies": {
-    "@arwes/animator": "^1.0.0-alpha.19",
-    "@arwes/bgs": "^1.0.0-alpha.19",
+    "@arwes/react-animator": "^1.0.0-alpha.19",
+    "@arwes/react-bgs": "^1.0.0-alpha.19",
     "next": "^12.1.4"
   },
   "scripts": {
