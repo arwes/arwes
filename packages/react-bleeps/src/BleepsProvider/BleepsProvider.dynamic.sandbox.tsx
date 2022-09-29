@@ -1,12 +1,7 @@
 import React, { ReactNode, ReactElement, useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
-import {
-  BleepsAudioSettings,
-  BleepsPlayersSettings,
-  BleepsSettings,
-  BleepsProvider,
-  useBleeps
-} from '@arwes/bleeps';
+import { BleepsAudioSettings, BleepsPlayersSettings, BleepsSettings } from '@arwes/bleeps';
+import { BleepsProvider, useBleeps } from '@arwes/react-bleeps';
 
 const SOUND_CLICK_URL = '/assets/sounds/click.mp3';
 const VOLUME_LOW = 0.1;

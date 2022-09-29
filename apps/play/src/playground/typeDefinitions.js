@@ -113,10 +113,6 @@ export const typeDefinitions = [
     code: require('!raw-loader?esModule=false!@arwes/theme/build/types/index.d.ts')
   },
   {
-    filename: 'file:///node_modules/@arwes/styles/index.d.ts',
-    code: require('!raw-loader?esModule=false!@arwes/styles/build/types/index.d.ts')
-  },
-  {
     filename: 'file:///node_modules/@arwes/animator/index.d.ts',
     code: require('!raw-loader?esModule=false!@arwes/animator/build/types/index.d.ts')
   },
@@ -131,5 +127,29 @@ export const typeDefinitions = [
   {
     filename: 'file:///node_modules/@arwes/bgs/index.d.ts',
     code: require('!raw-loader?esModule=false!@arwes/bgs/build/types/index.d.ts')
+  },
+  {
+    filename: 'file:///node_modules/@arwes/react-theme/index.d.ts',
+    code: require('!raw-loader?esModule=false!@arwes/react-theme/build/types/index.d.ts')
+  },
+  {
+    filename: 'file:///node_modules/@arwes/react-styles/index.d.ts',
+    code: require('!raw-loader?esModule=false!@arwes/react-styles/build/types/index.d.ts')
+  },
+  {
+    filename: 'file:///node_modules/@arwes/react-animator/index.d.ts',
+    code: require('!raw-loader?esModule=false!@arwes/react-animator/build/types/index.d.ts')
+  },
+  {
+    filename: 'file:///node_modules/@arwes/react-animated/index.d.ts',
+    code: require('!raw-loader?esModule=false!@arwes/react-animated/build/types/index.d.ts')
+  },
+  {
+    filename: 'file:///node_modules/@arwes/react-bleeps/index.d.ts',
+    code: require('!raw-loader?esModule=false!@arwes/react-bleeps/build/types/index.d.ts')
+  },
+  {
+    filename: 'file:///node_modules/@arwes/react-bgs/index.d.ts',
+    code: require('!raw-loader?esModule=false!@arwes/react-bgs/build/types/index.d.ts')
   }
 ];

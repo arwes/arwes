@@ -120,9 +120,6 @@ window.noxtron.setupPlayground(({ emotion, Icon }) => {
           </Link>,
           <Link href='/perf' target='perf'>
             <ArwesIcon /> Perf
-          </Link>,
-          <Link href='/project/versions' target='versions'>
-            <ArwesIcon /> Versions
           </Link>
         ],
         [

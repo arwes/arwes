@@ -1,7 +1,7 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Animator } from '@arwes/animator';
-import { Animated, aaProperty, aaOpacity } from '@arwes/animated';
+import { Animator } from '@arwes/react-animator';
+import { Animated, aaProperty, aaOpacity } from '@arwes/react-animated';
 
 const Item = (): ReactElement => {
   return (

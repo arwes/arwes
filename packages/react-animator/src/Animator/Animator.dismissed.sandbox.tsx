@@ -8,7 +8,7 @@
 import React, { ReactNode, ReactElement, useState, useRef, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { animate } from 'motion';
-import { AnimatorProps, Animator, useAnimator } from '@arwes/animator';
+import { Animator, AnimatorProps, useAnimator } from '@arwes/react-animator';
 
 const AnimatorUIListener = (): ReactElement => {
   const elementRef = useRef<HTMLDivElement>(null);

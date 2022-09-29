@@ -2,10 +2,11 @@
 
 import React, { FC, useContext } from 'react';
 import { render, cleanup } from '@testing-library/react';
+import type { BleepsSettings } from '@arwes/bleeps';
 
 import { makeErrorCatcher } from '../../__testUtils__/makeErrorCatcher';
-import type { BleepsSettings, BleepsSetup } from '../types';
-import { BleepsContext } from '../BleepsContext';
+import type { BleepsSetup } from '../types';
+import { BleepsContext } from '../internal/BleepsContext';
 import { BleepsProvider } from './BleepsProvider';
 
 let mockConsoleError: any;

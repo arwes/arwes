@@ -2,7 +2,7 @@
 import { jsx } from '@emotion/react';
 import { ReactNode, ReactElement, Fragment } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Styles, StylesCreator, useStyles } from '@arwes/styles';
+import { Styles, StylesCreator, useStyles } from '@arwes/react-styles';
 
 interface CardProps {
   styles?: StylesCreator

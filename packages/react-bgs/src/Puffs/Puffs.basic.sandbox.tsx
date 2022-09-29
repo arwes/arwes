@@ -1,7 +1,7 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Animator } from '@arwes/animator';
-import { Puffs } from '@arwes/bgs';
+import { Animator } from '@arwes/react-animator';
+import { Puffs } from '@arwes/react-bgs';
 
 const Sandbox = (): ReactElement => {
   const [active, setActive] = useState(true);

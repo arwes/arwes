@@ -2,7 +2,7 @@
 import { jsx, ThemeProvider } from '@emotion/react';
 import React, { ReactNode, ReactElement } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Styles, StylesThemeCreator, useThemeStyles } from '@arwes/styles';
+import { Styles, StylesThemeCreator, useThemeStyles } from '@arwes/react-styles';
 
 // useThemeStyles uses the `useTheme` hook which returns a `Theme`.
 // So the proper type should be set globally.

@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Animator } from '@arwes/animator';
-import { Animated } from '@arwes/animated';
+import { Animator } from '@arwes/react-animator';
+import { Animated } from '@arwes/react-animated';
 
 const Sandbox = (): ReactElement => {
   return (
