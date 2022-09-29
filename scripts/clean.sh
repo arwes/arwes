@@ -1,6 +1,7 @@
 #!/bin/sh
 
 rm -rf ./node_modules/.cache/nx
+rm -rf ./node_modules/@arwes
 rm -rf ./packages/*/build
 rm -rf ./packages/*/.tsbuildinfo
 rm -rf ./apps/*/build

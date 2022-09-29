@@ -85,14 +85,3 @@ export interface Bleep extends BleepGeneric {
 }
 
 export type Bleeps = Record<BleepName, Bleep>;
-
-// Bleeps Provider/Setup
-
-export interface BleepsSetup {
-  settings: {
-    audio: BleepsAudioSettings
-    players: BleepsPlayersSettings
-    bleeps: BleepsSettings
-  }
-  bleeps: BleepsGenerics
-}

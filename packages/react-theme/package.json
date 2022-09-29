@@ -1,0 +1,60 @@
+{
+  "name": "@arwes/react-theme",
+  "version": "1.0.0-alpha.19",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Futuristic Sci-Fi UI Web Framework",
+  "keywords": [
+    "arwes",
+    "ui",
+    "front-end",
+    "framework",
+    "scifi",
+    "sci-fi",
+    "science-fiction"
+  ],
+  "homepage": "https://arwes.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arwes/arwes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/arwes/arwes/issues"
+  },
+  "funding": "https://github.com/sponsors/romelperez",
+  "license": "MIT",
+  "files": [
+    "build"
+  ],
+  "exports": {
+    ".": {
+      "import": "./build/esm/index.js",
+      "require": "./build/cjs/index.js"
+    },
+    "./build/": {
+      "default": "./build/"
+    }
+  },
+  "types": "./build/esm/index.d.ts",
+  "module": "./build/esm/index.js",
+  "main": "./build/cjs/index.js",
+  "unpkg": "./build/umd/umd.min.js",
+  "peerDependencies": {
+    "@arwes/theme": "^1.0.0-alpha.19",
+    "@arwes/react-tools": "^1.0.0-alpha.19",
+    "@arwes/tools": "^1.0.0-alpha.19",
+    "react": "18"
+  },
+  "dependencies": {
+    "tslib": "^2.3.1"
+  },
+  "scripts": {
+    "build": "npm run build-esm && npm run build-cjs && npm run build-umd && npm run build-types",
+    "build-esm": "sh ../../scripts/pkg-build-esm.sh",
+    "build-cjs": "sh ../../scripts/pkg-build-cjs.sh",
+    "build-umd": "sh ../../scripts/pkg-build-umd.sh",
+    "build-types": "sh ../../scripts/pkg-build-types.sh",
+    "dev": "sh ../../scripts/pkg-build-esm.sh --watch"
+  }
+}

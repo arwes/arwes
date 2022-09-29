@@ -40,9 +40,7 @@
   "module": "./build/esm/index.js",
   "main": "./build/cjs/index.js",
   "unpkg": "./build/umd/umd.min.js",
-  "peerDependencies": {
-    "react": "18"
-  },
+  "peerDependencies": {},
   "dependencies": {
     "@types/howler": "2.2.x",
     "howler": "2.2.x",

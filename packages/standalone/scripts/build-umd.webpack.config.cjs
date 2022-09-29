@@ -19,8 +19,6 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
-      react$: path.join(MOCKS, 'react.js'),
-      '@emotion/react$': path.join(MOCKS, 'emotion/react.js'),
       motion$: path.join(MOCKS, 'motion.js')
     }
   },

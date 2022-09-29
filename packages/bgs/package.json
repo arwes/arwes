@@ -41,8 +41,6 @@
   "main": "./build/cjs/index.js",
   "unpkg": "./build/umd/umd.min.js",
   "peerDependencies": {
-    "@arwes/animator": "^1.0.0-alpha.19",
-    "@arwes/tools": "^1.0.0-alpha.19",
     "motion": "10",
     "react": "18"
   },
