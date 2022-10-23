@@ -1,11 +1,9 @@
 {
-  "packages": [
-    "packages/*"
-  ],
   "version": "1.0.0-alpha.19",
+  "useWorkspaces": true,
   "command": {
     "publish": {
-      "allowBranch": "main",
+      "allowBranch": "dev",
       "message": "chore(release): %s"
     }
   }
