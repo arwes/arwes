@@ -1,5 +1,6 @@
 import {
   HTMLProps,
+  SVGProps,
   CSSProperties,
   ForwardedRef,
   ReactNode
@@ -7,7 +8,7 @@ import {
 
 import type { AnimatedSettings } from '../types';
 
-export interface AnimatedProps<E extends HTMLElement | SVGElement = HTMLDivElement, P = HTMLProps<E>> {
+export interface AnimatedProps<E extends HTMLElement | SVGElement = HTMLDivElement, P extends HTMLProps<HTMLElement> | SVGProps<SVGElement> = HTMLProps<HTMLDivElement>> {
   elementRef?: ForwardedRef<E>
   className?: string
   style?: CSSProperties
