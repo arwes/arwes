@@ -1,6 +1,6 @@
 {
   "name": "@arwes/react-theme",
-  "version": "1.0.0-alpha.19",
+  "version": "1.0.0-next.1",
   "publishConfig": {
     "access": "public"
   },
@@ -41,8 +41,8 @@
   "main": "./build/cjs/index.js",
   "unpkg": "./build/umd/umd.min.js",
   "peerDependencies": {
-    "@arwes/theme": "^1.0.0-alpha.19",
     "@arwes/react-tools": "^1.0.0-alpha.19",
+    "@arwes/theme": "^1.0.0-alpha.19",
     "@arwes/tools": "^1.0.0-alpha.19",
     "react": "18"
   },

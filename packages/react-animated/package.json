@@ -1,6 +1,6 @@
 {
   "name": "@arwes/react-animated",
-  "version": "1.0.0-alpha.19",
+  "version": "1.0.0-next.1",
   "publishConfig": {
     "access": "public"
   },
