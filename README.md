@@ -27,23 +27,8 @@
     <a href="https://discord.gg/s5sbTkw">
       <img src="https://img.shields.io/discord/457381046497968128?color=5865F2&logo=discord&logoColor=white" alt="Join us on Discord">
     </a>
-</div>
-
-<div align="center">
-    <a href="https://standardjs.com">
-        <img src="https://img.shields.io/badge/code_style-standardjs-d2bb09.svg?style=flat-square" alt="code style: standardjs" />
-    </a>
-    <a href="https://jestjs.io">
-        <img src="https://img.shields.io/badge/tested%20with-jest-15c213.svg?style=flat-square" alt="tested with: jest" />
-    </a>
-    <a href="https://lerna.js.org">
-        <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg?style=flat-square" alt="lerna" />
-    </a>
-    <a href="http://commitizen.github.io/cz-cli">
-        <img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square" alt="Commitizen friendly" />
-    </a>
     <a href="https://github.com/arwes/arwes/blob/main/LICENSE">
-        <img src="https://img.shields.io/github/license/arwes/arwes.svg?maxAge=2592000&style=flat-square" alt="license" />
+      <img src="https://img.shields.io/github/license/arwes/arwes.svg?maxAge=2592000&style=flat-square" alt="license" />
     </a>
 </div>
 
