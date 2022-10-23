@@ -84,7 +84,8 @@ See **[arwes.dev](https://arwes.dev)**.
 <tr>
 <td align="center"><a href="https://soulextract.com"><img src="./static/community/apps/images/soulextract.com.jpg" width="252px;" alt="SoulExtract.com" /></a><br /><a href="https://soulextract.com">SoulExtract.com</a><br /><a href="https://github.com/soulextract/soulextract.com"><sub>soulextract/soulextract.com</sub></a></td>
 <td align="center"><a href="https://romelperez.dev"><img src="./static/community/apps/images/romelperez.dev.jpg" width="252px;" alt="RomelPerez.dev" /></a><br /><a href="https://romelperez.dev">RomelPerez.dev</a><br /><sub>--</sub></td>
-<td align="center"><a href="https://archiverpg.com"><img src="./static/community/apps/images/archiverpg.com.jpg" width="252px;" alt="ArchiveRPG.com" /></a><br /><a href="https://archiverpg.com">ArchiveRPG.com</a><br /><sub>--</sub></td>
+<td align="center"><a href="https://archiverpg.com"><img src="./static/community/apps/images/archiverpg.com.jpg" width="252px;" alt="ArchiveRPG.com" /></a><br /><a href="https://archiverpg.com">ArchiveRPG.com</a><br /><sub>--</sub></td></tr>
+<tr><td align="center"><a href="https://www.myxouz.com/2021/12/lady-of-shalott-first-version-of-our-home-dashboard/"><img src="./static/community/apps/images/lady-of-shalott.jpg" width="252px;" alt="Lady of the Shalott" /></a><br /><a href="https://www.myxouz.com/2021/12/lady-of-shalott-first-version-of-our-home-dashboard/">Lady of the Shalott</a><br /><sub>--</sub></td>
 </tr>
 </table>
 <!-- ARWES-COMMUNITY-APPS:END -->
