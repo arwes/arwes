@@ -17,9 +17,9 @@
     "@build-script/typescript-transformer-append-js-extension": "^1.0.7",
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
-    "@nrwl/cli": "^14.5.5",
-    "@nrwl/tao": "^14.5.5",
-    "@nrwl/workspace": "^14.5.5",
+    "@nrwl/cli": "^15.0.1",
+    "@nrwl/tao": "^15.0.1",
+    "@nrwl/workspace": "^15.0.1",
     "@testing-library/react": "^13.4.0",
     "@types/jest": "^28.1.6",
     "@types/react": "^18.0.21",
@@ -56,7 +56,7 @@
     "webpack-dev-server": "^4.11.1"
   },
   "scripts": {
-    "postinstall": "husky install",
+    "postinstall": "husky install && lerna bootstrap",
     "lint": "npm run lint-js && npm run lint-md",
     "lint-js": "eslint .",
     "lint-js-fix": "eslint . --fix",
