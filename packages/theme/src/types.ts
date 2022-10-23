@@ -1,4 +1,5 @@
 import type { Properties as CSSProperties } from 'csstype';
+import type { PartialDeep } from '@arwes/tools';
 
 // Theme Settings
 
@@ -52,3 +53,7 @@ export interface ThemeCreatorOptions {
   getCacheColorScheme: () => string | null | undefined
   setCacheColorScheme: (colorScheme: string) => void
 }
+
+export type ThemeCreator<ThemeSettings, Theme> = (
+  themeSettingsExtensions?: PartialDeep<ThemeSettings> | Array<PartialDeep<ThemeSettings> | undefined> | undefined
+) => Theme;

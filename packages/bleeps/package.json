@@ -1,6 +1,6 @@
 {
   "name": "@arwes/bleeps",
-  "version": "1.0.0-alpha.19",
+  "version": "1.0.0-next.1",
   "publishConfig": {
     "access": "public"
   },
@@ -40,13 +40,11 @@
   "module": "./build/esm/index.js",
   "main": "./build/cjs/index.js",
   "unpkg": "./build/umd/umd.min.js",
-  "peerDependencies": {},
   "dependencies": {
     "@types/howler": "2.2.x",
     "howler": "2.2.x",
     "tslib": "^2.3.1"
   },
-  "devDependencies": {},
   "scripts": {
     "build": "npm run build-esm && npm run build-cjs && npm run build-umd && npm run build-types",
     "build-esm": "sh ../../scripts/pkg-build-esm.sh",

@@ -1,6 +1,6 @@
 import type { PartialDeep } from '@arwes/tools';
 
-import type { ThemeCreatorStructure } from '../types';
+import type { ThemeCreatorStructure, ThemeCreator } from '../types';
 import { createThemeMultiplier } from '../createThemeMultiplier/index';
 import { createThemeUnit } from '../createThemeUnit/index';
 import { createThemeColor } from '../createThemeColor/index';
@@ -49,18 +49,16 @@ const createDeepThemeSetup = (structure: any, settings: any): any => {
   return newObject;
 };
 
-type CreateTheme<ThemeSettings, Theme> = (
-  themeSettingsExtensions?: PartialDeep<ThemeSettings> | Array<PartialDeep<ThemeSettings> | undefined> | undefined
-) => Theme;
-
 const createCreateTheme = <ThemeSettings, Theme>(
   themeStructure: ThemeCreatorStructure,
   themeSettingsDefaults: ThemeSettings
-): CreateTheme<ThemeSettings, Theme> => {
-  const createTheme: CreateTheme<ThemeSettings, Theme> = (themeSettingsExtensions = {}) => {
+): ThemeCreator<ThemeSettings, Theme> => {
+  const createTheme: ThemeCreator<ThemeSettings, Theme> = (themeSettingsExtensions = {}) => {
     let themeSettings: ThemeSettings | undefined;
 
     if (Array.isArray(themeSettingsExtensions)) {
+      // TODO:
+      // @ts-expect-error
       themeSettings = themeSettingsExtensions.reduce(
         (settingsTotal: ThemeSettings, settingsItem: PartialDeep<ThemeSettings> | undefined) => {
           if (!settingsItem) {
@@ -81,5 +79,4 @@ const createCreateTheme = <ThemeSettings, Theme>(
   return createTheme;
 };
 
-export type { CreateTheme };
 export { createCreateTheme };

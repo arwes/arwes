@@ -1,6 +1,6 @@
 {
   "name": "arwes",
-  "version": "1.0.0-alpha.19",
+  "version": "1.0.0-next.1",
   "publishConfig": {
     "access": "public"
   },
@@ -41,15 +41,14 @@
   "main": "./build/cjs/index.js",
   "unpkg": "./build/umd/umd.min.js",
   "dependencies": {
-    "@arwes/tools": "^1.0.0-alpha.19",
-    "@arwes/theme": "^1.0.0-alpha.19",
-    "@arwes/animator": "^1.0.0-alpha.19",
-    "@arwes/animated": "^1.0.0-alpha.19",
-    "@arwes/bleeps": "^1.0.0-alpha.19",
-    "@arwes/bgs": "^1.0.0-alpha.19",
+    "@arwes/animated": "^1.0.0-next.1",
+    "@arwes/animator": "^1.0.0-next.1",
+    "@arwes/bgs": "^1.0.0-next.1",
+    "@arwes/bleeps": "^1.0.0-next.1",
+    "@arwes/theme": "^1.0.0-next.1",
+    "@arwes/tools": "^1.0.0-next.1",
     "tslib": "^2.3.1"
   },
-  "devDependencies": {},
   "scripts": {
     "build": "npm run build-esm && npm run build-cjs && npm run build-umd && npm run build-types",
     "build-esm": "sh ../../scripts/pkg-build-esm.sh",
