@@ -32,17 +32,13 @@ export interface AnimatorSystem {
 
 export interface AnimatorSettingsMachine {
   initialState: string
-  states: {
-    [state: string]: {
-      onEntry?: {
-        execute?: (node: AnimatorSystemNode) => void
-        schedule?: (node: AnimatorSystemNode) => { duration: number, action: string }
-      }
-      onActions?: {
-        [action: string]: string
-      }
+  states: Record<string, {
+    onEntry?: {
+      execute?: (node: AnimatorSystemNode) => void
+      schedule?: (node: AnimatorSystemNode) => { duration: number, action: string }
     }
-  }
+    onActions?: Record<string, string>
+  }>
   onCreate?: (node: AnimatorSystemNode) => void
   onSettingsChange?: (node: AnimatorSystemNode) => void
   onTransition?: (node: AnimatorSystemNode) => void

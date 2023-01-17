@@ -7,7 +7,7 @@
       "options": {
         "script": "build"
       },
-      "outputs": ["out", "public"],
+      "outputs": ["out"],
       "dependsOn": [
         {
           "target": "build",
