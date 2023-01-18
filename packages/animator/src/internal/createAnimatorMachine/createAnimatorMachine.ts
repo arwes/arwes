@@ -1,7 +1,7 @@
 import { TOOLS_IS_BROWSER } from '@arwes/tools';
 
-import type { AnimatorNode, AnimatorState, AnimatorAction } from '../types';
-import { ANIMATOR_STATES, ANIMATOR_ACTIONS } from '../constants';
+import type { AnimatorNode, AnimatorState, AnimatorAction } from '../../types';
+import { ANIMATOR_STATES, ANIMATOR_ACTIONS } from '../../constants';
 
 const { exited, entering, entered, exiting } = ANIMATOR_STATES;
 const { setup, enter, enterEnd, exit, exitEnd, update } = ANIMATOR_ACTIONS;

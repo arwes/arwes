@@ -6,8 +6,8 @@ import type {
   AnimatorNode,
   AnimatorSystem
 } from '../types';
-import { createAnimatorManager } from '../createAnimatorManager/index';
-import { createAnimatorMachine } from '../createAnimatorMachine/index';
+import { createAnimatorManager } from '../internal/createAnimatorManager/index';
+import { createAnimatorMachine } from '../internal/createAnimatorMachine/index';
 
 const createAnimatorSystem = (): AnimatorSystem => {
   const systemId = `system-${Date.now()}-${Math.random()}`;

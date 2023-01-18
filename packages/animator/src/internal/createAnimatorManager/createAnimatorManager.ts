@@ -2,8 +2,8 @@ import type {
   AnimatorManagerName,
   AnimatorManager,
   AnimatorNode
-} from '../types';
-import { ANIMATOR_MANAGER_NAMES, ANIMATOR_ACTIONS } from '../constants';
+} from '../../types';
+import { ANIMATOR_MANAGER_NAMES, ANIMATOR_ACTIONS } from '../../constants';
 
 const { parallel, stagger, sequence } = ANIMATOR_MANAGER_NAMES;
 const { enter } = ANIMATOR_ACTIONS;
