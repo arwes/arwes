@@ -3,7 +3,7 @@
   "root": "packages/theme",
   "targets": {
     "build": {
-      "executor": "@nrwl/workspace:run-script",
+      "executor": "nx:run-script",
       "options": {
         "script": "build"
       },
@@ -16,7 +16,7 @@
       ]
     },
     "build-esm": {
-      "executor": "@nrwl/workspace:run-script",
+      "executor": "nx:run-script",
       "options": {
         "script": "build-esm"
       },
@@ -29,7 +29,7 @@
       ]
     },
     "build-cjs": {
-      "executor": "@nrwl/workspace:run-script",
+      "executor": "nx:run-script",
       "options": {
         "script": "build-cjs"
       },
@@ -42,7 +42,7 @@
       ]
     },
     "build-umd": {
-      "executor": "@nrwl/workspace:run-script",
+      "executor": "nx:run-script",
       "options": {
         "script": "build-umd"
       },
@@ -55,7 +55,7 @@
       ]
     },
     "build-types": {
-      "executor": "@nrwl/workspace:run-script",
+      "executor": "nx:run-script",
       "options": {
         "script": "build-types"
       },
