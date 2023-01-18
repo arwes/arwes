@@ -1,7 +1,5 @@
-import { ReactElement, createElement, useMemo, useContext, useRef } from 'react';
+import { ReactElement, createElement, useMemo, useContext, useRef, useEffect } from 'react';
 
-import { TOOLS_IS_BROWSER } from '@arwes/tools';
-import { useOnMount, useOnChange } from '@arwes/react-tools';
 import {
   AnimatorNode,
   AnimatorSettings,
@@ -27,6 +25,7 @@ const Animator = (props: AnimatorProps): ReactElement => {
   const dynamicSettingsRef = useRef<AnimatorPropsSettings | null>(null);
   const foreignRef = useRef<unknown>(null);
   const prevAnimatorRef = useRef<AnimatorInterface | undefined>(undefined);
+  const isFirstRenderRef = useRef<boolean | null>(true);
 
   settingsRef.current = settings;
 
@@ -102,19 +101,24 @@ const Animator = (props: AnimatorProps): ReactElement => {
 
   prevAnimatorRef.current = animatorInterface;
 
-  useOnChange(() => {
-    if (TOOLS_IS_BROWSER && animatorInterface) {
-      animatorInterface.node.send(ANIMATOR_ACTIONS.update);
-    }
-  }, [settings.active]);
+  useEffect(() => {
+    animatorInterface?.node.send(ANIMATOR_ACTIONS.setup);
 
-  useOnMount(() => {
     return () => {
       if (prevAnimatorRef.current) {
         prevAnimatorRef.current.system.unregister(prevAnimatorRef.current.node);
       }
     };
-  });
+  }, []);
+
+  useEffect(() => {
+    if (isFirstRenderRef.current) {
+      isFirstRenderRef.current = false;
+      return;
+    }
+
+    animatorInterface?.node.send(ANIMATOR_ACTIONS.update);
+  }, [settings.active]);
 
   return createElement(AnimatorContext.Provider, { value: animatorInterface }, children);
 };

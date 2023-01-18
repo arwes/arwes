@@ -27,18 +27,19 @@ const createAnimatorSystem = (): AnimatorSystem => {
       scheduler: createTOScheduler()
     };
 
+    const manager = createAnimatorManager(nodeBase as AnimatorNode, control.getSettings().manager);
     const machine = createAnimatorMachine(nodeBase as AnimatorNode);
 
     Object.defineProperty(nodeBase, 'manager', {
-      enumerable: true,
-      writable: false,
-      value: createAnimatorManager(nodeBase as AnimatorNode, control.getSettings().manager)
+      get () {
+        return manager;
+      }
     });
 
     Object.defineProperty(nodeBase, 'send', {
-      enumerable: true,
-      writable: false,
-      value: machine.send
+      get () {
+        return machine.send;
+      }
     });
 
     Object.defineProperty(nodeBase, 'state', {
@@ -52,8 +53,6 @@ const createAnimatorSystem = (): AnimatorSystem => {
     if (parent) {
       parent.children.add(node);
     }
-
-    machine.start();
 
     return node;
   };

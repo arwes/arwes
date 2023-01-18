@@ -32,16 +32,16 @@ export const ANIMATOR_MANAGER_NAMES: Record<AnimatorManagerName, AnimatorManager
 });
 
 export const ANIMATOR_DEFAULT_DURATION: AnimatorDuration = Object.freeze({
-  enter: 0.3,
-  exit: 0.3,
+  enter: 0.4,
+  exit: 0.4,
   delay: 0,
   offset: 0,
-  stagger: 0.03,
-  interval: 3
+  stagger: 0.04,
+  interval: 4
 });
 
 export const ANIMATOR_DEFAULT_SETTINGS: AnimatorSettings = Object.freeze({
-  active: false,
+  active: true,
   duration: ANIMATOR_DEFAULT_DURATION,
   manager: ANIMATOR_MANAGER_NAMES.parallel,
   merge: false,

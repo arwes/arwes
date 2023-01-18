@@ -3,26 +3,26 @@ import type {
   AnimatorManager,
   AnimatorNode
 } from '../../types';
-import { ANIMATOR_MANAGER_NAMES, ANIMATOR_ACTIONS } from '../../constants';
+import {
+  ANIMATOR_MANAGER_NAMES as MANAGERS,
+  ANIMATOR_ACTIONS as ACTIONS
+} from '../../constants';
 
-const { parallel, stagger, sequence } = ANIMATOR_MANAGER_NAMES;
-const { enter } = ANIMATOR_ACTIONS;
-
-type AnimatorManagerCreator = (parentNode: AnimatorNode) => AnimatorManager;
+type AnimatorManagerCreator = (parent: AnimatorNode) => AnimatorManager;
 
 const createAnimatorManagerParallel: AnimatorManagerCreator = () => {
   const enterChildren = (children: AnimatorNode[]): void => {
-    children.forEach(child => child.send(enter));
+    children.forEach(child => child.send(ACTIONS.enter));
   };
-  return Object.freeze({ name: parallel, enterChildren });
+  return Object.freeze({ name: MANAGERS.parallel, enterChildren });
 };
 
-const createAnimatorManagerStagger: AnimatorManagerCreator = parentNode => {
+const createAnimatorManagerStagger: AnimatorManagerCreator = parent => {
   let reservedUntilTime: number | undefined;
 
   const enterChildren = (children: AnimatorNode[]): void => {
-    const parentSettings = parentNode.control.getSettings();
-    const stagger = (parentSettings.duration?.stagger || 0) * 1000; // seconds to ms
+    const parentSettings = parent.control.getSettings();
+    const stagger = (parentSettings.duration.stagger || 0) * 1000; // seconds to ms
 
     const now = Date.now();
 
@@ -32,7 +32,7 @@ const createAnimatorManagerStagger: AnimatorManagerCreator = parentNode => {
 
     children.forEach(child => {
       const childSettings = child.control.getSettings();
-      const offset = (childSettings.duration?.offset || 0) * 1000; // seconds to ms
+      const offset = (childSettings.duration.offset || 0) * 1000; // seconds to ms
 
       reservedUntilTime = (reservedUntilTime as number) + offset;
 
@@ -40,16 +40,16 @@ const createAnimatorManagerStagger: AnimatorManagerCreator = parentNode => {
 
       reservedUntilTime = reservedUntilTime + stagger;
 
-      child.scheduler.start(delay, () => child.send(enter));
+      child.scheduler.start(delay, () => child.send(ACTIONS.enter));
     });
   };
 
-  return Object.freeze({ name: stagger, enterChildren });
+  return Object.freeze({ name: MANAGERS.stagger, enterChildren });
 };
 
 const createAnimatorManagerSequence: AnimatorManagerCreator = () => {
   const enterChildren = (): void => {};
-  return Object.freeze({ name: sequence, enterChildren });
+  return Object.freeze({ name: MANAGERS.sequence, enterChildren });
 };
 
 const createAnimatorManager = (
@@ -57,8 +57,8 @@ const createAnimatorManager = (
   manager: AnimatorManagerName
 ): AnimatorManager => {
   switch (manager) {
-    case stagger: return createAnimatorManagerStagger(parentNode);
-    case sequence: return createAnimatorManagerSequence(parentNode);
+    case MANAGERS.stagger: return createAnimatorManagerStagger(parentNode);
+    case MANAGERS.sequence: return createAnimatorManagerSequence(parentNode);
     default: return createAnimatorManagerParallel(parentNode);
   }
 };

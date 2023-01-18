@@ -18,7 +18,7 @@ const AnimatorUIListener = (): ReactElement => {
           animate(
             element,
             { x: [0, 100], backgroundColor: ['#0ff', '#ff0'] },
-            { duration: duration?.enter }
+            { duration: duration.enter }
           );
           break;
         }
@@ -26,7 +26,7 @@ const AnimatorUIListener = (): ReactElement => {
           animate(
             element,
             { x: [100, 0], backgroundColor: ['#ff0', '#0ff'] },
-            { duration: duration?.enter }
+            { duration: duration.exit }
           );
           break;
         }
