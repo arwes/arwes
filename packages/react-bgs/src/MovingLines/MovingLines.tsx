@@ -3,12 +3,12 @@ import { animate } from 'motion';
 import { cx, randomizeList } from '@arwes/tools';
 import { mergeRefs, useOnChange } from '@arwes/react-tools';
 import { easeInOutCubic } from '@arwes/animated';
-import { ANIMATOR_DEFAULT_KEYS, AnimatorSystemNode } from '@arwes/animator';
+import { ANIMATOR_STATES, AnimatorNode } from '@arwes/animator';
 import { useAnimator } from '@arwes/react-animator';
 
 import { MovingLinesProps, MovingLinesLineConfig, MovingLinesLine } from './MovingLines.types';
 
-const { ENTERING, EXITING, EXITED } = ANIMATOR_DEFAULT_KEYS;
+const { entering, exiting, exited } = ANIMATOR_STATES;
 
 const random = (min: number, max: number): number => (max - min) * Math.random();
 const minmaxOverflow01 = (value: number): number => Math.min(1, Math.max(0, value === 1 ? 1 : value % 1));
@@ -125,12 +125,12 @@ const MovingLines = (props: MovingLinesProps): ReactElement => {
       });
     };
 
-    const animatorSubscription = (node: AnimatorSystemNode): void => {
-      const state = node.getState();
+    const animatorSubscription = (node: AnimatorNode): void => {
+      const state = node.state;
       const { duration } = node.control.getSettings();
 
       switch (state) {
-        case ENTERING: {
+        case entering: {
           transitionControl = animate(
             canvas,
             { opacity: [0, 1] },
@@ -142,7 +142,7 @@ const MovingLines = (props: MovingLinesProps): ReactElement => {
           );
           break;
         }
-        case EXITING: {
+        case exiting: {
           transitionControl = animate(
             canvas,
             { opacity: [1, 0] },
@@ -150,7 +150,7 @@ const MovingLines = (props: MovingLinesProps): ReactElement => {
           );
           break;
         }
-        case EXITED: {
+        case exited: {
           intervalControl?.cancel();
           break;
         }

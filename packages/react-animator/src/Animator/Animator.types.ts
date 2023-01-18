@@ -1,8 +1,10 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
-import type { AnimatorSettings } from '@arwes/animator';
+import type { AnimatorSettings, AnimatorDuration } from '@arwes/animator';
 
-export interface AnimatorProps extends AnimatorSettings {
+export type AnimatorPropsSettings = Partial<Omit<AnimatorSettings, 'duration'>> & { duration?: Partial<AnimatorDuration> };
+
+export interface AnimatorProps extends AnimatorPropsSettings {
   root?: boolean
   disabled?: boolean
   dismissed?: boolean

@@ -13,7 +13,7 @@ const AnimatorUIListener = (): ReactElement => {
       const element = elementRef.current as HTMLElement;
       const { duration } = node.control.getSettings();
 
-      switch (node.getState()) {
+      switch (node.state) {
         case 'entering': {
           animate(
             element,

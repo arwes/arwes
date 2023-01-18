@@ -2,13 +2,13 @@ import React, { ReactElement, useRef } from 'react';
 import { animate } from 'motion';
 import { cx } from '@arwes/tools';
 import { mergeRefs, useOnChange } from '@arwes/react-tools';
-import { ANIMATOR_DEFAULT_KEYS, AnimatorSystemNode } from '@arwes/animator';
+import { ANIMATOR_STATES, AnimatorNode } from '@arwes/animator';
 import { useAnimator } from '@arwes/react-animator';
 
 import { DotsProps } from './Dots.types';
 import { getDistanceFromOriginToCornerProgress } from './getDistanceFromOriginToCornerProgress';
 
-const { ENTERING, EXITING } = ANIMATOR_DEFAULT_KEYS;
+const { entering, exiting } = ANIMATOR_STATES;
 
 const defaultProps: Required<Pick<DotsProps, 'color' | 'type' | 'distance' | 'size' | 'origin'>> = {
   color: '#777',
@@ -45,16 +45,14 @@ const Dots = (props: DotsProps): ReactElement => {
       resizeObserver?.disconnect();
     };
 
-    const animatorSubscription = (node: AnimatorSystemNode): void => {
-      const state = node.getState();
-
-      if (state !== ENTERING && state !== EXITING) {
+    const animatorSubscription = (node: AnimatorNode): void => {
+      if (node.state !== entering && node.state !== exiting) {
         return;
       }
 
       cancelAnimationSubscriptions();
 
-      const active = state === ENTERING;
+      const active = node.state === entering;
       const { duration } = node.control.getSettings();
       const transitionDuration = (active ? duration?.enter : duration?.exit) || 0;
 
