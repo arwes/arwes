@@ -42,6 +42,7 @@
     "@typescript-eslint/promise-function-async": ["error", {
       "checkArrowFunctions": false
     }],
+    "@typescript-eslint/no-confusing-void-expression": [0],
     "react/prop-types": "off",
     "semi": ["error", "always"],
     "brace-style": ["error", "stroustrup"],

@@ -1,246 +1,49 @@
-import type { AnimatorSystemNode, AnimatorSettingsMachine } from './types';
+import type {
+  AnimatorState,
+  AnimatorAction,
+  AnimatorManagerName,
+  AnimatorDuration,
+  AnimatorSettings
+} from './types';
 
 // States
-const ENTERED = 'entered';
-const ENTERING = 'entering';
-const EXITING = 'exiting';
-const EXITED = 'exited';
+export const ANIMATOR_STATES: Record<AnimatorState, AnimatorState> = Object.freeze({
+  entered: 'entered',
+  entering: 'entering',
+  exiting: 'exiting',
+  exited: 'exited'
+});
 
 // Actions
-const ENTER_START = 'enterStart';
-const ENTER_END = 'enterEnd';
-const EXIT_START = 'exitStart';
-const EXIT_END = 'exitEnd';
+export const ANIMATOR_ACTIONS: Record<AnimatorAction, AnimatorAction> = Object.freeze({
+  setup: 'setup',
+  enter: 'enter',
+  enterEnd: 'enterEnd',
+  exit: 'exit',
+  exitEnd: 'exitEnd',
+  update: 'update'
+});
 
 // Managers
-const PARALLEL = 'parallel';
-const SEQUENCE = 'sequence';
-const STAGGER = 'stagger';
-
-const ANIMATOR_DEFAULT_KEYS = {
-  ENTERED,
-  ENTERING,
-  EXITING,
-  EXITED,
-
-  ENTER_START,
-  ENTER_END,
-  EXIT_START,
-  EXIT_END,
-
-  PARALLEL,
-  SEQUENCE,
-  STAGGER
-} as const;
-
-interface AnimatorManager {
-  name: string
-  transitionChildren: (children: AnimatorSystemNode[]) => void
-}
-
-type AnimatorManagerCreator = (parent: AnimatorSystemNode) => AnimatorManager;
-
-const createAnimatorManagerParallel: AnimatorManagerCreator = () => {
-  const transitionChildren = (children: AnimatorSystemNode[]): void => {
-    children.forEach(child => child.send(ENTER_START));
-  };
-  return Object.freeze({ name: PARALLEL, transitionChildren });
-};
-
-const createAnimatorManagerStagger: AnimatorManagerCreator = parent => {
-  let reservedUntilTime: number | undefined;
-
-  const transitionChildren = (children: AnimatorSystemNode[]): void => {
-    const parentSettings = parent.control.getSettings();
-    const stagger = (parentSettings.duration?.stagger || 0) * 1000; // seconds to ms
-
-    const now = Date.now();
-
-    reservedUntilTime = reservedUntilTime !== undefined
-      ? Math.max(reservedUntilTime, now)
-      : now;
-
-    children.forEach(child => {
-      const childSettings = child.control.getSettings();
-      const offset = (childSettings.duration?.offset || 0) * 1000; // seconds to ms
-
-      reservedUntilTime = (reservedUntilTime as number) + offset;
-
-      const delay = (reservedUntilTime - now) / 1000; // ms to seconds
-
-      reservedUntilTime = reservedUntilTime + stagger;
-
-      child.scheduler.start(delay, () => child.send(ENTER_START));
-    });
-  };
-
-  return Object.freeze({ name: STAGGER, transitionChildren });
-};
-
-// TODO: Add support.
-const createAnimatorManagerSequence: AnimatorManagerCreator = () => {
-  const transitionChildren = (): void => {};
-  return Object.freeze({ name: SEQUENCE, transitionChildren });
-};
-
-const createAnimatorManager = (parent: AnimatorSystemNode, manager?: string): AnimatorManager => {
-  switch (manager) {
-    case STAGGER: return createAnimatorManagerStagger(parent);
-    case SEQUENCE: return createAnimatorManagerSequence(parent);
-    default: return createAnimatorManagerParallel(parent);
-  }
-};
-
-const ANIMATOR_DEFAULT_MACHINE: AnimatorSettingsMachine = Object.freeze({
-  initialState: EXITED,
-  states: {
-    [EXITED]: {
-      onActions: {
-        [ENTER_START]: ENTERING
-      }
-    },
-    [ENTERING]: {
-      onEntry: {
-        schedule: (node: AnimatorSystemNode) => {
-          const { duration: { delay = 0, enter = 0 } = {} } = node.control.getSettings();
-          return {
-            duration: delay + enter,
-            action: ENTER_END
-          };
-        }
-      },
-      onActions: {
-        [ENTER_END]: ENTERED,
-        [EXIT_START]: EXITING
-      }
-    },
-    [ENTERED]: {
-      onActions: {
-        [EXIT_START]: EXITING
-      }
-    },
-    [EXITING]: {
-      onEntry: {
-        schedule: (node: AnimatorSystemNode) => ({
-          duration: node.control.getSettings().duration?.exit || 0,
-          action: EXIT_END
-        })
-      },
-      onActions: {
-        [EXIT_END]: EXITED,
-        [ENTER_START]: ENTERING
-      }
-    }
-  },
-  onCreate: (node: AnimatorSystemNode) => {
-    const settings = node.control.getSettings();
-
-    node.context.manager = createAnimatorManager(node, settings.manager);
-  },
-  onTransition: (node: AnimatorSystemNode) => {
-    const state = node.getState();
-    const { combine } = node.control.getSettings();
-    const manager = node.context.manager as AnimatorManager;
-
-    switch (state) {
-      case ENTERING: {
-        const children = combine
-          ? Array.from(node.children)
-          : Array.from(node.children).filter(child => child.control.getSettings().merge);
-        manager.transitionChildren(children);
-        break;
-      }
-      case ENTERED: {
-        if (combine) {
-          break;
-        }
-        const children = Array.from(node.children).filter(child => !child.control.getSettings().merge);
-        manager.transitionChildren(children);
-        break;
-      }
-      case EXITING: {
-        Array.from(node.children).forEach(child => {
-          const childState = child.getState();
-
-          if (childState === ENTERING || childState === ENTERED) {
-            child.send(EXIT_START);
-          }
-          else if (childState === EXITED) {
-            child.scheduler.stop();
-          }
-          // If the child is EXITING, it will go to EXITED soon.
-        });
-        break;
-      }
-    }
-  },
-  onInitialTransition: (node: AnimatorSystemNode) => {
-    if (node.parent) {
-      const settings = node.control.getSettings();
-
-      const parentState = node.parent.getState();
-      const parentSettings = node.parent.control.getSettings();
-      const parentManager = node.parent.context.manager as AnimatorManager;
-
-      switch (parentState) {
-        case ENTERING: {
-          if (parentSettings.combine || settings.merge) {
-            parentManager.transitionChildren([node]);
-          }
-          break;
-        }
-        case ENTERED: {
-          // If the parent has already ENTERED, enter the incoming children whether
-          // they have "merge" setting or the parent is in "combine" setting.
-          parentManager.transitionChildren([node]);
-          break;
-        }
-      }
-    }
-  },
-  onSettingsChange: (node: AnimatorSystemNode) => {
-    const state = node.getState();
-    const settings = node.control.getSettings();
-    const manager = node.context.manager as AnimatorManager;
-
-    if (!node.parent) {
-      const isActive = settings.active === true || settings.active === undefined;
-
-      if ((state === EXITED || state === EXITING) && isActive) {
-        node.send(ENTER_START);
-      }
-      else if ((state === ENTERED || state === ENTERING) && !isActive) {
-        node.send(EXIT_START);
-      }
-    }
-
-    if (!manager || manager.name !== settings.manager) {
-      node.context.manager = createAnimatorManager(node, settings.manager);
-    }
-  }
+export const ANIMATOR_MANAGER_NAMES: Record<AnimatorManagerName, AnimatorManagerName> = Object.freeze({
+  parallel: 'parallel',
+  sequence: 'sequence',
+  stagger: 'stagger'
 });
 
-const ANIMATOR_DEFAULT_DURATION = Object.freeze({
-  enter: 0.4,
-  exit: 0.4,
+export const ANIMATOR_DEFAULT_DURATION: AnimatorDuration = Object.freeze({
+  enter: 0.3,
+  exit: 0.3,
   delay: 0,
   offset: 0,
-  stagger: 0.04,
-  interval: 4
+  stagger: 0.03,
+  interval: 3
 });
 
-const ANIMATOR_DEFAULT_MANAGER = PARALLEL;
-
-const ANIMATOR_DEFAULT_PROPS = {
-  machine: ANIMATOR_DEFAULT_MACHINE,
+export const ANIMATOR_DEFAULT_SETTINGS: AnimatorSettings = Object.freeze({
+  active: false,
   duration: ANIMATOR_DEFAULT_DURATION,
-  manager: ANIMATOR_DEFAULT_MANAGER
-};
-
-export {
-  ANIMATOR_DEFAULT_KEYS,
-  ANIMATOR_DEFAULT_MACHINE,
-  ANIMATOR_DEFAULT_DURATION,
-  ANIMATOR_DEFAULT_MANAGER,
-  ANIMATOR_DEFAULT_PROPS
-};
+  manager: ANIMATOR_MANAGER_NAMES.parallel,
+  merge: false,
+  combine: false
+});

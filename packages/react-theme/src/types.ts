@@ -20,9 +20,7 @@ export interface ThemeSettingsExtend<
     light?: ThemeSettingsPartial
     dark?: ThemeSettingsPartial
   }
-  medias?: {
-    [media: string]: ThemeSettingsPartial | undefined
-  }
+  medias?: Record<string, ThemeSettingsPartial | undefined>
 }
 
 export interface ThemeExtensionColorScheme {

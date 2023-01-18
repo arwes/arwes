@@ -1,68 +1,63 @@
 import type { TOScheduler } from '@arwes/tools';
 
 export interface AnimatorControl {
-  getSettings: () => AnimatorSettings
-  setDynamicSettings: (settings: AnimatorSettings | null) => void
-  getForeignRef: () => unknown
-  setForeignRef: (ref: unknown) => void
+  readonly getSettings: () => AnimatorSettings
+  readonly setDynamicSettings?: (settings: AnimatorSettings | null) => void
+  readonly getForeignRef?: () => unknown
+  readonly setForeignRef?: (ref: unknown) => void
 }
 
-export type AnimatorSystemNodeId = number;
+export type AnimatorState = 'entered' | 'entering' | 'exiting' | 'exited';
 
-export type AnimatorSystemNodeSubscriber = (node: AnimatorSystemNode) => void;
+export type AnimatorAction = 'setup' | 'enter' | 'enterEnd' | 'exit' | 'exitEnd' | 'update';
 
-export interface AnimatorSystemNode {
-  id: AnimatorSystemNodeId
-  control: AnimatorControl
-  parent?: AnimatorSystemNode
-  children: Set<AnimatorSystemNode>
-  subscribers: Set<AnimatorSystemNodeSubscriber>
-  scheduler: TOScheduler
-  context: Record<string, unknown>
-  getState: () => string
-  send: (action: string) => void
-  onSettingsChange: () => void
+export type AnimatorSubscriber = (node: AnimatorNode) => void;
+
+export type AnimatorManagerName = 'parallel' | 'stagger' | 'sequence';
+
+export interface AnimatorManager {
+  readonly name: AnimatorManagerName
+  readonly enterChildren: (childrenNodes: AnimatorNode[]) => void
+}
+
+export interface AnimatorNode {
+  readonly id: string
+  readonly control: AnimatorControl
+  readonly parent?: AnimatorNode
+  readonly children: Set<AnimatorNode>
+  readonly subscribers: Set<AnimatorSubscriber>
+  readonly scheduler: TOScheduler
+  readonly manager: AnimatorManager
+  readonly state: AnimatorState
+  readonly send: (newAction: AnimatorAction) => void
 }
 
 export interface AnimatorSystem {
-  setup: (control: AnimatorControl) => AnimatorSystemNode
-  register: (parent: AnimatorSystemNode, control: AnimatorControl) => AnimatorSystemNode
-  unregister: (node: AnimatorSystemNode) => void
+  readonly id: string
+  readonly register: (parentNode: AnimatorNode | undefined, control: AnimatorControl) => AnimatorNode
+  readonly unregister: (node: AnimatorNode) => void
 }
 
-export interface AnimatorSettingsMachine {
-  initialState: string
-  states: {
-    [state: string]: {
-      onEntry?: {
-        execute?: (node: AnimatorSystemNode) => void
-        schedule?: (node: AnimatorSystemNode) => { duration: number, action: string }
-      }
-      onActions?: {
-        [action: string]: string
-      }
-    }
-  }
-  onCreate?: (node: AnimatorSystemNode) => void
-  onSettingsChange?: (node: AnimatorSystemNode) => void
-  onTransition?: (node: AnimatorSystemNode) => void
-  onInitialTransition?: (node: AnimatorSystemNode) => void
+export interface AnimatorDuration {
+  enter: number
+  exit: number
+  delay: number
+  offset: number
+  stagger: number
+  interval: number
+  [duration: string]: number
 }
 
 export interface AnimatorSettings {
-  machine?: AnimatorSettingsMachine
-  duration?: Record<string, number>
-  onTransition?: (node: AnimatorSystemNode) => void
-
-  // TODO: Setup a way to configure extra settings.
-  active?: boolean
-  merge?: boolean
-  // TODO: Custom manager function.
-  manager?: string
-  combine?: boolean
+  active: boolean
+  duration: AnimatorDuration
+  manager: AnimatorManagerName
+  merge: boolean
+  combine: boolean
+  onTransition?: (node: AnimatorNode) => void
 }
 
 export interface AnimatorInterface {
-  system: AnimatorSystem
-  node: AnimatorSystemNode
+  readonly system: AnimatorSystem
+  readonly node: AnimatorNode
 }

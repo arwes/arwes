@@ -3,7 +3,7 @@ import { animate } from 'motion';
 import { cx } from '@arwes/tools';
 import { mergeRefs, useOnChange } from '@arwes/react-tools';
 import { easeOutSine } from '@arwes/animated';
-import { ANIMATOR_DEFAULT_KEYS, AnimatorSystemNode } from '@arwes/animator';
+import { ANIMATOR_STATES, AnimatorNode } from '@arwes/animator';
 import { useAnimator } from '@arwes/react-animator';
 
 import { PuffsProps } from './Puffs.types';
@@ -19,7 +19,7 @@ interface Puff {
   ro: number
 }
 
-const { ENTERING, ENTERED, EXITING, EXITED } = ANIMATOR_DEFAULT_KEYS;
+const { entering, entered, exiting, exited } = ANIMATOR_STATES;
 
 const minmaxOverflow01 = (value: number): number => Math.min(1, Math.max(0, value === 1 ? 1 : value % 1));
 
@@ -66,12 +66,12 @@ const Puffs = (props: PuffsProps): ReactElement => {
       window.clearTimeout(puffsEmptyTimeoutId);
     };
 
-    const animatorSubscription = (node: AnimatorSystemNode): void => {
-      const state = node.getState();
+    const animatorSubscription = (node: AnimatorNode): void => {
+      const state = node.state;
       const { duration } = node.control.getSettings();
 
       switch (state) {
-        case ENTERING: {
+        case entering: {
           cancelAnimationSubscriptions();
 
           const {
@@ -180,11 +180,11 @@ const Puffs = (props: PuffsProps): ReactElement => {
           break;
         }
 
-        case ENTERED: {
+        case entered: {
           break;
         }
 
-        case EXITING: {
+        case exiting: {
           canvasControl?.cancel();
           canvasControl = animate(
             canvas,
@@ -194,7 +194,7 @@ const Puffs = (props: PuffsProps): ReactElement => {
           break;
         }
 
-        case EXITED: {
+        case exited: {
           cancelAnimationSubscriptions();
           canvas.style.opacity = '0';
           break;

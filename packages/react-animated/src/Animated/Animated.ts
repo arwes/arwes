@@ -11,7 +11,7 @@ import { animate } from 'motion';
 
 import { NoInfer } from '@arwes/tools';
 import { mergeRefs, useOnChange } from '@arwes/react-tools';
-import { AnimatorSystemNode } from '@arwes/animator';
+import { AnimatorNode } from '@arwes/animator';
 import { useAnimator } from '@arwes/react-animator';
 
 import type {
@@ -52,22 +52,21 @@ const Animated = <
       return;
     }
 
-    const animatorSubscriber = (node: AnimatorSystemNode): void => {
+    const animatorSubscriber = (node: AnimatorNode): void => {
       animationControlsRef.current = [];
 
       const element = elementRef.current as E;
       const settingsList = animatedSettingsRef.current;
 
-      const state = node.getState();
-      const { duration = {} } = node.control.getSettings();
-      const durationTransition = state === 'entering' || state === 'entered'
+      const { duration } = node.control.getSettings();
+      const durationTransition = node.state === 'entering' || node.state === 'entered'
         ? duration.enter
         : duration.exit;
 
       // TODO: Support wildcard "*" state as any state transition.
 
       settingsList
-        .map(settingsItem => settingsItem.transitions?.[state] as AnimatedSettingsTransition)
+        .map(settingsItem => settingsItem.transitions?.[node.state] as AnimatedSettingsTransition)
         .filter(Boolean)
         .map(transitions => Array.isArray(transitions) ? transitions : [transitions])
         .flat(1)

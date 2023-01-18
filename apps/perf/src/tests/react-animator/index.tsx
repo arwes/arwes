@@ -1,7 +1,7 @@
 import React, { ReactElement, Profiler, Fragment, useState, useRef, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { AnimatorSystemNode } from '@arwes/animator';
+import { AnimatorNode } from '@arwes/animator';
 import { AnimatorGeneralProvider, Animator, useAnimator } from '@arwes/react-animator';
 
 const TEST_RENDER_NUMBER = 3000;
@@ -17,10 +17,10 @@ const Item = (): ReactElement => {
   const animator = useAnimator();
 
   useEffect(() => {
-    animator?.node.subscribers.add((node: AnimatorSystemNode) => {
+    animator?.node.subscribers.add((node: AnimatorNode) => {
       const element = elementRef.current as HTMLDivElement;
 
-      switch (node.getState()) {
+      switch (node.state) {
         case 'exited': element.style.opacity = '0.05'; break;
         case 'entering': element.style.opacity = '0.5'; break;
         case 'exiting': element.style.opacity = '0.5'; break;
@@ -48,8 +48,8 @@ const Test = (): ReactElement => {
           {Array(TEST_RENDER_NUMBER).fill(null).map((_, index) =>
             <Animator
               key={index}
-              onTransition={(node: AnimatorSystemNode) => {
-                const state = node.getState();
+              onTransition={(node: AnimatorNode) => {
+                const state = node.state;
                 if (index === 0) {
                   console.time(state);
                 }

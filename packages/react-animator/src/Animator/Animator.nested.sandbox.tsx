@@ -1,7 +1,7 @@
 import React, { ReactNode, ReactElement, useState, useRef, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { animate } from 'motion';
-import { AnimatorSystemNode, AnimatorInterface } from '@arwes/animator';
+import { AnimatorNode, AnimatorInterface } from '@arwes/animator';
 import { Animator, useAnimator } from '@arwes/react-animator';
 
 const AnimatorUIListener = (): ReactElement => {
@@ -9,11 +9,11 @@ const AnimatorUIListener = (): ReactElement => {
   const animator = useAnimator() as AnimatorInterface;
 
   useEffect(() => {
-    const subscriber = (node: AnimatorSystemNode): void => {
+    const subscriber = (node: AnimatorNode): void => {
       const element = elementRef.current as HTMLElement;
       const { duration } = node.control.getSettings();
 
-      switch (node.getState()) {
+      switch (node.state) {
         case 'entering': {
           animate(
             element,

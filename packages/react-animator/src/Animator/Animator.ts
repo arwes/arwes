@@ -1,19 +1,21 @@
 import { ReactElement, createElement, useMemo, useContext, useRef } from 'react';
 
 import { TOOLS_IS_BROWSER } from '@arwes/tools';
-import { useOnMount } from '@arwes/react-tools';
+import { useOnMount, useOnChange } from '@arwes/react-tools';
 import {
-  AnimatorSystemNode,
+  AnimatorNode,
   AnimatorSettings,
   AnimatorSystem,
   AnimatorControl,
   AnimatorInterface,
-  ANIMATOR_DEFAULT_PROPS,
-  createAnimatorSystem
+  ANIMATOR_DEFAULT_SETTINGS,
+  ANIMATOR_ACTIONS,
+  createAnimatorSystem,
+  AnimatorDuration
 } from '@arwes/animator';
 import { AnimatorContext } from '../internal/AnimatorContext/index';
 import { AnimatorGeneralContext } from '../internal/AnimatorGeneralContext/index';
-import { AnimatorProps } from './Animator.types';
+import type { AnimatorProps, AnimatorPropsSettings } from './Animator.types';
 
 const Animator = (props: AnimatorProps): ReactElement => {
   const { root, disabled, dismissed, children, ...settings } = props;
@@ -21,8 +23,8 @@ const Animator = (props: AnimatorProps): ReactElement => {
   const parentAnimatorInterface = useContext(AnimatorContext);
   const animatorGeneralInterface = useContext(AnimatorGeneralContext);
 
-  const settingsRef = useRef<AnimatorSettings>(settings);
-  const dynamicSettingsRef = useRef<AnimatorSettings | null>(null);
+  const settingsRef = useRef<AnimatorPropsSettings>(settings);
+  const dynamicSettingsRef = useRef<AnimatorPropsSettings | null>(null);
   const foreignRef = useRef<unknown>(null);
   const prevAnimatorRef = useRef<AnimatorInterface | undefined>(undefined);
 
@@ -54,17 +56,18 @@ const Animator = (props: AnimatorProps): ReactElement => {
       const animatorGeneralSettings = animatorGeneralInterface?.getSettings();
 
       return {
-        ...ANIMATOR_DEFAULT_PROPS,
+        ...ANIMATOR_DEFAULT_SETTINGS,
         ...animatorGeneralSettings,
         ...settingsRef.current,
         ...dynamicSettingsRef.current,
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
         duration: {
-          ...ANIMATOR_DEFAULT_PROPS.duration,
+          ...ANIMATOR_DEFAULT_SETTINGS.duration,
           ...animatorGeneralSettings?.duration,
           ...settingsRef.current?.duration,
           ...dynamicSettingsRef.current?.duration
-        },
-        onTransition: (node: AnimatorSystemNode): void => {
+        } as AnimatorDuration,
+        onTransition: (node: AnimatorNode): void => {
           settingsRef.current?.onTransition?.(node);
           dynamicSettingsRef.current?.onTransition?.(node);
         }
@@ -91,7 +94,7 @@ const Animator = (props: AnimatorProps): ReactElement => {
     });
 
     const node = isRoot
-      ? system.setup(control)
+      ? system.register(undefined, control)
       : system.register(parentAnimatorInterface.node, control);
 
     return Object.freeze({ system, node });
@@ -99,9 +102,11 @@ const Animator = (props: AnimatorProps): ReactElement => {
 
   prevAnimatorRef.current = animatorInterface;
 
-  if (TOOLS_IS_BROWSER && prevAnimatorRef.current) {
-    prevAnimatorRef.current.node.onSettingsChange();
-  }
+  useOnChange(() => {
+    if (TOOLS_IS_BROWSER && animatorInterface) {
+      animatorInterface.node.send(ANIMATOR_ACTIONS.update);
+    }
+  }, [settings.active]);
 
   useOnMount(() => {
     return () => {
