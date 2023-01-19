@@ -70,8 +70,9 @@ export const sandboxes = [
         name: 'Animator',
         children: [
           { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.basic.sandbox.tsx') },
-          { name: 'nested', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.nested.sandbox.tsx') },
+          { name: 'nesting', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.nesting.sandbox.tsx') },
           { name: 'combine', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.combine.sandbox.tsx') },
+          { name: 'combineNesting', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.combineNesting.sandbox.tsx') },
           { name: 'root', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.root.sandbox.tsx') },
           { name: 'managerStagger', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.managerStagger.sandbox.tsx') },
           { name: 'managerSequence', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.managerSequence.sandbox.tsx') },

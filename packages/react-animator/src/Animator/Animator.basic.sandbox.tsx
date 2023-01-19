@@ -11,7 +11,7 @@ const AnimatorUIListener = (): ReactElement => {
   useEffect(() => {
     const subscriber = (node: AnimatorNode): void => {
       const element = elementRef.current as HTMLElement;
-      const { duration } = node.control.getSettings();
+      const { duration } = node;
 
       switch (node.state) {
         case 'entering': {

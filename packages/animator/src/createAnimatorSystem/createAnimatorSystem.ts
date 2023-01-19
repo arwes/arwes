@@ -27,6 +27,11 @@ const createAnimatorSystem = (): AnimatorSystem => {
     const machine = createAnimatorMachine(node);
 
     const nodeProps: { [P in keyof AnimatorNode]: PropertyDescriptor } = {
+      _context: {
+        value: { manager },
+        enumerable: true,
+        writable: true
+      },
       id: {
         value: nodeId,
         enumerable: true
@@ -51,10 +56,14 @@ const createAnimatorSystem = (): AnimatorSystem => {
         value: createTOScheduler(),
         enumerable: true
       },
-      context: {
-        value: { manager },
-        enumerable: true,
-        writable: true
+      duration: {
+        get: (): { enter: number, exit: number } => {
+          const { duration, combine } = node.control.getSettings();
+          const enter = combine ? node._context.manager.getDurationEnter() : duration.enter || 0;
+          const exit = duration.exit || 0;
+          return { enter, exit };
+        },
+        enumerable: true
       },
       state: {
         get: () => machine.getState(),

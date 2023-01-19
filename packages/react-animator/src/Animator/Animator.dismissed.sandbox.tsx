@@ -22,7 +22,7 @@ const AnimatorUIListener = (): ReactElement => {
 
     animator.node.subscribers.add(node => {
       const element = elementRef.current as HTMLElement;
-      const { duration } = node.control.getSettings();
+      const { duration } = node;
 
       switch (node.state) {
         case 'entering': {

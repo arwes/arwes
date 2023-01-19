@@ -30,19 +30,21 @@ export type AnimatorSubscriber = (node: AnimatorNode) => void;
 
 export interface AnimatorManager {
   readonly name: AnimatorManagerName
+  readonly getDurationEnter: () => number
   readonly enterChildren: (childrenNodes: AnimatorNode[]) => void
 }
 
 export interface AnimatorNode {
+  readonly _context: {
+    manager: AnimatorManager
+  }
   readonly id: string
   readonly control: AnimatorControl
   readonly parent?: AnimatorNode
   readonly children: Set<AnimatorNode>
   readonly subscribers: Set<AnimatorSubscriber>
   readonly scheduler: TOScheduler
-  readonly context: {
-    manager: AnimatorManager
-  }
+  readonly duration: { enter: number, exit: number }
   readonly state: AnimatorState
   readonly send: (newAction: AnimatorAction) => void
 }
