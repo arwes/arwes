@@ -44,14 +44,14 @@ const createAnimatorMachine = (node: AnimatorNode): AnimatorMachine => {
             switch (node.parent.state) {
               case STATES.entering: {
                 if (parentSettings.combine || settings.merge) {
-                  node.parent._context.manager.enterChildren([node]);
+                  node.parent.manager.enterChildren(node.parent, [node]);
                 }
                 break;
               }
               // If the parent has already entered, enter the incoming children whether
               // they have "merge" setting or the parent is in "combine" setting.
               case STATES.entered: {
-                node.parent._context.manager.enterChildren([node]);
+                node.parent.manager.enterChildren(node.parent, [node]);
                 break;
               }
             }
@@ -78,7 +78,7 @@ const createAnimatorMachine = (node: AnimatorNode): AnimatorMachine => {
             ? Array.from(node.children)
             : Array.from(node.children).filter(child => child.control.getSettings().merge);
 
-          node._context.manager.enterChildren(children);
+          node.manager.enterChildren(node, children);
         },
 
         schedule: () => {
@@ -109,7 +109,7 @@ const createAnimatorMachine = (node: AnimatorNode): AnimatorMachine => {
             .from(node.children)
             .filter(child => !child.control.getSettings().merge);
 
-          node._context.manager.enterChildren(children);
+          node.manager.enterChildren(node, children);
         }
       },
 
@@ -149,8 +149,8 @@ const createAnimatorMachine = (node: AnimatorNode): AnimatorMachine => {
         [ACTIONS.update]: () => {
           const settings = node.control.getSettings();
 
-          if (settings.manager !== node._context.manager.name) {
-            node._context.manager = createAnimatorManager(node, settings.manager);
+          if (settings.manager !== node.manager.name) {
+            node.manager = createAnimatorManager(settings.manager);
           }
 
           if (!node.parent) {

@@ -30,14 +30,11 @@ export type AnimatorSubscriber = (node: AnimatorNode) => void;
 
 export interface AnimatorManager {
   readonly name: AnimatorManagerName
-  readonly getDurationEnter: () => number
-  readonly enterChildren: (childrenNodes: AnimatorNode[]) => void
+  readonly getDurationEnter: (parentNode: AnimatorNode, childrenNodes: AnimatorNode[]) => number
+  readonly enterChildren: (parentNode: AnimatorNode, childrenNodes: AnimatorNode[]) => void
 }
 
 export interface AnimatorNode {
-  readonly _context: {
-    manager: AnimatorManager
-  }
   readonly id: string
   readonly control: AnimatorControl
   readonly parent?: AnimatorNode
@@ -47,6 +44,7 @@ export interface AnimatorNode {
   readonly duration: { enter: number, exit: number }
   readonly state: AnimatorState
   readonly send: (newAction: AnimatorAction) => void
+  manager: AnimatorManager
 }
 
 export interface AnimatorSystem {

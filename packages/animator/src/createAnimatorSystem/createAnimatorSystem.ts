@@ -23,15 +23,10 @@ const createAnimatorSystem = (): AnimatorSystem => {
     // with specific readonly and writable properties.
     const node = {} as unknown as AnimatorNode;
 
-    const manager = createAnimatorManager(node, control.getSettings().manager);
     const machine = createAnimatorMachine(node);
+    const manager = createAnimatorManager(control.getSettings().manager);
 
     const nodeProps: { [P in keyof AnimatorNode]: PropertyDescriptor } = {
-      _context: {
-        value: { manager },
-        enumerable: true,
-        writable: true
-      },
       id: {
         value: nodeId,
         enumerable: true
@@ -59,7 +54,9 @@ const createAnimatorSystem = (): AnimatorSystem => {
       duration: {
         get: (): { enter: number, exit: number } => {
           const { duration, combine } = node.control.getSettings();
-          const enter = combine ? node._context.manager.getDurationEnter() : duration.enter || 0;
+          const enter = combine
+            ? node.manager.getDurationEnter(node, Array.from(node.children))
+            : duration.enter || 0;
           const exit = duration.exit || 0;
           return { enter, exit };
         },
@@ -72,6 +69,11 @@ const createAnimatorSystem = (): AnimatorSystem => {
       send: {
         value: machine.send,
         enumerable: true
+      },
+      manager: {
+        value: manager,
+        enumerable: true,
+        writable: true
       }
     };
 
