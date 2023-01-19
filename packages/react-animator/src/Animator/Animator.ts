@@ -118,7 +118,7 @@ const Animator = (props: AnimatorProps): ReactElement => {
     }
 
     animatorInterface?.node.send(ANIMATOR_ACTIONS.update);
-  }, [settings.active]);
+  }, [settings.active, settings.manager, settings.merge, settings.combine]);
 
   return createElement(AnimatorContext.Provider, { value: animatorInterface }, children);
 };

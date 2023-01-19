@@ -18,37 +18,55 @@ const createAnimatorSystem = (): AnimatorSystem => {
   const createNode = (parent: AnimatorNode | undefined, control: AnimatorControl): AnimatorNode => {
     const nodeId = `node-${nodeIdCounter++}`;
 
-    const nodeBase = {
-      id: nodeId,
-      control,
-      parent,
-      children: new Set<AnimatorNode>(),
-      subscribers: new Set<AnimatorSubscriber>(),
-      scheduler: createTOScheduler()
+    // The node object reference is passed around in multiple places with some
+    // circular references, so this is an object base and later is modified
+    // with specific readonly and writable properties.
+    const node = {} as unknown as AnimatorNode;
+
+    const manager = createAnimatorManager(node, control.getSettings().manager);
+    const machine = createAnimatorMachine(node);
+
+    const nodeProps: { [P in keyof AnimatorNode]: PropertyDescriptor } = {
+      id: {
+        value: nodeId,
+        enumerable: true
+      },
+      control: {
+        value: control,
+        enumerable: true
+      },
+      parent: {
+        value: parent,
+        enumerable: true
+      },
+      children: {
+        value: new Set<AnimatorNode>(),
+        enumerable: true
+      },
+      subscribers: {
+        value: new Set<AnimatorSubscriber>(),
+        enumerable: true
+      },
+      scheduler: {
+        value: createTOScheduler(),
+        enumerable: true
+      },
+      context: {
+        value: { manager },
+        enumerable: true,
+        writable: true
+      },
+      state: {
+        get: () => machine.getState(),
+        enumerable: true
+      },
+      send: {
+        value: machine.send,
+        enumerable: true
+      }
     };
 
-    const manager = createAnimatorManager(nodeBase as AnimatorNode, control.getSettings().manager);
-    const machine = createAnimatorMachine(nodeBase as AnimatorNode);
-
-    Object.defineProperty(nodeBase, 'manager', {
-      get () {
-        return manager;
-      }
-    });
-
-    Object.defineProperty(nodeBase, 'send', {
-      get () {
-        return machine.send;
-      }
-    });
-
-    Object.defineProperty(nodeBase, 'state', {
-      get () {
-        return machine.getState();
-      }
-    });
-
-    const node = Object.freeze(nodeBase as AnimatorNode);
+    Object.defineProperties(node, nodeProps);
 
     if (parent) {
       parent.children.add(node);

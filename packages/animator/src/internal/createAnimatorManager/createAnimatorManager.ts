@@ -18,7 +18,7 @@ const createAnimatorManagerParallel: AnimatorManagerCreator = () => {
 };
 
 const createAnimatorManagerStagger: AnimatorManagerCreator = parent => {
-  let reservedUntilTime: number | undefined;
+  let reservedUntilTime = 0;
 
   const enterChildren = (children: AnimatorNode[]): void => {
     const parentSettings = parent.control.getSettings();
@@ -26,29 +26,46 @@ const createAnimatorManagerStagger: AnimatorManagerCreator = parent => {
 
     const now = Date.now();
 
-    reservedUntilTime = reservedUntilTime !== undefined
-      ? Math.max(reservedUntilTime, now)
-      : now;
+    reservedUntilTime = Math.max(reservedUntilTime, now);
 
-    children.forEach(child => {
+    for (const child of children) {
       const childSettings = child.control.getSettings();
       const offset = (childSettings.duration.offset || 0) * 1000; // seconds to ms
 
-      reservedUntilTime = (reservedUntilTime as number) + offset;
+      reservedUntilTime = reservedUntilTime + offset;
 
       const delay = (reservedUntilTime - now) / 1000; // ms to seconds
 
       reservedUntilTime = reservedUntilTime + stagger;
 
       child.scheduler.start(delay, () => child.send(ACTIONS.enter));
-    });
+    }
   };
 
   return Object.freeze({ name: MANAGERS.stagger, enterChildren });
 };
 
 const createAnimatorManagerSequence: AnimatorManagerCreator = () => {
-  const enterChildren = (): void => {};
+  let reservedUntilTime = 0;
+
+  const enterChildren = (children: AnimatorNode[]): void => {
+    const now = Date.now();
+
+    reservedUntilTime = Math.max(reservedUntilTime, now);
+
+    for (const child of children) {
+      const childSettings = child.control.getSettings();
+      const offset = (childSettings.duration.offset || 0) * 1000; // seconds to ms
+      const durationEnter = (childSettings.duration.enter || 0) * 1000; // seconds to ms
+
+      reservedUntilTime = reservedUntilTime + offset + durationEnter;
+
+      const delay = (reservedUntilTime - now) / 1000; // ms to seconds
+
+      child.scheduler.start(delay, () => child.send(ACTIONS.enter));
+    }
+  };
+
   return Object.freeze({ name: MANAGERS.sequence, enterChildren });
 };
 

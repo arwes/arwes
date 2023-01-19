@@ -2,11 +2,7 @@ import { TOOLS_IS_BROWSER } from '@arwes/tools';
 
 import type { AnimatorNode, AnimatorState, AnimatorAction } from '../../types';
 import { ANIMATOR_STATES as STATES, ANIMATOR_ACTIONS as ACTIONS } from '../../constants';
-
-interface AnimatorMachine {
-  getState: () => AnimatorState
-  send: (action: AnimatorAction) => void
-}
+import { createAnimatorManager } from '../createAnimatorManager/index';
 
 type ActionProcedure = (() => AnimatorState) | (() => void);
 
@@ -21,6 +17,11 @@ type StatesMap = {
     }
   }
 };
+
+interface AnimatorMachine {
+  getState: () => AnimatorState
+  send: (action: AnimatorAction) => void
+}
 
 const createAnimatorMachine = (node: AnimatorNode): AnimatorMachine => {
   let state: AnimatorState = STATES.exited;
@@ -43,14 +44,14 @@ const createAnimatorMachine = (node: AnimatorNode): AnimatorMachine => {
             switch (node.parent.state) {
               case STATES.entering: {
                 if (parentSettings.combine || settings.merge) {
-                  node.parent.manager.enterChildren([node]);
+                  node.parent.context.manager.enterChildren([node]);
                 }
                 break;
               }
               // If the parent has already entered, enter the incoming children whether
               // they have "merge" setting or the parent is in "combine" setting.
               case STATES.entered: {
-                node.parent.manager.enterChildren([node]);
+                node.parent.context.manager.enterChildren([node]);
                 break;
               }
             }
@@ -77,7 +78,7 @@ const createAnimatorMachine = (node: AnimatorNode): AnimatorMachine => {
             ? Array.from(node.children)
             : Array.from(node.children).filter(child => child.control.getSettings().merge);
 
-          node.manager.enterChildren(children);
+          node.context.manager.enterChildren(children);
         },
 
         schedule: () => {
@@ -108,7 +109,7 @@ const createAnimatorMachine = (node: AnimatorNode): AnimatorMachine => {
             .from(node.children)
             .filter(child => !child.control.getSettings().merge);
 
-          node.manager.enterChildren(children);
+          node.context.manager.enterChildren(children);
         }
       },
 
@@ -146,8 +147,13 @@ const createAnimatorMachine = (node: AnimatorNode): AnimatorMachine => {
     '*': {
       onActions: {
         [ACTIONS.update]: () => {
+          const settings = node.control.getSettings();
+
+          if (settings.manager !== node.context.manager.name) {
+            node.context.manager = createAnimatorManager(node, settings.manager);
+          }
+
           if (!node.parent) {
-            const settings = node.control.getSettings();
             const isActive = (settings.active as boolean | undefined) === true ||
               settings.active === undefined;
 

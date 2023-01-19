@@ -1,7 +1,7 @@
 import React, { ReactElement, useState, useRef, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { animate } from 'motion';
-import { AnimatorNode, AnimatorInterface } from '@arwes/animator';
+import { AnimatorInterface } from '@arwes/animator';
 import { Animator, useAnimator } from '@arwes/react-animator';
 
 const AnimatorUIListener = (): ReactElement => {
@@ -9,7 +9,7 @@ const AnimatorUIListener = (): ReactElement => {
   const animator = useAnimator() as AnimatorInterface;
 
   useEffect(() => {
-    animator.node.subscribers.add((node: AnimatorNode): void => {
+    animator.node.subscribers.add(node => {
       const element = elementRef.current as HTMLElement;
       const { duration } = node.control.getSettings();
 

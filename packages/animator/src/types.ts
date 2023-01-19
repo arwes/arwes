@@ -7,13 +7,26 @@ export interface AnimatorControl {
   readonly setForeignRef?: (ref: unknown) => void
 }
 
-export type AnimatorState = 'entered' | 'entering' | 'exiting' | 'exited';
+export type AnimatorState =
+  | 'entered'
+  | 'entering'
+  | 'exiting'
+  | 'exited';
 
-export type AnimatorAction = 'setup' | 'enter' | 'enterEnd' | 'exit' | 'exitEnd' | 'update';
+export type AnimatorAction =
+  | 'setup'
+  | 'enter'
+  | 'enterEnd'
+  | 'exit'
+  | 'exitEnd'
+  | 'update';
+
+export type AnimatorManagerName =
+  | 'parallel'
+  | 'stagger'
+  | 'sequence';
 
 export type AnimatorSubscriber = (node: AnimatorNode) => void;
-
-export type AnimatorManagerName = 'parallel' | 'stagger' | 'sequence';
 
 export interface AnimatorManager {
   readonly name: AnimatorManagerName
@@ -27,7 +40,9 @@ export interface AnimatorNode {
   readonly children: Set<AnimatorNode>
   readonly subscribers: Set<AnimatorSubscriber>
   readonly scheduler: TOScheduler
-  readonly manager: AnimatorManager
+  readonly context: {
+    manager: AnimatorManager
+  }
   readonly state: AnimatorState
   readonly send: (newAction: AnimatorAction) => void
 }
