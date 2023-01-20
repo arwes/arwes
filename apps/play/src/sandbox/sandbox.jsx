@@ -11,6 +11,7 @@ import * as animator from '@arwes/animator';
 import * as animated from '@arwes/animated';
 import * as bleeps from '@arwes/bleeps';
 import * as bgs from '@arwes/bgs';
+import * as reactTools from '@arwes/react-tools';
 import * as reactTheme from '@arwes/react-theme';
 import * as reactStyles from '@arwes/react-styles';
 import * as reactAnimator from '@arwes/react-animator';
@@ -32,6 +33,7 @@ window.noxtron.setupSandbox(() => ({
     { name: '@arwes/animated', pkg: animated },
     { name: '@arwes/bleeps', pkg: bleeps },
     { name: '@arwes/bgs', pkg: bgs },
+    { name: '@arwes/react-tools', pkg: reactTools },
     { name: '@arwes/react-theme', pkg: reactTheme },
     { name: '@arwes/react-styles', pkg: reactStyles },
     { name: '@arwes/react-animator', pkg: reactAnimator },

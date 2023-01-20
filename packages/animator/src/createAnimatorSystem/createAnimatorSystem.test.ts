@@ -22,6 +22,7 @@ describe('setup()', () => {
     };
     const control: AnimatorControl = {
       getSettings: () => settings,
+      getDynamicSettings: () => ({}),
       setDynamicSettings: () => {},
       getForeignRef: () => {},
       setForeignRef: () => {}

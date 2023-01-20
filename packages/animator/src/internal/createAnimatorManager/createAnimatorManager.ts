@@ -8,38 +8,46 @@ import {
   ANIMATOR_ACTIONS as ACTIONS
 } from '../../constants';
 
-type AnimatorManagerCreator = () => AnimatorManager;
+type AnimatorManagerCreator = (node: AnimatorNode) => AnimatorManager;
 
 const createAnimatorManagerParallel: AnimatorManagerCreator = () => {
-  const getDurationEnter = (parent: AnimatorNode, children: AnimatorNode[]): number => {
+  const getDurationEnter = (children: AnimatorNode[]): number => {
     return children.reduce((total, child) => Math.max(total, child.duration.enter), 0);
   };
 
-  const enterChildren = (parent: AnimatorNode, children: AnimatorNode[]): void => {
+  const enterChildren = (children: AnimatorNode[]): void => {
     for (const child of children) {
       child.send(ACTIONS.enter);
     }
   };
 
-  return Object.freeze({ name: MANAGERS.parallel, getDurationEnter, enterChildren });
+  return Object.freeze({
+    name: MANAGERS.parallel,
+    getDurationEnter,
+    enterChildren
+  });
 };
 
-const createAnimatorManagerStagger: AnimatorManagerCreator = () => {
+const createAnimatorManagerStagger: AnimatorManagerCreator = node => {
   let reservedUntilTime = 0;
 
-  const getDurationEnter = (parent: AnimatorNode, children: AnimatorNode[]): number => {
+  const getDurationEnter = (children: AnimatorNode[]): number => {
     if (!children.length) {
       return 0;
     }
 
-    const { duration } = parent.control.getSettings();
+    const { duration } = node.control.getSettings();
     const lastChild = children[children.length - 1];
+
+    // TODO: If any of the children has a longer enter duration which surpasses
+    // the accumulated + last child enter duration value, the total duration should
+    // be greater.
 
     return (duration.stagger * (children.length - 1)) + lastChild.duration.enter;
   };
 
-  const enterChildren = (parent: AnimatorNode, children: AnimatorNode[]): void => {
-    const parentSettings = parent.control.getSettings();
+  const enterChildren = (children: AnimatorNode[]): void => {
+    const parentSettings = node.control.getSettings();
     const stagger = (parentSettings.duration.stagger || 0) * 1000; // seconds to ms
 
     const now = Date.now();
@@ -61,17 +69,21 @@ const createAnimatorManagerStagger: AnimatorManagerCreator = () => {
     }
   };
 
-  return Object.freeze({ name: MANAGERS.stagger, getDurationEnter, enterChildren });
+  return Object.freeze({
+    name: MANAGERS.stagger,
+    getDurationEnter,
+    enterChildren
+  });
 };
 
 const createAnimatorManagerSequence: AnimatorManagerCreator = () => {
   let reservedUntilTime = 0;
 
-  const getDurationEnter = (parent: AnimatorNode, children: AnimatorNode[]): number => {
+  const getDurationEnter = (children: AnimatorNode[]): number => {
     return children.reduce((total, child) => total + child.duration.enter, 0);
   };
 
-  const enterChildren = (parent: AnimatorNode, children: AnimatorNode[]): void => {
+  const enterChildren = (children: AnimatorNode[]): void => {
     const now = Date.now();
 
     reservedUntilTime = Math.max(reservedUntilTime, now);
@@ -92,14 +104,18 @@ const createAnimatorManagerSequence: AnimatorManagerCreator = () => {
     }
   };
 
-  return Object.freeze({ name: MANAGERS.sequence, getDurationEnter, enterChildren });
+  return Object.freeze({
+    name: MANAGERS.sequence,
+    getDurationEnter,
+    enterChildren
+  });
 };
 
-const createAnimatorManager = (manager: AnimatorManagerName): AnimatorManager => {
+const createAnimatorManager = (node: AnimatorNode, manager: AnimatorManagerName): AnimatorManager => {
   switch (manager) {
-    case MANAGERS.stagger: return createAnimatorManagerStagger();
-    case MANAGERS.sequence: return createAnimatorManagerSequence();
-    default: return createAnimatorManagerParallel();
+    case MANAGERS.stagger: return createAnimatorManagerStagger(node);
+    case MANAGERS.sequence: return createAnimatorManagerSequence(node);
+    default: return createAnimatorManagerParallel(node);
   }
 };
 

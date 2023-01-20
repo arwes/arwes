@@ -19,16 +19,16 @@ const aaVisibility = (): AnimatedSettings => {
       entering: ({ element, duration }) => timeline(
         [
           [element, { opacity: [0, 1] }],
-          [element, { opacity: [1, 0.6] }],
-          [element, { opacity: [0.6, 1] }]
+          [element, { opacity: [1, 0.7] }],
+          [element, { opacity: [0.7, 1] }]
         ],
         { duration }
       ),
       exiting: ({ element, duration }) => timeline(
         [
           [element, { opacity: [1, 0] }],
-          [element, { opacity: [0, 0.4] }],
-          [element, { opacity: [0.4, 0] }]
+          [element, { opacity: [0, 0.3] }],
+          [element, { opacity: [0.3, 0] }]
         ],
         { duration }
       )

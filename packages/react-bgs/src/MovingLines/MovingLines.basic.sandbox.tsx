@@ -12,7 +12,13 @@ const Sandbox = (): ReactElement => {
   }, []);
 
   return (
-    <Animator active={active} duration={{ enter: 0.5, exit: 0.5 }}>
+    <Animator
+      active={active}
+      duration={{
+        // Duration of an individual animation sequence.
+        interval: 4
+      }}
+    >
       <div style={{
         position: 'relative',
         width: '80vw',

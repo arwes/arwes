@@ -6,17 +6,17 @@ import type {
   AnimatorNode,
   AnimatorSystem
 } from '../types';
-import { createAnimatorManager } from '../internal/createAnimatorManager/index';
 import { createAnimatorMachine } from '../internal/createAnimatorMachine/index';
+import { createAnimatorManager } from '../internal/createAnimatorManager/index';
 
 const createAnimatorSystem = (): AnimatorSystem => {
-  const systemId = `system-${Date.now()}-${Math.random()}`;
+  const systemId = `system${Date.now()}${Math.random()}`.replace('.', '');
 
   let nodeIdCounter = 0;
   let root: AnimatorNode | undefined;
 
   const createNode = (parent: AnimatorNode | undefined, control: AnimatorControl): AnimatorNode => {
-    const nodeId = `node-${nodeIdCounter++}`;
+    const nodeId = `${systemId}-node${nodeIdCounter++}`;
 
     // The node object reference is passed around in multiple places with some
     // circular references, so this is an object base and later is modified
@@ -24,7 +24,7 @@ const createAnimatorSystem = (): AnimatorSystem => {
     const node = {} as unknown as AnimatorNode;
 
     const machine = createAnimatorMachine(node);
-    const manager = createAnimatorManager(control.getSettings().manager);
+    const manager = createAnimatorManager(node, control.getSettings().manager);
 
     const nodeProps: { [P in keyof AnimatorNode]: PropertyDescriptor } = {
       id: {
@@ -55,7 +55,7 @@ const createAnimatorSystem = (): AnimatorSystem => {
         get: (): { enter: number, exit: number } => {
           const { duration, combine } = node.control.getSettings();
           const enter = combine
-            ? node.manager.getDurationEnter(node, Array.from(node.children))
+            ? node.manager.getDurationEnter(Array.from(node.children))
             : duration.enter || 0;
           const exit = duration.exit || 0;
           return { enter, exit };
