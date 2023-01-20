@@ -2,21 +2,36 @@ import type { TOScheduler } from '@arwes/tools';
 
 export interface AnimatorControl {
   readonly getSettings: () => AnimatorSettings
-  readonly setDynamicSettings?: (settings: AnimatorSettings | null) => void
-  readonly getForeignRef?: () => unknown
-  readonly setForeignRef?: (ref: unknown) => void
+  readonly setDynamicSettings: (settings: AnimatorSettingsPartial | null) => void
+  readonly getDynamicSettings: () => AnimatorSettingsPartial | null
+  readonly setForeignRef: (ref: unknown) => void
+  readonly getForeignRef: () => unknown
 }
 
-export type AnimatorState = 'entered' | 'entering' | 'exiting' | 'exited';
+export type AnimatorState =
+  | 'entered'
+  | 'entering'
+  | 'exiting'
+  | 'exited';
 
-export type AnimatorAction = 'setup' | 'enter' | 'enterEnd' | 'exit' | 'exitEnd' | 'update';
+export type AnimatorAction =
+  | 'setup'
+  | 'enter'
+  | 'enterEnd'
+  | 'exit'
+  | 'exitEnd'
+  | 'update';
+
+export type AnimatorManagerName =
+  | 'parallel'
+  | 'stagger'
+  | 'sequence';
 
 export type AnimatorSubscriber = (node: AnimatorNode) => void;
 
-export type AnimatorManagerName = 'parallel' | 'stagger' | 'sequence';
-
 export interface AnimatorManager {
   readonly name: AnimatorManagerName
+  readonly getDurationEnter: (childrenNodes: AnimatorNode[]) => number
   readonly enterChildren: (childrenNodes: AnimatorNode[]) => void
 }
 
@@ -27,9 +42,10 @@ export interface AnimatorNode {
   readonly children: Set<AnimatorNode>
   readonly subscribers: Set<AnimatorSubscriber>
   readonly scheduler: TOScheduler
-  readonly manager: AnimatorManager
+  readonly duration: { enter: number, exit: number }
   readonly state: AnimatorState
   readonly send: (newAction: AnimatorAction) => void
+  manager: AnimatorManager
 }
 
 export interface AnimatorSystem {
@@ -44,7 +60,6 @@ export interface AnimatorDuration {
   delay: number
   offset: number
   stagger: number
-  interval: number
   [duration: string]: number
 }
 
@@ -56,6 +71,10 @@ export interface AnimatorSettings {
   combine: boolean
   onTransition?: (node: AnimatorNode) => void
 }
+
+export type AnimatorSettingsPartial = Partial<Omit<AnimatorSettings, 'duration'>> & {
+  duration?: Partial<AnimatorDuration>
+};
 
 export interface AnimatorInterface {
   readonly system: AnimatorSystem

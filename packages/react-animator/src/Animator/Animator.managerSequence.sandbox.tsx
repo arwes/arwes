@@ -1,7 +1,7 @@
-import React, { ReactNode, ReactElement, useState, useRef, useEffect } from 'react';
+import React, { ReactElement, useState, useRef, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { animate } from 'motion';
-import { AnimatorNode, AnimatorInterface } from '@arwes/animator';
+import { AnimatorInterface } from '@arwes/animator';
 import { Animator, useAnimator } from '@arwes/react-animator';
 
 const AnimatorUIListener = (): ReactElement => {
@@ -9,35 +9,29 @@ const AnimatorUIListener = (): ReactElement => {
   const animator = useAnimator() as AnimatorInterface;
 
   useEffect(() => {
-    const subscriber = (node: AnimatorNode): void => {
+    animator.node.subscribers.add(node => {
       const element = elementRef.current as HTMLElement;
-      const { duration } = node.control.getSettings();
+      const { duration } = node;
 
       switch (node.state) {
         case 'entering': {
           animate(
             element,
-            { x: [0, 50], backgroundColor: ['#0ff', '#ff0'] },
-            { duration: duration?.enter }
+            { x: [0, 100], backgroundColor: ['#0ff', '#ff0'] },
+            { duration: duration.enter }
           );
           break;
         }
         case 'exiting': {
           animate(
             element,
-            { x: [50, 0], backgroundColor: ['#ff0', '#0ff'] },
-            { duration: duration?.enter }
+            { x: [100, 0], backgroundColor: ['#ff0', '#0ff'] },
+            { duration: duration.exit }
           );
           break;
         }
       }
-    };
-
-    animator.node.subscribers.add(subscriber);
-
-    return () => {
-      animator.node.subscribers.delete(subscriber);
-    };
+    });
   }, []);
 
   return (
@@ -48,17 +42,10 @@ const AnimatorUIListener = (): ReactElement => {
   );
 };
 
-interface ItemProps {
-  children?: ReactNode
-}
-
-const Item = (props: ItemProps): ReactElement => {
+const Item = (): ReactElement => {
   return (
-    <Animator>
+    <Animator duration={{ enter: 0.15 }}>
       <AnimatorUIListener />
-      <div style={{ marginLeft: 20 }}>
-        {props.children}
-      </div>
     </Animator>
   );
 };
@@ -72,25 +59,8 @@ const Sandbox = (): ReactElement => {
   }, []);
 
   return (
-    <Animator active={active}>
-      <Item>
-        <Item />
-        <Item />
-        <Item>
-          <Item />
-          <Item />
-          <Item />
-        </Item>
-      </Item>
-      <Item>
-        <Item />
-        <Item />
-        <Item>
-          <Item />
-          <Item />
-          <Item />
-        </Item>
-      </Item>
+    <Animator active={active} manager='sequence' combine>
+      {Array(10).fill(0).map((_, i) => <Item key={i} />)}
     </Animator>
   );
 };

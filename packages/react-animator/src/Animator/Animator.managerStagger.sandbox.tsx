@@ -51,22 +51,16 @@ const Item = (): ReactElement => {
 };
 
 const Sandbox = (): ReactElement => {
-  const [active, setActive] = useState(false);
-  const [show, setShow] = useState(false);
+  const [active, setActive] = useState(true);
 
   useEffect(() => {
-    const tid1 = setTimeout(() => setActive(true), 1000);
-    const tid2 = setTimeout(() => setShow(true), 1200);
-
-    return () => {
-      clearTimeout(tid1);
-      clearTimeout(tid2);
-    };
+    const tid = setInterval(() => setActive(active => !active), 2000);
+    return () => clearInterval(tid);
   }, []);
 
   return (
     <Animator active={active} manager='stagger' combine>
-      {Array(show ? 20 : 10).fill(0).map((_, index) => <Item key={index} />)}
+      {Array(10).fill(0).map((_, i) => <Item key={i} />)}
     </Animator>
   );
 };

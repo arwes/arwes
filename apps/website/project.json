@@ -3,7 +3,7 @@
   "root": "apps/website",
   "targets": {
     "build": {
-      "executor": "@nrwl/workspace:run-script",
+      "executor": "nx:run-script",
       "options": {
         "script": "build"
       },

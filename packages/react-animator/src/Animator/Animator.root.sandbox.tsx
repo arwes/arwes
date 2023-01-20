@@ -13,14 +13,14 @@ const AnimatorUIListener = (): ReactElement => {
   useEffect(() => {
     const subscriber = (node: AnimatorNode): void => {
       const element = elementRef.current as HTMLElement;
-      const { duration } = node.control.getSettings();
+      const { duration } = node;
 
       switch (node.state) {
         case 'entering': {
           animate(
             element,
             { x: [0, 50], backgroundColor: ['#0ff', '#ff0'] },
-            { duration: duration?.enter }
+            { duration: duration.enter }
           );
           break;
         }
@@ -28,7 +28,7 @@ const AnimatorUIListener = (): ReactElement => {
           animate(
             element,
             { x: [50, 0], backgroundColor: ['#ff0', '#0ff'] },
-            { duration: duration?.enter }
+            { duration: duration.exit }
           );
           break;
         }

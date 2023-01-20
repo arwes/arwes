@@ -5,7 +5,7 @@ import { GridLines, Dots, MovingLines } from '@arwes/react-bgs';
 
 const Sandbox = (): ReactElement => {
   return (
-    <Animator duration={{ enter: 0.5, exit: 0.5, interval: 10 }}>
+    <Animator duration={{ interval: 10 }}>
       <div style={{
         position: 'absolute',
         left: 0,

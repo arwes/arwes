@@ -6,54 +6,82 @@ import type {
   AnimatorNode,
   AnimatorSystem
 } from '../types';
-import { createAnimatorManager } from '../createAnimatorManager/index';
-import { createAnimatorMachine } from '../createAnimatorMachine/index';
+import { createAnimatorMachine } from '../internal/createAnimatorMachine/index';
+import { createAnimatorManager } from '../internal/createAnimatorManager/index';
 
 const createAnimatorSystem = (): AnimatorSystem => {
-  const systemId = `system-${Date.now()}-${Math.random()}`;
+  const systemId = `system${Date.now()}${Math.random()}`.replace('.', '');
 
   let nodeIdCounter = 0;
   let root: AnimatorNode | undefined;
 
   const createNode = (parent: AnimatorNode | undefined, control: AnimatorControl): AnimatorNode => {
-    const nodeId = `node-${nodeIdCounter++}`;
+    const nodeId = `${systemId}-node${nodeIdCounter++}`;
 
-    const nodeBase = {
-      id: nodeId,
-      control,
-      parent,
-      children: new Set<AnimatorNode>(),
-      subscribers: new Set<AnimatorSubscriber>(),
-      scheduler: createTOScheduler()
+    // The node object reference is passed around in multiple places with some
+    // circular references, so this is an object base and later is modified
+    // with specific readonly and writable properties.
+    const node = {} as unknown as AnimatorNode;
+
+    const machine = createAnimatorMachine(node);
+    const manager = createAnimatorManager(node, control.getSettings().manager);
+
+    const nodeProps: { [P in keyof AnimatorNode]: PropertyDescriptor } = {
+      id: {
+        value: nodeId,
+        enumerable: true
+      },
+      control: {
+        value: control,
+        enumerable: true
+      },
+      parent: {
+        value: parent,
+        enumerable: true
+      },
+      children: {
+        value: new Set<AnimatorNode>(),
+        enumerable: true
+      },
+      subscribers: {
+        value: new Set<AnimatorSubscriber>(),
+        enumerable: true
+      },
+      scheduler: {
+        value: createTOScheduler(),
+        enumerable: true
+      },
+      duration: {
+        get: (): { enter: number, exit: number } => {
+          const { duration, combine } = node.control.getSettings();
+          const enter = combine
+            ? node.manager.getDurationEnter(Array.from(node.children))
+            : duration.enter || 0;
+          const exit = duration.exit || 0;
+          return { enter, exit };
+        },
+        enumerable: true
+      },
+      state: {
+        get: () => machine.getState(),
+        enumerable: true
+      },
+      send: {
+        value: machine.send,
+        enumerable: true
+      },
+      manager: {
+        value: manager,
+        enumerable: true,
+        writable: true
+      }
     };
 
-    const machine = createAnimatorMachine(nodeBase as AnimatorNode);
-
-    Object.defineProperty(nodeBase, 'manager', {
-      enumerable: true,
-      writable: false,
-      value: createAnimatorManager(nodeBase as AnimatorNode, control.getSettings().manager)
-    });
-
-    Object.defineProperty(nodeBase, 'send', {
-      enumerable: true,
-      writable: false,
-      value: machine.send
-    });
-
-    Object.defineProperty(nodeBase, 'state', {
-      get () {
-        return machine.getState();
-      }
-    });
-
-    const node = Object.freeze(nodeBase as AnimatorNode);
+    Object.defineProperties(node, nodeProps);
 
     if (parent) {
       parent.children.add(node);
     }
-
-    machine.start();
 
     return node;
   };

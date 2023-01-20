@@ -78,6 +78,7 @@ export const typeDefinitions = [
           repeat?: number
           direction?: string
           duration?: number
+          easing?: string
         }
 
         const animate: (

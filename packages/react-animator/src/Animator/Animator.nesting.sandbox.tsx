@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useRef, useEffect } from 'react';
+import React, { ReactNode, ReactElement, useState, useRef, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { animate } from 'motion';
 import { AnimatorNode, AnimatorInterface } from '@arwes/animator';
@@ -9,29 +9,35 @@ const AnimatorUIListener = (): ReactElement => {
   const animator = useAnimator() as AnimatorInterface;
 
   useEffect(() => {
-    animator.node.subscribers.add((node: AnimatorNode): void => {
+    const subscriber = (node: AnimatorNode): void => {
       const element = elementRef.current as HTMLElement;
-      const { duration } = node.control.getSettings();
+      const { duration } = node;
 
       switch (node.state) {
         case 'entering': {
           animate(
             element,
-            { x: [0, 100], backgroundColor: ['#0ff', '#ff0'] },
-            { duration: duration?.enter }
+            { x: [0, 50], backgroundColor: ['#0ff', '#ff0'] },
+            { duration: duration.enter }
           );
           break;
         }
         case 'exiting': {
           animate(
             element,
-            { x: [100, 0], backgroundColor: ['#ff0', '#0ff'] },
-            { duration: duration?.enter }
+            { x: [50, 0], backgroundColor: ['#ff0', '#0ff'] },
+            { duration: duration.exit }
           );
           break;
         }
       }
-    });
+    };
+
+    animator.node.subscribers.add(subscriber);
+
+    return () => {
+      animator.node.subscribers.delete(subscriber);
+    };
   }, []);
 
   return (
@@ -42,10 +48,17 @@ const AnimatorUIListener = (): ReactElement => {
   );
 };
 
-const Item = (): ReactElement => {
+interface ItemProps {
+  children?: ReactNode
+}
+
+const Item = (props: ItemProps): ReactElement => {
   return (
     <Animator>
       <AnimatorUIListener />
+      <div style={{ marginLeft: 20 }}>
+        {props.children}
+      </div>
     </Animator>
   );
 };
@@ -59,8 +72,25 @@ const Sandbox = (): ReactElement => {
   }, []);
 
   return (
-    <Animator active={active} manager='stagger' combine>
-      {Array(10).fill(0).map((_, i) => <Item key={i} />)}
+    <Animator active={active}>
+      <Item>
+        <Item />
+        <Item />
+        <Item>
+          <Item />
+          <Item />
+          <Item />
+        </Item>
+      </Item>
+      <Item>
+        <Item />
+        <Item />
+        <Item>
+          <Item />
+          <Item />
+          <Item />
+        </Item>
+      </Item>
     </Animator>
   );
 };
