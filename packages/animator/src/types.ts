@@ -50,7 +50,8 @@ export interface AnimatorNode {
 
 export interface AnimatorSystem {
   readonly id: string
-  readonly register: (parentNode: AnimatorNode | undefined, control: AnimatorControl) => AnimatorNode
+  readonly root: AnimatorNode | null
+  readonly register: (parentNode: AnimatorNode | undefined | null, control: AnimatorControl) => AnimatorNode
   readonly unregister: (node: AnimatorNode) => void
 }
 
