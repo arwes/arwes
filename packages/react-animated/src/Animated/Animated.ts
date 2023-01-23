@@ -115,6 +115,8 @@ const Animated = <
       .reduce((total, item) => ({ ...total, ...item }), {});
   }
 
+  // TODO: Set CSS property "visibility: hidden" on exited animator state if animated.
+
   return createElement(as, {
     ...otherProps,
     ...initialAttributes,

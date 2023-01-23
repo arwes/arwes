@@ -1,5 +1,6 @@
 import type { CSSProperties, HTMLProps, SVGProps } from 'react';
 import type { MotionKeyframesDefinition, AnimationOptionsWithOverrides } from '@motionone/dom';
+import type { AnimatorState } from '@arwes/animator';
 
 export interface AnimatedCSSPropsShorthands {
   x?: number | string
@@ -44,12 +45,12 @@ export type AnimatedSettingsTransition = AnimatedSettingsTransitionTypes | Anima
 export interface AnimatedSettings<A extends HTMLProps<HTMLElement> | SVGProps<SVGElement> = HTMLProps<HTMLDivElement>> {
   initialAttributes?: A
   initialStyle?: AnimatedCSSProps
-  transitions?: Record<string, AnimatedSettingsTransition | undefined>
+  transitions?: Record<AnimatorState, AnimatedSettingsTransition | undefined>
 };
 
 export type AnimatedAnimation = AnimatedSettings | AnimatedSettings[];
 
-export type AnimatedAnimations = Record<string, AnimatedAnimation>;
+export type AnimatedAnimations = Record<AnimatorState, AnimatedAnimation>;
 
 export type AnimatedAnimationsCreatorFunction<P = undefined> = (props: P) => AnimatedAnimations;
 
