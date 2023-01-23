@@ -1,8 +1,8 @@
 import React, { ReactElement, useRef, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
-import { animate } from 'motion';
 import { AnimatorInterface, AnimatorNode } from '@arwes/animator';
 import { Animator, useAnimator } from '@arwes/react-animator';
+import { Animated } from '@arwes/react-animated';
 
 interface AnimatorUIListenerProps {
   children: number
@@ -18,33 +18,10 @@ const AnimatorUIListener = (props: AnimatorUIListenerProps): ReactElement => {
     // Set a reference from the node to the element and viceversa.
     element.dataset.id = animator.node.id;
     animator.node.control.setForeignRef(element);
-
-    animator.node.subscribers.add(node => {
-      const { duration } = node;
-
-      switch (node.state) {
-        case 'entering': {
-          animate(
-            element,
-            { opacity: [0.2, 1] },
-            { duration: duration.enter }
-          );
-          break;
-        }
-        case 'exiting': {
-          animate(
-            element,
-            { opacity: [1, 0.2] },
-            { duration: duration.exit }
-          );
-          break;
-        }
-      }
-    });
   }, []);
 
   return (
-    <div
+    <Animated
       ref={elementRef}
       style={{
         display: 'flex',
@@ -54,12 +31,18 @@ const AnimatorUIListener = (props: AnimatorUIListenerProps): ReactElement => {
         height: '20vh',
         backgroundColor: '#055',
         color: '#fff',
-        fontSize: '2rem',
-        opacity: 0.2
+        fontSize: '2rem'
+      }}
+      animated={{
+        initialStyle: { opacity: 0.2 },
+        transitions: {
+          entering: { opacity: [0.2, 1] },
+          exiting: { opacity: [1, 0.2] }
+        }
       }}
     >
       {props.children}
-    </div>
+    </Animated>
   );
 };
 

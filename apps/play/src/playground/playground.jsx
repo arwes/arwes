@@ -98,7 +98,8 @@ window.noxtron.setupPlayground(({ emotion, Icon }) => {
       colorHues: {
         primary: 180,
         secondary: 60
-      }
+      },
+      colorSchemeDisabled: true
     },
     links: {
       small: [
