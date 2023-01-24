@@ -177,7 +177,10 @@ const createAnimatorManagerSwitch: AnimatorManagerCreator = node => {
 
     const onNextEnter = (): void => {
       if (nodeVisibleNew) {
-        if (nodeVisibleNew !== nodeVisible) {
+        if (nodeVisibleNew === nodeVisible) {
+          nodeVisibleNew.send(ACTIONS.enter);
+        }
+        else {
           if (nodeVisible) {
             nodeHiding = nodeVisible;
             nodeSubscriberUnsubscribe = nodeHiding.subscribe(nodeHidingSubscribed => {
