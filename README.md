@@ -9,27 +9,27 @@
 </p>
 
 <div align="center">
-    <a href="https://npmjs.org/package/@arwes/core">
-        <img src="https://img.shields.io/npm/v/@arwes/core.svg?style=flat-square" alt="version" />
-    </a>
-    <a href="https://github.com/arwes/arwes/actions">
-        <img src="https://github.com/arwes/arwes/workflows/ci/badge.svg?style=flat-square" alt="ci" />
-    </a>
-    <a href="https://github.com/arwes/arwes">
-        <img src="https://img.shields.io/github/stars/arwes/arwes.svg?style=flat-square&label=stars" alt="github stars" />
-    </a>
-    <a href="https://npmjs.org/package/@arwes/core">
-        <img src="https://img.shields.io/npm/dm/@arwes/core.svg?style=flat-square" alt="downloads" />
-    </a>
-    <a href="https://twitter.com/arwesjs">
-        <img src="https://img.shields.io/twitter/follow/arwesjs.svg?label=%40arwesjs&style=flat-square&logo=twitter" alt="Twitter Follow" />
-    </a>
-    <a href="https://discord.gg/s5sbTkw">
-      <img src="https://img.shields.io/discord/457381046497968128?color=5865F2&logo=discord&logoColor=white" alt="Join us on Discord">
-    </a>
-    <a href="https://github.com/arwes/arwes/blob/main/LICENSE">
-      <img src="https://img.shields.io/github/license/arwes/arwes.svg?maxAge=2592000&style=flat-square" alt="license" />
-    </a>
+  <a href="https://npmjs.org/package/@arwes/core">
+      <img src="https://img.shields.io/npm/v/@arwes/core.svg?style=flat-square" alt="Version" />
+  </a>
+  <a href="https://github.com/arwes/arwes/actions">
+      <img src="https://github.com/arwes/arwes/workflows/ci/badge.svg?style=flat-square" alt="CI" />
+  </a>
+  <a href="https://github.com/arwes/arwes">
+      <img src="https://img.shields.io/github/stars/arwes/arwes.svg?style=flat-square&label=stars" alt="Github Stars" />
+  </a>
+  <a href="https://npmjs.org/package/@arwes/core">
+      <img src="https://img.shields.io/npm/dm/@arwes/core.svg?style=flat-square" alt="Downloads" />
+  </a>
+  <a href="https://twitter.com/arwesjs">
+    <img src="https://img.shields.io/twitter/url?label=ArwesJS&logo=twitter&url=https%3A%2F%2Ftwitter.com%2Farwesjs" alt="Follow on Twitter" />
+  </a>
+  <a href="https://discord.gg/s5sbTkw">
+    <img src="https://img.shields.io/discord/457381046497968128?color=5865F2&logo=discord&logoColor=white" alt="Join us on Discord">
+  </a>
+  <a href="https://github.com/arwes/arwes/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/arwes/arwes.svg?maxAge=2592000&style=flat-square" alt="License" />
+  </a>
 </div>
 
 ----
@@ -40,25 +40,42 @@ behind are opinionated with influences from [Cyberprep](https://aesthetics.fando
 and [Synthwave](https://en.wikipedia.org/wiki/Synthwave),
 and productions like [Star Citizen](http://robertsspaceindustries.com),
 [Halo](https://www.halowaypoint.com/en-us/games), and [TRON: Legacy](http://www.imdb.com/title/tt1104001).
-It tries to inspire advanced space and alien technology.
+It tries to inspire advanced science and technology.
 
-> The project is under development and not ready for production yet.
-See [project details](https://arwes.dev/project).
+> The project is under development and not ready for production yet. It is still in
+[alpha release](https://stackoverflow.com/questions/40067469), so the components
+are being tested and their API may change as it gets completed.
 
-> Branch [`main`](https://github.com/arwes/arwes/tree/main) is for releases and
-public content deployed at [arwes.dev](https://arwes.dev).
+> Branch [`main`](https://github.com/arwes/arwes/tree/main) is for `1.0.0-alpha`
+releases and public content deployed at [arwes.dev](https://arwes.dev).
 
-> Branch [`next`](https://github.com/arwes/arwes/tree/next) is for active development
-deployed at [next.arwes.dev](https://next.arwes.dev).
+> Branch [`next`](https://github.com/arwes/arwes/tree/next) is for `1.0.0-next`
+releases and active development deployed at [next.arwes.dev](https://next.arwes.dev).
 
-> The previous version was moved to [version1-breakpoint1.arwes.dev](https://version1-breakpoint1.arwes.dev)
+> The previous version `arwes@1.0.0-alpha.5` was moved to [version1-breakpoint1.arwes.dev](https://version1-breakpoint1.arwes.dev)
 with the branch [`version1-breakpoint1`](https://github.com/arwes/arwes/tree/version1-breakpoint1)
 where you can find the components and the website source code. This package was
-released in February, 2018, and **it is now deprecated**.
+released in February, 2018, and it is now deprecated.
 
-## Documentation
+## Packages
 
-See **[arwes.dev](https://arwes.dev)**.
+### Agnostics
+
+Package | Status | Description
+---|---|---
+`@arwes/tools` |  Polishing | General browser API tools.
+`@arwes/theme` | Development | Color, units, and general purpose dynamic theming tools.
+`@arwes/animator` | Polishing | Assemble and disassemble user interfaces using animation controls.
+`@arwes/bleeps` | Development | Define, manage, and control interactive short sound effects.
+`@arwes/bgs` | Development | Passive UI background effects.
+
+### Implementations
+
+Package | Status | Description
+---|---|---
+`@arwes/react-animator` | Polishing | Animator interface tools for React.
+`@arwes/react-animated` | Polishing | Animated UI elements using animator tools for React.
+`@arwes/react-bgs` | Development | Passive UI background effects for React.
 
 ## Community
 
@@ -75,18 +92,20 @@ See **[arwes.dev](https://arwes.dev)**.
 </table>
 <!-- ARWES-COMMUNITY-APPS:END -->
 
+### Similars
+
+- [Augmented UI](https://augmented-ui.com)
+
 ## Need help?
 
 Open [a GitHub issue](https://github.com/arwes/arwes/issues/new/choose) or let's
 chat on [Discord](https://discord.gg/s5sbTkw).
 
-Review [frequently asked questions](https://arwes.dev/project/faq) and
-[code of conduct](https://arwes.dev/community/code-of-conduct).
+Review [frequently asked questions](./FAQ.md) and [code of conduct](./.github/CODE_OF_CONDUCT.md).
 
 ## Roadmap
 
-Check out [project boards](https://github.com/arwes/arwes/projects) and
-[roadmap](https://arwes.dev/project/roadmap).
+Check out [Project Task Boards](https://github.com/arwes/arwes/projects).
 
 ## Contributors
 
@@ -117,6 +136,5 @@ specification.
 ## Want to contribute?
 
 The project is not fully open for sustancial contributions yet until the
-first beta version is released and the [project guidelines](https://arwes.dev/project/guidelines)
-are finished. But you can follow the development in [Discord](https://discord.gg/s5sbTkw)
-and [Twitter](https://twitter.com/arwesjs).
+first beta version is released. Follow the development on
+[Discord](https://discord.gg/s5sbTkw) and [Twitter](https://twitter.com/arwesjs).
