@@ -1,43 +1,18 @@
-import React, { ReactNode, ReactElement, useState, useRef, useEffect } from 'react';
+import React, { ReactNode, ReactElement, useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
-import { animate } from 'motion';
-import { AnimatorInterface } from '@arwes/animator';
-import { Animator, AnimatorProps, useAnimator } from '@arwes/react-animator';
+import { Animator, AnimatorProps } from '@arwes/react-animator';
+import { Animated } from '@arwes/react-animated';
 
 const AnimatorUIListener = (): ReactElement => {
-  const elementRef = useRef<HTMLDivElement>(null);
-  const animator = useAnimator() as AnimatorInterface;
-
-  useEffect(() => {
-    animator.node.subscribe(node => {
-      const element = elementRef.current as HTMLElement;
-      const { duration } = node;
-
-      switch (node.state) {
-        case 'entering': {
-          animate(
-            element,
-            { x: [0, 50], backgroundColor: ['#0ff', '#ff0'] },
-            { duration: duration.enter }
-          );
-          break;
-        }
-        case 'exiting': {
-          animate(
-            element,
-            { x: [50, 0], backgroundColor: ['#ff0', '#0ff'] },
-            { duration: duration.exit }
-          );
-          break;
-        }
-      }
-    });
-  }, []);
-
   return (
-    <div
-      ref={elementRef}
+    <Animated
       style={{ margin: 10, width: 40, height: 20, backgroundColor: '#0ff' }}
+      animated={{
+        transitions: {
+          entering: { x: [0, 50], backgroundColor: ['#0ff', '#ff0'] },
+          exiting: { x: [50, 0], backgroundColor: ['#ff0', '#0ff'] }
+        }
+      }}
     />
   );
 };

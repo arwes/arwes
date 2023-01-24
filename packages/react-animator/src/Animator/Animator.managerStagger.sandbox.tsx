@@ -1,51 +1,20 @@
-import React, { ReactElement, useState, useRef, useEffect } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
-import { animate } from 'motion';
-import { AnimatorInterface } from '@arwes/animator';
-import { Animator, useAnimator } from '@arwes/react-animator';
-
-const AnimatorUIListener = (): ReactElement => {
-  const elementRef = useRef<HTMLDivElement>(null);
-  const animator = useAnimator() as AnimatorInterface;
-
-  useEffect(() => {
-    animator.node.subscribe(node => {
-      const element = elementRef.current as HTMLElement;
-      const { duration } = node;
-
-      switch (node.state) {
-        case 'entering': {
-          animate(
-            element,
-            { x: [0, 100], backgroundColor: ['#0ff', '#ff0'] },
-            { duration: duration.enter }
-          );
-          break;
-        }
-        case 'exiting': {
-          animate(
-            element,
-            { x: [100, 0], backgroundColor: ['#ff0', '#0ff'] },
-            { duration: duration.exit }
-          );
-          break;
-        }
-      }
-    });
-  }, []);
-
-  return (
-    <div
-      ref={elementRef}
-      style={{ margin: 10, width: 40, height: 20, backgroundColor: '#0ff' }}
-    />
-  );
-};
+import { Animator } from '@arwes/react-animator';
+import { Animated } from '@arwes/react-animated';
 
 const Item = (): ReactElement => {
   return (
     <Animator>
-      <AnimatorUIListener />
+      <Animated
+        style={{ margin: 10, width: 40, height: 20, backgroundColor: '#0ff' }}
+        animated={{
+          transitions: {
+            entering: { x: [0, 100], backgroundColor: ['#0ff', '#ff0'] },
+            exiting: { x: [100, 0], backgroundColor: ['#ff0', '#0ff'] }
+          }
+        }}
+      />
     </Animator>
   );
 };
