@@ -12,13 +12,21 @@ import {
 type AnimatorManagerCreator = (node: AnimatorNode) => AnimatorManager;
 
 const createAnimatorManagerParallel: AnimatorManagerCreator = node => {
+  const getChildren = (childrenProvided?: AnimatorNode[]): AnimatorNode[] => {
+    const children = (childrenProvided ?? Array.from(node.children));
+    return children.filter(child => {
+      const { condition } = child.control.getSettings();
+      return condition ? condition(child) : true;
+    });
+  };
+
   const getDurationEnter = (childrenProvided?: AnimatorNode[]): number => {
-    const children = childrenProvided ?? Array.from(node.children);
+    const children = getChildren(childrenProvided);
     return children.reduce((total, child) => Math.max(total, child.duration.enter), 0);
   };
 
   const enterChildren = (childrenProvided?: AnimatorNode[]): void => {
-    const children = childrenProvided ?? Array.from(node.children);
+    const children = getChildren(childrenProvided);
     for (const child of children) {
       child.send(ACTIONS.enter);
     }
@@ -34,8 +42,17 @@ const createAnimatorManagerParallel: AnimatorManagerCreator = node => {
 const createAnimatorManagerStagger: AnimatorManagerCreator = node => {
   let reservedUntilTime = 0;
 
+  const getChildren = (childrenProvided?: AnimatorNode[]): AnimatorNode[] => {
+    const children = (childrenProvided ?? Array.from(node.children));
+    return children.filter(child => {
+      const { condition } = child.control.getSettings();
+      return condition ? condition(child) : true;
+    });
+  };
+
   const getDurationEnter = (childrenProvided?: AnimatorNode[]): number => {
-    const children = childrenProvided ?? Array.from(node.children);
+    const children = getChildren(childrenProvided);
+
     if (!children.length) {
       return 0;
     }
@@ -51,7 +68,7 @@ const createAnimatorManagerStagger: AnimatorManagerCreator = node => {
   };
 
   const enterChildren = (childrenProvided?: AnimatorNode[]): void => {
-    const children = childrenProvided ?? Array.from(node.children);
+    const children = getChildren(childrenProvided);
     const parentSettings = node.control.getSettings();
     const stagger = (parentSettings.duration.stagger || 0) * 1000; // seconds to ms
 
@@ -84,13 +101,21 @@ const createAnimatorManagerStagger: AnimatorManagerCreator = node => {
 const createAnimatorManagerSequence: AnimatorManagerCreator = node => {
   let reservedUntilTime = 0;
 
+  const getChildren = (childrenProvided?: AnimatorNode[]): AnimatorNode[] => {
+    const children = (childrenProvided ?? Array.from(node.children));
+    return children.filter(child => {
+      const { condition } = child.control.getSettings();
+      return condition ? condition(child) : true;
+    });
+  };
+
   const getDurationEnter = (childrenProvided?: AnimatorNode[]): number => {
-    const children = childrenProvided ?? Array.from(node.children);
+    const children = getChildren(childrenProvided);
     return children.reduce((total, child) => total + child.duration.enter, 0);
   };
 
   const enterChildren = (childrenProvided?: AnimatorNode[]): void => {
-    const children = childrenProvided ?? Array.from(node.children);
+    const children = getChildren(childrenProvided);
     const now = Date.now();
 
     reservedUntilTime = Math.max(reservedUntilTime, now);
