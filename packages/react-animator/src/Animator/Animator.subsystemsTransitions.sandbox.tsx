@@ -227,13 +227,62 @@ const Sandbox = (): ReactElement => {
             <Footer />
           </Animator>
           <Animator combine>
-            {(path === 'a' || path === 'b') && <PanelLeft />}
-            {path === 'a' && <PanelRight />}
+            <Animator
+              combine
+              manager='switch'
+              checkToSend={[path]}
+              checkToSendAction='refresh'
+            >
+              <Animator
+                combine
+                condition={() => path === 'a' || path === 'b'}
+              >
+                <PanelLeft />
+              </Animator>
+            </Animator>
+            <Animator
+              combine
+              manager='switch'
+              checkToSend={[path]}
+              checkToSendAction='refresh'
+            >
+              <Animator
+                combine
+                condition={() => path === 'a'}
+              >
+                <PanelRight />
+              </Animator>
+            </Animator>
           </Animator>
           <main style={{ gridArea: 'main' }}>
-            {path === 'a' && <SubsystemA />}
-            {path === 'b' && <SubsystemB />}
-            {path === 'c' && <SubsystemC />}
+            <Animator
+              combine
+              manager='switch'
+              checkToSend={[path]}
+              checkToSendAction='refresh'
+            >
+              <Animator
+                combine
+                unmountOnExited
+                condition={() => path === 'a'}
+              >
+                <SubsystemA />
+              </Animator>
+              <Animator
+                combine
+                unmountOnExited
+                condition={() => path === 'b'}
+              >
+                <SubsystemB />
+              </Animator>
+              <Animator
+                combine
+                unmountOnExited
+                condition={() => path === 'c'}
+              >
+                <SubsystemC />
+              </Animator>
+            </Animator>
           </main>
         </div>
       </div>

@@ -3,7 +3,7 @@
 import React, { ReactNode, ReactElement, useState, useRef, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { animate } from 'motion';
-import { AnimatorNode, AnimatorInterface } from '@arwes/animator';
+import { AnimatorInterface } from '@arwes/animator';
 import { Animator, AnimatorProps, useAnimator } from '@arwes/react-animator';
 
 const AnimatorUIListener = (): ReactElement => {
@@ -11,7 +11,7 @@ const AnimatorUIListener = (): ReactElement => {
   const animator = useAnimator() as AnimatorInterface;
 
   useEffect(() => {
-    const subscriber = (node: AnimatorNode): void => {
+    animator.node.subscribe(node => {
       const element = elementRef.current as HTMLElement;
       const { duration } = node;
 
@@ -33,13 +33,7 @@ const AnimatorUIListener = (): ReactElement => {
           break;
         }
       }
-    };
-
-    animator.node.subscribers.add(subscriber);
-
-    return () => {
-      animator.node.subscribers.delete(subscriber);
-    };
+    });
   }, []);
 
   return (

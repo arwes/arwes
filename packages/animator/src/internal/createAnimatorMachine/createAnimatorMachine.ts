@@ -30,6 +30,8 @@ const createAnimatorMachine = (node: AnimatorNode): AnimatorMachine => {
   const statesMap: StatesMap = {
     [STATES.exited]: {
       onActions: {
+        [ACTIONS.enter]: STATES.entering,
+
         [ACTIONS.setup]: () => {
           if (hasSetup) {
             return;
@@ -72,9 +74,7 @@ const createAnimatorMachine = (node: AnimatorNode): AnimatorMachine => {
               return STATES.entering;
             }
           }
-        },
-
-        [ACTIONS.enter]: STATES.entering
+        }
       }
     },
 
@@ -100,7 +100,23 @@ const createAnimatorMachine = (node: AnimatorNode): AnimatorMachine => {
 
       onActions: {
         [ACTIONS.enterEnd]: STATES.entered,
-        [ACTIONS.exit]: STATES.exiting
+        [ACTIONS.exit]: STATES.exiting,
+
+        [ACTIONS.refresh]: () => {
+          const settings = node.control.getSettings();
+          const childrenExited = Array
+            .from(node.children)
+            .filter(child => child.state === STATES.exited);
+
+          if (settings.combine) {
+            node.manager.enterChildren(childrenExited);
+          }
+          else {
+            const childrenMerged = childrenExited
+              .filter(child => child.control.getSettings().merge);
+            node.manager.enterChildren(childrenMerged);
+          }
+        }
       }
     },
 
@@ -122,7 +138,15 @@ const createAnimatorMachine = (node: AnimatorNode): AnimatorMachine => {
       },
 
       onActions: {
-        [ACTIONS.exit]: STATES.exiting
+        [ACTIONS.exit]: STATES.exiting,
+
+        [ACTIONS.refresh]: () => {
+          const childrenExited = Array
+            .from(node.children)
+            .filter(child => child.state === STATES.exited);
+
+          node.manager.enterChildren(childrenExited);
+        }
       }
     },
 
@@ -158,6 +182,7 @@ const createAnimatorMachine = (node: AnimatorNode): AnimatorMachine => {
           const settings = node.control.getSettings();
 
           if (settings.manager !== node.manager.name) {
+            node.manager.destroy?.();
             node.manager = createAnimatorManager(node, settings.manager);
           }
 

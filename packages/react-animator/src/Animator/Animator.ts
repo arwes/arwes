@@ -1,16 +1,27 @@
-import { ReactElement, createElement, useMemo, useContext, useRef, useEffect, ForwardedRef } from 'react';
+import {
+  ReactElement,
+  ForwardedRef,
+  createElement,
+  useMemo,
+  useContext,
+  useRef,
+  useEffect,
+  useState
+} from 'react';
 
 import {
   AnimatorNode,
+  AnimatorSubscriber,
   AnimatorSettings,
   AnimatorSettingsPartial,
   AnimatorSystem,
   AnimatorControl,
   AnimatorInterface,
+  AnimatorDuration,
   ANIMATOR_DEFAULT_SETTINGS,
-  ANIMATOR_ACTIONS,
-  createAnimatorSystem,
-  AnimatorDuration
+  ANIMATOR_STATES as STATES,
+  ANIMATOR_ACTIONS as ACTIONS,
+  createAnimatorSystem
 } from '@arwes/animator';
 import { AnimatorContext } from '../internal/AnimatorContext/index';
 import { AnimatorGeneralContext } from '../internal/AnimatorGeneralContext/index';
@@ -26,7 +37,17 @@ const setNodeRefValue = (nodeRef: ForwardedRef<AnimatorNode> | undefined, node: 
 };
 
 const Animator = (props: AnimatorProps): ReactElement => {
-  const { root, disabled, dismissed, children, nodeRef, ...settings } = props;
+  const {
+    root,
+    disabled,
+    dismissed,
+    unmountOnExited,
+    checkToSendAction,
+    checkToSend,
+    nodeRef,
+    children,
+    ...settings
+  } = props;
 
   const parentAnimatorInterface = useContext(AnimatorContext);
   const animatorGeneralInterface = useContext(AnimatorGeneralContext);
@@ -35,7 +56,9 @@ const Animator = (props: AnimatorProps): ReactElement => {
   const dynamicSettingsRef = useRef<AnimatorSettingsPartial | null>(null);
   const foreignRef = useRef<unknown>(null);
   const prevAnimatorRef = useRef<AnimatorInterface | undefined>(undefined);
-  const isFirstRenderRef = useRef<boolean | null>(true);
+  const isFirstRender1Ref = useRef<boolean | null>(true);
+  const isFirstRender2Ref = useRef<boolean | null>(true);
+  const [isExited, setIsExited] = useState<boolean | undefined>(undefined);
 
   settingsRef.current = settings;
 
@@ -121,7 +144,7 @@ const Animator = (props: AnimatorProps): ReactElement => {
   prevAnimatorRef.current = animatorInterface;
 
   useEffect(() => {
-    animatorInterface?.node.send(ANIMATOR_ACTIONS.setup);
+    animatorInterface?.node.send(ACTIONS.setup);
 
     return () => {
       if (prevAnimatorRef.current) {
@@ -131,15 +154,46 @@ const Animator = (props: AnimatorProps): ReactElement => {
   }, []);
 
   useEffect(() => {
-    if (isFirstRenderRef.current) {
-      isFirstRenderRef.current = false;
+    if (isFirstRender1Ref.current) {
+      isFirstRender1Ref.current = false;
       return;
     }
 
-    animatorInterface?.node.send(ANIMATOR_ACTIONS.update);
+    animatorInterface?.node.send(ACTIONS.update);
   }, [settings.active, settings.manager, settings.merge, settings.combine]);
 
-  return createElement(AnimatorContext.Provider, { value: animatorInterface }, children);
+  useEffect(() => {
+    if (unmountOnExited && animatorInterface) {
+      const subscriber: AnimatorSubscriber = node => {
+        setIsExited(node.state === STATES.exited);
+      };
+
+      animatorInterface.node.subscribe(subscriber);
+
+      return () => {
+        animatorInterface?.node.unsubscribe(subscriber);
+      };
+    }
+  }, [unmountOnExited, animatorInterface]);
+
+  useEffect(() => {
+    if (isFirstRender2Ref.current) {
+      isFirstRender2Ref.current = false;
+      return;
+    }
+
+    if (animatorInterface) {
+      animatorInterface.node.send(checkToSendAction ?? ACTIONS.refresh);
+    }
+  }, checkToSend ?? []);
+
+  return createElement(
+    AnimatorContext.Provider,
+    { value: animatorInterface },
+    unmountOnExited && (isExited || animatorInterface?.node.state === STATES.exited)
+      ? null
+      : children
+  );
 };
 
 export { Animator };

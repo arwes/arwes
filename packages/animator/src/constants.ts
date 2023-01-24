@@ -21,14 +21,16 @@ export const ANIMATOR_ACTIONS: Record<AnimatorAction, AnimatorAction> = Object.f
   enterEnd: 'enterEnd',
   exit: 'exit',
   exitEnd: 'exitEnd',
-  update: 'update'
+  update: 'update',
+  refresh: 'refresh'
 });
 
 // Managers
 export const ANIMATOR_MANAGER_NAMES: Record<AnimatorManagerName, AnimatorManagerName> = Object.freeze({
   parallel: 'parallel',
   sequence: 'sequence',
-  stagger: 'stagger'
+  stagger: 'stagger',
+  switch: 'switch'
 });
 
 export const ANIMATOR_DEFAULT_DURATION: AnimatorDuration = Object.freeze({

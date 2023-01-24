@@ -9,7 +9,7 @@ const AnimatorUIListener = (): ReactElement => {
   const animator = useAnimator() as AnimatorInterface;
 
   useEffect(() => {
-    animator.node.subscribers.add(node => {
+    animator.node.subscribe(node => {
       const element = elementRef.current as HTMLElement;
       const { duration } = node;
 

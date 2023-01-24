@@ -66,6 +66,20 @@ const createAnimatorSystem = (): AnimatorSystem => {
         get: () => machine.getState(),
         enumerable: true
       },
+      subscribe: {
+        value: (subscriber: AnimatorSubscriber): (() => void) => {
+          node.subscribers.add(subscriber);
+          subscriber(node);
+          return () => node.subscribers.delete(subscriber);
+        },
+        enumerable: true
+      },
+      unsubscribe: {
+        value: (subscriber: AnimatorSubscriber): void => {
+          node.subscribers.delete(subscriber);
+        },
+        enumerable: true
+      },
       send: {
         value: machine.send,
         enumerable: true

@@ -1,11 +1,14 @@
-import type { ForwardedRef, ReactNode } from 'react';
+import type { ForwardedRef, ReactNode, DependencyList } from 'react';
 
-import type { AnimatorNode, AnimatorSettingsPartial } from '@arwes/animator';
+import type { AnimatorAction, AnimatorNode, AnimatorSettingsPartial } from '@arwes/animator';
 
 export interface AnimatorProps extends AnimatorSettingsPartial {
   root?: boolean
   disabled?: boolean
   dismissed?: boolean
-  children?: ReactNode
+  unmountOnExited?: boolean
+  checkToSendAction?: AnimatorAction
+  checkToSend?: DependencyList
   nodeRef?: ForwardedRef<AnimatorNode>
+  children?: ReactNode
 }

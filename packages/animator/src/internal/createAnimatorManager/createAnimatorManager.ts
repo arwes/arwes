@@ -1,21 +1,25 @@
 import type {
   AnimatorManagerName,
   AnimatorManager,
+  AnimatorSubscriber,
   AnimatorNode
 } from '../../types';
 import {
   ANIMATOR_MANAGER_NAMES as MANAGERS,
-  ANIMATOR_ACTIONS as ACTIONS
+  ANIMATOR_ACTIONS as ACTIONS,
+  ANIMATOR_STATES as STATES
 } from '../../constants';
 
 type AnimatorManagerCreator = (node: AnimatorNode) => AnimatorManager;
 
-const createAnimatorManagerParallel: AnimatorManagerCreator = () => {
-  const getDurationEnter = (children: AnimatorNode[]): number => {
+const createAnimatorManagerParallel: AnimatorManagerCreator = node => {
+  const getDurationEnter = (childrenProvided?: AnimatorNode[]): number => {
+    const children = childrenProvided ?? Array.from(node.children);
     return children.reduce((total, child) => Math.max(total, child.duration.enter), 0);
   };
 
-  const enterChildren = (children: AnimatorNode[]): void => {
+  const enterChildren = (childrenProvided?: AnimatorNode[]): void => {
+    const children = childrenProvided ?? Array.from(node.children);
     for (const child of children) {
       child.send(ACTIONS.enter);
     }
@@ -31,7 +35,8 @@ const createAnimatorManagerParallel: AnimatorManagerCreator = () => {
 const createAnimatorManagerStagger: AnimatorManagerCreator = node => {
   let reservedUntilTime = 0;
 
-  const getDurationEnter = (children: AnimatorNode[]): number => {
+  const getDurationEnter = (childrenProvided?: AnimatorNode[]): number => {
+    const children = childrenProvided ?? Array.from(node.children);
     if (!children.length) {
       return 0;
     }
@@ -46,7 +51,8 @@ const createAnimatorManagerStagger: AnimatorManagerCreator = node => {
     return (duration.stagger * (children.length - 1)) + lastChild.duration.enter;
   };
 
-  const enterChildren = (children: AnimatorNode[]): void => {
+  const enterChildren = (childrenProvided?: AnimatorNode[]): void => {
+    const children = childrenProvided ?? Array.from(node.children);
     const parentSettings = node.control.getSettings();
     const stagger = (parentSettings.duration.stagger || 0) * 1000; // seconds to ms
 
@@ -76,14 +82,16 @@ const createAnimatorManagerStagger: AnimatorManagerCreator = node => {
   });
 };
 
-const createAnimatorManagerSequence: AnimatorManagerCreator = () => {
+const createAnimatorManagerSequence: AnimatorManagerCreator = node => {
   let reservedUntilTime = 0;
 
-  const getDurationEnter = (children: AnimatorNode[]): number => {
+  const getDurationEnter = (childrenProvided?: AnimatorNode[]): number => {
+    const children = childrenProvided ?? Array.from(node.children);
     return children.reduce((total, child) => total + child.duration.enter, 0);
   };
 
-  const enterChildren = (children: AnimatorNode[]): void => {
+  const enterChildren = (childrenProvided?: AnimatorNode[]): void => {
+    const children = childrenProvided ?? Array.from(node.children);
     const now = Date.now();
 
     reservedUntilTime = Math.max(reservedUntilTime, now);
@@ -111,10 +119,84 @@ const createAnimatorManagerSequence: AnimatorManagerCreator = () => {
   });
 };
 
+const createAnimatorManagerSwitch: AnimatorManagerCreator = node => {
+  let nodeVisible: AnimatorNode | undefined;
+  let nodeVisibleSubscriber: AnimatorSubscriber | undefined;
+
+  const getDurationEnter = (): number => {
+    if (nodeVisible) {
+      return nodeVisible.duration.enter;
+    }
+
+    const nodeVisibleCurrent = Array.from(node.children).find(child => {
+      const { condition } = child.control.getSettings();
+      return condition ? condition(child) : true;
+    });
+
+    if (nodeVisibleCurrent) {
+      return nodeVisibleCurrent.duration.enter;
+    }
+
+    return 0;
+  };
+
+  const enterChildren = (): void => {
+    const children = Array.from(node.children);
+    const nodeVisibleNew = children.find(child => {
+      const { condition } = child.control.getSettings();
+      return condition ? condition(child) : true;
+    });
+
+    // TODO: What if "nodeVisibleSubscriber" already exists?
+
+    if (nodeVisibleNew) {
+      if (nodeVisibleNew === nodeVisible) {
+        nodeVisibleNew.send(ACTIONS.enter);
+      }
+      else {
+        if (nodeVisible) {
+          nodeVisibleSubscriber = nodeSubscribed => {
+            if (nodeSubscribed.state === STATES.exited) {
+              nodeSubscribed.unsubscribe(nodeVisibleSubscriber as AnimatorSubscriber);
+              nodeVisibleSubscriber = undefined;
+              nodeVisibleNew.send(ACTIONS.enter);
+            }
+          };
+          nodeVisible.subscribe(nodeVisibleSubscriber);
+          nodeVisible.send(ACTIONS.exit);
+        }
+        else {
+          nodeVisibleNew.send(ACTIONS.enter);
+        }
+      }
+    }
+
+    children
+      .filter(child => child !== nodeVisibleNew)
+      .forEach(child => child.send(ACTIONS.exit));
+
+    nodeVisible = nodeVisibleNew;
+  };
+
+  const destroy = (): void => {
+    if (nodeVisible && nodeVisibleSubscriber) {
+      nodeVisible.unsubscribe(nodeVisibleSubscriber);
+    }
+  };
+
+  return Object.freeze({
+    name: MANAGERS.switch,
+    getDurationEnter,
+    enterChildren,
+    destroy
+  });
+};
+
 const createAnimatorManager = (node: AnimatorNode, manager: AnimatorManagerName): AnimatorManager => {
   switch (manager) {
     case MANAGERS.stagger: return createAnimatorManagerStagger(node);
     case MANAGERS.sequence: return createAnimatorManagerSequence(node);
+    case MANAGERS.switch: return createAnimatorManagerSwitch(node);
     default: return createAnimatorManagerParallel(node);
   }
 };

@@ -20,19 +20,22 @@ export type AnimatorAction =
   | 'enterEnd'
   | 'exit'
   | 'exitEnd'
-  | 'update';
+  | 'update'
+  | 'refresh';
 
 export type AnimatorManagerName =
   | 'parallel'
   | 'stagger'
-  | 'sequence';
+  | 'sequence'
+  | 'switch';
 
 export type AnimatorSubscriber = (node: AnimatorNode) => void;
 
 export interface AnimatorManager {
   readonly name: AnimatorManagerName
-  readonly getDurationEnter: (childrenNodes: AnimatorNode[]) => number
-  readonly enterChildren: (childrenNodes: AnimatorNode[]) => void
+  readonly getDurationEnter: (childrenNodes?: AnimatorNode[]) => number
+  readonly enterChildren: (childrenNodes?: AnimatorNode[]) => void
+  readonly destroy?: () => void
 }
 
 export interface AnimatorNode {
@@ -44,6 +47,8 @@ export interface AnimatorNode {
   readonly scheduler: TOScheduler
   readonly duration: { enter: number, exit: number }
   readonly state: AnimatorState
+  readonly subscribe: ((subscriber: AnimatorSubscriber) => (() => void))
+  readonly unsubscribe: (subscriber: AnimatorSubscriber) => void
   readonly send: (newAction: AnimatorAction) => void
   manager: AnimatorManager
 }
@@ -70,6 +75,7 @@ export interface AnimatorSettings {
   manager: AnimatorManagerName
   merge: boolean
   combine: boolean
+  condition?: (node: AnimatorNode) => boolean
   onTransition?: (node: AnimatorNode) => void
 }
 

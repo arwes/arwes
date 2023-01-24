@@ -33,10 +33,10 @@ const AnimatorUIListener = (): ReactElement => {
       }
     };
 
-    animator.node.subscribers.add(subscriber);
+    animator.node.subscribe(subscriber);
 
     return () => {
-      animator.node.subscribers.delete(subscriber);
+      animator.node.unsubscribe(subscriber);
     };
   }, []);
 

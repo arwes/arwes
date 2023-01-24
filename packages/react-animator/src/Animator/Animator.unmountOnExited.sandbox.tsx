@@ -1,7 +1,7 @@
 import React, { ReactElement, useState, useRef, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { animate } from 'motion';
-import { AnimatorInterface } from '@arwes/animator';
+import { AnimatorNode, AnimatorInterface } from '@arwes/animator';
 import { Animator, useAnimator } from '@arwes/react-animator';
 
 const AnimatorUIListener = (): ReactElement => {
@@ -9,7 +9,7 @@ const AnimatorUIListener = (): ReactElement => {
   const animator = useAnimator() as AnimatorInterface;
 
   useEffect(() => {
-    animator.node.subscribe(node => {
+    const subscriber = (node: AnimatorNode): void => {
       const element = elementRef.current as HTMLElement;
       const { duration } = node;
 
@@ -31,22 +31,20 @@ const AnimatorUIListener = (): ReactElement => {
           break;
         }
       }
-    });
+    };
+
+    animator.node.subscribe(subscriber);
+
+    return () => {
+      animator.node.unsubscribe(subscriber);
+    };
   }, []);
 
   return (
     <div
       ref={elementRef}
-      style={{ margin: 10, width: 40, height: 20, backgroundColor: '#0ff' }}
+      style={{ margin: 10, width: 40, height: 40, backgroundColor: '#0ff' }}
     />
-  );
-};
-
-const Item = (): ReactElement => {
-  return (
-    <Animator>
-      <AnimatorUIListener />
-    </Animator>
   );
 };
 
@@ -59,8 +57,8 @@ const Sandbox = (): ReactElement => {
   }, []);
 
   return (
-    <Animator active={active} manager='stagger' combine>
-      {Array(10).fill(0).map((_, i) => <Item key={i} />)}
+    <Animator active={active} unmountOnExited>
+      <AnimatorUIListener />
     </Animator>
   );
 };
