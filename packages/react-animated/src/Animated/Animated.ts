@@ -96,10 +96,10 @@ const Animated = <
       setIsExited(node.state === 'exited');
     };
 
-    animator.node.subscribers.add(animatorSubscriber);
+    animator.node.subscribe(animatorSubscriber);
 
     return () => {
-      animator.node.subscribers.delete(animatorSubscriber);
+      animator.node.unsubscribe(animatorSubscriber);
       animationControlsRef.current.forEach(control => control.stop());
     };
   }, [animator]);
