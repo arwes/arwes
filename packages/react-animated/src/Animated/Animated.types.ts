@@ -13,6 +13,7 @@ export interface AnimatedProps<E extends HTMLElement | SVGElement = HTMLDivEleme
   className?: string
   style?: CSSProperties
   animated?: AnimatedSettings<P> | Array<AnimatedSettings<P>>
+  hideOnExited?: boolean
   as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
   children?: ReactNode
 }

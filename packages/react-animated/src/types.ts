@@ -45,12 +45,12 @@ export type AnimatedSettingsTransition = AnimatedSettingsTransitionTypes | Anima
 export interface AnimatedSettings<A extends HTMLProps<HTMLElement> | SVGProps<SVGElement> = HTMLProps<HTMLDivElement>> {
   initialAttributes?: A
   initialStyle?: AnimatedCSSProps
-  transitions?: Record<AnimatorState, AnimatedSettingsTransition | undefined>
+  transitions?: { [P in AnimatorState]?: AnimatedSettingsTransition | undefined }
 };
 
 export type AnimatedAnimation = AnimatedSettings | AnimatedSettings[];
 
-export type AnimatedAnimations = Record<AnimatorState, AnimatedAnimation>;
+export type AnimatedAnimations = { [P in AnimatorState]?: AnimatedAnimation };
 
 export type AnimatedAnimationsCreatorFunction<P = undefined> = (props: P) => AnimatedAnimations;
 

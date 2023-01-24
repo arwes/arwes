@@ -37,7 +37,7 @@ interface HeaderProps {
 const Header = (props: HeaderProps): ReactElement => {
   const { path, onLink } = props;
   return (
-    <Animator combine>
+    <Animator>
       <Animated
         as='header'
         style={{
@@ -49,6 +49,7 @@ const Header = (props: HeaderProps): ReactElement => {
           backgroundColor: '#055'
         }}
         animated={[aaOpacity(), aaProperty('y', 20, 0)]}
+        hideOnExited
       >
         <Link path='a' active={path === 'a'} bg='#550' bgActive='#aa0' onLink={onLink} />
         <Link path='b' active={path === 'b'} bg='#707' bgActive='#c0c' onLink={onLink} />
@@ -68,6 +69,7 @@ const Footer = (): ReactElement => {
         as='footer'
         style={{ gridArea: 'footer', backgroundColor: '#055' }}
         animated={[aaOpacity(), aaProperty('y', -20, 0)]}
+        hideOnExited
       />
     </Animator>
   );
@@ -82,6 +84,7 @@ const PanelLeft = (): ReactElement => {
         as='aside'
         style={{ gridArea: 'panelLeft', backgroundColor: '#055' }}
         animated={[aaOpacity(), aaProperty('x', 20, 0)]}
+        hideOnExited
       />
     </Animator>
   );
@@ -96,6 +99,7 @@ const PanelRight = (): ReactElement => {
         as='aside'
         style={{ gridArea: 'panelRight', backgroundColor: '#055' }}
         animated={[aaOpacity(), aaProperty('x', -20, 0)]}
+        hideOnExited
       />
     </Animator>
   );
@@ -115,6 +119,7 @@ const Item = (props: ItemProps): ReactElement => {
       <Animated
         style={{ ...style, backgroundColor: bg }}
         animated={aaOpacity()}
+        hideOnExited
       />
     </Animator>
   );
