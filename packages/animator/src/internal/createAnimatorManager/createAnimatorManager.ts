@@ -1,7 +1,6 @@
 import type {
   AnimatorManagerName,
   AnimatorManager,
-  AnimatorSubscriber,
   AnimatorNode
 } from '../../types';
 import {
@@ -120,8 +119,9 @@ const createAnimatorManagerSequence: AnimatorManagerCreator = node => {
 };
 
 const createAnimatorManagerSwitch: AnimatorManagerCreator = node => {
+  let nodeHiding: AnimatorNode | undefined;
   let nodeVisible: AnimatorNode | undefined;
-  let nodeVisibleSubscriber: AnimatorSubscriber | undefined;
+  let nodeSubscriberUnsubscribe: (() => void) | undefined;
 
   const getDurationEnter = (): number => {
     if (nodeVisible) {
@@ -141,47 +141,65 @@ const createAnimatorManagerSwitch: AnimatorManagerCreator = node => {
   };
 
   const enterChildren = (): void => {
+    nodeSubscriberUnsubscribe?.();
+    nodeSubscriberUnsubscribe = undefined;
+
     const children = Array.from(node.children);
     const nodeVisibleNew = children.find(child => {
       const { condition } = child.control.getSettings();
       return condition ? condition(child) : true;
     });
 
-    // TODO: What if "nodeVisibleSubscriber" already exists?
-
-    if (nodeVisibleNew) {
-      if (nodeVisibleNew === nodeVisible) {
-        nodeVisibleNew.send(ACTIONS.enter);
+    const onNextEnter = (): void => {
+      if (nodeVisibleNew) {
+        if (nodeVisibleNew !== nodeVisible) {
+          if (nodeVisible) {
+            nodeHiding = nodeVisible;
+            nodeSubscriberUnsubscribe = nodeHiding.subscribe(nodeHidingSubscribed => {
+              if (nodeHidingSubscribed.state === STATES.exited) {
+                nodeSubscriberUnsubscribe?.();
+                nodeSubscriberUnsubscribe = undefined;
+                nodeHiding = undefined;
+                nodeVisibleNew.send(ACTIONS.enter);
+              }
+            });
+            nodeHiding?.send(ACTIONS.exit);
+          }
+          else {
+            nodeVisibleNew.send(ACTIONS.enter);
+            nodeHiding = undefined;
+          }
+          nodeVisible = nodeVisibleNew;
+        }
       }
       else {
-        if (nodeVisible) {
-          nodeVisibleSubscriber = nodeSubscribed => {
-            if (nodeSubscribed.state === STATES.exited) {
-              nodeSubscribed.unsubscribe(nodeVisibleSubscriber as AnimatorSubscriber);
-              nodeVisibleSubscriber = undefined;
-              nodeVisibleNew.send(ACTIONS.enter);
-            }
-          };
-          nodeVisible.subscribe(nodeVisibleSubscriber);
-          nodeVisible.send(ACTIONS.exit);
-        }
-        else {
-          nodeVisibleNew.send(ACTIONS.enter);
-        }
+        nodeHiding = nodeVisible;
+        nodeVisible = undefined;
       }
+    };
+
+    if (nodeHiding) {
+      nodeSubscriberUnsubscribe = nodeHiding.subscribe(nodeHiding => {
+        if (nodeHiding.state === STATES.exited) {
+          onNextEnter();
+        }
+      });
+    }
+    else {
+      onNextEnter();
     }
 
     children
       .filter(child => child !== nodeVisibleNew)
       .forEach(child => child.send(ACTIONS.exit));
-
-    nodeVisible = nodeVisibleNew;
   };
 
   const destroy = (): void => {
-    if (nodeVisible && nodeVisibleSubscriber) {
-      nodeVisible.unsubscribe(nodeVisibleSubscriber);
-    }
+    nodeHiding = undefined;
+    nodeVisible = undefined;
+
+    nodeSubscriberUnsubscribe?.();
+    nodeSubscriberUnsubscribe = undefined;
   };
 
   return Object.freeze({
