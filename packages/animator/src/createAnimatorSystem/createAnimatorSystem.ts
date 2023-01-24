@@ -15,7 +15,7 @@ const createAnimatorSystem = (): AnimatorSystem => {
   let nodeIdCounter = 0;
   let root: AnimatorNode | undefined;
 
-  const createNode = (parent: AnimatorNode | undefined, control: AnimatorControl): AnimatorNode => {
+  const createNode = (parent: AnimatorNode | undefined | null, control: AnimatorControl): AnimatorNode => {
     const nodeId = `${systemId}-node${nodeIdCounter++}`;
 
     // The node object reference is passed around in multiple places with some
@@ -66,6 +66,20 @@ const createAnimatorSystem = (): AnimatorSystem => {
         get: () => machine.getState(),
         enumerable: true
       },
+      subscribe: {
+        value: (subscriber: AnimatorSubscriber): (() => void) => {
+          node.subscribers.add(subscriber);
+          subscriber(node);
+          return () => node.subscribers.delete(subscriber);
+        },
+        enumerable: true
+      },
+      unsubscribe: {
+        value: (subscriber: AnimatorSubscriber): void => {
+          node.subscribers.delete(subscriber);
+        },
+        enumerable: true
+      },
       send: {
         value: machine.send,
         enumerable: true
@@ -101,10 +115,10 @@ const createAnimatorSystem = (): AnimatorSystem => {
     node.subscribers.clear();
   };
 
-  const register = (parentNode: AnimatorNode | undefined, control: AnimatorControl): AnimatorNode => {
-    if (parentNode === undefined) {
+  const register = (parentNode: AnimatorNode | undefined | null, control: AnimatorControl): AnimatorNode => {
+    if (parentNode === undefined || parentNode === null) {
       if (root) {
-        throw new Error('The root node must be unregistered first before registering another root node.');
+        throw new Error('The root node must be unregistered before registering another root node.');
       }
 
       root = createNode(undefined, control);
@@ -131,7 +145,31 @@ const createAnimatorSystem = (): AnimatorSystem => {
     }
   };
 
-  return Object.freeze({ id: systemId, register, unregister });
+  // System object reference so it can have dynamic object properties setup later.
+  const system = {} as unknown as AnimatorSystem;
+
+  const systemProps: { [P in keyof AnimatorSystem]: PropertyDescriptor } = {
+    id: {
+      value: systemId,
+      enumerable: true
+    },
+    root: {
+      get: () => root,
+      enumerable: true
+    },
+    register: {
+      value: register,
+      enumerable: true
+    },
+    unregister: {
+      value: unregister,
+      enumerable: true
+    }
+  };
+
+  Object.defineProperties(system, systemProps);
+
+  return system;
 };
 
 export { createAnimatorSystem };

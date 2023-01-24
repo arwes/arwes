@@ -20,7 +20,7 @@ const AnimatorUIListener = (): ReactElement => {
       return;
     }
 
-    animator.node.subscribers.add(node => {
+    animator.node.subscribe(node => {
       const element = elementRef.current as HTMLElement;
       const { duration } = node;
 

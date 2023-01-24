@@ -5,15 +5,17 @@ import { Animated } from '@arwes/react-animated';
 
 const Item = (): ReactElement => {
   return (
-    <Animator duration={{ enter: 0.15 }}>
+    <Animator>
       <Animated
-        style={{ margin: 10, width: 40, height: 20, backgroundColor: '#0ff' }}
+        style={{ margin: 10, width: 40, height: 20, backgroundColor: '#777' }}
         animated={{
+          initialStyle: { x: 0, backgroundColor: '#0ff' },
           transitions: {
-            entering: { x: [0, 100], backgroundColor: ['#0ff', '#ff0'] },
-            exiting: { x: [100, 0], backgroundColor: ['#ff0', '#0ff'] }
+            entering: { x: [0, 100], backgroundColor: '#ff0' },
+            exiting: { x: [100, 0], backgroundColor: '#0ff' }
           }
         }}
+        hideOnExited
       />
     </Animator>
   );
@@ -28,7 +30,7 @@ const Sandbox = (): ReactElement => {
   }, []);
 
   return (
-    <Animator active={active} manager='sequence' combine>
+    <Animator active={active} manager='stagger' combine>
       {Array(10).fill(0).map((_, i) => <Item key={i} />)}
     </Animator>
   );

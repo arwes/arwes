@@ -1,15 +1,13 @@
-import React, { ReactNode, ReactElement, useState, useEffect } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Animator } from '@arwes/react-animator';
+import { AnimatorProps, Animator } from '@arwes/react-animator';
 import { Animated } from '@arwes/react-animated';
 
-interface ItemProps {
-  children?: ReactNode
-}
+interface ItemProps extends AnimatorProps {}
 
 const Item = (props: ItemProps): ReactElement => {
   return (
-    <Animator>
+    <Animator {...props}>
       <Animated
         style={{ margin: 10, width: 40, height: 20, backgroundColor: '#0ff' }}
         animated={{
@@ -19,15 +17,13 @@ const Item = (props: ItemProps): ReactElement => {
           }
         }}
       />
-      <div style={{ marginLeft: 20 }}>
-        {props.children}
-      </div>
     </Animator>
   );
 };
 
 const Sandbox = (): ReactElement => {
   const [active, setActive] = useState(true);
+  const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
     const tid = setInterval(() => setActive(active => !active), 2000);
@@ -35,26 +31,27 @@ const Sandbox = (): ReactElement => {
   }, []);
 
   return (
-    <Animator active={active}>
-      <Item>
+    <div>
+      <div>
+        <button onClick={() => setEnabled(v => !v)}>
+          {enabled ? 'Disable' : 'Enable'}
+        </button>
+      </div>
+
+      <Animator
+        active={active}
+        combine
+        manager='stagger'
+        checkToSend={[enabled]}
+        checkToSendAction='refresh'
+      >
         <Item />
         <Item />
-        <Item>
-          <Item />
-          <Item />
-          <Item />
-        </Item>
-      </Item>
-      <Item>
+        <Item condition={() => enabled} />
         <Item />
         <Item />
-        <Item>
-          <Item />
-          <Item />
-          <Item />
-        </Item>
-      </Item>
-    </Animator>
+      </Animator>
+    </div>
   );
 };
 

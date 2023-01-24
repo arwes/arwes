@@ -64,6 +64,17 @@ export const sandboxes = [
     ]
   },
   {
+    name: '@arwes/animator',
+    children: [
+      {
+        name: 'createAnimatorSystem',
+        children: [
+          { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/animator/src/createAnimatorSystem/createAnimatorSystem.basic.sandbox.tsx') }
+        ]
+      }
+    ]
+  },
+  {
     name: '@arwes/react-animator',
     children: [
       {
@@ -76,10 +87,14 @@ export const sandboxes = [
           { name: 'root', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.root.sandbox.tsx') },
           { name: 'managerStagger', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.managerStagger.sandbox.tsx') },
           { name: 'managerSequence', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.managerSequence.sandbox.tsx') },
-          { name: 'managerAPI', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.managerAPI.sandbox.tsx') },
-          { name: 'dynamicRendering', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.dynamicRendering.sandbox.tsx') },
+          { name: 'managerSwitch', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.managerSwitch.sandbox.tsx') },
+          { name: 'unmountOnExited', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.unmountOnExited.sandbox.tsx') },
+          { name: 'condition', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.condition.sandbox.tsx') },
           { name: 'disabled', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.disabled.sandbox.tsx') },
-          { name: 'dismissed', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.dismissed.sandbox.tsx') }
+          { name: 'dismissed', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.dismissed.sandbox.tsx') },
+          { name: 'dynamicRendering', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.dynamicRendering.sandbox.tsx') },
+          { name: 'externalManagement', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.externalManagement.sandbox.tsx') },
+          { name: 'subsystemsTransitions', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.subsystemsTransitions.sandbox.tsx') }
         ]
       },
       {
@@ -99,6 +114,7 @@ export const sandboxes = [
           { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-animated/src/Animated/Animated.basic.sandbox.tsx') },
           { name: 'functions', code: require('!raw-loader?esModule=false!@repository/packages/react-animated/src/Animated/Animated.functions.sandbox.tsx') },
           { name: 'composition', code: require('!raw-loader?esModule=false!@repository/packages/react-animated/src/Animated/Animated.composition.sandbox.tsx') },
+          { name: 'hidden', code: require('!raw-loader?esModule=false!@repository/packages/react-animated/src/Animated/Animated.hidden.sandbox.tsx') },
           { name: 'disabled', code: require('!raw-loader?esModule=false!@repository/packages/react-animated/src/Animated/Animated.disabled.sandbox.tsx') }
         ]
       },

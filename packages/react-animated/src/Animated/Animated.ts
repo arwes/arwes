@@ -5,12 +5,14 @@ import {
   ReactElement,
   createElement,
   useRef,
-  useMemo
+  useMemo,
+  useState,
+  useEffect
 } from 'react';
 import { animate } from 'motion';
 
 import { NoInfer } from '@arwes/tools';
-import { mergeRefs, useOnChange } from '@arwes/react-tools';
+import { mergeRefs } from '@arwes/react-tools';
 import { AnimatorNode } from '@arwes/animator';
 import { useAnimator } from '@arwes/react-animator';
 
@@ -32,6 +34,7 @@ const Animated = <
     className,
     style,
     elementRef: externalElementRef,
+    hideOnExited,
     ...otherProps
   } = props;
 
@@ -41,13 +44,14 @@ const Animated = <
   const elementRef = useRef<E | null>(null);
   const animatedSettingsRef = useRef<Array<AnimatedSettings<P>>>([]);
   const animationControlsRef = useRef<AnimatedSettingsTransitionFunctionReturn[]>([]);
+  const [isExited, setIsExited] = useState(() => animator?.node.state === 'exited');
 
   const animatedSettingsListReceived = Array.isArray(animated) ? animated : [animated];
   const animatedSettingsList = animatedSettingsListReceived.filter(Boolean) as Array<AnimatedSettings<P>>;
 
   animatedSettingsRef.current = animatedSettingsList;
 
-  useOnChange(() => {
+  useEffect(() => {
     if (!animator) {
       return;
     }
@@ -58,12 +62,10 @@ const Animated = <
       const element = elementRef.current as E;
       const settingsList = animatedSettingsRef.current;
 
-      const { duration } = node.control.getSettings();
+      const { duration } = node;
       const durationTransition = node.state === 'entering' || node.state === 'entered'
         ? duration.enter
         : duration.exit;
-
-      // TODO: Support wildcard "*" state as any state transition.
 
       settingsList
         .map(settingsItem => settingsItem.transitions?.[node.state] as AnimatedSettingsTransition)
@@ -90,12 +92,14 @@ const Animated = <
             animationControlsRef.current.push(control);
           }
         });
+
+      setIsExited(node.state === 'exited');
     };
 
-    animator.node.subscribers.add(animatorSubscriber);
+    animator.node.subscribe(animatorSubscriber);
 
     return () => {
-      animator.node.subscribers.delete(animatorSubscriber);
+      animator.node.unsubscribe(animatorSubscriber);
       animationControlsRef.current.forEach(control => control.stop());
     };
   }, [animator]);
@@ -115,13 +119,19 @@ const Animated = <
       .reduce((total, item) => ({ ...total, ...item }), {});
   }
 
+  let animatorStyles: CSSProperties | undefined;
+  if (animator && hideOnExited && isExited) {
+    animatorStyles = { visibility: 'hidden' };
+  }
+
   return createElement(as, {
     ...otherProps,
     ...initialAttributes,
     className,
     style: {
       ...style,
-      ...dynamicStyles
+      ...dynamicStyles,
+      ...animatorStyles
     },
     ref: mergeRefs(externalElementRef, elementRef)
   });

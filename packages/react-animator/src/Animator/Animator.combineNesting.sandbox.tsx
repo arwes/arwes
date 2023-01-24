@@ -1,46 +1,7 @@
-import React, { ReactNode, ReactElement, useRef, useEffect } from 'react';
+import React, { ReactNode, ReactElement } from 'react';
 import { createRoot } from 'react-dom/client';
-import { animate } from 'motion';
-import { AnimatorInterface } from '@arwes/animator';
-import { AnimatorProps, Animator, useAnimator, AnimatorGeneralProvider } from '@arwes/react-animator';
-
-const AnimatorUIListener = (): ReactElement => {
-  const elementRef = useRef<HTMLDivElement>(null);
-  const animator = useAnimator() as AnimatorInterface;
-
-  useEffect(() => {
-    animator.node.subscribers.add(node => {
-      const element = elementRef.current as HTMLElement;
-      const { duration } = node;
-
-      switch (node.state) {
-        case 'entering': {
-          animate(
-            element,
-            { x: [0, 50], backgroundColor: ['#0ff', '#ff0'] },
-            { duration: duration.enter, easing: 'linear' }
-          );
-          break;
-        }
-        case 'exiting': {
-          animate(
-            element,
-            { x: [50, 0], backgroundColor: ['#ff0', '#0ff'] },
-            { duration: duration.exit, easing: 'linear' }
-          );
-          break;
-        }
-      }
-    });
-  }, []);
-
-  return (
-    <div
-      ref={elementRef}
-      style={{ margin: 5, width: 40, height: 15, backgroundColor: '#0ff' }}
-    />
-  );
-};
+import { AnimatorProps, Animator, AnimatorGeneralProvider } from '@arwes/react-animator';
+import { Animated } from '@arwes/react-animated';
 
 interface ItemProps extends AnimatorProps {
   children?: ReactNode
@@ -49,7 +10,23 @@ interface ItemProps extends AnimatorProps {
 const Item = ({ children, ...animator }: ItemProps): ReactElement => {
   return (
     <Animator {...animator}>
-      <AnimatorUIListener />
+      <Animated
+        style={{ margin: 5, width: 40, height: 15, backgroundColor: '#0ff' }}
+        animated={{
+          transitions: {
+            entering: {
+              x: [0, 50],
+              backgroundColor: ['#0ff', '#ff0'],
+              options: { easing: 'linear' }
+            },
+            exiting: {
+              x: [50, 0],
+              backgroundColor: ['#ff0', '#0ff'],
+              options: { easing: 'linear' }
+            }
+          }
+        }}
+      />
       <div style={{ marginLeft: 20 }}>
         {children}
       </div>
