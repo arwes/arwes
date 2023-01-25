@@ -75,6 +75,7 @@ export interface AnimatorSettings {
   manager: AnimatorManagerName
   merge: boolean
   combine: boolean
+  initialState: 'exited' | 'entered'
   condition?: (node: AnimatorNode) => boolean
   onTransition?: (node: AnimatorNode) => void
 }

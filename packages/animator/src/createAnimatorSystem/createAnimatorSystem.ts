@@ -23,8 +23,9 @@ const createAnimatorSystem = (): AnimatorSystem => {
     // with specific readonly and writable properties.
     const node = {} as unknown as AnimatorNode;
 
-    const machine = createAnimatorMachine(node);
-    const manager = createAnimatorManager(node, control.getSettings().manager);
+    const settings = control.getSettings();
+    const machine = createAnimatorMachine(node, settings.initialState);
+    const manager = createAnimatorManager(node, settings.manager);
 
     const nodeProps: { [P in keyof AnimatorNode]: PropertyDescriptor } = {
       id: {

@@ -46,5 +46,6 @@ export const ANIMATOR_DEFAULT_SETTINGS: AnimatorSettings = Object.freeze({
   duration: ANIMATOR_DEFAULT_DURATION,
   manager: ANIMATOR_MANAGER_NAMES.parallel,
   merge: false,
-  combine: false
+  combine: false,
+  initialState: 'exited'
 });
