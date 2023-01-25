@@ -1,4 +1,4 @@
-Please make sure you have reviewed the [contribution guidelines](https://arwes.dev/project/contributing)
+Please make sure you have reviewed the [contribution guidelines](./CONTRIBUTING.md)
 for this project.
 
 - [ ] Make sure you are making a pull request against the **next** branch
