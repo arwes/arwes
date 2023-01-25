@@ -1,13 +1,13 @@
 {
   "name": "@arwes/app-perf",
-  "version": "1.0.0-next.1",
+  "version": "1.0.0-next.2",
   "private": true,
   "dependencies": {
-    "@arwes/animated": "^1.0.0-next.1",
-    "@arwes/animator": "^1.0.0-next.1",
-    "@arwes/react-animated": "^1.0.0-next.1",
-    "@arwes/react-animator": "^1.0.0-next.1",
-    "@arwes/tools": "^1.0.0-next.1"
+    "@arwes/animated": "^1.0.0-next.2",
+    "@arwes/animator": "^1.0.0-next.2",
+    "@arwes/react-animated": "^1.0.0-next.2",
+    "@arwes/react-animator": "^1.0.0-next.2",
+    "@arwes/tools": "^1.0.0-next.2"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^9.0.1",
