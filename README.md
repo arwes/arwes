@@ -69,7 +69,7 @@ Package | Status | Description
 `@arwes/bleeps` | Development | Define, manage, and control interactive short sound effects.
 `@arwes/text` | Specification | Text rendering effect tools.
 `@arwes/bgs` | Development | Passive UI background effects.
-`arwes` | Development | All agnostic Arwes packages bundle.
+`arwes` | Development | All agnostic packages bundle.
 
 ### Implementations
 
@@ -80,8 +80,10 @@ Package | Status | Description
 `@arwes/react-styles` | Development | Custom CSSinJS styling tools for React.
 `@arwes/react-animator` | Polishing | Animator interface tools for React.
 `@arwes/react-animated` | Polishing | Animated UI elements using animator tools for React.
-`@arwes/react-bleeps` | Development | Interactive short sound effects manager in React.
+`@arwes/react-bleeps` | Development | Interactive short sound effects manager for React.
+`@arwes/react-core` | Development | Core UI components for React.
 `@arwes/react-bgs` | Development | Passive UI background effects for React.
+`@arwes/react` | Development | All React packages bundle.
 
 ## Community
 
