@@ -33,6 +33,7 @@ module.exports = {
       '@arwes/animator$': path.join(MOCKS, 'arwes/animator.js'),
       '@arwes/animated$': path.join(MOCKS, 'arwes/animated.js'),
       '@arwes/bleeps$': path.join(MOCKS, 'arwes/bleeps.js'),
+      '@arwes/text$': path.join(MOCKS, 'arwes/text.js'),
       '@arwes/bgs$': path.join(MOCKS, 'arwes/bgs.js'),
 
       // Arwes React.

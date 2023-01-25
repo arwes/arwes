@@ -46,6 +46,7 @@
     "@arwes/bgs": "^1.0.0-next.2",
     "@arwes/bleeps": "^1.0.0-next.2",
     "@arwes/theme": "^1.0.0-next.2",
+    "@arwes/text": "^1.0.0-next.2",
     "@arwes/tools": "^1.0.0-next.2",
     "tslib": "^2.3.1"
   },
