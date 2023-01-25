@@ -67,14 +67,20 @@ Package | Status | Description
 `@arwes/theme` | Development | Color, units, and general purpose dynamic theming tools.
 `@arwes/animator` | Polishing | Assemble and disassemble user interfaces using animation controls.
 `@arwes/bleeps` | Development | Define, manage, and control interactive short sound effects.
+`@arwes/text` | Specification | Text rendering effect tools.
 `@arwes/bgs` | Development | Passive UI background effects.
+`arwes` | Development | All agnostic Arwes packages bundle.
 
 ### Implementations
 
 Package | Status | Description
 ---|---|---
+`@arwes/react-tools` | Development | General browser API tools for React.
+`@arwes/react-theme` | Development | Dynamic theming tools for React.
+`@arwes/react-styles` | Development | Custom CSSinJS styling tools for React.
 `@arwes/react-animator` | Polishing | Animator interface tools for React.
 `@arwes/react-animated` | Polishing | Animated UI elements using animator tools for React.
+`@arwes/react-bleeps` | Development | Interactive short sound effects manager in React.
 `@arwes/react-bgs` | Development | Passive UI background effects for React.
 
 ## Community

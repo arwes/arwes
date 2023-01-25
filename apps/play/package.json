@@ -25,7 +25,7 @@
     "babel-loader": "^9.1.2",
     "copy-webpack-plugin": "^11.0.0",
     "html-webpack-plugin": "^5.5.0",
-    "noxtron": "^0.7.4",
+    "noxtron": "^0.7.5",
     "raw-loader": "^4.0.2"
   },
   "scripts": {
