@@ -26,11 +26,13 @@ Let's create a simple example with
 $ create-react-app example
 ```
 
+Arwes is only compatible with React version 17.
+
 Now let's install Arwes:
 
 ```bash
 $ cd example
-$ npm install --save arwes
+$ npm install --save arwes@1.0.0-alpha.5
 ```
 
 Images and sounds are not provided, if you want to use the assets implemented in the docs,
