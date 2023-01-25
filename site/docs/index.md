@@ -26,7 +26,7 @@ Let's create a simple example with
 $ create-react-app example
 ```
 
-Arwes is only compatible with React version 17.
+Arwes is only compatible with React version 16.
 
 Now let's install Arwes:
 
