@@ -7,7 +7,7 @@ const Item = (): ReactElement => {
   return (
     <Animator duration={{ enter: 0.15 }}>
       <Animated
-        style={{ margin: 10, width: 40, height: 20, backgroundColor: '#0ff' }}
+        style={{ margin: 10, width: 40, height: 20, backgroundColor: '#777' }}
         animated={{
           transitions: {
             entering: { x: [0, 100], backgroundColor: ['#0ff', '#ff0'] },

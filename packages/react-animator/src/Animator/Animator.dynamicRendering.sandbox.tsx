@@ -9,7 +9,7 @@ const Item = (): ReactElement => {
       <Animated
         style={{ margin: 10, width: 40, height: 20 }}
         animated={{
-          initialStyle: { backgroundColor: '#0ff' },
+          initialStyle: { backgroundColor: '#777' },
           transitions: {
             entering: { x: [0, 100], backgroundColor: ['#0ff', '#ff0'] },
             exiting: { x: [100, 0], backgroundColor: ['#ff0', '#0ff'] }

@@ -6,7 +6,7 @@ import { Animated } from '@arwes/react-animated';
 const AnimatorUIListener = (): ReactElement => {
   return (
     <Animated
-      style={{ margin: 10, width: 40, height: 20, backgroundColor: '#0ff' }}
+      style={{ margin: 10, width: 40, height: 20, backgroundColor: '#777' }}
       animated={{
         transitions: {
           entering: { x: [0, 50], backgroundColor: ['#0ff', '#ff0'] },
