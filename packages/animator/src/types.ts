@@ -26,7 +26,9 @@ export type AnimatorAction =
 export type AnimatorManagerName =
   | 'parallel'
   | 'stagger'
+  | 'staggerReverse'
   | 'sequence'
+  | 'sequenceReverse'
   | 'switch';
 
 export type AnimatorSubscriber = (node: AnimatorNode) => void;

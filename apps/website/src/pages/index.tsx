@@ -32,39 +32,8 @@ const PageIndex = (): ReactElement => {
         html { background-color: #050b0b; }
       `}</style>
 
-      <Animator combine manager='stagger'>
-        <div className='page'>
-          <Animator>
-            <Animated
-              as='picture'
-              className="bg"
-              animated={[aaProperty('opacity', 0.5, 1), aaProperty('scale', 1.025, 1)]}
-            >
-              <source media='(min-width:1280px)' srcSet='/assets/images/background-large.webp' type='image/webp' />
-              <source media='(min-width:1280px)' srcSet='/assets/images/background-large.jpg' type='image/jpeg' />
-              <source media='(min-width:768px)' srcSet='/assets/images/background-medium.webp' type='image/webp' />
-              <source media='(min-width:768px)' srcSet='/assets/images/background-medium.jpg' type='image/jpeg' />
-              <source media='(max-width:767px)' srcSet='/assets/images/background-small.webp' type='image/webp' />
-              <img src='/assets/images/background-small.jpg' role='presentation' alt='Background' />
-            </Animated>
-          </Animator>
-
-          <Animator duration={{ enter: 0.75, exit: 0.75 }}>
-            <Dots
-              color='hsla(180, 29%, 72%, 0.25)'
-              size={2}
-              distance={60}
-              originInverted
-            />
-          </Animator>
-
-          <Animator duration={{ enter: 2, interval: 4 }}>
-            <Puffs
-              color='hsla(180, 29%, 72%, 0.25)'
-              quantity={20}
-            />
-          </Animator>
-
+      <div className='page'>
+        <Animator combine manager='staggerReverse'>
           <main className='main'>
             <Animator>
               <Animated as='h1' animated={[aaOpacity(), aaProperty('y', 10, 0)]}>
@@ -82,7 +51,7 @@ const PageIndex = (): ReactElement => {
             </Animator>
 
             <Animator>
-              <Animated as='p' animated={[aaOpacity(), aaProperty('y', 25, 0)]}>
+              <Animated as='p' animated={[aaOpacity(), aaProperty('y', 30, 0)]}>
                 Work in progress of the next version
               </Animated>
             </Animator>
@@ -91,7 +60,7 @@ const PageIndex = (): ReactElement => {
               <Animated
                 as='nav'
                 className='links'
-                animated={[aaOpacity(), aaProperty('y', 30, 0)]}
+                animated={[aaOpacity(), aaProperty('y', 40, 0)]}
               >
                 <Animated
                   as='a'
@@ -149,8 +118,39 @@ const PageIndex = (): ReactElement => {
               </Animated>
             </Animated>
           </Animator>
-        </div>
-      </Animator>
+        </Animator>
+
+        <Animator duration={{ enter: 2, interval: 4 }}>
+          <Puffs
+            color='hsla(180, 29%, 72%, 0.25)'
+            quantity={20}
+          />
+        </Animator>
+
+        <Animator duration={{ enter: 2 }}>
+          <Dots
+            color='hsla(180, 29%, 72%, 0.25)'
+            size={2}
+            distance={60}
+            originInverted
+          />
+        </Animator>
+
+        <Animator>
+          <Animated
+            as='picture'
+            className="bg"
+            animated={[aaProperty('opacity', 0.5, 1), aaProperty('scale', 1.025, 1)]}
+          >
+            <source media='(min-width:1280px)' srcSet='/assets/images/background-large.webp' type='image/webp' />
+            <source media='(min-width:1280px)' srcSet='/assets/images/background-large.jpg' type='image/jpeg' />
+            <source media='(min-width:768px)' srcSet='/assets/images/background-medium.webp' type='image/webp' />
+            <source media='(min-width:768px)' srcSet='/assets/images/background-medium.jpg' type='image/jpeg' />
+            <source media='(max-width:767px)' srcSet='/assets/images/background-small.webp' type='image/webp' />
+            <img src='/assets/images/background-small.jpg' role='presentation' alt='Background' />
+          </Animated>
+        </Animator>
+      </div>
     </Fragment>
   );
 };

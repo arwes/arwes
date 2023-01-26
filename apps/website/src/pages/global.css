@@ -62,10 +62,7 @@ img {
   object-align: center;
 }
 
-.arwes-bgs-dots {
-  z-index: 2;
-}
-
+.arwes-bgs-dots,
 .arwes-bgs-puffs {
   z-index: 2;
 }
@@ -173,7 +170,7 @@ img {
 
 .button--secondary:hover {
   color: #f6f6a2;
-  background: rgba(204, 204, 0, 0.12);
+  background: rgba(204, 204, 0, 0.16);
 }
 
 /* TABLET UP */

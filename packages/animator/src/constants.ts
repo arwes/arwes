@@ -28,8 +28,10 @@ export const ANIMATOR_ACTIONS: Record<AnimatorAction, AnimatorAction> = Object.f
 // Managers
 export const ANIMATOR_MANAGER_NAMES: Record<AnimatorManagerName, AnimatorManagerName> = Object.freeze({
   parallel: 'parallel',
-  sequence: 'sequence',
   stagger: 'stagger',
+  staggerReverse: 'staggerReverse',
+  sequence: 'sequence',
+  sequenceReverse: 'sequenceReverse',
   switch: 'switch'
 });
 
