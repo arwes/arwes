@@ -1,25 +1,10 @@
-import React, { Fragment, ReactElement, useEffect } from 'react';
+import React, { Fragment, ReactElement } from 'react';
 import Head from 'next/head';
-import { animate } from 'motion';
 import { Animator } from '@arwes/react-animator';
-import { Dots } from '@arwes/react-bgs';
-
-const $$ = (selector: string): HTMLElement[] => Array.from(document.querySelectorAll(selector));
+import { Animated, aaOpacity, aaProperty } from '@arwes/react-animated';
+import { Dots, Puffs } from '@arwes/react-bgs';
 
 const PageIndex = (): ReactElement => {
-  useEffect(() => {
-    animate($$('.footer'), { opacity: [0, 1], y: [10, 0] });
-    animate($$('.footer a:first-child'), { x: [10, 0] });
-    animate($$('.footer a:last-child'), { x: [-10, 0] });
-    animate($$('.bg img'), { opacity: [0, 1], rotate: [-45, 0] }, { delay: 0.1 });
-    animate($$('.links'), { opacity: [0, 1], y: [30, 0] }, { delay: 0.2 });
-    animate($$('.links .button:first-child'), { x: [10, 0] }, { delay: 0.2 });
-    animate($$('.links .button:last-child'), { x: [-10, 0] }, { delay: 0.2 });
-    animate($$('.main p'), { opacity: [0, 1], y: [20, 0] }, { delay: 0.3 });
-    animate($$('.main h2'), { opacity: [0, 1], y: [10, 0] }, { delay: 0.4 });
-    animate($$('.main h1'), { opacity: [0, 1], y: [-10, 0] }, { delay: 0.45 });
-  }, []);
-
   return (
     <Fragment>
       <Head>
@@ -31,7 +16,6 @@ const PageIndex = (): ReactElement => {
         <meta property="og:title" content="Arwes" />
         <meta property="og:site_name" content="Arwes" />
         <meta property="og:description" content="Futuristic Sci-Fi UI Web Framework." />
-        {/* TODO: For next development environment. */}
         <meta property="og:image" content="https://next.arwes.dev/arwes.jpg" />
         <meta property="og:url" content="https://next.arwes.dev" />
         <meta property="og:type" content="website" />
@@ -43,55 +27,130 @@ const PageIndex = (): ReactElement => {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin='' />
       </Head>
+
       <style>{`
-        html { background-color: #171717; }
+        html { background-color: #050b0b; }
       `}</style>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;700&display=swap" />
-      <div className='page'>
-        <main className='main'>
-          <h1 className='hidden'>
-            <img
-              src='/logotype.png'
-              alt='Arwes'
+
+      <Animator combine manager='stagger'>
+        <div className='page'>
+          <Animator>
+            <Animated
+              as='picture'
+              className="bg"
+              animated={[aaProperty('opacity', 0.5, 1), aaProperty('scale', 1.025, 1)]}
+            >
+              <source media='(min-width:1280px)' srcSet='/assets/images/background-large.webp' type='image/webp' />
+              <source media='(min-width:1280px)' srcSet='/assets/images/background-large.jpg' type='image/jpeg' />
+              <source media='(min-width:768px)' srcSet='/assets/images/background-medium.webp' type='image/webp' />
+              <source media='(min-width:768px)' srcSet='/assets/images/background-medium.jpg' type='image/jpeg' />
+              <source media='(max-width:767px)' srcSet='/assets/images/background-small.webp' type='image/webp' />
+              <img src='/assets/images/background-small.jpg' role='presentation' alt='Background' />
+            </Animated>
+          </Animator>
+
+          <Animator duration={{ enter: 0.75, exit: 0.75 }}>
+            <Dots
+              color='hsla(180, 29%, 72%, 0.25)'
+              size={2}
+              distance={60}
+              originInverted
             />
-          </h1>
+          </Animator>
 
-          <h2 className='hidden'>
-            Futuristic Sci-Fi UI Web Framework
-          </h2>
+          <Animator duration={{ enter: 2, interval: 4 }}>
+            <Puffs
+              color='hsla(180, 29%, 72%, 0.25)'
+              quantity={20}
+            />
+          </Animator>
 
-          <p className='hidden'>
-            Work in progress of the next version
-          </p>
+          <main className='main'>
+            <Animator>
+              <Animated as='h1' animated={[aaOpacity(), aaProperty('y', 10, 0)]}>
+                <img
+                  src='/logotype.png'
+                  alt='Arwes'
+                />
+              </Animated>
+            </Animator>
 
-          <nav className='links hidden'>
-            <a className='button button--secondary' href='/play'>Play</a>
-            <a className='button button--secondary' href='/perf'>Perf</a>
-            <a className='button button--secondary' href='https://arwes.dev' target='main'>Main</a>
-          </nav>
-        </main>
+            <Animator>
+              <Animated as='h2' animated={[aaOpacity(), aaProperty('y', 20, 0)]}>
+                Futuristic Sci-Fi UI Web Framework
+              </Animated>
+            </Animator>
 
-        <footer className='footer hidden'>
-          <a href='https://github.com/arwes/arwes' target='github'>GitHub</a>
-          <a href='https://discord.gg/s5sbTkw' target='discord'>Discord</a>
-          <a href='https://twitter.com/arwesjs' target='twitter'>Twitter</a>
-        </footer>
+            <Animator>
+              <Animated as='p' animated={[aaOpacity(), aaProperty('y', 25, 0)]}>
+                Work in progress of the next version
+              </Animated>
+            </Animator>
 
-        <div className='bg'>
-          <img
-            className='hidden'
-            src='/assets/images/arwesLogoImage.svg'
-          />
+            <Animator>
+              <Animated
+                as='nav'
+                className='links'
+                animated={[aaOpacity(), aaProperty('y', 30, 0)]}
+              >
+                <Animated
+                  as='a'
+                  className='button button--secondary'
+                  href='/play'
+                  animated={aaProperty('x', 20, 0)}
+                >
+                  Play
+                </Animated>
+                <a
+                  className='button button--secondary'
+                  href='/perf'
+                >
+                  Perf
+                </a>
+                <Animated
+                  as='a'
+                  className='button button--secondary'
+                  href='https://arwes.dev'
+                  animated={aaProperty('x', -20, 0)}
+                >
+                  Main
+                </Animated>
+              </Animated>
+            </Animator>
+          </main>
+
+          <Animator>
+            <Animated
+              as='footer'
+              className='footer'
+              animated={[aaOpacity(), aaProperty('y', 10, 0)]}
+            >
+              <Animated
+                as='a'
+                href='https://github.com/arwes/arwes'
+                target='github'
+                animated={aaProperty('x', 10, 0)}
+              >
+                GitHub
+              </Animated>
+              <a
+                href='https://discord.gg/s5sbTkw'
+                target='discord'
+              >
+                Discord
+              </a>
+              <Animated
+                as='a'
+                href='https://twitter.com/arwesjs'
+                target='twitter'
+                animated={aaProperty('x', -10, 0)}
+              >
+                Twitter
+              </Animated>
+            </Animated>
+          </Animator>
         </div>
-        <Animator duration={{ enter: 0.75, exit: 0.75 }}>
-          <Dots
-            color='hsla(180, 29%, 72%, 0.04)'
-            size={5}
-            distance={30}
-            originInverted
-          />
-        </Animator>
-      </div>
+      </Animator>
     </Fragment>
   );
 };
