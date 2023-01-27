@@ -4,5 +4,6 @@ export * from '@arwes/react-styles';
 export * from '@arwes/react-animator';
 export * from '@arwes/react-animated';
 export * from '@arwes/react-bleeps';
-export * from '@arwes/react-core';
+export * from '@arwes/react-text';
 export * from '@arwes/react-bgs';
+export * from '@arwes/react-core';
