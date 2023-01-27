@@ -82,6 +82,8 @@ export interface AnimatorSettings {
   onTransition?: (node: AnimatorNode) => void
 }
 
+// TODO: The duration type should only allow numeric values, otherwise they should
+// not be present. Right now it allows `undefined` values which triggers errors.
 export type AnimatorSettingsPartial = Partial<Omit<AnimatorSettings, 'duration'>> & {
   duration?: Partial<AnimatorDuration>
 };

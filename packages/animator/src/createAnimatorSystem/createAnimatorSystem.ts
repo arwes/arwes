@@ -10,13 +10,13 @@ import { createAnimatorMachine } from '../internal/createAnimatorMachine/index';
 import { createAnimatorManager } from '../internal/createAnimatorManager/index';
 
 const createAnimatorSystem = (): AnimatorSystem => {
-  const systemId = `system${Date.now()}${Math.random()}`.replace('.', '');
+  const systemId = `s${Date.now()}${Math.random()}`.replace('.', '');
 
   let nodeIdCounter = 0;
   let root: AnimatorNode | undefined;
 
   const createNode = (parent: AnimatorNode | undefined | null, control: AnimatorControl): AnimatorNode => {
-    const nodeId = `${systemId}-node${nodeIdCounter++}`;
+    const nodeId = `${systemId}-n${nodeIdCounter++}`;
 
     // The node object reference is passed around in multiple places with some
     // circular references, so this is an object base and later is modified
