@@ -40,7 +40,12 @@
   "module": "./build/esm/index.js",
   "main": "./build/cjs/index.js",
   "unpkg": "./build/umd/umd.min.js",
-  "peerDependencies": {},
+  "peerDependencies": {
+    "@arwes/tools": "^1.0.0-next.2",
+    "@arwes/animator": "^1.0.0-next.2",
+    "@arwes/text": "^1.0.0-next.2",
+    "@arwes/react-tools": "^1.0.0-next.2"
+  },
   "dependencies": {
     "tslib": "^2.3.1"
   },

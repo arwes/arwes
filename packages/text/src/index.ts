@@ -1,1 +1,3 @@
-export const ARWES_TEXT = '@arwes/text';
+export * from './transitionTextSequence/index';
+export * from './getTransitionTextDuration/index';
+export * from './createTextTransitioner/index';

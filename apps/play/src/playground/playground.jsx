@@ -105,10 +105,10 @@ window.noxtron.setupPlayground(({ emotion, Icon }) => {
       small: [
         [
           versionLink,
-          <Link href='/' target='website'>
+          <Link href='/'>
             <ArwesIcon /> Website
           </Link>,
-          <Link href='/perf' target='perf'>
+          <Link href='/perf'>
             <ArwesIcon /> Perf
           </Link>
         ]
@@ -116,10 +116,10 @@ window.noxtron.setupPlayground(({ emotion, Icon }) => {
       medium: [
         [
           versionLink,
-          <Link href='/' target='website'>
+          <Link href='/'>
             <ArwesIcon /> Website
           </Link>,
-          <Link href='/perf' target='perf'>
+          <Link href='/perf'>
             <ArwesIcon /> Perf
           </Link>
         ],

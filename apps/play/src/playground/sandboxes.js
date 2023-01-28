@@ -142,6 +142,21 @@ export const sandboxes = [
     ]
   },
   {
+    name: '@arwes/react-text',
+    children: [
+      {
+        name: 'Text',
+        children: [
+          { name: 'base', code: require('!raw-loader?esModule=false!@repository/packages/react-text/src/Text/Text.base.sandbox.tsx') },
+          { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-text/src/Text/Text.basic.sandbox.tsx') },
+          { name: 'multiple', code: require('!raw-loader?esModule=false!@repository/packages/react-text/src/Text/Text.multiple.sandbox.tsx') },
+          { name: 'dynamic', code: require('!raw-loader?esModule=false!@repository/packages/react-text/src/Text/Text.dynamic.sandbox.tsx') },
+          { name: 'intercepting', code: require('!raw-loader?esModule=false!@repository/packages/react-text/src/Text/Text.intercepting.sandbox.tsx') }
+        ]
+      }
+    ]
+  },
+  {
     name: '@arwes/react-bgs',
     children: [
       {
