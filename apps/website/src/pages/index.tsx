@@ -24,8 +24,6 @@ const PageIndex = (): ReactElement => {
         <meta name="twitter:site" content="@arwesjs" />
 
         <link rel="icon" type="image/png" href="/logo.png" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin='' />
       </Head>
 
       <style>{`

@@ -126,6 +126,10 @@ export const typeDefinitions = [
     code: require('!raw-loader?esModule=false!@arwes/bleeps/build/types/index.d.ts')
   },
   {
+    filename: 'file:///node_modules/@arwes/text/index.d.ts',
+    code: require('!raw-loader?esModule=false!@arwes/text/build/types/index.d.ts')
+  },
+  {
     filename: 'file:///node_modules/@arwes/bgs/index.d.ts',
     code: require('!raw-loader?esModule=false!@arwes/bgs/build/types/index.d.ts')
   },
@@ -148,6 +152,10 @@ export const typeDefinitions = [
   {
     filename: 'file:///node_modules/@arwes/react-bleeps/index.d.ts',
     code: require('!raw-loader?esModule=false!@arwes/react-bleeps/build/types/index.d.ts')
+  },
+  {
+    filename: 'file:///node_modules/@arwes/react-text/index.d.ts',
+    code: require('!raw-loader?esModule=false!@arwes/react-text/build/types/index.d.ts')
   },
   {
     filename: 'file:///node_modules/@arwes/react-bgs/index.d.ts',

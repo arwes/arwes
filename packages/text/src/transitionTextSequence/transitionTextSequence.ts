@@ -1,3 +1,5 @@
+import { ease } from '@arwes/animated';
+
 interface TransitionTextSequenceProps {
   text: string
   /**
@@ -5,6 +7,7 @@ interface TransitionTextSequenceProps {
    */
   duration: number
   isEntering?: boolean
+  ease?: keyof typeof ease
   onChange: (newText: string) => void
   onComplete?: () => void
 }
@@ -18,6 +21,7 @@ const transitionTextSequence = (props: TransitionTextSequenceProps): (() => void
     text,
     isEntering = true,
     duration: durationProvided,
+    ease: easeName = 'linear',
     onChange,
     onComplete
   } = props;
@@ -26,10 +30,12 @@ const transitionTextSequence = (props: TransitionTextSequenceProps): (() => void
 
   onChange(isEntering ? '' : text);
 
+  const easeFn = ease[easeName];
   const length = text.length;
   const duration = durationProvided * 1000; // seconds to ms
+
   let start = window.performance.now();
-  let progress = null;
+  let progress: number | null = null;
 
   const nextAnimation = (timestamp: number): void => {
     if (!start) {
@@ -44,7 +50,7 @@ const transitionTextSequence = (props: TransitionTextSequenceProps): (() => void
 
     // partialLength(n) = animationProgressDuration(ms).
     // textTotalLength(n) = totalDuration(ms).
-    const newLength = Math.round((progress * length) / duration);
+    const newLength = Math.round(easeFn(progress / duration) * length);
     const newText = text.substring(0, newLength);
 
     onChange(newText);

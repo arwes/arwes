@@ -2,7 +2,7 @@ import React, { ReactElement, useRef } from 'react';
 import { animate } from 'motion';
 import { cx } from '@arwes/tools';
 import { mergeRefs, useOnChange } from '@arwes/react-tools';
-import { easeOutSine } from '@arwes/animated';
+import { ease } from '@arwes/animated';
 import { ANIMATOR_STATES, AnimatorNode } from '@arwes/animator';
 import { useAnimator } from '@arwes/react-animator';
 
@@ -151,7 +151,7 @@ const Puffs = (props: PuffsProps): ReactElement => {
             puffsSets.forEach((puffs, index) => {
               const puffsOffset = puffsSetOffset * index;
               const puffsProgress = minmaxOverflow01(intervalProgress + puffsOffset);
-              drawPuffs(puffs, easeOutSine(puffsProgress));
+              drawPuffs(puffs, ease.outSine(puffsProgress));
             });
           };
 

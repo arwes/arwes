@@ -1,1 +1,1 @@
-export * from './easings/index';
+export * from './ease/index';

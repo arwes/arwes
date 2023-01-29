@@ -1,4 +1,5 @@
 import { AnimatorNode, ANIMATOR_STATES as STATES } from '@arwes/animator';
+import { ease } from '@arwes/animated';
 
 import { transitionTextSequence } from '../transitionTextSequence/index';
 
@@ -7,6 +8,7 @@ interface CreateTextTransitionerProps {
   rootElement: HTMLElement
   contentElement: HTMLElement
   initialText: string
+  ease?: keyof typeof ease
 }
 
 interface CreateTextTransitioner {
@@ -15,7 +17,7 @@ interface CreateTextTransitioner {
 }
 
 const createTextTransitioner = (props: CreateTextTransitionerProps): CreateTextTransitioner => {
-  const { node, rootElement, contentElement, initialText } = props;
+  const { node, rootElement, contentElement, initialText, ease } = props;
   const cloneElement = document.createElement('span');
 
   let text: string = initialText;
@@ -36,6 +38,7 @@ const createTextTransitioner = (props: CreateTextTransitionerProps): CreateTextT
 
     cancelTransition = transitionTextSequence({
       text,
+      ease,
       duration: node.duration.enter,
       isEntering: true,
       onChange: newText => (cloneElement.textContent = newText),
@@ -53,6 +56,7 @@ const createTextTransitioner = (props: CreateTextTransitionerProps): CreateTextT
 
     cancelTransition = transitionTextSequence({
       text,
+      ease,
       duration: node.duration.exit,
       isEntering: false,
       onChange: newText => (cloneElement.textContent = newText),
@@ -77,8 +81,9 @@ const createTextTransitioner = (props: CreateTextTransitionerProps): CreateTextT
   };
 
   const cancel = (): void => {
-    cancelTransition?.();
+    contentElement.style.visibility = 'visible';
     cloneElement.remove();
+    cancelTransition?.();
     animatorSubscription();
   };
 

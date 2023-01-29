@@ -11,6 +11,7 @@ import { jsx } from '@emotion/react';
 import { cx } from '@arwes/tools';
 import { mergeRefs } from '@arwes/react-tools';
 import { ANIMATOR_STATES as STATES } from '@arwes/animator';
+import { ease } from '@arwes/animated';
 import { useAnimator } from '@arwes/react-animator';
 import {
   getTransitionTextDuration,
@@ -23,7 +24,8 @@ interface TextProps<E extends HTMLElement = HTMLSpanElement> extends HTMLProps<E
   className?: string
   elementRef?: ForwardedRef<E>
   method?: 'sequence'
-  isDynamic?: boolean
+  ease?: keyof typeof ease
+  dynamic?: boolean
   children: string
 }
 
@@ -35,7 +37,8 @@ const Text = memo((props: TextProps): ReactElement => {
     className,
     children,
     method,
-    isDynamic = true,
+    ease,
+    dynamic = true,
     elementRef: elementRefProvided,
     ...otherProps
   } = props;
@@ -48,9 +51,6 @@ const Text = memo((props: TextProps): ReactElement => {
 
   useEffect(() => {
     if (!animator) {
-      if (contentElementRef.current) {
-        contentElementRef.current.style.visibility = 'visible';
-      }
       return;
     }
 
@@ -58,7 +58,7 @@ const Text = memo((props: TextProps): ReactElement => {
       throw new Error('Text children must be a string.');
     }
 
-    if (isDynamic) {
+    if (dynamic) {
       const settings = animator.node.control.getSettings();
       const durationEnter = getTransitionTextDuration({
         text: children,
@@ -79,7 +79,8 @@ const Text = memo((props: TextProps): ReactElement => {
         node: animator.node,
         rootElement: elementRef.current as HTMLElement,
         contentElement: contentElementRef.current as HTMLElement,
-        initialText: children
+        initialText: children,
+        ease
       });
     }
     else {
