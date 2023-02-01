@@ -55,23 +55,17 @@ window.noxtron.setupPlayground(({ emotion, Icon }) => {
     title: {
       small: (
         <img
-          style={{ display: 'block', margin: 0, height: '1.3em' }}
-          src='https://arwes.dev/logo.png'
+          style={{ display: 'block', margin: 0, height: '0.9em' }}
+          src='https://arwes.dev/logo-horizontal-text.png'
           alt='Arwes Playground'
         />
       ),
       medium: (
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img
-            style={{ display: 'block', margin: '0 5px 0 0', height: '1.1em' }}
-            src='https://arwes.dev/logo.png'
-          />
-          <img
-            style={{ display: 'block', margin: 0, height: '0.9em' }}
-            src='https://arwes.dev/logo-horizontal-text.png'
-            alt='Arwes Playground'
-          />
-        </div>
+        <img
+          style={{ display: 'block', margin: 0, height: '0.9em' }}
+          src='https://arwes.dev/logo-horizontal-text.png'
+          alt='Arwes Playground'
+        />
       )
     },
     theme: {
@@ -106,7 +100,7 @@ window.noxtron.setupPlayground(({ emotion, Icon }) => {
         [
           versionLink,
           <Link href='/'>
-            <ArwesIcon /> Website
+            <ArwesIcon /> Docs
           </Link>,
           <Link href='/perf'>
             <ArwesIcon /> Perf
@@ -117,7 +111,7 @@ window.noxtron.setupPlayground(({ emotion, Icon }) => {
         [
           versionLink,
           <Link href='/'>
-            <ArwesIcon /> Website
+            <ArwesIcon /> Docs
           </Link>,
           <Link href='/perf'>
             <ArwesIcon /> Perf

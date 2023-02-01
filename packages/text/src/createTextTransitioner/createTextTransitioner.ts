@@ -1,14 +1,16 @@
 import { AnimatorNode, ANIMATOR_STATES as STATES } from '@arwes/animator';
-import { ease } from '@arwes/animated';
+import { easing } from '@arwes/animated';
 
 import { transitionTextSequence } from '../transitionTextSequence/index';
+import { transitionTextDecipher } from '../transitionTextDecipher/index';
 
 interface CreateTextTransitionerProps {
   node: AnimatorNode
   rootElement: HTMLElement
   contentElement: HTMLElement
   initialText: string
-  ease?: keyof typeof ease
+  manager?: 'sequence' | 'decipher'
+  easing?: keyof typeof easing
 }
 
 interface CreateTextTransitioner {
@@ -17,8 +19,18 @@ interface CreateTextTransitioner {
 }
 
 const createTextTransitioner = (props: CreateTextTransitionerProps): CreateTextTransitioner => {
-  const { node, rootElement, contentElement, initialText, ease } = props;
+  const {
+    node,
+    rootElement,
+    contentElement,
+    initialText,
+    manager = 'sequence',
+    easing = 'linear'
+  } = props;
   const cloneElement = document.createElement('span');
+  const transition = manager === 'decipher'
+    ? transitionTextDecipher
+    : transitionTextSequence;
 
   let text: string = initialText;
   let cancelTransition: (() => void) | null = null;
@@ -36,9 +48,9 @@ const createTextTransitioner = (props: CreateTextTransitionerProps): CreateTextT
     contentElement.style.visibility = 'hidden';
     rootElement.appendChild(cloneElement);
 
-    cancelTransition = transitionTextSequence({
+    cancelTransition = transition({
       text,
-      ease,
+      easing,
       duration: node.duration.enter,
       isEntering: true,
       onChange: newText => (cloneElement.textContent = newText),
@@ -54,13 +66,15 @@ const createTextTransitioner = (props: CreateTextTransitionerProps): CreateTextT
     contentElement.style.visibility = 'hidden';
     rootElement.appendChild(cloneElement);
 
-    cancelTransition = transitionTextSequence({
+    cancelTransition = transition({
       text,
-      ease,
+      easing,
       duration: node.duration.exit,
       isEntering: false,
       onChange: newText => (cloneElement.textContent = newText),
-      onComplete: () => cloneElement.remove()
+      onComplete: () => {
+        cloneElement.remove();
+      }
     });
   };
 

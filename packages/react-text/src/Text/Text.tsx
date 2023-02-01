@@ -2,7 +2,6 @@ import {
   ReactElement,
   HTMLProps,
   ForwardedRef,
-  memo,
   useMemo,
   useRef,
   useEffect
@@ -11,7 +10,7 @@ import { jsx } from '@emotion/react';
 import { cx } from '@arwes/tools';
 import { mergeRefs } from '@arwes/react-tools';
 import { ANIMATOR_STATES as STATES } from '@arwes/animator';
-import { ease } from '@arwes/animated';
+import { easing } from '@arwes/animated';
 import { useAnimator } from '@arwes/react-animator';
 import {
   getTransitionTextDuration,
@@ -23,28 +22,28 @@ interface TextProps<E extends HTMLElement = HTMLSpanElement> extends HTMLProps<E
   as?: keyof HTMLElementTagNameMap
   className?: string
   elementRef?: ForwardedRef<E>
-  method?: 'sequence'
-  ease?: keyof typeof ease
+  manager?: 'sequence' | 'decipher'
+  easing?: keyof typeof easing
   dynamic?: boolean
   children: string
 }
 
 const TEXT_CLASS = 'arwes_react-text_Text';
 
-const Text = memo((props: TextProps): ReactElement => {
+const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): ReactElement => {
   const {
     as: asProvided = 'span',
     className,
     children,
-    method,
-    ease,
+    manager,
+    easing,
     dynamic = true,
     elementRef: elementRefProvided,
     ...otherProps
   } = props;
 
   const as = useMemo(() => asProvided, []);
-  const elementRef = useRef<HTMLElement>(null);
+  const elementRef = useRef<E>(null);
   const contentElementRef = useRef<HTMLSpanElement>(null);
   const transitioner = useRef<CreateTextTransitioner | null>(null);
   const animator = useAnimator();
@@ -80,7 +79,8 @@ const Text = memo((props: TextProps): ReactElement => {
         rootElement: elementRef.current as HTMLElement,
         contentElement: contentElementRef.current as HTMLElement,
         initialText: children,
-        ease
+        manager,
+        easing
       });
     }
     else {
@@ -101,7 +101,7 @@ const Text = memo((props: TextProps): ReactElement => {
         position: 'relative',
         display: 'inline-block'
       },
-      ref: mergeRefs(elementRefProvided, elementRef)
+      ref: mergeRefs<E>(elementRefProvided, elementRef)
     },
     jsx(
       'span',
@@ -118,7 +118,7 @@ const Text = memo((props: TextProps): ReactElement => {
       children
     )
   );
-});
+};
 
 export type { TextProps };
 export { TEXT_CLASS, Text };

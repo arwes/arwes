@@ -2,7 +2,7 @@ import React, { ReactElement, useRef } from 'react';
 import { animate } from 'motion';
 import { cx, randomizeList } from '@arwes/tools';
 import { mergeRefs, useOnChange } from '@arwes/react-tools';
-import { ease } from '@arwes/animated';
+import { easing } from '@arwes/animated';
 import { ANIMATOR_STATES, AnimatorNode } from '@arwes/animator';
 import { useAnimator } from '@arwes/react-animator';
 
@@ -108,7 +108,7 @@ const MovingLines = (props: MovingLinesProps): ReactElement => {
         // and becomes 0.23.
         const linesSetProgressOffset = ((1 / linesSetsLength) * linesSetIndex);
         const progress = minmaxOverflow01(intervalProgress + linesSetProgressOffset);
-        const progressEase = ease.inOutCubic(progress);
+        const progressEase = easing.inOutCubic(progress);
 
         linesSet.forEach(line => {
           const { axis1, axis2Initial, length } = line;

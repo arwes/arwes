@@ -25,7 +25,7 @@ const bounceOut = (x: number): number => {
   return n1 * (x -= 2.625 / d1) * x + 0.984375;
 };
 
-const ease = {
+const easing = {
   linear: (x: number): number => x,
   inQuad: (x: number): number => {
     return x * x;
@@ -143,4 +143,4 @@ const ease = {
   }
 };
 
-export { ease };
+export { easing };

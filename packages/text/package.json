@@ -41,7 +41,9 @@
   "main": "./build/cjs/index.js",
   "unpkg": "./build/umd/umd.min.js",
   "peerDependencies": {
-    "@arwes/animated": "^1.0.0-next.2"
+    "@arwes/animated": "^1.0.0-next.2",
+    "@arwes/tools": "^1.0.0-next.2",
+    "motion": "10"
   },
   "dependencies": {
     "tslib": "^2.3.1"

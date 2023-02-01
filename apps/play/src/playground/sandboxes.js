@@ -168,6 +168,7 @@ export const sandboxes = [
               { name: 'base', code: require('!raw-loader?esModule=false!@repository/packages/react-text/src/Text/Text.base.sandbox.tsx') },
               { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-text/src/Text/Text.basic.sandbox.tsx') },
               { name: 'multiple', code: require('!raw-loader?esModule=false!@repository/packages/react-text/src/Text/Text.multiple.sandbox.tsx') },
+              { name: 'managerDecipher', code: require('!raw-loader?esModule=false!@repository/packages/react-text/src/Text/Text.managerDecipher.sandbox.tsx') },
               { name: 'updates', code: require('!raw-loader?esModule=false!@repository/packages/react-text/src/Text/Text.updates.sandbox.tsx') },
               { name: 'intercepting', code: require('!raw-loader?esModule=false!@repository/packages/react-text/src/Text/Text.intercepting.sandbox.tsx') }
             ]
