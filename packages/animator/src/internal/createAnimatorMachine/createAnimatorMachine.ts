@@ -164,18 +164,6 @@ const createAnimatorMachine = (node: AnimatorNode, initialState: AnimatorState):
 
     '*': {
       onActions: {
-        [ACTIONS.setup]: () => {
-          const settings = node.control.getSettings();
-
-          // Initial transition setup.
-          settings.onTransition?.(node);
-
-          // Initial subscribers notification.
-          for (const subscriber of node.subscribers) {
-            subscriber(node);
-          }
-        },
-
         [ACTIONS.update]: () => {
           const settings = node.control.getSettings();
 
