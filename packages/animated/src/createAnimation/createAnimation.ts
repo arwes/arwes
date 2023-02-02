@@ -9,6 +9,7 @@ interface AnimationProps {
   easing?: keyof typeof easing
   onChange: (progress: number) => void
   onComplete?: () => void
+  onCancel?: () => void
 }
 
 interface Animation {
@@ -22,7 +23,8 @@ const createAnimation = (props: AnimationProps): Animation => {
     isEntering = true,
     easing: easingName = 'outSine',
     onChange,
-    onComplete
+    onComplete,
+    onCancel
   } = props;
 
   const ease = easing[easingName];
@@ -66,6 +68,7 @@ const createAnimation = (props: AnimationProps): Animation => {
   const cancel = (): void => {
     if (currentAnimationFrame !== null) {
       window.cancelAnimationFrame(currentAnimationFrame);
+      onCancel?.();
     }
   };
 

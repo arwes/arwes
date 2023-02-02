@@ -10,7 +10,7 @@ import { jsx } from '@emotion/react';
 import { cx } from '@arwes/tools';
 import { mergeRefs } from '@arwes/react-tools';
 import { ANIMATOR_STATES as STATES } from '@arwes/animator';
-import { easing } from '@arwes/animated';
+import { Animation, easing } from '@arwes/animated';
 import { useAnimator } from '@arwes/react-animator';
 import {
   TextTransitionManager,
@@ -46,7 +46,7 @@ const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): Rea
   const as = useMemo(() => asProvided, []);
   const elementRef = useRef<E>(null);
   const contentElementRef = useRef<HTMLSpanElement>(null);
-  const cancelTransition = useRef<(() => void) | null>(null);
+  const transitionControl = useRef<Animation | null>(null);
   const animator = useAnimator();
 
   useEffect(() => {
@@ -82,8 +82,8 @@ const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): Rea
       : transitionTextSequence;
 
     const transition = (duration: number, isEntering: boolean): void => {
-      cancelTransition.current?.();
-      cancelTransition.current = transitioner({
+      transitionControl.current?.cancel();
+      transitionControl.current = transitioner({
         rootElement: elementRef.current as HTMLElement,
         contentElement: contentElementRef.current as HTMLElement,
         duration,
@@ -94,6 +94,12 @@ const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): Rea
 
     const subscription = animator.node.subscribe(node => {
       switch (node.state) {
+        case 'entered': {
+          if (!transitionControl.current) {
+            transition(node.duration.enter, true);
+          }
+          break;
+        }
         case 'entering': {
           transition(node.duration.enter, true);
           break;
@@ -107,8 +113,8 @@ const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): Rea
 
     return () => {
       subscription();
-      cancelTransition.current?.();
-      cancelTransition.current = null;
+      transitionControl.current?.cancel();
+      transitionControl.current = null;
     };
   }, [animator, children]);
 

@@ -1,11 +1,11 @@
 import { randomizeList } from '@arwes/tools';
-import { createAnimation } from '@arwes/animated';
+import { Animation, createAnimation } from '@arwes/animated';
 
 import type { TextTransitionProps } from '../types';
 
 const LETTERS = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ>!·$%&/()=?¿≤|@#';
 
-const transitionTextDecipher = (props: TextTransitionProps): (() => void) => {
+const transitionTextDecipher = (props: TextTransitionProps): Animation => {
   const {
     rootElement,
     contentElement,
@@ -30,12 +30,12 @@ const transitionTextDecipher = (props: TextTransitionProps): (() => void) => {
   const indexes = randomizeList(Array(text.length).fill(null).map((_, i) => i));
   const deciphered: Record<number, boolean> = {};
 
-  const complete = (): void => {
+  const finish = (): void => {
     contentElement.style.visibility = isEntering ? 'visible' : 'hidden';
     cloneElement.remove();
   };
 
-  const animation = createAnimation({
+  return createAnimation({
     duration,
     easing,
     isEntering,
@@ -57,13 +57,9 @@ const transitionTextDecipher = (props: TextTransitionProps): (() => void) => {
 
       cloneElement.textContent = newText;
     },
-    onComplete: complete
+    onCancel: finish,
+    onComplete: finish
   });
-
-  return () => {
-    complete();
-    animation.cancel();
-  };
 };
 
 export { transitionTextDecipher };
