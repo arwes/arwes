@@ -14,6 +14,13 @@
     "image": "romelperez.dev.jpg"
   },
   {
+    "name": "inCyberPunk",
+    "description": "A Full Stack Social Media with Node/React with a CyberPunk theme.",
+    "url": "https://cybersocial.herokuapp.com",
+    "repository": "https://github.com/inPhoenix/inCyberPunk2022",
+    "image": "incyberpunk.jpg"
+  },
+  {
     "name": "ArchiveRPG.com",
     "description": "Digital tabletop roleplaying game set in a sci-fi world.",
     "url": "https://archiverpg.com",
