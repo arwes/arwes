@@ -3,7 +3,8 @@ import { ReactElement, useEffect } from 'react';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 
-import { setupGoogleAnalytics } from '../utils/ga';
+import { setupGoogleFonts } from '../utils/setupGoogleFonts';
+import { setupGoogleAnalytics } from '../utils/setupGoogleAnalytics';
 
 interface ClientAppProps extends AppProps {
   Component: NextPage
@@ -11,6 +12,7 @@ interface ClientAppProps extends AppProps {
 
 const ClientApp = (props: ClientAppProps): ReactElement => {
   useEffect(() => {
+    setupGoogleFonts();
     setupGoogleAnalytics();
   }, []);
 

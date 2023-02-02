@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-next.2",
+  "version": "1.0.0-next.3",
   "useWorkspaces": true,
   "command": {
     "publish": {

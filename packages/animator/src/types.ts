@@ -26,7 +26,9 @@ export type AnimatorAction =
 export type AnimatorManagerName =
   | 'parallel'
   | 'stagger'
+  | 'staggerReverse'
   | 'sequence'
+  | 'sequenceReverse'
   | 'switch';
 
 export type AnimatorSubscriber = (node: AnimatorNode) => void;
@@ -75,10 +77,13 @@ export interface AnimatorSettings {
   manager: AnimatorManagerName
   merge: boolean
   combine: boolean
+  initialState: 'exited' | 'entered'
   condition?: (node: AnimatorNode) => boolean
   onTransition?: (node: AnimatorNode) => void
 }
 
+// TODO: The duration type should only allow numeric values, otherwise they should
+// not be present. Right now it allows `undefined` values which triggers errors.
 export type AnimatorSettingsPartial = Partial<Omit<AnimatorSettings, 'duration'>> & {
   duration?: Partial<AnimatorDuration>
 };

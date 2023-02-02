@@ -48,7 +48,7 @@ const AnimatorUIListener = (): ReactElement => {
   return (
     <div
       ref={elementRef}
-      style={{ margin: 10, width: 40, height: 20, backgroundColor: '#0ff' }}
+      style={{ margin: 10, width: 40, height: 20, backgroundColor: '#777' }}
     />
   );
 };

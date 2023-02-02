@@ -11,7 +11,7 @@ const Item = ({ children, ...animator }: ItemProps): ReactElement => {
   return (
     <Animator {...animator}>
       <Animated
-        style={{ margin: 5, width: 40, height: 15, backgroundColor: '#0ff' }}
+        style={{ margin: 5, width: 40, height: 15, backgroundColor: '#777' }}
         animated={{
           transitions: {
             entering: {

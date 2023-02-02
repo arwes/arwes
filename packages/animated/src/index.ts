@@ -1,1 +1,2 @@
-export * from './easings/index';
+export * from './easing/index';
+export * from './createAnimation/index';

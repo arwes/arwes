@@ -1,11 +1,15 @@
 // The "createAnimatorSystem" API is supposed to be used with abstractions APIs
 // such as packages "@arwes/react-animator" and "@arwes/react-animated".
 // This is just a brief example.
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
 
 import { animate } from 'motion';
 import {
   AnimatorControl,
   AnimatorNode,
+  AnimatorDuration,
+  AnimatorSettingsPartial,
+  ANIMATOR_DEFAULT_DURATION,
   ANIMATOR_DEFAULT_SETTINGS,
   createAnimatorSystem
 } from '@arwes/animator';
@@ -18,7 +22,7 @@ rootElement.innerHTML = `
       margin: 10px;
       width: 40px;
       height: 20px;
-      background-color: #0ff;
+      background-color: #777;
     }
     .margin-left {
       margin-left: 20px;
@@ -40,18 +44,25 @@ const system = createAnimatorSystem();
 const createNode = (
   parentNode: AnimatorNode | null,
   element: HTMLElement,
-  getSettingsIsActive?: () => boolean
+  getSettings?: () => AnimatorSettingsPartial
 ): AnimatorNode => {
   // Animator node control. It is used as an interface from UI components to
   // the animator node.
   const control: AnimatorControl = {
-    getSettings: () => ({
-      ...ANIMATOR_DEFAULT_SETTINGS,
+    // If a node is a parent, it will expect an "active" value to change from
+    // transition between states. Otherwise, it will listen to its parent node.
+    getSettings: () => {
+      const providedSettings = getSettings?.();
+      return {
+        // Send the default animator settings.
+        ...ANIMATOR_DEFAULT_SETTINGS,
 
-      // If a node is a parent, it will expect an "active" value to change from
-      // transition between states. Otherwise, it will listen to its parent node.
-      active: getSettingsIsActive?.() ?? true
-    }),
+        duration: {
+          ...ANIMATOR_DEFAULT_DURATION,
+          ...providedSettings?.duration
+        } as AnimatorDuration
+      };
+    },
     getDynamicSettings: () => null,
     setDynamicSettings: () => null,
     getForeignRef: () => null,
@@ -63,14 +74,14 @@ const createNode = (
   const node = system.register(parentNode, control);
 
   // Subscribe to node state changes.
-  node.subscribers.add(() => {
+  node.subscribe(() => {
     const { duration } = node;
 
     switch (node.state) {
       case 'entering': {
         animate(
           element,
-          { x: [0, 40], backgroundColor: ['#0ff', '#ff0'] },
+          { x: [0, 50], backgroundColor: ['#0ff', '#ff0'] },
           { duration: duration.enter }
         );
         break;
@@ -78,7 +89,7 @@ const createNode = (
       case 'exiting': {
         animate(
           element,
-          { x: [40, 0], backgroundColor: ['#ff0', '#0ff'] },
+          { x: [50, 0], backgroundColor: ['#ff0', '#0ff'] },
           { duration: duration.exit }
         );
         break;
@@ -98,7 +109,7 @@ let isActive = true;
 const parentNode = createNode(
   null,
   rootElement.querySelector('#parent') as HTMLDivElement,
-  () => isActive
+  () => ({ active: isActive, manager: 'stagger' })
 );
 
 createNode(parentNode, rootElement.querySelector('#child1') as HTMLDivElement);

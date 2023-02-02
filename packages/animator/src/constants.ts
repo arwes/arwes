@@ -28,8 +28,10 @@ export const ANIMATOR_ACTIONS: Record<AnimatorAction, AnimatorAction> = Object.f
 // Managers
 export const ANIMATOR_MANAGER_NAMES: Record<AnimatorManagerName, AnimatorManagerName> = Object.freeze({
   parallel: 'parallel',
-  sequence: 'sequence',
   stagger: 'stagger',
+  staggerReverse: 'staggerReverse',
+  sequence: 'sequence',
+  sequenceReverse: 'sequenceReverse',
   switch: 'switch'
 });
 
@@ -46,5 +48,6 @@ export const ANIMATOR_DEFAULT_SETTINGS: AnimatorSettings = Object.freeze({
   duration: ANIMATOR_DEFAULT_DURATION,
   manager: ANIMATOR_MANAGER_NAMES.parallel,
   merge: false,
-  combine: false
+  combine: false,
+  initialState: 'exited'
 });

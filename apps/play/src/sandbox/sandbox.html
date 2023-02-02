@@ -10,7 +10,6 @@
     <meta property="og:title" content="Arwes Sandbox">
     <meta property="og:site_name" content="Arwes">
     <meta property="og:description" content="Futuristic Sci-Fi UI Web Framework.">
-    <!-- TODO: For next development environment. -->
     <meta property="og:image" content="https://next.arwes.dev/arwes.jpg">
     <meta property="og:url" content="https://next.arwes.dev/play">
     <meta property="og:type" content="website">
@@ -19,9 +18,17 @@
     <meta name="twitter:site" content="@arwesjs">
 
     <link rel="icon" href="https://next.arwes.dev/logo.png" type="image/png">
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600&display=swap">
+
+    <script>
+      (function () {
+        window.addEventListener('load', function () {
+          const gFontsLink = document.createElement('link');
+          gFontsLink.rel = 'stylesheet';
+          gFontsLink.href = 'https://fonts.googleapis.com/css2?family=Source+Code+Pro&family=Titillium+Web:wght@400;600&display=swap';
+          document.body.appendChild(gFontsLink);
+        });
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

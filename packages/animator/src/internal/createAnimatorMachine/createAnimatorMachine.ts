@@ -23,9 +23,8 @@ interface AnimatorMachine {
   send: (action: AnimatorAction) => void
 }
 
-const createAnimatorMachine = (node: AnimatorNode): AnimatorMachine => {
-  let state: AnimatorState = STATES.exited;
-  let hasSetup = false;
+const createAnimatorMachine = (node: AnimatorNode, initialState: AnimatorState): AnimatorMachine => {
+  let state: AnimatorState = initialState;
 
   const statesMap: StatesMap = {
     [STATES.exited]: {
@@ -33,20 +32,7 @@ const createAnimatorMachine = (node: AnimatorNode): AnimatorMachine => {
         [ACTIONS.enter]: STATES.entering,
 
         [ACTIONS.setup]: () => {
-          if (hasSetup) {
-            return;
-          }
-          hasSetup = true;
-
           const settings = node.control.getSettings();
-
-          // Initial transition setup.
-          settings.onTransition?.(node);
-
-          // Initial subscribers notification.
-          for (const subscriber of node.subscribers) {
-            subscriber(node);
-          }
 
           if (node.parent) {
             const parentSettings = node.parent.control.getSettings();
