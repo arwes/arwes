@@ -22,15 +22,39 @@ const transitionTextSequence = (props: TextTransitionProps): (() => void) => {
     bottom: 0
   });
 
+  const blinkElement = document.createElement('span');
+  blinkElement.innerHTML = '&#9614;';
+  Object.assign(blinkElement.style, {
+    position: 'relative',
+    display: 'inline-block',
+    width: 0,
+    height: 0,
+    lineHeight: '0',
+    color: 'inherit'
+  });
+
   rootElement.appendChild(cloneElement);
   contentElement.style.visibility = 'hidden';
 
-  const animation = animate(
+  const blinkAnimation = animate(
+    blinkElement,
+    {
+      color: ['transparent', 'inherit', 'transparent']
+    },
+    {
+      duration: 0.1,
+      easing: 'steps(2, end)',
+      repeat: Infinity
+    }
+  );
+
+  const mainAnimation = animate(
     progress => {
       const newLength = Math.round(progress * text.length);
       const newText = text.substring(0, newLength);
 
       cloneElement.textContent = newText;
+      cloneElement.appendChild(blinkElement);
     },
     {
       duration,
@@ -42,10 +66,11 @@ const transitionTextSequence = (props: TextTransitionProps): (() => void) => {
   const onComplete = (): void => {
     contentElement.style.visibility = isEntering ? 'visible' : 'hidden';
     cloneElement.remove();
-    animation.cancel();
+    blinkAnimation.cancel();
+    mainAnimation.cancel();
   };
 
-  animation.finished.then(onComplete).catch(() => {});
+  mainAnimation.finished.then(onComplete).catch(() => {});
 
   return onComplete;
 };
