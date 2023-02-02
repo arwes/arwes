@@ -63,27 +63,26 @@ released in February, 2018, and it is now deprecated.
 
 Package | Status | Description
 ---|---|---
-`@arwes/tools` |  Polishing | General browser API tools.
-`@arwes/theme` | Development | Color, units, and general purpose dynamic theming tools.
-`@arwes/animator` | Polishing | Assemble and disassemble user interfaces using animation controls.
-`@arwes/bleeps` | Development | Define, manage, and control interactive short sound effects.
-`@arwes/text` | Specification | Text rendering effect tools.
-`@arwes/bgs` | Development | Passive UI background effects.
-`arwes` | Development | All agnostic packages bundle.
+`@arwes/tools` |  Polishing | General browser API tools
+`@arwes/theme` | Development | Color, units, and general purpose dynamic theming tools
+`@arwes/animated` | Polishing | HTML element animation utilities
+`@arwes/animator` | Polishing | Assemble and disassemble user interfaces using animation controls
+`@arwes/bleeps` | Development | Define, manage, and control interactive short sound effects
+`@arwes/text` | Specification | Text rendering effect tools
+`@arwes/bgs` | Development | Passive UI background effects
+`arwes` | Development | All agnostic packages bundle
 
 ### React
 
 Package | Status | Description
 ---|---|---
 `@arwes/react-tools` | Development | General browser API tools
-`@arwes/react-theme` | Development | Dynamic theming tools
-`@arwes/react-styles` | Development | Custom CSSinJS styling tools
 `@arwes/react-animator` | Polishing | Animator interface tools
 `@arwes/react-animated` | Polishing | Animated UI elements using animator tools
 `@arwes/react-bleeps` | Development | Interactive short sound effects manager
 `@arwes/react-core` | Specification | Core UI components
 `@arwes/react-bgs` | Development | Passive UI background effects
-`@arwes/react` | Development | All React packages bundle.
+`@arwes/react` | Development | All React packages bundle
 
 ## Community
 

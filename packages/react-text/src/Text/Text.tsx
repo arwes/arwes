@@ -13,16 +13,17 @@ import { ANIMATOR_STATES as STATES } from '@arwes/animator';
 import { easing } from '@arwes/animated';
 import { useAnimator } from '@arwes/react-animator';
 import {
+  TextTransitionManager,
   getTransitionTextDuration,
-  CreateTextTransitioner,
-  createTextTransitioner
+  transitionTextSequence,
+  transitionTextDecipher
 } from '@arwes/text';
 
 interface TextProps<E extends HTMLElement = HTMLSpanElement> extends HTMLProps<E> {
   as?: keyof HTMLElementTagNameMap
   className?: string
   elementRef?: ForwardedRef<E>
-  manager?: 'sequence' | 'decipher'
+  manager?: TextTransitionManager
   easing?: keyof typeof easing
   dynamic?: boolean
   children: string
@@ -45,11 +46,14 @@ const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): Rea
   const as = useMemo(() => asProvided, []);
   const elementRef = useRef<E>(null);
   const contentElementRef = useRef<HTMLSpanElement>(null);
-  const transitioner = useRef<CreateTextTransitioner | null>(null);
+  const cancelTransition = useRef<(() => void) | null>(null);
   const animator = useAnimator();
 
   useEffect(() => {
     if (!animator) {
+      if (contentElementRef.current) {
+        contentElementRef.current.style.visibility = 'visible';
+      }
       return;
     }
 
@@ -73,22 +77,38 @@ const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): Rea
       });
     }
 
-    if (!transitioner.current) {
-      transitioner.current = createTextTransitioner({
-        node: animator.node,
+    const transitioner = manager === 'decipher'
+      ? transitionTextDecipher
+      : transitionTextSequence;
+
+    const transition = (duration: number, isEntering: boolean): void => {
+      cancelTransition.current = transitioner({
         rootElement: elementRef.current as HTMLElement,
         contentElement: contentElementRef.current as HTMLElement,
-        initialText: children,
-        manager,
+        text: children,
+        duration,
+        isEntering,
         easing
       });
-    }
-    else {
-      transitioner.current.update(children);
-    }
+    };
+
+    const subscription = animator.node.subscribe(node => {
+      switch (node.state) {
+        case 'entering': {
+          transition(node.duration.enter, true);
+          break;
+        }
+        case 'exiting': {
+          transition(node.duration.exit, false);
+          break;
+        }
+      }
+    });
 
     return () => {
-      transitioner.current?.cancel();
+      subscription();
+      cancelTransition.current?.();
+      cancelTransition.current = null;
     };
   }, [animator, children]);
 

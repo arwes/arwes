@@ -1,5 +1,7 @@
 /* eslint-disable import/no-webpack-loader-syntax */
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 export const sandboxes = [
   {
     name: 'Visual Design',
@@ -36,7 +38,7 @@ export const sandboxes = [
           }
         ]
       },
-      {
+      !isProduction && {
         name: '@arwes/react-theme',
         children: [
           {
@@ -47,7 +49,7 @@ export const sandboxes = [
           }
         ]
       },
-      {
+      !isProduction && {
         name: '@arwes/react-styles',
         children: [
           {
@@ -66,7 +68,7 @@ export const sandboxes = [
           }
         ]
       }
-    ]
+    ].filter(Boolean)
   },
   {
     name: 'Motion Design',
