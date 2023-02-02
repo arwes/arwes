@@ -1,8 +1,10 @@
 import {
+  ReactNode,
   ReactElement,
   HTMLProps,
   ForwardedRef,
   useMemo,
+  useState,
   useRef,
   useEffect
 } from 'react';
@@ -26,7 +28,7 @@ interface TextProps<E extends HTMLElement = HTMLSpanElement> extends HTMLProps<E
   manager?: TextTransitionManager
   easing?: keyof typeof easing
   dynamic?: boolean
-  children: string
+  children: ReactNode
 }
 
 const TEXT_CLASS = 'arwes_react-text_Text';
@@ -44,10 +46,15 @@ const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): Rea
   } = props;
 
   const as = useMemo(() => asProvided, []);
+  const [childrenText, setChildrenText] = useState('');
   const elementRef = useRef<E>(null);
   const contentElementRef = useRef<HTMLSpanElement>(null);
   const transitionControl = useRef<Animation | null>(null);
   const animator = useAnimator();
+
+  useEffect(() => {
+    setChildrenText(contentElementRef.current?.textContent ?? '');
+  }, [children]);
 
   useEffect(() => {
     if (!animator) {
@@ -57,18 +64,19 @@ const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): Rea
       return;
     }
 
-    if (typeof children !== 'string') {
-      throw new Error('Text component children must be a string.');
+    // If there is no text, there is nothing to animate.
+    if (!childrenText.length) {
+      return;
     }
 
     if (dynamic) {
       const settings = animator.node.control.getSettings();
       const durationEnter = getTransitionTextDuration({
-        length: children.length,
+        length: childrenText.length,
         maxDuration: settings.duration.enter
       });
       const durationExit = getTransitionTextDuration({
-        length: children.length,
+        length: childrenText.length,
         maxDuration: settings.duration.exit
       });
 
@@ -116,7 +124,7 @@ const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): Rea
       transitionControl.current?.cancel();
       transitionControl.current = null;
     };
-  }, [animator, children]);
+  }, [animator, childrenText]);
 
   return jsx(
     as,

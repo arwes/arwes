@@ -9,14 +9,14 @@ afterEach(cleanup);
 
 test('Should render component classes and content with default "span" element', () => {
   const { container } = render(
-    <Text>Furutistic Sci-Fi UI Web Framework</Text>
+    <Text>Furutistic <b>Sci-Fi</b> UI Web Framework</Text>
   );
   const element = container.firstChild as HTMLElement;
   const contentEl = element.firstChild as HTMLElement;
   expect(element.classList.contains('arwes_react-text_Text')).toBeTruthy();
   expect(element.tagName).toBe('SPAN');
   expect(contentEl.classList.contains('arwes_react-text_Text__content')).toBeTruthy();
-  expect(contentEl.innerHTML).toBe('Furutistic Sci-Fi UI Web Framework');
+  expect(contentEl.innerHTML).toBe('Furutistic <b>Sci-Fi</b> UI Web Framework');
 });
 
 test('Should allow to set custom element', () => {

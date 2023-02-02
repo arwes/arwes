@@ -2,6 +2,8 @@ import { animate } from 'motion';
 import { Animation, createAnimation } from '@arwes/animated';
 
 import type { TextTransitionProps } from '../types';
+import { walkTextNodes } from '../internal/walkTextNodes/index';
+import { setTextNodesContent } from '../internal/setTextNodesContent/index';
 
 const transitionTextSequence = (props: TextTransitionProps): Animation => {
   const {
@@ -12,15 +14,15 @@ const transitionTextSequence = (props: TextTransitionProps): Animation => {
     easing
   } = props;
 
-  const text = contentElement.textContent ?? '';
-
-  const cloneElement = document.createElement('span');
+  const cloneElement = contentElement.cloneNode(true) as HTMLElement;
   Object.assign(cloneElement.style, {
     position: 'absolute',
     left: 0,
     right: 0,
     top: 0,
-    bottom: 0
+    bottom: 0,
+    visibility: 'visible',
+    opacity: 1
   });
 
   const blinkElement = document.createElement('span');
@@ -34,7 +36,22 @@ const transitionTextSequence = (props: TextTransitionProps): Animation => {
     color: 'inherit'
   });
 
+  const textNodes: Node[] = [];
+  const texts: string[] = [];
+
+  walkTextNodes(cloneElement, child => {
+    textNodes.push(child);
+    texts.push(child.textContent || '');
+
+    if (isEntering) {
+      child.textContent = '';
+    }
+  });
+
+  const length = texts.join('').length;
+
   rootElement.appendChild(cloneElement);
+  cloneElement.appendChild(blinkElement);
   contentElement.style.visibility = 'hidden';
 
   const blinkAnimation = animate(
@@ -54,11 +71,8 @@ const transitionTextSequence = (props: TextTransitionProps): Animation => {
     easing,
     isEntering,
     onChange: progress => {
-      const newLength = Math.round(progress * text.length);
-      const newText = text.substring(0, newLength);
-
-      cloneElement.textContent = newText;
-      cloneElement.appendChild(blinkElement);
+      const newLength = Math.round(progress * length);
+      setTextNodesContent(textNodes, texts, newLength);
     },
     onComplete: finish,
     onCancel: finish
