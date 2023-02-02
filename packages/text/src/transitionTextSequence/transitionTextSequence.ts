@@ -10,8 +10,8 @@ const transitionTextSequence = (props: TextTransitionProps): Animation => {
     rootElement,
     contentElement,
     duration,
-    isEntering,
-    easing
+    easing = 'linear',
+    isEntering = true
   } = props;
 
   const cloneElement = contentElement.cloneNode(true) as HTMLElement;
@@ -69,8 +69,8 @@ const transitionTextSequence = (props: TextTransitionProps): Animation => {
   return createAnimation({
     duration,
     easing,
-    isEntering,
-    onChange: progress => {
+    direction: isEntering ? 'normal' : 'reverse',
+    onUpdate: progress => {
       const newLength = Math.round(progress * length);
       setTextNodesContent(textNodes, texts, newLength);
     },

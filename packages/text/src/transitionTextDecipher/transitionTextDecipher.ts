@@ -12,8 +12,8 @@ const transitionTextDecipher = (props: TextTransitionProps): Animation => {
     rootElement,
     contentElement,
     duration,
-    isEntering = true,
-    easing = 'linear'
+    easing = 'linear',
+    isEntering = true
   } = props;
 
   const cloneElement = contentElement.cloneNode(true) as HTMLElement;
@@ -55,8 +55,8 @@ const transitionTextDecipher = (props: TextTransitionProps): Animation => {
   return createAnimation({
     duration,
     easing,
-    isEntering,
-    onChange: progress => {
+    direction: isEntering ? 'normal' : 'reverse',
+    onUpdate: progress => {
       // When entering, the animation decipher characters over time.
       // When exiting, the animation will cipher characters over time.
 

@@ -5,9 +5,9 @@ interface AnimationProps {
    * Duration in seconds.
    */
   duration: number
-  isEntering?: boolean
   easing?: keyof typeof easing
-  onChange: (progress: number) => void
+  direction?: 'normal' | 'reverse'
+  onUpdate: (progress: number) => void
   onComplete?: () => void
   onCancel?: () => void
 }
@@ -20,9 +20,9 @@ interface Animation {
 const createAnimation = (props: AnimationProps): Animation => {
   const {
     duration: durationProvided,
-    isEntering = true,
     easing: easingName = 'outSine',
-    onChange,
+    direction = 'normal',
+    onUpdate,
     onComplete,
     onCancel
   } = props;
@@ -41,14 +41,14 @@ const createAnimation = (props: AnimationProps): Animation => {
 
     slapsed = Math.max(timestamp - start, 0);
 
-    if (!isEntering) {
+    if (direction === 'reverse') {
       slapsed = duration - slapsed;
     }
 
     const progress = Math.min(1, Math.max(0, ease(slapsed / duration)));
-    const continueAnimation = isEntering ? slapsed < duration : slapsed > 0;
+    const continueAnimation = direction === 'normal' ? slapsed < duration : slapsed > 0;
 
-    onChange(progress);
+    onUpdate(progress);
 
     if (continueAnimation) {
       currentAnimationFrame = window.requestAnimationFrame(nextAnimation);
