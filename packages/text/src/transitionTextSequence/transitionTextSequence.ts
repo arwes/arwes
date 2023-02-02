@@ -1,5 +1,5 @@
 import { animate } from 'motion';
-import { easing } from '@arwes/animated';
+import { createAnimation } from '@arwes/animated';
 
 import type { TextTransitionProps } from '../types';
 
@@ -7,11 +7,12 @@ const transitionTextSequence = (props: TextTransitionProps): (() => void) => {
   const {
     rootElement,
     contentElement,
-    text,
     duration,
-    isEntering = true,
-    easing: easingName = 'linear'
+    isEntering,
+    easing
   } = props;
+
+  const text = contentElement.textContent ?? '';
 
   const cloneElement = document.createElement('span');
   Object.assign(cloneElement.style, {
@@ -48,31 +49,32 @@ const transitionTextSequence = (props: TextTransitionProps): (() => void) => {
     }
   );
 
-  const mainAnimation = animate(
-    progress => {
-      const newLength = Math.round(progress * text.length);
-      const newText = text.substring(0, newLength);
-
-      cloneElement.textContent = newText;
-      cloneElement.appendChild(blinkElement);
-    },
-    {
-      duration,
-      easing: easing[easingName],
-      direction: isEntering ? 'normal' : 'reverse'
-    }
-  );
-
-  const onComplete = (): void => {
+  const complete = (): void => {
     contentElement.style.visibility = isEntering ? 'visible' : 'hidden';
     cloneElement.remove();
     blinkAnimation.cancel();
-    mainAnimation.cancel();
   };
 
-  mainAnimation.finished.then(onComplete).catch(() => {});
+  const mainAnimation = createAnimation(
+    {
+      duration,
+      easing,
+      isEntering,
+      onChange: progress => {
+        const newLength = Math.round(progress * text.length);
+        const newText = text.substring(0, newLength);
 
-  return onComplete;
+        cloneElement.textContent = newText;
+        cloneElement.appendChild(blinkElement);
+      },
+      onComplete: complete
+    }
+  );
+
+  return () => {
+    complete();
+    mainAnimation.cancel();
+  };
 };
 
 export { transitionTextSequence };

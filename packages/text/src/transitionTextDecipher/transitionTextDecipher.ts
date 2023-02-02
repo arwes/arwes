@@ -1,6 +1,5 @@
-import { animate } from 'motion';
 import { randomizeList } from '@arwes/tools';
-import { easing } from '@arwes/animated';
+import { createAnimation } from '@arwes/animated';
 
 import type { TextTransitionProps } from '../types';
 
@@ -10,10 +9,9 @@ const transitionTextDecipher = (props: TextTransitionProps): (() => void) => {
   const {
     rootElement,
     contentElement,
-    text,
     duration,
     isEntering = true,
-    easing: easingName = 'linear'
+    easing = 'linear'
   } = props;
 
   const cloneElement = document.createElement('span');
@@ -28,11 +26,20 @@ const transitionTextDecipher = (props: TextTransitionProps): (() => void) => {
   rootElement.appendChild(cloneElement);
   contentElement.style.visibility = 'hidden';
 
+  const text = contentElement.textContent ?? '';
   const indexes = randomizeList(Array(text.length).fill(null).map((_, i) => i));
   const deciphered: Record<number, boolean> = {};
 
-  const animation = animate(
-    progress => {
+  const complete = (): void => {
+    contentElement.style.visibility = isEntering ? 'visible' : 'hidden';
+    cloneElement.remove();
+  };
+
+  const animation = createAnimation({
+    duration,
+    easing,
+    isEntering,
+    onChange: progress => {
       const newPositionsLength = Math.round(text.length * progress);
 
       for (let index = 0; index < text.length; index++) {
@@ -50,22 +57,13 @@ const transitionTextDecipher = (props: TextTransitionProps): (() => void) => {
 
       cloneElement.textContent = newText;
     },
-    {
-      duration,
-      easing: easing[easingName],
-      direction: isEntering ? 'normal' : 'reverse'
-    }
-  );
+    onComplete: complete
+  });
 
-  const onComplete = (): void => {
-    contentElement.style.visibility = isEntering ? 'visible' : 'hidden';
-    cloneElement.remove();
+  return () => {
+    complete();
     animation.cancel();
   };
-
-  animation.finished.then(onComplete).catch(() => {});
-
-  return onComplete;
 };
 
 export { transitionTextDecipher };

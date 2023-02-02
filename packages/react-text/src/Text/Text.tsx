@@ -58,17 +58,17 @@ const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): Rea
     }
 
     if (typeof children !== 'string') {
-      throw new Error('Text children must be a string.');
+      throw new Error('Text component children must be a string.');
     }
 
     if (dynamic) {
       const settings = animator.node.control.getSettings();
       const durationEnter = getTransitionTextDuration({
-        text: children,
+        length: children.length,
         maxDuration: settings.duration.enter
       });
       const durationExit = getTransitionTextDuration({
-        text: children,
+        length: children.length,
         maxDuration: settings.duration.exit
       });
 
@@ -82,10 +82,10 @@ const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): Rea
       : transitionTextSequence;
 
     const transition = (duration: number, isEntering: boolean): void => {
+      cancelTransition.current?.();
       cancelTransition.current = transitioner({
         rootElement: elementRef.current as HTMLElement,
         contentElement: contentElementRef.current as HTMLElement,
-        text: children,
         duration,
         isEntering,
         easing
