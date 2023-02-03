@@ -1,7 +1,7 @@
-import { memo } from 'react';
+import { memo } from '@arwes/react-tools';
 import { Text as Component } from './Text';
 
-const Text: typeof Component = memo(Component) as any;
+const Text = memo(Component);
 
 export * from './Text';
 export { Text };

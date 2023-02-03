@@ -1,7 +1,7 @@
-import React, { ReactElement, useRef } from 'react';
+import React, { ReactElement, useRef, useEffect } from 'react';
 import { animate } from 'motion';
 import { cx } from '@arwes/tools';
-import { mergeRefs, useOnChange } from '@arwes/react-tools';
+import { mergeRefs } from '@arwes/react-tools';
 import { ANIMATOR_STATES, AnimatorNode } from '@arwes/animator';
 import { useAnimator } from '@arwes/react-animator';
 
@@ -31,7 +31,7 @@ const GridLines = (props: GridLinesProps): ReactElement => {
 
   propsFullRef.current = propsFull;
 
-  useOnChange(() => {
+  useEffect(() => {
     if (!animator) {
       return;
     }
