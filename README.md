@@ -97,6 +97,7 @@ Package | Status | Description
 <td align="center"><a href="https://cybersocial.herokuapp.com"><img src="./static/community/apps/images/incyberpunk.jpg" width="252px;" alt="inCyberPunk" /></a><br /><a href="https://cybersocial.herokuapp.com">inCyberPunk</a><br /><a href="https://github.com/inPhoenix/inCyberPunk2022"><sub>inPhoenix/inCyberPunk2022</sub></a></td></tr>
 <tr><td align="center"><a href="https://archiverpg.com"><img src="./static/community/apps/images/archiverpg.com.jpg" width="252px;" alt="ArchiveRPG.com" /></a><br /><a href="https://archiverpg.com">ArchiveRPG.com</a><br /><sub>--</sub></td>
 <td align="center"><a href="https://www.myxouz.com/2021/12/lady-of-shalott-first-version-of-our-home-dashboard/"><img src="./static/community/apps/images/lady-of-shalott.jpg" width="252px;" alt="Lady of the Shalott" /></a><br /><a href="https://www.myxouz.com/2021/12/lady-of-shalott-first-version-of-our-home-dashboard/">Lady of the Shalott</a><br /><sub>--</sub></td>
+<td align="center"><a href="https://www.indiedb.com/games/assembly-rts"><img src="./static/community/apps/images/AssemblyRTS.jpg" width="252px;" alt="Assembly RTS" /></a><br /><a href="https://www.indiedb.com/games/assembly-rts">Assembly RTS</a><br /><sub>--</sub></td>
 </tr>
 </table>
 <!-- ARWES-COMMUNITY-APPS:END -->
