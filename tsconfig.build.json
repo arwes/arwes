@@ -11,7 +11,7 @@
     "**/build",
     "**/out",
     "**/.next",
-    "**/__deprecated__",
+    "**/.deprecated",
     "**/__testUtils__",
     "**/*.test.ts",
     "**/*.test.tsx",

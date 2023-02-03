@@ -1,7 +1,10 @@
 import './global.css';
-import { ReactElement, useEffect } from 'react';
+
+import type { ReactElement } from 'react';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
+
+import { useEffect } from 'react';
 
 import { setupGoogleFonts } from '../utils/setupGoogleFonts';
 import { setupGoogleAnalytics } from '../utils/setupGoogleAnalytics';

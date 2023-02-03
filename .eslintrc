@@ -8,10 +8,10 @@
     "static",
     "out",
     "www",
-    "__deprecated__",
+    ".deprecated",
     ".cache",
     ".next",
-    "apps/website/next-env.d.ts"
+    "apps/docs/next-env.d.ts"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {

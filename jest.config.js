@@ -14,7 +14,7 @@ module.exports = {
     '/out/',
     '/public/',
     '/www/',
-    '/__deprecated__/',
+    '/.deprecated/',
     '/.cache/',
     '/.next/'
   ],

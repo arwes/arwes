@@ -155,15 +155,12 @@ export const sandboxes = [
     name: 'Audio Design',
     children: [
       {
-        name: '@arwes/react-bleeps',
+        name: '@arwes/bleeps',
         children: [
           {
-            name: 'BleepsProvider',
+            name: 'createBleep',
             children: [
-              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-bleeps/src/BleepsProvider/BleepsProvider.basic.sandbox.tsx') },
-              { name: 'loops', code: require('!raw-loader?esModule=false!@repository/packages/react-bleeps/src/BleepsProvider/BleepsProvider.loops.sandbox.tsx') },
-              { name: 'categories', code: require('!raw-loader?esModule=false!@repository/packages/react-bleeps/src/BleepsProvider/BleepsProvider.categories.sandbox.tsx') },
-              { name: 'dynamic', code: require('!raw-loader?esModule=false!@repository/packages/react-bleeps/src/BleepsProvider/BleepsProvider.dynamic.sandbox.tsx') }
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/bleeps/src/createBleep/createBleep.basic.sandbox.tsx') }
             ]
           }
         ]
