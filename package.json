@@ -27,10 +27,7 @@
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
     "all-contributors-cli": "^6.24.0",
-    "auto-changelog": "^2.4.0",
-    "commitizen": "^4.2.6",
     "cross-env": "^7.0.3",
-    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.32.0",
     "eslint-config-standard-with-typescript": "^27.0.1",
     "eslint-plugin-react": "^7.32.1",
@@ -69,24 +66,9 @@
     "clean": "sh ./scripts/clean.sh",
     "integration": "sh ./scripts/integration.sh",
     "release": "nx run-many --target=build --all --parallel=8 && npm run lint && npm run test && lerna publish",
-    "changelog": "auto-changelog",
     "contributors-add": "all-contributors add",
     "readme-contributors-generate": "all-contributors generate",
     "readme-community-generate": "node ./scripts/readme-community-generate.js",
     "www-build": "sh ./scripts/www-build.sh"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "auto-changelog": {
-    "handlebarsSetup": "./website/src/templates/changelog-setup.js",
-    "template": "./website/src/templates/changelog.hbs",
-    "output": "./website/src/pages/project/changelog.mdx",
-    "commitLimit": false,
-    "replaceText": {
-      "#(\\d+)": "[`#$1`](https://github.com/arwes/arwes/issues/$1)"
-    }
   }
 }
