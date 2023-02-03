@@ -1,11 +1,11 @@
-import { easing } from '../easing/index';
+import { Easing, easing } from '../easing/index';
 
 interface AnimationProps {
   /**
    * Duration in seconds.
    */
   duration: number
-  easing?: keyof typeof easing
+  easing?: Easing
   direction?: 'normal' | 'reverse'
   onUpdate: (progress: number) => void
   onComplete?: () => void
@@ -27,7 +27,7 @@ const createAnimation = (props: AnimationProps): Animation => {
     onCancel
   } = props;
 
-  const ease = easing[easingName];
+  const ease = typeof easingName === 'function' ? easingName : easing[easingName];
   const duration = durationProvided * 1000; // seconds to ms
 
   let currentAnimationFrame: number | null = null;

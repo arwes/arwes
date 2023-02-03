@@ -85,6 +85,18 @@ export const sandboxes = [
         ]
       },
       {
+        name: '@arwes/animated',
+        children: [
+          {
+            name: 'createAnimation',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/animated/src/createAnimation/createAnimation.basic.sandbox.tsx') },
+              { name: 'easing', code: require('!raw-loader?esModule=false!@repository/packages/animated/src/createAnimation/createAnimation.easing.sandbox.tsx') }
+            ]
+          }
+        ]
+      },
+      {
         name: '@arwes/react-animator',
         children: [
           {
