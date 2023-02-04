@@ -40,9 +40,10 @@
   "module": "./build/esm/index.js",
   "main": "./build/cjs/index.js",
   "unpkg": "./build/umd/umd.min.js",
+  "peerDependencies": {
+    "@arwes/tools": "^1.0.0-next.3"
+  },
   "dependencies": {
-    "@types/howler": "2.2.x",
-    "howler": "2.2.x",
     "tslib": "^2.3.1"
   },
   "scripts": {

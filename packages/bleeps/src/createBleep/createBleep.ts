@@ -1,99 +1,143 @@
-import { Howler, Howl } from 'howler';
+import { TOOLS_IS_BROWSER } from '@arwes/tools';
 
-import type {
-  BleepsAudioGroupSettings,
-  BleepPlayerSettings,
-  BleepGenericInstanceId,
-  BleepGeneric
-} from '../types';
+import type { BleepProps, Bleep } from '../types';
 
-const createBleep = (audioSettings: BleepsAudioGroupSettings, playerSettings: BleepPlayerSettings): BleepGeneric => {
-  const { disabled, ...settings } = {
-    ...audioSettings,
-    ...playerSettings
-  };
+const createBleep = (props: BleepProps): Bleep | null => {
+  if (!TOOLS_IS_BROWSER || props.disabled) {
+    return null;
+  }
 
-  // TODO: The Howler API does not provide a public interface to know if
-  // the browser audio is locked or not. But it has a private flag.
-  // This could potentially break this library if it changes unexpectedly,
-  // but there is no proper way to know.
-  const isGlobalAudioLocked = !(Howler as any)._audioUnlocked;
+  const {
+    sources,
+    preload = true,
+    loop = false,
+    volume = 1.0,
+    muted = false
+  } = props;
 
-  let isLocked: boolean = isGlobalAudioLocked;
-  let lastId: number | undefined;
+  let isAudioLoaded = false;
+  let isAudioPlaying = false;
+  let isAudioError = false;
 
-  const howl = new Howl({
-    ...settings,
-    onunlock: () => {
-      isLocked = false;
-    }
+  const audioElement = document.createElement('audio');
+  const callersAccount = new Set<string>();
+
+  audioElement.addEventListener('canplaythrough', () => (isAudioLoaded = true));
+  audioElement.addEventListener('play', () => (isAudioPlaying = true));
+  audioElement.addEventListener('pause', () => (isAudioPlaying = false));
+  audioElement.addEventListener('ended', () => (isAudioPlaying = false));
+
+  audioElement.role = 'presentation';
+  audioElement.preload = preload ? 'auto' : 'none';
+  audioElement.loop = loop;
+  audioElement.volume = Math.min(1, Math.max(0, volume));
+  audioElement.muted = muted;
+
+  sources.forEach(({ src, type }) => {
+    const sourceElement = document.createElement('source');
+
+    const onError = (): void => {
+      isAudioError = true;
+      console.error(`The bleep with source "${src}" with type "${type}" could not be loaded.`);
+    };
+
+    sourceElement.addEventListener('error', onError);
+    sourceElement.addEventListener('abort', onError);
+    sourceElement.addEventListener('stalled', onError);
+
+    sourceElement.type = type;
+    sourceElement.src = src;
+
+    audioElement.appendChild(sourceElement);
   });
 
-  // In a loop sound, if the sound is played by multiple sources
-  // (e.g. multiple components multiple times), to stop the sound,
-  // all of the play() calls must also call stop().
-  // Otherwise, a race-condition issue can happen.
-  const sourcesAccount: Record<BleepGenericInstanceId, boolean> = {};
-
-  const play = (instanceId: BleepGenericInstanceId): void => {
-    // Even if the audio is set up to be preloaded, sometimes the file
-    // is not loaded, probably because the browser has locked the playback.
-    if (howl.state() === 'unloaded') {
-      howl.load();
-    }
-
-    // If the browser audio is locked, if the audio is played, it will be queued
-    // until the browser audio is unlocked. But if in-between the audio is stopped,
-    // the play is still queued. It is also accumulated, regardless of passing down
-    // the same playback id.
-    if (isLocked) {
+  const play = (caller?: string): void => {
+    if (isAudioError) {
       return;
     }
 
-    sourcesAccount[instanceId] = true;
+    if (caller) {
+      callersAccount.add(caller);
+    }
 
-    // If the sound is being loaded, the play action will be
-    // queued until it is loaded.
-    const newId = howl.play(lastId);
-
-    // If the sound is being loaded, it returns null.
-    // To prevent errors, the id to pass to play must be a number or undefined.
-    lastId = newId || undefined;
+    audioElement.currentTime = 0;
+    audioElement.play()?.catch(() => {
+      console.error(`The bleep with sources "${JSON.stringify(sources)}" could not be played.`);
+    });
   };
 
-  const stop = (instanceId: BleepGenericInstanceId): void => {
-    delete sourcesAccount[instanceId]; // eslint-disable-line @typescript-eslint/no-dynamic-delete
+  const stop = (caller?: string): void => {
+    if (isAudioError) {
+      return;
+    }
 
-    const noActiveSources = !Object.keys(sourcesAccount).length;
+    if (caller) {
+      callersAccount.delete(caller);
+    }
 
-    const canStop = settings.loop ? noActiveSources : true;
-
-    if (canStop && howl.playing()) {
-      howl.stop();
+    if (!callersAccount.size && isAudioPlaying) {
+      audioElement.pause();
+      audioElement.currentTime = 0;
     }
   };
 
-  const getIsPlaying = (): boolean => {
-    return howl.playing();
+  const load = (): void => {
+    if (isAudioError) {
+      return;
+    }
+
+    if (!isAudioLoaded) {
+      audioElement.load();
+    }
   };
 
   const getDuration = (): number => {
-    return howl.duration();
+    return Number.isFinite(audioElement.duration) ? audioElement.duration : 0;
   };
 
-  const unload = (): void => {
-    howl.unload();
+  const getIsPlaying = (): boolean => {
+    return isAudioPlaying;
   };
 
-  return {
-    _settings: settings,
-    _howl: howl,
-    play,
-    stop,
-    getIsPlaying,
-    getDuration,
-    unload
+  const getIsLoaded = (): boolean => {
+    return isAudioLoaded;
   };
+
+  const bleep = {} as unknown as Bleep;
+  const bleepAPI: { [P in keyof Bleep]: PropertyDescriptor } = {
+    play: {
+      value: play,
+      enumerable: true
+    },
+    stop: {
+      value: stop,
+      enumerable: true
+    },
+    load: {
+      value: load,
+      enumerable: true
+    },
+    duration: {
+      get: getDuration,
+      enumerable: true
+    },
+    isPlaying: {
+      get: getIsPlaying,
+      enumerable: true
+    },
+    isLoaded: {
+      get: getIsLoaded,
+      enumerable: true
+    },
+    props: {
+      value: props,
+      enumerable: true
+    }
+  };
+
+  Object.defineProperties(bleep, bleepAPI);
+
+  return bleep;
 };
 
 export { createBleep };
