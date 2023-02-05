@@ -160,7 +160,18 @@ export const sandboxes = [
           {
             name: 'createBleep',
             children: [
-              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/bleeps/src/createBleep/createBleep.basic.sandbox.tsx') }
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/bleeps/src/createBleep/createBleep.basic.sandbox.tsx') },
+              { name: 'looping', code: require('!raw-loader?esModule=false!@repository/packages/bleeps/src/createBleep/createBleep.looping.sandbox.tsx') },
+              { name: 'sources', code: require('!raw-loader?esModule=false!@repository/packages/bleeps/src/createBleep/createBleep.sources.sandbox.tsx') },
+              { name: 'dynamic', code: require('!raw-loader?esModule=false!@repository/packages/bleeps/src/createBleep/createBleep.dynamic.sandbox.tsx') }
+            ]
+          },
+          {
+            name: 'createBleepsManager',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/bleeps/src/createBleepsManager/createBleepsManager.basic.sandbox.tsx') },
+              { name: 'categories', code: require('!raw-loader?esModule=false!@repository/packages/bleeps/src/createBleepsManager/createBleepsManager.categories.sandbox.tsx') },
+              { name: 'dynamic', code: require('!raw-loader?esModule=false!@repository/packages/bleeps/src/createBleepsManager/createBleepsManager.dynamic.sandbox.tsx') }
             ]
           }
         ]

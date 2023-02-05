@@ -1,9 +1,9 @@
-import { TOOLS_IS_BROWSER } from '@arwes/tools';
+import { IS_BROWSER, IS_PRODUCTION } from '@arwes/tools';
 
 import type { BleepProps, Bleep } from '../types';
 
 const createBleep = (props: BleepProps): Bleep | null => {
-  if (!TOOLS_IS_BROWSER || props.disabled) {
+  if (!IS_BROWSER) {
     return null;
   }
 
@@ -19,8 +19,14 @@ const createBleep = (props: BleepProps): Bleep | null => {
   let isAudioPlaying = false;
   let isAudioError = false;
 
+  const context = props.context ?? new AudioContext();
   const audioElement = document.createElement('audio');
+  const track = new MediaElementAudioSourceNode(context, {
+    mediaElement: audioElement
+  });
   const callersAccount = new Set<string>();
+
+  track.connect(context.destination);
 
   audioElement.addEventListener('canplaythrough', () => (isAudioLoaded = true));
   audioElement.addEventListener('play', () => (isAudioPlaying = true));
@@ -36,9 +42,11 @@ const createBleep = (props: BleepProps): Bleep | null => {
   sources.forEach(({ src, type }) => {
     const sourceElement = document.createElement('source');
 
-    const onError = (): void => {
+    const onError = (err: Event): void => {
       isAudioError = true;
-      console.error(`The bleep with source "${src}" with type "${type}" could not be loaded.`);
+      if (!IS_PRODUCTION) {
+        console.error(`The bleep with source "${src}" with type "${type}" could not be loaded:`, err);
+      }
     };
 
     sourceElement.addEventListener('error', onError);
@@ -51,6 +59,10 @@ const createBleep = (props: BleepProps): Bleep | null => {
     audioElement.appendChild(sourceElement);
   });
 
+  const getDuration = (): number => audioElement.duration;
+  const getIsPlaying = (): boolean => isAudioPlaying;
+  const getIsLoaded = (): boolean => isAudioLoaded;
+
   const play = (caller?: string): void => {
     if (isAudioError) {
       return;
@@ -60,9 +72,30 @@ const createBleep = (props: BleepProps): Bleep | null => {
       callersAccount.add(caller);
     }
 
+    if (loop && isAudioPlaying) {
+      return;
+    }
+
+    if (context.state === 'suspended') {
+      let isResumeError = false;
+
+      context.resume().catch((err: Event) => {
+        isResumeError = true;
+        if (!IS_PRODUCTION) {
+          console.error(`The bleep audio context with sources "${JSON.stringify(sources)}" could not be resumed to be played:`, err);
+        }
+      });
+
+      if (isResumeError) {
+        return;
+      }
+    }
+
     audioElement.currentTime = 0;
-    audioElement.play()?.catch(() => {
-      console.error(`The bleep with sources "${JSON.stringify(sources)}" could not be played.`);
+    audioElement.play()?.catch(err => {
+      if (!IS_PRODUCTION) {
+        console.error(`The bleep with sources "${JSON.stringify(sources)}" could not be played:`, err);
+      }
     });
   };
 
@@ -91,32 +124,12 @@ const createBleep = (props: BleepProps): Bleep | null => {
     }
   };
 
-  const getDuration = (): number => {
-    return Number.isFinite(audioElement.duration) ? audioElement.duration : 0;
-  };
-
-  const getIsPlaying = (): boolean => {
-    return isAudioPlaying;
-  };
-
-  const getIsLoaded = (): boolean => {
-    return isAudioLoaded;
+  const unload = (): void => {
+    track.disconnect(context.destination);
   };
 
   const bleep = {} as unknown as Bleep;
   const bleepAPI: { [P in keyof Bleep]: PropertyDescriptor } = {
-    play: {
-      value: play,
-      enumerable: true
-    },
-    stop: {
-      value: stop,
-      enumerable: true
-    },
-    load: {
-      value: load,
-      enumerable: true
-    },
     duration: {
       get: getDuration,
       enumerable: true
@@ -129,8 +142,25 @@ const createBleep = (props: BleepProps): Bleep | null => {
       get: getIsLoaded,
       enumerable: true
     },
-    props: {
-      value: props,
+    play: {
+      value: play,
+      enumerable: true
+    },
+    stop: {
+      value: stop,
+      enumerable: true
+    },
+    load: {
+      value: load,
+      enumerable: true
+    },
+    unload: {
+      value: unload,
+      enumerable: true
+    },
+    // TODO: Implement.
+    update: {
+      value: null,
       enumerable: true
     }
   };

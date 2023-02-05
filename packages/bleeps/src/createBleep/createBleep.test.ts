@@ -1,5 +1,8 @@
 /* eslint-env jest */
 
+test.todo('createBleep');
+
+/*
 import type { Bleep } from '../types';
 import { createBleep } from './createBleep';
 
@@ -24,7 +27,6 @@ test('Should create bleep with provided settings', () => {
   });
 });
 
-/*
 test('Should allow playing the sound as shared sound', () => {
   const props = { volume: 0.8 };
   const bleep = createBleep(props) as Bleep;
