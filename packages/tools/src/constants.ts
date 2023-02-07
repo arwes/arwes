@@ -1,3 +1,5 @@
 export const IS_BROWSER: boolean = typeof window !== 'undefined';
 
-export const IS_PRODUCTION: boolean = typeof process !== 'undefined' ? process?.env?.NODE_ENV === 'production' : true;
+export const IS_BROWSER_SAFARI: boolean = IS_BROWSER &&
+  window.navigator.userAgent.includes('Safari') &&
+  !window.navigator.userAgent.includes('Chrome');

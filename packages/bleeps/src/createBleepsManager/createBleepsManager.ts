@@ -1,4 +1,4 @@
-import { IS_BROWSER, IS_PRODUCTION } from '@arwes/tools';
+import { IS_BROWSER } from '@arwes/tools';
 
 import type { Bleep, BleepsManager, BleepsManagerProps } from '../types';
 import { createBleep } from '../createBleep/index';
@@ -7,16 +7,6 @@ const createBleepsManager = <BleepNames extends string = string>(
   props: BleepsManagerProps<BleepNames>
 ): BleepsManager<BleepNames> | null => {
   if (!IS_BROWSER) {
-    return null;
-  }
-
-  // TODO: Add support for Safari browser.
-  const isSafari = (/safari/i).test(window.navigator.userAgent);
-  const isSupported = isSafari;
-  if (!isSupported) {
-    if (!IS_PRODUCTION) {
-      console.error('Bleeps are not supported in this navigator.');
-    }
     return null;
   }
 

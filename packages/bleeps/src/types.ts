@@ -9,7 +9,6 @@ export type BleepCategory =
 export interface BleepGeneralProps {
   readonly preload?: boolean
   readonly volume?: number
-  readonly muted?: boolean
   readonly disabled?: boolean
 }
 
@@ -21,6 +20,9 @@ export interface BleepProps extends Omit<BleepGeneralProps, 'disabled'> {
 }
 
 export interface Bleep {
+  /**
+   * Get audio duration in seconds.
+   */
   readonly duration: number
   readonly isLoaded: boolean
   readonly isPlaying: boolean
@@ -28,7 +30,6 @@ export interface Bleep {
   readonly stop: (callerID?: string) => void
   readonly load: () => void
   readonly unload: () => void
-  readonly update: (props: PartialDeep<BleepProps>) => void
 }
 
 export interface BleepsManagerProps <BleepNames extends string = string> {

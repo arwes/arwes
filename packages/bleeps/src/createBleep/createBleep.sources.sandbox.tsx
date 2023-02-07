@@ -13,7 +13,10 @@ const stopOneElement = rootElement.querySelector('.stopOne') as HTMLButtonElemen
 const stopAllElement = rootElement.querySelector('.stopAll') as HTMLButtonElement;
 
 const typeBleep = createBleep({
-  sources: [{ src: '/assets/sounds/type.webm', type: 'audio/webm' }],
+  sources: [
+    { src: '/assets/sounds/type.webm', type: 'audio/webm' },
+    { src: '/assets/sounds/type.mp3', type: 'audio/mpeg' }
+  ],
   loop: true
 });
 

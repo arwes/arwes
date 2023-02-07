@@ -1,4 +1,4 @@
-import { IS_BROWSER, IS_PRODUCTION } from '@arwes/tools';
+import { IS_BROWSER, IS_BROWSER_SAFARI } from '@arwes/tools';
 
 import type { BleepProps, Bleep } from '../types';
 
@@ -11,79 +11,96 @@ const createBleep = (props: BleepProps): Bleep | null => {
     sources,
     preload = true,
     loop = false,
-    volume = 1.0,
-    muted = false
+    volume = 1.0
   } = props;
 
-  let isAudioLoaded = false;
-  let isAudioPlaying = false;
-  let isAudioError = false;
+  let isBufferLoading = false;
+  let isBufferError = false;
+  let isBufferPlaying = false;
+
+  let source: AudioBufferSourceNode | null = null;
+  let buffer: AudioBuffer | null = null;
+  let duration = 0;
 
   const context = props.context ?? new AudioContext();
-  const audioElement = document.createElement('audio');
-  const track = new MediaElementAudioSourceNode(context, {
-    mediaElement: audioElement
-  });
+  const gainNode = context.createGain();
   const callersAccount = new Set<string>();
 
-  track.connect(context.destination);
+  const fetchAudioBuffer = (): void => {
+    if (buffer || isBufferLoading || isBufferError) {
+      return;
+    }
 
-  audioElement.addEventListener('canplaythrough', () => (isAudioLoaded = true));
-  audioElement.addEventListener('play', () => (isAudioPlaying = true));
-  audioElement.addEventListener('pause', () => (isAudioPlaying = false));
-  audioElement.addEventListener('ended', () => (isAudioPlaying = false));
+    if (!sources.length) {
+      isBufferError = true;
+      console.error('Every bleep must have at least one source with a valid audio file URL and type.');
+      return;
+    }
 
-  audioElement.role = 'presentation';
-  audioElement.preload = preload ? 'auto' : 'none';
-  audioElement.loop = loop;
-  audioElement.volume = Math.min(1, Math.max(0, volume));
-  audioElement.muted = muted;
-
-  sources.forEach(({ src, type }) => {
-    const sourceElement = document.createElement('source');
-
-    const onError = (err: Event): void => {
-      isAudioError = true;
-      if (!IS_PRODUCTION) {
-        console.error(`The bleep with source "${src}" with type "${type}" could not be loaded:`, err);
+    const audioTest = new Audio();
+    const source = sources.find(source => {
+      // "webm" and "weba" file formats are not supported on Safari.
+      if (IS_BROWSER_SAFARI && source.type.includes('audio/webm')) {
+        return false;
       }
-    };
 
-    sourceElement.addEventListener('error', onError);
-    sourceElement.addEventListener('abort', onError);
-    sourceElement.addEventListener('stalled', onError);
+      const support = audioTest.canPlayType(source.type || '');
+      return support === 'probably' || support === 'maybe';
+    });
 
-    sourceElement.type = type;
-    sourceElement.src = src;
+    if (!source) {
+      isBufferError = true;
+      console.error(`The bleep sources "${JSON.stringify(sources)}" are not supported on this navigator.`);
+      return;
+    }
 
-    audioElement.appendChild(sourceElement);
-  });
+    const { src, type } = source;
 
-  const getDuration = (): number => audioElement.duration;
-  const getIsPlaying = (): boolean => isAudioPlaying;
-  const getIsLoaded = (): boolean => isAudioLoaded;
+    isBufferLoading = true;
+
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    fetch(src)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Bleep source could not be fetched.');
+        }
+        return response;
+      })
+      .then(response => response.arrayBuffer())
+      .then(audioArrayBuffer => context.decodeAudioData(audioArrayBuffer))
+      .then(audioBuffer => {
+        buffer = audioBuffer;
+        duration = buffer.duration;
+      })
+      .catch(err => {
+        isBufferError = true;
+        console.error(`The bleep with source URL "${src}" and type "${type}" could not be used:`, err);
+      })
+      .then(() => (isBufferLoading = false));
+  };
+
+  const getDuration = (): number => duration;
+  const getIsPlaying = (): boolean => isBufferPlaying;
+  const getIsLoaded = (): boolean => !!buffer;
 
   const play = (caller?: string): void => {
-    if (isAudioError) {
+    if (!buffer) {
+      fetchAudioBuffer();
       return;
     }
 
-    if (caller) {
-      callersAccount.add(caller);
-    }
-
-    if (loop && isAudioPlaying) {
+    if (loop && isBufferPlaying) {
       return;
     }
 
+    // If the user has not yet interacted with the browser, audio is locked
+    // so try to unlock it.
     if (context.state === 'suspended') {
       let isResumeError = false;
 
       context.resume().catch((err: Event) => {
         isResumeError = true;
-        if (!IS_PRODUCTION) {
-          console.error(`The bleep audio context with sources "${JSON.stringify(sources)}" could not be resumed to be played:`, err);
-        }
+        console.error(`The bleep audio context with sources "${JSON.stringify(sources)}" could not be resumed to be played:`, err);
       });
 
       if (isResumeError) {
@@ -91,16 +108,37 @@ const createBleep = (props: BleepProps): Bleep | null => {
       }
     }
 
-    audioElement.currentTime = 0;
-    audioElement.play()?.catch(err => {
-      if (!IS_PRODUCTION) {
-        console.error(`The bleep with sources "${JSON.stringify(sources)}" could not be played:`, err);
-      }
-    });
+    if (caller) {
+      callersAccount.add(caller);
+    }
+
+    isBufferPlaying = true;
+
+    if (source) {
+      source.stop();
+      source.disconnect(gainNode);
+      source = null;
+    }
+
+    source = context.createBufferSource();
+    source.buffer = buffer;
+    source.loop = loop;
+
+    if (loop) {
+      source.loopStart = 0;
+      source.loopEnd = buffer.duration;
+    }
+
+    source.connect(gainNode);
+    source.start();
+
+    source.onended = () => {
+      isBufferPlaying = false;
+    };
   };
 
   const stop = (caller?: string): void => {
-    if (isAudioError) {
+    if (!buffer) {
       return;
     }
 
@@ -108,24 +146,35 @@ const createBleep = (props: BleepProps): Bleep | null => {
       callersAccount.delete(caller);
     }
 
-    if (!callersAccount.size && isAudioPlaying) {
-      audioElement.pause();
-      audioElement.currentTime = 0;
+    const canStop = loop ? !callersAccount.size : true;
+
+    if (canStop) {
+      if (source) {
+        source.stop();
+        source.disconnect(gainNode);
+        source = null;
+      }
+
+      isBufferPlaying = false;
     }
   };
 
   const load = (): void => {
-    if (isAudioError) {
-      return;
-    }
-
-    if (!isAudioLoaded) {
-      audioElement.load();
-    }
+    fetchAudioBuffer();
   };
 
   const unload = (): void => {
-    track.disconnect(context.destination);
+    if (source) {
+      source.stop();
+      source.disconnect(gainNode);
+      source = null;
+    }
+
+    // Remove audio buffer from memory.
+    buffer = null;
+
+    isBufferLoading = false;
+    isBufferError = false;
   };
 
   const bleep = {} as unknown as Bleep;
@@ -157,15 +206,17 @@ const createBleep = (props: BleepProps): Bleep | null => {
     unload: {
       value: unload,
       enumerable: true
-    },
-    // TODO: Implement.
-    update: {
-      value: null,
-      enumerable: true
     }
   };
 
   Object.defineProperties(bleep, bleepAPI);
+
+  gainNode.connect(context.destination);
+  gainNode.gain.setValueAtTime(volume, context.currentTime);
+
+  if (preload) {
+    fetchAudioBuffer();
+  }
 
   return bleep;
 };
