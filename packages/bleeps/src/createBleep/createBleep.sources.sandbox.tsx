@@ -12,26 +12,26 @@ const playAllElement = rootElement.querySelector('.playAll') as HTMLButtonElemen
 const stopOneElement = rootElement.querySelector('.stopOne') as HTMLButtonElement;
 const stopAllElement = rootElement.querySelector('.stopAll') as HTMLButtonElement;
 
-const typeBleep = createBleep({
+const bleep = createBleep({
   sources: [
-    { src: '/assets/sounds/type.webm', type: 'audio/webm' },
-    { src: '/assets/sounds/type.mp3', type: 'audio/mpeg' }
+    { src: '/assets/sounds/readout.webm', type: 'audio/webm' },
+    { src: '/assets/sounds/readout.mp3', type: 'audio/mpeg' }
   ],
   loop: true
 });
 
 playAllElement.addEventListener('click', () => {
-  typeBleep?.play('A');
-  typeBleep?.play('B');
-  typeBleep?.play('C');
+  bleep?.play('A');
+  bleep?.play('B');
+  bleep?.play('C');
 });
 
 stopOneElement.addEventListener('click', () => {
-  typeBleep?.stop('B');
+  bleep?.stop('B');
 });
 
 stopAllElement.addEventListener('click', () => {
-  typeBleep?.stop('A');
-  typeBleep?.stop('B');
-  typeBleep?.stop('C');
+  bleep?.stop('A');
+  bleep?.stop('B');
+  bleep?.stop('C');
 });

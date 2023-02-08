@@ -20,10 +20,10 @@ const bleepsManager = createBleepsManager<BleepNames>({
   },
   categories: {
     interaction: {
-      volume: 0.2
+      volume: 0
     },
     notification: {
-      muted: true
+      volume: 0.5
     },
     transition: {
       volume: 1

@@ -6,20 +6,20 @@ rootElement.innerHTML = '<button class="bleep">Play</button>';
 
 const bleepElement = rootElement.querySelector('.bleep') as HTMLButtonElement;
 
-const typeBleep = createBleep({
+const bleep = createBleep({
   sources: [{ src: '/assets/sounds/type.mp3', type: 'audio/mpeg' }],
   loop: true,
   volume: 0.5
 });
 
 bleepElement.addEventListener('click', () => {
-  if (typeBleep) {
-    if (typeBleep.isPlaying) {
-      typeBleep.stop();
+  if (bleep) {
+    if (bleep.isPlaying) {
+      bleep.stop();
       bleepElement.textContent = 'Play';
     }
     else {
-      typeBleep.play();
+      bleep.play();
       bleepElement.textContent = 'Stop';
     }
   }

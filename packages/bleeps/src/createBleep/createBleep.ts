@@ -1,6 +1,6 @@
 import { IS_BROWSER, IS_BROWSER_SAFARI } from '@arwes/tools';
 
-import type { BleepProps, Bleep } from '../types';
+import type { BleepProps, Bleep, BleepPropsUpdatable } from '../types';
 
 const createBleep = (props: BleepProps): Bleep | null => {
   if (!IS_BROWSER) {
@@ -11,7 +11,9 @@ const createBleep = (props: BleepProps): Bleep | null => {
     sources,
     preload = true,
     loop = false,
-    volume = 1.0
+    volume = 1.0,
+    fetchHeaders,
+    globalGain
   } = props;
 
   let isBufferLoading = false;
@@ -23,7 +25,7 @@ const createBleep = (props: BleepProps): Bleep | null => {
   let duration = 0;
 
   const context = props.context ?? new AudioContext();
-  const gainNode = context.createGain();
+  const gain = context.createGain();
   const callersAccount = new Set<string>();
 
   const fetchAudioBuffer = (): void => {
@@ -59,7 +61,10 @@ const createBleep = (props: BleepProps): Bleep | null => {
     isBufferLoading = true;
 
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    fetch(src)
+    fetch(src, {
+      method: 'GET',
+      headers: fetchHeaders
+    })
       .then(response => {
         if (!response.ok) {
           throw new Error('Bleep source could not be fetched.');
@@ -116,7 +121,7 @@ const createBleep = (props: BleepProps): Bleep | null => {
 
     if (source) {
       source.stop();
-      source.disconnect(gainNode);
+      source.disconnect(gain);
       source = null;
     }
 
@@ -129,7 +134,7 @@ const createBleep = (props: BleepProps): Bleep | null => {
       source.loopEnd = buffer.duration;
     }
 
-    source.connect(gainNode);
+    source.connect(gain);
     source.start();
 
     source.onended = () => {
@@ -151,7 +156,7 @@ const createBleep = (props: BleepProps): Bleep | null => {
     if (canStop) {
       if (source) {
         source.stop();
-        source.disconnect(gainNode);
+        source.disconnect(gain);
         source = null;
       }
 
@@ -166,7 +171,7 @@ const createBleep = (props: BleepProps): Bleep | null => {
   const unload = (): void => {
     if (source) {
       source.stop();
-      source.disconnect(gainNode);
+      source.disconnect(gain);
       source = null;
     }
 
@@ -175,6 +180,13 @@ const createBleep = (props: BleepProps): Bleep | null => {
 
     isBufferLoading = false;
     isBufferError = false;
+  };
+
+  const update = (props: BleepPropsUpdatable): void => {
+    if (props.volume !== undefined) {
+      const bleepVolume = Math.max(0, Math.min(1, props.volume));
+      gain.gain.setValueAtTime(bleepVolume, context.currentTime);
+    }
   };
 
   const bleep = {} as unknown as Bleep;
@@ -206,13 +218,26 @@ const createBleep = (props: BleepProps): Bleep | null => {
     unload: {
       value: unload,
       enumerable: true
+    },
+    update: {
+      value: update,
+      enumerable: true
     }
   };
 
   Object.defineProperties(bleep, bleepAPI);
 
-  gainNode.connect(context.destination);
-  gainNode.gain.setValueAtTime(volume, context.currentTime);
+  // If there is a global GainNode provided, subscribe to it so a global volume
+  // can be set from there. Otherwise, subscribe to the context directly.
+  if (globalGain) {
+    gain.connect(globalGain);
+  }
+  else {
+    gain.connect(context.destination);
+  }
+
+  const bleepVolume = Math.max(0, Math.min(1, volume));
+  gain.gain.setValueAtTime(bleepVolume, context.currentTime);
 
   if (preload) {
     fetchAudioBuffer();
