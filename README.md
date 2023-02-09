@@ -67,7 +67,7 @@ Package | Status | Description
 `@arwes/theme` | Development | Color, units, and general purpose dynamic theming tools
 `@arwes/animated` | Polishing | HTML element animation utilities
 `@arwes/animator` | Polishing | Assemble and disassemble user interfaces using animation controls
-`@arwes/bleeps` | Development | Define, manage, and control interactive short sound effects
+`@arwes/bleeps` | Polishing | Define, manage, and control interactive short sound effects
 `@arwes/text` | Polishing | Text rendering effect tools
 `@arwes/bgs` | Polishing | Passive UI background effects
 `arwes` | Polishing | All agnostic packages bundle
@@ -79,7 +79,7 @@ Package | Status | Description
 `@arwes/react-tools` | Polishing | General browser API tools
 `@arwes/react-animator` | Polishing | Animator interface tools
 `@arwes/react-animated` | Polishing | Animated UI elements using animator tools
-`@arwes/react-bleeps` | Development | Interactive short sound effects manager
+`@arwes/react-bleeps` | Polishing | Interactive short sound effects manager
 `@arwes/react-core` | Specification | Core UI components
 `@arwes/react-text` | Polishing | Text effect components
 `@arwes/react-bgs` | Polishing | Passive UI background effects
