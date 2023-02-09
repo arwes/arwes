@@ -236,8 +236,8 @@ const createBleep = (props: BleepProps): Bleep | null => {
     gain.connect(context.destination);
   }
 
-  const bleepVolume = Math.max(0, Math.min(1, volume));
-  gain.gain.setValueAtTime(bleepVolume, context.currentTime);
+  // Set initial bleep volume.
+  update({ volume });
 
   if (preload) {
     fetchAudioBuffer();

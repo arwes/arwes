@@ -44,6 +44,7 @@ const createBleepsManager = <BleepNames extends string = string>(
 
   globalGain.connect(context.destination);
 
+  // Set initial global gain value.
   const globalVolume = Math.max(0, Math.min(1, props?.global?.volume ?? 1));
   globalGain.gain.setValueAtTime(globalVolume, context.currentTime);
 
@@ -56,8 +57,6 @@ const createBleepsManager = <BleepNames extends string = string>(
     }
 
     // Bleep settings.
-
-    const bleepNames = Object.keys(newProps.bleeps) as BleepNames[];
 
     bleepNames.forEach(bleepName => {
       const baseBleepProps = props.bleeps[bleepName];
@@ -75,10 +74,20 @@ const createBleepsManager = <BleepNames extends string = string>(
         bleeps[bleepName] = null;
       }
       else {
-        bleeps[bleepName]?.update({
-          ...generalProps,
-          ...newProps.bleeps[bleepName]
-        });
+        if (bleeps[bleepName]) {
+          bleeps[bleepName]?.update({
+            ...generalProps,
+            ...newProps.bleeps?.[bleepName]
+          });
+        }
+        else {
+          bleeps[bleepName] = createBleep({
+            ...generalProps,
+            ...baseBleepProps,
+            context,
+            globalGain
+          });
+        }
       }
     });
   };

@@ -25,6 +25,7 @@ export interface BleepProps extends Omit<BleepGeneralProps, 'disabled'> {
   readonly globalGain?: GainNode
 }
 
+// TODO: Add support to allow updates on other bleep properties.
 export interface BleepPropsUpdatable {
   readonly volume?: number
 }
@@ -72,7 +73,7 @@ export interface BleepsManagerPropsUpdatable <BleepNames extends string = string
   readonly categories?: {
     readonly [P in BleepCategory]?: BleepsManagerPropsGeneralUpdatable
   }
-  readonly bleeps: Record<BleepNames, BleepsManagerPropsBleepUpdatable>
+  readonly bleeps?: Record<BleepNames, BleepsManagerPropsBleepUpdatable>
 }
 
 export interface BleepsManager <BleepNames extends string = string> {
