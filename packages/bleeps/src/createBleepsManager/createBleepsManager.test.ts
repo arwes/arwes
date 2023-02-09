@@ -1,50 +1,44 @@
 /* eslint-env jest */
 
-test.todo('createBleepsManager');
+import { createBleepsManager } from './createBleepsManager';
 
-/*
-import type { BleepsSettings } from '../types';
-import {
-  BLEEPS_TRANSITION,
-  BLEEPS_INTERACTION
-} from '../constants';
-import { createOrUpdateBleeps } from './createOrUpdateBleeps';
-
-test('Should create bleeps with common and category settings', () => {
-  const audioSettings = {
-    common: { volume: 0.9 },
-    categories: {
-      [BLEEPS_INTERACTION]: {
-        volume: 0.5
-      },
-      [BLEEPS_TRANSITION]: {
-        volume: 0.7
-      }
+beforeEach(() => {
+  class AudioContext {
+    createGain (): object {
+      return {
+        connect: jest.fn(),
+        gain: {
+          setValueAtTime: jest.fn()
+        }
+      };
     }
   };
-  const playersSettings = {
-    click: { src: ['click.webm'] },
-    hover: { src: ['hover.webm'] },
-    type: { src: ['type.webm'], loop: true }
-  };
-  const bleepsSettings: BleepsSettings = {
-    click: { player: 'click' },
-    hover: { player: 'hover', category: BLEEPS_INTERACTION },
-    type: { player: 'type', category: BLEEPS_TRANSITION }
-  };
-  const bleeps = createOrUpdateBleeps({}, audioSettings, playersSettings, bleepsSettings);
-  expect(Object.keys(bleeps)).toEqual(['click', 'hover', 'type']);
-  expect(bleeps.click).toMatchObject({
-    _settings: { volume: 0.9, src: ['click.webm'] }
+  window.AudioContext = AudioContext as any;
+});
+
+afterEach(() => {
+  window.AudioContext = null as any;
+});
+
+test('Should create bleeps manager structure', () => {
+  const bleepsManager = createBleepsManager({
+    bleeps: {
+      click: {
+        sources: [{ src: 'audio.mp3', type: 'audio/mpeg' }],
+        preload: false
+      }
+    }
   });
-  expect(bleeps.hover).toMatchObject({
-    _settings: { volume: 0.5, src: ['hover.webm'] }
-  });
-  expect(bleeps.type).toMatchObject({
-    _settings: { volume: 0.7, src: ['type.webm'], loop: true }
+  expect(bleepsManager).toMatchObject({
+    bleeps: {
+      click: expect.any(Object)
+    },
+    unload: expect.any(Function),
+    update: expect.any(Function)
   });
 });
 
+/*
 test('Should create and update bleeps with common and category settings changes', () => {
   let bleeps: any;
   const bleepsSettings: BleepsSettings = {

@@ -1,3 +1,5 @@
+import { IS_BROWSER } from '@arwes/tools';
+
 import type {
   Bleep,
   BleepGeneralProps,
@@ -10,8 +12,11 @@ import { createBleep } from '../createBleep/index';
 const createBleepsManager = <Names extends string>(
   props: BleepsManagerProps<Names>
 ): BleepsManager<Names> => {
-  const context = new AudioContext();
-  const masterGain = context.createGain();
+  // In non-browser environments, the bleeps manager is still created but without
+  // actual functionalities.
+  const context = IS_BROWSER ? new window.AudioContext() : null as unknown as AudioContext;
+  const masterGain = IS_BROWSER ? context.createGain() : null as unknown as GainNode;
+
   const bleeps = {} as unknown as Record<Names, Bleep | null>;
   const bleepNames = Object.keys(props.bleeps) as Names[];
 
@@ -36,11 +41,13 @@ const createBleepsManager = <Names extends string>(
       });
   });
 
-  masterGain.connect(context.destination);
+  if (IS_BROWSER) {
+    masterGain.connect(context.destination);
 
-  // Set initial master gain value.
-  const globalVolume = Math.max(0, Math.min(1, props?.master?.volume ?? 1));
-  masterGain.gain.setValueAtTime(globalVolume, context.currentTime);
+    // Set initial master gain value.
+    const globalVolume = Math.max(0, Math.min(1, props?.master?.volume ?? 1));
+    masterGain.gain.setValueAtTime(globalVolume, context.currentTime);
+  }
 
   const unload = (): void => {
     bleepNames.forEach(bleepName => {

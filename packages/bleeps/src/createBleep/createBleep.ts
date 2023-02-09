@@ -24,7 +24,7 @@ const createBleep = (props: BleepProps): Bleep | null => {
   let buffer: AudioBuffer | null = null;
   let duration = 0;
 
-  const context = props.context ?? new AudioContext();
+  const context = props.context ?? new window.AudioContext();
   const gain = context.createGain();
   const callersAccount = new Set<string>();
 
@@ -39,7 +39,7 @@ const createBleep = (props: BleepProps): Bleep | null => {
       return;
     }
 
-    const audioTest = new Audio();
+    const audioTest = new window.Audio();
     const source = sources.find(source => {
       // "webm" and "weba" file formats are not supported on Safari.
       if (IS_BROWSER_SAFARI && source.type.includes('audio/webm')) {
@@ -61,7 +61,7 @@ const createBleep = (props: BleepProps): Bleep | null => {
     isBufferLoading = true;
 
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    fetch(src, {
+    window.fetch(src, {
       method: 'GET',
       headers: fetchHeaders
     })

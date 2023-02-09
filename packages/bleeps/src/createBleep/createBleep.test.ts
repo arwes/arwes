@@ -1,35 +1,64 @@
 /* eslint-env jest */
 
-test.todo('createBleep');
-
-/*
-import type { Bleep } from '../types';
 import { createBleep } from './createBleep';
+
+const mockAudioContextDestination = Symbol('destination');
+
+beforeEach(() => {
+  class AudioContext {
+    state = 'suspended';
+    destination = mockAudioContextDestination;
+    resume = jest.fn();
+
+    createGain (): object {
+      return {
+        connect: jest.fn(),
+        gain: {
+          value: 0,
+          setValueAtTime: jest.fn()
+        }
+      };
+    }
+  };
+
+  class Audio {
+    canPlayType = jest.fn(type => type === 'audio/mpeg' ? 'probably' : '');
+  }
+
+  window.AudioContext = AudioContext as any;
+  window.Audio = Audio as any;
+  window.fetch = jest.fn();
+});
+
+afterEach(() => {
+  window.AudioContext = null as any;
+  window.Audio = null as any;
+  window.fetch = null as any;
+});
 
 test('Should create bleep with provided settings', () => {
   const bleep = createBleep({
-    sources: [{ src: 'sound.webm', type: 'audio/webm' }],
-    volume: 0.8,
-    preload: true
+    sources: [{ src: 'sound.mp3', type: 'audio/mpeg' }],
+    preload: false
   });
   expect(bleep).toMatchObject({
-    props: {
-      sources: [{ src: 'sound.webm', type: 'audio/webm' }],
-      volume: 0.8,
-      preload: true
-    },
+    duration: expect.any(Number),
+    isLoaded: expect.any(Boolean),
+    isPlaying: expect.any(Boolean),
     play: expect.any(Function),
     stop: expect.any(Function),
     load: expect.any(Function),
-    duration: expect.any(Number),
-    isLoaded: expect.any(Boolean),
-    isPlaying: expect.any(Boolean)
+    unload: expect.any(Function),
+    update: expect.any(Function)
   });
 });
 
+/* TODO:
 test('Should allow playing the sound as shared sound', () => {
-  const props = { volume: 0.8 };
-  const bleep = createBleep(props) as Bleep;
+  const bleep = createBleep({
+    sources: [{ src: 'sound.mp3', type: 'audio/mpeg' }],
+    preload: false
+  }) as Bleep;
   const howlPlay = jest.spyOn(bleep._howl, 'play').mockImplementation(() => 777);
   bleep.play('A');
   bleep.play('A');
