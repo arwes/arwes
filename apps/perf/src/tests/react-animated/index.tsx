@@ -1,4 +1,4 @@
-import React, { ReactElement, Profiler, Fragment, useState, useEffect } from 'react';
+import React, { type ReactElement, Profiler, Fragment, useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import { Animator } from '@arwes/react-animator';

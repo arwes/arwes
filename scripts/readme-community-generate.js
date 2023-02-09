@@ -2,7 +2,7 @@
 
 const path = require('path');
 const { readFileSync, writeFileSync } = require('fs');
-const appsItems = require('../static/community/apps/apps.json');
+const appsItems = require('../static/assets/community/apps/apps.json');
 
 const README_FILE_PATH = path.join(process.cwd(), 'README.md');
 const README_FILE_ENCODING = 'utf-8';
@@ -13,7 +13,7 @@ const appsRowsHTML = appsItems
   .map(item => ({
     ...item,
     repositoryName: item.repository.replace(/^https?:\/\/[^/]+\//, ''),
-    imageRelativePath: './' + path.join('static/community/apps/images', item.image)
+    imageRelativePath: './' + path.join('static/assets/community/apps/images', item.image)
   }))
   .map(({ name, url, repository, repositoryName, imageRelativePath }) =>
     [

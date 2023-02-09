@@ -67,22 +67,23 @@ Package | Status | Description
 `@arwes/theme` | Development | Color, units, and general purpose dynamic theming tools
 `@arwes/animated` | Polishing | HTML element animation utilities
 `@arwes/animator` | Polishing | Assemble and disassemble user interfaces using animation controls
-`@arwes/bleeps` | Development | Define, manage, and control interactive short sound effects
-`@arwes/text` | Specification | Text rendering effect tools
-`@arwes/bgs` | Development | Passive UI background effects
-`arwes` | Development | All agnostic packages bundle
+`@arwes/bleeps` | Polishing | Define, manage, and control interactive short sound effects
+`@arwes/text` | Polishing | Text rendering effect tools
+`@arwes/bgs` | Polishing | Passive UI background effects
+`arwes` | Polishing | All agnostic packages bundle
 
 ### React
 
 Package | Status | Description
 ---|---|---
-`@arwes/react-tools` | Development | General browser API tools
+`@arwes/react-tools` | Polishing | General browser API tools
 `@arwes/react-animator` | Polishing | Animator interface tools
 `@arwes/react-animated` | Polishing | Animated UI elements using animator tools
-`@arwes/react-bleeps` | Development | Interactive short sound effects manager
+`@arwes/react-bleeps` | Polishing | Interactive short sound effects manager
 `@arwes/react-core` | Specification | Core UI components
-`@arwes/react-bgs` | Development | Passive UI background effects
-`@arwes/react` | Development | All React packages bundle
+`@arwes/react-text` | Polishing | Text effect components
+`@arwes/react-bgs` | Polishing | Passive UI background effects
+`@arwes/react` | Polishing | All React packages bundle
 
 ## Community
 
@@ -91,10 +92,12 @@ Package | Status | Description
 <!-- ARWES-COMMUNITY-APPS:START -->
 <table>
 <tr>
-<td align="center"><a href="https://soulextract.com"><img src="./static/community/apps/images/soulextract.com.jpg" width="252px;" alt="SoulExtract.com" /></a><br /><a href="https://soulextract.com">SoulExtract.com</a><br /><a href="https://github.com/soulextract/soulextract.com"><sub>soulextract/soulextract.com</sub></a></td>
-<td align="center"><a href="https://romelperez.dev"><img src="./static/community/apps/images/romelperez.dev.jpg" width="252px;" alt="RomelPerez.dev" /></a><br /><a href="https://romelperez.dev">RomelPerez.dev</a><br /><sub>--</sub></td>
-<td align="center"><a href="https://archiverpg.com"><img src="./static/community/apps/images/archiverpg.com.jpg" width="252px;" alt="ArchiveRPG.com" /></a><br /><a href="https://archiverpg.com">ArchiveRPG.com</a><br /><sub>--</sub></td></tr>
-<tr><td align="center"><a href="https://www.myxouz.com/2021/12/lady-of-shalott-first-version-of-our-home-dashboard/"><img src="./static/community/apps/images/lady-of-shalott.jpg" width="252px;" alt="Lady of the Shalott" /></a><br /><a href="https://www.myxouz.com/2021/12/lady-of-shalott-first-version-of-our-home-dashboard/">Lady of the Shalott</a><br /><sub>--</sub></td>
+<td align="center"><a href="https://soulextract.com"><img src="./static/assets/community/apps/images/soulextract.com.jpg" width="252px;" alt="SoulExtract.com" /></a><br /><a href="https://soulextract.com">SoulExtract.com</a><br /><a href="https://github.com/soulextract/soulextract.com"><sub>soulextract/soulextract.com</sub></a></td>
+<td align="center"><a href="https://romelperez.dev"><img src="./static/assets/community/apps/images/romelperez.dev.jpg" width="252px;" alt="RomelPerez.dev" /></a><br /><a href="https://romelperez.dev">RomelPerez.dev</a><br /><sub>--</sub></td>
+<td align="center"><a href="https://cybersocial.herokuapp.com"><img src="./static/assets/community/apps/images/incyberpunk.jpg" width="252px;" alt="inCyberPunk" /></a><br /><a href="https://cybersocial.herokuapp.com">inCyberPunk</a><br /><a href="https://github.com/inPhoenix/inCyberPunk2022"><sub>inPhoenix/inCyberPunk2022</sub></a></td></tr>
+<tr><td align="center"><a href="https://archiverpg.com"><img src="./static/assets/community/apps/images/archiverpg.com.jpg" width="252px;" alt="ArchiveRPG.com" /></a><br /><a href="https://archiverpg.com">ArchiveRPG.com</a><br /><sub>--</sub></td>
+<td align="center"><a href="https://www.myxouz.com/2021/12/lady-of-shalott-first-version-of-our-home-dashboard/"><img src="./static/assets/community/apps/images/lady-of-shalott.jpg" width="252px;" alt="Lady of the Shalott" /></a><br /><a href="https://www.myxouz.com/2021/12/lady-of-shalott-first-version-of-our-home-dashboard/">Lady of the Shalott</a><br /><sub>--</sub></td>
+<td align="center"><a href="https://www.indiedb.com/games/assembly-rts"><img src="./static/assets/community/apps/images/AssemblyRTS.jpg" width="252px;" alt="Assembly RTS" /></a><br /><a href="https://www.indiedb.com/games/assembly-rts">Assembly RTS</a><br /><sub>--</sub></td>
 </tr>
 </table>
 <!-- ARWES-COMMUNITY-APPS:END -->

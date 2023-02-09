@@ -1,4 +1,4 @@
-import { TOOLS_IS_BROWSER } from '@arwes/tools';
+import { IS_BROWSER } from '@arwes/tools';
 
 import type { AnimatorNode, AnimatorState, AnimatorAction } from '../../types';
 import { ANIMATOR_STATES as STATES, ANIMATOR_ACTIONS as ACTIONS } from '../../constants';
@@ -236,7 +236,7 @@ const createAnimatorMachine = (node: AnimatorNode, initialState: AnimatorState):
 
   const send = (action: AnimatorAction): void => {
     // In non-browser environments, there are no transitions.
-    if (!TOOLS_IS_BROWSER) {
+    if (!IS_BROWSER) {
       return;
     }
 

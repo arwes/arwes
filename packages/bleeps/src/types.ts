@@ -1,87 +1,83 @@
-import type { Howl } from 'howler';
+// BLEEP
 
-import {
-  BLEEPS_BACKGROUND,
-  BLEEPS_TRANSITION,
-  BLEEPS_INTERACTION,
-  BLEEPS_NOTIFICATION
-} from './constants';
+export type BleepCategory =
+  | 'background'
+  | 'transition'
+  | 'interaction'
+  | 'notification';
 
-// Bleeps Audio Settings
-
-export interface BleepsAudioGroupSettings {
-  volume?: number
-  rate?: number
-  preload?: boolean
-  disabled?: boolean
+export interface BleepGeneralProps {
+  readonly preload?: boolean
+  readonly volume?: number
+  readonly fetchHeaders?: Headers
+  readonly disabled?: boolean
 }
 
-export type BleepCategoryName = typeof BLEEPS_BACKGROUND | typeof BLEEPS_TRANSITION | typeof BLEEPS_INTERACTION | typeof BLEEPS_NOTIFICATION;
-
-export type BleepsAudioCategoriesSettings = Partial<Record<BleepCategoryName, BleepsAudioGroupSettings>>;
-
-export interface BleepsAudioSettings {
-  common?: BleepsAudioGroupSettings
-  categories?: BleepsAudioCategoriesSettings
+export interface BleepProps extends Omit<BleepGeneralProps, 'disabled'> {
+  readonly sources: Array<Readonly<{ src: string, type: string }>>
+  readonly loop?: boolean
+  readonly category?: BleepCategory
+  readonly context?: AudioContext
+  readonly masterGain?: GainNode
 }
 
-// Bleeps Players Settings
-
-export type BleepPlayerName = string;
-
-export interface BleepPlayerSettings {
-  src: string[]
-  format?: string[]
-  loop?: boolean
-  rate?: number
-  disabled?: boolean
+// TODO: Add support to allow updates on other bleep properties.
+export interface BleepPropsUpdatable {
+  readonly volume?: number
 }
 
-export type BleepsPlayersSettings = Record<BleepPlayerName, BleepPlayerSettings>;
-
-// Bleeps Settings
-
-// TODO: There should be a way to define a set of predefined bleeps names, based
-// on the bleeps settings provided to the <BleepsProvider />.
-export type BleepName = string;
-
-export interface BleepSettings {
-  player: BleepPlayerName
-  category?: BleepCategoryName
+export interface Bleep {
+  /**
+   * Get audio duration in seconds.
+   */
+  readonly duration: number
+  readonly isLoaded: boolean
+  readonly isPlaying: boolean
+  readonly play: (callerID?: string) => void
+  readonly stop: (callerID?: string) => void
+  readonly load: () => void
+  readonly unload: () => void
+  readonly update: (props: BleepPropsUpdatable) => void
 }
 
-export type BleepsSettings = Record<BleepName, BleepSettings | undefined>;
+// BLEEPS MANAGER
 
-// Bleeps Generics
-// The generic bleeps interfaces are the bleeps references provided globally
-// to components. It would require to explicitely define the "instanceId"
-// or an identifier of the location it is being used. For example,
-// if three components use the bleeps, each of them has to provide an
-// identifier to known where are the calls coming from.
-
-export type BleepGenericInstanceId = number | string;
-
-export interface BleepGeneric {
-  play: (instanceId: BleepGenericInstanceId) => void
-  stop: (instanceId: BleepGenericInstanceId) => void
-  getIsPlaying: () => boolean
-  getDuration: () => number
-  unload: () => void
-
-  _settings: BleepsAudioGroupSettings & BleepPlayerSettings
-  _howl: Howl
+export interface BleepMasterProps {
+  readonly volume?: number
 }
 
-export type BleepsGenerics = Record<BleepName, BleepGeneric>;
-
-// Bleeps
-// These are the bleeps which the components would normally use, where the
-// identification was automatically generated and there is no need
-// to explicitely provide it.
-
-export interface Bleep extends BleepGeneric {
-  play: () => void
-  stop: () => void
+export interface BleepsManagerProps <Names extends string = string> {
+  readonly master?: BleepMasterProps
+  readonly common?: BleepGeneralProps
+  readonly categories?: {
+    readonly [P in BleepCategory]?: BleepGeneralProps
+  }
+  readonly bleeps: Record<Names, Omit<BleepProps, 'context' | 'masterGain'>>
 }
 
-export type Bleeps = Record<BleepName, Bleep>;
+export interface BleepsManagerPropsMasterUpdatable {
+  readonly volume?: number
+}
+
+export interface BleepsManagerPropsGeneralUpdatable extends BleepPropsUpdatable {
+  readonly disabled?: boolean
+}
+
+export interface BleepsManagerPropsBleepUpdatable extends BleepPropsUpdatable {
+  readonly disabled?: boolean
+}
+
+export interface BleepsManagerPropsUpdatable <Names extends string = string> {
+  readonly master?: BleepsManagerPropsMasterUpdatable
+  readonly common?: BleepsManagerPropsGeneralUpdatable
+  readonly categories?: {
+    readonly [P in BleepCategory]?: BleepsManagerPropsGeneralUpdatable
+  }
+  readonly bleeps?: Record<Names, BleepsManagerPropsBleepUpdatable>
+}
+
+export interface BleepsManager <Names extends string = string> {
+  readonly bleeps: Record<Names, Bleep | null>
+  readonly unload: () => void
+  readonly update: (props: BleepsManagerPropsUpdatable<Names>) => void
+}

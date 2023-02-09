@@ -1,8 +1,8 @@
 import {
-  HTMLProps,
-  SVGProps,
-  CSSProperties,
-  ReactElement,
+  type HTMLProps,
+  type SVGProps,
+  type CSSProperties,
+  type ReactElement,
   createElement,
   useRef,
   useMemo,
@@ -11,9 +11,9 @@ import {
 } from 'react';
 import { animate } from 'motion';
 
-import { NoInfer } from '@arwes/tools';
+import { type NoInfer } from '@arwes/tools';
 import { mergeRefs } from '@arwes/react-tools';
-import { AnimatorNode } from '@arwes/animator';
+import { type AnimatorNode } from '@arwes/animator';
 import { useAnimator } from '@arwes/react-animator';
 
 import type {
@@ -22,7 +22,7 @@ import type {
   AnimatedSettingsTransitionFunctionReturn
 } from '../types';
 import { formatAnimatedCSSPropsShorthands } from '../internal/formatAnimatedCSSPropsShorthands/index';
-import { AnimatedProps } from './Animated.types';
+import { type AnimatedProps } from './Animated.types';
 
 const Animated = <
   E extends HTMLElement | SVGElement = HTMLDivElement,

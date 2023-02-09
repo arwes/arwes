@@ -1,7 +1,7 @@
-import React, { ReactElement, Profiler, Fragment, useState, useRef, useEffect } from 'react';
+import React, { type ReactElement, Profiler, Fragment, useState, useRef, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { AnimatorNode } from '@arwes/animator';
+import { type AnimatorNode } from '@arwes/animator';
 import { AnimatorGeneralProvider, Animator, useAnimator } from '@arwes/react-animator';
 
 const TEST_RENDER_NUMBER = 3000;

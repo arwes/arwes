@@ -1,8 +1,8 @@
 import {
-  ReactNode,
-  ReactElement,
-  HTMLProps,
-  ForwardedRef,
+  type ReactNode,
+  type ReactElement,
+  type HTMLProps,
+  type ForwardedRef,
   useMemo,
   useState,
   useRef,
@@ -12,10 +12,10 @@ import { jsx } from '@emotion/react';
 import { cx } from '@arwes/tools';
 import { mergeRefs } from '@arwes/react-tools';
 import { ANIMATOR_STATES as STATES } from '@arwes/animator';
-import { Animation, easing } from '@arwes/animated';
+import { type Animation, type easing } from '@arwes/animated';
 import { useAnimator } from '@arwes/react-animator';
 import {
-  TextTransitionManager,
+  type TextTransitionManager,
   getTransitionTextDuration,
   transitionTextSequence,
   transitionTextDecipher

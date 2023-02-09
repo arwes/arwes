@@ -1,49 +1,56 @@
 /* eslint-env jest */
 
-import React, { FC } from 'react';
+import type { ReactElement } from 'react';
+import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 
-import type { Bleeps } from '@arwes/bleeps';
-import { BleepsProvider } from '../BleepsProvider';
-import { useBleeps } from './useBleeps';
+import { BleepsProvider } from '../BleepsProvider/index';
+import { useBleeps } from '../index';
 
-afterEach(cleanup);
-
-test('Should provide empty bleeps if provided bleeps setup was not found', () => {
-  let bleeps: Bleeps | undefined;
-  const Example: FC = () => {
-    bleeps = useBleeps();
-    return null;
+beforeEach(() => {
+  class AudioContext {
+    createGain (): object {
+      return {
+        connect: jest.fn(),
+        gain: {
+          setValueAtTime: jest.fn()
+        }
+      };
+    }
   };
-  render(<Example />);
-  expect(bleeps).toEqual({});
+
+  window.AudioContext = AudioContext as any;
 });
 
-test('Should provide bleeps if provider bleeps setup was found', () => {
-  let bleeps: Bleeps | undefined;
-  const Example: FC = () => {
-    bleeps = useBleeps();
-    return null;
+afterEach(() => {
+  window.AudioContext = null as any;
+
+  cleanup();
+});
+
+test('Should render bleeps provider content', () => {
+  const Button = (): ReactElement => {
+    const bleeps = useBleeps();
+    expect(bleeps).toMatchObject({
+      click: expect.any(Object)
+    });
+    return <button>Click</button>;
   };
-  const audioSettings = { common: {}, categories: {} };
-  const playersSettings = { click: { src: ['click.webm'] } };
-  const bleepsSettings = { click: { player: 'click' } };
-  render(
+
+  const { container } = render(
     <BleepsProvider
-      settings={{
-        audio: audioSettings,
-        players: playersSettings,
-        bleeps: bleepsSettings
+      master={{
+        volume: 0.5
+      }}
+      bleeps={{
+        click: {
+          sources: [{ src: 'audio.mp3', type: 'audio/mpeg' }],
+          preload: false
+        }
       }}
     >
-      <Example />
+      <Button />
     </BleepsProvider>
   );
-  expect(bleeps && Object.keys(bleeps)).toEqual(['click']);
-  // The actual bleeps API is not tested but rather their final settings.
-  expect(bleeps).toMatchObject({
-    click: { _settings: { src: ['click.webm'] } }
-  });
+  expect(container.innerHTML).toBe('<button>Click</button>');
 });
-
-// TODO: Test how the bleeps generics are converted into component bleeps.

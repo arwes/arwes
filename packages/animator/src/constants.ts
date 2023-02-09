@@ -7,7 +7,7 @@ import type {
 } from './types';
 
 // States
-export const ANIMATOR_STATES: Record<AnimatorState, AnimatorState> = Object.freeze({
+export const ANIMATOR_STATES: { [P in AnimatorState]: P } = Object.freeze({
   entered: 'entered',
   entering: 'entering',
   exiting: 'exiting',
@@ -15,7 +15,7 @@ export const ANIMATOR_STATES: Record<AnimatorState, AnimatorState> = Object.free
 });
 
 // Actions
-export const ANIMATOR_ACTIONS: Record<AnimatorAction, AnimatorAction> = Object.freeze({
+export const ANIMATOR_ACTIONS: { [P in AnimatorAction]: P } = Object.freeze({
   setup: 'setup',
   enter: 'enter',
   enterEnd: 'enterEnd',
@@ -26,7 +26,7 @@ export const ANIMATOR_ACTIONS: Record<AnimatorAction, AnimatorAction> = Object.f
 });
 
 // Managers
-export const ANIMATOR_MANAGER_NAMES: Record<AnimatorManagerName, AnimatorManagerName> = Object.freeze({
+export const ANIMATOR_MANAGER_NAMES: { [P in AnimatorManagerName]: P } = Object.freeze({
   parallel: 'parallel',
   stagger: 'stagger',
   staggerReverse: 'staggerReverse',

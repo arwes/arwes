@@ -1,12 +1,12 @@
-import React, { ReactElement, useRef } from 'react';
+import React, { type ReactElement, useRef, useEffect } from 'react';
 import { animate } from 'motion';
 import { cx } from '@arwes/tools';
-import { mergeRefs, useOnChange } from '@arwes/react-tools';
+import { mergeRefs } from '@arwes/react-tools';
 import { easing } from '@arwes/animated';
-import { ANIMATOR_STATES, AnimatorNode } from '@arwes/animator';
+import { ANIMATOR_STATES, type AnimatorNode } from '@arwes/animator';
 import { useAnimator } from '@arwes/react-animator';
 
-import { PuffsProps } from './Puffs.types';
+import { type PuffsProps } from './Puffs.types';
 
 type AnimateControl = ReturnType<typeof animate>;
 
@@ -48,7 +48,7 @@ const Puffs = (props: PuffsProps): ReactElement => {
 
   propsFullRef.current = propsFull;
 
-  useOnChange(() => {
+  useEffect(() => {
     if (!animator) {
       return;
     }

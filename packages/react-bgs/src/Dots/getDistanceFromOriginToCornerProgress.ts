@@ -1,4 +1,4 @@
-import { DotsPropsOrigin } from './Dots.types';
+import { type DotsPropsOrigin } from './Dots.types';
 
 const getDistanceBetweenTwoPoints = (x1: number, y1: number, x2: number, y2: number): number => {
   return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);

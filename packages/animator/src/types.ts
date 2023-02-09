@@ -49,7 +49,7 @@ export interface AnimatorNode {
   readonly scheduler: TOScheduler
   readonly duration: { enter: number, exit: number }
   readonly state: AnimatorState
-  readonly subscribe: ((subscriber: AnimatorSubscriber) => (() => void))
+  readonly subscribe: (subscriber: AnimatorSubscriber) => (() => void)
   readonly unsubscribe: (subscriber: AnimatorSubscriber) => void
   readonly send: (newAction: AnimatorAction) => void
   manager: AnimatorManager

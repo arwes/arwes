@@ -1,6 +1,6 @@
 // Change the browser viewport width to test.
 
-import React, { ReactElement, Fragment } from 'react';
+import React, { type ReactElement, Fragment } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Global } from '@emotion/react';
 import { createThemeBreakpoints } from '@arwes/theme';

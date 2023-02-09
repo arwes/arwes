@@ -1,19 +1,19 @@
 /** @jsx jsx */
 import { jsx, Global } from '@emotion/react';
-import { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
-  ThemeSettingsMultiplier,
-  ThemeSettingsColor,
-  ThemeSettingsStyle,
-  ThemeMultiplier,
-  ThemeColor,
-  ThemeStyle,
-  ThemeCreatorStructure
+  type ThemeSettingsMultiplier,
+  type ThemeSettingsColor,
+  type ThemeSettingsStyle,
+  type ThemeMultiplier,
+  type ThemeColor,
+  type ThemeStyle,
+  type ThemeCreatorStructure
 } from '@arwes/theme';
 import {
-  ThemeSettingsExtend,
-  ThemeExtend,
+  type ThemeSettingsExtend,
+  type ThemeExtend,
   createUseCreateThemeExtended
 } from '@arwes/react-theme';
 

@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/react';
-import React, { ReactNode, ReactElement, Fragment } from 'react';
+import React, { type ReactNode, type ReactElement, Fragment } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Styles, StylesCreator, useStyles } from '@arwes/react-styles';
+import { type Styles, type StylesCreator, useStyles } from '@arwes/react-styles';
 
 interface CardProps {
   styles?: StylesCreator<CardProps>

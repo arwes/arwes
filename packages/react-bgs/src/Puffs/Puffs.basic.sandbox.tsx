@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useEffect } from 'react';
+import React, { type ReactElement, useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Animator } from '@arwes/react-animator';
 import { Puffs } from '@arwes/react-bgs';

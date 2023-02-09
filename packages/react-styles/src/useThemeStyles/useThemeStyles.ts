@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useTheme } from '@emotion/react';
 
-import { Styles, StylesThemeCreator, StylesThemeCreatorFunction } from '../types';
+import { type Styles, type StylesThemeCreator, type StylesThemeCreatorFunction } from '../types';
 import { STYLES_EMPTY } from '../constants';
 import { mergeThemeStyles } from '../internal/mergeThemeStyles';
 

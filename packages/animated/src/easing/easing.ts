@@ -1,3 +1,5 @@
+type EasingFn = (x: number) => number;
+
 const pow = Math.pow;
 const sqrt = Math.sqrt;
 const sin = Math.sin;
@@ -143,4 +145,7 @@ const easing = {
   }
 };
 
+type Easing = EasingFn | keyof typeof easing;
+
+export type { Easing, EasingFn };
 export { easing };

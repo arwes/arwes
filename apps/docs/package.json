@@ -1,0 +1,15 @@
+{
+  "name": "@arwes/app-docs",
+  "version": "1.0.0-next.4",
+  "private": true,
+  "dependencies": {
+    "@arwes/react-animator": "^1.0.0-next.4",
+    "@arwes/react-bgs": "^1.0.0-next.4",
+    "next": "^13.1.6"
+  },
+  "scripts": {
+    "dev": "next dev -p 9200",
+    "build": "next build && next export",
+    "start": "serve ./out -p 9200"
+  }
+}

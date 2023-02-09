@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { type ReactElement } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Animator } from '@arwes/react-animator';
 import { GridLines } from '@arwes/react-bgs';

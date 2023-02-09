@@ -1,48 +1,14 @@
-import { useMemo } from 'react';
+import { useContext } from 'react';
+import type { BleepsManager } from '@arwes/bleeps';
 
-import type { BleepName, Bleep, Bleeps } from '@arwes/bleeps';
-import { useBleepsSetup } from '../useBleepsSetup/index';
+import { BleepsManagerContext } from '../internal/BleepsManagerContext';
 
-let instanceIdCounter = 0;
-
-function useBleeps (): Bleeps {
-  interface BleepItem {
-    name: BleepName
-    bleep: Bleep
-  }
-
-  const bleepsSetup = useBleepsSetup();
-
-  const instanceId = useMemo(() => instanceIdCounter++, []);
-
-  const bleeps: Bleeps = useMemo(() => {
-    if (!bleepsSetup) {
-      return {};
-    }
-
-    return Object
-      .keys(bleepsSetup.bleeps)
-      .map(bleepName => {
-        const bleepGeneric = bleepsSetup.bleeps[bleepName];
-
-        const bleepItem: BleepItem = {
-          name: bleepName,
-          bleep: {
-            ...bleepGeneric,
-            play: () => bleepGeneric.play(instanceId),
-            stop: () => bleepGeneric.stop(instanceId)
-          }
-        };
-
-        return bleepItem;
-      })
-      .reduce((bleeps: Bleeps, bleepItem: BleepItem) => {
-        const { name, bleep } = bleepItem;
-        return { ...bleeps, [name]: bleep };
-      }, {});
-  }, [bleepsSetup]);
-
-  return bleeps;
-}
+const useBleeps = <
+  BleepsNames extends string,
+  Manager extends BleepsManager = BleepsManager<BleepsNames>
+>(): Manager['bleeps'] => {
+  const bleepsManager = useContext(BleepsManagerContext);
+  return bleepsManager?.bleeps ?? {};
+};
 
 export { useBleeps };
