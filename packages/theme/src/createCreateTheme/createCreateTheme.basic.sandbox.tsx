@@ -1,14 +1,14 @@
-import React, { ReactElement, Fragment, useMemo } from 'react';
+import React, { type ReactElement, Fragment, useMemo } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Global } from '@emotion/react';
 import {
-  ThemeSettingsMultiplier,
-  ThemeSettingsColor,
-  ThemeSettingsStyle,
-  ThemeMultiplier,
-  ThemeColor,
-  ThemeStyle,
-  ThemeCreatorStructure,
+  type ThemeSettingsMultiplier,
+  type ThemeSettingsColor,
+  type ThemeSettingsStyle,
+  type ThemeMultiplier,
+  type ThemeColor,
+  type ThemeStyle,
+  type ThemeCreatorStructure,
   createCreateTheme
 } from '@arwes/theme';
 

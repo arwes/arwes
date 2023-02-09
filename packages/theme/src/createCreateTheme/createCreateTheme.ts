@@ -57,8 +57,7 @@ const createCreateTheme = <ThemeSettings, Theme>(
     let themeSettings: ThemeSettings | undefined;
 
     if (Array.isArray(themeSettingsExtensions)) {
-      // TODO:
-      // @ts-expect-error
+      // @ts-expect-error TODO.
       themeSettings = themeSettingsExtensions.reduce(
         (settingsTotal: ThemeSettings, settingsItem: PartialDeep<ThemeSettings> | undefined) => {
           if (!settingsItem) {

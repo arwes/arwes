@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { Styles, StylesCreatorFunction, StylesCreator } from '../types';
+import { type Styles, type StylesCreatorFunction, type StylesCreator } from '../types';
 import { STYLES_EMPTY } from '../constants';
 import { mergeThemeStyles } from '../internal/mergeThemeStyles';
 

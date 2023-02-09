@@ -1,4 +1,4 @@
-import { CSSProperties, ForwardedRef } from 'react';
+import { type CSSProperties, type ForwardedRef } from 'react';
 
 export interface PuffsProps {
   elementRef?: ForwardedRef<HTMLCanvasElement>

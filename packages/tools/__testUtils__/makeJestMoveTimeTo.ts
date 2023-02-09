@@ -22,4 +22,5 @@ function makeJestMoveTimeTo (): JestMoveTimeTo {
   return jestMoveTimeTo;
 }
 
-export { JestMoveTimeTo, makeJestMoveTimeTo };
+export type { JestMoveTimeTo };
+export { makeJestMoveTimeTo };

@@ -1,9 +1,9 @@
 import {
-  HTMLProps,
-  SVGProps,
-  CSSProperties,
-  ForwardedRef,
-  ReactNode
+  type HTMLProps,
+  type SVGProps,
+  type CSSProperties,
+  type ForwardedRef,
+  type ReactNode
 } from 'react';
 
 import type { AnimatedSettings } from '../types';

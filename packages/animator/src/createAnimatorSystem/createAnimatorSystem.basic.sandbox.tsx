@@ -5,10 +5,10 @@
 
 import { animate } from 'motion';
 import {
-  AnimatorControl,
-  AnimatorNode,
-  AnimatorDuration,
-  AnimatorSettingsPartial,
+  type AnimatorControl,
+  type AnimatorNode,
+  type AnimatorDuration,
+  type AnimatorSettingsPartial,
   ANIMATOR_DEFAULT_DURATION,
   ANIMATOR_DEFAULT_SETTINGS,
   createAnimatorSystem

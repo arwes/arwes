@@ -14,7 +14,7 @@ interface TOScheduler {
 const ID_DEFAULT = '';
 
 function createTOScheduler (): TOScheduler {
-  const ledger: Map<TOSchedulerId, TOSchedulerCallback> = new Map();
+  const ledger = new Map<TOSchedulerId, TOSchedulerCallback>();
 
   const isPending = (id: TOSchedulerId = ID_DEFAULT): boolean => {
     return ledger.has(id);

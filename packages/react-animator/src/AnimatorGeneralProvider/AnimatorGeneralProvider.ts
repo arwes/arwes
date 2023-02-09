@@ -1,8 +1,8 @@
-import { createElement, ReactElement, useRef, useMemo } from 'react';
+import { createElement, type ReactElement, useRef, useMemo } from 'react';
 
 import type { AnimatorGeneralProviderSettings, AnimatorGeneralInterface } from '../types';
 import { AnimatorGeneralContext } from '../internal/AnimatorGeneralContext/index';
-import { AnimatorGeneralProviderProps } from './AnimatorGeneralProvider.types';
+import { type AnimatorGeneralProviderProps } from './AnimatorGeneralProvider.types';
 
 const AnimatorGeneralProvider = (props: AnimatorGeneralProviderProps): ReactElement => {
   const { children, ...animatorGeneralSettings } = props;

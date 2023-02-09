@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, CSSProperties, useEffect } from 'react';
+import React, { type ReactElement, useState, type CSSProperties, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Animator } from '@arwes/react-animator';
 import { Animated, aaProperty, aaOpacity } from '@arwes/react-animated';

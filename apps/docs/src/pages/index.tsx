@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement } from 'react';
+import React, { Fragment, type ReactElement } from 'react';
 import Head from 'next/head';
 import { Animator } from '@arwes/react-animator';
 import { Animated, aaOpacity, aaProperty } from '@arwes/react-animated';

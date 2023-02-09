@@ -1,5 +1,5 @@
 import { animate } from 'motion';
-import { Animation, createAnimation } from '@arwes/animated';
+import { type Animation, createAnimation } from '@arwes/animated';
 
 import type { TextTransitionProps } from '../types';
 import { walkTextNodes } from '../internal/walkTextNodes/index';

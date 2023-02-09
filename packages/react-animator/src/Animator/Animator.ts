@@ -1,6 +1,6 @@
 import {
-  ReactElement,
-  ForwardedRef,
+  type ReactElement,
+  type ForwardedRef,
   createElement,
   useMemo,
   useContext,
@@ -10,14 +10,14 @@ import {
 } from 'react';
 
 import {
-  AnimatorNode,
-  AnimatorSubscriber,
-  AnimatorSettings,
-  AnimatorSettingsPartial,
-  AnimatorSystem,
-  AnimatorControl,
-  AnimatorInterface,
-  AnimatorDuration,
+  type AnimatorNode,
+  type AnimatorSubscriber,
+  type AnimatorSettings,
+  type AnimatorSettingsPartial,
+  type AnimatorSystem,
+  type AnimatorControl,
+  type AnimatorInterface,
+  type AnimatorDuration,
   ANIMATOR_DEFAULT_SETTINGS,
   ANIMATOR_STATES as STATES,
   ANIMATOR_ACTIONS as ACTIONS,

@@ -1,12 +1,12 @@
-import React, { ReactElement, useRef, useEffect } from 'react';
+import React, { type ReactElement, useRef, useEffect } from 'react';
 import { animate } from 'motion';
 import { cx, randomizeList } from '@arwes/tools';
 import { mergeRefs } from '@arwes/react-tools';
 import { easing } from '@arwes/animated';
-import { ANIMATOR_STATES, AnimatorNode } from '@arwes/animator';
+import { ANIMATOR_STATES, type AnimatorNode } from '@arwes/animator';
 import { useAnimator } from '@arwes/react-animator';
 
-import { MovingLinesProps, MovingLinesLineConfig, MovingLinesLine } from './MovingLines.types';
+import { type MovingLinesProps, type MovingLinesLineConfig, type MovingLinesLine } from './MovingLines.types';
 
 const { entering, exiting, exited } = ANIMATOR_STATES;
 

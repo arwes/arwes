@@ -1,6 +1,6 @@
-import React, { ReactNode, ReactElement } from 'react';
+import React, { type ReactNode, type ReactElement } from 'react';
 import { createRoot } from 'react-dom/client';
-import { AnimatorProps, Animator, AnimatorGeneralProvider } from '@arwes/react-animator';
+import { type AnimatorProps, Animator, AnimatorGeneralProvider } from '@arwes/react-animator';
 import { Animated } from '@arwes/react-animated';
 
 interface ItemProps extends AnimatorProps {

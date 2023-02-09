@@ -1,7 +1,7 @@
-import React, { ReactElement, useState, useRef, useEffect } from 'react';
+import React, { type ReactElement, useState, useRef, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { animate } from 'motion';
-import { AnimatorNode, AnimatorInterface } from '@arwes/animator';
+import { type AnimatorNode, type AnimatorInterface } from '@arwes/animator';
 import { Animator, useAnimator } from '@arwes/react-animator';
 
 const AnimatorUIListener = (): ReactElement => {

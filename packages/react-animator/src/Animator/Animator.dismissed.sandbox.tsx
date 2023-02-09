@@ -5,10 +5,10 @@
 // The option is useful for removing all components animations which
 // depend on the animator transitions.
 
-import React, { ReactNode, ReactElement, useState, useRef, useEffect } from 'react';
+import React, { type ReactNode, type ReactElement, useState, useRef, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { animate } from 'motion';
-import { Animator, AnimatorProps, useAnimator } from '@arwes/react-animator';
+import { Animator, type AnimatorProps, useAnimator } from '@arwes/react-animator';
 
 const AnimatorUIListener = (): ReactElement => {
   const elementRef = useRef<HTMLDivElement>(null);
