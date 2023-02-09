@@ -6,10 +6,6 @@ export type BleepCategory =
   | 'interaction'
   | 'notification';
 
-export interface BleepGlobalProps {
-  readonly volume?: number
-}
-
 export interface BleepGeneralProps {
   readonly preload?: boolean
   readonly volume?: number
@@ -22,7 +18,7 @@ export interface BleepProps extends Omit<BleepGeneralProps, 'disabled'> {
   readonly loop?: boolean
   readonly category?: BleepCategory
   readonly context?: AudioContext
-  readonly globalGain?: GainNode
+  readonly masterGain?: GainNode
 }
 
 // TODO: Add support to allow updates on other bleep properties.
@@ -46,16 +42,20 @@ export interface Bleep {
 
 // BLEEPS MANAGER
 
-export interface BleepsManagerProps <BleepNames extends string = string> {
-  readonly global?: BleepGlobalProps
+export interface BleepMasterProps {
+  readonly volume?: number
+}
+
+export interface BleepsManagerProps <Names extends string = string> {
+  readonly master?: BleepMasterProps
   readonly common?: BleepGeneralProps
   readonly categories?: {
     readonly [P in BleepCategory]?: BleepGeneralProps
   }
-  readonly bleeps: Record<BleepNames, Omit<BleepProps, 'context'>>
+  readonly bleeps: Record<Names, Omit<BleepProps, 'context' | 'masterGain'>>
 }
 
-export interface BleepsManagerPropsGlobalUpdatable {
+export interface BleepsManagerPropsMasterUpdatable {
   readonly volume?: number
 }
 
@@ -67,16 +67,17 @@ export interface BleepsManagerPropsBleepUpdatable extends BleepPropsUpdatable {
   readonly disabled?: boolean
 }
 
-export interface BleepsManagerPropsUpdatable <BleepNames extends string = string> {
-  readonly global?: BleepsManagerPropsGlobalUpdatable
+export interface BleepsManagerPropsUpdatable <Names extends string = string> {
+  readonly master?: BleepsManagerPropsMasterUpdatable
   readonly common?: BleepsManagerPropsGeneralUpdatable
   readonly categories?: {
     readonly [P in BleepCategory]?: BleepsManagerPropsGeneralUpdatable
   }
-  readonly bleeps?: Record<BleepNames, BleepsManagerPropsBleepUpdatable>
+  readonly bleeps?: Record<Names, BleepsManagerPropsBleepUpdatable>
 }
 
-export interface BleepsManager <BleepNames extends string = string> {
-  readonly bleeps: Record<BleepNames, Bleep | null>
-  readonly update: (props: BleepsManagerPropsUpdatable<BleepNames>) => void
+export interface BleepsManager <Names extends string = string> {
+  readonly bleeps: Record<Names, Bleep | null>
+  readonly unload: () => void
+  readonly update: (props: BleepsManagerPropsUpdatable<Names>) => void
 }

@@ -37,10 +37,10 @@ const clickElement = rootElement.querySelector('.click') as HTMLButtonElement;
 const errorElement = rootElement.querySelector('.error') as HTMLButtonElement;
 const assembleElement = rootElement.querySelector('.assemble') as HTMLButtonElement;
 
-type BleepNames = 'click' | 'error' | 'assemble';
+type BleepsNames = 'click' | 'error' | 'assemble';
 
-const bleepsManager = createBleepsManager<BleepNames>({
-  global: {
+const bleepsManager = createBleepsManager<BleepsNames>({
+  master: {
     volume: 1
   },
   categories: {
@@ -73,7 +73,7 @@ const bleepsManager = createBleepsManager<BleepNames>({
 volumeElement.addEventListener('change', () => {
   const volume = volumeElement.valueAsNumber;
   bleepsManager?.update({
-    global: { volume }
+    master: { volume }
   });
 });
 

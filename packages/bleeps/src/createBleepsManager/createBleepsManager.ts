@@ -1,5 +1,3 @@
-import { IS_BROWSER } from '@arwes/tools';
-
 import type {
   Bleep,
   BleepGeneralProps,
@@ -9,17 +7,13 @@ import type {
 } from '../types';
 import { createBleep } from '../createBleep/index';
 
-const createBleepsManager = <BleepNames extends string = string>(
-  props: BleepsManagerProps<BleepNames>
-): BleepsManager<BleepNames> | null => {
-  if (!IS_BROWSER) {
-    return null;
-  }
-
+const createBleepsManager = <Names extends string>(
+  props: BleepsManagerProps<Names>
+): BleepsManager<Names> => {
   const context = new AudioContext();
-  const globalGain = context.createGain();
-  const bleeps = {} as unknown as Record<BleepNames, Bleep | null>;
-  const bleepNames = Object.keys(props.bleeps) as BleepNames[];
+  const masterGain = context.createGain();
+  const bleeps = {} as unknown as Record<Names, Bleep | null>;
+  const bleepNames = Object.keys(props.bleeps) as Names[];
 
   bleepNames.forEach(bleepName => {
     const bleepProps = props.bleeps[bleepName];
@@ -38,22 +32,28 @@ const createBleepsManager = <BleepNames extends string = string>(
         ...generalProps,
         ...bleepProps,
         context,
-        globalGain
+        masterGain
       });
   });
 
-  globalGain.connect(context.destination);
+  masterGain.connect(context.destination);
 
-  // Set initial global gain value.
-  const globalVolume = Math.max(0, Math.min(1, props?.global?.volume ?? 1));
-  globalGain.gain.setValueAtTime(globalVolume, context.currentTime);
+  // Set initial master gain value.
+  const globalVolume = Math.max(0, Math.min(1, props?.master?.volume ?? 1));
+  masterGain.gain.setValueAtTime(globalVolume, context.currentTime);
+
+  const unload = (): void => {
+    bleepNames.forEach(bleepName => {
+      bleeps[bleepName]?.unload();
+    });
+  };
 
   const update = (newProps: BleepsManagerPropsUpdatable): void => {
     // Global settings.
 
-    if (newProps.global?.volume !== undefined) {
-      const globalVolume = Math.max(0, Math.min(1, newProps.global.volume));
-      globalGain.gain.setValueAtTime(globalVolume, context.currentTime);
+    if (newProps.master?.volume !== undefined) {
+      const globalVolume = Math.max(0, Math.min(1, newProps.master.volume));
+      masterGain.gain.setValueAtTime(globalVolume, context.currentTime);
     }
 
     // Bleep settings.
@@ -85,14 +85,14 @@ const createBleepsManager = <BleepNames extends string = string>(
             ...generalProps,
             ...baseBleepProps,
             context,
-            globalGain
+            masterGain
           });
         }
       }
     });
   };
 
-  return Object.freeze({ bleeps, update });
+  return Object.freeze({ bleeps, unload, update });
 };
 
 export { createBleepsManager };

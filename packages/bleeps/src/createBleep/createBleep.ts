@@ -13,7 +13,7 @@ const createBleep = (props: BleepProps): Bleep | null => {
     loop = false,
     volume = 1.0,
     fetchHeaders,
-    globalGain
+    masterGain
   } = props;
 
   let isBufferLoading = false;
@@ -227,10 +227,10 @@ const createBleep = (props: BleepProps): Bleep | null => {
 
   Object.defineProperties(bleep, bleepAPI);
 
-  // If there is a global GainNode provided, subscribe to it so a global volume
+  // If there is a master GainNode provided, subscribe to it so a global volume
   // can be set from there. Otherwise, subscribe to the context directly.
-  if (globalGain) {
-    gain.connect(globalGain);
+  if (masterGain) {
+    gain.connect(masterGain);
   }
   else {
     gain.connect(context.destination);

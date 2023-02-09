@@ -175,6 +175,17 @@ export const sandboxes = [
             ]
           }
         ]
+      },
+      {
+        name: '@arwes/react-bleeps',
+        children: [
+          {
+            name: 'BleepsProvider',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-bleeps/src/BleepsProvider/BleepsProvider.basic.sandbox.tsx') }
+            ]
+          }
+        ]
       }
     ]
   },
