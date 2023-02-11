@@ -9,13 +9,17 @@ const AnimatorUIListener = (): ReactElement => {
   const animator = useAnimator() as AnimatorInterface;
 
   useEffect(() => {
+    let animation: { cancel: () => void } | undefined;
+
+    // A subscription function to be called every time the state changes.
     const subscriber = (node: AnimatorNode): void => {
       const element = elementRef.current as HTMLElement;
-      const { duration } = node;
+      const { duration } = node; // Getting the duration once is faster.
 
       switch (node.state) {
         case 'entering': {
-          animate(
+          animation?.cancel(); // Cancel current animation.
+          animation = animate(
             element,
             { x: [0, 100], backgroundColor: ['#0ff', '#ff0'] },
             { duration: duration.enter }
@@ -23,7 +27,8 @@ const AnimatorUIListener = (): ReactElement => {
           break;
         }
         case 'exiting': {
-          animate(
+          animation?.cancel();
+          animation = animate(
             element,
             { x: [100, 0], backgroundColor: ['#ff0', '#0ff'] },
             { duration: duration.exit }
@@ -36,6 +41,7 @@ const AnimatorUIListener = (): ReactElement => {
     animator.node.subscribe(subscriber);
 
     return () => {
+      animation?.cancel();
       animator.node.unsubscribe(subscriber);
     };
   }, []);
