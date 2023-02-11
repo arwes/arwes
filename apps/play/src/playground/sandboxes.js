@@ -216,6 +216,27 @@ export const sandboxes = [
             children: [
               { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVG/FrameSVG.basic.sandbox.tsx') }
             ]
+          },
+          {
+            name: 'FrameSVGHexagon',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGHexagon/FrameSVGHexagon.basic.sandbox.tsx') },
+              { name: 'inverted', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGHexagon/FrameSVGHexagon.inverted.sandbox.tsx') }
+            ]
+          },
+          {
+            name: 'FrameSVGPentagon',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGPentagon/FrameSVGPentagon.basic.sandbox.tsx') },
+              { name: 'inverted', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGPentagon/FrameSVGPentagon.inverted.sandbox.tsx') }
+            ]
+          },
+          {
+            name: 'FrameSVGUnderline',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGUnderline/FrameSVGUnderline.basic.sandbox.tsx') },
+              { name: 'squareSize', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGUnderline/FrameSVGUnderline.squareSize.sandbox.tsx') }
+            ]
           }
         ]
       },

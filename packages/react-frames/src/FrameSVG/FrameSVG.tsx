@@ -18,7 +18,7 @@ interface FRAME_SVG_POLYLINE_CUSTOM {
 
 type FRAME_SVG_POLYLINE_GENERIC = FRAME_SVG_POLYLINE | FRAME_SVG_POLYLINE_CUSTOM;
 
-interface FrameProps extends SVGProps<SVGSVGElement> {
+interface FrameSVGProps extends SVGProps<SVGSVGElement> {
   shapes?: FRAME_SVG_POLYLINE_GENERIC[]
   shapesStyle?: CSSProperties
   polylines?: FRAME_SVG_POLYLINE_GENERIC[]
@@ -30,7 +30,7 @@ interface FrameProps extends SVGProps<SVGSVGElement> {
 
 const emptyPolyline: FRAME_SVG_POLYLINE[] = [];
 
-const FrameSVG = (props: FrameProps): ReactElement => {
+const FrameSVG = (props: FrameSVGProps): ReactElement => {
   const {
     shapes = emptyPolyline,
     shapesStyle,
@@ -133,5 +133,5 @@ const FrameSVG = (props: FrameProps): ReactElement => {
   );
 };
 
-export type { FrameProps };
+export type { FrameSVGProps };
 export { FrameSVG };
