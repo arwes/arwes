@@ -62,8 +62,8 @@ img {
   object-align: center;
 }
 
-.arwes-bgs-dots,
-.arwes-bgs-puffs {
+.arwes-react-bgs-dots,
+.arwes-react-bgs-puffs {
   z-index: 2;
 }
 

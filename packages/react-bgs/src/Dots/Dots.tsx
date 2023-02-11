@@ -146,7 +146,7 @@ const Dots = (props: DotsProps): ReactElement => {
   return (
     <canvas
       ref={mergeRefs(elementRef, elementRefExternal)}
-      className={cx('arwes-bgs-dots', className)}
+      className={cx('arwes-react-bgs-dots', className)}
       style={{
         position: 'absolute',
         left: 0,
