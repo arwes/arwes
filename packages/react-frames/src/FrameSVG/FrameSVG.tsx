@@ -1,9 +1,32 @@
-import React, { type ReactElement, useRef, useState, useEffect } from 'react';
+import React, {
+  type SVGProps,
+  type ForwardedRef,
+  type ReactElement,
+  type CSSProperties,
+  useRef,
+  useState,
+  useEffect
+} from 'react';
 import { cx } from '@arwes/tools';
 import { mergeRefs } from '@arwes/react-tools';
+import { type FRAME_SVG_POLYLINE, formatFrameSVGPolyline } from '@arwes/frames';
 
-import type { FRAME_SVG_POLYLINE, FrameProps } from './FrameSVG.types';
-import { formatPolyline } from './formatPolyline';
+interface FRAME_SVG_POLYLINE_CUSTOM {
+  polyline: FRAME_SVG_POLYLINE
+  style?: CSSProperties
+}
+
+type FRAME_SVG_POLYLINE_GENERIC = FRAME_SVG_POLYLINE | FRAME_SVG_POLYLINE_CUSTOM;
+
+interface FrameProps extends SVGProps<SVGSVGElement> {
+  shapes?: FRAME_SVG_POLYLINE_GENERIC[]
+  shapesStyle?: CSSProperties
+  polylines?: FRAME_SVG_POLYLINE_GENERIC[]
+  polylinesStyle?: CSSProperties
+  className?: string
+  style?: CSSProperties
+  elementRef?: ForwardedRef<SVGSVGElement>
+}
 
 const emptyPolyline: FRAME_SVG_POLYLINE[] = [];
 
@@ -74,7 +97,7 @@ const FrameSVG = (props: FrameProps): ReactElement => {
           <path
             key={index}
             data-type='shape'
-            d={formatPolyline(width, height, polyline)}
+            d={formatFrameSVGPolyline(width, height, polyline)}
             style={{
               strokeWidth: 0,
               stroke: 'transparent',
@@ -94,7 +117,7 @@ const FrameSVG = (props: FrameProps): ReactElement => {
           <path
             key={index}
             data-type='polyline'
-            d={formatPolyline(width, height, polyline)}
+            d={formatFrameSVGPolyline(width, height, polyline)}
             style={{
               vectorEffect: 'non-scaling-stroke',
               strokeWidth: 1,
@@ -110,4 +133,5 @@ const FrameSVG = (props: FrameProps): ReactElement => {
   );
 };
 
+export type { FrameProps };
 export { FrameSVG };

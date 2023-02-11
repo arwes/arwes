@@ -1,4 +1,4 @@
-import type { FRAME_SVG_POINT, FRAME_SVG_POLYLINE } from './FrameSVG.types';
+import type { FRAME_SVG_POINT, FRAME_SVG_POLYLINE } from '../types';
 
 const formatPoint = (width: number, height: number, point: FRAME_SVG_POINT): string => {
   return point
@@ -33,11 +33,11 @@ const formatPoint = (width: number, height: number, point: FRAME_SVG_POINT): str
     .join(',');
 };
 
-const formatPolyline = (width: number, height: number, polyline: FRAME_SVG_POLYLINE): string => {
+const formatFrameSVGPolyline = (width: number, height: number, polyline: FRAME_SVG_POLYLINE): string => {
   return polyline
     .map(point => formatPoint(width, height, point))
     .map((point, index) => (index === 0 ? 'M' : 'L') + point)
     .join(' ');
 };
 
-export { formatPolyline };
+export { formatFrameSVGPolyline };
