@@ -85,7 +85,7 @@ export const typeDefinitions = [
           element: HTMLElement | HTMLElement[],
           props: Record<string, any>,
           options: MotionOptions
-        ) => void;
+        ) => { cancel: () => void };
 
         export { animate };
       }
@@ -158,7 +158,15 @@ export const typeDefinitions = [
     code: require('!raw-loader?esModule=false!@arwes/react-text/build/types/index.d.ts')
   },
   {
+    filename: 'file:///node_modules/@arwes/react-frames/index.d.ts',
+    code: require('!raw-loader?esModule=false!@arwes/react-frames/build/types/index.d.ts')
+  },
+  {
     filename: 'file:///node_modules/@arwes/react-bgs/index.d.ts',
     code: require('!raw-loader?esModule=false!@arwes/react-bgs/build/types/index.d.ts')
+  },
+  {
+    filename: 'file:///node_modules/@arwes/react-core/index.d.ts',
+    code: require('!raw-loader?esModule=false!@arwes/react-core/build/types/index.d.ts')
   }
 ];

@@ -10,6 +10,7 @@
     "@arwes/react": "^1.0.0-next.4",
     "@arwes/react-animated": "^1.0.0-next.4",
     "@arwes/react-animator": "^1.0.0-next.4",
+    "@arwes/react-frames": "^1.0.0-next.4",
     "@arwes/react-bgs": "^1.0.0-next.4",
     "@arwes/react-bleeps": "^1.0.0-next.4",
     "@arwes/react-styles": "^1.0.0-next.4",
@@ -17,6 +18,7 @@
     "@arwes/react-tools": "^1.0.0-next.4",
     "@arwes/theme": "^1.0.0-next.4",
     "@arwes/tools": "^1.0.0-next.4",
+    "@arwes/frames": "^1.0.0-next.4",
     "empanada": "^0.2.2"
   },
   "devDependencies": {

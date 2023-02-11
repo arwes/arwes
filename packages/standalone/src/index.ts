@@ -4,4 +4,5 @@ export * from '@arwes/animator';
 export * from '@arwes/animated';
 export * from '@arwes/bleeps';
 export * from '@arwes/text';
+export * from '@arwes/frames';
 export * from '@arwes/bgs';

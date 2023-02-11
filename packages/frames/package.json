@@ -1,5 +1,5 @@
 {
-  "name": "arwes",
+  "name": "@arwes/frames",
   "version": "1.0.0-next.4",
   "publishConfig": {
     "access": "public"
@@ -40,22 +40,17 @@
   "module": "./build/esm/index.js",
   "main": "./build/cjs/index.js",
   "unpkg": "./build/umd/umd.min.js",
+  "peerDependencies": {
+    "@arwes/react-tools": "^1.0.0-next.4"
+  },
   "dependencies": {
-    "@arwes/tools": "^1.0.0-next.4",
-    "@arwes/theme": "^1.0.0-next.4",
-    "@arwes/animated": "^1.0.0-next.4",
-    "@arwes/animator": "^1.0.0-next.4",
-    "@arwes/bleeps": "^1.0.0-next.4",
-    "@arwes/text": "^1.0.0-next.4",
-    "@arwes/frames": "^1.0.0-next.4",
-    "@arwes/bgs": "^1.0.0-next.4",
     "tslib": "^2.3.1"
   },
   "scripts": {
     "build": "npm run build-esm && npm run build-cjs && npm run build-umd && npm run build-types",
     "build-esm": "sh ../../scripts/pkg-build-esm.sh",
     "build-cjs": "sh ../../scripts/pkg-build-cjs.sh",
-    "build-umd": "sh ./scripts/build-umd.sh",
+    "build-umd": "sh ../../scripts/pkg-build-umd.sh",
     "build-types": "sh ../../scripts/pkg-build-types.sh",
     "dev": "sh ../../scripts/pkg-build-esm.sh --watch"
   }
