@@ -209,6 +209,17 @@ export const sandboxes = [
         ]
       },
       {
+        name: '@arwes/react-frames',
+        children: [
+          {
+            name: 'FrameSVG',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVG/FrameSVG.basic.sandbox.tsx') }
+            ]
+          }
+        ]
+      },
+      {
         name: '@arwes/react-bgs',
         children: [
           {
