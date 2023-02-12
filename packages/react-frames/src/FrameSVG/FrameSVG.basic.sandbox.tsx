@@ -6,8 +6,7 @@ const Sandbox = (): ReactElement => {
   return (
     <div style={{
       position: 'absolute',
-      width: 300,
-      height: 300
+      inset: 20
     }}>
       <FrameSVG
         shapes={[

@@ -218,10 +218,10 @@ export const sandboxes = [
             ]
           },
           {
-            name: 'FrameSVGHexagon',
+            name: 'FrameSVGUnderline',
             children: [
-              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGHexagon/FrameSVGHexagon.basic.sandbox.tsx') },
-              { name: 'inverted', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGHexagon/FrameSVGHexagon.inverted.sandbox.tsx') }
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGUnderline/FrameSVGUnderline.basic.sandbox.tsx') },
+              { name: 'squareSize', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGUnderline/FrameSVGUnderline.squareSize.sandbox.tsx') }
             ]
           },
           {
@@ -232,10 +232,17 @@ export const sandboxes = [
             ]
           },
           {
-            name: 'FrameSVGUnderline',
+            name: 'FrameSVGHexagon',
             children: [
-              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGUnderline/FrameSVGUnderline.basic.sandbox.tsx') },
-              { name: 'squareSize', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGUnderline/FrameSVGUnderline.squareSize.sandbox.tsx') }
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGHexagon/FrameSVGHexagon.basic.sandbox.tsx') },
+              { name: 'inverted', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGHexagon/FrameSVGHexagon.inverted.sandbox.tsx') }
+            ]
+          },
+          {
+            name: 'FrameSVGCorners',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGCorners/FrameSVGCorners.basic.sandbox.tsx') },
+              { name: 'corners', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGCorners/FrameSVGCorners.corners.sandbox.tsx') }
             ]
           }
         ]

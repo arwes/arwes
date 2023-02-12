@@ -13,7 +13,7 @@ test('Should render component classes and content with default "span" element', 
   );
   const element = container.firstChild as HTMLElement;
   const contentEl = element.firstChild as HTMLElement;
-  expect(element.classList.contains('arwes_react-text_Text')).toBeTruthy();
+  expect(element.classList.contains('arwes-react-text-text')).toBeTruthy();
   expect(element.tagName).toBe('SPAN');
   expect(contentEl.classList.contains('arwes-react-text-text__content')).toBeTruthy();
   expect(contentEl.innerHTML).toBe('Furutistic <b>Sci-Fi</b> UI Web Framework');

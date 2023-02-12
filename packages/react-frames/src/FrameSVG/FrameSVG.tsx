@@ -99,6 +99,7 @@ const FrameSVG = (props: FrameSVGProps): ReactElement => {
             data-type='shape'
             d={formatFrameSVGPolyline(width, height, polyline)}
             style={{
+              vectorEffect: 'non-scaling-stroke',
               strokeWidth: 0,
               stroke: 'transparent',
               fill: 'currentColor',
@@ -133,5 +134,5 @@ const FrameSVG = (props: FrameSVGProps): ReactElement => {
   );
 };
 
-export type { FrameSVGProps };
+export type { FRAME_SVG_POLYLINE_CUSTOM, FRAME_SVG_POLYLINE_GENERIC, FrameSVGProps };
 export { FrameSVG };
