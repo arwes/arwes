@@ -244,6 +244,13 @@ export const sandboxes = [
               { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGCorners/FrameSVGCorners.basic.sandbox.tsx') },
               { name: 'corners', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGCorners/FrameSVGCorners.corners.sandbox.tsx') }
             ]
+          },
+          {
+            name: 'FrameSVGLines',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGLines/FrameSVGLines.basic.sandbox.tsx') },
+              { name: 'lines', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGLines/FrameSVGLines.lines.sandbox.tsx') }
+            ]
           }
         ]
       },
