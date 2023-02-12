@@ -1,4 +1,4 @@
-import React, { type ReactElement } from 'react';
+import React, { type CSSProperties, type ReactElement } from 'react';
 import { cx } from '@arwes/tools';
 import { type FRAME_SVG_POLYLINE } from '@arwes/frames';
 
@@ -21,6 +21,14 @@ const FrameSVGHexagon = (props: FrameSVGHexagonProps): ReactElement => {
   } = props;
 
   const so = strokeWidth / 2;
+
+  const polylineStyle: CSSProperties = {
+    stroke: 'currentcolor',
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+    strokeWidth,
+    fill: 'transparent'
+  };
 
   // Polylines without repeated points between them.
   let polyline1: FRAME_SVG_POLYLINE = [];
@@ -55,23 +63,30 @@ const FrameSVGHexagon = (props: FrameSVGHexagonProps): ReactElement => {
     <FrameSVG
       {...otherProps}
       className={cx('arwes-react-frames-framesvghexagon', className)}
-      shapes={[
-        polyline1.concat(polyline2)
-      ]}
-      polylinesStyle={{
-        strokeLinecap: 'round',
-        strokeLinejoin: 'round',
-        ...otherProps.polylinesStyle,
-        strokeWidth
-      }}
       polylines={[
-        polyline1,
+        {
+          name: 'shape',
+          style: {
+            strokeWidth: 0,
+            fill: 'currentcolor'
+          },
+          polyline: polyline1.concat(polyline2)
+        },
+        {
+          name: 'polyline',
+          style: polylineStyle,
+          polyline: polyline1
+        },
         // Polyline2 joins with ending vertexes of Polyline1.
-        [
-          polyline1[polyline1.length - 1],
-          ...polyline2,
-          polyline1[0]
-        ]
+        {
+          name: 'polyline',
+          style: polylineStyle,
+          polyline: [
+            polyline1[polyline1.length - 1],
+            ...polyline2,
+            polyline1[0]
+          ]
+        }
       ]}
     />
   );

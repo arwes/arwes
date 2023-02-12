@@ -9,40 +9,53 @@ const Sandbox = (): ReactElement => {
       inset: 20
     }}>
       <FrameSVG
-        shapes={[
-          // Background shape.
-          [
-            [20, 20],
-            [20, '100% - 20'],
-            ['100% - 20', '100% - 20'],
-            ['100% - 20', 20]
-          ]
-        ]}
-        shapesStyle={{
-          color: 'hsl(180, 75%, 10%)',
-          filter: 'drop-shadow(0 0 4px hsl(180, 75%, 10%))'
-        }}
         polylines={[
+          // Background shape.
+          {
+            name: 'bg',
+            style: {
+              strokeWidth: 0,
+              fill: 'hsl(180, 75%, 10%)',
+              filter: 'drop-shadow(0 0 2px hsl(180, 75%, 10%))'
+            },
+            polyline: [
+              [20, 20],
+              [20, '100% - 20'],
+              ['100% - 20', '100% - 20'],
+              ['100% - 20', 20]
+            ]
+          },
           // Top polyline.
-          [
-            [10, 10],
-            ['100% - 10', 10],
-            ['100% - 10', 40]
-          ],
+          {
+            name: 'top',
+            style: {
+              strokeWidth: 1,
+              stroke: 'hsl(180, 75%, 50%)',
+              fill: 'transparent',
+              filter: 'drop-shadow(0 0 2px hsl(180, 75%, 50%))'
+            },
+            polyline: [
+              [10, 10],
+              ['100% - 10', 10],
+              ['100% - 10', 40]
+            ]
+          },
           // Bottom polyline.
           {
+            name: 'bottom',
+            style: {
+              strokeWidth: 2,
+              stroke: 'hsl(180, 75%, 50%)',
+              fill: 'transparent',
+              filter: 'drop-shadow(0 0 2px hsl(180, 75%, 50%))'
+            },
             polyline: [
               ['100% - 10', '100% - 10'],
               [10, '100% - 10'],
               [10, '100% - 40']
-            ],
-            style: { strokeWidth: 2 }
+            ]
           }
         ]}
-        polylinesStyle={{
-          color: 'hsl(180, 75%, 50%)',
-          filter: 'drop-shadow(0 0 2px hsl(180, 75%, 50%))'
-        }}
       />
     </div>
   );

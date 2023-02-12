@@ -1,4 +1,6 @@
-import React, { type ReactElement } from 'react';
+/** @jsx jsx */
+import { jsx } from '@emotion/react';
+import { type ReactElement } from 'react';
 import { createRoot } from 'react-dom/client';
 import { FrameSVGCorners } from '@arwes/react-frames';
 
@@ -10,8 +12,14 @@ const Sandbox = (): ReactElement => {
       height: 300
     }}>
       <FrameSVGCorners
-        shapesStyle={{ color: 'hsl(180, 75%, 10%)' }}
-        polylinesStyle={{ color: 'hsl(180, 75%, 50%)' }}
+        css={{
+          '& path[data-name="shape"]': {
+            color: 'hsl(180, 75%, 10%)'
+          },
+          '& path[data-name="polyline"]': {
+            color: 'hsl(180, 75%, 50%)'
+          }
+        }}
       />
     </div>
   );

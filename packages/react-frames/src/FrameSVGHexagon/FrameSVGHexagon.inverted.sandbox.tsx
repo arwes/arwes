@@ -1,4 +1,6 @@
-import React, { type ReactElement } from 'react';
+/** @jsx jsx */
+import { jsx } from '@emotion/react';
+import { type ReactElement } from 'react';
 import { createRoot } from 'react-dom/client';
 import { FrameSVGHexagon } from '@arwes/react-frames';
 
@@ -13,8 +15,14 @@ const Sandbox = (): ReactElement => {
         inverted
         squareSize={32}
         strokeWidth={2}
-        shapesStyle={{ color: 'hsl(60, 75%, 10%)' }}
-        polylinesStyle={{ color: 'hsl(60, 75%, 50%)' }}
+        css={{
+          '& path[data-name="shape"]': {
+            color: 'hsl(60, 75%, 10%)'
+          },
+          '& path[data-name="polyline"]': {
+            color: 'hsl(60, 75%, 50%)'
+          }
+        }}
       />
     </div>
   );

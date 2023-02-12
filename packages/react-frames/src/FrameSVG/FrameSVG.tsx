@@ -12,17 +12,15 @@ import { mergeRefs } from '@arwes/react-tools';
 import { type FRAME_SVG_POLYLINE, formatFrameSVGPolyline } from '@arwes/frames';
 
 interface FRAME_SVG_POLYLINE_CUSTOM {
-  polyline: FRAME_SVG_POLYLINE
+  name?: string
   style?: CSSProperties
+  polyline: FRAME_SVG_POLYLINE
 }
 
 type FRAME_SVG_POLYLINE_GENERIC = FRAME_SVG_POLYLINE | FRAME_SVG_POLYLINE_CUSTOM;
 
 interface FrameSVGProps extends SVGProps<SVGSVGElement> {
-  shapes?: FRAME_SVG_POLYLINE_GENERIC[]
-  shapesStyle?: CSSProperties
   polylines?: FRAME_SVG_POLYLINE_GENERIC[]
-  polylinesStyle?: CSSProperties
   className?: string
   style?: CSSProperties
   elementRef?: ForwardedRef<SVGSVGElement>
@@ -32,10 +30,7 @@ const emptyPolyline: FRAME_SVG_POLYLINE[] = [];
 
 const FrameSVG = (props: FrameSVGProps): ReactElement => {
   const {
-    shapes = emptyPolyline,
-    shapesStyle,
     polylines = emptyPolyline,
-    polylinesStyle,
     className,
     style,
     elementRef: externalElementRef,
@@ -88,43 +83,19 @@ const FrameSVG = (props: FrameSVGProps): ReactElement => {
       }}
       {...otherProps}
     >
-      {hasSize && shapes.map((polylineCustom, index) => {
-        const isPolyline = Array.isArray(polylineCustom);
-        const polyline = isPolyline ? polylineCustom : polylineCustom.polyline;
-        const style = isPolyline ? null : polylineCustom.style;
-
-        return (
-          <path
-            key={index}
-            data-type='shape'
-            d={formatFrameSVGPolyline(width, height, polyline)}
-            style={{
-              vectorEffect: 'non-scaling-stroke',
-              strokeWidth: 0,
-              stroke: 'transparent',
-              fill: 'currentColor',
-              ...shapesStyle,
-              ...style
-            }}
-          />
-        );
-      })}
       {hasSize && polylines.map((polylineCustom, index) => {
         const isPolyline = Array.isArray(polylineCustom);
         const polyline = isPolyline ? polylineCustom : polylineCustom.polyline;
         const style = isPolyline ? null : polylineCustom.style;
+        const name = isPolyline ? null : polylineCustom.name;
 
         return (
           <path
             key={index}
-            data-type='polyline'
+            data-name={name}
             d={formatFrameSVGPolyline(width, height, polyline)}
             style={{
               vectorEffect: 'non-scaling-stroke',
-              strokeWidth: 1,
-              stroke: 'currentColor',
-              fill: 'transparent',
-              ...polylinesStyle,
               ...style
             }}
           />

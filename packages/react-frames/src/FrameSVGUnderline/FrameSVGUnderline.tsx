@@ -25,27 +25,35 @@ const FrameSVGUnderline = (props: FrameSVGUnderlineProps): ReactElement => {
     <FrameSVG
       {...otherProps}
       className={cx('arwes-react-frames-framesvgunderline', className)}
-      shapes={[
-        [
-          [0, 0],
-          [0, '100%'],
-          [`100% - ${ss}`, '100%'],
-          ['100%', `100% - ${ss}`],
-          ['100%', 0]
-        ]
-      ]}
       polylines={[
         {
+          name: 'shape',
+          style: {
+            strokeWidth: 0,
+            fill: 'currentColor'
+          },
+          polyline: [
+            [0, 0],
+            [0, '100%'],
+            [`100% - ${ss}`, '100%'],
+            ['100%', `100% - ${ss}`],
+            ['100%', 0]
+          ]
+        },
+        {
+          name: 'polyline',
+          style: {
+            stroke: 'currentColor',
+            strokeLinecap: 'round',
+            strokeLinejoin: 'round',
+            strokeWidth: sw,
+            fill: 'transparent'
+          },
           polyline: [
             [so, `100% - ${so}`],
             [`100% - ${ss}`, `100% - ${so}`],
             [`100% - ${so}`, `100% - ${ss - so}`]
-          ],
-          style: {
-            strokeLinecap: 'round',
-            strokeLinejoin: 'round',
-            strokeWidth: sw
-          }
+          ]
         }
       ]}
     />
