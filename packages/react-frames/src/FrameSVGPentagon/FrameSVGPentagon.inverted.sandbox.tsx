@@ -5,15 +5,16 @@ import { FrameSVGPentagon } from '@arwes/react-frames';
 const Sandbox = (): ReactElement => {
   return (
     <div style={{
-      position: 'absolute',
+      position: 'relative',
       width: 300,
       height: 300
     }}>
       <FrameSVGPentagon
         inverted
         squareSize={32}
-        shapesStyle={{ color: 'hsl(185, 75%, 10%)' }}
-        polylinesStyle={{ color: 'hsl(185, 75%, 50%)' }}
+        strokeWidth={2}
+        shapesStyle={{ color: 'hsl(60, 75%, 10%)' }}
+        polylinesStyle={{ color: 'hsl(60, 75%, 50%)' }}
       />
     </div>
   );

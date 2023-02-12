@@ -5,6 +5,7 @@ import { type FrameSVGProps, FrameSVG } from '../FrameSVG/index';
 
 interface FrameSVGUnderlineProps extends FrameSVGProps {
   squareSize?: number
+  strokeWidth?: number
   inverted?: boolean
   className?: string
 }
@@ -12,10 +13,13 @@ interface FrameSVGUnderlineProps extends FrameSVGProps {
 const FrameSVGUnderline = (props: FrameSVGUnderlineProps): ReactElement => {
   const {
     squareSize: ss = 16,
+    strokeWidth: sw = 1,
     inverted,
     className,
     ...otherProps
   } = props;
+
+  const so = sw / 2;
 
   return (
     <FrameSVG
@@ -31,11 +35,18 @@ const FrameSVGUnderline = (props: FrameSVGUnderlineProps): ReactElement => {
         ]
       ]}
       polylines={[
-        [
-          [0, '100%'],
-          [`100% - ${ss}`, '100%'],
-          ['100%', `100% - ${ss}`]
-        ]
+        {
+          polyline: [
+            [so, `100% - ${so}`],
+            [`100% - ${ss}`, `100% - ${so}`],
+            [`100% - ${so}`, `100% - ${ss - so}`]
+          ],
+          style: {
+            strokeLinecap: 'round',
+            strokeLinejoin: 'round',
+            strokeWidth: sw
+          }
+        }
       ]}
     />
   );

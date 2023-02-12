@@ -7,6 +7,7 @@ import { type FrameSVGProps, FrameSVG } from '../FrameSVG/index';
 interface FrameSVGHexagonProps extends FrameSVGProps {
   squareSize?: number
   inverted?: boolean
+  strokeWidth?: number
   className?: string
 }
 
@@ -14,9 +15,12 @@ const FrameSVGHexagon = (props: FrameSVGHexagonProps): ReactElement => {
   const {
     squareSize: ss = 16,
     inverted,
+    strokeWidth = 1,
     className,
     ...otherProps
   } = props;
+
+  const so = strokeWidth / 2;
 
   // Polylines without repeated points between them.
   let polyline1: FRAME_SVG_POLYLINE = [];
@@ -24,26 +28,26 @@ const FrameSVGHexagon = (props: FrameSVGHexagonProps): ReactElement => {
 
   if (!inverted) {
     polyline1 = [
-      [0, '100%'],
-      [`100% - ${ss}`, '100%'],
-      ['100%', `100% - ${ss}`],
-      ['100%', 0]
+      [so, `100% - ${so}`],
+      [`100% - ${ss - so}`, `100% - ${so}`],
+      [`100% - ${so}`, `100% - ${ss - so}`],
+      [`100% - ${so}`, so]
     ];
     polyline2 = [
-      [ss, 0],
-      [0, ss]
+      [ss + so, so],
+      [so, ss - so]
     ];
   }
   else {
     polyline1 = [
-      [0, 0],
-      [0, `100% - ${ss}`],
-      [ss, '100%'],
-      ['100%', '100%']
+      [so, so],
+      [so, `100% - ${ss}`],
+      [ss + so, `100% - ${so}`],
+      [`100% - ${so}`, `100% - ${so}`]
     ];
     polyline2 = [
-      ['100%', ss],
-      [`100% - ${ss}`, 0]
+      [`100% - ${so}`, ss - so],
+      [`100% - ${ss - so}`, so]
     ];
   }
 
@@ -54,6 +58,12 @@ const FrameSVGHexagon = (props: FrameSVGHexagonProps): ReactElement => {
       shapes={[
         polyline1.concat(polyline2)
       ]}
+      polylinesStyle={{
+        strokeLinecap: 'round',
+        strokeLinejoin: 'round',
+        ...otherProps.polylinesStyle,
+        strokeWidth
+      }}
       polylines={[
         polyline1,
         // Polyline2 joins with ending vertexes of Polyline1.

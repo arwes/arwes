@@ -13,7 +13,7 @@ const Sandbox = (): ReactElement => {
         shapesStyle={{ color: 'hsl(60, 75%, 10%)' }}
         polylinesStyle={{ color: 'hsl(60, 75%, 50%)' }}
         cornerLength={32}
-        cornerWidth={2}
+        strokeWidth={2}
       />
     </div>
   );

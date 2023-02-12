@@ -4,15 +4,14 @@ import { cx } from '@arwes/tools';
 import { type FrameSVGProps, FrameSVG } from '../FrameSVG/index';
 
 interface FrameSVGCornersProps extends FrameSVGProps {
-  cornerWidth?: number
+  strokeWidth?: number
   cornerLength?: number
-  contentLineWidth?: number
   className?: string
 }
 
 const FrameSVGCorners = (props: FrameSVGCornersProps): ReactElement => {
   const {
-    cornerWidth: cw = 1,
+    strokeWidth: cw = 1,
     cornerLength: cl = 16,
     className,
     ...otherProps

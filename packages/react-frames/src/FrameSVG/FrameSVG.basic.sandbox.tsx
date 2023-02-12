@@ -19,8 +19,8 @@ const Sandbox = (): ReactElement => {
           ]
         ]}
         shapesStyle={{
-          color: 'hsl(185, 75%, 10%)',
-          filter: 'drop-shadow(0 0 4px hsl(185, 75%, 10%))'
+          color: 'hsl(180, 75%, 10%)',
+          filter: 'drop-shadow(0 0 4px hsl(180, 75%, 10%))'
         }}
         polylines={[
           // Top polyline.
@@ -40,8 +40,8 @@ const Sandbox = (): ReactElement => {
           }
         ]}
         polylinesStyle={{
-          color: 'hsl(185, 75%, 50%)',
-          filter: 'drop-shadow(0 0 2px hsl(185, 75%, 50%))'
+          color: 'hsl(180, 75%, 50%)',
+          filter: 'drop-shadow(0 0 2px hsl(180, 75%, 50%))'
         }}
       />
     </div>

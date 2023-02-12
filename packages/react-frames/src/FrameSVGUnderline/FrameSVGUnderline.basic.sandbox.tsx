@@ -5,13 +5,13 @@ import { FrameSVGUnderline } from '@arwes/react-frames';
 const Sandbox = (): ReactElement => {
   return (
     <div style={{
-      position: 'absolute',
+      position: 'relative',
       width: 300,
       height: 300
     }}>
       <FrameSVGUnderline
-        shapesStyle={{ color: 'hsl(185, 75%, 10%)' }}
-        polylinesStyle={{ color: 'hsl(185, 75%, 50%)' }}
+        shapesStyle={{ color: 'hsl(180, 75%, 10%)' }}
+        polylinesStyle={{ color: 'hsl(180, 75%, 50%)' }}
       />
     </div>
   );
