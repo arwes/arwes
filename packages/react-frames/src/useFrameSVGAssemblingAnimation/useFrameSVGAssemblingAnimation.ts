@@ -1,27 +1,25 @@
-/** @jsx jsx */
-/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
-import { jsx } from '@emotion/react';
-import { type ReactElement, useState, useEffect, useRef, useCallback } from 'react';
-import { createRoot } from 'react-dom/client';
+import { type MutableRefObject, useRef, useCallback, useEffect } from 'react';
 import { animate, type AnimationControls } from 'motion';
-import { FrameSVGHexagon } from '@arwes/react-frames';
-import { Animator, useAnimator } from '@arwes/react-animator';
+import { useAnimator } from '@arwes/react-animator';
 
-const Frame = (): ReactElement => {
+interface UseFrameSVGAssemblingAnimation {
+  onRender: () => void
+}
+
+const useFrameSVGAssemblingAnimation = (svgRef: MutableRefObject<SVGSVGElement | null>): UseFrameSVGAssemblingAnimation => {
   const animator = useAnimator();
   const animationControlRef = useRef<AnimationControls | null>(null);
-  const svgRef = useRef<SVGSVGElement | null>(null);
 
   useEffect(() => {
-    if (!animator) {
+    if (!animator || !svgRef.current) {
       return;
     }
 
-    const svg = svgRef.current as SVGSVGElement;
-    const shapes = Array.from(svg.querySelectorAll('path[data-name="shape"]')) as SVGPathElement[];
-    const polylines = Array.from(svg.querySelectorAll('path[data-name="polyline"]')) as SVGPathElement[];
+    const svg = svgRef.current;
+    const shapes = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="shape"]'));
+    const polylines = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="polyline"]'));
 
-    animator.node.subscribe(node => {
+    const unsubscribe = animator.node.subscribe(node => {
       const { duration } = node;
 
       animationControlRef.current?.cancel();
@@ -93,67 +91,35 @@ const Frame = (): ReactElement => {
         }
       }
     });
+
+    return () => {
+      animationControlRef.current?.cancel();
+      unsubscribe();
+    };
   }, []);
 
   const onRender = useCallback(() => {
-    if (!animator) {
+    if (!animator || !svgRef.current) {
       return;
     }
 
-    const svg = svgRef.current as SVGSVGElement;
-    const shapes = Array.from(svg.querySelectorAll('path[data-name="shape"]')) as SVGPathElement[];
-    const polylines = Array.from(svg.querySelectorAll('path[data-name="polyline"]')) as SVGPathElement[];
+    const svg = svgRef.current;
+    const shapes = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="shape"]'));
+    const polylines = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="polyline"]'));
 
-    if (animator.node.state === 'entering' || animator.node.state === 'entered') {
-      shapes.concat(polylines).forEach(path => {
-        path.style.opacity = '1';
-        path.style.strokeDasharray = '';
-        path.style.strokeDashoffset = '';
-      });
-    }
-    else {
-      shapes.concat(polylines).forEach(path => {
-        path.style.opacity = '0';
-        path.style.strokeDasharray = '';
-        path.style.strokeDashoffset = '';
-      });
-    }
+    const isVisible = animator.node.state === 'entering' || animator.node.state === 'entered';
+
+    animationControlRef.current?.cancel();
+
+    shapes.concat(polylines).forEach(path => {
+      path.style.opacity = isVisible ? '1' : '0';
+      path.style.strokeDasharray = '';
+      path.style.strokeDashoffset = '';
+    });
   }, []);
 
-  return (
-    <div css={{
-      position: 'relative',
-      width: '100%',
-      height: 150,
-
-      '& path[data-name="shape"]': {
-        color: 'hsl(180, 75%, 10%)'
-      },
-      '& path[data-name="polyline"]': {
-        color: 'hsl(180, 75%, 50%)'
-      }
-    }}>
-      <FrameSVGHexagon
-        elementRef={svgRef}
-        onRender={onRender}
-      />
-    </div>
-  );
+  return { onRender };
 };
 
-const Sandbox = (): ReactElement => {
-  const [active, setActive] = useState(true);
-
-  useEffect(() => {
-    const tid = setInterval(() => setActive(active => !active), 2000);
-    return () => clearInterval(tid);
-  }, []);
-
-  return (
-    <Animator active={active}>
-      <Frame />
-    </Animator>
-  );
-};
-
-createRoot(document.querySelector('#root') as HTMLElement).render(<Sandbox />);
+export type { UseFrameSVGAssemblingAnimation };
+export { useFrameSVGAssemblingAnimation };

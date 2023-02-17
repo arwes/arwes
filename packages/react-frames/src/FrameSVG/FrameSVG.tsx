@@ -81,6 +81,7 @@ const FrameSVG = (props: FrameSVGProps): ReactElement => {
         top: 0,
         bottom: 0,
         display: 'block',
+        border: 0,
         margin: 0,
         padding: 0,
         width: '100%',

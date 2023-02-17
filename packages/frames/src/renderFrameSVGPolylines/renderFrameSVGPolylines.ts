@@ -23,7 +23,6 @@ const renderFrameSVGPolylines = (
     const isPolyline = Array.isArray(polylineCustom);
     const polyline = isPolyline ? polylineCustom : polylineCustom.polyline;
 
-    pathElement.setAttribute('style', '');
     Object.assign(pathElement.style, {
       vectorEffect: 'non-scaling-stroke'
     });
