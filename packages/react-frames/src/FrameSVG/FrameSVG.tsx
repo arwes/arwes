@@ -4,23 +4,19 @@ import React, {
   type ReactElement,
   type CSSProperties,
   useRef,
-  useState,
   useEffect
 } from 'react';
 import { cx } from '@arwes/tools';
 import { mergeRefs } from '@arwes/react-tools';
-import { type FRAME_SVG_POLYLINE, formatFrameSVGPolyline } from '@arwes/frames';
-
-interface FRAME_SVG_POLYLINE_CUSTOM {
-  name?: string
-  style?: CSSProperties
-  polyline: FRAME_SVG_POLYLINE
-}
-
-type FRAME_SVG_POLYLINE_GENERIC = FRAME_SVG_POLYLINE | FRAME_SVG_POLYLINE_CUSTOM;
+import {
+  type FRAME_SVG_POLYLINE,
+  type FRAME_SVG_POLYLINE_GENERIC,
+  renderFrameSVGPolylines
+} from '@arwes/frames';
 
 interface FrameSVGProps extends SVGProps<SVGSVGElement> {
   polylines?: FRAME_SVG_POLYLINE_GENERIC[]
+  onRender?: (svg: SVGSVGElement) => void
   className?: string
   style?: CSSProperties
   elementRef?: ForwardedRef<SVGSVGElement>
@@ -31,42 +27,50 @@ const emptyPolyline: FRAME_SVG_POLYLINE[] = [];
 const FrameSVG = (props: FrameSVGProps): ReactElement => {
   const {
     polylines = emptyPolyline,
+    onRender: onRenderExternal,
     className,
     style,
-    elementRef: externalElementRef,
+    elementRef,
     ...otherProps
   } = props;
 
-  const elementRef = useRef<SVGSVGElement>(null);
-  const [{ width, height }, setSize] = useState({ width: 0, height: 0 });
-
-  const hasSize = width > 0 && height > 0;
+  const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
-    const element = elementRef.current as SVGSVGElement;
+    const svg = svgRef.current as SVGSVGElement;
 
-    const onResize = (): void => {
-      const { width, height } = element.getBoundingClientRect();
-      setSize({ width, height });
+    const onRender = (): void => {
+      const { width, height } = svg.getBoundingClientRect();
+      renderFrameSVGPolylines(svg, width, height, polylines);
+
+      onRenderExternal?.(svg);
     };
 
+    // Resize only once initially and synchronously.
+    onRender();
+
+    // If ResizeObserver is available, allow rerenders on element resize.
     if (window.ResizeObserver) {
-      const observer = new window.ResizeObserver(onResize);
-      observer.observe(element);
+      let isFirstRender = true;
+      const observer = new window.ResizeObserver(() => {
+        // The observer triggers and initial observation call asynchronously,
+        // but the first render was already executed before, so skip it.
+        if (isFirstRender) {
+          isFirstRender = false;
+          return;
+        }
+        onRender();
+      });
+      observer.observe(svg);
       return () => observer.disconnect();
     }
-    else {
-      // Resize only once initially.
-      onResize();
-    }
-  }, []);
+  }, [onRenderExternal]);
 
   return (
     <svg
-      ref={mergeRefs(elementRef, externalElementRef)}
-      className={cx('arwes-react-core-framesvg', className)}
+      ref={mergeRefs(svgRef, elementRef)}
+      className={cx('arwes-react-frames-framesvg', className)}
       xmlns='http://www.w3.org/2000/svg'
-      viewBox={`0 0 ${width} ${height}`}
       // Even if it is still resized automatically, in case there is a delay
       // or the ResizeObserver API is not available, the SVG should be resized.
       preserveAspectRatio='none'
@@ -77,33 +81,16 @@ const FrameSVG = (props: FrameSVGProps): ReactElement => {
         top: 0,
         bottom: 0,
         display: 'block',
+        margin: 0,
+        padding: 0,
         width: '100%',
         height: '100%',
         ...style
       }}
       {...otherProps}
-    >
-      {hasSize && polylines.map((polylineCustom, index) => {
-        const isPolyline = Array.isArray(polylineCustom);
-        const polyline = isPolyline ? polylineCustom : polylineCustom.polyline;
-        const style = isPolyline ? null : polylineCustom.style;
-        const name = isPolyline ? null : polylineCustom.name;
-
-        return (
-          <path
-            key={index}
-            data-name={name}
-            d={formatFrameSVGPolyline(width, height, polyline)}
-            style={{
-              vectorEffect: 'non-scaling-stroke',
-              ...style
-            }}
-          />
-        );
-      })}
-    </svg>
+    />
   );
 };
 
-export type { FRAME_SVG_POLYLINE_CUSTOM, FRAME_SVG_POLYLINE_GENERIC, FrameSVGProps };
+export type { FrameSVGProps };
 export { FrameSVG };

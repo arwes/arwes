@@ -81,13 +81,25 @@ export const typeDefinitions = [
           easing?: string
         }
 
-        const animate: (
-          element: HTMLElement | HTMLElement[],
+        interface AnimationControls {
+          cancel: () => void
+          finished: Promise<void>
+        }
+
+        declare function AnimateFunction (
+          element: SVGElement | SVGElement[] | HTMLElement | HTMLElement[],
           props: Record<string, any>,
           options: MotionOptions
-        ) => { cancel: () => void };
+        ): AnimationControls;
 
-        export { animate };
+        declare function AnimateFunction (
+          (progress: number) => void,
+          options: MotionOptions
+        ): AnimationControls;
+
+        const animate: AnimateFunction = () => AnimationControls;
+
+        export { AnimationControls, animate };
       }
     `
   },
@@ -128,6 +140,10 @@ export const typeDefinitions = [
   {
     filename: 'file:///node_modules/@arwes/text/index.d.ts',
     code: require('!raw-loader?esModule=false!@arwes/text/build/types/index.d.ts')
+  },
+  {
+    filename: 'file:///node_modules/@arwes/frames/index.d.ts',
+    code: require('!raw-loader?esModule=false!@arwes/frames/build/types/index.d.ts')
   },
   {
     filename: 'file:///node_modules/@arwes/bgs/index.d.ts',
