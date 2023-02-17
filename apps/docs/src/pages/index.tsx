@@ -2,8 +2,8 @@ import React, { Fragment, type ReactElement } from 'react';
 import Head from 'next/head';
 import { Animator } from '@arwes/react-animator';
 import { Animated, aaOpacity, aaProperty } from '@arwes/react-animated';
-import { FrameSVGHexagon } from '@arwes/react-frames';
 import { Dots, Puffs } from '@arwes/react-bgs';
+import { Button } from '../ui/Button';
 
 const PageIndex = (): ReactElement => {
   return (
@@ -53,32 +53,32 @@ const PageIndex = (): ReactElement => {
               <Animated
                 as='nav'
                 className='links'
-                animated={[aaOpacity(), aaProperty('y', 30, 0)]}
+                animated={[aaProperty('y', 30, 0)]}
               >
                 <Animated
                   as='a'
-                  className='button button--secondary'
                   href='/docs'
                   animated={aaProperty('x', 20, 0)}
                 >
-                  <FrameSVGHexagon squareSize={12} />
-                  <span>Docs</span>
+                  <Button variant='secondary'>
+                    Docs
+                  </Button>
                 </Animated>
                 <a
-                  className='button button--secondary'
                   href='/play'
                 >
-                  <FrameSVGHexagon squareSize={12} />
-                  <span>Play</span>
+                  <Button variant='secondary'>
+                    Play
+                  </Button>
                 </a>
                 <Animated
                   as='a'
-                  className='button button--secondary'
                   href='/perf'
                   animated={aaProperty('x', -20, 0)}
                 >
-                  <FrameSVGHexagon squareSize={12} />
-                  <span>Perf</span>
+                  <Button variant='secondary'>
+                    Perf
+                  </Button>
                 </Animated>
               </Animated>
             </Animator>
@@ -136,7 +136,7 @@ const PageIndex = (): ReactElement => {
           <Animated
             as='picture'
             className="bg"
-            animated={[aaProperty('opacity', 0.5, 1), aaProperty('scale', 1.025, 1)]}
+            animated={[aaProperty('opacity', 0.8, 1), aaProperty('scale', 1.025, 1)]}
           >
             <source media='(min-width:1280px)' srcSet='/assets/images/background-large.webp' type='image/webp' />
             <source media='(min-width:1280px)' srcSet='/assets/images/background-large.jpg' type='image/jpeg' />
