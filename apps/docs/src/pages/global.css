@@ -47,6 +47,7 @@ img {
   top: 0;
   bottom: 0;
   transform-origin: top;
+  filter: brightness(0.4);
 }
 
 .bg img {
@@ -197,5 +198,32 @@ img {
     height: 36px;
     line-height: 32px;
     font-size: 16px;
+  }
+}
+
+/* TABLET UP */
+
+@media (min-width: 1920px) {
+  .main img {
+    max-height: 80px;
+  }
+
+  .main h2 {
+    font-size: 28px;
+  }
+
+  .main p {
+    font-size: 21px;
+  }
+
+  .links .button + .button {
+    margin-left: 24px;
+  }
+
+  .button {
+    padding: 0 60px;
+    height: 44px;
+    line-height: 44px;
+    font-size: 21px;
   }
 }

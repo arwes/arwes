@@ -49,38 +49,32 @@ const PageIndex = (): ReactElement => {
             </Animator>
 
             <Animator>
-              <Animated as='p' animated={[aaOpacity(), aaProperty('y', 30, 0)]}>
-                Work in progress of the next version
-              </Animated>
-            </Animator>
-
-            <Animator>
               <Animated
                 as='nav'
                 className='links'
-                animated={[aaOpacity(), aaProperty('y', 40, 0)]}
+                animated={[aaOpacity(), aaProperty('y', 30, 0)]}
               >
                 <Animated
                   as='a'
                   className='button button--secondary'
-                  href='/play'
+                  href='/docs'
                   animated={aaProperty('x', 20, 0)}
                 >
-                  Play
+                  Docs
                 </Animated>
                 <a
                   className='button button--secondary'
-                  href='/perf'
+                  href='/play'
                 >
-                  Perf
+                  Play
                 </a>
                 <Animated
                   as='a'
                   className='button button--secondary'
-                  href='https://arwes.dev'
+                  href='/perf'
                   animated={aaProperty('x', -20, 0)}
                 >
-                  Main
+                  Perf
                 </Animated>
               </Animated>
             </Animator>
