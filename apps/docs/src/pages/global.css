@@ -139,6 +139,7 @@ img {
 /* BUTTON */
 
 .button {
+  position: relative;
   display: inline-block;
   padding: 0 30px;
   min-width: 80px;
@@ -152,8 +153,7 @@ img {
   color: #79F2F2;
   text-shadow: 0px 0px 1px rgba(121, 242, 242, 0.5);
   background: rgba(0, 204, 204, 0.04);
-  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-  transition-property: color, background;
+  transition-property: color;
   transition-duration: 200ms;
   transition-timing-function: ease-out;
 }
@@ -163,15 +163,39 @@ img {
   background: rgba(0, 204, 204, 0.08);
 }
 
+/* BUTTON SECONDARY */
+
 .button--secondary {
   color: #F2F279;
   text-shadow: 0px 0px 2px rgba(242, 242, 121, 0.5);
-  background: rgba(204, 204, 0, 0.08);
+  background: transparent;
+}
+
+.button--secondary path {
+  transition-property: color;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+}
+
+.button--secondary path[data-name="shape"] {
+  color: rgba(204, 204, 0, 0.08);
+}
+
+.button--secondary path[data-name="polyline"] {
+  color: rgba(204, 204, 0, 0.12);
 }
 
 .button--secondary:hover {
   color: #f6f6a2;
-  background: rgba(204, 204, 0, 0.16);
+  background: transparent;
+}
+
+.button--secondary:hover path[data-name="shape"] {
+  color: rgba(204, 204, 0, 0.16);
+}
+
+.button--secondary:hover path[data-name="polyline"] {
+  color: rgba(204, 204, 0, 0.2);
 }
 
 /* TABLET UP */
@@ -203,7 +227,7 @@ img {
 
 /* TABLET UP */
 
-@media (min-width: 1920px) {
+@media (min-width: 1921px) {
   .main img {
     max-height: 80px;
   }

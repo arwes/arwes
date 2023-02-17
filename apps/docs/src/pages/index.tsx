@@ -2,6 +2,7 @@ import React, { Fragment, type ReactElement } from 'react';
 import Head from 'next/head';
 import { Animator } from '@arwes/react-animator';
 import { Animated, aaOpacity, aaProperty } from '@arwes/react-animated';
+import { FrameSVGHexagon } from '@arwes/react-frames';
 import { Dots, Puffs } from '@arwes/react-bgs';
 
 const PageIndex = (): ReactElement => {
@@ -60,13 +61,15 @@ const PageIndex = (): ReactElement => {
                   href='/docs'
                   animated={aaProperty('x', 20, 0)}
                 >
-                  Docs
+                  <FrameSVGHexagon squareSize={12} />
+                  <span>Docs</span>
                 </Animated>
                 <a
                   className='button button--secondary'
                   href='/play'
                 >
-                  Play
+                  <FrameSVGHexagon squareSize={12} />
+                  <span>Play</span>
                 </a>
                 <Animated
                   as='a'
@@ -74,7 +77,8 @@ const PageIndex = (): ReactElement => {
                   href='/perf'
                   animated={aaProperty('x', -20, 0)}
                 >
-                  Perf
+                  <FrameSVGHexagon squareSize={12} />
+                  <span>Perf</span>
                 </Animated>
               </Animated>
             </Animator>
