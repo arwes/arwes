@@ -169,7 +169,7 @@ const MovingLines = (props: MovingLinesProps): ReactElement => {
   return (
     <canvas
       ref={mergeRefs(elementRef, elementRefExternal)}
-      className={cx('arwes-bgs-movinglines', className)}
+      className={cx('arwes-react-bgs-movinglines', className)}
       style={{
         position: 'absolute',
         left: 0,

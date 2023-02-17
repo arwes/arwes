@@ -138,7 +138,7 @@ const GridLines = (props: GridLinesProps): ReactElement => {
   return (
     <canvas
       ref={mergeRefs(elementRef, elementRefExternal)}
-      className={cx('arwes-bgs-gridlines', className)}
+      className={cx('arwes-react-bgs-gridlines', className)}
       style={{
         position: 'absolute',
         left: 0,

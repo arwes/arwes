@@ -26,6 +26,7 @@ const transitionTextSequence = (props: TextTransitionProps): Animation => {
   });
 
   const blinkElement = document.createElement('span');
+  blinkElement.classList.add('arwes-text__blink');
   blinkElement.innerHTML = '&#9614;';
   Object.assign(blinkElement.style, {
     position: 'relative',

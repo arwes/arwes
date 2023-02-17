@@ -31,7 +31,7 @@ interface TextProps<E extends HTMLElement = HTMLSpanElement> extends HTMLProps<E
   children: ReactNode
 }
 
-const TEXT_CLASS = 'arwes_react-text_Text';
+const TEXT_CLASS = 'arwes-react-text-text';
 
 const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): ReactElement => {
   const {

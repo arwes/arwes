@@ -1,6 +1,6 @@
 {
   "name": "@arwes/react",
-  "version": "1.0.0-next.4",
+  "version": "1.0.0-next.5",
   "publishConfig": {
     "access": "public"
   },
@@ -46,12 +46,11 @@
     "@arwes/react-bgs": "^1.0.0-next.3",
     "@arwes/react-bleeps": "^1.0.0-next.3",
     "@arwes/react-core": "^1.0.0-next.3",
+    "@arwes/react-frames": "^1.0.0-next.3",
     "@arwes/react-styles": "^1.0.0-next.3",
     "@arwes/react-text": "^1.0.0-next.3",
     "@arwes/react-theme": "^1.0.0-next.3",
     "@arwes/react-tools": "^1.0.0-next.3",
-    "@emotion/react": "11",
-    "motion": "10",
     "react": "18"
   },
   "dependencies": {

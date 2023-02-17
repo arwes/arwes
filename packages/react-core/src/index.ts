@@ -1,1 +1,1 @@
-export const ARWES_REACT_CORE = '@arwes/react-core';
+export const ARWES_REACT_CORE = 'react-core';

@@ -47,6 +47,7 @@ img {
   top: 0;
   bottom: 0;
   transform-origin: top;
+  filter: brightness(0.4);
 }
 
 .bg img {
@@ -62,8 +63,8 @@ img {
   object-align: center;
 }
 
-.arwes-bgs-dots,
-.arwes-bgs-puffs {
+.arwes-react-bgs-dots,
+.arwes-react-bgs-puffs {
   z-index: 2;
 }
 
@@ -103,7 +104,7 @@ img {
   justify-content: center;
 }
 
-.links .button + .button {
+.links a + a {
   margin-left: 10px;
 }
 
@@ -117,6 +118,7 @@ img {
   bottom: 20px;
   display: flex;
   justify-content: center;
+  text-align: center;
 }
 
 .footer a {
@@ -135,26 +137,36 @@ img {
   margin-left: 20px;
 }
 
+.footer .arwes-text__blink {
+  display: none !important;
+}
+
 /* BUTTON */
 
 .button {
+  position: relative;
   display: inline-block;
   padding: 0 30px;
   min-width: 80px;
   height: 30px;
-  line-height: 28px;
+  line-height: 30px;
   font-size: 14px;
-  font-family: 'Titillium Web';
+  font-family: 'Titillium Web', sans-serif;
   font-weight: 400;
   text-transform: uppercase;
   text-decoration: none;
   color: #79F2F2;
+  text-align: center;
   text-shadow: 0px 0px 1px rgba(121, 242, 242, 0.5);
   background: rgba(0, 204, 204, 0.04);
-  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-  transition-property: color, background;
+  cursor: pointer;
+  transition-property: color;
   transition-duration: 200ms;
   transition-timing-function: ease-out;
+}
+
+.button__content {
+  position: relative;
 }
 
 .button:hover {
@@ -162,15 +174,43 @@ img {
   background: rgba(0, 204, 204, 0.08);
 }
 
+.button .arwes-text__blink {
+  display: none !important;
+}
+
+/* BUTTON SECONDARY */
+
 .button--secondary {
-  color: #F2F279;
-  text-shadow: 0px 0px 2px rgba(242, 242, 121, 0.5);
-  background: rgba(204, 204, 0, 0.08);
+  color: hsl(60deg 100% 75%);
+  text-shadow: 0px 0px 2px hsl(60deg 100% 75% / 50%);
+  background: transparent;
+}
+
+.button--secondary path {
+  transition-property: color;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+}
+
+.button--secondary path[data-name="shape"] {
+  color: hsl(60deg 100% 40% / 8%);
+}
+
+.button--secondary path[data-name="polyline"] {
+  color: hsl(60deg 100% 40% / 12%);
 }
 
 .button--secondary:hover {
-  color: #f6f6a2;
-  background: rgba(204, 204, 0, 0.16);
+  color: hsl(60deg 100% 85%);
+  background: transparent;
+}
+
+.button--secondary:hover path[data-name="shape"] {
+  color: hsl(60deg 100% 40% / 16%);
+}
+
+.button--secondary:hover path[data-name="polyline"] {
+  color: hsl(60deg 100% 40% / 20%);
 }
 
 /* TABLET UP */
@@ -188,14 +228,41 @@ img {
     font-size: 16px;
   }
 
-  .links .button + .button {
+  .links a + a {
     margin-left: 20px;
   }
 
   .button {
     padding: 0 40px;
     height: 36px;
-    line-height: 32px;
+    line-height: 36px;
     font-size: 16px;
+  }
+}
+
+/* TABLET UP */
+
+@media (min-width: 1921px) {
+  .main img {
+    max-height: 80px;
+  }
+
+  .main h2 {
+    font-size: 28px;
+  }
+
+  .main p {
+    font-size: 21px;
+  }
+
+  .links a + a {
+    margin-left: 24px;
+  }
+
+  .button {
+    padding: 0 60px;
+    height: 44px;
+    line-height: 44px;
+    font-size: 21px;
   }
 }

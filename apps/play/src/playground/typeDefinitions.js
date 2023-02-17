@@ -81,13 +81,25 @@ export const typeDefinitions = [
           easing?: string
         }
 
-        const animate: (
-          element: HTMLElement | HTMLElement[],
+        interface AnimationControls {
+          cancel: () => void
+          finished: Promise<void>
+        }
+
+        declare function AnimateFunction (
+          element: SVGElement | SVGElement[] | HTMLElement | HTMLElement[],
           props: Record<string, any>,
           options: MotionOptions
-        ) => void;
+        ): AnimationControls;
 
-        export { animate };
+        declare function AnimateFunction (
+          (progress: number) => void,
+          options: MotionOptions
+        ): AnimationControls;
+
+        const animate: AnimateFunction = () => AnimationControls;
+
+        export { AnimationControls, animate };
       }
     `
   },
@@ -130,6 +142,10 @@ export const typeDefinitions = [
     code: require('!raw-loader?esModule=false!@arwes/text/build/types/index.d.ts')
   },
   {
+    filename: 'file:///node_modules/@arwes/frames/index.d.ts',
+    code: require('!raw-loader?esModule=false!@arwes/frames/build/types/index.d.ts')
+  },
+  {
     filename: 'file:///node_modules/@arwes/bgs/index.d.ts',
     code: require('!raw-loader?esModule=false!@arwes/bgs/build/types/index.d.ts')
   },
@@ -158,7 +174,15 @@ export const typeDefinitions = [
     code: require('!raw-loader?esModule=false!@arwes/react-text/build/types/index.d.ts')
   },
   {
+    filename: 'file:///node_modules/@arwes/react-frames/index.d.ts',
+    code: require('!raw-loader?esModule=false!@arwes/react-frames/build/types/index.d.ts')
+  },
+  {
     filename: 'file:///node_modules/@arwes/react-bgs/index.d.ts',
     code: require('!raw-loader?esModule=false!@arwes/react-bgs/build/types/index.d.ts')
+  },
+  {
+    filename: 'file:///node_modules/@arwes/react-core/index.d.ts',
+    code: require('!raw-loader?esModule=false!@arwes/react-core/build/types/index.d.ts')
   }
 ];
