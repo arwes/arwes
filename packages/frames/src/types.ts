@@ -1,6 +1,6 @@
 import type * as CSS from 'csstype';
 
-export type FRAME_SVG_PATH_COMMAND_NAME = 'M' | 'm' | 'L' | 'l' | 'H' | 'h' | 'V' | 'v' | 'C' | 'c' | 'S' | 's' | 'Q' | 'q' | 'T' | 't' | 'A' | 'a';
+type FRAME_SVG_PATH_COMMAND_NAME = 'M' | 'm' | 'L' | 'l' | 'H' | 'h' | 'V' | 'v' | 'C' | 'c' | 'S' | 's' | 'Q' | 'q' | 'T' | 't' | 'A' | 'a';
 
 export type FRAME_SVG_PATH_DIMENSION = number | string;
 

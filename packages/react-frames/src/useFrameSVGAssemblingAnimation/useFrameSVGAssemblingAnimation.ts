@@ -1,12 +1,12 @@
-import { type MutableRefObject, useRef, useCallback, useEffect } from 'react';
+import { type RefObject, useRef, useCallback, useEffect } from 'react';
 import { animate, type AnimationControls } from 'motion';
 import { useAnimator } from '@arwes/react-animator';
 
-interface UseFrameSVGAssemblingAnimation {
+interface FrameSVGAssemblingAnimation {
   onRender: () => void
 }
 
-const useFrameSVGAssemblingAnimation = (svgRef: MutableRefObject<SVGSVGElement | null>): UseFrameSVGAssemblingAnimation => {
+const useFrameSVGAssemblingAnimation = (svgRef: RefObject<SVGSVGElement>): FrameSVGAssemblingAnimation => {
   const animator = useAnimator();
   const animationControlRef = useRef<AnimationControls | null>(null);
 
@@ -121,5 +121,5 @@ const useFrameSVGAssemblingAnimation = (svgRef: MutableRefObject<SVGSVGElement |
   return { onRender };
 };
 
-export type { UseFrameSVGAssemblingAnimation };
+export type { FrameSVGAssemblingAnimation };
 export { useFrameSVGAssemblingAnimation };

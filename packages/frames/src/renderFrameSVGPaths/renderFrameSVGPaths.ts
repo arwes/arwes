@@ -2,7 +2,7 @@ import type { FRAME_SVG_PATH_GENERIC } from '../types';
 import { formatFrameSVGPath } from '../formatFrameSVGPath/index';
 
 const renderFrameSVGPaths = (
-  svgElement: SVGSVGElement,
+  parentElement: SVGElement,
   width: number,
   height: number,
   pathsCustom: FRAME_SVG_PATH_GENERIC[]
@@ -11,9 +11,7 @@ const renderFrameSVGPaths = (
     return;
   }
 
-  svgElement.setAttribute('viewBox', `0 0 ${width} ${height}`);
-
-  const pathElementsCurrent = Array.from(svgElement.querySelectorAll('path'));
+  const pathElementsCurrent = Array.from(parentElement.querySelectorAll<SVGPathElement>('path[data-frame]'));
 
   for (let index = 0; index < pathsCustom.length; index++) {
     const pathCustom = pathsCustom[index];
@@ -21,7 +19,9 @@ const renderFrameSVGPaths = (
     const pathElement = pathElementCurrent ?? document.createElementNS('http://www.w3.org/2000/svg', 'path');
 
     const isCommands = Array.isArray(pathCustom);
-    const polyline = isCommands ? pathCustom : pathCustom.path;
+    const path = isCommands ? pathCustom : pathCustom.path;
+
+    pathElement.dataset.frame = '';
 
     Object.assign(pathElement.style, {
       vectorEffect: 'non-scaling-stroke'
@@ -45,9 +45,11 @@ const renderFrameSVGPaths = (
       Object.assign(pathElement.style, style);
     }
 
-    pathElement.setAttribute('d', formatFrameSVGPath(width, height, polyline));
+    pathElement.setAttribute('d', formatFrameSVGPath(width, height, path));
 
-    svgElement.appendChild(pathElement);
+    if (pathElement.parentNode !== parentElement) {
+      parentElement.appendChild(pathElement);
+    }
   }
 
   // TODO: If the number of polygons change, remove the excess unneeded elements.

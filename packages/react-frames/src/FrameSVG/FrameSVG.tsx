@@ -2,69 +2,46 @@ import React, {
   type SVGProps,
   type ForwardedRef,
   type ReactElement,
+  type ReactNode,
   type CSSProperties,
   useRef,
-  useEffect
+  useCallback
 } from 'react';
 import { cx } from '@arwes/tools';
 import { mergeRefs } from '@arwes/react-tools';
-import {
-  type FRAME_SVG_PATH,
-  type FRAME_SVG_PATH_GENERIC,
-  renderFrameSVGPaths
-} from '@arwes/frames';
+import { type FRAME_SVG_PATH_GENERIC, renderFrameSVGPaths } from '@arwes/frames';
+import { useFrameSVGRenderer } from '../useFrameSVGRenderer/index';
 
 interface FrameSVGProps extends SVGProps<SVGSVGElement> {
   paths?: FRAME_SVG_PATH_GENERIC[]
-  onRender?: (svg: SVGSVGElement) => void
+  onRender?: (svg: SVGSVGElement, width: number, height: number) => void
   className?: string
   style?: CSSProperties
   elementRef?: ForwardedRef<SVGSVGElement>
+  children?: ReactNode
 }
-
-const emptyPaths: FRAME_SVG_PATH[] = [];
 
 const FrameSVG = (props: FrameSVGProps): ReactElement => {
   const {
-    paths = emptyPaths,
+    paths,
     onRender: onRenderExternal,
     className,
     style,
     elementRef,
+    children,
     ...otherProps
   } = props;
 
   const svgRef = useRef<SVGSVGElement>(null);
 
-  useEffect(() => {
-    const svg = svgRef.current as SVGSVGElement;
-
-    const onRender = (): void => {
-      const { width, height } = svg.getBoundingClientRect();
+  const onRender = useCallback((svg: SVGSVGElement, width: number, height: number) => {
+    if (paths) {
       renderFrameSVGPaths(svg, width, height, paths);
-
-      onRenderExternal?.(svg);
-    };
-
-    // Resize only once initially and synchronously.
-    onRender();
-
-    // If ResizeObserver is available, allow rerenders on element resize.
-    if (window.ResizeObserver) {
-      let isFirstRender = true;
-      const observer = new window.ResizeObserver(() => {
-        // The observer triggers and initial observation call asynchronously,
-        // but the first render was already executed before, so skip it.
-        if (isFirstRender) {
-          isFirstRender = false;
-          return;
-        }
-        onRender();
-      });
-      observer.observe(svg);
-      return () => observer.disconnect();
     }
-  }, [onRenderExternal]);
+    onRenderExternal?.(svg, width, height);
+  }, [paths]);
+
+  useFrameSVGRenderer(svgRef, onRender);
 
   return (
     <svg
@@ -89,7 +66,9 @@ const FrameSVG = (props: FrameSVGProps): ReactElement => {
         ...style
       }}
       {...otherProps}
-    />
+    >
+      {children}
+    </svg>
   );
 };
 

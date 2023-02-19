@@ -32,10 +32,12 @@ const formatCommand = (width: number, height: number, command: FRAME_SVG_PATH_CO
   if (Array.isArray(command)) {
     const [name, ...dimensions] = command;
 
-    // One dimension commands.
+    // One dimension horizontal commands.
     if (name === 'H' || name === 'h') {
       return `${name} ${formatDimension(width, dimensions[0])}`;
     }
+
+    // One dimension vertical commands.
     if (name === 'V' || name === 'v') {
       return `${name} ${formatDimension(height, dimensions[0])}`;
     }

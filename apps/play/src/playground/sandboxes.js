@@ -212,10 +212,17 @@ export const sandboxes = [
         name: '@arwes/react-frames',
         children: [
           {
+            name: 'useFrameSVGRenderer',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/useFrameSVGRenderer/useFrameSVGRenderer.basic.sandbox.tsx') },
+              { name: 'commands', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/useFrameSVGRenderer/useFrameSVGRenderer.commands.sandbox.tsx') },
+              { name: 'clipping', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/useFrameSVGRenderer/useFrameSVGRenderer.clipping.sandbox.tsx') }
+            ]
+          },
+          {
             name: 'FrameSVG',
             children: [
-              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVG/FrameSVG.basic.sandbox.tsx') },
-              { name: 'commands', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVG/FrameSVG.commands.sandbox.tsx') }
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVG/FrameSVG.basic.sandbox.tsx') }
             ]
           },
           {
@@ -256,6 +263,12 @@ export const sandboxes = [
               { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGLines/FrameSVGLines.basic.sandbox.tsx') },
               { name: 'lines', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGLines/FrameSVGLines.lines.sandbox.tsx') },
               { name: 'assembling', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGLines/FrameSVGLines.assembling.sandbox.tsx') }
+            ]
+          },
+          {
+            name: 'IlluminatorSVG',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/IlluminatorSVG/IlluminatorSVG.basic.sandbox.tsx') }
             ]
           }
         ]
