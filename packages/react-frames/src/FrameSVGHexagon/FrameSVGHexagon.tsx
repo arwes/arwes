@@ -1,9 +1,9 @@
 import React, { useMemo, type ReactElement } from 'react';
 import { cx } from '@arwes/tools';
 import {
-  type FRAME_SVG_POLYLINE,
-  type FRAME_SVG_POLYLINE_STYLE,
-  type FRAME_SVG_POLYLINE_GENERIC
+  type FRAME_SVG_PATH,
+  type FRAME_SVG_STYLE,
+  type FRAME_SVG_PATH_GENERIC
 } from '@arwes/frames';
 
 import { type FrameSVGProps, FrameSVG } from '../FrameSVG/index';
@@ -24,43 +24,47 @@ const FrameSVGHexagon = (props: FrameSVGHexagonProps): ReactElement => {
     ...otherProps
   } = props;
 
-  const polylines = useMemo(() => {
+  const paths = useMemo(() => {
     const so = strokeWidth / 2;
 
-    const polylineStyle: FRAME_SVG_POLYLINE_STYLE = {
+    const polylineStyle: FRAME_SVG_STYLE = {
       stroke: 'currentcolor',
       strokeLinecap: 'round',
       strokeLinejoin: 'round',
       strokeWidth: String(strokeWidth),
-      fill: 'transparent'
+      fill: 'none'
     };
 
     // Polylines without repeated points between them.
-    let polyline1: FRAME_SVG_POLYLINE = [];
-    let polyline2: FRAME_SVG_POLYLINE = [];
+    let polyline1: FRAME_SVG_PATH = [];
+    let polyline2: FRAME_SVG_PATH = [];
 
     if (!inverted) {
       polyline1 = [
-        [so, `100% - ${so}`],
-        [`100% - ${ss - so}`, `100% - ${so}`],
-        [`100% - ${so}`, `100% - ${ss - so}`],
-        [`100% - ${so}`, so]
+        ['M', so, `100% - ${so}`],
+        ['L', `100% - ${ss - so}`, `100% - ${so}`],
+        ['L', `100% - ${so}`, `100% - ${ss - so}`],
+        ['L', `100% - ${so}`, so]
       ];
       polyline2 = [
-        [ss + so, so],
-        [so, ss - so]
+        ['M', `100% - ${so}`, so],
+        ['L', ss + so, so],
+        ['L', so, ss - so],
+        ['L', so, `100% - ${so}`]
       ];
     }
     else {
       polyline1 = [
-        [so, so],
-        [so, `100% - ${ss}`],
-        [ss + so, `100% - ${so}`],
-        [`100% - ${so}`, `100% - ${so}`]
+        ['M', so, so],
+        ['L', so, `100% - ${ss}`],
+        ['L', ss + so, `100% - ${so}`],
+        ['L', `100% - ${so}`, `100% - ${so}`]
       ];
       polyline2 = [
-        [`100% - ${so}`, ss - so],
-        [`100% - ${ss - so}`, so]
+        ['M', `100% - ${so}`, `100% - ${so}`],
+        ['L', `100% - ${so}`, ss - so],
+        ['L', `100% - ${ss - so}`, so],
+        ['L', so, so]
       ];
     }
 
@@ -71,31 +75,26 @@ const FrameSVGHexagon = (props: FrameSVGHexagonProps): ReactElement => {
           strokeWidth: 0,
           fill: 'currentcolor'
         },
-        polyline: polyline1.concat(polyline2)
+        path: polyline1.concat(polyline2)
       },
       {
-        name: 'polyline',
+        name: 'decoration',
         style: polylineStyle,
-        polyline: polyline1
+        path: polyline1
       },
-      // Polyline2 joins with ending vertexes of Polyline1.
       {
-        name: 'polyline',
+        name: 'decoration',
         style: polylineStyle,
-        polyline: [
-          polyline1[polyline1.length - 1],
-          ...polyline2,
-          polyline1[0]
-        ]
+        path: polyline2
       }
-    ] as FRAME_SVG_POLYLINE_GENERIC[];
+    ] as FRAME_SVG_PATH_GENERIC[];
   }, [ss, inverted, strokeWidth]);
 
   return (
     <FrameSVG
       {...otherProps}
       className={cx('arwes-react-frames-framesvghexagon', className)}
-      polylines={polylines}
+      paths={paths}
     />
   );
 };

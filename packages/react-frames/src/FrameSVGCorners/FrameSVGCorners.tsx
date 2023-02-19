@@ -1,6 +1,6 @@
 import React, { useMemo, type ReactElement } from 'react';
 import { cx } from '@arwes/tools';
-import { type FRAME_SVG_POLYLINE_GENERIC } from '@arwes/frames';
+import { type FRAME_SVG_PATH_GENERIC, type FRAME_SVG_PATH } from '@arwes/frames';
 
 import { type FrameSVGProps, FrameSVG } from '../FrameSVG/index';
 
@@ -18,50 +18,52 @@ const FrameSVGCorners = (props: FrameSVGCornersProps): ReactElement => {
     ...otherProps
   } = props;
 
-  const polylines = useMemo(() => {
+  const paths: FRAME_SVG_PATH_GENERIC[] = useMemo(() => {
     const co = cw / 2;
 
-    const bg: FRAME_SVG_POLYLINE_GENERIC = {
+    const bg: FRAME_SVG_PATH_GENERIC = {
       name: 'shape',
       style: {
         strokeWidth: 0,
         fill: 'currentcolor'
       },
-      polyline: [
-        [cw, cw],
-        [cw, `100% - ${cw}`],
-        [`100% - ${cw}`, `100% - ${cw}`],
-        [`100% - ${cw}`, cw]
+      path: [
+        ['M', cw, cw],
+        ['L', cw, `100% - ${cw}`],
+        ['L', `100% - ${cw}`, `100% - ${cw}`],
+        ['L', `100% - ${cw}`, cw]
       ]
     };
 
-    const lines = [
-      // Left-top.
-      [[co, co], [co, cl]],
-      [[co, co], [cl, co]],
+    const linesPaths: FRAME_SVG_PATH[] = [
+      // Left top.
+      [['M', co, co], ['L', co, cl]],
+      [['M', co, co], ['L', cl, co]],
 
       // Right top.
-      [[`100% - ${co}`, co], [`100% - ${cl}`, co]],
-      [[`100% - ${co}`, co], [`100% - ${co}`, cl]],
+      [['M', `100% - ${co}`, co], ['L', `100% - ${cl}`, co]],
+      [['M', `100% - ${co}`, co], ['L', `100% - ${co}`, cl]],
 
       // Right bottom.
-      [[`100% - ${co}`, `100% - ${co}`], [`100% - ${cl}`, `100% - ${co}`]],
-      [[`100% - ${co}`, `100% - ${co}`], [`100% - ${co}`, `100% - ${cl}`]],
+      [['M', `100% - ${co}`, `100% - ${co}`], ['L', `100% - ${cl}`, `100% - ${co}`]],
+      [['M', `100% - ${co}`, `100% - ${co}`], ['L', `100% - ${co}`, `100% - ${cl}`]],
 
       // Left bottom.
-      [[co, `100% - ${co}`], [co, `100% - ${cl}`]],
-      [[co, `100% - ${co}`], [cl, `100% - ${co}`]]
-    ].map(polyline => ({
-      name: 'polyline',
+      [['M', co, `100% - ${co}`], ['L', co, `100% - ${cl}`]],
+      [['M', co, `100% - ${co}`], ['L', cl, `100% - ${co}`]]
+    ];
+
+    const lines: FRAME_SVG_PATH_GENERIC[] = linesPaths.map(path => ({
+      name: 'decoration',
       style: {
         stroke: 'currentcolor',
         strokeLinecap: 'round',
         strokeLinejoin: 'round',
-        strokeWidth: cw,
-        fill: 'transparent'
+        strokeWidth: String(cw),
+        fill: 'none'
       },
-      polyline
-    })) as FRAME_SVG_POLYLINE_GENERIC[];
+      path
+    }));
 
     return [bg, ...lines];
   }, [cw, cl]);
@@ -70,7 +72,7 @@ const FrameSVGCorners = (props: FrameSVGCornersProps): ReactElement => {
     <FrameSVG
       {...otherProps}
       className={cx('arwes-react-frames-framesvgcorners', className)}
-      polylines={polylines}
+      paths={paths}
     />
   );
 };

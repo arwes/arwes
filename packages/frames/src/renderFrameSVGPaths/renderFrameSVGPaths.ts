@@ -1,11 +1,11 @@
-import type { FRAME_SVG_POLYLINE_GENERIC } from '../types';
-import { formatFrameSVGPolyline } from '../formatFrameSVGPolyline/index';
+import type { FRAME_SVG_PATH_GENERIC } from '../types';
+import { formatFrameSVGPath } from '../formatFrameSVGPath/index';
 
-const renderFrameSVGPolylines = (
+const renderFrameSVGPaths = (
   svgElement: SVGSVGElement,
   width: number,
   height: number,
-  polylinesCustom: FRAME_SVG_POLYLINE_GENERIC[]
+  pathsCustom: FRAME_SVG_PATH_GENERIC[]
 ): void => {
   if (width <= 0 || height <= 0) {
     return;
@@ -15,23 +15,27 @@ const renderFrameSVGPolylines = (
 
   const pathElementsCurrent = Array.from(svgElement.querySelectorAll('path'));
 
-  for (let index = 0; index < polylinesCustom.length; index++) {
-    const polylineCustom = polylinesCustom[index];
+  for (let index = 0; index < pathsCustom.length; index++) {
+    const pathCustom = pathsCustom[index];
     const pathElementCurrent = pathElementsCurrent[index];
     const pathElement = pathElementCurrent ?? document.createElementNS('http://www.w3.org/2000/svg', 'path');
 
-    const isPolyline = Array.isArray(polylineCustom);
-    const polyline = isPolyline ? polylineCustom : polylineCustom.polyline;
+    const isCommands = Array.isArray(pathCustom);
+    const polyline = isCommands ? pathCustom : pathCustom.path;
 
     Object.assign(pathElement.style, {
       vectorEffect: 'non-scaling-stroke'
     });
 
-    if (!isPolyline) {
-      const { name, className, style } = polylineCustom;
+    if (!isCommands) {
+      const { name, id, className, style } = pathCustom;
 
       if (pathElement.dataset.name !== name) {
         pathElement.dataset.name = name;
+      }
+
+      if (pathElement.id !== id) {
+        pathElement.id = id || '';
       }
 
       if (pathElement.classList.value !== className) {
@@ -41,7 +45,7 @@ const renderFrameSVGPolylines = (
       Object.assign(pathElement.style, style);
     }
 
-    pathElement.setAttribute('d', formatFrameSVGPolyline(width, height, polyline));
+    pathElement.setAttribute('d', formatFrameSVGPath(width, height, polyline));
 
     svgElement.appendChild(pathElement);
   }
@@ -49,4 +53,4 @@ const renderFrameSVGPolylines = (
   // TODO: If the number of polygons change, remove the excess unneeded elements.
 };
 
-export { renderFrameSVGPolylines };
+export { renderFrameSVGPaths };

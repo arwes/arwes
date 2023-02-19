@@ -1,9 +1,9 @@
 import React, { useMemo, type ReactElement } from 'react';
 import { cx } from '@arwes/tools';
 import {
-  type FRAME_SVG_POLYLINE_GENERIC,
-  type FRAME_SVG_POLYLINE,
-  type FRAME_SVG_POLYLINE_STYLE
+  type FRAME_SVG_PATH_GENERIC,
+  type FRAME_SVG_PATH,
+  type FRAME_SVG_STYLE
 } from '@arwes/frames';
 
 import { type FrameSVGProps, FrameSVG } from '../FrameSVG/index';
@@ -24,34 +24,58 @@ const FrameSVGLines = (props: FrameSVGLinesProps): ReactElement => {
     ...otherProps
   } = props;
 
-  const polylines = useMemo(() => {
-    const polylineStyle: FRAME_SVG_POLYLINE_STYLE = {
+  const paths: FRAME_SVG_PATH_GENERIC[] = useMemo(() => {
+    const polylineStyle: FRAME_SVG_STYLE = {
       strokeLinecap: 'square',
-      stroke: 'currentColor',
-      fill: 'transparent'
+      stroke: 'currentcolor',
+      fill: 'none'
     };
 
     const llo = llw / 2;
     const slo = slw / 2;
 
-    const largePolylines: FRAME_SVG_POLYLINE[] = [
+    const largePolylines: FRAME_SVG_PATH[] = [
       // Top
-      [[llo, llo], ['50% + 0.1', llo]],
-      [[`100% - ${llo}`, llo], ['50% - 0.1', llo]],
+      [
+        ['M', llo, llo],
+        ['L', '50% + 0.1', llo]
+      ],
+      [
+        ['M', `100% - ${llo}`, llo],
+        ['L', '50% - 0.1', llo]
+      ],
 
       // Bottom
-      [[llo, `100% - ${llo}`], ['50% + 0.1', `100% - ${llo}`]],
-      [[`100% - ${llo}`, `100% - ${llo}`], ['50% - 0.1', `100% - ${llo}`]]
+      [
+        ['M', llo, `100% - ${llo}`],
+        ['L', '50% + 0.1', `100% - ${llo}`]
+      ],
+      [
+        ['M', `100% - ${llo}`, `100% - ${llo}`],
+        ['L', '50% - 0.1', `100% - ${llo}`]
+      ]
     ];
 
-    const smallPolylines: FRAME_SVG_POLYLINE[] = [
+    const smallPolylines: FRAME_SVG_PATH[] = [
       // Top
-      [[slo, llw + slo], [sll + slo, llw + slo]],
-      [[`100% - ${slo}`, llw + slo], [`100% - ${sll + slo}`, llw + slo]],
+      [
+        ['M', slo, llw + slo],
+        ['L', sll + slo, llw + slo]
+      ],
+      [
+        ['M', `100% - ${slo}`, llw + slo],
+        ['L', `100% - ${sll + slo}`, llw + slo]
+      ],
 
       // Bottom
-      [[slo, `100% - ${llw + slo}`], [sll + slo, `100% - ${llw + slo}`]],
-      [[`100% - ${slo}`, `100% - ${llw + slo}`], [`100% - ${sll + slo}`, `100% - ${llw + slo}`]]
+      [
+        ['M', slo, `100% - ${llw + slo}`],
+        ['L', sll + slo, `100% - ${llw + slo}`]
+      ],
+      [
+        ['M', `100% - ${slo}`, `100% - ${llw + slo}`],
+        ['L', `100% - ${sll + slo}`, `100% - ${llw + slo}`]
+      ]
     ];
 
     return [
@@ -61,37 +85,37 @@ const FrameSVGLines = (props: FrameSVGLinesProps): ReactElement => {
           strokeWidth: 0,
           fill: 'currentcolor'
         },
-        polyline: [
-          [0, 0],
-          [0, '100%'],
-          ['100%', '100%'],
-          ['100%', 0]
+        path: [
+          ['M', 0, 0],
+          ['L', 0, '100%'],
+          ['L', '100%', '100%'],
+          ['L', '100%', 0]
         ]
       },
       ...largePolylines.map(polyline => ({
-        name: 'polyline',
+        name: 'decoration',
         style: {
           ...polylineStyle,
           strokeWidth: String(llw)
         },
-        polyline
+        path: polyline
       })),
       ...smallPolylines.map(polyline => ({
-        name: 'polyline',
+        name: 'decoration',
         style: {
           ...polylineStyle,
           strokeWidth: String(slw)
         },
-        polyline
+        path: polyline
       }))
-    ] as FRAME_SVG_POLYLINE_GENERIC[];
+    ];
   }, [llw, slw, sll]);
 
   return (
     <FrameSVG
       {...otherProps}
       className={cx('arwes-react-frames-framesvglines', className)}
-      polylines={polylines}
+      paths={paths}
     />
   );
 };

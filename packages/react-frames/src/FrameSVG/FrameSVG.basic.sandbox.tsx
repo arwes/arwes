@@ -1,10 +1,10 @@
 import React, { type ReactElement, useMemo } from 'react';
 import { createRoot } from 'react-dom/client';
-import { type FRAME_SVG_POLYLINE_GENERIC } from '@arwes/frames';
+import { type FRAME_SVG_PATH_GENERIC } from '@arwes/frames';
 import { FrameSVG } from '@arwes/react-frames';
 
 const Sandbox = (): ReactElement => {
-  const polylines: FRAME_SVG_POLYLINE_GENERIC[] = useMemo(() => [
+  const paths: FRAME_SVG_PATH_GENERIC[] = useMemo(() => [
     // Background shape.
     {
       name: 'shape',
@@ -13,48 +13,48 @@ const Sandbox = (): ReactElement => {
         fill: 'hsl(180, 75%, 10%)',
         filter: 'drop-shadow(0 0 2px hsl(180, 75%, 10%))'
       },
-      polyline: [
-        [20, 20],
-        [20, '100% - 20'],
-        ['100% - 20', '100% - 20'],
-        ['100% - 20', 20]
+      path: [
+        ['M', 20, 20],
+        ['L', 20, '100% - 20'],
+        ['L', '100% - 20', '100% - 20'],
+        ['L', '100% - 20', 20]
       ]
     },
-    // Top polyline.
+    // Top decoration.
     {
-      name: 'polyline',
+      name: 'decoration',
       style: {
         strokeWidth: '1',
         stroke: 'hsl(180, 75%, 50%)',
-        fill: 'transparent',
+        fill: 'none',
         filter: 'drop-shadow(0 0 2px hsl(180, 75%, 50%))'
       },
-      polyline: [
-        [10, 10],
-        ['100% - 10', 10],
-        ['100% - 10', 40]
+      path: [
+        ['M', 10, 10],
+        ['L', '100% - 10', 10],
+        ['L', '100% - 10', 40]
       ]
     },
-    // Bottom polyline.
+    // Bottom decoration.
     {
-      name: 'polyline',
+      name: 'decoration',
       style: {
         strokeWidth: '2',
         stroke: 'hsl(180, 75%, 50%)',
-        fill: 'transparent',
+        fill: 'none',
         filter: 'drop-shadow(0 0 2px hsl(180, 75%, 50%))'
       },
-      polyline: [
-        ['100% - 10', '100% - 10'],
-        [10, '100% - 10'],
-        [10, '100% - 40']
+      path: [
+        ['M', '100% - 10', '100% - 10'],
+        ['L', 10, '100% - 10'],
+        ['L', 10, '100% - 40']
       ]
     }
   ], []);
 
   return (
     <div style={{ position: 'absolute', inset: 20 }}>
-      <FrameSVG polylines={polylines} />
+      <FrameSVG paths={paths} />
     </div>
   );
 };

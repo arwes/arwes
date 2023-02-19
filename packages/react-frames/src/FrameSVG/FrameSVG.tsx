@@ -9,24 +9,24 @@ import React, {
 import { cx } from '@arwes/tools';
 import { mergeRefs } from '@arwes/react-tools';
 import {
-  type FRAME_SVG_POLYLINE,
-  type FRAME_SVG_POLYLINE_GENERIC,
-  renderFrameSVGPolylines
+  type FRAME_SVG_PATH,
+  type FRAME_SVG_PATH_GENERIC,
+  renderFrameSVGPaths
 } from '@arwes/frames';
 
 interface FrameSVGProps extends SVGProps<SVGSVGElement> {
-  polylines?: FRAME_SVG_POLYLINE_GENERIC[]
+  paths?: FRAME_SVG_PATH_GENERIC[]
   onRender?: (svg: SVGSVGElement) => void
   className?: string
   style?: CSSProperties
   elementRef?: ForwardedRef<SVGSVGElement>
 }
 
-const emptyPolyline: FRAME_SVG_POLYLINE[] = [];
+const emptyPaths: FRAME_SVG_PATH[] = [];
 
 const FrameSVG = (props: FrameSVGProps): ReactElement => {
   const {
-    polylines = emptyPolyline,
+    paths = emptyPaths,
     onRender: onRenderExternal,
     className,
     style,
@@ -41,7 +41,7 @@ const FrameSVG = (props: FrameSVGProps): ReactElement => {
 
     const onRender = (): void => {
       const { width, height } = svg.getBoundingClientRect();
-      renderFrameSVGPolylines(svg, width, height, polylines);
+      renderFrameSVGPaths(svg, width, height, paths);
 
       onRenderExternal?.(svg);
     };

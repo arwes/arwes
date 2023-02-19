@@ -17,7 +17,7 @@ const useFrameSVGAssemblingAnimation = (svgRef: MutableRefObject<SVGSVGElement |
 
     const svg = svgRef.current;
     const shapes = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="shape"]'));
-    const polylines = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="polyline"]'));
+    const polylines = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="decoration"]'));
 
     const unsubscribe = animator.node.subscribe(node => {
       const { duration } = node;
@@ -105,7 +105,7 @@ const useFrameSVGAssemblingAnimation = (svgRef: MutableRefObject<SVGSVGElement |
 
     const svg = svgRef.current;
     const shapes = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="shape"]'));
-    const polylines = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="polyline"]'));
+    const polylines = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="decoration"]'));
 
     const isVisible = animator.node.state === 'entering' || animator.node.state === 'entered';
 

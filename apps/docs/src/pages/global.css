@@ -196,8 +196,8 @@ img {
   color: hsl(60deg 100% 40% / 8%);
 }
 
-.button--secondary path[data-name="polyline"] {
-  color: hsl(60deg 100% 40% / 12%);
+.button--secondary path[data-name="decoration"] {
+  color: hsl(60deg 100% 40% / 14%);
 }
 
 .button--secondary:hover {
@@ -209,8 +209,8 @@ img {
   color: hsl(60deg 100% 40% / 16%);
 }
 
-.button--secondary:hover path[data-name="polyline"] {
-  color: hsl(60deg 100% 40% / 20%);
+.button--secondary:hover path[data-name="decoration"] {
+  color: hsl(60deg 100% 40% / 22%);
 }
 
 /* TABLET UP */

@@ -16,7 +16,7 @@ const Sandbox = (): ReactElement => {
           '& path[data-name="shape"]': {
             color: 'hsl(60, 75%, 10%)'
           },
-          '& path[data-name="polyline"]': {
+          '& path[data-name="decoration"]': {
             color: 'hsl(60, 75%, 50%)'
           }
         }}
