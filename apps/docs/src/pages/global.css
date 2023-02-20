@@ -165,17 +165,38 @@ img {
   transition-timing-function: ease-out;
 }
 
+.button__illuminator {
+  --button-p: 1px;
+  --button-ss: 12px;
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  clip-path: polygon(
+    var(--button-p) calc(100% - var(--button-p)),
+    var(--button-p) calc(var(--button-ss) + var(--button-p)),
+    calc(var(--button-ss) + var(--button-p)) var(--button-p),
+    calc(100% - var(--button-p)) var(--button-p),
+    calc(100% - var(--button-p)) calc(100% - var(--button-ss) - var(--button-p)),
+    calc(100% - var(--button-ss) - var(--button-p)) calc(100% - var(--button-p))
+  );
+}
+
+.button .arwes-react-frames-framesvg {
+  z-index: 1;
+}
+
 .button__content {
   position: relative;
+  z-index: 2;
 }
 
 .button:hover {
   color: #a2f6f6;
   background: rgba(0, 204, 204, 0.08);
-}
-
-.button .arwes-text__blink {
-  display: none !important;
 }
 
 /* BUTTON SECONDARY */
@@ -211,6 +232,7 @@ img {
 
 .button--secondary:hover path[data-name="decoration"] {
   color: hsl(60deg 100% 40% / 22%);
+  filter: drop-shadow(0 0 1px hsl(60deg 100% 40%));
 }
 
 /* TABLET UP */

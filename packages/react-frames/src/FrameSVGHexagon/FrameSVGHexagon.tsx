@@ -11,6 +11,7 @@ import { type FrameSVGProps, FrameSVG } from '../FrameSVG/index';
 interface FrameSVGHexagonProps extends FrameSVGProps {
   squareSize?: number
   inverted?: boolean
+  padding?: number
   strokeWidth?: number
   className?: string
 }
@@ -20,6 +21,7 @@ const FrameSVGHexagon = (props: FrameSVGHexagonProps): ReactElement => {
     squareSize: ss = 16,
     inverted,
     strokeWidth = 1,
+    padding: p = 0,
     className,
     ...otherProps
   } = props;
@@ -35,40 +37,39 @@ const FrameSVGHexagon = (props: FrameSVGHexagonProps): ReactElement => {
       fill: 'none'
     };
 
-    // Polylines without repeated points between them.
     let polyline1: FRAME_SVG_PATH = [];
     let polyline2: FRAME_SVG_PATH = [];
 
     if (!inverted) {
       polyline1 = [
-        ['M', so, `100% - ${so}`],
-        ['L', `100% - ${ss - so}`, `100% - ${so}`],
-        ['L', `100% - ${so}`, `100% - ${ss - so}`],
-        ['L', `100% - ${so}`, so]
+        ['M', so + p, `100% - ${so + p}`],
+        ['L', `100% - ${ss - so + p}`, `100% - ${so + p}`],
+        ['L', `100% - ${so + p}`, `100% - ${ss - so + p}`],
+        ['L', `100% - ${so + p}`, so + p]
       ];
       polyline2 = [
-        ['M', `100% - ${so}`, so],
-        ['L', ss + so, so],
-        ['L', so, ss - so],
-        ['L', so, `100% - ${so}`]
+        ['M', `100% - ${so + p}`, so + p],
+        ['L', ss + so + p, so + p],
+        ['L', so + p, ss - so + p],
+        ['L', so + p, `100% - ${so + p}`]
       ];
     }
     else {
       polyline1 = [
-        ['M', so, so],
-        ['L', so, `100% - ${ss}`],
-        ['L', ss + so, `100% - ${so}`],
-        ['L', `100% - ${so}`, `100% - ${so}`]
+        ['M', so + p, so + p],
+        ['L', so + p, `100% - ${ss + p}`],
+        ['L', ss + so + p, `100% - ${so + p}`],
+        ['L', `100% - ${so + p}`, `100% - ${so + p}`]
       ];
       polyline2 = [
-        ['M', `100% - ${so}`, `100% - ${so}`],
-        ['L', `100% - ${so}`, ss - so],
-        ['L', `100% - ${ss - so}`, so],
-        ['L', so, so]
+        ['M', `100% - ${so + p}`, `100% - ${so + p}`],
+        ['L', `100% - ${so + p}`, ss - so + p],
+        ['L', `100% - ${ss - so + p}`, so + p],
+        ['L', so + p, so + p]
       ];
     }
 
-    return [
+    const paths: FRAME_SVG_PATH_GENERIC[] = [
       {
         name: 'shape',
         style: {
@@ -87,8 +88,10 @@ const FrameSVGHexagon = (props: FrameSVGHexagonProps): ReactElement => {
         style: polylineStyle,
         path: polyline2
       }
-    ] as FRAME_SVG_PATH_GENERIC[];
-  }, [ss, inverted, strokeWidth]);
+    ];
+
+    return paths;
+  }, [ss, inverted, strokeWidth, p]);
 
   return (
     <FrameSVG
