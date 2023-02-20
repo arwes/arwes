@@ -4,6 +4,7 @@ import { Animator } from '@arwes/react-animator';
 import { Animated, aaOpacity, aaProperty } from '@arwes/react-animated';
 import { Dots, Puffs } from '@arwes/react-bgs';
 import { Button } from '../ui/Button';
+import lernaSettings from '@repository/lerna.json';
 
 const PageIndex = (): ReactElement => {
   return (
@@ -33,87 +34,116 @@ const PageIndex = (): ReactElement => {
 
       <div className='page'>
         <Animator combine manager='staggerReverse'>
-          <main className='main'>
-            <Animator>
-              <Animated as='h1' animated={[aaOpacity(), aaProperty('y', 10, 0)]}>
-                <img
-                  src='/logotype.png'
-                  alt='Arwes'
-                />
-              </Animated>
-            </Animator>
-
-            <Animator>
-              <Animated as='h2' animated={[aaOpacity(), aaProperty('y', 20, 0)]}>
-                Futuristic Sci-Fi UI Web Framework
-              </Animated>
-            </Animator>
-
-            <Animator>
-              <Animated
-                as='nav'
-                className='links'
-                animated={[aaProperty('y', 30, 0)]}
-              >
+          <div className='page__content'>
+            <header className='header'>
+              <Animator>
                 <Animated
-                  as='a'
-                  href='/docs'
-                  animated={aaProperty('x', 20, 0)}
+                  className='header__logo'
+                  animated={[aaOpacity(), aaProperty('x', -10, 0)]}
                 >
-                  <Button variant='secondary'>
-                    Docs
-                  </Button>
+                  <a
+                    className='header__logo-link'
+                    href='/'
+                  >
+                    <img
+                      className='header__logo-img'
+                      src='/logo.png'
+                      role='presentation'
+                    />
+                  </a>
                 </Animated>
+              </Animator>
+
+              <div className='header__controls'>
                 <a
-                  href='/play'
+                  className='header__version'
+                  href={`https://github.com/arwes/arwes/releases/tag/v${lernaSettings.version}`}
+                  target='version'
                 >
-                  <Button variant='secondary'>
-                    Play
-                  </Button>
+                  v{lernaSettings.version}
                 </a>
-                <Animated
-                  as='a'
-                  href='/perf'
-                  animated={aaProperty('x', -20, 0)}
-                >
-                  <Button variant='secondary'>
-                    Perf
-                  </Button>
-                </Animated>
-              </Animated>
-            </Animator>
-          </main>
+                <Animator>
+                  <Animated
+                    as='nav'
+                    className='nav'
+                    animated={[aaOpacity(), aaProperty('x', 10, 0)]}
+                  >
+                    <a
+                      href='https://github.com/arwes/arwes'
+                      target='github'
+                    >
+                      GitHub
+                    </a>
+                    <a
+                      href='https://discord.gg/s5sbTkw'
+                      target='discord'
+                    >
+                      Discord
+                    </a>
+                    <a
+                      href='https://twitter.com/arwesjs'
+                      target='twitter'
+                    >
+                      Twitter
+                    </a>
+                  </Animated>
+                </Animator>
+              </div>
+            </header>
 
-          <Animator>
-            <Animated
-              as='footer'
-              className='footer'
-              animated={[aaOpacity(), aaProperty('y', 10, 0)]}
-            >
-              <Animated
-                as='a'
-                href='https://github.com/arwes/arwes'
-                target='github'
-                animated={aaProperty('x', 10, 0)}
-              >
-                GitHub
-              </Animated>
-              <a
-                href='https://discord.gg/s5sbTkw'
-                target='discord'
-              >
-                Discord
-              </a>
-              <Animated
-                as='a'
-                href='https://twitter.com/arwesjs'
-                target='twitter'
-                animated={aaProperty('x', -10, 0)}
-              >
-                Twitter
-              </Animated>
-            </Animated>
-          </Animator>
+            <main className='main'>
+              <div className='main__content'>
+                <Animator>
+                  <Animated as='h1' animated={[aaOpacity(), aaProperty('y', 10, 0)]}>
+                    <img
+                      src='/logotype.png'
+                      alt='Arwes'
+                    />
+                  </Animated>
+                </Animator>
+
+                <Animator>
+                  <Animated as='h2' animated={[aaOpacity(), aaProperty('y', 20, 0)]}>
+                    Futuristic Sci-Fi UI Web Framework
+                  </Animated>
+                </Animator>
+
+                <Animator>
+                  <Animated
+                    as='nav'
+                    className='links'
+                    animated={[aaProperty('y', 30, 0)]}
+                  >
+                    <Animated
+                      as='a'
+                      href='/docs'
+                      animated={aaProperty('x', 20, 0)}
+                    >
+                      <Button variant='secondary'>
+                        Docs
+                      </Button>
+                    </Animated>
+                    <a
+                      href='/play'
+                    >
+                      <Button variant='secondary'>
+                        Play
+                      </Button>
+                    </a>
+                    <Animated
+                      as='a'
+                      href='/perf'
+                      animated={aaProperty('x', -20, 0)}
+                    >
+                      <Button variant='secondary'>
+                        Perf
+                      </Button>
+                    </Animated>
+                  </Animated>
+                </Animator>
+              </div>
+            </main>
+          </div>
         </Animator>
 
         <Animator duration={{ enter: 2, interval: 4 }}>
