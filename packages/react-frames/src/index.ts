@@ -7,3 +7,4 @@ export * from './FrameSVGHexagon/index';
 export * from './FrameSVGCorners/index';
 export * from './FrameSVGLines/index';
 export * from './IlluminatorSVG/index';
+export * from './Illuminator/index';

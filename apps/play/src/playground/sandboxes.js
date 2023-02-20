@@ -270,6 +270,12 @@ export const sandboxes = [
             children: [
               { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/IlluminatorSVG/IlluminatorSVG.basic.sandbox.tsx') }
             ]
+          },
+          {
+            name: 'Illuminator',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/Illuminator/Illuminator.basic.sandbox.tsx') }
+            ]
           }
         ]
       },

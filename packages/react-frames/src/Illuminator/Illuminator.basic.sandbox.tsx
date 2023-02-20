@@ -1,28 +1,34 @@
 import React, { type ReactElement } from 'react';
 import { createRoot } from 'react-dom/client';
-import { IlluminatorSVG } from '@arwes/react-frames';
+import { Illuminator } from '@arwes/react-frames';
 
 const Sandbox = (): ReactElement => {
   return (
     <div>
       <p style={{ color: '#fff' }}>Move mouse over the page.</p>
-      <svg
+      <div
         style={{
-          display: 'block',
+          position: 'relative',
           width: 300,
-          height: 300
+          height: 300,
+          overflow: 'hidden',
+          clipPath: `polygon(
+            0 100%,
+            0 40px,
+            40px 0,
+            100% 0,
+            100% calc(100% - 40px),
+            calc(100% - 40px) 100%
+          )`
         }}
-        xmlns='http://www.w3.org/2000/svg'
-        preserveAspectRatio='none'
-        viewBox='0 0 300 300'
       >
-        <IlluminatorSVG
+        <Illuminator
           hue='180'
           saturation='50%'
           lightness='50%'
           size={300}
         />
-      </svg>
+      </div>
     </div>
   );
 };

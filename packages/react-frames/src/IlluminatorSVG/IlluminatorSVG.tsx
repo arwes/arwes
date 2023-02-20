@@ -11,6 +11,7 @@ import { cx } from '@arwes/tools';
 interface IlluminatorSVGProps {
   hue?: string
   saturation?: string
+  lightness?: string
   size?: number
   className?: string
   style?: CSSProperties
@@ -21,6 +22,7 @@ const IlluminatorSVG = (props: IlluminatorSVGProps): ReactElement => {
   const {
     hue = '0',
     saturation = '0%',
+    lightness = '50%',
     size = 300,
     className,
     style
@@ -55,7 +57,7 @@ const IlluminatorSVG = (props: IlluminatorSVGProps): ReactElement => {
       document.removeEventListener('mousemove', onMove);
       document.removeEventListener('mouseleave', onHide);
     };
-  }, [hue, saturation, size]);
+  }, [hue, saturation, lightness, size]);
 
   return (
     <g
@@ -67,8 +69,8 @@ const IlluminatorSVG = (props: IlluminatorSVGProps): ReactElement => {
     >
       <defs>
         <radialGradient id={gradientId}>
-          <stop offset='0%' stopColor={`hsl(${hue} ${saturation} 50% / 7%)`} />
-          <stop offset='50%' stopColor={`hsl(${hue} ${saturation} 50% / 4%)`} />
+          <stop offset='0%' stopColor={`hsl(${hue} ${saturation} ${lightness} / 7%)`} />
+          <stop offset='50%' stopColor={`hsl(${hue} ${saturation} ${lightness} / 4%)`} />
           <stop offset='100%' stopColor='transparent' />
         </radialGradient>
       </defs>
