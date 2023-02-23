@@ -14,6 +14,13 @@
     "image": "romelperez.dev.jpg"
   },
   {
+    "name": "Badgeth",
+    "description": "A dApp for identifying and rewarding noteworthy behavior on the blockchain by issuing NFT badges.",
+    "url": "https://www.reddit.com/r/reactjs/comments/p6x6j7/show_rreactjs_badgeth_a_scifi_dapp_built_with/",
+    "repository": "",
+    "image": "badgeth.jpg"
+  },
+  {
     "name": "inCyberPunk",
     "description": "A Full Stack Social Media with Node/React with a CyberPunk theme.",
     "url": "https://cybersocial.herokuapp.com",

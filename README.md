@@ -85,7 +85,7 @@ Package | Status | Description
 `@arwes/react-text` | Polishing | Text effect components
 `@arwes/react-frames` | Polishing | Build responsive vector graphics components
 `@arwes/react-bgs` | Polishing | Passive UI background effects
-`@arwes/react` | Polishing | All React packages bundle
+`@arwes/react` | Polishing | All Agnostic and React packages bundle
 
 ## Community
 
@@ -96,10 +96,11 @@ Package | Status | Description
 <tr>
 <td align="center"><a href="https://soulextract.com"><img src="./static/assets/community/apps/images/soulextract.com.jpg" width="252px;" alt="SoulExtract.com" /></a><br /><a href="https://soulextract.com">SoulExtract.com</a><br /><a href="https://github.com/soulextract/soulextract.com"><sub>soulextract/soulextract.com</sub></a></td>
 <td align="center"><a href="https://romelperez.dev"><img src="./static/assets/community/apps/images/romelperez.dev.jpg" width="252px;" alt="RomelPerez.dev" /></a><br /><a href="https://romelperez.dev">RomelPerez.dev</a><br /><sub>--</sub></td>
-<td align="center"><a href="https://cybersocial.herokuapp.com"><img src="./static/assets/community/apps/images/incyberpunk.jpg" width="252px;" alt="inCyberPunk" /></a><br /><a href="https://cybersocial.herokuapp.com">inCyberPunk</a><br /><a href="https://github.com/inPhoenix/inCyberPunk2022"><sub>inPhoenix/inCyberPunk2022</sub></a></td></tr>
-<tr><td align="center"><a href="https://archiverpg.com"><img src="./static/assets/community/apps/images/archiverpg.com.jpg" width="252px;" alt="ArchiveRPG.com" /></a><br /><a href="https://archiverpg.com">ArchiveRPG.com</a><br /><sub>--</sub></td>
-<td align="center"><a href="https://www.myxouz.com/2021/12/lady-of-shalott-first-version-of-our-home-dashboard/"><img src="./static/assets/community/apps/images/lady-of-shalott.jpg" width="252px;" alt="Lady of the Shalott" /></a><br /><a href="https://www.myxouz.com/2021/12/lady-of-shalott-first-version-of-our-home-dashboard/">Lady of the Shalott</a><br /><sub>--</sub></td>
-<td align="center"><a href="https://www.indiedb.com/games/assembly-rts"><img src="./static/assets/community/apps/images/AssemblyRTS.jpg" width="252px;" alt="Assembly RTS" /></a><br /><a href="https://www.indiedb.com/games/assembly-rts">Assembly RTS</a><br /><sub>--</sub></td>
+<td align="center"><a href="https://www.reddit.com/r/reactjs/comments/p6x6j7/show_rreactjs_badgeth_a_scifi_dapp_built_with/"><img src="./static/assets/community/apps/images/badgeth.jpg" width="252px;" alt="Badgeth" /></a><br /><a href="https://www.reddit.com/r/reactjs/comments/p6x6j7/show_rreactjs_badgeth_a_scifi_dapp_built_with/">Badgeth</a><br /><sub>--</sub></td></tr>
+<tr><td align="center"><a href="https://cybersocial.herokuapp.com"><img src="./static/assets/community/apps/images/incyberpunk.jpg" width="252px;" alt="inCyberPunk" /></a><br /><a href="https://cybersocial.herokuapp.com">inCyberPunk</a><br /><a href="https://github.com/inPhoenix/inCyberPunk2022"><sub>inPhoenix/inCyberPunk2022</sub></a></td>
+<td align="center"><a href="https://archiverpg.com"><img src="./static/assets/community/apps/images/archiverpg.com.jpg" width="252px;" alt="ArchiveRPG.com" /></a><br /><a href="https://archiverpg.com">ArchiveRPG.com</a><br /><sub>--</sub></td>
+<td align="center"><a href="https://www.myxouz.com/2021/12/lady-of-shalott-first-version-of-our-home-dashboard/"><img src="./static/assets/community/apps/images/lady-of-shalott.jpg" width="252px;" alt="Lady of the Shalott" /></a><br /><a href="https://www.myxouz.com/2021/12/lady-of-shalott-first-version-of-our-home-dashboard/">Lady of the Shalott</a><br /><sub>--</sub></td></tr>
+<tr><td align="center"><a href="https://www.indiedb.com/games/assembly-rts"><img src="./static/assets/community/apps/images/AssemblyRTS.jpg" width="252px;" alt="Assembly RTS" /></a><br /><a href="https://www.indiedb.com/games/assembly-rts">Assembly RTS</a><br /><sub>--</sub></td>
 </tr>
 </table>
 <!-- ARWES-COMMUNITY-APPS:END -->
