@@ -61,5 +61,12 @@
     "url": "https://www.indiedb.com/games/assembly-rts",
     "repository": "",
     "image": "AssemblyRTS.jpg"
+  },
+  {
+    "name": "Universe Dawn",
+    "description": "Online role-play browser game.",
+    "url": "https://universe-dawn.com",
+    "repository": "",
+    "image": "universe-dawn.com.jpg"
   }
 ]
