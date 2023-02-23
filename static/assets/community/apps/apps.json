@@ -42,6 +42,13 @@
     "image": "archiverpg.com.jpg"
   },
   {
+    "name": "StarWards",
+    "description": "Starwards is a space and starship simulator designed specifically for LARPs.",
+    "url": "https://blog.starwards.space",
+    "repository": "https://github.com/starwards/starwards",
+    "image": "starwards.jpg"
+  },
+  {
     "name": "Cyber Movie Database",
     "description": "Digital tabletop roleplaying game set in a sci-fi world.",
     "url": "https://cmdb.wrick17.com",
