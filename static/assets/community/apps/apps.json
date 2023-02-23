@@ -42,6 +42,13 @@
     "image": "archiverpg.com.jpg"
   },
   {
+    "name": "Cyber Movie Database",
+    "description": "Digital tabletop roleplaying game set in a sci-fi world.",
+    "url": "https://cmdb.wrick17.com",
+    "repository": "https://github.com/wrick17/cmdb",
+    "image": "cmdb.wrick17.jpg"
+  },
+  {
     "name": "Lady of the Shalott",
     "description": "Home dashboard application.",
     "url": "https://www.myxouz.com/2021/12/lady-of-shalott-first-version-of-our-home-dashboard/",
