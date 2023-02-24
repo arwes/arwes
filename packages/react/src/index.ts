@@ -1,3 +1,4 @@
+export * from 'arwes';
 export * from '@arwes/react-tools';
 export * from '@arwes/react-theme';
 export * from '@arwes/react-styles';

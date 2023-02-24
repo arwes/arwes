@@ -41,6 +41,9 @@
   "main": "./build/cjs/index.js",
   "unpkg": "./build/umd/umd.min.js",
   "peerDependencies": {
+    "react": "18"
+  },
+  "dependencies": {
     "@arwes/react-animated": "^1.0.0-next.3",
     "@arwes/react-animator": "^1.0.0-next.3",
     "@arwes/react-bgs": "^1.0.0-next.3",
@@ -51,9 +54,7 @@
     "@arwes/react-text": "^1.0.0-next.3",
     "@arwes/react-theme": "^1.0.0-next.3",
     "@arwes/react-tools": "^1.0.0-next.3",
-    "react": "18"
-  },
-  "dependencies": {
+    "arwes": "^1.0.0-next.3",
     "tslib": "^2.3.1"
   },
   "scripts": {
