@@ -105,7 +105,8 @@ Package | Status | Description
 <td align="center"><a href="https://cmdb.wrick17.com"><img src="./static/assets/community/apps/images/cmdb.wrick17.jpg" width="252px;" alt="Cyber Movie Database" /></a><br /><a href="https://cmdb.wrick17.com">Cyber Movie Database</a><br /><a href="https://github.com/wrick17/cmdb"><sub>wrick17/cmdb</sub></a></td></tr>
 <tr><td align="center"><a href="https://www.myxouz.com/2021/12/lady-of-shalott-first-version-of-our-home-dashboard/"><img src="./static/assets/community/apps/images/lady-of-shalott.jpg" width="252px;" alt="Lady of the Shalott" /></a><br /><a href="https://www.myxouz.com/2021/12/lady-of-shalott-first-version-of-our-home-dashboard/">Lady of the Shalott</a><br /><sub>--</sub></td>
 <td align="center"><a href="https://www.indiedb.com/games/assembly-rts"><img src="./static/assets/community/apps/images/AssemblyRTS.jpg" width="252px;" alt="Assembly RTS" /></a><br /><a href="https://www.indiedb.com/games/assembly-rts">Assembly RTS</a><br /><sub>--</sub></td>
-<td align="center"><a href="https://universe-dawn.com"><img src="./static/assets/community/apps/images/universe-dawn.com.jpg" width="252px;" alt="Universe Dawn" /></a><br /><a href="https://universe-dawn.com">Universe Dawn</a><br /><sub>--</sub></td>
+<td align="center"><a href="https://universe-dawn.com"><img src="./static/assets/community/apps/images/universe-dawn.com.jpg" width="252px;" alt="Universe Dawn" /></a><br /><a href="https://universe-dawn.com">Universe Dawn</a><br /><sub>--</sub></td></tr>
+<tr><td align="center"><a href="https://paingthet.com"><img src="./static/assets/community/apps/images/paingthet.com.jpg" width="252px;" alt="paingthet.com" /></a><br /><a href="https://paingthet.com">paingthet.com</a><br /><sub>--</sub></td>
 </tr>
 </table>
 <!-- ARWES-COMMUNITY-APPS:END -->

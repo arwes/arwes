@@ -82,5 +82,12 @@
     "url": "https://universe-dawn.com",
     "repository": "",
     "image": "universe-dawn.com.jpg"
+  },
+  {
+    "name": "paingthet.com",
+    "description": "Pi's personal website.",
+    "url": "https://paingthet.com",
+    "repository": "",
+    "image": "paingthet.com.jpg"
   }
 ]
