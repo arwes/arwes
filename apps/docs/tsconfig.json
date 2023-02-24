@@ -13,6 +13,7 @@
     "incremental": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "jsxImportSource": "@emotion/react",
     "allowJs": true
   },
   "include": [
