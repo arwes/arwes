@@ -3,9 +3,8 @@
   "version": "1.0.0-next.5",
   "private": true,
   "dependencies": {
-    "@arwes/react-animator": "^1.0.0-next.5",
-    "@arwes/react-bgs": "^1.0.0-next.5",
-    "next": "^13.1.6"
+    "@arwes/react": "^1.0.0-next.5",
+    "next": "^13.2.0"
   },
   "scripts": {
     "dev": "next dev -p 9200",
