@@ -72,8 +72,7 @@ const styles: StylesThemeCreator<ButtonProps> = (theme, props) => {
           color: 'hsl(60deg 100% 40% / 16%)'
         },
         'path[data-name="decoration"]': {
-          color: 'hsl(60deg 100% 40% / 22%)',
-          filter: 'drop-shadow(0 0 1px hsl(60deg 100% 40%))'
+          color: 'hsl(60deg 100% 40% / 22%)'
         }
       },
 
@@ -83,7 +82,7 @@ const styles: StylesThemeCreator<ButtonProps> = (theme, props) => {
         lineHeight: '36px',
         fontSize: '16px'
       },
-      '@media (min-width: 1921px)': {
+      '@media (min-width: 1920px)': {
         padding: '0 60px',
         height: '44px',
         lineHeight: '44px',
