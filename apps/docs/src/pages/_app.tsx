@@ -6,7 +6,7 @@ import { type AppProps } from 'next/app';
 import Head from 'next/head';
 import { useEffect } from 'react';
 import { ThemeProvider } from '@emotion/react';
-import { Animator, AnimatorGeneralProvider, Animated, aaProperty, Dots, Puffs } from '@arwes/react';
+import { Animator, AnimatorGeneralProvider, Animated, aa, Dots, Puffs } from '@arwes/react';
 
 import { setupGoogleFonts } from '../utils/setupGoogleFonts';
 import { setupGoogleAnalytics } from '../utils/setupGoogleAnalytics';
@@ -55,7 +55,7 @@ const ClientApp = (props: ClientAppProps): ReactElement => {
               <Animated
                 as='picture'
                 className="background1"
-                animated={[aaProperty('opacity', 0.8, 1), aaProperty('scale', 1.025, 1)]}
+                animated={[aa('opacity', 0.8, 1), aa('scale', 1.025, 1)]}
                 role='presentation'
               >
                 <source media='(min-width:1280px)' srcSet='/assets/images/background-large.webp' type='image/webp' />

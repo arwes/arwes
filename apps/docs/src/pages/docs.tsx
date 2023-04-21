@@ -2,7 +2,7 @@ import { type ReactElement } from 'react';
 import {
   Animator,
   Animated,
-  aaProperty,
+  aa,
   aaVisibility,
   FrameSVG,
   Illuminator,
@@ -12,7 +12,7 @@ import {
 const PageIndex = (): ReactElement => {
   return (
     <Animator combine>
-      <Animated as='main' className='page-document' animated={aaProperty('y', 12, 0)}>
+      <Animated as='main' className='page-document' animated={aa('y', 12, 0)}>
         <Animator>
           <Animated className='page-document__decoration' animated={aaVisibility()}>
             <FrameSVG
@@ -45,7 +45,7 @@ const PageIndex = (): ReactElement => {
                   <Text as='h1' dynamic={false}>Futuristic Sci-Fi UI Web Framework</Text>
                 </Animator>
                 <Animator>
-                  <Animated as='hr' style={{ transformOrigin: 'left' }} animated={aaProperty('scaleX', 0, 1)} />
+                  <Animated as='hr' style={{ transformOrigin: 'left' }} animated={aa('scaleX', 0, 1)} />
                 </Animator>
                 <Animator>
                   <Text as='p' dynamic={true}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>

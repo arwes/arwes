@@ -1,7 +1,7 @@
 import React, { type ReactElement } from 'react';
 import Link from 'next/link';
 import { Animator } from '@arwes/react-animator';
-import { Animated, aaOpacity, aaProperty } from '@arwes/react-animated';
+import { Animated, aaOpacity, aa } from '@arwes/react-animated';
 import { Button } from '../ui/Button';
 import lernaSettings from '@repository/lerna.json';
 
@@ -12,7 +12,7 @@ const PageIndex = (): ReactElement => {
         <Animator>
           <Animated
             className='header__logo'
-            animated={[aaOpacity(), aaProperty('x', -10, 0)]}
+            animated={[aaOpacity(), aa('x', -10, 0)]}
           >
             <a className='header__logo-link' href='/'>
               <img
@@ -36,7 +36,7 @@ const PageIndex = (): ReactElement => {
             <Animated
               as='nav'
               className='nav'
-              animated={[aaOpacity(), aaProperty('x', 10, 0)]}
+              animated={[aaOpacity(), aa('x', 10, 0)]}
             >
               <a href='https://github.com/arwes/arwes' target='github'>
                 GitHub
@@ -55,7 +55,7 @@ const PageIndex = (): ReactElement => {
       <main className='main'>
         <div className='main__content'>
           <Animator>
-            <Animated as='h1' animated={[aaOpacity(), aaProperty('y', 10, 0)]}>
+            <Animated as='h1' animated={[aaOpacity(), aa('y', 10, 0)]}>
               <img
                 src='/logotype.png'
                 alt='Arwes'
@@ -64,7 +64,7 @@ const PageIndex = (): ReactElement => {
           </Animator>
 
           <Animator>
-            <Animated as='h2' animated={[aaOpacity(), aaProperty('y', 20, 0)]}>
+            <Animated as='h2' animated={[aaOpacity(), aa('y', 20, 0)]}>
               Futuristic Sci-Fi UI Web Framework
             </Animated>
           </Animator>
@@ -73,10 +73,10 @@ const PageIndex = (): ReactElement => {
             <Animated
               as='nav'
               className='links'
-              animated={[aaProperty('y', 30, 0)]}
+              animated={[aa('y', 30, 0)]}
             >
               <Link href='/docs'>
-                <Button variant='secondary' animated={aaProperty('x', 20, 0)}>
+                <Button variant='secondary' animated={aa('x', 20, 0)}>
                   Docs
                 </Button>
               </Link>
@@ -86,7 +86,7 @@ const PageIndex = (): ReactElement => {
                 </Button>
               </a>
               <a href='/perf'>
-                <Button variant='secondary' animated={aaProperty('x', -20, 0)}>
+                <Button variant='secondary' animated={aa('x', -20, 0)}>
                   Perf
                 </Button>
               </a>

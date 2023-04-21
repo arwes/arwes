@@ -2,15 +2,15 @@ import { timeline } from 'motion';
 
 import type { AnimatedSettings } from '../types';
 
-const aaProperty = (prop: string, from: number | string, to: number | string): AnimatedSettings => ({
+const aa = (prop: string, from: number | string, to: number | string, back?: number | string): AnimatedSettings => ({
   initialStyle: { [prop]: from },
   transitions: {
     entering: { [prop]: [from, to] },
-    exiting: { [prop]: [to, from] }
+    exiting: { [prop]: [to, back ?? from] }
   }
 });
 
-const aaOpacity = (): AnimatedSettings => aaProperty('opacity', 0, 1);
+const aaOpacity = (): AnimatedSettings => aa('opacity', 0, 1);
 
 const aaVisibility = (): AnimatedSettings => {
   return {
@@ -36,4 +36,4 @@ const aaVisibility = (): AnimatedSettings => {
   };
 };
 
-export { aaProperty, aaOpacity, aaVisibility };
+export { aa, aaOpacity, aaVisibility };
