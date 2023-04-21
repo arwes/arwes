@@ -27,7 +27,11 @@ interface TextProps<E extends HTMLElement = HTMLSpanElement> extends HTMLProps<E
   elementRef?: ForwardedRef<E>
   manager?: TextTransitionManager
   easing?: keyof typeof easing
-  dynamic?: boolean
+  /**
+   * If the duration of the animation should be fixed by the parent Animator
+   * or dynamic according to its children.
+   */
+  fixed?: boolean
   children: ReactNode
 }
 
@@ -40,7 +44,7 @@ const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): Rea
     children,
     manager,
     easing,
-    dynamic = true,
+    fixed,
     elementRef: elementRefProvided,
     ...otherProps
   } = props;
@@ -69,7 +73,7 @@ const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): Rea
       return;
     }
 
-    if (dynamic) {
+    if (!fixed) {
       const settings = animator.node.control.getSettings();
       const durationEnter = getTransitionTextDuration({
         length: childrenText.length,

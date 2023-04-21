@@ -16,8 +16,8 @@ const Sandbox = (): ReactElement => {
       <Text
         style={{ color: '#ddd', fontFamily: 'monospace' }}
         manager='decipher'
-        dynamic={false}
         easing='outSine'
+        fixed
       >
         Nemo enim ipsam <b>voluptatem quia voluptas</b> sit aspernatur
         aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
