@@ -32,7 +32,7 @@ const PageIndex = (): ReactElement => {
               ]}
             />
             <div className='page-document__illuminator'>
-              <Illuminator hue='180' saturation='50%' lightness='90%' size={400} />
+              <Illuminator color='hsl(180 50% 90% / 4%)' size={400} />
             </div>
           </Animated>
         </Animator>

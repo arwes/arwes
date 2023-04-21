@@ -17,9 +17,7 @@ const Sandbox = (): ReactElement => {
         viewBox='0 0 300 300'
       >
         <IlluminatorSVG
-          hue='180'
-          saturation='50%'
-          lightness='50%'
+          color='hsl(180 50% 50% / 4%)'
           size={300}
         />
       </svg>

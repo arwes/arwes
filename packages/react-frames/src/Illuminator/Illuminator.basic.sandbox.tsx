@@ -23,9 +23,7 @@ const Sandbox = (): ReactElement => {
         }}
       >
         <Illuminator
-          hue='180'
-          saturation='50%'
-          lightness='50%'
+          color='hsl(180 50% 50% / 4%)'
           size={300}
         />
       </div>

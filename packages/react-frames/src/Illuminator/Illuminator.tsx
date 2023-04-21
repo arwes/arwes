@@ -8,9 +8,7 @@ import React, {
 import { cx } from '@arwes/tools';
 
 interface IlluminatorProps {
-  hue?: string
-  saturation?: string
-  lightness?: string
+  color: string
   size?: number
   className?: string
   style?: CSSProperties
@@ -19,9 +17,7 @@ interface IlluminatorProps {
 
 const Illuminator = (props: IlluminatorProps): ReactElement => {
   const {
-    hue = '0',
-    saturation = '0%',
-    lightness = '50%',
+    color = 'hsl(0 0% 50% / 5%)',
     size = 300,
     className,
     style
@@ -65,8 +61,7 @@ const Illuminator = (props: IlluminatorProps): ReactElement => {
         opacity: 0,
         pointerEvents: 'none',
         background: `radial-gradient(
-          hsl(${hue} ${saturation} ${lightness} / 7%) 0%,
-          hsl(${hue} ${saturation} ${lightness} / 4%) 35%,
+          ${color} 0%,
           transparent 70%
         )`,
         ...style

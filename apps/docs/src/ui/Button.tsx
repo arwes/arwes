@@ -127,7 +127,7 @@ const Button = (props: ButtonProps): ReactElement => {
       animated={animated}
     >
       <div css={css.illuminator}>
-        <Illuminator size={150} lightness='100%' />
+        <Illuminator color='hsl(60 50% 90% / 4%)' size={200} />
       </div>
       <FrameSVGHexagon
         elementRef={svgRef}
