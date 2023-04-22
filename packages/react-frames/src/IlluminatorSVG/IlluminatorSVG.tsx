@@ -9,7 +9,7 @@ import React, {
 import { cx } from '@arwes/tools';
 
 interface IlluminatorSVGProps {
-  color: string
+  color?: string
   size?: number
   className?: string
   style?: CSSProperties
@@ -25,21 +25,21 @@ const IlluminatorSVG = (props: IlluminatorSVGProps): ReactElement => {
   } = props;
 
   const gradientId = useId();
-  const rectElementRef = useRef<SVGRectElement>(null);
+  const circleElementRef = useRef<SVGCircleElement>(null);
 
   useEffect(() => {
-    const element = rectElementRef.current as SVGRectElement;
+    const element = circleElementRef.current as SVGCircleElement;
     const svg = element.parentElement?.parentElement as unknown as SVGSVGElement; // TODO:
 
     element.style.transform = `translate(-${size / 2}px, -${size / 2}px)`;
 
     const onMove = (event: MouseEvent): void => {
       const bounds = svg.getBoundingClientRect();
-      const x = event.clientX - bounds.left;
-      const y = event.clientY - bounds.top;
+      const x = event.clientX - bounds.left + (size / 2);
+      const y = event.clientY - bounds.top + (size / 2);
       element.style.opacity = '1';
-      element.setAttribute('x', String(x));
-      element.setAttribute('y', String(y));
+      element.setAttribute('cx', String(x));
+      element.setAttribute('cy', String(y));
     };
 
     const onHide = (): void => {
@@ -69,12 +69,11 @@ const IlluminatorSVG = (props: IlluminatorSVGProps): ReactElement => {
           <stop offset='100%' stopColor='transparent' />
         </radialGradient>
       </defs>
-      <rect
-        ref={rectElementRef}
+      <circle
+        ref={circleElementRef}
+        r={size / 2}
         style={{
           position: 'absolute',
-          width: size,
-          height: size,
           transition: 'opacity 200ms ease-out',
           opacity: 0
         }}

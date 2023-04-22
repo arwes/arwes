@@ -8,7 +8,7 @@ import React, {
 import { cx } from '@arwes/tools';
 
 interface IlluminatorProps {
-  color: string
+  color?: string
   size?: number
   className?: string
   style?: CSSProperties
@@ -60,10 +60,8 @@ const Illuminator = (props: IlluminatorProps): ReactElement => {
         transition: 'opacity 200ms ease-out',
         opacity: 0,
         pointerEvents: 'none',
-        background: `radial-gradient(
-          ${color} 0%,
-          transparent 70%
-        )`,
+        borderRadius: '50%',
+        background: `radial-gradient(${color} 0%, transparent 70%)`,
         ...style
       }}
       ref={elementRef}
