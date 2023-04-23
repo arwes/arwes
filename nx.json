@@ -29,5 +29,10 @@
         "projects": "dependencies"
       }
     ]
+  },
+  "pluginsConfig": {
+    "@nrwl/js": {
+      "analyzeSourceFiles": false
+    }
   }
 }
