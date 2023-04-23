@@ -5,7 +5,7 @@ module.exports = {
   testEnvironment: 'jsdom',
   testMatch: glob
     .sync('./packages/*')
-    .map(path => path.replace(/^\./, '<rootDir>'))
+    .map(path => `<rootDir>/${path}`)
     .map(path => path + '/src/**/*.test.ts?(x)'),
   coveragePathIgnorePatterns: [
     '/node_modules/',
