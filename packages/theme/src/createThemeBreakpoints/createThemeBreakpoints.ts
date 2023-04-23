@@ -14,15 +14,22 @@ const createThemeBreakpoints = (settings: ThemeSettingsBreakpoints = []): ThemeB
     return typeof item === 'string' ? item : item.value;
   };
 
-  const up = (key: string | number): string => `@media (min-width: ${getBreakpointValue(key)})`;
+  const up = (key: string | number, opts?: { strip?: boolean }): string => {
+    const media = opts?.strip ? '' : '@media ';
+    return `${media}(min-width: ${getBreakpointValue(key)})`;
+  };
 
-  const down = (key: string | number): string => `@media (max-width: calc(${getBreakpointValue(key)} - 1px))`;
+  const down = (key: string | number, opts?: { strip?: boolean }): string => {
+    const media = opts?.strip ? '' : '@media ';
+    return `${media}(max-width: calc(${getBreakpointValue(key)} - 1px))`;
+  };
 
-  const between = (startKey: string | number, endKey: string | number): string => {
+  const between = (startKey: string | number, endKey: string | number, opts?: { strip?: boolean }): string => {
+    const media = opts?.strip ? '' : '@media ';
     const min = getBreakpointValue(startKey);
     const max = getBreakpointValue(endKey);
 
-    return `@media (min-width: ${min}) and (max-width: calc(${max} - 1px))`;
+    return `${media}(min-width: ${min}) and (max-width: calc(${max} - 1px))`;
   };
 
   return Object.freeze({
