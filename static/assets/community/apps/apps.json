@@ -35,11 +35,11 @@
     "image": "incyberpunk.jpg"
   },
   {
-    "name": "Beko Pharm Stream Overlay",
-    "description": "Stream overlay interface.",
-    "url": "https://beko.famkos.net/2021/07/22/using-react-and-arwes-for-a-stream-overlay-wip",
+    "name": "Stream Overlay",
+    "description": "Web UI stream overlay.",
+    "url": "https://beko.famkos.net/tag/streamoverlay",
     "repository": "",
-    "image": "beko-pharm-stream-overlay.jpg"
+    "image": "beko-stream-overlay.jpg"
   },
   {
     "name": "ArchiveRPG.com",
@@ -78,7 +78,7 @@
   },
   {
     "name": "Universe Dawn",
-    "description": "Online role-play browser game.",
+    "description": "Universe Dawn is a browser-based space-themed strategy game where players build empires and engage in intergalactic warfare.",
     "url": "https://universe-dawn.com",
     "repository": "",
     "image": "universe-dawn.com.jpg"
@@ -89,5 +89,12 @@
     "url": "https://paingthet.com",
     "repository": "",
     "image": "paingthet.com.jpg"
+  },
+  {
+    "name": "Primary Buffer Panel",
+    "description": "A simulated spaceship cockpit made of cardboard on a budget.",
+    "url": "https://beko.famkos.net/category/simpit",
+    "repository": "",
+    "image": "beko-primary-buffer-panel.jpg"
   }
 ]
