@@ -59,7 +59,6 @@ const Animator = (props: AnimatorProps): ReactElement => {
   const prevAnimatorRef = useRef<AnimatorInterface | undefined>(undefined);
   const isFirstRender1Ref = useRef<boolean | null>(true);
   const isFirstRender2Ref = useRef<boolean | null>(true);
-  const [isEnabledToUnmount, setIsEnabledToUnmount] = useState<boolean | undefined>(undefined);
 
   settingsRef.current = settings;
 
@@ -144,6 +143,11 @@ const Animator = (props: AnimatorProps): ReactElement => {
 
   prevAnimatorRef.current = animatorInterface;
 
+  const [isEnabledToUnmount, setIsEnabledToUnmount] = useState<boolean | undefined>(() =>
+    (unmountOnExited && animatorInterface?.node.state === STATES.exited) ||
+    (unmountOnEntered && animatorInterface?.node.state === STATES.entered)
+  );
+
   useEffect(() => {
     animatorInterface?.node.send(ACTIONS.setup);
 
@@ -194,11 +198,7 @@ const Animator = (props: AnimatorProps): ReactElement => {
   return createElement(
     AnimatorContext.Provider,
     { value: animatorInterface },
-    (isEnabledToUnmount ||
-      (unmountOnExited && animatorInterface?.node.state === STATES.exited) ||
-      (unmountOnEntered && animatorInterface?.node.state === STATES.entered))
-      ? null
-      : children
+    isEnabledToUnmount ? null : children
   );
 };
 
