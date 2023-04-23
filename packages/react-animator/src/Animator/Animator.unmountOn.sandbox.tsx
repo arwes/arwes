@@ -12,7 +12,7 @@ const Sandbox = (): ReactElement => {
   }, []);
 
   return (
-    <Animator active={active} unmountOnExited>
+    <Animator active={active} unmountOnExited unmountOnEntered>
       <Animated
         style={{ margin: 10, width: 40, height: 20, backgroundColor: '#777' }}
         animated={{

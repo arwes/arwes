@@ -42,6 +42,7 @@ const Animator = (props: AnimatorProps): ReactElement => {
     disabled,
     dismissed,
     unmountOnExited,
+    unmountOnEntered,
     checkToSendAction,
     checkToSend,
     nodeRef,
@@ -58,7 +59,7 @@ const Animator = (props: AnimatorProps): ReactElement => {
   const prevAnimatorRef = useRef<AnimatorInterface | undefined>(undefined);
   const isFirstRender1Ref = useRef<boolean | null>(true);
   const isFirstRender2Ref = useRef<boolean | null>(true);
-  const [isExited, setIsExited] = useState<boolean | undefined>(undefined);
+  const [isEnabledToUnmount, setIsEnabledToUnmount] = useState<boolean | undefined>(undefined);
 
   settingsRef.current = settings;
 
@@ -163,9 +164,12 @@ const Animator = (props: AnimatorProps): ReactElement => {
   }, [settings.active, settings.manager, settings.merge, settings.combine]);
 
   useEffect(() => {
-    if (unmountOnExited && animatorInterface) {
+    if ((unmountOnExited || unmountOnEntered) && animatorInterface) {
       const subscriber: AnimatorSubscriber = node => {
-        setIsExited(node.state === STATES.exited);
+        setIsEnabledToUnmount(
+          (unmountOnExited && node.state === STATES.exited) ||
+          (unmountOnEntered && node.state === STATES.entered)
+        );
       };
 
       animatorInterface.node.subscribe(subscriber);
@@ -174,7 +178,7 @@ const Animator = (props: AnimatorProps): ReactElement => {
         animatorInterface?.node.unsubscribe(subscriber);
       };
     }
-  }, [unmountOnExited, animatorInterface]);
+  }, [unmountOnExited, unmountOnEntered, animatorInterface]);
 
   useEffect(() => {
     if (isFirstRender2Ref.current) {
@@ -190,7 +194,9 @@ const Animator = (props: AnimatorProps): ReactElement => {
   return createElement(
     AnimatorContext.Provider,
     { value: animatorInterface },
-    unmountOnExited && (isExited || animatorInterface?.node.state === STATES.exited)
+    (isEnabledToUnmount ||
+      (unmountOnExited && animatorInterface?.node.state === STATES.exited) ||
+      (unmountOnEntered && animatorInterface?.node.state === STATES.entered))
       ? null
       : children
   );
