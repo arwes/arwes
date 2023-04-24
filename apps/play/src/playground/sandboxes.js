@@ -203,6 +203,29 @@ export const sandboxes = [
         ]
       },
       {
+        name: '@arwes/frames',
+        children: [
+          {
+            name: 'createFramePentagonClip',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFramePentagonClip/createFramePentagonClip.basic.sandbox.tsx') }
+            ]
+          },
+          {
+            name: 'createFrameHexagonClip',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameHexagonClip/createFrameHexagonClip.basic.sandbox.tsx') }
+            ]
+          },
+          {
+            name: 'createFrameOctagonClip',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameOctagonClip/createFrameOctagonClip.basic.sandbox.tsx') }
+            ]
+          }
+        ]
+      },
+      {
         name: '@arwes/react-frames',
         children: [
           {
