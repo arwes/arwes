@@ -1,11 +1,11 @@
-interface CreateFrameHexagonClipProps {
+interface CreateFramePentagonClipProps {
   squareSize?: number | string
   inverted?: boolean
 }
 
-const defaults: CreateFrameHexagonClipProps = {};
+const defaults: CreateFramePentagonClipProps = {};
 
-const createFrameHexagonClip = (props?: CreateFrameHexagonClipProps): string => {
+const createFramePentagonClip = (props?: CreateFramePentagonClipProps): string => {
   const {
     squareSize = '16px',
     inverted
@@ -16,8 +16,7 @@ const createFrameHexagonClip = (props?: CreateFrameHexagonClipProps): string => 
   if (inverted) {
     return `polygon(
   0 0,
-  calc(100% - ${ss}) 0,
-  100% ${ss},
+  100% 0,
   100% 100%,
   ${ss} 100%,
   0 calc(100% - ${ss})
@@ -25,14 +24,13 @@ const createFrameHexagonClip = (props?: CreateFrameHexagonClipProps): string => 
   }
 
   return `polygon(
-  0 100%,
-  0 ${ss},
-  ${ss} 0,
+  0 0,
   100% 0,
   100% calc(100% - ${ss}),
-  calc(100% - ${ss}) 100%
+  calc(100% - ${ss}) 100%,
+  0 100%
 )`;
 };
 
-export type { CreateFrameHexagonClipProps };
-export { createFrameHexagonClip };
+export type { CreateFramePentagonClipProps };
+export { createFramePentagonClip };
