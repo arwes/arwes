@@ -13,7 +13,8 @@ export const sandboxes = [
             name: 'createThemeColor',
             children: [
               { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createThemeColor/createThemeColor.basic.sandbox.tsx') },
-              { name: 'variations', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createThemeColor/createThemeColor.variations.sandbox.tsx') }
+              { name: 'variations', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createThemeColor/createThemeColor.variations.sandbox.tsx') },
+              { name: 'alpha', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createThemeColor/createThemeColor.alpha.sandbox.tsx') }
             ]
           },
           {

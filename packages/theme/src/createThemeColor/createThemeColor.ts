@@ -7,7 +7,7 @@ const minMax0to1 = minMax(0, 1);
 const searchRegExp = (string: string, regexp: RegExp): string | null => {
   const result = string.match(regexp);
   if (Array.isArray(result)) {
-    return result[0];
+    return String(result[0]);
   }
   return null;
 };
@@ -32,34 +32,44 @@ const formatColor = (
   color: string | [number, number, number, number?],
   options: ThemeColorOptions = colorOptionsDefault
 ): string => {
-  if (typeof color === 'string') {
-    const { alpha } = options;
+  if (typeof color !== 'string') {
+    return fromHSLAArrayToHSLAString(color, options);
+  }
 
-    if (alpha !== undefined) {
-      const colorClean = color.replace(/\s/g, '');
-      const alphaAdjust = minMax0to1(alpha);
+  const { alpha } = options;
 
-      if (/^(hsl|rgb)\(/i.test(colorClean)) {
-        return colorClean
-          .replace('(', 'a(')
-          .replace(/\)$/, `,${alphaAdjust})`);
-      }
-
-      if (/^(hsla|rgba)\(/i.test(colorClean)) {
-        const alphaCurrentMatch = searchRegExp(colorClean, /,[\d.]+\)$/);
-        if (alphaCurrentMatch) {
-          const alphaCurrent = Number(alphaCurrentMatch.replace(/[,)]/g, ''));
-          return colorClean.replace(/,[\d.]+\)$/, `,${alphaCurrent * alphaAdjust})`);
-        }
-      }
-
-      return colorClean;
-    }
-
+  if (alpha === undefined || alpha === null) {
     return color;
   }
 
-  return fromHSLAArrayToHSLAString(color, options);
+  // Make sure the color format complies with:
+  // - hsl, hsla, rgb, rgba color functions.
+  // - Either 3 or 4 arguments.
+  // - Each argument separated by either "," or "space", except fourth one.
+  // - Fourth argument is optional and can be separated by either "," or "/".
+  // - Each argument can be a integer, floating, or percentage value.
+  // See:
+  // - https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/hsl
+  // - https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/rgb
+  if (!/^(hsla?|rgba?)\(\d+(\.\d+)?%?(,\s?|\s)\d+(\.\d+)?%?(,\s?|\s)\d+(\.\d+)?%?((,\s?|\s?\/\s?)\d+(\.\d+)?%?)?\)$/.test(color)) {
+    return color;
+  }
+
+  const separators = Array.from(color.matchAll(/(,\s?|\s?\/\s?|\s)/g));
+  const hasCurrentAlpha = separators.length === 3;
+
+  const isCommaSeparated = color.includes(',');
+  const alphaAdjust = minMax0to1(alpha);
+
+  if (hasCurrentAlpha) {
+    const alphaCurrentMatch = searchRegExp(color, /\d+(\.\d+)?%?\)$/) as string;
+    const isPercentage = alphaCurrentMatch.includes('%');
+    const alphaCurrent = Number(alphaCurrentMatch.replace(/%?\)$/g, ''));
+
+    return color.replace(/\d+(\.\d+)?%?\)$/, `${alphaCurrent * alphaAdjust}${isPercentage ? '%' : ''})`);
+  }
+
+  return color.replace(/\)$/, isCommaSeparated ? `,${alphaAdjust})` : ` / ${alphaAdjust})`);
 };
 
 const createThemeColor = (settings: ThemeSettingsColor): ThemeColor => {
