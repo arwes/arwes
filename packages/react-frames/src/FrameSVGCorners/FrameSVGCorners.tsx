@@ -1,6 +1,6 @@
 import React, { useMemo, type ReactElement } from 'react';
 import { cx } from '@arwes/tools';
-import { type FRAME_SVG_PATH_GENERIC, type FRAME_SVG_PATH } from '@arwes/frames';
+import { type FrameSVGPathGeneric, type FrameSVGPath } from '@arwes/frames';
 
 import { type FrameSVGProps, FrameSVG } from '../FrameSVG/index';
 
@@ -18,10 +18,10 @@ const FrameSVGCorners = (props: FrameSVGCornersProps): ReactElement => {
     ...otherProps
   } = props;
 
-  const paths: FRAME_SVG_PATH_GENERIC[] = useMemo(() => {
+  const paths: FrameSVGPathGeneric[] = useMemo(() => {
     const co = cw / 2;
 
-    const bg: FRAME_SVG_PATH_GENERIC = {
+    const bg: FrameSVGPathGeneric = {
       name: 'shape',
       style: {
         strokeWidth: 0,
@@ -35,7 +35,7 @@ const FrameSVGCorners = (props: FrameSVGCornersProps): ReactElement => {
       ]
     };
 
-    const linesPaths: FRAME_SVG_PATH[] = [
+    const linesPaths: FrameSVGPath[] = [
       // Left top.
       [['M', co, co], ['L', co, cl]],
       [['M', co, co], ['L', cl, co]],
@@ -53,7 +53,7 @@ const FrameSVGCorners = (props: FrameSVGCornersProps): ReactElement => {
       [['M', co, `100% - ${co}`], ['L', cl, `100% - ${co}`]]
     ];
 
-    const lines: FRAME_SVG_PATH_GENERIC[] = linesPaths.map(path => ({
+    const lines: FrameSVGPathGeneric[] = linesPaths.map(path => ({
       name: 'decoration',
       style: {
         stroke: 'currentcolor',

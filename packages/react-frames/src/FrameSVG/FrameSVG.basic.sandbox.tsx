@@ -1,10 +1,10 @@
 import React, { type ReactElement, useMemo } from 'react';
 import { createRoot } from 'react-dom/client';
-import { type FRAME_SVG_PATH_GENERIC } from '@arwes/frames';
+import { type FrameSVGPathGeneric } from '@arwes/frames';
 import { FrameSVG } from '@arwes/react-frames';
 
 const Sandbox = (): ReactElement => {
-  const paths: FRAME_SVG_PATH_GENERIC[] = useMemo(() => [
+  const paths: FrameSVGPathGeneric[] = useMemo(() => [
     // Background shape.
     {
       name: 'shape',

@@ -1,9 +1,9 @@
 import React, { useMemo, type ReactElement } from 'react';
 import { cx } from '@arwes/tools';
 import {
-  type FRAME_SVG_PATH_GENERIC,
-  type FRAME_SVG_PATH,
-  type FRAME_SVG_STYLE
+  type FrameSVGPathGeneric,
+  type FrameSVGPath,
+  type FrameSVGStyle
 } from '@arwes/frames';
 
 import { type FrameSVGProps, FrameSVG } from '../FrameSVG/index';
@@ -24,8 +24,8 @@ const FrameSVGLines = (props: FrameSVGLinesProps): ReactElement => {
     ...otherProps
   } = props;
 
-  const paths: FRAME_SVG_PATH_GENERIC[] = useMemo(() => {
-    const polylineStyle: FRAME_SVG_STYLE = {
+  const paths: FrameSVGPathGeneric[] = useMemo(() => {
+    const polylineStyle: FrameSVGStyle = {
       strokeLinecap: 'square',
       stroke: 'currentcolor',
       fill: 'none'
@@ -34,7 +34,7 @@ const FrameSVGLines = (props: FrameSVGLinesProps): ReactElement => {
     const llo = llw / 2;
     const slo = slw / 2;
 
-    const largePolylines: FRAME_SVG_PATH[] = [
+    const largePolylines: FrameSVGPath[] = [
       // Top
       [
         ['M', llo, llo],
@@ -56,7 +56,7 @@ const FrameSVGLines = (props: FrameSVGLinesProps): ReactElement => {
       ]
     ];
 
-    const smallPolylines: FRAME_SVG_PATH[] = [
+    const smallPolylines: FrameSVGPath[] = [
       // Top
       [
         ['M', slo, llw + slo],

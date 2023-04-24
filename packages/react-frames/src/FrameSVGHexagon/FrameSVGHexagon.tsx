@@ -1,9 +1,9 @@
 import React, { useMemo, type ReactElement } from 'react';
 import { cx } from '@arwes/tools';
 import {
-  type FRAME_SVG_PATH,
-  type FRAME_SVG_STYLE,
-  type FRAME_SVG_PATH_GENERIC
+  type FrameSVGPath,
+  type FrameSVGStyle,
+  type FrameSVGPathGeneric
 } from '@arwes/frames';
 
 import { type FrameSVGProps, FrameSVG } from '../FrameSVG/index';
@@ -29,7 +29,7 @@ const FrameSVGHexagon = (props: FrameSVGHexagonProps): ReactElement => {
   const paths = useMemo(() => {
     const so = strokeWidth / 2;
 
-    const polylineStyle: FRAME_SVG_STYLE = {
+    const polylineStyle: FrameSVGStyle = {
       stroke: 'currentcolor',
       strokeLinecap: 'round',
       strokeLinejoin: 'round',
@@ -37,8 +37,8 @@ const FrameSVGHexagon = (props: FrameSVGHexagonProps): ReactElement => {
       fill: 'none'
     };
 
-    let polyline1: FRAME_SVG_PATH = [];
-    let polyline2: FRAME_SVG_PATH = [];
+    let polyline1: FrameSVGPath = [];
+    let polyline2: FrameSVGPath = [];
 
     if (!inverted) {
       polyline1 = [
@@ -69,7 +69,7 @@ const FrameSVGHexagon = (props: FrameSVGHexagonProps): ReactElement => {
       ];
     }
 
-    const paths: FRAME_SVG_PATH_GENERIC[] = [
+    const paths: FrameSVGPathGeneric[] = [
       {
         name: 'shape',
         style: {

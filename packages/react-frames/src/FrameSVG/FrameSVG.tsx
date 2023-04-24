@@ -9,11 +9,11 @@ import React, {
 } from 'react';
 import { cx } from '@arwes/tools';
 import { mergeRefs } from '@arwes/react-tools';
-import { type FRAME_SVG_PATH_GENERIC, renderFrameSVGPaths } from '@arwes/frames';
+import { type FrameSVGPathGeneric, renderFrameSVGPaths } from '@arwes/frames';
 import { useFrameSVGRenderer } from '../useFrameSVGRenderer/index';
 
 interface FrameSVGProps extends SVGProps<SVGSVGElement> {
-  paths?: FRAME_SVG_PATH_GENERIC[]
+  paths?: FrameSVGPathGeneric[]
   onRender?: (svg: SVGSVGElement, width: number, height: number) => void
   className?: string
   style?: CSSProperties

@@ -1,6 +1,6 @@
 import React, { useMemo, type ReactElement } from 'react';
 import { cx } from '@arwes/tools';
-import { type FRAME_SVG_PATH_GENERIC } from '@arwes/frames';
+import { type FrameSVGPathGeneric } from '@arwes/frames';
 
 import { type FrameSVGProps, FrameSVG } from '../FrameSVG/index';
 
@@ -53,7 +53,7 @@ const FrameSVGUnderline = (props: FrameSVGUnderlineProps): ReactElement => {
           ['L', `100% - ${so}`, `100% - ${ss - so}`]
         ]
       }
-    ] as FRAME_SVG_PATH_GENERIC[];
+    ] as FrameSVGPathGeneric[];
   }, [ss, sw, inverted]);
 
   return (

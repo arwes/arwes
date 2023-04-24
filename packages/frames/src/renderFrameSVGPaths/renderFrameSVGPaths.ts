@@ -1,11 +1,11 @@
-import type { FRAME_SVG_PATH_GENERIC } from '../types';
+import type { FrameSVGPathGeneric } from '../types';
 import { formatFrameSVGPath } from '../formatFrameSVGPath/index';
 
 const renderFrameSVGPaths = (
   parentElement: SVGElement,
   width: number,
   height: number,
-  pathsCustom: FRAME_SVG_PATH_GENERIC[]
+  pathsCustom: FrameSVGPathGeneric[]
 ): void => {
   if (width <= 0 || height <= 0) {
     return;

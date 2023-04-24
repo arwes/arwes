@@ -1,6 +1,6 @@
-import type { FRAME_SVG_PATH, FRAME_SVG_PATH_COMMAND, FRAME_SVG_PATH_DIMENSION } from '../types';
+import type { FrameSVGPath, FrameSVGPathCommand, FrameSVGPathDimension } from '../types';
 
-const formatDimension = (size: number, dimension: FRAME_SVG_PATH_DIMENSION): string => {
+const formatDimension = (size: number, dimension: FrameSVGPathDimension): string => {
   if (typeof dimension === 'number') {
     return String(dimension);
   }
@@ -28,7 +28,7 @@ const formatDimension = (size: number, dimension: FRAME_SVG_PATH_DIMENSION): str
   return String(dimensionNumber);
 };
 
-const formatCommand = (width: number, height: number, command: FRAME_SVG_PATH_COMMAND): string => {
+const formatCommand = (width: number, height: number, command: FrameSVGPathCommand): string => {
   if (Array.isArray(command)) {
     const [name, ...dimensions] = command;
 
@@ -74,7 +74,7 @@ const formatCommand = (width: number, height: number, command: FRAME_SVG_PATH_CO
   return command;
 };
 
-const formatFrameSVGPath = (width: number, height: number, path: FRAME_SVG_PATH): string => {
+const formatFrameSVGPath = (width: number, height: number, path: FrameSVGPath): string => {
   return path
     .map((command) => formatCommand(width, height, command))
     .join(' ');
