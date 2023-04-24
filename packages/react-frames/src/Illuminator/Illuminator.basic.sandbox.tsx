@@ -1,5 +1,6 @@
 import React, { type ReactElement } from 'react';
 import { createRoot } from 'react-dom/client';
+import { createFrameHexagonClip } from '@arwes/frames';
 import { Illuminator } from '@arwes/react-frames';
 
 const Sandbox = (): ReactElement => {
@@ -12,18 +13,11 @@ const Sandbox = (): ReactElement => {
           width: 300,
           height: 300,
           overflow: 'hidden',
-          clipPath: `polygon(
-            0 100%,
-            0 40px,
-            40px 0,
-            100% 0,
-            100% calc(100% - 40px),
-            calc(100% - 40px) 100%
-          )`
+          clipPath: createFrameHexagonClip({ squareSize: 50 })
         }}
       >
         <Illuminator
-          color='hsl(180 50% 50% / 10%)'
+          color='hsl(180 50% 50% / 20%)'
           size={300}
         />
       </div>
