@@ -1,9 +1,8 @@
-import React, { type ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Link from 'next/link';
-import { Animator } from '@arwes/react-animator';
-import { Animated, aaOpacity, aa } from '@arwes/react-animated';
-import { Button } from '../ui/Button';
 import lernaSettings from '@repository/lerna.json';
+import { Animator, Animated, aaOpacity, aa } from '@arwes/react';
+import { Button } from '../ui/Button';
 
 const PageIndex = (): ReactElement => {
   return (

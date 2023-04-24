@@ -52,7 +52,6 @@
     "@arwes/react-frames": "^1.0.0-next.3",
     "@arwes/react-styles": "^1.0.0-next.3",
     "@arwes/react-text": "^1.0.0-next.3",
-    "@arwes/react-theme": "^1.0.0-next.3",
     "@arwes/react-tools": "^1.0.0-next.3",
     "arwes": "^1.0.0-next.3",
     "tslib": "^2.3.1"

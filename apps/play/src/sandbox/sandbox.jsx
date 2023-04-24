@@ -17,7 +17,6 @@ import * as bgs from '@arwes/bgs';
 
 // React
 import * as reactTools from '@arwes/react-tools';
-import * as reactTheme from '@arwes/react-theme';
 import * as reactStyles from '@arwes/react-styles';
 import * as reactAnimator from '@arwes/react-animator';
 import * as reactAnimated from '@arwes/react-animated';
@@ -44,7 +43,6 @@ window.noxtron.setupSandbox(() => ({
     { name: '@arwes/frames', pkg: frames },
     { name: '@arwes/bgs', pkg: bgs },
     { name: '@arwes/react-tools', pkg: reactTools },
-    { name: '@arwes/react-theme', pkg: reactTheme },
     { name: '@arwes/react-styles', pkg: reactStyles },
     { name: '@arwes/react-animator', pkg: reactAnimator },
     { name: '@arwes/react-animated', pkg: reactAnimated },

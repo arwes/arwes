@@ -8,3 +8,4 @@ rm -rf ./apps/*/build
 rm -rf ./apps/docs/.next
 rm -rf ./apps/docs/out
 rm -rf ./apps/docs/public
+rm -rf ./coverage

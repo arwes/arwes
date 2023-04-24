@@ -1,7 +1,5 @@
 /* eslint-disable import/no-webpack-loader-syntax */
 
-const isProduction = process.env.NODE_ENV === 'production';
-
 export const sandboxes = [
   {
     name: 'Visual Design',
@@ -39,18 +37,7 @@ export const sandboxes = [
           }
         ]
       },
-      !isProduction && {
-        name: '@arwes/react-theme',
-        children: [
-          {
-            name: 'createUseCreateThemeExtended',
-            children: [
-              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-theme/src/createUseCreateThemeExtended/createUseCreateThemeExtended.basic.sandbox.tsx') }
-            ]
-          }
-        ]
-      },
-      !isProduction && {
+      {
         name: '@arwes/react-styles',
         children: [
           {
@@ -69,7 +56,7 @@ export const sandboxes = [
           }
         ]
       }
-    ].filter(Boolean)
+    ]
   },
   {
     name: 'Motion Design',
