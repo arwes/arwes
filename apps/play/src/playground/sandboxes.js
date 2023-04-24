@@ -8,6 +8,12 @@ export const sandboxes = [
         name: '@arwes/theme',
         children: [
           {
+            name: 'createThemeUnit',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createThemeUnit/createThemeUnit.basic.sandbox.tsx') }
+            ]
+          },
+          {
             name: 'createThemeColor',
             children: [
               { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createThemeColor/createThemeColor.basic.sandbox.tsx') },
