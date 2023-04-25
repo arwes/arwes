@@ -1,8 +1,8 @@
 import { createElement, memo, forwardRef } from 'react';
 
-import { Animated as Component } from './Animated';
+import { AnimatedX as Component } from './AnimatedX';
 
-const Animated: typeof Component = memo(
+const AnimatedX: typeof Component = memo(
   forwardRef((props: any, forwardedRef: any) => (
     createElement(Component, {
       elementRef: forwardedRef,
@@ -11,5 +11,5 @@ const Animated: typeof Component = memo(
   ))
 ) as any;
 
-export * from './Animated';
-export { Animated };
+export * from './AnimatedX';
+export { AnimatedX };

@@ -8,15 +8,12 @@ import {
   createElement,
   useRef,
   useMemo,
-  useState,
   useEffect
 } from 'react';
 import { animate } from 'motion';
 
 import { type NoInfer } from '@arwes/tools';
 import { mergeRefs } from '@arwes/react-tools';
-import { type AnimatorNode } from '@arwes/animator';
-import { useAnimator } from '@arwes/react-animator';
 
 import type {
   AnimatedSettings,
@@ -25,40 +22,35 @@ import type {
 } from '../types';
 import { formatAnimatedCSSPropsShorthands } from '../internal/formatAnimatedCSSPropsShorthands/index';
 
-interface AnimatedProps<E extends HTMLElement | SVGElement = HTMLDivElement, P extends HTMLProps<HTMLElement> | SVGProps<SVGElement> = HTMLProps<HTMLDivElement>> {
+interface AnimatedXProps<E extends HTMLElement | SVGElement = HTMLDivElement, P extends HTMLProps<HTMLElement> | SVGProps<SVGElement> = HTMLProps<HTMLDivElement>> {
   elementRef?: ForwardedRef<E>
   className?: string
   style?: CSSProperties
+  state?: string
   animated?: AnimatedSettings<P> | Array<AnimatedSettings<P>>
-  hideOnExited?: boolean
-  hideOnEntered?: boolean
   as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
   children?: ReactNode
 }
 
-const Animated = <
+const AnimatedX = <
   E extends HTMLElement | SVGElement = HTMLDivElement,
   P extends HTMLProps<HTMLElement> | SVGProps<SVGElement> = HTMLProps<HTMLDivElement>
->(props: AnimatedProps<E, P> & NoInfer<P>): ReactElement => {
+>(props: AnimatedXProps<E, P> & NoInfer<P>): ReactElement => {
   const {
     as: asProvided,
+    state: animatedState,
     animated,
     className,
     style,
     elementRef: externalElementRef,
-    hideOnExited,
-    hideOnEntered,
     ...otherProps
   } = props;
 
-  const animator = useAnimator();
-
+  const hasState = animatedState !== undefined && animatedState !== null;
   const as = useMemo(() => asProvided || 'div', []);
   const elementRef = useRef<E | null>(null);
   const animatedSettingsRef = useRef<Array<AnimatedSettings<P>>>([]);
   const animationControlsRef = useRef<AnimatedSettingsTransitionFunctionReturn[]>([]);
-  const [isExited, setIsExited] = useState(() => animator?.node.state === 'exited');
-  const [isEntered, setIsEntered] = useState(() => animator?.node.state === 'entered');
 
   const animatedSettingsListReceived = Array.isArray(animated) ? animated : [animated];
   const animatedSettingsList = animatedSettingsListReceived.filter(Boolean) as Array<AnimatedSettings<P>>;
@@ -68,61 +60,45 @@ const Animated = <
   animatedSettingsRef.current = animatedSettingsList;
 
   useEffect(() => {
-    if (!animator) {
+    if (!hasState) {
       return;
     }
 
-    const animatorSubscriber = (node: AnimatorNode): void => {
-      animationControlsRef.current = [];
+    animationControlsRef.current = [];
 
-      const element = elementRef.current as E;
-      const settingsList = animatedSettingsRef.current;
+    const element = elementRef.current as E;
+    const settingsList = animatedSettingsRef.current;
 
-      const { duration } = node;
-      const durationTransition = node.state === 'entering' || node.state === 'entered'
-        ? duration.enter
-        : duration.exit;
-
-      settingsList
-        .map(settingsItem => settingsItem.transitions?.[node.state] as AnimatedSettingsTransition)
-        .filter(Boolean)
-        .map(transitions => Array.isArray(transitions) ? transitions : [transitions])
-        .flat(1)
-        .forEach(transition => {
-          if (typeof transition === 'function') {
-            const control = transition({
-              element,
-              duration: durationTransition
-            });
-            if (control) {
-              animationControlsRef.current.push(control);
-            }
-          }
-          else {
-            const { duration, easing, options, ...definition } = transition;
-            const control = animate(
-              element,
-              definition,
-              { duration: duration || durationTransition, easing, ...options }
-            );
+    settingsList
+      .map(settingsItem => settingsItem.transitions?.[animatedState] as AnimatedSettingsTransition)
+      .filter(Boolean)
+      .map(transitions => Array.isArray(transitions) ? transitions : [transitions])
+      .flat(1)
+      .forEach(transition => {
+        if (typeof transition === 'function') {
+          const control = transition({ element, duration: 0 });
+          if (control) {
             animationControlsRef.current.push(control);
           }
-        });
-
-      setIsExited(node.state === 'exited');
-      setIsEntered(node.state === 'entered');
-    };
-
-    animator.node.subscribe(animatorSubscriber);
+        }
+        else {
+          const { duration, easing, options, ...definition } = transition;
+          const control = animate(
+            element,
+            definition,
+            { duration, easing, ...options }
+          );
+          animationControlsRef.current.push(control);
+        }
+      });
 
     return () => {
-      animator.node.unsubscribe(animatorSubscriber);
       animationControlsRef.current.forEach(control => control.stop());
     };
-  }, [animator]);
+  }, [hasState, animatedState]);
 
   let initialAttributes: P | undefined;
-  if (animator) {
+  if (hasState) {
     // TODO: Fix type.
     initialAttributes = animatedSettingsList
       .map(item => item?.initialAttributes)
@@ -130,15 +106,10 @@ const Animated = <
   }
 
   let dynamicStyles: CSSProperties | undefined;
-  if (animator) {
+  if (hasState) {
     dynamicStyles = animatedSettingsList
       .map(item => formatAnimatedCSSPropsShorthands(item?.initialStyle))
       .reduce((total, item) => ({ ...total, ...item }), {});
-  }
-
-  let animatorStyles: CSSProperties | undefined;
-  if (animator && ((hideOnExited && isExited) || (hideOnEntered && isEntered))) {
-    animatorStyles = { visibility: 'hidden' };
   }
 
   return createElement(as, {
@@ -147,12 +118,11 @@ const Animated = <
     className,
     style: {
       ...style,
-      ...dynamicStyles,
-      ...animatorStyles
+      ...dynamicStyles
     },
     ref: mergeRefs(externalElementRef, elementRef)
   });
 };
 
-export type { AnimatedProps };
-export { Animated };
+export type { AnimatedXProps };
+export { AnimatedX };
