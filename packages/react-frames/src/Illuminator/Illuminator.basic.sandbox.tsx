@@ -1,6 +1,6 @@
 import React, { type ReactElement } from 'react';
 import { createRoot } from 'react-dom/client';
-import { createFrameHexagonClip } from '@arwes/frames';
+import { createFrameOctagonClip } from '@arwes/frames';
 import { Illuminator } from '@arwes/react-frames';
 
 const Sandbox = (): ReactElement => {
@@ -9,11 +9,9 @@ const Sandbox = (): ReactElement => {
       <p style={{ color: '#fff' }}>Move mouse over the page.</p>
       <div
         style={{
-          position: 'relative',
           width: 300,
           height: 300,
-          overflow: 'hidden',
-          clipPath: createFrameHexagonClip({ squareSize: 50 })
+          clipPath: createFrameOctagonClip({ squareSize: 50 })
         }}
       >
         <Illuminator

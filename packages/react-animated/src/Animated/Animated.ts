@@ -35,6 +35,7 @@ const Animated = <
     style,
     elementRef: externalElementRef,
     hideOnExited,
+    hideOnEntered,
     ...otherProps
   } = props;
 
@@ -45,10 +46,13 @@ const Animated = <
   const animatedSettingsRef = useRef<Array<AnimatedSettings<P>>>([]);
   const animationControlsRef = useRef<AnimatedSettingsTransitionFunctionReturn[]>([]);
   const [isExited, setIsExited] = useState(() => animator?.node.state === 'exited');
+  const [isEntered, setIsEntered] = useState(() => animator?.node.state === 'entered');
 
   const animatedSettingsListReceived = Array.isArray(animated) ? animated : [animated];
   const animatedSettingsList = animatedSettingsListReceived.filter(Boolean) as Array<AnimatedSettings<P>>;
 
+  // The animations list is passed as a reference so the Animator node subscription
+  // and its respective functionalities are only initialized once for performance.
   animatedSettingsRef.current = animatedSettingsList;
 
   useEffect(() => {
@@ -94,6 +98,7 @@ const Animated = <
         });
 
       setIsExited(node.state === 'exited');
+      setIsEntered(node.state === 'entered');
     };
 
     animator.node.subscribe(animatorSubscriber);
@@ -120,7 +125,7 @@ const Animated = <
   }
 
   let animatorStyles: CSSProperties | undefined;
-  if (animator && hideOnExited && isExited) {
+  if (animator && ((hideOnExited && isExited) || (hideOnEntered && isEntered))) {
     animatorStyles = { visibility: 'hidden' };
   }
 
