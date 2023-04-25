@@ -1,8 +1,7 @@
 import { type ReactElement } from 'react';
 import Link from 'next/link';
-import lernaSettings from '@repository/lerna.json';
 import { Animator, Animated, aaOpacity, aa } from '@arwes/react';
-import { Button } from '../ui/Button';
+import { Button, SocialMedia, Version } from '../ui';
 
 const PageIndex = (): ReactElement => {
   return (
@@ -24,29 +23,11 @@ const PageIndex = (): ReactElement => {
         </Animator>
 
         <div className='header__controls'>
-          <a
-            className='header__version'
-            href={`https://github.com/arwes/arwes/releases/tag/v${lernaSettings.version}`}
-            target='version'
-          >
-            v{lernaSettings.version}
-          </a>
+          <Version />
           <Animator>
-            <Animated
-              as='nav'
-              className='nav'
+            <SocialMedia
               animated={[aaOpacity(), aa('x', 10, 0)]}
-            >
-              <a href='https://github.com/arwes/arwes' target='github'>
-                GitHub
-              </a>
-              <a href='https://discord.gg/s5sbTkw' target='discord'>
-                Discord
-              </a>
-              <a href='https://twitter.com/arwesjs' target='twitter'>
-                Twitter
-              </a>
-            </Animated>
+            />
           </Animator>
         </div>
       </header>
@@ -75,17 +56,17 @@ const PageIndex = (): ReactElement => {
               animated={[aa('y', 30, 0)]}
             >
               <Link href='/docs'>
-                <Button variant='secondary' animated={aa('x', 20, 0)}>
+                <Button animated={aa('x', 20, 0)}>
                   Docs
                 </Button>
               </Link>
               <a href='/play'>
-                <Button variant='secondary'>
+                <Button>
                   Play
                 </Button>
               </a>
               <a href='/perf'>
-                <Button variant='secondary' animated={aa('x', -20, 0)}>
+                <Button animated={aa('x', -20, 0)}>
                   Perf
                 </Button>
               </a>

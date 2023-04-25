@@ -16,12 +16,12 @@ interface ClientAppProps extends AppProps {
 }
 
 const ClientApp = (props: ClientAppProps): ReactElement => {
+  const { Component, pageProps } = props;
+
   useEffect(() => {
     setupGoogleFonts();
     setupGoogleAnalytics();
   }, []);
-
-  const { Component, pageProps } = props;
 
   return (
     <ThemeProvider theme={{}}>
