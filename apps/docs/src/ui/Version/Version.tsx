@@ -1,6 +1,8 @@
 import { useEffect, useState, type ReactElement } from 'react';
-import { type AnimatedProp, Animated } from '@arwes/react';
+import { type AnimatedProp, Animated, cx } from '@arwes/react';
 import lernaSettings from '@repository/lerna.json';
+
+import * as classes from './Version.css';
 
 interface VersionProps {
   className?: string
@@ -19,7 +21,7 @@ const Version = (props: VersionProps): ReactElement => {
   return (
     <Animated
       as='a'
-      className={className}
+      className={cx(classes.root, className)}
       animated={animated}
       href={
         isNext
@@ -27,6 +29,7 @@ const Version = (props: VersionProps): ReactElement => {
           : `https://github.com/arwes/arwes/releases/tag/v${lernaSettings.version}`
       }
       target='github'
+      title='Current Project Version'
     >
       {isNext ? 'Next Version' : `v${lernaSettings.version}`}
     </Animated>

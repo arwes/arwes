@@ -1,9 +1,6 @@
 import { type ReactElement } from 'react';
-import {
-  type AnimatedProp,
-  Animated,
-  cx
-} from '@arwes/react';
+import { GitHub, Discord, Twitter } from 'iconoir-react';
+import { type AnimatedProp, Animated, cx } from '@arwes/react';
 
 import * as classes from './SocialMedia.css';
 
@@ -21,19 +18,19 @@ const SocialMedia = (props: SocialMediaProps): ReactElement => {
       className={cx(classes.root, className)}
       animated={animated}
     >
-      <li>
-        <a href='https://github.com/arwes/arwes' target='github'>
-          GitHub
+      <li className={classes.item}>
+        <a className={classes.link} href='https://github.com/arwes/arwes' target='github' title='GitHub'>
+          <GitHub />
         </a>
       </li>
-      <li>
-        <a href='https://discord.gg/s5sbTkw' target='discord'>
-          Discord
+      <li className={classes.item}>
+        <a className={classes.link} href='https://discord.gg/s5sbTkw' target='discord' title='Discord'>
+          <Discord />
         </a>
       </li>
-      <li>
-        <a href='https://twitter.com/arwesjs' target='twitter'>
-          Twitter
+      <li className={classes.item}>
+        <a className={classes.link} href='https://twitter.com/arwesjs' target='twitter' title='Twitter'>
+          <Twitter />
         </a>
       </li>
     </Animated>

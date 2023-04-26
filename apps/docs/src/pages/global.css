@@ -20,6 +20,14 @@ img {
   margin: 0 auto;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:focus {
+  outline: 1px dotted hsl(60deg 100% 40% / 50%);
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -72,7 +80,7 @@ img {
   top: 0;
   bottom: 0;
   transform-origin: top;
-  filter: brightness(0.4) blur(10px);
+  filter: brightness(0.4) blur(0px);
 }
 
 .background1 img {
@@ -93,67 +101,11 @@ img {
   z-index: 2;
 }
 
-/* HEADER */
-
-.header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 24px;
-  width: 100%;
-}
-
-.header__logo {}
-
-.header__logo-link {
-  display: block;
-  transition: opacity 200ms ease-out;
-  opacity: 0.5;
-}
-
-.header__logo-link:hover,
-.header__logo-link:focus {
-  opacity: 1;
-}
-
-.header__logo-img {
-  display: block;
-  margin: 0;
-  width: auto;
-  height: 24px;
-  animation: arwes-logo-rotate 30s infinite linear;
-}
-
-@keyframes arwes-logo-rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.header__controls {
-  display: grid;
-  grid-template-columns: auto auto;
-  align-items: center;
-  gap: 0 24px;
-}
-
-.header__version {
-  font-size: 16px;
-  color: #59B2B2;
-  text-decoration: none;
-  transition: opacity 200ms ease-out;
-  opacity: 0.5;
-}
-
-.header__version:hover,
-.header__version:focus {
-  opacity: 1;
-}
-
 /* NAV */
 
 .nav {
   display: flex;
+  margin-bottom: 24px;
   justify-content: center;
   text-align: center;
   transition: opacity 200ms ease-out;
@@ -189,6 +141,7 @@ img {
 .main {
   flex: 1;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 20px;
@@ -199,6 +152,10 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.controls {
+  margin-top: 32px;
 }
 
 .main h1 {

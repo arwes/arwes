@@ -1,4 +1,4 @@
-const cx = (...classNames: Array<string | undefined | null>): string => {
+const cx = (...classNames: Array<string | boolean | undefined | null>): string => {
   return classNames.filter(Boolean).join(' ');
 };
 

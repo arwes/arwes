@@ -54,6 +54,9 @@ export interface AnimatedSettings<A extends HTMLProps<HTMLElement> | SVGProps<SV
   }
 };
 
+export type AnimatedProp<A extends HTMLProps<HTMLElement> | SVGProps<SVGElement> = HTMLProps<HTMLDivElement>> =
+  AnimatedSettings<A> | Array<AnimatedSettings<A>>;
+
 export type AnimatedAnimation = AnimatedSettings | AnimatedSettings[];
 
 export type AnimatedAnimations = { [P in AnimatorState]?: AnimatedAnimation };
