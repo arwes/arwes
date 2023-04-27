@@ -47,11 +47,12 @@ const formatColor = (
   // - Either 3 or 4 arguments.
   // - Each argument separated by either "," or "space", except fourth one.
   // - Fourth argument is optional and can be separated by either "," or "/".
-  // - Each argument can be a integer, floating, or percentage value.
+  // - First argument can be an integer, floating, percentage or degree value.
+  // - Each argument can be aa integer, floating, or percentage value.
   // See:
   // - https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/hsl
   // - https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/rgb
-  if (!/^(hsla?|rgba?)\(\d+(\.\d+)?%?(,\s?|\s)\d+(\.\d+)?%?(,\s?|\s)\d+(\.\d+)?%?((,\s?|\s?\/\s?)\d+(\.\d+)?%?)?\)$/.test(color)) {
+  if (!/^(hsla?|rgba?)\(\d+(\.\d+)?(%|deg)?(,\s?|\s)\d+(\.\d+)?%?(,\s?|\s)\d+(\.\d+)?%?((,\s?|\s?\/\s?)\d+(\.\d+)?%?)?\)$/.test(color)) {
     return color;
   }
 
