@@ -1,8 +1,7 @@
 import { type ReactElement } from 'react';
 import Link from 'next/link';
 import { Page, Codepen, CollageFrame, DashboardSpeed } from 'iconoir-react';
-
-import { Button } from '../ui';
+import { Button } from '@app/ui';
 
 const PageIndex = (): ReactElement => {
   return (

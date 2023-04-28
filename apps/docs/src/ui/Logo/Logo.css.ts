@@ -4,6 +4,12 @@ export const root = style({
   display: 'block'
 });
 
+const blink = keyframes({
+  '0%': { opacity: 0.8 },
+  '1%': { opacity: 1 },
+  '2%': { opacity: 0.8 }
+});
+
 export const link = style({
   display: 'grid',
   gridAutoFlow: 'column',
@@ -15,6 +21,7 @@ export const link = style({
   transitionProperty: 'opacity, color, outline',
   transitionDuration: '0.2s',
   transitionTimingFunction: 'ease-out',
+  animation: `${blink} 30s infinite 3s linear`,
 
   ':hover': {
     opacity: 1

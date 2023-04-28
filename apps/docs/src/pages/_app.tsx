@@ -7,10 +7,9 @@ import Head from 'next/head';
 import { useEffect } from 'react';
 import { ThemeProvider } from '@emotion/react';
 import { Animator, AnimatorGeneralProvider } from '@arwes/react';
-
-import { MainLayout } from '../ui';
-import { Header } from '../containers';
-import { setupGoogleFonts, setupGoogleAnalytics } from '../utils';
+import { MainLayout } from '@app/ui';
+import { Header } from '@app/containers';
+import { setupGoogleFonts, setupGoogleAnalytics } from '@app/utils';
 
 interface ClientAppProps extends AppProps {
   Component: NextPage
@@ -26,7 +25,7 @@ const ClientApp = (props: ClientAppProps): ReactElement => {
 
   return (
     <ThemeProvider theme={{}}>
-      <AnimatorGeneralProvider duration={{ enter: 0.2, exit: 0.2, stagger: 0.1 }}>
+      <AnimatorGeneralProvider duration={{ enter: 0.15, exit: 0.15, stagger: 0.05 }}>
         <Head>
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />

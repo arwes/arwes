@@ -88,26 +88,37 @@ globalStyle(`${content} svg`, {
 export const frameSimple = style({});
 
 export const frameSimpleDeco = style({
-  position: 'absolute',
-  right: 4,
-  bottom: 4,
-  borderWidth: '0 1px 1px 0',
-  borderStyle: 'solid',
-  borderColor: 'hsl(60deg 100% 75%)',
-  width: 4,
-  height: 4,
-  transformOrigin: 'right bottom',
-  transitionProperty: 'width, height, right, bottom, border',
-  transitionDuration: '200ms',
-  transitionTimingFunction: 'ease-out',
+  ':before': {
+    content: '""',
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    borderTop: '1px solid hsl(60deg 100% 75%)',
+    transform: 'translate(-4px, -4px) scaleX(0.1)',
+    transformOrigin: 'right bottom',
+    transitionProperty: 'border, transform, opacity',
+    transitionDuration: '200ms',
+    transitionTimingFunction: 'ease-out'
+  },
+  ':after': {
+    content: '""',
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    height: '100%',
+    borderLeft: '1px solid hsl(60deg 100% 75%)',
+    transform: 'translate(-4px, -4px) scaleY(0.2)',
+    transformOrigin: 'right bottom',
+    transitionProperty: 'border, transform, opacity',
+    transitionDuration: '200ms',
+    transitionTimingFunction: 'ease-out'
+  },
 
   selectors: {
-    [`${root}:hover &`]: {
-      right: 0,
-      bottom: 0,
-      width: '100%',
-      height: '25%',
-      borderColor: 'hsl(60deg 100% 40% / 50%)'
+    [`${root}:hover &:before, ${root}:hover &:after`]: {
+      borderColor: 'hsl(60deg 100% 40% / 50%)',
+      transform: 'translate(0, 0) scale(1)'
     }
   }
 });

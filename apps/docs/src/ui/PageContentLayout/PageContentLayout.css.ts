@@ -12,6 +12,8 @@ export const root = style({
   minHeight: 0
 });
 
+export const floating = style({});
+
 export const frame = style({
   zIndex: 1,
   position: 'absolute',
@@ -22,29 +24,29 @@ export const frame = style({
   maxWidth: 900,
   transform: 'translate(-50%, 0)',
   clipPath: createFrameOctagonClip({
-    squareSize: 16
+    squareSize: '1rem'
   })
 });
 
-globalStyle(`${root} path`, {
+globalStyle(`${frame} path`, {
   transitionProperty: 'color',
   transitionDuration: '200ms',
   transitionTimingFunction: 'ease-out'
 });
 
-globalStyle(`${root} path[data-name="shape"]`, {
+globalStyle(`${frame} path[data-name="shape"]`, {
   color: 'hsla(180, 100%, 75%, 0.02)'
 });
 
-globalStyle(`${root} path[data-name="decoration"]`, {
+globalStyle(`${frame} path[data-name="decoration"]`, {
   color: 'hsla(180, 100%, 9%, 0.6)'
 });
 
-globalStyle(`${root}:hover path[data-name="shape"]`, {
+globalStyle(`${root}:hover ${frame} path[data-name="shape"]`, {
   color: 'hsla(180, 100%, 75%, 0.04)'
 });
 
-globalStyle(`${root}:hover path[data-name="decoration"]`, {
+globalStyle(`${root}:hover ${frame} path[data-name="decoration"]`, {
   color: 'hsla(180, 100%, 9%, 0.8)'
 });
 
@@ -79,5 +81,11 @@ export const content = style({
     marginTop: '3rem',
     width: '100%',
     height: 1
+  },
+
+  selectors: {
+    [`${floating} &`]: {
+      padding: 0
+    }
   }
 });

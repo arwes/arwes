@@ -2,7 +2,8 @@ import { useEffect, useState, type ReactElement } from 'react';
 import { type AnimatedProp, Animated, cx } from '@arwes/react';
 import lernaSettings from '@repository/lerna.json';
 
-import { DEPLOY_TIME } from '../../dynamics';
+import { DEPLOY_TIME } from '@app/dynamics';
+import { transition } from '@app/styles/motion.css';
 import * as classes from './Version.css';
 
 interface VersionProps {
@@ -17,13 +18,13 @@ const Version = (props: VersionProps): ReactElement => {
   const date = new Date(DEPLOY_TIME);
 
   useEffect(() => {
-    setIsNext(/(next|localhost|127|198|0\.0\.0\.0\.)/.test(window.location.host));
+    setIsNext(window.location.host !== 'arwes.dev');
   }, []);
 
   return (
     <Animated
       as='a'
-      className={cx(classes.root, className)}
+      className={cx(classes.root, transition, className)}
       animated={animated}
       href={
         isNext
@@ -31,9 +32,9 @@ const Version = (props: VersionProps): ReactElement => {
           : `https://github.com/arwes/arwes/releases/tag/v${lernaSettings.version}`
       }
       target='github'
-      title={`Deployed at ${date.toUTCString()}`}
+      title={`Version ${isNext ? '@next' : lernaSettings.version} deployed at ${date.toUTCString()}`}
     >
-      {isNext ? 'Next Version' : `v${lernaSettings.version}`}
+      {isNext ? 'Version @next' : `v${lernaSettings.version}`}
     </Animated>
   );
 };

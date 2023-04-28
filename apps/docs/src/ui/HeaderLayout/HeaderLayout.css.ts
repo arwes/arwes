@@ -17,19 +17,16 @@ export const frame = style({
   position: 'absolute',
   inset: 0,
   overflow: 'hidden',
-  borderTop: '1px solid hsl(180deg 100% 75% / 10%)',
-  borderLeft: '1px solid hsl(180deg 100% 75% / 10%)',
-  borderRight: '1px solid hsl(180deg 100% 75% / 10%)',
+  borderTop: '1px solid hsla(180, 100%, 9%, 0.6)',
+  borderLeft: '1px solid hsla(180, 100%, 9%, 0.6)',
+  borderRight: '1px solid hsla(180, 100%, 9%, 0.6)',
   borderBottom: '1px solid hsl(180deg 33% 25%)',
-  backgroundColor: 'hsl(180deg 100% 6% / 25%)',
-  opacity: 0.8,
-  transitionProperty: 'opacity',
-  transitionDuration: '200ms',
-  transitionTimingFunction: 'ease-out',
+  backgroundColor: 'hsla(180, 100%, 75%, 0.02)',
 
   selectors: {
     [`${root}:hover &`]: {
-      opacity: 1
+      borderColor: 'hsla(180, 100%, 9%, 0.8) hsla(180, 100%, 9%, 0.8) hsl(180deg 33% 30%)',
+      backgroundColor: 'hsla(180, 100%, 75%, 0.04)'
     }
   }
 });

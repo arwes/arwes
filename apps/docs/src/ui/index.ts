@@ -6,3 +6,4 @@ export * from './MenuItem';
 export * from './Logo';
 export * from './HeaderLayout';
 export * from './PageContentLayout';
+export * from './Card';
