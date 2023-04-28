@@ -1,9 +1,9 @@
 import { type ReactElement, type ReactNode } from 'react';
 import { type AnimatedProp, Animated, Illuminator, cx } from '@arwes/react';
 
-import * as classes from './Header.css';
+import * as classes from './HeaderLayout.css';
 
-interface HeaderProps {
+interface HeaderLayoutProps {
   className?: string
   animated?: AnimatedProp
   hasFrame?: boolean
@@ -12,7 +12,7 @@ interface HeaderProps {
   right?: ReactNode
 }
 
-const Header = (props: HeaderProps): ReactElement => {
+const HeaderLayout = (props: HeaderLayoutProps): ReactElement => {
   const { className, animated, hasFrame, left, center, right } = props;
 
   return (
@@ -26,7 +26,7 @@ const Header = (props: HeaderProps): ReactElement => {
           <div role='presentation' className={classes.frame}>
             <div className={classes.frameLineLeft} />
             <div className={classes.frameLineRight} />
-            <Illuminator color='hsl(180 50% 90% / 4%)' size={400} />
+            <Illuminator color='hsl(180 50% 50% / 5%)' size={400} />
           </div>
         )}
         <div className={classes.left}>
@@ -43,5 +43,5 @@ const Header = (props: HeaderProps): ReactElement => {
   );
 };
 
-export type { HeaderProps };
-export { Header };
+export type { HeaderLayoutProps };
+export { HeaderLayout };

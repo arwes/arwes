@@ -2,7 +2,7 @@ import { type ReactElement, type ReactNode } from 'react';
 import {
   type AnimatedProp,
   Animated,
-  FrameSVGHexagon,
+  FrameSVGOctagon,
   Illuminator,
   cx
 } from '@arwes/react';
@@ -13,6 +13,7 @@ interface ButtonProps {
   className?: string
   animated?: AnimatedProp
   tabIndex?: number
+  title?: string
   size?: 'small' | 'medium'
   frame?: 'simple' | 'hexagon'
   children: ReactNode
@@ -23,6 +24,7 @@ const Button = (props: ButtonProps): ReactElement => {
     animated,
     className,
     tabIndex,
+    title,
     size = 'medium',
     frame = 'simple',
     children
@@ -40,21 +42,20 @@ const Button = (props: ButtonProps): ReactElement => {
       )}
       animated={animated}
       tabIndex={tabIndex}
+      title={title}
     >
       {frame === 'simple' && (
         <div className={classes.frameSimpleDeco} />
       )}
       {frame === 'hexagon' && (
-        <>
-          <div className={classes.frameHexagonClip}>
-            <Illuminator
-              className={classes.frameHexagonIlluminator}
-              color='hsl(60 50% 90% / 8%)'
-              size={200}
-            />
-          </div>
-          <FrameSVGHexagon squareSize={12} />
-        </>
+        <div className={classes.frameHexagonClip}>
+          <Illuminator
+            className={classes.frameHexagonIlluminator}
+            color='hsl(60 50% 90% / 8%)'
+            size={200}
+          />
+          <FrameSVGOctagon squareSize={12} leftBottom={false} rightTop={false} />
+        </div>
       )}
       <div className={classes.content}>
         {children}

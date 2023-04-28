@@ -7,10 +7,9 @@ export const root = style({
 
 export const container = style({
   position: 'relative',
-  display: 'flex',
-  justifyContent: 'space-between',
-  paddingLeft: '2rem',
-  paddingRight: '2rem'
+  display: 'grid',
+  gridTemplateColumns: 'repeat(3, 1fr)',
+  padding: '0 2rem'
 });
 
 export const frame = style({
@@ -21,7 +20,7 @@ export const frame = style({
   borderTop: '1px solid hsl(180deg 100% 75% / 10%)',
   borderLeft: '1px solid hsl(180deg 100% 75% / 10%)',
   borderRight: '1px solid hsl(180deg 100% 75% / 10%)',
-  borderBottom: '1px solid hsl(180deg 33% 40%)',
+  borderBottom: '1px solid hsl(180deg 33% 25%)',
   backgroundColor: 'hsl(180deg 100% 6% / 25%)',
   opacity: 0.8,
   transitionProperty: 'opacity',
@@ -54,23 +53,23 @@ export const frameLineRight = style({
 export const left = style({
   display: 'grid',
   gridAutoFlow: 'column',
+  justifyContent: 'flex-start',
   alignItems: 'center',
-  columnGap: '1rem',
-  padding: '0.75rem 0'
+  columnGap: '1rem'
 });
 
 export const center = style({
   display: 'grid',
   gridAutoFlow: 'column',
+  justifyContent: 'center',
   alignItems: 'center',
-  columnGap: '1rem',
-  padding: '0.75rem 0'
+  columnGap: '1rem'
 });
 
 export const right = style({
   display: 'grid',
   gridAutoFlow: 'column',
+  justifyContent: 'flex-end',
   alignItems: 'center',
-  columnGap: '1rem',
-  padding: '0.75rem 0'
+  columnGap: '1rem'
 });

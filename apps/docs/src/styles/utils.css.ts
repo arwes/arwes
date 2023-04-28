@@ -15,3 +15,11 @@ export const hiddenMDDown = style({
     }
   }
 });
+
+export const hiddenMD = style({
+  '@media': {
+    '(min-width: 900px)': {
+      display: 'none'
+    }
+  }
+});

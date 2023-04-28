@@ -124,7 +124,7 @@ export const frameHexagonClip = style({
   width: '100%',
   height: '100%',
   overflow: 'hidden',
-  clipPath: createFrameOctagonClip({ squareSize: 12, leftTop: false, rightBottom: false })
+  clipPath: createFrameOctagonClip({ squareSize: 12, leftBottom: false, rightTop: false })
 });
 
 export const frameHexagonIlluminator = style({

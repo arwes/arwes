@@ -46,189 +46,60 @@ a:focus {
   border: 1px solid hsla(60, 83%, 71%, 1);
 }
 
-/* PAGE */
+/* INDEX PAGE */
 
-.page {
-  position: absolute;
-  overflow: hidden;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  background: radial-gradient(50% 50% at 50% 50%, #04252B 0%, #002424 0.01%, #001515 100%);
-}
+.index-page {}
 
-.page__content {
-  z-index: 100;
-  position: relative;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-/* BACKGROUNDS */
-
-.background1 {
-  display: block;
-  position: absolute;
-  z-index: 1;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  transform-origin: top;
-  filter: brightness(0.4) blur(0px);
-}
-
-.background1 img {
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-align: center;
-}
-
-.background2,
-.background3 {
-  z-index: 2;
-}
-
-/* NAV */
-
-.nav {
-  display: flex;
-  margin-bottom: 24px;
-  justify-content: center;
-  text-align: center;
-  transition: opacity 200ms ease-out;
-  opacity: 0.5;
-}
-
-.nav:hover,
-.nav:focus {
-  opacity: 1;
-}
-
-.nav a {
-  display: block;
-  padding: 8px;
-  color: #79F2F2;
-  text-decoration: none;
-  text-transform: none;
-  opacity: 0.5;
-  transition: opacity 200ms ease-out;
-}
-
-.nav a:hover,
-.nav a:focus {
-  opacity: 1;
-}
-
-.nav .arwes-text__blink {
-  display: none !important;
-}
-
-/* CONTENT */
-
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  text-align: center;
-}
-
-.main__content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.controls {
-  margin-top: 32px;
-}
-
-.main h1 {
+.index-page h1 {
   margin: 0 auto 20px;
 }
 
-.main img {
+.index-page img {
   max-height: 40px;
 }
 
-.main h2 {
+.index-page h2 {
   margin-bottom: 20px;
   font-size: 16px;
   font-weight: 400;
   text-shadow: 0px 0px 2px rgba(194, 242, 242, 0.5);
 }
 
-.main p {
+.index-page p {
   margin-bottom: 20px;
   font-size: 14px;
   font-weight: 400;
 }
 
-/* LINKS */
-
-.links {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.links a + a {
-  margin-left: 10px;
-}
-
 /* TABLET UP */
 
 @media (min-width: 768px) {
-  .main img {
+  .index-page img {
     max-height: 60px;
   }
 
-  .main h2 {
+  .index-page h2 {
     font-size: 24px;
   }
 
-  .main p {
+  .index-page p {
     font-size: 16px;
-  }
-
-  .links a + a {
-    margin-left: 20px;
   }
 }
 
 /* TABLET UP */
 
 @media (min-width: 1921px) {
-  .main img {
+  .index-page img {
     max-height: 80px;
   }
 
-  .main h2 {
+  .index-page h2 {
     font-size: 28px;
   }
 
-  .main p {
+  .index-page p {
     font-size: 21px;
-  }
-
-  .links a + a {
-    margin-left: 24px;
   }
 }
 
@@ -237,16 +108,9 @@ a:focus {
 //
 */
 
-.page-document {
-  position: relative;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  min-height: 0;
-}
+/* PAGE DOCUMENT */
+
+.page-document {}
 
 .page-document h1,
 .page-document h2,
@@ -298,76 +162,4 @@ a:focus {
   width: 20px;
   height: 0;
   border-bottom: 1px solid hsla(180, 69%, 67%, 0.5);
-}
-
-.page-document__decoration {
-  z-index: 1;
-  position: absolute;
-  left: 50%;
-  top: 2rem;
-  bottom: 2rem;
-  width: 100%;
-  max-width: 900px;
-  transform: translate(-50%, 0);
-}
-
-.page-document__svg,
-.page-document__illuminator {
-  /**/
-}
-
-.page-document__svg path {
-  stroke: hsla(180, 100%, 9%, 0.6);
-  stroke-width: 1px;
-  fill: hsla(180, 100%, 75%, 0.02);
-}
-
-.page-document__illuminator {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  clip-path: polygon(
-    16px 0,
-    calc(100% - 16px) 0,
-    100% 16px,
-    100% calc(100% - 16px),
-    calc(100% - 16px) 100%,
-    16px 100%,
-    0 calc(100% - 16px),
-    0 16px
-  );
-}
-
-.page-document__overflow {
-  z-index: 2;
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  padding: 2rem 1rem;
-  width: 100%;
-  min-height: 0;
-}
-
-.page-document__container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  overflow-y: auto;
-  width: 100%;
-  min-height: 0;
-}
-
-.page-document__content {
-  padding: 3rem;
-  width: 100%;
-  max-width: 900px;
-}
-
-/* To create the container scroll padding bottom space. */
-.page-document__content::after {
-  content: "";
-  display: block;
-  margin-top: 3rem;
-  width: 100%;
-  height: 1px;
 }

@@ -4,14 +4,13 @@ import type { ReactElement } from 'react';
 import { type NextPage } from 'next';
 import { type AppProps } from 'next/app';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { ThemeProvider } from '@emotion/react';
-import { Animator, AnimatorGeneralProvider, Animated, aa, Dots, Puffs } from '@arwes/react';
+import { Animator, AnimatorGeneralProvider } from '@arwes/react';
 
-import { SocialMedia, Version, Header, Logo } from '../ui';
-import { setupGoogleFonts } from '../utils/setupGoogleFonts';
-import { setupGoogleAnalytics } from '../utils/setupGoogleAnalytics';
+import { MainLayout } from '../ui';
+import { Header } from '../containers';
+import { setupGoogleFonts, setupGoogleAnalytics } from '../utils';
 
 interface ClientAppProps extends AppProps {
   Component: NextPage
@@ -19,8 +18,6 @@ interface ClientAppProps extends AppProps {
 
 const ClientApp = (props: ClientAppProps): ReactElement => {
   const { Component, pageProps } = props;
-
-  const router = useRouter();
 
   useEffect(() => {
     setupGoogleFonts();
@@ -54,56 +51,10 @@ const ClientApp = (props: ClientAppProps): ReactElement => {
         `}</style>
 
         <Animator combine>
-          <div className='page'>
-            <Animator>
-              <Animated
-                as='picture'
-                className="background1"
-                animated={[aa('opacity', 0.8, 1), aa('scale', 1.025, 1)]}
-                role='presentation'
-              >
-                <source media='(min-width:1280px)' srcSet='/assets/images/background-large.webp' type='image/webp' />
-                <source media='(min-width:1280px)' srcSet='/assets/images/background-large.jpg' type='image/jpeg' />
-                <source media='(min-width:768px)' srcSet='/assets/images/background-medium.webp' type='image/webp' />
-                <source media='(min-width:768px)' srcSet='/assets/images/background-medium.jpg' type='image/jpeg' />
-                <source media='(max-width:767px)' srcSet='/assets/images/background-small.webp' type='image/webp' />
-                <img src='/assets/images/background-small.jpg' role='presentation' alt='Background' />
-              </Animated>
-            </Animator>
-
-            <Animator duration={{ enter: 2 }}>
-              <Dots
-                className="background2"
-                color='hsla(180, 29%, 72%, 0.15)'
-                size={2}
-                distance={40}
-                originInverted
-              />
-            </Animator>
-
-            <Animator duration={{ enter: 2, interval: 4 }}>
-              <Puffs
-                className="background3"
-                color='hsla(180, 29%, 72%, 0.25)'
-                quantity={20}
-              />
-            </Animator>
-
-            <div className='page__content'>
-              <Header
-                hasFrame={router.asPath !== '/'}
-                left={<Logo withLogotype={router.asPath !== '/'} />}
-                right={
-                  <>
-                    <Version />
-                    <SocialMedia />
-                  </>
-                }
-              />
-
-              <Component {...pageProps} />
-            </div>
-          </div>
+          <MainLayout>
+            <Header />
+            <Component {...pageProps} />
+          </MainLayout>
         </Animator>
       </AnimatorGeneralProvider>
     </ThemeProvider>
