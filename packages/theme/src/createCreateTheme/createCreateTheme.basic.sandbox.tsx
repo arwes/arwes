@@ -2,9 +2,11 @@ import React, { type ReactElement, Fragment, useMemo } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Global } from '@emotion/react';
 import {
+  type ThemeSettingsUnit,
   type ThemeSettingsMultiplier,
   type ThemeSettingsColor,
   type ThemeSettingsStyle,
+  type ThemeUnit,
   type ThemeMultiplier,
   type ThemeColor,
   type ThemeStyle,
@@ -13,20 +15,20 @@ import {
 } from '@arwes/theme';
 
 interface ThemeSettings {
-  space: ThemeSettingsMultiplier
+  space: ThemeSettingsUnit
   outline: ThemeSettingsMultiplier
   font: ThemeSettingsStyle
-  palette: {
+  color: {
     primary: ThemeSettingsColor
     secondary: ThemeSettingsColor
   }
 }
 
 interface Theme {
-  space: ThemeMultiplier
+  space: ThemeUnit
   outline: ThemeMultiplier
   font: ThemeStyle
-  palette: {
+  color: {
     primary: ThemeColor
     secondary: ThemeColor
   }
@@ -36,7 +38,7 @@ const themeStructure: ThemeCreatorStructure = {
   space: 'multiplier',
   outline: 'multiplier',
   font: 'style',
-  palette: {
+  color: {
     primary: 'color',
     secondary: 'color'
   }
@@ -44,14 +46,14 @@ const themeStructure: ThemeCreatorStructure = {
 
 const themeDefaults: ThemeSettings = {
   // Values to be multiplied by a provided integer.
-  space: 5,
+  space: i => `${i}rem`,
   outline: 1,
   // A list of styles with any CSS properties.
   font: [
     { fontFamily: 'monospace', fontSize: '30px' },
     { fontFamily: 'sans-serif', fontSize: '21px' }
   ],
-  palette: {
+  color: {
     // A function to return a HSLA value as [number, number, number, number?].
     primary: i => [180, 70, i * 5, 1],
     secondary: i => [60, 70, i * 5, 1]
@@ -73,21 +75,21 @@ const Sandbox = (): ReactElement => {
     <Fragment>
       <Global styles={{
         html: {
-          margin: theme.space(4),
-          backgroundColor: theme.palette.primary(1)
+          margin: theme.space(2),
+          backgroundColor: theme.color.primary(1)
         },
         h1: {
+          ...theme.font(0),
+          marginBottom: theme.space(1),
           borderBottomWidth: theme.outline(1),
           borderBottomStyle: 'solid',
-          borderBottomColor: theme.palette.primary(10),
-          marginBottom: theme.space(2),
-          paddingBottom: theme.space(2),
-          ...theme.font(0),
-          color: theme.palette.primary(16)
+          borderBottomColor: theme.color.primary(10),
+          paddingBottom: theme.space(1),
+          color: theme.color.primary(16)
         },
         p: {
           ...theme.font(1),
-          color: theme.palette.secondary(16)
+          color: theme.color.secondary(16)
         }
       }} />
       <h1>Arwes Framework</h1>

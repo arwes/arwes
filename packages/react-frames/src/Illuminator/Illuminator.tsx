@@ -52,6 +52,7 @@ const Illuminator = (props: IlluminatorProps): ReactElement => {
 
   return (
     <div
+      role='presentation'
       className={cx('arwes-react-frames-illuminator', className)}
       style={{
         position: 'absolute',

@@ -45,6 +45,7 @@ const FrameSVG = (props: FrameSVGProps): ReactElement => {
 
   return (
     <svg
+      role='presentation'
       ref={mergeRefs(svgRef, elementRef)}
       className={cx('arwes-react-frames-framesvg', className)}
       xmlns='http://www.w3.org/2000/svg'
