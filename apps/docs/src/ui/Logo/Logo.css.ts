@@ -8,9 +8,10 @@ export const link = style({
   display: 'grid',
   gridAutoFlow: 'column',
   alignItems: 'center',
-  columnGap: 8,
+  padding: '0.25rem',
+  columnGap: '0.5rem',
   textDecoration: 'none',
-  opacity: 0.5,
+  opacity: 0.8,
   transitionProperty: 'opacity, color, outline',
   transitionDuration: '0.2s',
   transitionTimingFunction: 'ease-out',
@@ -20,7 +21,7 @@ export const link = style({
   },
   ':focus': {
     opacity: 1,
-    outline: '1px dotted hsl(180 82.31% 71.18%)'
+    outline: '1px dotted hsl(180deg 100% 40% / 50%)'
   }
 });
 
@@ -32,12 +33,12 @@ const rotation = keyframes({
 export const logo = style({
   display: 'block',
   width: 'auto',
-  height: 24,
+  height: '1.5rem',
   animation: `${rotation} 30s infinite linear`
 });
 
 export const type = style({
   display: 'block',
   width: 'auto',
-  height: 20
+  height: '1.25rem'
 });

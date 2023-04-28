@@ -4,10 +4,12 @@ import type { ReactElement } from 'react';
 import { type NextPage } from 'next';
 import { type AppProps } from 'next/app';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { ThemeProvider } from '@emotion/react';
 import { Animator, AnimatorGeneralProvider, Animated, aa, Dots, Puffs } from '@arwes/react';
 
+import { SocialMedia, Version, Header, Logo } from '../ui';
 import { setupGoogleFonts } from '../utils/setupGoogleFonts';
 import { setupGoogleAnalytics } from '../utils/setupGoogleAnalytics';
 
@@ -17,6 +19,8 @@ interface ClientAppProps extends AppProps {
 
 const ClientApp = (props: ClientAppProps): ReactElement => {
   const { Component, pageProps } = props;
+
+  const router = useRouter();
 
   useEffect(() => {
     setupGoogleFonts();
@@ -86,6 +90,17 @@ const ClientApp = (props: ClientAppProps): ReactElement => {
             </Animator>
 
             <div className='page__content'>
+              <Header
+                hasFrame={router.asPath !== '/'}
+                left={<Logo withLogotype={router.asPath !== '/'} />}
+                right={
+                  <>
+                    <Version />
+                    <SocialMedia />
+                  </>
+                }
+              />
+
               <Component {...pageProps} />
             </div>
           </div>

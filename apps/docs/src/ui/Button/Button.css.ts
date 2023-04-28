@@ -1,5 +1,5 @@
 import { style, globalStyle } from '@vanilla-extract/css';
-import { createFrameHexagonClip } from '@arwes/react';
+import { createFrameOctagonClip } from '@arwes/react';
 
 export const root = style({
   position: 'relative',
@@ -80,7 +80,6 @@ export const content = style({
 });
 
 globalStyle(`${content} svg`, {
-  display: 'inline-block',
   margin: 0
 });
 
@@ -125,7 +124,7 @@ export const frameHexagonClip = style({
   width: '100%',
   height: '100%',
   overflow: 'hidden',
-  clipPath: createFrameHexagonClip({ squareSize: 12 })
+  clipPath: createFrameOctagonClip({ squareSize: 12, leftTop: false, rightBottom: false })
 });
 
 export const frameHexagonIlluminator = style({

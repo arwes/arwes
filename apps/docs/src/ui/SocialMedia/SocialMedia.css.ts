@@ -4,7 +4,7 @@ export const root = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
   gridTemplateRows: 'auto',
-  columnGap: '12px',
+  columnGap: '0.5rem',
   listStyle: 'none',
   justifyContent: 'center',
   alignItems: 'center'
@@ -18,8 +18,9 @@ export const item = style({
 export const link = style({
   display: 'flex',
   justifyContent: 'center',
+  padding: '0.25rem',
   color: 'hsl(180 82.31% 71.18%)',
-  opacity: 0.5,
+  opacity: 0.8,
   transitionProperty: 'opacity, color, outline',
   transitionDuration: '0.2s',
   transitionTimingFunction: 'ease-out',
@@ -30,6 +31,6 @@ export const link = style({
   },
   ':focus': {
     opacity: 1,
-    outline: '1px dotted hsl(180 82.31% 71.18%)'
+    outline: '1px dotted hsl(180deg 100% 40% / 50%)'
   }
 });
