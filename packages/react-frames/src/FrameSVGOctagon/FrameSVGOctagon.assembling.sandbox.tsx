@@ -16,12 +16,12 @@ const Frame = (): ReactElement => {
       height: 150,
 
       '& path[data-name="shape"]': {
-        color: 'hsl(180, 75%, 10%)',
-        filter: 'drop-shadow(0 0 4px hsl(180, 75%, 10%))'
+        color: 'hsl(60, 75%, 10%)',
+        filter: 'drop-shadow(0 0 4px hsl(60, 75%, 10%))'
       },
       '& path[data-name="decoration"]': {
-        color: 'hsl(180, 75%, 50%)',
-        filter: 'drop-shadow(0 0 4px hsl(180, 75%, 50%))'
+        color: 'hsl(60, 75%, 50%)',
+        filter: 'drop-shadow(0 0 4px hsl(60, 75%, 50%))'
       }
     }}>
       <FrameSVGOctagon

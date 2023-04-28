@@ -2,27 +2,28 @@
 import { jsx } from '@emotion/react';
 import { type ReactElement } from 'react';
 import { createRoot } from 'react-dom/client';
-import { FrameSVGHexagon } from '@arwes/react-frames';
+import { FrameSVGOctagon } from '@arwes/react-frames';
 
 const Sandbox = (): ReactElement => {
   return (
     <div style={{
       position: 'relative',
-      width: 300,
+      width: 150,
       height: 300
     }}>
-      <FrameSVGHexagon
-        inverted
-        squareSize={32}
-        strokeWidth={2}
+      <FrameSVGOctagon
         css={{
           '& path[data-name="shape"]': {
-            color: 'hsl(60, 75%, 10%)'
+            color: 'hsl(120, 75%, 10%)'
           },
           '& path[data-name="decoration"]': {
-            color: 'hsl(60, 75%, 50%)'
+            color: 'hsl(120, 75%, 50%)'
           }
         }}
+        leftTop={false}
+        rightTop={true}
+        rightBottom={true}
+        leftBottom={false}
       />
     </div>
   );

@@ -240,34 +240,19 @@ export const sandboxes = [
             ]
           },
           {
+            name: 'FrameSVGOctagon',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGOctagon/FrameSVGOctagon.basic.sandbox.tsx') },
+              { name: 'corners', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGOctagon/FrameSVGOctagon.corners.sandbox.tsx') },
+              { name: 'assembling', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGOctagon/FrameSVGOctagon.assembling.sandbox.tsx') }
+            ]
+          },
+          {
             name: 'FrameSVGUnderline',
             children: [
               { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGUnderline/FrameSVGUnderline.basic.sandbox.tsx') },
               { name: 'squareSize', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGUnderline/FrameSVGUnderline.squareSize.sandbox.tsx') },
               { name: 'assembling', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGUnderline/FrameSVGUnderline.assembling.sandbox.tsx') }
-            ]
-          },
-          {
-            name: 'FrameSVGPentagon',
-            children: [
-              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGPentagon/FrameSVGPentagon.basic.sandbox.tsx') },
-              { name: 'inverted', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGPentagon/FrameSVGPentagon.inverted.sandbox.tsx') },
-              { name: 'assembling', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGPentagon/FrameSVGPentagon.assembling.sandbox.tsx') }
-            ]
-          },
-          {
-            name: 'FrameSVGHexagon',
-            children: [
-              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGHexagon/FrameSVGHexagon.basic.sandbox.tsx') },
-              { name: 'inverted', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGHexagon/FrameSVGHexagon.inverted.sandbox.tsx') },
-              { name: 'assembling', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGHexagon/FrameSVGHexagon.assembling.sandbox.tsx') }
-            ]
-          },
-          {
-            name: 'FrameSVGOctagon',
-            children: [
-              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGOctagon/FrameSVGOctagon.basic.sandbox.tsx') },
-              { name: 'assembling', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGOctagon/FrameSVGOctagon.assembling.sandbox.tsx') }
             ]
           },
           {
