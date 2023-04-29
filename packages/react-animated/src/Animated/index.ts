@@ -11,5 +11,5 @@ const Animated: typeof Component = memo(
   ))
 ) as any;
 
-export * from './Animated.types';
+export * from './Animated';
 export { Animated };

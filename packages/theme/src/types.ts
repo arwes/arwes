@@ -38,9 +38,9 @@ export type ThemeStyle = (index: number) => ThemeStyleValue;
 
 export interface ThemeBreakpoints {
   settings: ThemeSettingsBreakpoints
-  up: (key: string | number) => string
-  down: (key: string | number) => string
-  between: (startKey: string | number, endKey: string | number) => string
+  up: (key: string | number, opts?: { strip?: boolean }) => string
+  down: (key: string | number, opts?: { strip?: boolean }) => string
+  between: (startKey: string | number, endKey: string | number, opts?: { strip?: boolean }) => string
 }
 
 // Theme Creators

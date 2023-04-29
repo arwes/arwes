@@ -18,7 +18,7 @@ const Frame = (): ReactElement => {
       '& path[data-name="shape"]': {
         color: 'hsl(180, 75%, 10%)'
       },
-      '& path[data-name="polyline"]': {
+      '& path[data-name="decoration"]': {
         color: 'hsl(180, 75%, 50%)'
       }
     }}>

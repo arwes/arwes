@@ -10,10 +10,17 @@ export const sandboxes = [
         name: '@arwes/theme',
         children: [
           {
+            name: 'createThemeUnit',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createThemeUnit/createThemeUnit.basic.sandbox.tsx') }
+            ]
+          },
+          {
             name: 'createThemeColor',
             children: [
               { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createThemeColor/createThemeColor.basic.sandbox.tsx') },
-              { name: 'variations', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createThemeColor/createThemeColor.variations.sandbox.tsx') }
+              { name: 'variations', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createThemeColor/createThemeColor.variations.sandbox.tsx') },
+              { name: 'alpha', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createThemeColor/createThemeColor.alpha.sandbox.tsx') }
             ]
           },
           {
@@ -34,17 +41,6 @@ export const sandboxes = [
             name: 'createCreateTheme',
             children: [
               { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createCreateTheme/createCreateTheme.basic.sandbox.tsx') }
-            ]
-          }
-        ]
-      },
-      !isProduction && {
-        name: '@arwes/react-theme',
-        children: [
-          {
-            name: 'createUseCreateThemeExtended',
-            children: [
-              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-theme/src/createUseCreateThemeExtended/createUseCreateThemeExtended.basic.sandbox.tsx') }
             ]
           }
         ]
@@ -110,7 +106,7 @@ export const sandboxes = [
               { name: 'managerStagger', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.managerStagger.sandbox.tsx') },
               { name: 'managerSequence', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.managerSequence.sandbox.tsx') },
               { name: 'managerSwitch', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.managerSwitch.sandbox.tsx') },
-              { name: 'unmountOnExited', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.unmountOnExited.sandbox.tsx') },
+              { name: 'unmountOn', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.unmountOn.sandbox.tsx') },
               { name: 'condition', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.condition.sandbox.tsx') },
               { name: 'initialState', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.initialState.sandbox.tsx') },
               { name: 'disabled', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.disabled.sandbox.tsx') },
@@ -139,6 +135,14 @@ export const sandboxes = [
               { name: 'composition', code: require('!raw-loader?esModule=false!@repository/packages/react-animated/src/Animated/Animated.composition.sandbox.tsx') },
               { name: 'hidden', code: require('!raw-loader?esModule=false!@repository/packages/react-animated/src/Animated/Animated.hidden.sandbox.tsx') },
               { name: 'disabled', code: require('!raw-loader?esModule=false!@repository/packages/react-animated/src/Animated/Animated.disabled.sandbox.tsx') }
+            ]
+          },
+          {
+            name: 'AnimatedX',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-animated/src/AnimatedX/AnimatedX.basic.sandbox.tsx') },
+              { name: 'options', code: require('!raw-loader?esModule=false!@repository/packages/react-animated/src/AnimatedX/AnimatedX.options.sandbox.tsx') },
+              { name: 'disabled', code: require('!raw-loader?esModule=false!@repository/packages/react-animated/src/AnimatedX/AnimatedX.disabled.sandbox.tsx') }
             ]
           },
           {
@@ -209,12 +213,40 @@ export const sandboxes = [
         ]
       },
       {
+        name: '@arwes/frames',
+        children: [
+          {
+            name: 'createFrameOctagonClip',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameOctagonClip/createFrameOctagonClip.basic.sandbox.tsx') },
+              { name: 'corners', code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameOctagonClip/createFrameOctagonClip.corners.sandbox.tsx') }
+            ]
+          }
+        ]
+      },
+      {
         name: '@arwes/react-frames',
         children: [
+          {
+            name: 'useFrameSVGRenderer',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/useFrameSVGRenderer/useFrameSVGRenderer.basic.sandbox.tsx') },
+              { name: 'commands', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/useFrameSVGRenderer/useFrameSVGRenderer.commands.sandbox.tsx') },
+              { name: 'clipping', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/useFrameSVGRenderer/useFrameSVGRenderer.clipping.sandbox.tsx') }
+            ]
+          },
           {
             name: 'FrameSVG',
             children: [
               { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVG/FrameSVG.basic.sandbox.tsx') }
+            ]
+          },
+          {
+            name: 'FrameSVGOctagon',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGOctagon/FrameSVGOctagon.basic.sandbox.tsx') },
+              { name: 'corners', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGOctagon/FrameSVGOctagon.corners.sandbox.tsx') },
+              { name: 'assembling', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGOctagon/FrameSVGOctagon.assembling.sandbox.tsx') }
             ]
           },
           {
@@ -223,22 +255,6 @@ export const sandboxes = [
               { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGUnderline/FrameSVGUnderline.basic.sandbox.tsx') },
               { name: 'squareSize', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGUnderline/FrameSVGUnderline.squareSize.sandbox.tsx') },
               { name: 'assembling', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGUnderline/FrameSVGUnderline.assembling.sandbox.tsx') }
-            ]
-          },
-          {
-            name: 'FrameSVGPentagon',
-            children: [
-              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGPentagon/FrameSVGPentagon.basic.sandbox.tsx') },
-              { name: 'inverted', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGPentagon/FrameSVGPentagon.inverted.sandbox.tsx') },
-              { name: 'assembling', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGPentagon/FrameSVGPentagon.assembling.sandbox.tsx') }
-            ]
-          },
-          {
-            name: 'FrameSVGHexagon',
-            children: [
-              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGHexagon/FrameSVGHexagon.basic.sandbox.tsx') },
-              { name: 'inverted', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGHexagon/FrameSVGHexagon.inverted.sandbox.tsx') },
-              { name: 'assembling', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGHexagon/FrameSVGHexagon.assembling.sandbox.tsx') }
             ]
           },
           {
@@ -255,6 +271,18 @@ export const sandboxes = [
               { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGLines/FrameSVGLines.basic.sandbox.tsx') },
               { name: 'lines', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGLines/FrameSVGLines.lines.sandbox.tsx') },
               { name: 'assembling', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGLines/FrameSVGLines.assembling.sandbox.tsx') }
+            ]
+          },
+          {
+            name: 'IlluminatorSVG',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/IlluminatorSVG/IlluminatorSVG.basic.sandbox.tsx') }
+            ]
+          },
+          {
+            name: 'Illuminator',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/Illuminator/Illuminator.basic.sandbox.tsx') }
             ]
           }
         ]

@@ -1,18 +1,21 @@
 import type * as CSS from 'csstype';
 
-export type FRAME_SVG_DIMENSION = number | string;
+type FrameSVGPathCommandName = 'M' | 'm' | 'L' | 'l' | 'H' | 'h' | 'V' | 'v' | 'C' | 'c' | 'S' | 's' | 'Q' | 'q' | 'T' | 't' | 'A' | 'a';
 
-export type FRAME_SVG_POINT = FRAME_SVG_DIMENSION[];
+export type FrameSVGPathDimension = number | string;
 
-export type FRAME_SVG_POLYLINE = FRAME_SVG_POINT[];
+export type FrameSVGPathCommand = 'Z' | 'z' | [FrameSVGPathCommandName, ...FrameSVGPathDimension[]];
 
-export type FRAME_SVG_POLYLINE_STYLE = CSS.Properties;
+export type FrameSVGPath = FrameSVGPathCommand[];
 
-export interface FRAME_SVG_POLYLINE_CUSTOM {
+export type FrameSVGStyle = CSS.Properties;
+
+export interface FrameSVGPathCustom {
   name?: string
+  id?: string
   className?: string
-  style?: FRAME_SVG_POLYLINE_STYLE
-  polyline: FRAME_SVG_POLYLINE
+  style?: FrameSVGStyle
+  path: FrameSVGPath
 }
 
-export type FRAME_SVG_POLYLINE_GENERIC = FRAME_SVG_POLYLINE | FRAME_SVG_POLYLINE_CUSTOM;
+export type FrameSVGPathGeneric = FrameSVGPath | FrameSVGPathCustom;

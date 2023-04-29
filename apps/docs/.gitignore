@@ -1,3 +1,4 @@
 .next
 public
 out
+src/dynamics.ts

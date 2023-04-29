@@ -74,14 +74,34 @@ test('Should return the last available item if index exceeds', () => {
 });
 
 describe('alpha overwrite', () => {
-  test('Should HSL string colors list accept alpha option', () => {
+  test('Should HSL "hsl(hue, saturation, lightness)" string colors list accept alpha option', () => {
     const themeColor = createThemeColor(['hsl(100,50%,50%)']);
-    expect(themeColor(0, { alpha: 0.5 })).toBe('hsla(100,50%,50%,0.5)');
+    expect(themeColor(0, { alpha: 0.5 })).toBe('hsl(100,50%,50%,0.5)');
   });
 
-  test('Should RGB string colors list accept alpha option', () => {
-    const themeColor = createThemeColor(['rgb(150,255,150)']);
-    expect(themeColor(0, { alpha: 0.5 })).toBe('rgba(150,255,150,0.5)');
+  test('Should HSL "hsl(hue, saturation, lightness, alpha)" string colors list accept alpha option', () => {
+    const themeColor = createThemeColor(['hsl(100, 50%, 50%, 0.5)']);
+    expect(themeColor(0, { alpha: 0.5 })).toBe('hsl(100, 50%, 50%, 0.25)');
+  });
+
+  test('Should HSL "hsl(hue, saturation, lightness, alpha%)" string colors list accept alpha option', () => {
+    const themeColor = createThemeColor(['hsl(100, 50%, 50%, 50%)']);
+    expect(themeColor(0, { alpha: 0.5 })).toBe('hsl(100, 50%, 50%, 25%)');
+  });
+
+  test('Should HSL "hsl(hue saturation lightness)" string colors list accept alpha option', () => {
+    const themeColor = createThemeColor(['hsl(100 50% 50%)']);
+    expect(themeColor(0, { alpha: 0.5 })).toBe('hsl(100 50% 50% / 0.5)');
+  });
+
+  test('Should HSL "hsl(hue saturation lightness / alpha)" string colors list accept alpha option', () => {
+    const themeColor = createThemeColor(['hsl(100 50% 50% / 0.5)']);
+    expect(themeColor(0, { alpha: 0.5 })).toBe('hsl(100 50% 50% / 0.25)');
+  });
+
+  test('Should HSL "hsl(hue saturation lightness / alpha%)" string colors list accept alpha option', () => {
+    const themeColor = createThemeColor(['hsl(100 50% 50% / 50%)']);
+    expect(themeColor(0, { alpha: 0.5 })).toBe('hsl(100 50% 50% / 25%)');
   });
 
   test('Should HSLA string colors list accept alpha adjust option', () => {
@@ -95,6 +115,11 @@ describe('alpha overwrite', () => {
     expect(themeColor(1, { alpha: 0.2 })).toBe('hsla(100,50%,50%,0.06)');
     expect(themeColor(2, { alpha: 0.2 })).toBe('hsla(100,50%,50%,0.12)');
     expect(themeColor(3, { alpha: 0.2 })).toBe('hsla(100,50%,50%,0.2)');
+  });
+
+  test('Should RGB string colors list accept alpha option', () => {
+    const themeColor = createThemeColor(['rgb(150,255,150)']);
+    expect(themeColor(0, { alpha: 0.5 })).toBe('rgb(150,255,150,0.5)');
   });
 
   test('Should RGBA string colors list accept alpha adjust option', () => {
@@ -129,10 +154,10 @@ describe('alpha overwrite', () => {
   });
 
   test('Should not allow to alpha overwrite string colors list not applicable', () => {
-    const themeColor = createThemeColor(['red', 'blue', 'currentColor', 'transparent']);
+    const themeColor = createThemeColor(['red', 'blue', 'currentcolor', 'transparent']);
     expect(themeColor(0, { alpha: 0.5 })).toBe('red');
     expect(themeColor(1, { alpha: 0.5 })).toBe('blue');
-    expect(themeColor(2, { alpha: 0.5 })).toBe('currentColor');
+    expect(themeColor(2, { alpha: 0.5 })).toBe('currentcolor');
     expect(themeColor(3, { alpha: 0.5 })).toBe('transparent');
   });
 });

@@ -22,6 +22,8 @@ export interface AnimatedCSSPropsShorthands {
 export type AnimatedCSSProps = Omit<CSSProperties, keyof AnimatedCSSPropsShorthands> & AnimatedCSSPropsShorthands;
 
 export type AnimatedSettingsTransitionDefinition = MotionKeyframesDefinition & {
+  duration?: number
+  easing?: AnimationOptionsWithOverrides['easing']
   options?: AnimationOptionsWithOverrides
 };
 
@@ -45,8 +47,15 @@ export type AnimatedSettingsTransition = AnimatedSettingsTransitionTypes | Anima
 export interface AnimatedSettings<A extends HTMLProps<HTMLElement> | SVGProps<SVGElement> = HTMLProps<HTMLDivElement>> {
   initialAttributes?: A
   initialStyle?: AnimatedCSSProps
-  transitions?: { [P in AnimatorState]?: AnimatedSettingsTransition | undefined }
+  transitions?: {
+    [P in AnimatorState]?: AnimatedSettingsTransition | undefined
+  } & {
+    [P in string]?: AnimatedSettingsTransition | undefined
+  }
 };
+
+export type AnimatedProp<A extends HTMLProps<HTMLElement> | SVGProps<SVGElement> = HTMLProps<HTMLDivElement>> =
+  AnimatedSettings<A> | Array<AnimatedSettings<A> | undefined> | undefined;
 
 export type AnimatedAnimation = AnimatedSettings | AnimatedSettings[];
 

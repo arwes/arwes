@@ -1,12 +1,12 @@
-import { type MutableRefObject, useRef, useCallback, useEffect } from 'react';
+import { type RefObject, useRef, useCallback, useEffect } from 'react';
 import { animate, type AnimationControls } from 'motion';
 import { useAnimator } from '@arwes/react-animator';
 
-interface UseFrameSVGAssemblingAnimation {
+interface FrameSVGAssemblingAnimation {
   onRender: () => void
 }
 
-const useFrameSVGAssemblingAnimation = (svgRef: MutableRefObject<SVGSVGElement | null>): UseFrameSVGAssemblingAnimation => {
+const useFrameSVGAssemblingAnimation = (svgRef: RefObject<SVGSVGElement>): FrameSVGAssemblingAnimation => {
   const animator = useAnimator();
   const animationControlRef = useRef<AnimationControls | null>(null);
 
@@ -17,7 +17,7 @@ const useFrameSVGAssemblingAnimation = (svgRef: MutableRefObject<SVGSVGElement |
 
     const svg = svgRef.current;
     const shapes = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="shape"]'));
-    const polylines = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="polyline"]'));
+    const polylines = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="decoration"]'));
 
     const unsubscribe = animator.node.subscribe(node => {
       const { duration } = node;
@@ -105,7 +105,7 @@ const useFrameSVGAssemblingAnimation = (svgRef: MutableRefObject<SVGSVGElement |
 
     const svg = svgRef.current;
     const shapes = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="shape"]'));
-    const polylines = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="polyline"]'));
+    const polylines = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="decoration"]'));
 
     const isVisible = animator.node.state === 'entering' || animator.node.state === 'entered';
 
@@ -121,5 +121,5 @@ const useFrameSVGAssemblingAnimation = (svgRef: MutableRefObject<SVGSVGElement |
   return { onRender };
 };
 
-export type { UseFrameSVGAssemblingAnimation };
+export type { FrameSVGAssemblingAnimation };
 export { useFrameSVGAssemblingAnimation };

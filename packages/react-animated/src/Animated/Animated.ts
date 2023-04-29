@@ -3,6 +3,8 @@ import {
   type SVGProps,
   type CSSProperties,
   type ReactElement,
+  type ForwardedRef,
+  type ReactNode,
   createElement,
   useRef,
   useMemo,
@@ -19,10 +21,21 @@ import { useAnimator } from '@arwes/react-animator';
 import type {
   AnimatedSettings,
   AnimatedSettingsTransition,
-  AnimatedSettingsTransitionFunctionReturn
+  AnimatedSettingsTransitionFunctionReturn,
+  AnimatedProp
 } from '../types';
 import { formatAnimatedCSSPropsShorthands } from '../internal/formatAnimatedCSSPropsShorthands/index';
-import { type AnimatedProps } from './Animated.types';
+
+interface AnimatedProps<E extends HTMLElement | SVGElement = HTMLDivElement, P extends HTMLProps<HTMLElement> | SVGProps<SVGElement> = HTMLProps<HTMLDivElement>> {
+  elementRef?: ForwardedRef<E>
+  className?: string
+  style?: CSSProperties
+  animated?: AnimatedProp<P>
+  hideOnExited?: boolean
+  hideOnEntered?: boolean
+  as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
+  children?: ReactNode
+}
 
 const Animated = <
   E extends HTMLElement | SVGElement = HTMLDivElement,
@@ -35,6 +48,7 @@ const Animated = <
     style,
     elementRef: externalElementRef,
     hideOnExited,
+    hideOnEntered,
     ...otherProps
   } = props;
 
@@ -45,10 +59,13 @@ const Animated = <
   const animatedSettingsRef = useRef<Array<AnimatedSettings<P>>>([]);
   const animationControlsRef = useRef<AnimatedSettingsTransitionFunctionReturn[]>([]);
   const [isExited, setIsExited] = useState(() => animator?.node.state === 'exited');
+  const [isEntered, setIsEntered] = useState(() => animator?.node.state === 'entered');
 
   const animatedSettingsListReceived = Array.isArray(animated) ? animated : [animated];
   const animatedSettingsList = animatedSettingsListReceived.filter(Boolean) as Array<AnimatedSettings<P>>;
 
+  // The animations list is passed as a reference so the Animator node subscription
+  // and its respective functionalities are only initialized once for performance.
   animatedSettingsRef.current = animatedSettingsList;
 
   useEffect(() => {
@@ -83,17 +100,18 @@ const Animated = <
             }
           }
           else {
-            const { options, ...definition } = transition;
+            const { duration, easing, options, ...definition } = transition;
             const control = animate(
               element,
               definition,
-              { duration: durationTransition, ...options }
+              { duration: duration || durationTransition, easing, ...options }
             );
             animationControlsRef.current.push(control);
           }
         });
 
       setIsExited(node.state === 'exited');
+      setIsEntered(node.state === 'entered');
     };
 
     animator.node.subscribe(animatorSubscriber);
@@ -120,7 +138,7 @@ const Animated = <
   }
 
   let animatorStyles: CSSProperties | undefined;
-  if (animator && hideOnExited && isExited) {
+  if (animator && ((hideOnExited && isExited) || (hideOnEntered && isEntered))) {
     animatorStyles = { visibility: 'hidden' };
   }
 
@@ -137,4 +155,5 @@ const Animated = <
   });
 };
 
+export type { AnimatedProps };
 export { Animated };

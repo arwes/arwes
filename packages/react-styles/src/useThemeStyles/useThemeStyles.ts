@@ -5,8 +5,8 @@ import { type Styles, type StylesThemeCreator, type StylesThemeCreatorFunction }
 import { STYLES_EMPTY } from '../constants';
 import { mergeThemeStyles } from '../internal/mergeThemeStyles';
 
-const useThemeStyles = <P = undefined>(
-  styleCreators: [StylesThemeCreatorFunction<P>, StylesThemeCreator<P>],
+const useThemeStyles = <P = null>(
+  styleCreators: [StylesThemeCreatorFunction<P>, StylesThemeCreator<P>?],
   props: P,
   dependencies: unknown[]
 ): Styles => {

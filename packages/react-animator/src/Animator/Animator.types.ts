@@ -7,6 +7,7 @@ export interface AnimatorProps extends AnimatorSettingsPartial {
   disabled?: boolean
   dismissed?: boolean
   unmountOnExited?: boolean
+  unmountOnEntered?: boolean
   checkToSendAction?: AnimatorAction
   checkToSend?: DependencyList
   nodeRef?: ForwardedRef<AnimatorNode>

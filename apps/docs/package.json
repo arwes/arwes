@@ -1,15 +1,16 @@
 {
   "name": "@arwes/app-docs",
-  "version": "1.0.0-next.5",
+  "version": "1.0.0-next.6",
   "private": true,
   "dependencies": {
-    "@arwes/react-animator": "^1.0.0-next.5",
-    "@arwes/react-bgs": "^1.0.0-next.5",
-    "next": "^13.1.6"
+    "@arwes/react": "^1.0.0-next.6",
+    "@vanilla-extract/next-plugin": "^2.1.2",
+    "iconoir-react": "^6.6.0",
+    "next": "^13.3.1"
   },
   "scripts": {
-    "dev": "next dev -p 9200",
-    "build": "next build && next export",
+    "dev": "sh ../../scripts/docs-generate-dynamics.sh && next dev -p 9200",
+    "build": "sh ../../scripts/docs-generate-dynamics.sh && next build && next export",
     "start": "serve ./out -p 9200"
   }
 }

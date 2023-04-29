@@ -69,7 +69,7 @@ Package | Status | Description
 `@arwes/animator` | Polishing | Assemble and disassemble user interfaces using animation controls
 `@arwes/bleeps` | Polishing | Define, manage, and control interactive short sound effects
 `@arwes/text` | Polishing | Text rendering effect tools
-`@arwes/frames` | Polishing | Build custom frame components
+`@arwes/frames` | Polishing | Build responsive vector graphics components
 `@arwes/bgs` | Polishing | Passive UI background effects
 `arwes` | Polishing | All agnostic packages bundle
 
@@ -83,9 +83,9 @@ Package | Status | Description
 `@arwes/react-bleeps` | Polishing | Interactive short sound effects manager
 `@arwes/react-core` | Specification | Core UI components
 `@arwes/react-text` | Polishing | Text effect components
-`@arwes/react-frames` | Polishing | Build custom frame components
+`@arwes/react-frames` | Polishing | Build responsive vector graphics components
 `@arwes/react-bgs` | Polishing | Passive UI background effects
-`@arwes/react` | Polishing | All React packages bundle
+`@arwes/react` | Polishing | All Agnostic and React packages bundle
 
 ## Community
 
@@ -96,10 +96,18 @@ Package | Status | Description
 <tr>
 <td align="center"><a href="https://soulextract.com"><img src="./static/assets/community/apps/images/soulextract.com.jpg" width="252px;" alt="SoulExtract.com" /></a><br /><a href="https://soulextract.com">SoulExtract.com</a><br /><a href="https://github.com/soulextract/soulextract.com"><sub>soulextract/soulextract.com</sub></a></td>
 <td align="center"><a href="https://romelperez.dev"><img src="./static/assets/community/apps/images/romelperez.dev.jpg" width="252px;" alt="RomelPerez.dev" /></a><br /><a href="https://romelperez.dev">RomelPerez.dev</a><br /><sub>--</sub></td>
-<td align="center"><a href="https://cybersocial.herokuapp.com"><img src="./static/assets/community/apps/images/incyberpunk.jpg" width="252px;" alt="inCyberPunk" /></a><br /><a href="https://cybersocial.herokuapp.com">inCyberPunk</a><br /><a href="https://github.com/inPhoenix/inCyberPunk2022"><sub>inPhoenix/inCyberPunk2022</sub></a></td></tr>
+<td align="center"><a href="https://www.reddit.com/r/reactjs/comments/p6x6j7/show_rreactjs_badgeth_a_scifi_dapp_built_with/"><img src="./static/assets/community/apps/images/badgeth.jpg" width="252px;" alt="Badgeth" /></a><br /><a href="https://www.reddit.com/r/reactjs/comments/p6x6j7/show_rreactjs_badgeth_a_scifi_dapp_built_with/">Badgeth</a><br /><sub>--</sub></td></tr>
+<tr><td align="center"><a href="https://darkgalaxies.io"><img src="./static/assets/community/apps/images/darkgalaxies.io.jpg" width="252px;" alt="Dark Galaxies" /></a><br /><a href="https://darkgalaxies.io">Dark Galaxies</a><br /><sub>--</sub></td>
+<td align="center"><a href="https://cybersocial.herokuapp.com"><img src="./static/assets/community/apps/images/incyberpunk.jpg" width="252px;" alt="inCyberPunk" /></a><br /><a href="https://cybersocial.herokuapp.com">inCyberPunk</a><br /><a href="https://github.com/inPhoenix/inCyberPunk2022"><sub>inPhoenix/inCyberPunk2022</sub></a></td>
+<td align="center"><a href="https://beko.famkos.net/tag/streamoverlay"><img src="./static/assets/community/apps/images/beko-stream-overlay.jpg" width="252px;" alt="Stream Overlay" /></a><br /><a href="https://beko.famkos.net/tag/streamoverlay">Stream Overlay</a><br /><sub>--</sub></td></tr>
 <tr><td align="center"><a href="https://archiverpg.com"><img src="./static/assets/community/apps/images/archiverpg.com.jpg" width="252px;" alt="ArchiveRPG.com" /></a><br /><a href="https://archiverpg.com">ArchiveRPG.com</a><br /><sub>--</sub></td>
-<td align="center"><a href="https://www.myxouz.com/2021/12/lady-of-shalott-first-version-of-our-home-dashboard/"><img src="./static/assets/community/apps/images/lady-of-shalott.jpg" width="252px;" alt="Lady of the Shalott" /></a><br /><a href="https://www.myxouz.com/2021/12/lady-of-shalott-first-version-of-our-home-dashboard/">Lady of the Shalott</a><br /><sub>--</sub></td>
+<td align="center"><a href="https://blog.starwards.space"><img src="./static/assets/community/apps/images/starwards.jpg" width="252px;" alt="StarWards" /></a><br /><a href="https://blog.starwards.space">StarWards</a><br /><a href="https://github.com/starwards/starwards"><sub>starwards/starwards</sub></a></td>
+<td align="center"><a href="https://cmdb.wrick17.com"><img src="./static/assets/community/apps/images/cmdb.wrick17.jpg" width="252px;" alt="Cyber Movie Database" /></a><br /><a href="https://cmdb.wrick17.com">Cyber Movie Database</a><br /><a href="https://github.com/wrick17/cmdb"><sub>wrick17/cmdb</sub></a></td></tr>
+<tr><td align="center"><a href="https://www.myxouz.com/2021/12/lady-of-shalott-first-version-of-our-home-dashboard/"><img src="./static/assets/community/apps/images/lady-of-shalott.jpg" width="252px;" alt="Lady of the Shalott" /></a><br /><a href="https://www.myxouz.com/2021/12/lady-of-shalott-first-version-of-our-home-dashboard/">Lady of the Shalott</a><br /><sub>--</sub></td>
 <td align="center"><a href="https://www.indiedb.com/games/assembly-rts"><img src="./static/assets/community/apps/images/AssemblyRTS.jpg" width="252px;" alt="Assembly RTS" /></a><br /><a href="https://www.indiedb.com/games/assembly-rts">Assembly RTS</a><br /><sub>--</sub></td>
+<td align="center"><a href="https://universe-dawn.com"><img src="./static/assets/community/apps/images/universe-dawn.com.jpg" width="252px;" alt="Universe Dawn" /></a><br /><a href="https://universe-dawn.com">Universe Dawn</a><br /><sub>--</sub></td></tr>
+<tr><td align="center"><a href="https://paingthet.com"><img src="./static/assets/community/apps/images/paingthet.com.jpg" width="252px;" alt="paingthet.com" /></a><br /><a href="https://paingthet.com">paingthet.com</a><br /><sub>--</sub></td>
+<td align="center"><a href="https://beko.famkos.net/category/simpit"><img src="./static/assets/community/apps/images/beko-primary-buffer-panel.jpg" width="252px;" alt="Primary Buffer Panel" /></a><br /><a href="https://beko.famkos.net/category/simpit">Primary Buffer Panel</a><br /><sub>--</sub></td>
 </tr>
 </table>
 <!-- ARWES-COMMUNITY-APPS:END -->

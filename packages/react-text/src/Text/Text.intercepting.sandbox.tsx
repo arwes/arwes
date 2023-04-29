@@ -17,7 +17,7 @@ const Sandbox = (): ReactElement => {
 
   return (
     <Animator active={active} duration={{ enter: 1, exit: 1 }}>
-      <Text style={{ color: '#ddd' }} dynamic={false}>
+      <Text style={{ color: '#ddd' }} fixed>
         Nemo enim ipsam <b>voluptatem quia voluptas</b> sit aspernatur
         aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
         voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia

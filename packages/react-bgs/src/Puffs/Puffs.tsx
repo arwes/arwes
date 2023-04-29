@@ -212,6 +212,7 @@ const Puffs = (props: PuffsProps): ReactElement => {
 
   return (
     <canvas
+      role='presentation'
       ref={mergeRefs(elementRef, elementRefExternal)}
       className={cx('arwes-react-bgs-puffs', className)}
       style={{

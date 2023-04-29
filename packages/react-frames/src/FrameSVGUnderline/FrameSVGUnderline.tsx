@@ -1,6 +1,6 @@
 import React, { useMemo, type ReactElement } from 'react';
 import { cx } from '@arwes/tools';
-import { type FRAME_SVG_POLYLINE_GENERIC } from '@arwes/frames';
+import { type FrameSVGPathGeneric } from '@arwes/frames';
 
 import { type FrameSVGProps, FrameSVG } from '../FrameSVG/index';
 
@@ -20,7 +20,7 @@ const FrameSVGUnderline = (props: FrameSVGUnderlineProps): ReactElement => {
     ...otherProps
   } = props;
 
-  const polylines = useMemo(() => {
+  const paths = useMemo(() => {
     const so = sw / 2;
 
     return [
@@ -28,39 +28,39 @@ const FrameSVGUnderline = (props: FrameSVGUnderlineProps): ReactElement => {
         name: 'shape',
         style: {
           strokeWidth: 0,
-          fill: 'currentColor'
+          fill: 'currentcolor'
         },
-        polyline: [
-          [0, 0],
-          [0, '100%'],
-          [`100% - ${ss}`, '100%'],
-          ['100%', `100% - ${ss}`],
-          ['100%', 0]
+        path: [
+          ['M', 0, 0],
+          ['L', 0, '100%'],
+          ['L', `100% - ${ss}`, '100%'],
+          ['L', '100%', `100% - ${ss}`],
+          ['L', '100%', 0]
         ]
       },
       {
-        name: 'polyline',
+        name: 'decoration',
         style: {
-          stroke: 'currentColor',
+          stroke: 'currentcolor',
           strokeLinecap: 'round',
           strokeLinejoin: 'round',
           strokeWidth: String(sw),
-          fill: 'transparent'
+          fill: 'none'
         },
-        polyline: [
-          [so, `100% - ${so}`],
-          [`100% - ${ss}`, `100% - ${so}`],
-          [`100% - ${so}`, `100% - ${ss - so}`]
+        path: [
+          ['M', so, `100% - ${so}`],
+          ['L', `100% - ${ss}`, `100% - ${so}`],
+          ['L', `100% - ${so}`, `100% - ${ss - so}`]
         ]
       }
-    ] as FRAME_SVG_POLYLINE_GENERIC[];
+    ] as FrameSVGPathGeneric[];
   }, [ss, sw, inverted]);
 
   return (
     <FrameSVG
       {...otherProps}
       className={cx('arwes-react-frames-framesvgunderline', className)}
-      polylines={polylines}
+      paths={paths}
     />
   );
 };

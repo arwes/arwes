@@ -1,7 +1,7 @@
 import React, { type ReactElement, useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Animator } from '@arwes/react-animator';
-import { Animated, aaProperty, aaOpacity } from '@arwes/react-animated';
+import { Animated, aa, aaOpacity } from '@arwes/react-animated';
 
 const Item = (): ReactElement => {
   return (
@@ -9,8 +9,8 @@ const Item = (): ReactElement => {
       <Animated
         style={{ margin: 10, width: 40, height: 20, backgroundColor: '#777' }}
         animated={[
-          aaProperty('x', 0, 100),
-          aaProperty('backgroundColor', '#0ff', '#ff0'),
+          aa('x', 0, 100),
+          aa('backgroundColor', '#0ff', '#ff0', '#f0f'),
           aaOpacity()
         ]}
       />
