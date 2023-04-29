@@ -18,7 +18,8 @@ import { mergeRefs } from '@arwes/react-tools';
 import type {
   AnimatedSettings,
   AnimatedSettingsTransition,
-  AnimatedSettingsTransitionFunctionReturn
+  AnimatedSettingsTransitionFunctionReturn,
+  AnimatedProp
 } from '../types';
 import { formatAnimatedCSSPropsShorthands } from '../internal/formatAnimatedCSSPropsShorthands/index';
 
@@ -27,7 +28,7 @@ interface AnimatedXProps<E extends HTMLElement | SVGElement = HTMLDivElement, P 
   className?: string
   style?: CSSProperties
   state?: string
-  animated?: AnimatedSettings<P> | Array<AnimatedSettings<P>>
+  animated?: AnimatedProp<P>
   as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
   children?: ReactNode
 }

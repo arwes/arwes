@@ -21,7 +21,8 @@ import { useAnimator } from '@arwes/react-animator';
 import type {
   AnimatedSettings,
   AnimatedSettingsTransition,
-  AnimatedSettingsTransitionFunctionReturn
+  AnimatedSettingsTransitionFunctionReturn,
+  AnimatedProp
 } from '../types';
 import { formatAnimatedCSSPropsShorthands } from '../internal/formatAnimatedCSSPropsShorthands/index';
 
@@ -29,7 +30,7 @@ interface AnimatedProps<E extends HTMLElement | SVGElement = HTMLDivElement, P e
   elementRef?: ForwardedRef<E>
   className?: string
   style?: CSSProperties
-  animated?: AnimatedSettings<P> | Array<AnimatedSettings<P>>
+  animated?: AnimatedProp<P>
   hideOnExited?: boolean
   hideOnEntered?: boolean
   as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap

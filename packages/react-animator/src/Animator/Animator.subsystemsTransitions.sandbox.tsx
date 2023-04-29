@@ -1,7 +1,7 @@
 import React, { type ReactElement, useState, type CSSProperties, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Animator } from '@arwes/react-animator';
-import { Animated, aaProperty, aaOpacity } from '@arwes/react-animated';
+import { Animated, aa, aaOpacity } from '@arwes/react-animated';
 
 // LINK
 
@@ -48,7 +48,7 @@ const Header = (props: HeaderProps): ReactElement => {
           padding: '1rem',
           backgroundColor: '#055'
         }}
-        animated={[aaOpacity(), aaProperty('y', 20, 0)]}
+        animated={[aaOpacity(), aa('y', 20, 0)]}
         hideOnExited
       >
         <Link path='a' active={path === 'a'} bg='#550' bgActive='#aa0' onLink={onLink} />
@@ -68,7 +68,7 @@ const Footer = (): ReactElement => {
       <Animated
         as='footer'
         style={{ gridArea: 'footer', backgroundColor: '#055' }}
-        animated={[aaOpacity(), aaProperty('y', -20, 0)]}
+        animated={[aaOpacity(), aa('y', -20, 0)]}
         hideOnExited
       />
     </Animator>
@@ -83,7 +83,7 @@ const PanelLeft = (): ReactElement => {
       <Animated
         as='aside'
         style={{ gridArea: 'panelLeft', backgroundColor: '#055' }}
-        animated={[aaOpacity(), aaProperty('x', 20, 0)]}
+        animated={[aaOpacity(), aa('x', 20, 0)]}
         hideOnExited
       />
     </Animator>
@@ -98,7 +98,7 @@ const PanelRight = (): ReactElement => {
       <Animated
         as='aside'
         style={{ gridArea: 'panelRight', backgroundColor: '#055' }}
-        animated={[aaOpacity(), aaProperty('x', -20, 0)]}
+        animated={[aaOpacity(), aa('x', -20, 0)]}
         hideOnExited
       />
     </Animator>
