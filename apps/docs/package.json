@@ -1,9 +1,9 @@
 {
   "name": "@arwes/app-docs",
-  "version": "1.0.0-next.5",
+  "version": "1.0.0-next.6",
   "private": true,
   "dependencies": {
-    "@arwes/react": "^1.0.0-next.5",
+    "@arwes/react": "^1.0.0-next.6",
     "@vanilla-extract/next-plugin": "^2.1.2",
     "iconoir-react": "^6.6.0",
     "next": "^13.3.1"
