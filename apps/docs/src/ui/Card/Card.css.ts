@@ -58,7 +58,6 @@ export const asset = style({
 
 export const image = style({
   position: 'absolute',
-  display: 'block',
   width: '100%',
   height: '100%',
   objectFit: 'cover',
@@ -73,12 +72,17 @@ export const content = style({
 
 export const title = style({
   display: 'block',
+  margin: 0,
   fontSize: '1rem',
   color: 'hsl(180deg 88.18% 56.86%)'
 });
 
 globalStyle(`${title} a`, {
   color: 'hsl(180deg 88.18% 56.86%)'
+});
+
+globalStyle(`${title} a:hover`, {
+  color: 'hsl(180deg 88.18% 66.86%)'
 });
 
 export const children = style({
@@ -89,4 +93,8 @@ export const children = style({
 
 globalStyle(`${children} a`, {
   color: 'hsl(180deg 88.18% 45%)'
+});
+
+globalStyle(`${children} p`, {
+  margin: 0
 });

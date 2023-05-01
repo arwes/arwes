@@ -25,18 +25,18 @@ const HeaderLayout = (props: HeaderLayoutProps): ReactElement => {
       <div className={classes.container}>
         {hasFrame && (
           <div role='presentation' className={cx(classes.frame, transition)}>
-            <div className={classes.frameLineLeft} />
-            <div className={classes.frameLineRight} />
+            <div className={cx(classes.frameLine, classes.frameLineLeft)} />
+            <div className={cx(classes.frameLine, classes.frameLineRight)} />
             <Illuminator color='hsl(180 50% 50% / 5%)' size={400} />
           </div>
         )}
-        <div className={classes.left}>
+        <div className={cx(classes.section, classes.left)}>
           {left}
         </div>
-        <div className={classes.center}>
+        <div className={cx(classes.section, classes.center)}>
           {center}
         </div>
-        <div className={classes.right}>
+        <div className={cx(classes.section, classes.right)}>
           {right}
         </div>
       </div>

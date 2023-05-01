@@ -1,4 +1,4 @@
-import './global.css';
+import '@app/styles/global.css';
 
 import type { ReactElement } from 'react';
 import { type NextPage } from 'next';

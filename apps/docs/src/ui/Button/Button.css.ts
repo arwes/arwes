@@ -37,12 +37,6 @@ export const root = style({
       height: '28px',
       lineHeight: '28px',
       fontSize: 14
-    },
-    '(min-width: 1920px)': {
-      padding: '0 24px',
-      height: '32px',
-      lineHeight: '32px',
-      fontSize: 16
     }
   }
 });
@@ -59,12 +53,6 @@ export const medium = style({
       height: '36px',
       lineHeight: '36px',
       fontSize: 16
-    },
-    '(min-width: 1920px)': {
-      padding: '0 64px',
-      height: '44px',
-      lineHeight: '44px',
-      fontSize: 18
     }
   }
 });

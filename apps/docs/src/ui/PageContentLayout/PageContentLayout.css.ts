@@ -19,13 +19,20 @@ export const frame = style({
   position: 'absolute',
   left: '50%',
   top: '2rem',
+  display: 'none',
   bottom: '2rem',
   width: '100%',
   maxWidth: 900,
   transform: 'translate(-50%, 0)',
   clipPath: createFrameOctagonClip({
     squareSize: '1rem'
-  })
+  }),
+
+  '@media': {
+    '(min-width: 1200px)': {
+      display: 'block'
+    }
+  }
 });
 
 globalStyle(`${frame} path`, {
@@ -55,9 +62,15 @@ export const overflow = style({
   flex: 1,
   display: 'flex',
   justifyContent: 'center',
-  padding: '2rem 1rem',
+  padding: 0,
   width: '100%',
-  minHeight: 0
+  minHeight: 0,
+
+  '@media': {
+    '(min-width: 1200px)': {
+      padding: '2rem 1rem'
+    }
+  }
 });
 
 export const container = style({
@@ -70,7 +83,7 @@ export const container = style({
 });
 
 export const content = style({
-  padding: '3rem',
+  padding: '2rem',
   width: '100%',
   maxWidth: 900,
 
@@ -85,7 +98,19 @@ export const content = style({
 
   selectors: {
     [`${floating} &`]: {
-      padding: 0
+      padding: '2rem',
+
+      '@media': {
+        '(min-width: 1200px)': {
+          padding: 0
+        }
+      }
+    }
+  },
+
+  '@media': {
+    '(min-width: 1200px)': {
+      padding: '3rem'
     }
   }
 });

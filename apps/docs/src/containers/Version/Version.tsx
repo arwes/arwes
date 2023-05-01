@@ -34,7 +34,7 @@ const Version = (props: VersionProps): ReactElement => {
       target='github'
       title={`Version ${isNext ? '@next' : lernaSettings.version} deployed at ${date.toUTCString()}`}
     >
-      {isNext ? 'Version @next' : `v${lernaSettings.version}`}
+      {isNext ? 'v@next' : `v${lernaSettings.version}`}
     </Animated>
   );
 };

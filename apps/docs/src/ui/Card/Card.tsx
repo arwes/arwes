@@ -1,6 +1,7 @@
 import { type ReactElement, type ReactNode } from 'react';
 import { type AnimatedProp, Animated, FrameSVGOctagon, cx } from '@arwes/react';
 import * as classes from './Card.css';
+import { linkPrimary } from '@app/styles';
 
 interface CardProps {
   className?: string
@@ -34,10 +35,10 @@ const Card = (props: CardProps): ReactElement => {
           />
         </div>
         <div className={classes.content}>
-          <h1 className={classes.title}>
+          <h1 className={cx(classes.title, linkPrimary)}>
             {title}
           </h1>
-          <div className={classes.children}>
+          <div className={cx(classes.children, linkPrimary)}>
             {children}
           </div>
         </div>

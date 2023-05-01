@@ -40,7 +40,8 @@ globalStyle(`${active} a, ${active} button`, {
   borderBottom: '1px solid hsl(60 82.31% 71.18%)'
 });
 
-globalStyle(`${active} a:focus, ${active} button:focus`, {
+globalStyle(`${active} a:hover, ${active} button:hover`, {
+  color: 'hsl(60 82.31% 81.18%)',
   borderColor: 'hsl(60deg 100% 40% / 50%)'
 });
 

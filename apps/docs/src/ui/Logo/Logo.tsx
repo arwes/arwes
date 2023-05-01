@@ -1,4 +1,4 @@
-import { type ReactElement } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
 import { type AnimatedProp, Animated, cx } from '@arwes/react';
 import Link from 'next/link';
 
@@ -7,11 +7,11 @@ import * as classes from './Logo.css';
 interface LogoProps {
   className?: string
   animated?: AnimatedProp
-  withLogotype?: boolean
+  children?: ReactNode
 }
 
 const Logo = (props: LogoProps): ReactElement => {
-  const { className, animated, withLogotype } = props;
+  const { className, animated, children } = props;
 
   return (
     <Animated
@@ -26,13 +26,7 @@ const Logo = (props: LogoProps): ReactElement => {
           alt='Arwes Project'
           role='heading'
         />
-        {withLogotype && (
-          <img
-            className={classes.type}
-            src='/logotype.png'
-            role='presentation'
-          />
-        )}
+        {children}
       </Link>
     </Animated>
   );
