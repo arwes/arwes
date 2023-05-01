@@ -39,7 +39,7 @@ const TEXT_CLASS = 'arwes-react-text-text';
 
 const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): ReactElement => {
   const {
-    as: asProvided = 'span',
+    as: asProvided = 'p',
     className,
     children,
     manager,
@@ -136,8 +136,7 @@ const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): Rea
       ...otherProps,
       className: cx(TEXT_CLASS, className),
       css: {
-        position: 'relative',
-        display: 'inline-block'
+        position: 'relative'
       },
       ref: mergeRefs<E>(elementRefProvided, elementRef)
     },

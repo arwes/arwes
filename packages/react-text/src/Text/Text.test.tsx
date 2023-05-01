@@ -7,14 +7,14 @@ import { Text } from './index';
 
 afterEach(cleanup);
 
-test('Should render component classes and content with default "span" element', () => {
+test('Should render component classes and content with default "p" element', () => {
   const { container } = render(
     <Text>Furutistic <b>Sci-Fi</b> UI Web Framework</Text>
   );
   const element = container.firstChild as HTMLElement;
   const contentEl = element.firstChild as HTMLElement;
   expect(element.classList.contains('arwes-react-text-text')).toBeTruthy();
-  expect(element.tagName).toBe('SPAN');
+  expect(element.tagName).toBe('P');
   expect(contentEl.classList.contains('arwes-react-text-text__content')).toBeTruthy();
   expect(contentEl.innerHTML).toBe('Furutistic <b>Sci-Fi</b> UI Web Framework');
 });
