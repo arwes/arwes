@@ -37,7 +37,6 @@ const PageIndex = (): ReactElement => {
           justify-content: center;
           margin: 0;
           font-size: 1rem;
-          font-weight: 400;
         }
 
         .nav {

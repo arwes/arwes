@@ -13,17 +13,6 @@ const Page = (): ReactElement => {
           row-gap: 2rem;
         }
 
-        .header {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-        }
-
-        .header h1,
-        .header h2 {
-          margin: 0 2rem 0 0;
-        }
-
         .heading-icon {
           vertical-align: middle;
         }
@@ -60,7 +49,7 @@ const Page = (): ReactElement => {
           floating
         >
           <div className='sections'>
-            <header className='header'>
+            <header>
               <Animator>
                 <Text as='h1' fixed>Community</Text>
               </Animator>

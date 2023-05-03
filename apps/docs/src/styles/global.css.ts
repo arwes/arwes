@@ -1,6 +1,7 @@
 // Extending https://necolas.github.io/normalize.css.
 
 import { globalStyle } from '@vanilla-extract/css';
+import { createFrameOctagonClip } from '@arwes/react';
 
 globalStyle('*, *::before, *::after', {
   boxSizing: 'border-box',
@@ -67,7 +68,7 @@ globalStyle(`
 
 globalStyle('h1, h2, h3, h4, h5, h6', {
   fontStyle: 'normal',
-  fontWeight: 600,
+  fontWeight: 300,
   color: 'hsl(180deg 100% 60%)',
   textShadow: '0px 0px 1px hsl(180deg 100% 60% / 0.5)'
 });
@@ -146,10 +147,11 @@ globalStyle('hr', {
   border: 'none',
   borderBottom: '1px solid hsla(180, 33%, 45%, 0.5)',
   width: '100%',
-  height: 2
+  height: 2,
+  transformOrigin: 'left center'
 });
 
-globalStyle('hr::before', {
+globalStyle('hr::after', {
   content: '""',
   position: 'absolute',
   right: 0,
@@ -158,6 +160,35 @@ globalStyle('hr::before', {
   width: '1.5rem',
   height: 0,
   borderBottom: '1px solid hsla(180, 69%, 67%, 0.5)'
+});
+
+globalStyle('blockquote', {
+  display: 'block',
+  border: 'none',
+  borderLeft: '0.25rem solid hsl(180deg 69.7% 67.65%)',
+  padding: '1rem 1rem 1rem 1.25rem',
+  width: '100%',
+  backgroundColor: 'hsl(180deg 28.67% 71.96% / 8%)',
+  clipPath: createFrameOctagonClip({ squareSize: '0.75rem', leftTop: false, leftBottom: false })
+});
+
+globalStyle('code, pre', {
+  // Correct the inheritance and scaling of font size in all browsers.
+  fontFamily: 'monospace, monospace'
+});
+
+globalStyle('code', {
+  fontSize: '90%'
+});
+
+globalStyle('pre', {
+  display: 'block',
+  borderWidth: '1px 0',
+  borderStyle: 'solid',
+  borderColor: 'hsl(180deg 70% 25%)',
+  padding: '1rem',
+  fontSize: '0.9rem',
+  backgroundColor: 'hsl(180deg 25% 15% / 25%)'
 });
 
 globalStyle('button', {

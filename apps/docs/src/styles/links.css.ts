@@ -7,6 +7,6 @@ globalStyle(`${linkPrimary}:is(a), ${linkPrimary} a`, {
   textShadow: '0px 0px 1px hsl(180deg 50% 75% / 0.5)'
 });
 
-globalStyle(`${linkPrimary}:is(a):hover, a:hover`, {
+globalStyle(`${linkPrimary}:is(a):hover, ${linkPrimary} a:hover`, {
   color: 'hsl(180deg 88.18% 66.86%)'
 });
