@@ -150,6 +150,10 @@ export const typeDefinitions = [
     code: require('!raw-loader?esModule=false!@arwes/bgs/build/types/index.d.ts')
   },
   {
+    filename: 'file:///node_modules/arwes/index.d.ts',
+    code: require('!raw-loader?esModule=false!arwes/build/types/index.d.ts')
+  },
+  {
     filename: 'file:///node_modules/@arwes/react-styles/index.d.ts',
     code: require('!raw-loader?esModule=false!@arwes/react-styles/build/types/index.d.ts')
   },
@@ -180,5 +184,9 @@ export const typeDefinitions = [
   {
     filename: 'file:///node_modules/@arwes/react-core/index.d.ts',
     code: require('!raw-loader?esModule=false!@arwes/react-core/build/types/index.d.ts')
+  },
+  {
+    filename: 'file:///node_modules/@arwes/react/index.d.ts',
+    code: require('!raw-loader?esModule=false!@arwes/react/build/types/index.d.ts')
   }
 ];

@@ -1,6 +1,20 @@
-import { type ReactElement } from 'react';
+import { type ReactElement, useRef } from 'react';
 import { DroneError } from 'iconoir-react';
-import { Animator, Animated, FrameSVGOctagon, aa, aaVisibility } from '@arwes/react';
+import { Animator, Animated, FrameSVGLines, Illuminator, Text, aa, useFrameSVGAssemblingAnimation, aaVisibility } from '@arwes/react';
+
+const Frame = (): ReactElement => {
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const { onRender } = useFrameSVGAssemblingAnimation(svgRef);
+
+  return (
+    <FrameSVGLines
+      className='frame'
+      elementRef={svgRef}
+      onRender={onRender}
+      smallLineWidth={3}
+    />
+  );
+};
 
 const Page = (): ReactElement => {
   return (
@@ -18,6 +32,8 @@ const Page = (): ReactElement => {
           position: relative;
           display: grid;
           row-gap: 0.5rem;
+          overflow: hidden;
+          border: 1px solid transparent;
           padding: 2rem 4rem;
           text-align: center;
         }
@@ -36,9 +52,6 @@ const Page = (): ReactElement => {
 
         .icon {
           margin: 0;
-        }
-
-        .icon svg {
           width: 4rem;
           height: 4rem;
           color: hsl(0deg 100% 70%);
@@ -58,22 +71,28 @@ const Page = (): ReactElement => {
 
       <Animator combine manager='stagger'>
         <div className='container'>
-          <Animated as='main' className='content' animated={[aa('y', 12, 0)]}>
-            <FrameSVGOctagon className='frame' />
-            <Animator>
-              <Animated role='presentation' className='icon' animated={aaVisibility()}>
-                <DroneError />
-              </Animated>
+          <Animated as='main' className='content' animated={[aa('y', 24, 0)]}>
+            <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
+              <Frame />
+              <Illuminator color='hsl(0deg 50% 50% / 0.05)' />
             </Animator>
             <Animator>
-              <Animated as='h1' className='title' animated={aaVisibility()}>
-                Samples
+              <Animated
+                animated={[aaVisibility(), {
+                  transitions: {
+                    entering: { y: [24, 0], options: { delay: 0.4 } },
+                    exiting: { y: 0 }
+                  }
+                }]}
+              >
+                <DroneError role='presentation' className='icon' />
+                <h1 className='title'>Samples</h1>
               </Animated>
             </Animator>
-            <Animator>
-              <Animated as='p' className='description' animated={aaVisibility()}>
+            <Animator duration={{ delay: 0.4 }}>
+              <Text className='description' fixed>
                 The framework samples are under specification.
-              </Animated>
+              </Text>
             </Animator>
           </Animated>
         </div>

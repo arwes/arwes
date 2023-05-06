@@ -9,6 +9,7 @@ export const root = style({
   justifyContent: 'flex-start',
   alignItems: 'center',
   width: '100%',
+  minWidth: 0,
   minHeight: 0
 });
 
@@ -64,6 +65,7 @@ export const overflow = style({
   justifyContent: 'center',
   padding: 0,
   width: '100%',
+  minWidth: 0,
   minHeight: 0,
 
   '@media': {
@@ -79,12 +81,15 @@ export const container = style({
   justifyContent: 'center',
   overflowY: 'auto',
   width: '100%',
+  minWidth: 0,
   minHeight: 0
 });
 
 export const content = style({
   padding: '2rem',
   width: '100%',
+  minWidth: 0,
+  minHeight: 0,
   maxWidth: 900,
 
   // To create the container scroll padding bottom space.

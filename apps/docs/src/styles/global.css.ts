@@ -13,7 +13,9 @@ globalStyle('html, body', {
   // Prevent adjustments of font size after orientation changes in iOS.
   WebkitTextSizeAdjust: '100%',
 
-  fontFamily: "'Titillium Web', sans-serif",
+  WebkitFontSmoothing: 'antialiased',
+
+  fontFamily: '"Titillium Web", "Segoe UI Web (West European)","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif',
   fontSize: '100%',
   fontStyle: 'normal',
   fontWeight: 400,
@@ -49,6 +51,8 @@ globalStyle('::selection', {
   backgroundColor: 'hsla(180, 50%, 75%, 0.25)'
 });
 
+// TEXTS
+
 globalStyle(`
   :where(
     h1:not(:last-child),
@@ -59,18 +63,31 @@ globalStyle(`
     h6:not(:last-child),
     p:not(:last-child),
     blockquote:not(:last-child),
+    pre:not(:last-child),
     figure:not(:last-child),
+    table:not(:last-child),
     hr:not(:last-child)
   )
 `, {
   marginBottom: '1.5rem'
 });
 
+globalStyle(`
+  :where(
+    h1:not(:first-child),
+    h2:not(:first-child),
+    h3:not(:first-child)
+  )
+`, {
+  marginTop: '3rem'
+});
+
 globalStyle('h1, h2, h3, h4, h5, h6', {
   fontStyle: 'normal',
   fontWeight: 300,
   color: 'hsl(180deg 100% 60%)',
-  textShadow: '0px 0px 1px hsl(180deg 100% 60% / 0.5)'
+  textShadow: '0px 0px 1px hsl(180deg 100% 60% / 0.5)',
+  scrollMarginTop: '3rem'
 });
 
 globalStyle('h1', { fontSize: '1.75rem' });
@@ -137,10 +154,36 @@ globalStyle('a:focus', {
   outline: '1px dotted hsl(60deg 100% 40% / 50%)'
 });
 
-globalStyle('img', {
+globalStyle('blockquote', {
   display: 'block',
-  maxWidth: '100%'
+  border: 'none',
+  borderLeft: '0.25rem solid hsl(180deg 69.7% 67.65%)',
+  padding: '1rem 1rem 1rem 1.25rem',
+  width: '100%',
+  backgroundColor: 'hsl(180deg 28.67% 71.96% / 8%)',
+  clipPath: createFrameOctagonClip({ squareSize: '0.75rem', leftTop: false, leftBottom: false })
 });
+
+globalStyle('code, pre', {
+  // Correct the inheritance and scaling of font size in all browsers.
+  fontFamily: 'JetBrains Mono,Menlo,Monaco,Consolas,Courier New,monospace'
+});
+
+globalStyle('code', {
+  fontSize: '90%'
+});
+
+globalStyle('pre', {
+  display: 'block',
+  borderWidth: '1px 0',
+  borderStyle: 'solid',
+  borderColor: 'hsl(180deg 70% 25%)',
+  padding: '1rem',
+  fontSize: '0.9rem',
+  backgroundColor: 'hsl(180deg 25% 15% / 25%)'
+});
+
+// LINES
 
 globalStyle('hr', {
   position: 'relative',
@@ -162,34 +205,49 @@ globalStyle('hr::after', {
   borderBottom: '1px solid hsla(180, 69%, 67%, 0.5)'
 });
 
-globalStyle('blockquote', {
-  display: 'block',
-  border: 'none',
-  borderLeft: '0.25rem solid hsl(180deg 69.7% 67.65%)',
-  padding: '1rem 1rem 1rem 1.25rem',
+// TABLES
+
+globalStyle('table', {
+  borderCollapse: 'separate',
+  borderSpacing: '0.25rem',
   width: '100%',
-  backgroundColor: 'hsl(180deg 28.67% 71.96% / 8%)',
-  clipPath: createFrameOctagonClip({ squareSize: '0.75rem', leftTop: false, leftBottom: false })
+  textAlign: 'left'
 });
 
-globalStyle('code, pre', {
-  // Correct the inheritance and scaling of font size in all browsers.
-  fontFamily: 'monospace, monospace'
+globalStyle('thead tr', {
+  backgroundColor: 'hsl(180deg 29% 72% / 3%)'
 });
 
-globalStyle('code', {
-  fontSize: '90%'
+globalStyle('thead th, thead td', {
+  fontSize: '0.875rem',
+  borderBottom: '1px solid hsl(180deg 33.04% 45.1%)'
 });
 
-globalStyle('pre', {
+globalStyle('tbody tr', {
+  backgroundColor: 'hsl(180deg 29% 72% / 3%)'
+});
+
+globalStyle('tbody tr:hover', {
+  backgroundColor: 'hsl(180deg 29% 72% / 9%)'
+});
+
+globalStyle('th, td', {
+  padding: '0.25rem 0.75rem',
+  verticalAlign: 'top'
+});
+
+globalStyle('tr', {
+  transition: 'background-color 0.2s ease-out'
+});
+
+// ASSETS
+
+globalStyle('img', {
   display: 'block',
-  borderWidth: '1px 0',
-  borderStyle: 'solid',
-  borderColor: 'hsl(180deg 70% 25%)',
-  padding: '1rem',
-  fontSize: '0.9rem',
-  backgroundColor: 'hsl(180deg 25% 15% / 25%)'
+  maxWidth: '100%'
 });
+
+// FORMS
 
 globalStyle('button', {
   outline: 'none',

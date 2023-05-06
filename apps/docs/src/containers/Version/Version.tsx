@@ -3,7 +3,7 @@ import { type AnimatedProp, Animated, cx } from '@arwes/react';
 import lernaSettings from '@repository/lerna.json';
 
 import { DEPLOY_TIME } from '@app/dynamics';
-import { transition } from '@app/styles/motion.css';
+import { transition, linkPrimary } from '@app/styles';
 import * as classes from './Version.css';
 
 interface VersionProps {
@@ -24,7 +24,7 @@ const Version = (props: VersionProps): ReactElement => {
   return (
     <Animated
       as='a'
-      className={cx(classes.root, transition, className)}
+      className={cx(classes.root, transition, linkPrimary, className)}
       animated={animated}
       href={
         isNext

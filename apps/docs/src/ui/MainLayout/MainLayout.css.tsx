@@ -8,7 +8,9 @@ export const root = style({
   top: 0,
   bottom: 0,
   display: 'flex',
-  background: 'radial-gradient(50% 50% at 50% 50%, #04252B 0%, #002424 0.01%, #001515 100%)'
+  background: 'radial-gradient(50% 50% at 50% 50%, #04252B 0%, #002424 0.01%, #001515 100%)',
+  minWidth: 0,
+  minHeight: 0
 });
 
 export const container = style({
@@ -18,5 +20,7 @@ export const container = style({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'flex-start',
-  alignItems: 'center'
+  alignItems: 'center',
+  minWidth: 0,
+  minHeight: 0
 });

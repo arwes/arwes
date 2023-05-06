@@ -14,6 +14,7 @@ import * as bleeps from '@arwes/bleeps';
 import * as text from '@arwes/text';
 import * as frames from '@arwes/frames';
 import * as bgs from '@arwes/bgs';
+import * as arwes from 'arwes';
 
 // React
 import * as reactTools from '@arwes/react-tools';
@@ -25,6 +26,7 @@ import * as reactText from '@arwes/react-text';
 import * as reactBgs from '@arwes/react-bgs';
 import * as reactFrames from '@arwes/react-frames';
 import * as reactCore from '@arwes/react-core';
+import * as arwesReact from '@arwes/react';
 
 window.noxtron.setupSandbox(() => ({
   dependencies: [
@@ -42,6 +44,7 @@ window.noxtron.setupSandbox(() => ({
     { name: '@arwes/text', pkg: text },
     { name: '@arwes/frames', pkg: frames },
     { name: '@arwes/bgs', pkg: bgs },
+    { name: 'arwes', pkg: arwes },
     { name: '@arwes/react-tools', pkg: reactTools },
     { name: '@arwes/react-styles', pkg: reactStyles },
     { name: '@arwes/react-animator', pkg: reactAnimator },
@@ -50,6 +53,7 @@ window.noxtron.setupSandbox(() => ({
     { name: '@arwes/react-text', pkg: reactText },
     { name: '@arwes/react-bgs', pkg: reactBgs },
     { name: '@arwes/react-frames', pkg: reactFrames },
-    { name: '@arwes/react-core', pkg: reactCore }
+    { name: '@arwes/react-core', pkg: reactCore },
+    { name: '@arwes/react', pkg: arwesReact }
   ]
 }));

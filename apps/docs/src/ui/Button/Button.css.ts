@@ -71,6 +71,8 @@ globalStyle(`${content} svg`, {
   margin: 0
 });
 
+export const frameElement = style({});
+
 // Frame Simple
 
 export const frameSimple = style({});
@@ -130,24 +132,36 @@ export const frameHexagonIlluminator = style({
   zIndex: 1
 });
 
-globalStyle(`${root} path`, {
-  transitionProperty: 'color',
+export const onHoverAnimateIcons = style({
+  zIndex: 1
+});
+
+globalStyle(`${root} svg, ${root} path`, {
+  transitionProperty: 'color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, outline',
   transitionDuration: '200ms',
   transitionTimingFunction: 'ease-out'
 });
 
-globalStyle(`${root} path[data-name="shape"]`, {
+globalStyle(`${onHoverAnimateIcons}:hover span + svg`, {
+  transform: 'translateX(0.25rem)'
+});
+
+globalStyle(`${onHoverAnimateIcons}:hover svg:first-child`, {
+  transform: 'translateX(-0.25rem)'
+});
+
+globalStyle(`${root} ${frameElement} path[data-name="shape"]`, {
   color: 'hsl(60deg 100% 40% / 8%)'
 });
 
-globalStyle(`${root} path[data-name="decoration"]`, {
+globalStyle(`${root} ${frameElement} path[data-name="decoration"]`, {
   color: 'hsl(60deg 100% 40% / 14%)'
 });
 
-globalStyle(`${root}:hover path[data-name="shape"]`, {
+globalStyle(`${root}:hover ${frameElement} path[data-name="shape"]`, {
   color: 'hsl(60deg 100% 40% / 16%)'
 });
 
-globalStyle(`${root}:hover path[data-name="decoration"]`, {
+globalStyle(`${root}:hover ${frameElement} path[data-name="decoration"]`, {
   color: 'hsl(60deg 100% 40% / 22%)'
 });

@@ -15,6 +15,39 @@ const Page = (): ReactElement => {
           <Animated as='hr' animated={aa('scaleX', 0, 1)} />
         </Animator>
         <Animator>
+          <Animated
+            style={{
+              display: 'inline-grid',
+              gridAutoFlow: 'column',
+              columnGap: '0.5rem',
+              marginBottom: '1.5rem'
+            }}
+            animated={aaVisibility()}
+          >
+            <a href="https://npmjs.org/package/arwes" target='_blank'>
+              <img src="https://img.shields.io/npm/v/arwes.svg?style=flat-square" alt="Version" />
+            </a>
+            <a href="https://github.com/arwes/arwes/actions" target='_blank'>
+              <img src="https://github.com/arwes/arwes/workflows/ci/badge.svg?style=flat-square" alt="CI" />
+            </a>
+            <a href="https://github.com/arwes/arwes" target='_blank'>
+              <img src="https://img.shields.io/github/stars/arwes/arwes.svg?style=flat-square&label=stars" alt="Github Stars" />
+            </a>
+            <a href="https://npmjs.org/package/arwes" target='_blank'>
+              <img src="https://img.shields.io/npm/dm/arwes.svg?style=flat-square" alt="Downloads" />
+            </a>
+            <a href="https://twitter.com/arwesjs" target='_blank'>
+              <img src="https://img.shields.io/twitter/url?label=ArwesJS&logo=twitter&url=https%3A%2F%2Ftwitter.com%2Farwesjs" alt="Follow on Twitter" />
+            </a>
+            <a href="https://discord.gg/s5sbTkw" target='_blank'>
+              <img src="https://img.shields.io/discord/457381046497968128?color=5865F2&logo=discord&logoColor=white" alt="Join us on Discord" />
+            </a>
+            <a href="https://github.com/arwes/arwes/blob/main/LICENSE" target='_blank'>
+              <img src="https://img.shields.io/github/license/arwes/arwes.svg?maxAge=2592000&style=flat-square" alt="License" />
+            </a>
+          </Animated>
+        </Animator>
+        <Animator>
           <Text>Arwes is a web framework to build user interfaces based on futuristic science fiction designs, animations, and sound effects. The concepts behind are opinionated with influences from <a href="https://aesthetics.fandom.com/wiki/Cyberprep" target='_blank'>Cyberprep</a> and <a href="https://en.wikipedia.org/wiki/Synthwave" target='_blank'>Synthwave</a>, and productions like <a href="http://robertsspaceindustries.com" target='_blank'>Star Citizen</a>, <a href="https://www.halowaypoint.com" target='_blank'>Halo</a>, and <a href="http://www.imdb.com/title/tt1104001" target='_blank'>TRON: Legacy</a>. It tries to inspire advanced science and technology.</Text>
         </Animator>
         <Animator>
@@ -40,19 +73,25 @@ const Page = (): ReactElement => {
         </Animator>
         <Animator>
           <Text>
-            The packages are categorized by "agnostic" and "implementation" packages. Arwes agnostic packages do not have UI libraries or frameworks dependencies, while the implementation packages depend on specific UI tools to simplify their use and add custom UI components. Currently, the framework offers <a href="https://react.dev">React.js</a> specific packages but it can be used with any other UI library.
+            Latest version of Chrome, Firefox, and Safari, for Android, iOS and desktop are supported. Server-side rendering with Node.js v18+ is supported. There are custom APIs for <a href="https://react.dev">React.js</a> v18+ which can be used with tools like <a href="https://nextjs.org">Next.js</a> and <a href='https://remix.run'>Remix</a>.
           </Text>
         </Animator>
         <Animator>
           <Text>
-            Latest version of Chrome, Firefox, and Safari, for Android, iOS and desktop are supported. Server-side rendering with Node.js v18+ is supported. Tools like <a href="https://nextjs.org">Next.js</a> and <a href='https://remix.run'>Remix</a> can be used with the framework.
+            Since sci-fi UIs are normally very particular with custom visual workflows and user experiences, the tools offered are currently "low/medium level APIs", which means that the framework does not provide an entire set of UI components for a common web app but rather a set of primitives, utilities, and base components to build the project design system.
           </Text>
         </Animator>
 
-        <nav style={{ display: 'flex', justifyContent: 'right' }}>
+        <nav style={{ marginTop: '3rem', display: 'flex', justifyContent: 'right' }}>
           <Animator>
             <Link href='/docs/develop'>
-              <Button frame='hexagon' animated={[aaVisibility(), aa('x', -12, 0)]} tabIndex={-1} title='Get started'>
+              <Button
+                frame='hexagon'
+                animated={[aaVisibility(), aa('x', -12, 0)]}
+                onHoverAnimateIcons
+                tabIndex={-1}
+                title='Get started'
+              >
                 <span>Develop</span>
                 <ArrowRight />
               </Button>
