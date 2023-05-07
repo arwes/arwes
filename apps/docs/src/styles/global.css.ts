@@ -179,7 +179,7 @@ globalStyle('pre', {
   borderStyle: 'solid',
   borderColor: 'hsl(180deg 70% 25%)',
   padding: '1rem',
-  fontSize: '0.9rem',
+  fontSize: '0.875rem',
   backgroundColor: 'hsl(180deg 25% 15% / 25%)'
 });
 

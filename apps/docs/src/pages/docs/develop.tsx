@@ -39,6 +39,11 @@ const Page = (): ReactElement => {
             Vanilla packages can be used with any other UI library but many tools are low level APIs and require more elaborated configurations. Implementation packages mostly provide "sugar-APIs" to facilitate their use.
           </Text>
         </Animator>
+        <Animator>
+          <Text>
+            Available vanilla packages:
+          </Text>
+        </Animator>
 
         <Animator>
           <Animated
@@ -171,7 +176,7 @@ const Page = (): ReactElement => {
         </Animator>
         <Animator>
           <Text>
-            Get started with <a href="https://nextjs.org/docs/getting-started/installation">Next.js</a> for a new project and then install Arwes for React.
+            Get started with <a href="https://nextjs.org/docs/getting-started/installation">Next.js</a> or any other React setup for a new or existing project and then install Arwes for React.
           </Text>
         </Animator>
         <Animator>
@@ -182,6 +187,218 @@ npm install @arwes/react
         <Animator>
           <Text>
             The package re-exports all the vanilla packages and the React specific packages.
+          </Text>
+        </Animator>
+        <Animator>
+          <Text>
+            If the app is going to use the Arwes animator system, some optional global animation settings can be setup as a root component. For example, to enable/disable animations or their durations.
+          </Text>
+        </Animator>
+        <Animator>
+          <Animated as='pre' animated={aaVisibility()}>
+{`import { type ReactElement } from 'react';
+import {
+  type AnimatorGeneralProviderSettings,
+  AnimatorGeneralProvider
+} from '@arwes/react';
+
+const animatorsSettings: AnimatorGeneralProviderSettings = {
+  // Durations in seconds.
+  duration: {
+    enter: 0.2,
+    exit: 0.2,
+    stagger: 0.04
+  }
+};
+
+const App = (): ReactElement => {
+  return (
+    <AnimatorGeneralProvider {...animatorsSettings}>
+      {/* children... */}
+    </AnimatorGeneralProvider>
+  );
+};`}
+          </Animated>
+        </Animator>
+        <Animator>
+          <Text>
+            Now there can be also a root Animator component to manage the app children animations.
+          </Text>
+        </Animator>
+        <Animator>
+          <Animated as='pre' animated={aaVisibility()}>
+{`import { type ReactElement, useState } from 'react';
+import { Animator } from '@arwes/react';
+
+const App = (): ReactElement => {
+  const [active] = useState(true);
+
+  return (
+    <Animator combine manager='stagger' active={active}>
+      {/* children... */}
+    </Animator>
+  );
+};`}
+          </Animated>
+        </Animator>
+        <Animator>
+          <Text>
+            Sound effects can be setup globally so any children component can read and play them.
+          </Text>
+        </Animator>
+        <Animator>
+          <Animated as='pre' animated={aaVisibility()}>
+{`import { type ReactElement } from 'react';
+import {
+  type BleepsManagerProps,
+  BleepsProvider
+} from '@arwes/react';
+
+const bleepsSettings: BleepsManagerProps = {
+  // Shared global audio settings.
+  master: {
+    volume: 0.9
+  },
+  bleeps: {
+    // A transition bleep sound to play when an object appears on the screen.
+    object: {
+      sources: [
+        { src: 'https://next.arwes.dev/assets/sounds/object.mp3', type: 'audio/mpeg' }
+      ]
+    },
+    // An interactive bleep sound to play when user clicks.
+    click: {
+      sources: [
+        { src: 'https://next.arwes.dev/assets/sounds/click.mp3', type: 'audio/mpeg' }
+      ]
+    }
+  }
+};
+
+const App = (): ReactElement => {
+  return (
+    <BleepsProvider {...bleepsSettings}>
+      {/* children... */}
+    </BleepsProvider>
+  );
+};`}
+          </Animated>
+        </Animator>
+        <Animator>
+          <Text>
+            Some applications would use visual animated patterns effects for their backgrounds. Multiple UI effects can be used together for more styles.
+          </Text>
+        </Animator>
+        <Animator>
+          <Animated as='pre' animated={aaVisibility()}>
+{`import { GridLines, Dots, MovingLines } from '@arwes/react';
+
+const Background = (): ReactElement => {
+  // The component can have its own Animator but for better composability,
+  // it should merge with its closest parent Animator.
+  return (
+    <Animator merge duration={{ interval: 10 }}>
+      {/* Some backgrounds require custom durations. */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundColor: 'hsla(100deg, 100%, 3%)'
+        }}
+      >
+        <GridLines lineColor='hsla(100deg, 100%, 75%, 0.05)' />
+        <Dots color='hsla(100deg, 100%, 75%, 0.05)' />
+        <MovingLines lineColor='hsla(100deg, 100%, 75%, 0.07)' />
+      </div>
+    </Animator>
+  );
+};
+
+const App = (): ReactElement => {
+  return (
+    <>
+      {/* For composability, an animated component would require its own custom
+          parent Animator. */}
+      <Animator>
+        <Background />
+      <Animator>
+
+      {/* more children... */}
+    </>
+  );
+};`}
+          </Animated>
+        </Animator>
+        <Animator>
+          <Text>
+            To experiment with some Arwes building blocks, there can be a card component to display a title and a description. It would use a custom frame style and transition animations for the text.
+          </Text>
+        </Animator>
+        <Animator>
+          <Animated as='pre' animated={aaVisibility()}>
+{`import {
+  useBleeps,
+  Animated,
+  FrameSVGCorners,
+  Text,
+  aa,
+  aaVisibility
+} from '@arwes/react';
+
+const Card = (): ReactElement => {
+  const bleeps = useBleeps();
+
+  return (
+    <Animator merge combine manager='stagger'>
+      <Animated
+        style={{
+          position: 'relative',
+          display: 'inline-block',
+          margin: '1rem',
+          padding: '2rem',
+          textAlign: 'center'
+        }}
+        // Effects for entering and exiting animation transitions.
+        animated={[aaVisibility(), aa('y', 24, 0)]}
+        // Play a bleep when the card is clicked.
+        onClick={() => bleeps.click?.play()}
+      >
+        <Animator>
+          <FrameSVGCorners strokeWidth={2} />
+        </Animator>
+        <Animator>
+          <Text as='h1'>
+            Arwes Project
+          </Text>
+        </Animator>
+        <Animator>
+          <Text>
+            Futuristic science fiction user interface web framework.
+          </Text>
+        </Animator>
+      </Animated>
+    </Animator>
+  );
+};
+
+const App = (): ReactElement => {
+  return (
+    <>
+      {/* ... */}
+
+      <Animator>
+        <Card />
+      <Animator>
+
+      {/* more children... */}
+    </>
+  );
+};`}
+          </Animated>
+        </Animator>
+        <Animator>
+          <Text>
+            With all these elements there is a simple web page with custom and flexible sci-fi effects. Open the playground sandbox to see it in real-time in-browser.
           </Text>
         </Animator>
 
@@ -201,6 +418,12 @@ npm install @arwes/react
               </Button>
             </a>
           </p>
+        </Animator>
+
+        <Animator>
+          <Text>
+            Available React packages:
+          </Text>
         </Animator>
 
         <Animator>
