@@ -6,7 +6,8 @@
     "@arwes/react": "^1.0.0-next.6",
     "@vanilla-extract/next-plugin": "^2.1.2",
     "iconoir-react": "^6.6.0",
-    "next": "^13.3.1"
+    "next": "^13.3.1",
+    "prism-react-renderer": "^2.0.3"
   },
   "scripts": {
     "dev": "sh ../../scripts/docs-generate-dynamics.sh && next dev -p 9200",

@@ -34,12 +34,12 @@ export const frame = style({
   overflow: 'hidden',
   border: 'none',
   borderBottom: '1px solid hsl(180deg 33% 25%)',
-  backgroundColor: 'hsla(180, 100%, 75%, 0.02)',
+  backgroundColor: 'hsla(180, 100%, 5%, 0.5)',
 
   selectors: {
     [`${root}:hover &`]: {
       borderColor: 'hsla(180, 100%, 9%, 0.8) hsla(180, 100%, 9%, 0.8) hsl(180deg 33% 30%)',
-      backgroundColor: 'hsla(180, 100%, 75%, 0.04)'
+      backgroundColor: 'hsla(180, 100%, 5%, 0.4)'
     }
   },
 

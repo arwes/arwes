@@ -8,3 +8,4 @@ export * from './LogoType';
 export * from './HeaderLayout';
 export * from './PageContentLayout';
 export * from './Card';
+export * from './CodeBlock';

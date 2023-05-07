@@ -43,7 +43,7 @@ globalStyle(`${frame} path`, {
 });
 
 globalStyle(`${frame} path[data-name="shape"]`, {
-  color: 'hsla(180, 100%, 75%, 0.02)'
+  color: 'hsla(180, 100%, 5%, 0.5)'
 });
 
 globalStyle(`${frame} path[data-name="decoration"]`, {
@@ -51,7 +51,7 @@ globalStyle(`${frame} path[data-name="decoration"]`, {
 });
 
 globalStyle(`${root}:hover ${frame} path[data-name="shape"]`, {
-  color: 'hsla(180, 100%, 75%, 0.04)'
+  color: 'hsla(180, 100%, 5%, 0.4)'
 });
 
 globalStyle(`${root}:hover ${frame} path[data-name="decoration"]`, {

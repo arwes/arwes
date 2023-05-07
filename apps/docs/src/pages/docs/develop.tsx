@@ -2,8 +2,7 @@ import { type ReactElement } from 'react';
 import Link from 'next/link';
 import { ArrowRight, FastArrowRight, OpenInBrowser } from 'iconoir-react';
 import { Animator, Animated, Text, aa, aaVisibility } from '@arwes/react';
-import { APP_PLAY_HOST_URL } from '@app/settings';
-import { PageContentLayout, Button } from '@app/ui';
+import { PageContentLayout, Button, CodeBlock } from '@app/ui';
 
 const Page = (): ReactElement => {
   return (
@@ -180,9 +179,10 @@ const Page = (): ReactElement => {
           </Text>
         </Animator>
         <Animator>
-          <Animated as='pre' animated={aaVisibility()}>
-npm install @arwes/react
-          </Animated>
+          <CodeBlock
+            animated={aaVisibility()}
+            code='npm install @arwes/react'
+          />
         </Animator>
         <Animator>
           <Text>
@@ -195,8 +195,9 @@ npm install @arwes/react
           </Text>
         </Animator>
         <Animator>
-          <Animated as='pre' animated={aaVisibility()}>
-{`import { type ReactElement } from 'react';
+          <CodeBlock
+            animated={aaVisibility()}
+            code={`import { type ReactElement } from 'react';
 import {
   type AnimatorGeneralProviderSettings,
   AnimatorGeneralProvider
@@ -218,7 +219,7 @@ const App = (): ReactElement => {
     </AnimatorGeneralProvider>
   );
 };`}
-          </Animated>
+          />
         </Animator>
         <Animator>
           <Text>
@@ -226,8 +227,9 @@ const App = (): ReactElement => {
           </Text>
         </Animator>
         <Animator>
-          <Animated as='pre' animated={aaVisibility()}>
-{`import { type ReactElement, useState } from 'react';
+          <CodeBlock
+            animated={aaVisibility()}
+            code={`import { type ReactElement, useState } from 'react';
 import { Animator } from '@arwes/react';
 
 const App = (): ReactElement => {
@@ -239,7 +241,7 @@ const App = (): ReactElement => {
     </Animator>
   );
 };`}
-          </Animated>
+          />
         </Animator>
         <Animator>
           <Text>
@@ -247,8 +249,9 @@ const App = (): ReactElement => {
           </Text>
         </Animator>
         <Animator>
-          <Animated as='pre' animated={aaVisibility()}>
-{`import { type ReactElement } from 'react';
+          <CodeBlock
+            animated={aaVisibility()}
+            code={`import { type ReactElement } from 'react';
 import {
   type BleepsManagerProps,
   BleepsProvider
@@ -282,7 +285,7 @@ const App = (): ReactElement => {
     </BleepsProvider>
   );
 };`}
-          </Animated>
+          />
         </Animator>
         <Animator>
           <Text>
@@ -290,8 +293,9 @@ const App = (): ReactElement => {
           </Text>
         </Animator>
         <Animator>
-          <Animated as='pre' animated={aaVisibility()}>
-{`import { GridLines, Dots, MovingLines } from '@arwes/react';
+          <CodeBlock
+            animated={aaVisibility()}
+            code={`import { GridLines, Dots, MovingLines } from '@arwes/react';
 
 const Background = (): ReactElement => {
   // The component can have its own Animator but for better composability,
@@ -327,16 +331,17 @@ const App = (): ReactElement => {
     </>
   );
 };`}
-          </Animated>
+          />
         </Animator>
         <Animator>
           <Text>
-            To experiment with some Arwes building blocks, there can be a card component to display a title and a description. It would use a custom frame style and transition animations for the text.
+            To experiment with some Arwes building blocks, there can be a card component to display a title and a description. It would use a custom frame style (with colors defined by CSS) and transition animations for the text.
           </Text>
         </Animator>
         <Animator>
-          <Animated as='pre' animated={aaVisibility()}>
-{`import {
+          <CodeBlock
+            animated={aaVisibility()}
+            code={`import {
   useBleeps,
   Animated,
   FrameSVGCorners,
@@ -364,6 +369,16 @@ const Card = (): ReactElement => {
         onClick={() => bleeps.click?.play()}
       >
         <Animator>
+          {/* Frame decoration and shape colors defined by CSS.
+              (This way of overwriting is not recommended for production apps.) */}
+          <style>{\`
+            .arwes-react-frames-framesvg path[data-name="decoration"] {
+              color: hsla(100deg, 100%, 50%);
+            }
+            .arwes-react-frames-framesvg path[data-name="shape"] {
+              color: hsla(100deg, 100%, 75%, 0.05)
+            }
+          \`}</style>
           <FrameSVGCorners strokeWidth={2} />
         </Animator>
         <Animator>
@@ -394,7 +409,7 @@ const App = (): ReactElement => {
     </>
   );
 };`}
-          </Animated>
+          />
         </Animator>
         <Animator>
           <Text>
@@ -405,7 +420,7 @@ const App = (): ReactElement => {
         <Animator>
           <p>
             <a
-              href={`${APP_PLAY_HOST_URL}/play/?code=aW1wb3J0IFJlYWN0LCB7IHR5cGUgUmVhY3RFbGVtZW50LCB1c2VFZmZlY3QgfSBmcm9tICdyZWFjdCc7CmltcG9ydCB7IGNyZWF0ZVJvb3QgfSBmcm9tICdyZWFjdC1kb20vY2xpZW50JzsKaW1wb3J0IHsKICB0eXBlIEFuaW1hdG9yR2VuZXJhbFByb3ZpZGVyU2V0dGluZ3MsCiAgdXNlQW5pbWF0b3IsCiAgQW5pbWF0b3JHZW5lcmFsUHJvdmlkZXIsCiAgQW5pbWF0b3IsCiAgQW5pbWF0ZWQsCiAgdHlwZSBCbGVlcHNNYW5hZ2VyUHJvcHMsCiAgQmxlZXBzUHJvdmlkZXIsCiAgdXNlQmxlZXBzLAogIEZyYW1lU1ZHQ29ybmVycywKICBHcmlkTGluZXMsCiAgRG90cywKICBNb3ZpbmdMaW5lcywKICBUZXh0LAogIGFhVmlzaWJpbGl0eSwKICBhYQp9IGZyb20gJ0Bhcndlcy9yZWFjdCc7Cgpjb25zdCBCYWNrZ3JvdW5kID0gKCk6IFJlYWN0RWxlbWVudCA9PiB7CiAgcmV0dXJuICgKICAgIDxBbmltYXRvciBtZXJnZSBkdXJhdGlvbj17eyBpbnRlcnZhbDogMTAgfX0%2BCiAgICAgIDxkaXYKICAgICAgICBzdHlsZT17ewogICAgICAgICAgcG9zaXRpb246ICdhYnNvbHV0ZScsCiAgICAgICAgICBpbnNldDogMCwKICAgICAgICAgIGJhY2tncm91bmRDb2xvcjogJ2hzbGEoMTAwZGVnLCAxMDAlLCAzJSknCiAgICAgICAgfX0KICAgICAgPgogICAgICAgIDxHcmlkTGluZXMgbGluZUNvbG9yPSdoc2xhKDEwMGRlZywgMTAwJSwgNzUlLCAwLjA1KScgLz4KICAgICAgICA8RG90cyBjb2xvcj0naHNsYSgxMDBkZWcsIDEwMCUsIDc1JSwgMC4wNSknIC8%2BCiAgICAgICAgPE1vdmluZ0xpbmVzIGxpbmVDb2xvcj0naHNsYSgxMDBkZWcsIDEwMCUsIDc1JSwgMC4wNyknIC8%2BCiAgICAgIDwvZGl2PgogICAgPC9BbmltYXRvcj4KICApOwp9OwoKY29uc3QgQ2FyZCA9ICgpOiBSZWFjdEVsZW1lbnQgPT4gewogIGNvbnN0IGFuaW1hdG9yID0gdXNlQW5pbWF0b3IoKTsKICBjb25zdCBibGVlcHMgPSB1c2VCbGVlcHMoKTsKCiAgdXNlRWZmZWN0KCgpID0%2BIHsKICAgIGlmICghYW5pbWF0b3IpIHJldHVybjsKCiAgICBhbmltYXRvci5ub2RlLnN1YnNjcmliZShub2RlID0%2BIHsKICAgICAgaWYgKG5vZGUuc3RhdGUgPT09ICdlbnRlcmluZycpIHsKICAgICAgICBibGVlcHMub2JqZWN0Py5wbGF5KCk7CiAgICAgIH0KICAgIH0pOwogIH0sIFthbmltYXRvciwgYmxlZXBzXSk7CgogIHJldHVybiAoCiAgICA8QW5pbWF0b3IgbWVyZ2UgY29tYmluZSBtYW5hZ2VyPSdzdGFnZ2VyJz4KICAgICAgPEFuaW1hdGVkCiAgICAgICAgc3R5bGU9e3sKICAgICAgICAgIHBvc2l0aW9uOiAncmVsYXRpdmUnLAogICAgICAgICAgZGlzcGxheTogJ2lubGluZS1ibG9jaycsCiAgICAgICAgICBtYXJnaW46ICcxcmVtJywKICAgICAgICAgIHBhZGRpbmc6ICcycmVtJywKICAgICAgICAgIHRleHRBbGlnbjogJ2NlbnRlcicKICAgICAgICB9fQogICAgICAgIGFuaW1hdGVkPXtbYWFWaXNpYmlsaXR5KCksIGFhKCd5JywgMjQsIDApXX0KICAgICAgICBvbkNsaWNrPXsoKSA9PiBibGVlcHMuY2xpY2s%2FLnBsYXkoKX0KICAgICAgPgogICAgICAgIDxBbmltYXRvcj4KICAgICAgICAgIDxGcmFtZVNWR0Nvcm5lcnMgc3Ryb2tlV2lkdGg9ezJ9IC8%2BCiAgICAgICAgPC9BbmltYXRvcj4KICAgICAgICA8QW5pbWF0b3I%2BCiAgICAgICAgICA8VGV4dCBhcz0naDEnPgogICAgICAgICAgICBBcndlcyBQcm9qZWN0CiAgICAgICAgICA8L1RleHQ%2BCiAgICAgICAgPC9BbmltYXRvcj4KICAgICAgICA8QW5pbWF0b3I%2BCiAgICAgICAgICA8VGV4dD4KICAgICAgICAgICAgRnV0dXJpc3RpYyBzY2llbmNlIGZpY3Rpb24gdXNlciBpbnRlcmZhY2Ugd2ViIGZyYW1ld29yay4KICAgICAgICAgIDwvVGV4dD4KICAgICAgICA8L0FuaW1hdG9yPgogICAgICA8L0FuaW1hdGVkPgogICAgPC9BbmltYXRvcj4KICApOwp9OwoKY29uc3QgYW5pbWF0b3JzU2V0dGluZ3M6IEFuaW1hdG9yR2VuZXJhbFByb3ZpZGVyU2V0dGluZ3MgPSB7CiAgZHVyYXRpb246IHsKICAgIGVudGVyOiAwLjIsCiAgICBleGl0OiAwLjIsCiAgICBzdGFnZ2VyOiAwLjA0CiAgfQp9OwoKY29uc3QgYmxlZXBzU2V0dGluZ3M6IEJsZWVwc01hbmFnZXJQcm9wcyA9IHsKICBtYXN0ZXI6IHsKICAgIHZvbHVtZTogMC45CiAgfSwKICBibGVlcHM6IHsKICAgIG9iamVjdDogewogICAgICBzb3VyY2VzOiBbeyBzcmM6ICdodHRwczovL25leHQuYXJ3ZXMuZGV2L2Fzc2V0cy9zb3VuZHMvb2JqZWN0Lm1wMycsIHR5cGU6ICdhdWRpby9tcGVnJyB9XQogICAgfSwKICAgIGNsaWNrOiB7CiAgICAgIHNvdXJjZXM6IFt7IHNyYzogJ2h0dHBzOi8vbmV4dC5hcndlcy5kZXYvYXNzZXRzL3NvdW5kcy9jbGljay5tcDMnLCB0eXBlOiAnYXVkaW8vbXBlZycgfV0KICAgIH0KICB9Cn07Cgpjb25zdCBTYW5kYm94ID0gKCk6IFJlYWN0RWxlbWVudCA9PiB7CiAgcmV0dXJuICgKICAgIDxBbmltYXRvckdlbmVyYWxQcm92aWRlciB7Li4uYW5pbWF0b3JzU2V0dGluZ3N9PgogICAgICA8QmxlZXBzUHJvdmlkZXIgey4uLmJsZWVwc1NldHRpbmdzfT4KICAgICAgICA8QW5pbWF0b3IgY29tYmluZSBtYW5hZ2VyPSdzdGFnZ2VyJz4KICAgICAgICAgIDxzdHlsZT57YAogICAgICAgICAgICAuYXJ3ZXMtcmVhY3QtZnJhbWVzLWZyYW1lc3ZnIHBhdGhbZGF0YS1uYW1lPSJkZWNvcmF0aW9uIl0gewogICAgICAgICAgICAgIGNvbG9yOiBoc2xhKDEwMGRlZywgMTAwJSwgNTAlKTsKICAgICAgICAgICAgfQogICAgICAgICAgICAuYXJ3ZXMtcmVhY3QtZnJhbWVzLWZyYW1lc3ZnIHBhdGhbZGF0YS1uYW1lPSJzaGFwZSJdIHsKICAgICAgICAgICAgICBjb2xvcjogaHNsYSgxMDBkZWcsIDEwMCUsIDc1JSwgMC4wNSkKICAgICAgICAgICAgfQogICAgICAgICAgYH08L3N0eWxlPgoKICAgICAgICAgIDxBbmltYXRvcj4KICAgICAgICAgICAgPEJhY2tncm91bmQgLz4KICAgICAgICAgIDwvQW5pbWF0b3I%2BCiAgICAgICAgICA8QW5pbWF0b3I%2BCiAgICAgICAgICAgIDxDYXJkIC8%2BCiAgICAgICAgICA8L0FuaW1hdG9yPgoKICAgICAgICAgIHsvKiBERUJVRyAqL30KICAgICAgICAgIDxzdHlsZT57YAogICAgICAgICAgICBib2R5IHsgZm9udC1mYW1pbHk6IC1hcHBsZS1zeXN0ZW0sc2Fucy1zZXJpZjsgY29sb3I6IGN5YW47IH0KICAgICAgICAgICAgaDEgeyBtYXJnaW46IDAgMCAxcmVtOyBjb2xvcjogaHNsKDEwMGRlZyAxMDAlIDYwJSk7IH0KICAgICAgICAgICAgcCB7IG1hcmdpbjogMDsgY29sb3I6IGhzbCgxMDBkZWcgNTAlIDc1JSk7IH0KICAgICAgICAgIGB9PC9zdHlsZT4KICAgICAgICAgIHsvKiBERUJVRyAqL30KCiAgICAgICAgPC9BbmltYXRvcj4KICAgICAgPC9CbGVlcHNQcm92aWRlcj4KICAgIDwvQW5pbWF0b3JHZW5lcmFsUHJvdmlkZXI%2BCiAgKTsKfTsKCmNyZWF0ZVJvb3QoZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI3Jvb3QnKSBhcyBIVE1MRWxlbWVudCkucmVuZGVyKDxTYW5kYm94IC8%2BKTsK&type=custom&sandbox=&explorer=false&editor=false&preview=true`}
+              href='/play/?code=aW1wb3J0IFJlYWN0LCB7IHR5cGUgUmVhY3RFbGVtZW50LCB1c2VFZmZlY3QgfSBmcm9tICdyZWFjdCc7CmltcG9ydCB7IGNyZWF0ZVJvb3QgfSBmcm9tICdyZWFjdC1kb20vY2xpZW50JzsKaW1wb3J0IHsKICB0eXBlIEFuaW1hdG9yR2VuZXJhbFByb3ZpZGVyU2V0dGluZ3MsCiAgdXNlQW5pbWF0b3IsCiAgQW5pbWF0b3JHZW5lcmFsUHJvdmlkZXIsCiAgQW5pbWF0b3IsCiAgQW5pbWF0ZWQsCiAgdHlwZSBCbGVlcHNNYW5hZ2VyUHJvcHMsCiAgQmxlZXBzUHJvdmlkZXIsCiAgdXNlQmxlZXBzLAogIEZyYW1lU1ZHQ29ybmVycywKICBHcmlkTGluZXMsCiAgRG90cywKICBNb3ZpbmdMaW5lcywKICBUZXh0LAogIGFhVmlzaWJpbGl0eSwKICBhYQp9IGZyb20gJ0Bhcndlcy9yZWFjdCc7Cgpjb25zdCBCYWNrZ3JvdW5kID0gKCk6IFJlYWN0RWxlbWVudCA9PiB7CiAgcmV0dXJuICgKICAgIDxBbmltYXRvciBtZXJnZSBkdXJhdGlvbj17eyBpbnRlcnZhbDogMTAgfX0%2BCiAgICAgIDxkaXYKICAgICAgICBzdHlsZT17ewogICAgICAgICAgcG9zaXRpb246ICdhYnNvbHV0ZScsCiAgICAgICAgICBpbnNldDogMCwKICAgICAgICAgIGJhY2tncm91bmRDb2xvcjogJ2hzbGEoMTAwZGVnLCAxMDAlLCAzJSknCiAgICAgICAgfX0KICAgICAgPgogICAgICAgIDxHcmlkTGluZXMgbGluZUNvbG9yPSdoc2xhKDEwMGRlZywgMTAwJSwgNzUlLCAwLjA1KScgLz4KICAgICAgICA8RG90cyBjb2xvcj0naHNsYSgxMDBkZWcsIDEwMCUsIDc1JSwgMC4wNSknIC8%2BCiAgICAgICAgPE1vdmluZ0xpbmVzIGxpbmVDb2xvcj0naHNsYSgxMDBkZWcsIDEwMCUsIDc1JSwgMC4wNyknIC8%2BCiAgICAgIDwvZGl2PgogICAgPC9BbmltYXRvcj4KICApOwp9OwoKY29uc3QgQ2FyZCA9ICgpOiBSZWFjdEVsZW1lbnQgPT4gewogIGNvbnN0IGFuaW1hdG9yID0gdXNlQW5pbWF0b3IoKTsKICBjb25zdCBibGVlcHMgPSB1c2VCbGVlcHMoKTsKCiAgdXNlRWZmZWN0KCgpID0%2BIHsKICAgIGlmICghYW5pbWF0b3IpIHJldHVybjsKCiAgICBhbmltYXRvci5ub2RlLnN1YnNjcmliZShub2RlID0%2BIHsKICAgICAgaWYgKG5vZGUuc3RhdGUgPT09ICdlbnRlcmluZycpIHsKICAgICAgICBibGVlcHMub2JqZWN0Py5wbGF5KCk7CiAgICAgIH0KICAgIH0pOwogIH0sIFthbmltYXRvciwgYmxlZXBzXSk7CgogIHJldHVybiAoCiAgICA8QW5pbWF0b3IgbWVyZ2UgY29tYmluZSBtYW5hZ2VyPSdzdGFnZ2VyJz4KICAgICAgPEFuaW1hdGVkCiAgICAgICAgc3R5bGU9e3sKICAgICAgICAgIHBvc2l0aW9uOiAncmVsYXRpdmUnLAogICAgICAgICAgZGlzcGxheTogJ2lubGluZS1ibG9jaycsCiAgICAgICAgICBtYXJnaW46ICcxcmVtJywKICAgICAgICAgIHBhZGRpbmc6ICcycmVtJywKICAgICAgICAgIHRleHRBbGlnbjogJ2NlbnRlcicKICAgICAgICB9fQogICAgICAgIGFuaW1hdGVkPXtbYWFWaXNpYmlsaXR5KCksIGFhKCd5JywgMjQsIDApXX0KICAgICAgICBvbkNsaWNrPXsoKSA9PiBibGVlcHMuY2xpY2s%2FLnBsYXkoKX0KICAgICAgPgogICAgICAgIDxBbmltYXRvcj4KICAgICAgICAgIDxGcmFtZVNWR0Nvcm5lcnMgc3Ryb2tlV2lkdGg9ezJ9IC8%2BCiAgICAgICAgPC9BbmltYXRvcj4KICAgICAgICA8QW5pbWF0b3I%2BCiAgICAgICAgICA8VGV4dCBhcz0naDEnPgogICAgICAgICAgICBBcndlcyBQcm9qZWN0CiAgICAgICAgICA8L1RleHQ%2BCiAgICAgICAgPC9BbmltYXRvcj4KICAgICAgICA8QW5pbWF0b3I%2BCiAgICAgICAgICA8VGV4dD4KICAgICAgICAgICAgRnV0dXJpc3RpYyBzY2llbmNlIGZpY3Rpb24gdXNlciBpbnRlcmZhY2Ugd2ViIGZyYW1ld29yay4KICAgICAgICAgIDwvVGV4dD4KICAgICAgICA8L0FuaW1hdG9yPgogICAgICA8L0FuaW1hdGVkPgogICAgPC9BbmltYXRvcj4KICApOwp9OwoKY29uc3QgYW5pbWF0b3JzU2V0dGluZ3M6IEFuaW1hdG9yR2VuZXJhbFByb3ZpZGVyU2V0dGluZ3MgPSB7CiAgZHVyYXRpb246IHsKICAgIGVudGVyOiAwLjIsCiAgICBleGl0OiAwLjIsCiAgICBzdGFnZ2VyOiAwLjA0CiAgfQp9OwoKY29uc3QgYmxlZXBzU2V0dGluZ3M6IEJsZWVwc01hbmFnZXJQcm9wcyA9IHsKICBtYXN0ZXI6IHsKICAgIHZvbHVtZTogMC45CiAgfSwKICBibGVlcHM6IHsKICAgIG9iamVjdDogewogICAgICBzb3VyY2VzOiBbeyBzcmM6ICdodHRwczovL25leHQuYXJ3ZXMuZGV2L2Fzc2V0cy9zb3VuZHMvb2JqZWN0Lm1wMycsIHR5cGU6ICdhdWRpby9tcGVnJyB9XQogICAgfSwKICAgIGNsaWNrOiB7CiAgICAgIHNvdXJjZXM6IFt7IHNyYzogJ2h0dHBzOi8vbmV4dC5hcndlcy5kZXYvYXNzZXRzL3NvdW5kcy9jbGljay5tcDMnLCB0eXBlOiAnYXVkaW8vbXBlZycgfV0KICAgIH0KICB9Cn07Cgpjb25zdCBTYW5kYm94ID0gKCk6IFJlYWN0RWxlbWVudCA9PiB7CiAgcmV0dXJuICgKICAgIDxBbmltYXRvckdlbmVyYWxQcm92aWRlciB7Li4uYW5pbWF0b3JzU2V0dGluZ3N9PgogICAgICA8QmxlZXBzUHJvdmlkZXIgey4uLmJsZWVwc1NldHRpbmdzfT4KICAgICAgICA8QW5pbWF0b3IgY29tYmluZSBtYW5hZ2VyPSdzdGFnZ2VyJz4KICAgICAgICAgIDxzdHlsZT57YAogICAgICAgICAgICAuYXJ3ZXMtcmVhY3QtZnJhbWVzLWZyYW1lc3ZnIHBhdGhbZGF0YS1uYW1lPSJkZWNvcmF0aW9uIl0gewogICAgICAgICAgICAgIGNvbG9yOiBoc2xhKDEwMGRlZywgMTAwJSwgNTAlKTsKICAgICAgICAgICAgfQogICAgICAgICAgICAuYXJ3ZXMtcmVhY3QtZnJhbWVzLWZyYW1lc3ZnIHBhdGhbZGF0YS1uYW1lPSJzaGFwZSJdIHsKICAgICAgICAgICAgICBjb2xvcjogaHNsYSgxMDBkZWcsIDEwMCUsIDc1JSwgMC4wNSkKICAgICAgICAgICAgfQogICAgICAgICAgYH08L3N0eWxlPgoKICAgICAgICAgIDxBbmltYXRvcj4KICAgICAgICAgICAgPEJhY2tncm91bmQgLz4KICAgICAgICAgIDwvQW5pbWF0b3I%2BCiAgICAgICAgICA8QW5pbWF0b3I%2BCiAgICAgICAgICAgIDxDYXJkIC8%2BCiAgICAgICAgICA8L0FuaW1hdG9yPgoKICAgICAgICAgIHsvKiBERUJVRyAqL30KICAgICAgICAgIDxzdHlsZT57YAogICAgICAgICAgICBib2R5IHsgZm9udC1mYW1pbHk6IC1hcHBsZS1zeXN0ZW0sc2Fucy1zZXJpZjsgY29sb3I6IGN5YW47IH0KICAgICAgICAgICAgaDEgeyBtYXJnaW46IDAgMCAxcmVtOyBjb2xvcjogaHNsKDEwMGRlZyAxMDAlIDYwJSk7IH0KICAgICAgICAgICAgcCB7IG1hcmdpbjogMDsgY29sb3I6IGhzbCgxMDBkZWcgNTAlIDc1JSk7IH0KICAgICAgICAgIGB9PC9zdHlsZT4KICAgICAgICAgIHsvKiBERUJVRyAqL30KCiAgICAgICAgPC9BbmltYXRvcj4KICAgICAgPC9CbGVlcHNQcm92aWRlcj4KICAgIDwvQW5pbWF0b3JHZW5lcmFsUHJvdmlkZXI%2BCiAgKTsKfTsKCmNyZWF0ZVJvb3QoZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI3Jvb3QnKSBhcyBIVE1MRWxlbWVudCkucmVuZGVyKDxTYW5kYm94IC8%2BKTsK&type=custom&sandbox=&explorer=false&editor=false&preview=true'
               target='_blank'
             >
               <Button
