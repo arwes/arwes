@@ -20,7 +20,7 @@ globalStyle(`${root} path`, {
 });
 
 globalStyle(`${root} path[data-name="shape"]`, {
-  color: 'hsla(180, 100%, 5%, 0.5)'
+  color: 'hsla(180, 100%, 10%, 0.1)'
 });
 
 globalStyle(`${root} path[data-name="decoration"]`, {
@@ -28,7 +28,7 @@ globalStyle(`${root} path[data-name="decoration"]`, {
 });
 
 globalStyle(`${root}:hover path[data-name="shape"]`, {
-  color: 'hsla(180, 100%, 7%, 0.5)'
+  color: 'hsla(180, 100%, 10%, 0.2)'
 });
 
 globalStyle(`${root}:hover path[data-name="decoration"]`, {

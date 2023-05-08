@@ -7,6 +7,24 @@ import { PageContentLayout, Button } from '@app/ui';
 const Page = (): ReactElement => {
   return (
     <Animator combine manager='stagger'>
+      <style jsx global>{`
+        .badges {
+          display: inline-grid;
+          grid-auto-flow: column;
+          grid-template-columns: repeat(auto-fill, 100px);
+          grid-template-rows: repeat(3, 1fr);
+          gap: 0.5rem;
+          margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 600px) {
+          .badges {
+            grid-template-columns: auto;
+            grid-template-rows: auto;
+          }
+        }
+      `}</style>
+
       <PageContentLayout animated={aa('y', 12, 0)}>
         <Animator>
           <Text as='h1' fixed>Futuristic Sci-Fi UI Web Framework</Text>
@@ -16,12 +34,7 @@ const Page = (): ReactElement => {
         </Animator>
         <Animator>
           <Animated
-            style={{
-              display: 'inline-grid',
-              gridAutoFlow: 'column',
-              columnGap: '0.5rem',
-              marginBottom: '1.5rem'
-            }}
+            className='badges'
             animated={aaVisibility()}
           >
             <a href="https://npmjs.org/package/arwes" target='_blank'>

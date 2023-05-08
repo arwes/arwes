@@ -13,6 +13,7 @@ const Background = (props: BackgroundProps): ReactElement => {
   const { className, animated } = props;
 
   const router = useRouter();
+  const isIndex = router.asPath === '/';
 
   return (
     <Animator merge combine>
@@ -27,16 +28,16 @@ const Background = (props: BackgroundProps): ReactElement => {
             role='presentation'
             className={classes.layer1}
             style={{
-              filter: `brightness(0.4) blur(${router.asPath === '/' ? 0 : 10}px)`
+              filter: `brightness(${isIndex ? 0.4 : 0.3}) blur(${isIndex ? 0 : 10}px)`
             }}
-            animated={[aa('opacity', 0.8, 1), aa('scale', 1.025, 1)]}
+            animated={[aa('opacity', 0.8, 1), aa('scale', 1.05, 1)]}
           >
             <source media='(min-width:1280px)' srcSet='/assets/images/background-large.webp' type='image/webp' />
             <source media='(min-width:1280px)' srcSet='/assets/images/background-large.jpg' type='image/jpeg' />
             <source media='(min-width:768px)' srcSet='/assets/images/background-medium.webp' type='image/webp' />
             <source media='(min-width:768px)' srcSet='/assets/images/background-medium.jpg' type='image/jpeg' />
             <source media='(max-width:767px)' srcSet='/assets/images/background-small.webp' type='image/webp' />
-            <img className={classes.layer1Image} src='/assets/images/background-small.jpg' role='presentation' alt='Background' />
+            <img className={classes.layer1Image} src='/assets/images/background-small.jpg' role='presentation' alt='Background' fetchPriority='low' />
           </Animated>
         </Animator>
 

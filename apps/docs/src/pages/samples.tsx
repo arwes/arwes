@@ -1,10 +1,26 @@
-import { type ReactElement, useRef } from 'react';
+import { type ReactElement, useRef, useEffect } from 'react';
 import { DroneError } from 'iconoir-react';
-import { Animator, Animated, FrameSVGLines, Illuminator, Text, aa, useFrameSVGAssemblingAnimation, aaVisibility } from '@arwes/react';
+import {
+  Animator,
+  Animated,
+  FrameSVGLines,
+  Illuminator,
+  Text,
+  aa,
+  useFrameSVGAssemblingAnimation,
+  aaVisibility,
+  useBleeps
+} from '@arwes/react';
 
 const Frame = (): ReactElement => {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const { onRender } = useFrameSVGAssemblingAnimation(svgRef);
+  const bleeps = useBleeps();
+
+  useEffect(() => {
+    bleeps.error?.play('/samples');
+    return () => bleeps.error?.stop('/samples');
+  }, []);
 
   return (
     <FrameSVGLines

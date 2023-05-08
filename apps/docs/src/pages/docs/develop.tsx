@@ -69,7 +69,6 @@ const Page = (): ReactElement => {
                   <td><code>@arwes/tools</code></td>
                   <td><small style={{ color: 'hsl(150 100% 50%)' }}>Polishing</small></td>
                   <td>
-                    <img src="https://img.shields.io/npm/v/@arwes/tools.svg?style=flat-square" alt="Version" />
                     <img src="https://img.shields.io/bundlephobia/minzip/@arwes/tools?style=flat-square" alt="npm bundle size (scoped)" />
                     <img src="https://img.shields.io/npm/dm/@arwes/tools.svg?style=flat-square" alt="Downloads" />
                   </td>
@@ -79,7 +78,6 @@ const Page = (): ReactElement => {
                   <td><code>@arwes/theme</code></td>
                   <td><small style={{ color: 'hsl(30 100% 50%)' }}>Development</small></td>
                   <td>
-                    <img src="https://img.shields.io/npm/v/@arwes/theme.svg?style=flat-square" alt="Version" />
                     <img src="https://img.shields.io/bundlephobia/minzip/@arwes/theme?style=flat-square" alt="npm bundle size (scoped)" />
                     <img src="https://img.shields.io/npm/dm/@arwes/theme.svg?style=flat-square" alt="Downloads" />
                   </td>
@@ -89,7 +87,6 @@ const Page = (): ReactElement => {
                   <td><code>@arwes/animated</code></td>
                   <td><small style={{ color: 'hsl(150 100% 50%)' }}>Polishing</small></td>
                   <td>
-                    <img src="https://img.shields.io/npm/v/@arwes/animated.svg?style=flat-square" alt="Version" />
                     <img src="https://img.shields.io/bundlephobia/minzip/@arwes/animated?style=flat-square" alt="npm bundle size (scoped)" />
                     <img src="https://img.shields.io/npm/dm/@arwes/animated.svg?style=flat-square" alt="Downloads" />
                   </td>
@@ -99,7 +96,6 @@ const Page = (): ReactElement => {
                   <td><code>@arwes/animator</code></td>
                   <td><small style={{ color: 'hsl(150 100% 50%)' }}>Polishing</small></td>
                   <td>
-                    <img src="https://img.shields.io/npm/v/@arwes/animator.svg?style=flat-square" alt="Version" />
                     <img src="https://img.shields.io/bundlephobia/minzip/@arwes/animator?style=flat-square" alt="npm bundle size (scoped)" />
                     <img src="https://img.shields.io/npm/dm/@arwes/animator.svg?style=flat-square" alt="Downloads" />
                   </td>
@@ -109,7 +105,6 @@ const Page = (): ReactElement => {
                   <td><code>@arwes/bleeps</code></td>
                   <td><small style={{ color: 'hsl(150 100% 50%)' }}>Polishing</small></td>
                   <td>
-                    <img src="https://img.shields.io/npm/v/@arwes/bleeps.svg?style=flat-square" alt="Version" />
                     <img src="https://img.shields.io/bundlephobia/minzip/@arwes/bleeps?style=flat-square" alt="npm bundle size (scoped)" />
                     <img src="https://img.shields.io/npm/dm/@arwes/bleeps.svg?style=flat-square" alt="Downloads" />
                   </td>
@@ -119,7 +114,6 @@ const Page = (): ReactElement => {
                   <td><code>@arwes/text</code></td>
                   <td><small style={{ color: 'hsl(150 100% 50%)' }}>Polishing</small></td>
                   <td>
-                    <img src="https://img.shields.io/npm/v/@arwes/text.svg?style=flat-square" alt="Version" />
                     <img src="https://img.shields.io/bundlephobia/minzip/@arwes/text?style=flat-square" alt="npm bundle size (scoped)" />
                     <img src="https://img.shields.io/npm/dm/@arwes/text.svg?style=flat-square" alt="Downloads" />
                   </td>
@@ -129,7 +123,6 @@ const Page = (): ReactElement => {
                   <td><code>@arwes/frames</code></td>
                   <td><small style={{ color: 'hsl(150 100% 50%)' }}>Polishing</small></td>
                   <td>
-                    <img src="https://img.shields.io/npm/v/@arwes/frames.svg?style=flat-square" alt="Version" />
                     <img src="https://img.shields.io/bundlephobia/minzip/@arwes/frames?style=flat-square" alt="npm bundle size (scoped)" />
                     <img src="https://img.shields.io/npm/dm/@arwes/frames.svg?style=flat-square" alt="Downloads" />
                   </td>
@@ -139,7 +132,6 @@ const Page = (): ReactElement => {
                   <td><code>@arwes/bgs</code></td>
                   <td><small style={{ color: 'hsl(30 100% 50%)' }}>Development</small></td>
                   <td>
-                    <img src="https://img.shields.io/npm/v/@arwes/bgs.svg?style=flat-square" alt="Version" />
                     <img src="https://img.shields.io/bundlephobia/minzip/@arwes/bgs?style=flat-square" alt="npm bundle size (scoped)" />
                     <img src="https://img.shields.io/npm/dm/@arwes/bgs.svg?style=flat-square" alt="Downloads" />
                   </td>
@@ -149,7 +141,6 @@ const Page = (): ReactElement => {
                   <td><code>arwes</code></td>
                   <td><small style={{ color: 'hsl(150 100% 50%)' }}>Polishing</small></td>
                   <td>
-                    <img src="https://img.shields.io/npm/v/arwes.svg?style=flat-square" alt="Version" />
                     <img src="https://img.shields.io/bundlephobia/minzip/arwes?style=flat-square" alt="npm bundle size (scoped)" />
                     <img src="https://img.shields.io/npm/dm/arwes.svg?style=flat-square" alt="Downloads" />
                   </td>
@@ -466,7 +457,6 @@ const App = (): ReactElement => {
                   <td><code>@arwes/react-tools</code></td>
                   <td><small style={{ color: 'hsl(150 100% 50%)' }}>Polishing</small></td>
                   <td>
-                    <img src="https://img.shields.io/npm/v/@arwes/react-tools.svg?style=flat-square" alt="Version" />
                     <img src="https://img.shields.io/bundlephobia/minzip/@arwes/react-tools?style=flat-square" alt="npm bundle size (scoped)" />
                     <img src="https://img.shields.io/npm/dm/@arwes/react-tools.svg?style=flat-square" alt="Downloads" />
                   </td>
@@ -476,7 +466,6 @@ const App = (): ReactElement => {
                   <td><code>@arwes/react-animator</code></td>
                   <td><small style={{ color: 'hsl(150 100% 50%)' }}>Polishing</small></td>
                   <td>
-                    <img src="https://img.shields.io/npm/v/@arwes/react-animator.svg?style=flat-square" alt="Version" />
                     <img src="https://img.shields.io/bundlephobia/minzip/@arwes/react-animator?style=flat-square" alt="npm bundle size (scoped)" />
                     <img src="https://img.shields.io/npm/dm/@arwes/react-animator.svg?style=flat-square" alt="Downloads" />
                   </td>
@@ -486,7 +475,6 @@ const App = (): ReactElement => {
                   <td><code>@arwes/react-animated</code></td>
                   <td><small style={{ color: 'hsl(150 100% 50%)' }}>Polishing</small></td>
                   <td>
-                    <img src="https://img.shields.io/npm/v/@arwes/react-animated.svg?style=flat-square" alt="Version" />
                     <img src="https://img.shields.io/bundlephobia/minzip/@arwes/react-animated?style=flat-square" alt="npm bundle size (scoped)" />
                     <img src="https://img.shields.io/npm/dm/@arwes/react-animated.svg?style=flat-square" alt="Downloads" />
                   </td>
@@ -496,7 +484,6 @@ const App = (): ReactElement => {
                   <td><code>@arwes/react-bleeps</code></td>
                   <td><small style={{ color: 'hsl(150 100% 50%)' }}>Polishing</small></td>
                   <td>
-                    <img src="https://img.shields.io/npm/v/@arwes/react-bleeps.svg?style=flat-square" alt="Version" />
                     <img src="https://img.shields.io/bundlephobia/minzip/@arwes/react-bleeps?style=flat-square" alt="npm bundle size (scoped)" />
                     <img src="https://img.shields.io/npm/dm/@arwes/react-bleeps.svg?style=flat-square" alt="Downloads" />
                   </td>
@@ -506,7 +493,6 @@ const App = (): ReactElement => {
                   <td><code>@arwes/react-core</code></td>
                   <td><small style={{ color: 'hsl(0 100% 50%)' }}>Specification</small></td>
                   <td>
-                    <img src="https://img.shields.io/npm/v/@arwes/react-core.svg?style=flat-square" alt="Version" />
                     <img src="https://img.shields.io/bundlephobia/minzip/@arwes/react-core?style=flat-square" alt="npm bundle size (scoped)" />
                     <img src="https://img.shields.io/npm/dm/@arwes/react-core.svg?style=flat-square" alt="Downloads" />
                   </td>
@@ -516,7 +502,6 @@ const App = (): ReactElement => {
                   <td><code>@arwes/react-text</code></td>
                   <td><small style={{ color: 'hsl(150 100% 50%)' }}>Polishing</small></td>
                   <td>
-                    <img src="https://img.shields.io/npm/v/@arwes/react-text.svg?style=flat-square" alt="Version" />
                     <img src="https://img.shields.io/bundlephobia/minzip/@arwes/react-text?style=flat-square" alt="npm bundle size (scoped)" />
                     <img src="https://img.shields.io/npm/dm/@arwes/react-text.svg?style=flat-square" alt="Downloads" />
                   </td>
@@ -526,7 +511,6 @@ const App = (): ReactElement => {
                   <td><code>@arwes/react-frames</code></td>
                   <td><small style={{ color: 'hsl(150 100% 50%)' }}>Polishing</small></td>
                   <td>
-                    <img src="https://img.shields.io/npm/v/@arwes/react-frames.svg?style=flat-square" alt="Version" />
                     <img src="https://img.shields.io/bundlephobia/minzip/@arwes/react-frames?style=flat-square" alt="npm bundle size (scoped)" />
                     <img src="https://img.shields.io/npm/dm/@arwes/react-frames.svg?style=flat-square" alt="Downloads" />
                   </td>
@@ -536,7 +520,6 @@ const App = (): ReactElement => {
                   <td><code>@arwes/react-bgs</code></td>
                   <td><small style={{ color: 'hsl(150 100% 50%)' }}>Polishing</small></td>
                   <td>
-                    <img src="https://img.shields.io/npm/v/@arwes/react-bgs.svg?style=flat-square" alt="Version" />
                     <img src="https://img.shields.io/bundlephobia/minzip/@arwes/react-bgs?style=flat-square" alt="npm bundle size (scoped)" />
                     <img src="https://img.shields.io/npm/dm/@arwes/react-bgs.svg?style=flat-square" alt="Downloads" />
                   </td>
@@ -546,7 +529,6 @@ const App = (): ReactElement => {
                   <td><code>@arwes/react</code></td>
                   <td><small style={{ color: 'hsl(150 100% 50%)' }}>Polishing</small></td>
                   <td>
-                    <img src="https://img.shields.io/npm/v/@arwes/react.svg?style=flat-square" alt="Version" />
                     <img src="https://img.shields.io/bundlephobia/minzip/@arwes/react?style=flat-square" alt="npm bundle size (scoped)" />
                     <img src="https://img.shields.io/npm/dm/@arwes/react.svg?style=flat-square" alt="Downloads" />
                   </td>

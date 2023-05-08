@@ -5,8 +5,7 @@ import { type NextPage } from 'next';
 import { type AppProps } from 'next/app';
 import Head from 'next/head';
 import { useEffect } from 'react';
-import { ThemeProvider } from '@emotion/react';
-import { Animator, AnimatorGeneralProvider } from '@arwes/react';
+import { type AnimatorGeneralProviderSettings, AnimatorGeneralProvider, Animator, BleepsProvider, type BleepsManagerProps } from '@arwes/react';
 import { MainLayout } from '@app/ui';
 import { Header } from '@app/containers';
 import { setupGoogleFonts, setupGoogleAnalytics } from '@app/utils';
@@ -14,6 +13,38 @@ import { setupGoogleFonts, setupGoogleAnalytics } from '@app/utils';
 interface ClientAppProps extends AppProps {
   Component: NextPage
 }
+
+const animatorsSettings: AnimatorGeneralProviderSettings = {
+  disabled: false,
+  duration: {
+    enter: 0.15,
+    exit: 0.15,
+    stagger: 0.05
+  }
+};
+
+const bleepsSettings: BleepsManagerProps = {
+  master: {
+    volume: 0.75
+  },
+  common: {
+    disabled: false
+  },
+  bleeps: {
+    intro: {
+      sources: [
+        { src: '/assets/sounds/intro.webm', type: 'audio/webm' },
+        { src: '/assets/sounds/intro.mp3', type: 'audio/mpeg' }
+      ]
+    },
+    error: {
+      sources: [
+        { src: '/assets/sounds/error.webm', type: 'audio/webm' },
+        { src: '/assets/sounds/error.mp3', type: 'audio/mpeg' }
+      ]
+    }
+  }
+};
 
 const ClientApp = (props: ClientAppProps): ReactElement => {
   const { Component, pageProps } = props;
@@ -24,8 +55,8 @@ const ClientApp = (props: ClientAppProps): ReactElement => {
   }, []);
 
   return (
-    <ThemeProvider theme={{}}>
-      <AnimatorGeneralProvider duration={{ enter: 0.15, exit: 0.15, stagger: 0.05 }}>
+    <AnimatorGeneralProvider {...animatorsSettings}>
+      <BleepsProvider {...bleepsSettings}>
         <Head>
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -49,14 +80,14 @@ const ClientApp = (props: ClientAppProps): ReactElement => {
           html { background-color: #050b0b; }
         `}</style>
 
-        <Animator combine>
+        <Animator combine manager='stagger'>
           <MainLayout>
             <Header />
             <Component {...pageProps} />
           </MainLayout>
         </Animator>
-      </AnimatorGeneralProvider>
-    </ThemeProvider>
+      </BleepsProvider>
+    </AnimatorGeneralProvider>
   );
 };
 

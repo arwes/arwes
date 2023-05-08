@@ -43,19 +43,11 @@ globalStyle(`${frame} path`, {
 });
 
 globalStyle(`${frame} path[data-name="shape"]`, {
-  color: 'hsla(180, 100%, 5%, 0.5)'
+  color: 'hsla(180, 100%, 10%, 0.1)'
 });
 
 globalStyle(`${frame} path[data-name="decoration"]`, {
-  color: 'hsla(180, 100%, 9%, 0.6)'
-});
-
-globalStyle(`${root}:hover ${frame} path[data-name="shape"]`, {
-  color: 'hsla(180, 100%, 5%, 0.4)'
-});
-
-globalStyle(`${root}:hover ${frame} path[data-name="decoration"]`, {
-  color: 'hsla(180, 100%, 9%, 0.8)'
+  color: 'hsla(180, 100%, 10%, 0.5)'
 });
 
 export const overflow = style({

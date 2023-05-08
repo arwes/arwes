@@ -106,7 +106,7 @@ globalStyle('b, strong', {
 });
 
 globalStyle('small', {
-  fontSize: '80%'
+  fontSize: '75%'
 });
 
 // Prevent `sub` and `sup` elements from affecting the line height in all browsers.
@@ -170,7 +170,7 @@ globalStyle('code, pre', {
 });
 
 globalStyle('code', {
-  fontSize: '90%'
+  fontSize: '75%'
 });
 
 globalStyle('pre', {
@@ -179,7 +179,7 @@ globalStyle('pre', {
   borderStyle: 'solid',
   borderColor: 'hsl(180deg 70% 25%)',
   padding: '1rem',
-  fontSize: '0.875rem',
+  fontSize: '0.75rem',
   backgroundColor: 'hsl(180deg 25% 15% / 25%)'
 });
 
