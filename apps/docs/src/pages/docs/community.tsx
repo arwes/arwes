@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import { Animator, Animated, Text, aa, aaVisibility } from '@arwes/react';
+import { Animator, Animated, Text, BleepsOnAnimator, aa, aaVisibility } from '@arwes/react';
 import { FastArrowRight } from 'iconoir-react';
 import communityApps from '@repository/static/assets/community/apps/apps.json';
 import { PageContentLayout, Card } from '@app/ui';
@@ -52,6 +52,11 @@ const Page = (): ReactElement => {
             <header>
               <Animator>
                 <Text as='h1' fixed>Community</Text>
+
+                {/* TODO: Move to the Animator combined for the real duration. */}
+                <Animator duration={{ enter: 0.5 }}>
+                  <BleepsOnAnimator transitions={{ entering: 'assemble' }} />
+                </Animator>
               </Animator>
               <Animator>
                 <Animated as='hr' animated={aa('scaleX', 0, 1)} />

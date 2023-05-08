@@ -55,6 +55,7 @@ globalStyle('::selection', {
 
 globalStyle(`
   :where(
+    .arwes-global-block,
     h1:not(:last-child),
     h2:not(:last-child),
     h3:not(:last-child),

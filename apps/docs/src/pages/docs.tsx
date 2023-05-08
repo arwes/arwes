@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'iconoir-react';
-import { Animator, Animated, Text, aa, aaVisibility } from '@arwes/react';
+import { Animator, Animated, Text, BleepsOnAnimator, aa, aaVisibility } from '@arwes/react';
 import { PageContentLayout, Button } from '@app/ui';
 
 const Page = (): ReactElement => {
@@ -28,6 +28,7 @@ const Page = (): ReactElement => {
       <PageContentLayout animated={aa('y', 12, 0)}>
         <Animator>
           <Text as='h1' fixed>Futuristic Sci-Fi UI Web Framework</Text>
+          <BleepsOnAnimator transitions={{ entering: 'appear' }} continuous />
         </Animator>
         <Animator>
           <Animated as='hr' animated={aa('scaleX', 0, 1)} />

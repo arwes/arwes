@@ -11,34 +11,37 @@ interface CodeBlockProps {
 }
 
 const CodeBlock = (props: CodeBlockProps): ReactElement => {
-  const { className: classNameExternal, animated, code } = props;
+  const { className, animated, code } = props;
 
   return (
-    <Highlight
-      theme={themes.vsDark}
-      code={code}
-      language="tsx"
+    <Animated
+      animated={animated}
+      className={cx(classes.root, className)}
     >
-      {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <Animated
-          as='pre'
-          className={cx(classes.root, className, classNameExternal)}
-          style={{
-            ...style,
-            backgroundColor: 'hsl(180deg 25% 15% / 25%)'
-          }}
-          animated={animated}
-        >
-          {tokens.map((line, i) => (
-            <div key={i} {...getLineProps({ line })}>
-              {line.map((token, key) => (
-                <span key={key} {...getTokenProps({ token })} />
-              ))}
-            </div>
-          ))}
-        </Animated>
-      )}
-    </Highlight>
+      <Highlight
+        theme={themes.vsDark}
+        code={code}
+        language="tsx"
+      >
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+          <pre
+            className={cx(classes.pre, className)}
+            style={{
+              ...style,
+              backgroundColor: 'hsl(180deg 25% 15% / 25%)'
+            }}
+          >
+            {tokens.map((line, i) => (
+              <div key={i} {...getLineProps({ line })}>
+                {line.map((token, key) => (
+                  <span key={key} {...getTokenProps({ token })} />
+                ))}
+              </div>
+            ))}
+          </pre>
+        )}
+      </Highlight>
+    </Animated>
   );
 };
 

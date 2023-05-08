@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'iconoir-react';
-import { Animator, Animated, Text, aa } from '@arwes/react';
+import { Animator, Animated, Text, BleepsOnAnimator, aa } from '@arwes/react';
 import { PageContentLayout } from '@app/ui';
 
 const Page = (): ReactElement => {
@@ -10,6 +10,7 @@ const Page = (): ReactElement => {
       <PageContentLayout animated={aa('y', 12, 0)}>
         <Animator>
           <Text as='h1' fixed>Design</Text>
+          <BleepsOnAnimator transitions={{ entering: 'appear' }} continuous />
         </Animator>
         <Animator>
           <Animated as='hr' animated={aa('scaleX', 0, 1)} />

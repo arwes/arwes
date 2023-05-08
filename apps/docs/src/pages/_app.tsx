@@ -24,17 +24,38 @@ const animatorsSettings: AnimatorGeneralProviderSettings = {
 };
 
 const bleepsSettings: BleepsManagerProps = {
-  master: {
-    volume: 0.75
+  master: { volume: 0.75 },
+  categories: {
+    interaction: { volume: 0.75 },
+    notification: { volume: 1 },
+    transition: { volume: 0.5 },
+    background: { volume: 0.25 }
   },
   bleeps: {
     intro: {
+      category: 'transition',
       sources: [
         { src: '/assets/sounds/intro.webm', type: 'audio/webm' },
         { src: '/assets/sounds/intro.mp3', type: 'audio/mpeg' }
       ]
     },
+    appear: {
+      category: 'transition',
+      sources: [
+        { src: '/assets/sounds/appear.webm', type: 'audio/webm' },
+        { src: '/assets/sounds/appear.mp3', type: 'audio/mpeg' }
+      ]
+    },
+    assemble: {
+      category: 'transition',
+      sources: [
+        { src: '/assets/sounds/assemble.webm', type: 'audio/webm' },
+        { src: '/assets/sounds/assemble.mp3', type: 'audio/mpeg' }
+      ],
+      loop: true
+    },
     error: {
+      category: 'notification',
       sources: [
         { src: '/assets/sounds/error.webm', type: 'audio/webm' },
         { src: '/assets/sounds/error.mp3', type: 'audio/mpeg' }

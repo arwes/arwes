@@ -1,4 +1,4 @@
-import { type ReactElement, useRef, useEffect } from 'react';
+import { type ReactElement, useRef } from 'react';
 import { DroneError } from 'iconoir-react';
 import {
   Animator,
@@ -9,18 +9,12 @@ import {
   aa,
   useFrameSVGAssemblingAnimation,
   aaVisibility,
-  useBleeps
+  BleepsOnAnimator
 } from '@arwes/react';
 
 const Frame = (): ReactElement => {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const { onRender } = useFrameSVGAssemblingAnimation(svgRef);
-  const bleeps = useBleeps();
-
-  useEffect(() => {
-    bleeps.error?.play('/samples');
-    return () => bleeps.error?.stop('/samples');
-  }, []);
 
   return (
     <FrameSVGLines
@@ -91,6 +85,7 @@ const Page = (): ReactElement => {
             <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
               <Frame />
               <Illuminator color='hsl(0deg 50% 50% / 0.05)' />
+              <BleepsOnAnimator transitions={{ entering: 'error' }} continuous />
             </Animator>
             <Animator>
               <Animated
