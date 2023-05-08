@@ -93,7 +93,6 @@ const PageIndex = (): ReactElement => {
                   src='/logotype.png'
                   alt='Arwes Project'
                   title='Arwes Project'
-                  fetchPriority='high'
                 />
               </Animated>
             </Animator>

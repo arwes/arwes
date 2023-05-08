@@ -1,6 +1,7 @@
 import { type ReactElement } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useAtom } from 'jotai';
 import {
   Page,
   Codepen,
@@ -9,12 +10,15 @@ import {
   GitHub,
   Discord,
   Twitter,
+  Keyframes,
   RemoveKeyframes,
+  SoundHigh,
   SoundOff,
   Menu as MenuIcon
 } from 'iconoir-react';
 import { cx, Animator, aa, aaVisibility, aaOpacity } from '@arwes/react';
 
+import { atomMotion, atomAudio } from '@app/utils';
 import { hiddenLG, hiddenSMDown, hiddenLGDown, hiddenXLDown } from '@app/styles';
 import { type HeaderLayoutProps, HeaderLayout, Logo, LogoType, Menu, MenuItem } from '@app/ui';
 import { Version } from '../Version';
@@ -24,6 +28,8 @@ interface HeaderProps extends HeaderLayoutProps {}
 
 const Header = (props: HeaderProps): ReactElement => {
   const router = useRouter();
+  const [motion, setMotion] = useAtom(atomMotion);
+  const [audio, setAudio] = useAtom(atomAudio);
 
   // The pages where the page content elements are floating instead
   // of being container by containers.
@@ -152,15 +158,23 @@ const Header = (props: HeaderProps): ReactElement => {
           <Menu>
             <Animator>
               <MenuItem className={cx(classes.menuItem, hiddenLGDown)} animated={rightItemAnimation}>
-                <button className={classes.button} title='Enable motion'>
-                  <RemoveKeyframes />
+                <button
+                  className={classes.button}
+                  title={motion ? 'Disable motion' : 'Enable motion'}
+                  onClick={() => setMotion(!motion)}
+                >
+                  {motion ? <Keyframes /> : <RemoveKeyframes />}
                 </button>
               </MenuItem>
             </Animator>
             <Animator>
               <MenuItem className={cx(classes.menuItem, hiddenLGDown)} animated={rightItemAnimation}>
-                <button className={classes.button} title='Enable audio'>
-                  <SoundOff />
+                <button
+                  className={classes.button}
+                  title={audio ? 'Disable audio' : 'Enable audio'}
+                  onClick={() => setAudio(!audio)}
+                >
+                  {audio ? <SoundHigh /> : <SoundOff />}
                 </button>
               </MenuItem>
             </Animator>

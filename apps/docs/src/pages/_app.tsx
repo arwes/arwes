@@ -5,17 +5,17 @@ import { type NextPage } from 'next';
 import { type AppProps } from 'next/app';
 import Head from 'next/head';
 import { useEffect } from 'react';
+import { useAtomValue } from 'jotai';
 import { type AnimatorGeneralProviderSettings, AnimatorGeneralProvider, Animator, BleepsProvider, type BleepsManagerProps } from '@arwes/react';
 import { MainLayout } from '@app/ui';
 import { Header } from '@app/containers';
-import { setupGoogleFonts, setupGoogleAnalytics } from '@app/utils';
+import { setupGoogleFonts, setupGoogleAnalytics, atomMotion, atomAudio } from '@app/utils';
 
 interface ClientAppProps extends AppProps {
   Component: NextPage
 }
 
 const animatorsSettings: AnimatorGeneralProviderSettings = {
-  disabled: false,
   duration: {
     enter: 0.15,
     exit: 0.15,
@@ -26,9 +26,6 @@ const animatorsSettings: AnimatorGeneralProviderSettings = {
 const bleepsSettings: BleepsManagerProps = {
   master: {
     volume: 0.75
-  },
-  common: {
-    disabled: false
   },
   bleeps: {
     intro: {
@@ -54,9 +51,12 @@ const ClientApp = (props: ClientAppProps): ReactElement => {
     setupGoogleAnalytics();
   }, []);
 
+  const motion = useAtomValue(atomMotion);
+  const audio = useAtomValue(atomAudio);
+
   return (
-    <AnimatorGeneralProvider {...animatorsSettings}>
-      <BleepsProvider {...bleepsSettings}>
+    <AnimatorGeneralProvider {...animatorsSettings} disabled={!motion}>
+      <BleepsProvider {...bleepsSettings} common={{ disabled: !audio }}>
         <Head>
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
