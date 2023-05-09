@@ -1,6 +1,6 @@
 import { type ReactElement, useRef } from 'react';
 import React, { useId, useEffect } from 'react';
-import { type AnimatorState, type AnimatorSubscriber } from '@arwes/animator';
+import { type AnimatorState } from '@arwes/animator';
 import { useAnimator } from '@arwes/react-animator';
 import { type Bleep } from '@arwes/bleeps';
 import { useBleeps } from '@arwes/react-bleeps';
@@ -35,7 +35,7 @@ const BleepsOnAnimator = <BleepsNames extends string = string>(props: BleepsOnAn
 
     let currentBleep: Bleep | null = null;
 
-    const subscription: AnimatorSubscriber = node => {
+    const cancelSubscription = animator.node.subscribe(node => {
       const bleepName = transitionsRef.current[node.state];
 
       if (!continuous) {
@@ -49,9 +49,7 @@ const BleepsOnAnimator = <BleepsNames extends string = string>(props: BleepsOnAn
         currentBleep = newBleep;
         currentBleep.play(id);
       }
-    };
-
-    const cancelSubscription = animator.node.subscribe(subscription);
+    });
 
     return () => {
       cancelSubscription();
