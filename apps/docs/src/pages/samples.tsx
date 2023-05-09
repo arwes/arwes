@@ -11,6 +11,7 @@ import {
   aaVisibility,
   BleepsOnAnimator
 } from '@arwes/react';
+import type { BleepNames } from '@app/types';
 
 const Frame = (): ReactElement => {
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -85,7 +86,7 @@ const Page = (): ReactElement => {
             <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
               <Frame />
               <Illuminator color='hsl(0deg 50% 50% / 0.05)' />
-              <BleepsOnAnimator transitions={{ entering: 'error' }} continuous />
+              <BleepsOnAnimator<BleepNames> transitions={{ entering: 'error' }} continuous />
             </Animator>
             <Animator>
               <Animated

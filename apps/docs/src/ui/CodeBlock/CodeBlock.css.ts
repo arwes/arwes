@@ -11,6 +11,13 @@ export const root = style({
 export const pre = style({
   display: 'block',
   width: '100%',
-  minWidth: 700,
+  minWidth: 700, // TODO:
+  minHeight: 0
+});
+
+export const line = style({
+  display: 'block',
+  width: '100%',
+  minWidth: 0,
   minHeight: 0
 });

@@ -2,6 +2,7 @@ import { type ReactElement } from 'react';
 import Link from 'next/link';
 import { ArrowRight, FastArrowRight, OpenInBrowser } from 'iconoir-react';
 import { Animator, Animated, Text, BleepsOnAnimator, aa, aaVisibility } from '@arwes/react';
+import type { BleepNames } from '@app/types';
 import { PageContentLayout, Button, CodeBlock } from '@app/ui';
 
 const Page = (): ReactElement => {
@@ -10,7 +11,7 @@ const Page = (): ReactElement => {
       <PageContentLayout animated={aa('y', 12, 0)}>
         <Animator>
           <Text as='h1' fixed>Develop</Text>
-          <BleepsOnAnimator transitions={{ entering: 'appear' }} continuous />
+          <BleepsOnAnimator<BleepNames> transitions={{ entering: 'content' }} continuous />
         </Animator>
         <Animator>
           <Animated as='hr' animated={aa('scaleX', 0, 1)} />
@@ -172,6 +173,7 @@ const Page = (): ReactElement => {
         </Animator>
         <Animator>
           <CodeBlock
+            className='arwes-global-block'
             animated={aaVisibility()}
             code='npm install @arwes/react'
           />

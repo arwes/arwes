@@ -2,6 +2,7 @@ import { type ReactElement } from 'react';
 import { Animator, Animated, Text, BleepsOnAnimator, aa, aaVisibility } from '@arwes/react';
 import { FastArrowRight } from 'iconoir-react';
 import communityApps from '@repository/static/assets/community/apps/apps.json';
+import type { BleepNames } from '@app/types';
 import { PageContentLayout, Card } from '@app/ui';
 
 const Page = (): ReactElement => {
@@ -43,6 +44,9 @@ const Page = (): ReactElement => {
       `}</style>
 
       <Animator combine manager='stagger'>
+        <Animator duration={{ enter: 0.4 }}>
+          <BleepsOnAnimator<BleepNames> transitions={{ entering: 'assemble' }} />
+        </Animator>
         <PageContentLayout
           animated={aa('y', 12, 0)}
           frame={false}
@@ -52,11 +56,6 @@ const Page = (): ReactElement => {
             <header>
               <Animator>
                 <Text as='h1' fixed>Community</Text>
-
-                {/* TODO: Move to the Animator combined for the real duration. */}
-                <Animator duration={{ enter: 0.5 }}>
-                  <BleepsOnAnimator transitions={{ entering: 'assemble' }} />
-                </Animator>
               </Animator>
               <Animator>
                 <Animated as='hr' animated={aa('scaleX', 0, 1)} />

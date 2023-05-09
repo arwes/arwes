@@ -1,8 +1,9 @@
 import { useEffect, useState, type ReactElement } from 'react';
-import { type AnimatedProp, Animated, cx } from '@arwes/react';
+import { type AnimatedProp, Animated, cx, useBleeps } from '@arwes/react';
 import lernaSettings from '@repository/lerna.json';
 
 import { DEPLOY_TIME } from '@app/dynamics';
+import type { BleepNames } from '@app/types';
 import { transition, linkPrimary } from '@app/styles';
 import * as classes from './Version.css';
 
@@ -14,6 +15,7 @@ interface VersionProps {
 const Version = (props: VersionProps): ReactElement => {
   const { className, animated } = props;
 
+  const bleeps = useBleeps<BleepNames>();
   const [isNext, setIsNext] = useState(false);
   const date = new Date(DEPLOY_TIME);
 
@@ -33,6 +35,7 @@ const Version = (props: VersionProps): ReactElement => {
       }
       target='github'
       title={`Version ${isNext ? '@next' : lernaSettings.version} deployed at ${date.toUTCString()}`}
+      onClick={() => bleeps.click?.play()}
     >
       {isNext ? 'v@next' : `v${lernaSettings.version}`}
     </Animated>

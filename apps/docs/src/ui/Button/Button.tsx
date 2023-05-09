@@ -4,9 +4,11 @@ import {
   Animated,
   FrameSVGOctagon,
   Illuminator,
+  useBleeps,
   cx
 } from '@arwes/react';
 
+import type { BleepNames } from '@app/types';
 import * as classes from './Button.css';
 
 interface ButtonProps {
@@ -34,6 +36,8 @@ const Button = (props: ButtonProps): ReactElement => {
     children
   } = props;
 
+  const bleeps = useBleeps<BleepNames>();
+
   return (
     <Animated
       as='button'
@@ -48,7 +52,10 @@ const Button = (props: ButtonProps): ReactElement => {
       animated={animated}
       tabIndex={tabIndex}
       title={title}
-      onClick={onClick}
+      onClick={() => {
+        onClick?.();
+        bleeps.click?.play();
+      }}
     >
       {frame === 'simple' && (
         <div className={cx(classes.frameElement, classes.frameSimpleDeco)} />

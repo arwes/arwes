@@ -1,18 +1,10 @@
-import { useEffect, type ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import Link from 'next/link';
 import { Page, Codepen, CollageFrame, DashboardSpeed } from 'iconoir-react';
-import { Animator, Animated, aaVisibility, aa, useBleeps } from '@arwes/react';
+import { Animator, Animated, aaVisibility, aa, BleepsOnAnimator } from '@arwes/react';
+import type { BleepNames } from '@app/types';
 import { Button } from '@app/ui';
 import { hiddenSMDown } from '@app/styles';
-
-const IntroBleeps = (): ReactElement => {
-  const bleeps = useBleeps();
-  useEffect(() => {
-    bleeps.intro?.play('/');
-    return () => bleeps.intro?.stop('/');
-  }, []);
-  return <></>;
-};
 
 const PageIndex = (): ReactElement => {
   return (
@@ -82,10 +74,11 @@ const PageIndex = (): ReactElement => {
       `}</style>
 
       <Animator combine manager='sequenceReverse'>
+        <BleepsOnAnimator<BleepNames> transitions={{ entering: 'intro' }} continuous />
+
         <main className='page'>
           <Animated className='container' animated={aa('y', 12, 0)}>
             <Animator>
-              <IntroBleeps />
               <Animated as='h1' className='title' animated={[aaVisibility()]}>
                 <img
                   role='heading'

@@ -31,13 +31,17 @@ const CodeBlock = (props: CodeBlockProps): ReactElement => {
               backgroundColor: 'hsl(180deg 25% 15% / 25%)'
             }}
           >
-            {tokens.map((line, i) => (
-              <div key={i} {...getLineProps({ line })}>
-                {line.map((token, key) => (
-                  <span key={key} {...getTokenProps({ token })} />
-                ))}
-              </div>
-            ))}
+            {tokens.map((line, i) => {
+              // TODO: Fix overflow content parent resize.
+              const tokenProps = getLineProps({ line });
+              return (
+                <div key={i} {...tokenProps} className={cx(classes.line, tokenProps.className)}>
+                  {line.map((token, key) => (
+                    <span key={key} {...getTokenProps({ token })} />
+                  ))}
+                </div>
+              );
+            })}
           </pre>
         )}
       </Highlight>
