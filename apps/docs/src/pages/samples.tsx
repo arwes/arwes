@@ -36,7 +36,7 @@ const Page = (): ReactElement => {
           display: flex;
           justify-content: center;
           align-items: center;
-          padding: 2rem;
+          padding: 2.5rem 1.25rem;
         }
 
         .content {

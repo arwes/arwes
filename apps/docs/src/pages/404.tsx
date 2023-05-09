@@ -1,9 +1,9 @@
 import { type ReactElement, useRef } from 'react';
-import { FrameSimple } from 'iconoir-react';
+import { VoiceError } from 'iconoir-react';
 import {
   Animator,
   Animated,
-  FrameSVGCorners,
+  FrameSVGLines,
   Illuminator,
   Text,
   aa,
@@ -18,12 +18,11 @@ const Frame = (): ReactElement => {
   const { onRender } = useFrameSVGAssemblingAnimation(svgRef);
 
   return (
-    <FrameSVGCorners
+    <FrameSVGLines
       className='frame'
       elementRef={svgRef}
       onRender={onRender}
-      strokeWidth={1}
-      cornerLength={24}
+      smallLineWidth={3}
     />
   );
 };
@@ -55,29 +54,29 @@ const Page = (): ReactElement => {
         }
 
         .frame path[data-name="decoration"] {
-          color: hsl(100deg 100% 60%);
+          color: hsl(0deg 100% 60%);
         }
 
         .frame path[data-name="shape"] {
-          color: hsl(100deg 50% 10% / 0.5);
+          color: hsl(0deg 50% 10% / 0.5);
         }
 
         .icon {
           margin: 0;
           width: 4rem;
           height: 4rem;
-          color: hsl(100deg 100% 70%);
+          color: hsl(0deg 100% 70%);
         }
 
         .title {
           margin: 0;
-          color: hsl(100deg 100% 60%);
-          text-shadow: 0 0 2px hsl(100deg 100% 60%);
+          color: hsl(0deg 100% 60%);
+          text-shadow: 0 0 2px hsl(0deg 100% 60%);
         }
 
         .description {
           margin: 0;
-          color: hsl(100deg 50% 85%);
+          color: hsl(0deg 50% 85%);
         }
       `}</style>
 
@@ -86,8 +85,8 @@ const Page = (): ReactElement => {
           <Animated as='main' className='content' animated={[aa('y', 24, 0)]}>
             <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
               <Frame />
-              <Illuminator color='hsl(100deg 50% 50% / 0.05)' />
-              <BleepsOnAnimator<BleepNames> transitions={{ entering: 'info' }} continuous />
+              <Illuminator color='hsl(0deg 50% 50% / 0.05)' />
+              <BleepsOnAnimator<BleepNames> transitions={{ entering: 'error' }} continuous />
             </Animator>
             <Animator>
               <Animated
@@ -98,13 +97,13 @@ const Page = (): ReactElement => {
                   }
                 }]}
               >
-                <FrameSimple role='presentation' className='icon' />
-                <h1 className='title'>Design</h1>
+                <VoiceError role='presentation' className='icon' />
+                <h1 className='title'>Not Found</h1>
               </Animated>
             </Animator>
             <Animator duration={{ delay: 0.4 }}>
               <Text className='description' fixed>
-                The design document page is under development.
+                The location you are looking for was not found.
               </Text>
             </Animator>
           </Animated>

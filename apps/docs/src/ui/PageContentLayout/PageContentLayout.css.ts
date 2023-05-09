@@ -78,7 +78,7 @@ export const container = style({
 });
 
 export const content = style({
-  padding: '1.25rem',
+  padding: '2.5rem 1.25rem',
   width: '100%',
   minWidth: 0,
   minHeight: 0,

@@ -13,7 +13,7 @@ const MainLayout = (props: MainLayoutProps): ReactElement => {
   const { className, children } = props;
 
   return (
-    <div className={cx(classes.root, className)}>
+    <div lang='en' className={cx(classes.root, className)}>
       <Background />
       <div className={classes.container}>
         {children}
