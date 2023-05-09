@@ -11,4 +11,6 @@ export interface TextTransitionProps {
   duration: number
   easing?: keyof typeof easing
   isEntering?: boolean
+  hideOnExited?: boolean
+  hideOnEntered?: boolean
 }

@@ -13,8 +13,18 @@ const transitionTextDecipher = (props: TextTransitionProps): Animation => {
     contentElement,
     duration,
     easing = 'linear',
-    isEntering = true
+    isEntering = true,
+    hideOnExited = true,
+    hideOnEntered
   } = props;
+
+  // If no valid elements are provided, return an void animation for type safety.
+  if (!rootElement || !contentElement) {
+    return {
+      isPending: () => false,
+      cancel: () => {}
+    };
+  }
 
   const cloneElement = contentElement.cloneNode(true) as HTMLElement;
   Object.assign(cloneElement.style, {
@@ -47,11 +57,6 @@ const transitionTextDecipher = (props: TextTransitionProps): Animation => {
   rootElement.appendChild(cloneElement);
   contentElement.style.visibility = 'hidden';
 
-  const finish = (): void => {
-    contentElement.style.visibility = isEntering ? 'visible' : 'hidden';
-    cloneElement.remove();
-  };
-
   return createAnimation({
     duration,
     easing,
@@ -79,8 +84,16 @@ const transitionTextDecipher = (props: TextTransitionProps): Animation => {
 
       setTextNodesContent(textNodes, textsCurrent, length);
     },
-    onCancel: finish,
-    onComplete: finish
+    onComplete: () => {
+      contentElement.style.visibility = (isEntering && hideOnEntered) || (!isEntering && hideOnExited)
+        ? 'hidden'
+        : 'visible';
+      cloneElement.remove();
+    },
+    onCancel: () => {
+      contentElement.style.visibility = '';
+      cloneElement.remove();
+    }
   });
 };
 

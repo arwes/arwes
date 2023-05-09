@@ -11,8 +11,18 @@ const transitionTextSequence = (props: TextTransitionProps): Animation => {
     contentElement,
     duration,
     easing = 'linear',
-    isEntering = true
+    isEntering = true,
+    hideOnExited = true,
+    hideOnEntered
   } = props;
+
+  // If no valid elements are provided, return an void animation for type safety.
+  if (!rootElement || !contentElement) {
+    return {
+      isPending: () => false,
+      cancel: () => {}
+    };
+  }
 
   const cloneElement = contentElement.cloneNode(true) as HTMLElement;
   Object.assign(cloneElement.style, {
@@ -61,12 +71,6 @@ const transitionTextSequence = (props: TextTransitionProps): Animation => {
     { duration: 0.1, easing: 'steps(2, end)', repeat: Infinity }
   );
 
-  const finish = (): void => {
-    contentElement.style.visibility = isEntering ? 'visible' : 'hidden';
-    cloneElement.remove();
-    blinkAnimation.cancel();
-  };
-
   return createAnimation({
     duration,
     easing,
@@ -75,8 +79,18 @@ const transitionTextSequence = (props: TextTransitionProps): Animation => {
       const newLength = Math.round(progress * length);
       setTextNodesContent(textNodes, texts, newLength);
     },
-    onComplete: finish,
-    onCancel: finish
+    onComplete: () => {
+      contentElement.style.visibility = (isEntering && hideOnEntered) || (!isEntering && hideOnExited)
+        ? 'hidden'
+        : 'visible';
+      cloneElement.remove();
+      blinkAnimation.cancel();
+    },
+    onCancel: () => {
+      contentElement.style.visibility = '';
+      cloneElement.remove();
+      blinkAnimation.cancel();
+    }
   });
 };
 
