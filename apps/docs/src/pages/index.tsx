@@ -19,7 +19,7 @@ const PageIndex = (): ReactElement => {
 
         .container {
           display: grid;
-          row-gap: 0.5rem;
+          row-gap: 1rem;
           padding: 1rem;
         }
 
@@ -56,7 +56,7 @@ const PageIndex = (): ReactElement => {
 
         @media (min-width: 768px) {
           .container {
-            row-gap: 1rem;
+            row-gap: 1.25rem;
           }
 
           .logo {

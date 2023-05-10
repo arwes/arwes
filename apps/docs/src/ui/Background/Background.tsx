@@ -41,7 +41,7 @@ const Background = (props: BackgroundProps): ReactElement => {
           </Animated>
         </Animator>
 
-        <Animator duration={{ enter: 2 }}>
+        <Animator duration={{ enter: 2 }} unmountOnDisabled>
           <Dots
             className={classes.layer2}
             color='hsla(180, 29%, 72%, 0.15)'
@@ -51,7 +51,7 @@ const Background = (props: BackgroundProps): ReactElement => {
           />
         </Animator>
 
-        <Animator duration={{ enter: 2, interval: 4 }}>
+        <Animator duration={{ enter: 2, interval: 4 }} unmountOnDisabled>
           <Puffs
             className={classes.layer3}
             color='hsla(180, 29%, 72%, 0.25)'

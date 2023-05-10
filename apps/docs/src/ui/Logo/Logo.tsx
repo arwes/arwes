@@ -28,7 +28,6 @@ const Logo = (props: LogoProps): ReactElement => {
           className={classes.logo}
           src='/logo.png'
           alt='Arwes Project'
-          role='heading'
         />
         {children}
       </Link>

@@ -3,7 +3,7 @@ import { FrameSimple } from 'iconoir-react';
 import {
   Animator,
   Animated,
-  FrameSVGCorners,
+  FrameSVGLines,
   Illuminator,
   Text,
   aa,
@@ -18,12 +18,11 @@ const Frame = (): ReactElement => {
   const { onRender } = useFrameSVGAssemblingAnimation(svgRef);
 
   return (
-    <FrameSVGCorners
+    <FrameSVGLines
       className='frame'
       elementRef={svgRef}
       onRender={onRender}
-      strokeWidth={1}
-      cornerLength={24}
+      smallLineWidth={3}
     />
   );
 };

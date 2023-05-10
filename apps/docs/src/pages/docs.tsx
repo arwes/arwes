@@ -10,18 +10,27 @@ const Page = (): ReactElement => {
     <Animator combine manager='stagger'>
       <style jsx global>{`
         .badges {
-          display: inline-grid;
-          grid-auto-flow: column;
-          grid-template-columns: repeat(auto-fill, 100px);
-          grid-template-rows: repeat(3, 1fr);
-          gap: 0.5rem;
-          margin-bottom: 1.5rem;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+
+        .badges img {
+          display: block;
+          margin: 0 0.5rem 0.5rem 0;
         }
 
         @media (min-width: 600px) {
           .badges {
+            display: inline-grid;
+            grid-auto-flow: column;
             grid-template-columns: auto;
             grid-template-rows: auto;
+            gap: 0.5rem;
+          }
+
+          .badges img {
+            margin: 0;
           }
         }
       `}</style>
@@ -36,7 +45,7 @@ const Page = (): ReactElement => {
         </Animator>
         <Animator>
           <Animated
-            className='badges'
+            className='badges arwes-global-block'
             animated={aaVisibility()}
           >
             <a href="https://npmjs.org/package/arwes" target='_blank'>
@@ -93,7 +102,7 @@ const Page = (): ReactElement => {
         </Animator>
         <Animator>
           <Text>
-            Since sci-fi UIs are normally very particular with custom visual workflows and user experiences, the tools offered are currently "low/medium level APIs", which means that the framework does not provide an entire set of UI components for a common web app but rather a set of primitives, utilities, and base components to build the project design system.
+            Since sci-fi UIs are normally very particular with custom visual workflows and user experiences, the tools offered are currently "low/medium level APIs", which means that the framework does not provide an entire set of UI components for a common web app but rather a set of primitives, utilities, and base components to build a design system.
           </Text>
         </Animator>
 

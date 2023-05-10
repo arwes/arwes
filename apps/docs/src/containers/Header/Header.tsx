@@ -44,16 +44,18 @@ const Header = (props: HeaderProps): ReactElement => {
       hasFrame={!isFloatingRoutePath}
       left={
         <Animator combine manager='stagger'>
-          <Logo animated={aaVisibility()}>
-            {!isFloatingRoutePath && (
-              <Animator merge>
-                <LogoType
-                  className={hiddenSMDown}
-                  animated={leftItemAnimation}
-                />
-              </Animator>
-            )}
-          </Logo>
+          <Animator>
+            <Logo animated={aaVisibility()}>
+              {!isFloatingRoutePath && (
+                <Animator merge>
+                  <LogoType
+                    className={hiddenSMDown}
+                    animated={leftItemAnimation}
+                  />
+                </Animator>
+              )}
+            </Logo>
+          </Animator>
           {!isFloatingRoutePath && (
             <Animator combine manager='stagger' duration={{ stagger: 0.03 }}>
               <Menu>
