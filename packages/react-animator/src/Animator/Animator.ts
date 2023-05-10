@@ -45,6 +45,7 @@ const Animator = (props: AnimatorProps): ReactElement => {
     dismissed,
     unmountOnExited,
     unmountOnEntered,
+    unmountOnDisabled,
     checkToSendAction,
     checkToSend,
     nodeRef,
@@ -147,7 +148,8 @@ const Animator = (props: AnimatorProps): ReactElement => {
 
   const [isEnabledToUnmount, setIsEnabledToUnmount] = useState<boolean | undefined>(() =>
     (unmountOnExited && animatorInterface?.node.state === STATES.exited) ||
-    (unmountOnEntered && animatorInterface?.node.state === STATES.entered)
+    (unmountOnEntered && animatorInterface?.node.state === STATES.entered) ||
+    (unmountOnDisabled && isDisabled)
   );
 
   useEffect(() => {
@@ -176,17 +178,19 @@ const Animator = (props: AnimatorProps): ReactElement => {
   }, [settings.active, settings.manager, settings.merge, settings.combine]);
 
   useEffect(() => {
-    if ((unmountOnExited || unmountOnEntered) && animatorInterface) {
+    if (animatorInterface) {
       const cancelSubscription = animatorInterface.node.subscribe(node => {
         setIsEnabledToUnmount(
           (unmountOnExited && node.state === STATES.exited) ||
           (unmountOnEntered && node.state === STATES.entered)
         );
       });
-
       return () => cancelSubscription();
     }
-  }, [unmountOnExited, unmountOnEntered, animatorInterface]);
+    else {
+      setIsEnabledToUnmount(unmountOnDisabled);
+    }
+  }, [animatorInterface, unmountOnExited, unmountOnEntered, unmountOnDisabled]);
 
   useEffect(() => {
     if (isFirstRender2Ref.current) {
