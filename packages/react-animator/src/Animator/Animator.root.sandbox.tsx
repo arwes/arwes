@@ -21,6 +21,7 @@ const Item = (props: ItemProps): ReactElement => {
             exiting: { x: [50, 0], backgroundColor: ['#ff0', '#0ff'] }
           }
         }}
+        hideOnExited={false}
       />
       <div style={{ marginLeft: 20 }}>
         {props.children}
