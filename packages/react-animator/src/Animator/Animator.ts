@@ -11,7 +11,6 @@ import {
 
 import {
   type AnimatorNode,
-  type AnimatorSubscriber,
   type AnimatorSettings,
   type AnimatorSettingsPartial,
   type AnimatorSystem,
@@ -37,6 +36,9 @@ const setNodeRefValue = (nodeRef: ForwardedRef<AnimatorNode> | undefined, node: 
 };
 
 const Animator = (props: AnimatorProps): ReactElement => {
+  // It is responsibility of the <Animator> to register, setup, update, and unregister
+  // the new node every time there is a change in it, since they happen on UI events.
+
   const {
     root,
     disabled,
@@ -149,8 +151,6 @@ const Animator = (props: AnimatorProps): ReactElement => {
   );
 
   useEffect(() => {
-    animatorInterface?.node.send(ACTIONS.setup);
-
     return () => {
       if (prevAnimatorRef.current) {
         prevAnimatorRef.current.system.unregister(prevAnimatorRef.current.node);
@@ -158,6 +158,14 @@ const Animator = (props: AnimatorProps): ReactElement => {
     };
   }, []);
 
+  // Setup on mounted and in case animator is disabled and then re-enabled,
+  // trigger the setup once is created again.
+  useEffect(() => {
+    animatorInterface?.node.send(ACTIONS.setup);
+  }, [!!animatorInterface]);
+
+  // Trigger updates on animator only after first render, since in the first render
+  // the setup event would take care of the initial data procedore.
   useEffect(() => {
     if (isFirstRender1Ref.current) {
       isFirstRender1Ref.current = false;
@@ -169,18 +177,14 @@ const Animator = (props: AnimatorProps): ReactElement => {
 
   useEffect(() => {
     if ((unmountOnExited || unmountOnEntered) && animatorInterface) {
-      const subscriber: AnimatorSubscriber = node => {
+      const cancelSubscription = animatorInterface.node.subscribe(node => {
         setIsEnabledToUnmount(
           (unmountOnExited && node.state === STATES.exited) ||
           (unmountOnEntered && node.state === STATES.entered)
         );
-      };
+      });
 
-      animatorInterface.node.subscribe(subscriber);
-
-      return () => {
-        animatorInterface?.node.unsubscribe(subscriber);
-      };
+      return () => cancelSubscription();
     }
   }, [unmountOnExited, unmountOnEntered, animatorInterface]);
 

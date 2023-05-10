@@ -10,7 +10,7 @@ import { createAnimatorMachine } from '../internal/createAnimatorMachine/index';
 import { createAnimatorManager } from '../internal/createAnimatorManager/index';
 
 const createAnimatorSystem = (): AnimatorSystem => {
-  const systemId = `s${Date.now()}${Math.random()}`.replace('.', '');
+  const systemId = `s${Math.random()}`.replace('.', '');
 
   let nodeIdCounter = 0;
   let root: AnimatorNode | undefined;
@@ -21,7 +21,7 @@ const createAnimatorSystem = (): AnimatorSystem => {
     // The node object reference is passed around in multiple places with some
     // circular references, so this is an object base and later is modified
     // with specific readonly and writable properties.
-    const node = {} as unknown as AnimatorNode;
+    const node = { id: nodeId } as unknown as AnimatorNode;
 
     const settings = control.getSettings();
     const machine = createAnimatorMachine(node, settings.initialState);

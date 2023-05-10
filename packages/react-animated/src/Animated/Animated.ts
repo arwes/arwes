@@ -15,7 +15,7 @@ import { animate } from 'motion';
 
 import { type NoInfer } from '@arwes/tools';
 import { mergeRefs } from '@arwes/react-tools';
-import { type AnimatorNode } from '@arwes/animator';
+import { ANIMATOR_STATES as STATES } from '@arwes/animator';
 import { useAnimator } from '@arwes/react-animator';
 
 import type {
@@ -47,7 +47,7 @@ const Animated = <
     className,
     style,
     elementRef: externalElementRef,
-    hideOnExited,
+    hideOnExited = true,
     hideOnEntered,
     ...otherProps
   } = props;
@@ -58,8 +58,8 @@ const Animated = <
   const elementRef = useRef<E | null>(null);
   const animatedSettingsRef = useRef<Array<AnimatedSettings<P>>>([]);
   const animationControlsRef = useRef<AnimatedSettingsTransitionFunctionReturn[]>([]);
-  const [isExited, setIsExited] = useState(() => animator?.node.state === 'exited');
-  const [isEntered, setIsEntered] = useState(() => animator?.node.state === 'entered');
+  const [isExited, setIsExited] = useState(() => animator?.node.state === STATES.exited);
+  const [isEntered, setIsEntered] = useState(() => animator?.node.state === STATES.entered);
 
   const animatedSettingsListReceived = Array.isArray(animated) ? animated : [animated];
   const animatedSettingsList = animatedSettingsListReceived.filter(Boolean) as Array<AnimatedSettings<P>>;
@@ -73,14 +73,17 @@ const Animated = <
       return;
     }
 
-    const animatorSubscriber = (node: AnimatorNode): void => {
+    const cancelSubscription = animator.node.subscribe(node => {
       animationControlsRef.current = [];
+
+      setIsExited(node.state === STATES.exited);
+      setIsEntered(node.state === STATES.entered);
 
       const element = elementRef.current as E;
       const settingsList = animatedSettingsRef.current;
 
       const { duration } = node;
-      const durationTransition = node.state === 'entering' || node.state === 'entered'
+      const durationTransition = node.state === STATES.entering || node.state === STATES.entered
         ? duration.enter
         : duration.exit;
 
@@ -109,15 +112,10 @@ const Animated = <
             animationControlsRef.current.push(control);
           }
         });
-
-      setIsExited(node.state === 'exited');
-      setIsEntered(node.state === 'entered');
-    };
-
-    animator.node.subscribe(animatorSubscriber);
+    });
 
     return () => {
-      animator.node.unsubscribe(animatorSubscriber);
+      cancelSubscription();
       animationControlsRef.current.forEach(control => control.stop());
     };
   }, [animator]);
@@ -137,11 +135,6 @@ const Animated = <
       .reduce((total, item) => ({ ...total, ...item }), {});
   }
 
-  let animatorStyles: CSSProperties | undefined;
-  if (animator && ((hideOnExited && isExited) || (hideOnEntered && isEntered))) {
-    animatorStyles = { visibility: 'hidden' };
-  }
-
   return createElement(as, {
     ...otherProps,
     ...initialAttributes,
@@ -149,7 +142,7 @@ const Animated = <
     style: {
       ...style,
       ...dynamicStyles,
-      ...animatorStyles
+      visibility: animator && ((hideOnExited && isExited) || (hideOnEntered && isEntered)) ? 'hidden' : 'visible'
     },
     ref: mergeRefs(externalElementRef, elementRef)
   });
