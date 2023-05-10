@@ -74,14 +74,19 @@ const Animated = <
     }
 
     const cancelSubscription = animator.node.subscribe(node => {
-      animationControlsRef.current = [];
-
       setIsExited(node.state === STATES.exited);
       setIsEntered(node.state === STATES.entered);
 
-      const element = elementRef.current as E;
-      const settingsList = animatedSettingsRef.current;
+      animationControlsRef.current = [];
 
+      const element = elementRef.current;
+
+      // Weird case if the element is removed and the subscription is not cancelled.
+      if (!element) {
+        return;
+      }
+
+      const settingsList = animatedSettingsRef.current;
       const { duration } = node;
       const durationTransition = node.state === STATES.entering || node.state === STATES.entered
         ? duration.enter
