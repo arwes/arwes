@@ -15,11 +15,14 @@
   <a href="https://github.com/arwes/arwes/actions">
       <img src="https://github.com/arwes/arwes/workflows/ci/badge.svg?style=flat-square" alt="CI" />
   </a>
+  <a href="https://www.codefactor.io/repository/github/arwes/arwes">
+    <img src="https://www.codefactor.io/repository/github/arwes/arwes/badge" alt="CodeFactor" />
+  </a>
   <a href="https://github.com/arwes/arwes">
       <img src="https://img.shields.io/github/stars/arwes/arwes.svg?style=flat-square&label=stars" alt="Github Stars" />
   </a>
   <a href="https://npmjs.org/package/arwes">
-      <img src="https://img.shields.io/npm/dm/arwes.svg?style=flat-square" alt="Downloads" />
+    <img alt="npm" src="https://img.shields.io/npm/dm/arwes?label=installs&style=flat-square" />
   </a>
   <a href="https://twitter.com/arwesjs">
     <img src="https://img.shields.io/twitter/url?label=ArwesJS&logo=twitter&url=https%3A%2F%2Ftwitter.com%2Farwesjs" alt="Follow on Twitter" />
@@ -59,19 +62,19 @@ released in February, 2018, and it is now deprecated.
 
 ## Packages
 
-### Agnostic
+### Vanilla
 
 Package | Status | Description
 ---|---|---
-`@arwes/tools` |  Polishing | General browser API tools
+`@arwes/tools` |  Polishing | General React API tools
 `@arwes/theme` | Development | Color, units, and general purpose dynamic theming tools
 `@arwes/animated` | Polishing | HTML element animation utilities
 `@arwes/animator` | Polishing | Assemble and disassemble user interfaces using animation controls
 `@arwes/bleeps` | Polishing | Define, manage, and control interactive short sound effects
 `@arwes/text` | Polishing | Text rendering effect tools
 `@arwes/frames` | Polishing | Build responsive vector graphics components
-`@arwes/bgs` | Polishing | Passive UI background effects
-`arwes` | Polishing | All agnostic packages bundle
+`@arwes/bgs` | Development | Passive UI background effects
+`arwes` | Polishing | All vanilla packages bundle
 
 ### React
 
@@ -85,7 +88,7 @@ Package | Status | Description
 `@arwes/react-text` | Polishing | Text effect components
 `@arwes/react-frames` | Polishing | Build responsive vector graphics components
 `@arwes/react-bgs` | Polishing | Passive UI background effects
-`@arwes/react` | Polishing | All Agnostic and React packages bundle
+`@arwes/react` | Polishing | All vanilla and React packages bundle
 
 ## Community
 
@@ -133,16 +136,19 @@ Check out [Project Task Boards](https://github.com/arwes/arwes/projects).
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
-  <tr>
-    <td align="center"><a href="https://RomelPerez.dev"><img src="https://avatars2.githubusercontent.com/u/1393135?v=4?s=140" width="140px;" alt=""/><br /><sub><b>Romel Pérez</b></sub></a><br /><a href="#projectManagement-romelperez" title="Project Management">📆</a> <a href="https://github.com/arwes/arwes/commits?author=romelperez" title="Code">💻</a> <a href="https://github.com/arwes/arwes/commits?author=romelperez" title="Tests">⚠️</a> <a href="https://github.com/arwes/arwes/commits?author=romelperez" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://nickwe.st"><img src="https://avatars1.githubusercontent.com/u/3742496?v=4?s=140" width="140px;" alt=""/><br /><sub><b>Nick West</b></sub></a><br /><a href="https://github.com/arwes/arwes/commits?author=njwest" title="Documentation">📖</a> <a href="#ideas-njwest" title="Ideas, Planning, & Feedback">🤔</a> <a href="#research-njwest" title="Research">🔬</a> <a href="#infra-njwest" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
-    <td align="center"><a href="https://github.com/jdpnielsen"><img src="https://avatars3.githubusercontent.com/u/8746698?v=4?s=140" width="140px;" alt=""/><br /><sub><b>Joshua Pratt</b></sub></a><br /><a href="https://github.com/arwes/arwes/commits?author=jdpnielsen" title="Code">💻</a> <a href="https://github.com/arwes/arwes/pulls?q=is%3Apr+reviewed-by%3Ajdpnielsen" title="Reviewed Pull Requests">👀</a></td>
-    <td align="center"><a href="https://github.com/Dessix"><img src="https://avatars.githubusercontent.com/u/434942?v=4?s=140" width="140px;" alt=""/><br /><sub><b>Zoey</b></sub></a><br /><a href="#ideas-Dessix" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/arwes/arwes/pulls?q=is%3Apr+reviewed-by%3ADessix" title="Reviewed Pull Requests">👀</a></td>
-    <td align="center"><a href="https://github.com/amir-arad"><img src="https://avatars.githubusercontent.com/u/6019373?v=4?s=140" width="140px;" alt=""/><br /><sub><b>Amir Arad</b></sub></a><br /><a href="https://github.com/arwes/arwes/issues?q=author%3Aamir-arad" title="Bug reports">🐛</a> <a href="https://github.com/arwes/arwes/commits?author=amir-arad" title="Code">💻</a></td>
-  </tr>
-  <tr>
-    <td align="center"><a href="https://github.com/StephenCodesThings"><img src="https://avatars.githubusercontent.com/u/126058?v=4?s=140" width="140px;" alt=""/><br /><sub><b>Stephen Bennett</b></sub></a><br /><a href="https://github.com/arwes/arwes/issues?q=author%3AStephenCodesThings" title="Bug reports">🐛</a> <a href="https://github.com/arwes/arwes/commits?author=StephenCodesThings" title="Code">💻</a></td>
-  </tr>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="20%"><a href="https://RomelPerez.dev"><img src="https://avatars2.githubusercontent.com/u/1393135?v=4?s=140" width="140px;" alt="Romel Pérez"/><br /><sub><b>Romel Pérez</b></sub></a><br /><a href="#projectManagement-romelperez" title="Project Management">📆</a> <a href="https://github.com/arwes/arwes/commits?author=romelperez" title="Code">💻</a> <a href="https://github.com/arwes/arwes/commits?author=romelperez" title="Tests">⚠️</a> <a href="https://github.com/arwes/arwes/commits?author=romelperez" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://nickwe.st"><img src="https://avatars1.githubusercontent.com/u/3742496?v=4?s=140" width="140px;" alt="Nick West"/><br /><sub><b>Nick West</b></sub></a><br /><a href="https://github.com/arwes/arwes/commits?author=njwest" title="Documentation">📖</a> <a href="#ideas-njwest" title="Ideas, Planning, & Feedback">🤔</a> <a href="#research-njwest" title="Research">🔬</a> <a href="#infra-njwest" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/jdpnielsen"><img src="https://avatars3.githubusercontent.com/u/8746698?v=4?s=140" width="140px;" alt="Joshua Pratt"/><br /><sub><b>Joshua Pratt</b></sub></a><br /><a href="https://github.com/arwes/arwes/commits?author=jdpnielsen" title="Code">💻</a> <a href="https://github.com/arwes/arwes/pulls?q=is%3Apr+reviewed-by%3Ajdpnielsen" title="Reviewed Pull Requests">👀</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/Dessix"><img src="https://avatars.githubusercontent.com/u/434942?v=4?s=140" width="140px;" alt="Zoey"/><br /><sub><b>Zoey</b></sub></a><br /><a href="#ideas-Dessix" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/arwes/arwes/pulls?q=is%3Apr+reviewed-by%3ADessix" title="Reviewed Pull Requests">👀</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/amir-arad"><img src="https://avatars.githubusercontent.com/u/6019373?v=4?s=140" width="140px;" alt="Amir Arad"/><br /><sub><b>Amir Arad</b></sub></a><br /><a href="https://github.com/arwes/arwes/issues?q=author%3Aamir-arad" title="Bug reports">🐛</a> <a href="https://github.com/arwes/arwes/commits?author=amir-arad" title="Code">💻</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/StephenCodesThings"><img src="https://avatars.githubusercontent.com/u/126058?v=4?s=140" width="140px;" alt="Stephen Bennett"/><br /><sub><b>Stephen Bennett</b></sub></a><br /><a href="https://github.com/arwes/arwes/issues?q=author%3AStephenCodesThings" title="Bug reports">🐛</a> <a href="https://github.com/arwes/arwes/commits?author=StephenCodesThings" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/TheNetAdmin"><img src="https://avatars.githubusercontent.com/u/18525442?v=4?s=140" width="140px;" alt="Zixuan Wang"/><br /><sub><b>Zixuan Wang</b></sub></a><br /><a href="https://github.com/arwes/arwes/issues?q=author%3ATheNetAdmin" title="Bug reports">🐛</a> <a href="https://github.com/arwes/arwes/commits?author=TheNetAdmin" title="Code">💻</a></td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->

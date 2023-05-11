@@ -1,72 +1,54 @@
 import { style } from '@vanilla-extract/css';
 
 export const root = style({
-  padding: '0.75rem',
-  width: '100%'
+  width: '100%',
+  userSelect: 'none',
+
+  '@media': {
+    '(min-width: 900px)': {
+      padding: '0.75rem 1rem'
+    }
+  }
 });
 
 export const container = style({
   position: 'relative',
   display: 'grid',
-  gridTemplateColumns: 'repeat(3, 1fr)',
-  padding: '0 2rem'
+  gridTemplateColumns: 'repeat(3, auto)',
+  padding: '0 1rem',
+
+  '@media': {
+    '(min-width: 900px)': {
+      padding: '0 2rem'
+    },
+    '(min-width: 1200px)': {
+      gridTemplateColumns: 'repeat(3, 1fr)'
+    }
+  }
 });
 
 export const frame = style({
   zIndex: -1,
   position: 'absolute',
   inset: 0,
-  overflow: 'hidden',
-  borderTop: '1px solid hsla(180, 100%, 9%, 0.6)',
-  borderLeft: '1px solid hsla(180, 100%, 9%, 0.6)',
-  borderRight: '1px solid hsla(180, 100%, 9%, 0.6)',
-  borderBottom: '1px solid hsl(180deg 33% 25%)',
-  backgroundColor: 'hsla(180, 100%, 75%, 0.02)',
-
-  selectors: {
-    [`${root}:hover &`]: {
-      borderColor: 'hsla(180, 100%, 9%, 0.8) hsla(180, 100%, 9%, 0.8) hsl(180deg 33% 30%)',
-      backgroundColor: 'hsla(180, 100%, 75%, 0.04)'
-    }
-  }
+  overflow: 'hidden'
 });
 
-export const frameLineLeft = style({
-  position: 'absolute',
-  left: 0,
-  bottom: 0,
-  borderBottom: '1px solid hsl(180 68% 67%)',
-  width: '1rem'
-});
-
-export const frameLineRight = style({
-  position: 'absolute',
-  right: 0,
-  bottom: 0,
-  borderBottom: '1px solid hsl(180 68% 67%)',
-  width: '1rem'
+export const section = style({
+  display: 'grid',
+  gridAutoFlow: 'column',
+  alignItems: 'center',
+  columnGap: '1rem'
 });
 
 export const left = style({
-  display: 'grid',
-  gridAutoFlow: 'column',
-  justifyContent: 'flex-start',
-  alignItems: 'center',
-  columnGap: '1rem'
+  justifyContent: 'flex-start'
 });
 
 export const center = style({
-  display: 'grid',
-  gridAutoFlow: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  columnGap: '1rem'
+  justifyContent: 'center'
 });
 
 export const right = style({
-  display: 'grid',
-  gridAutoFlow: 'column',
-  justifyContent: 'flex-end',
-  alignItems: 'center',
-  columnGap: '1rem'
+  justifyContent: 'flex-end'
 });

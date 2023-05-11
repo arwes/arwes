@@ -67,8 +67,13 @@ const AnimatedX = <
 
     animationControlsRef.current = [];
 
-    const element = elementRef.current as E;
+    const element = elementRef.current;
     const settingsList = animatedSettingsRef.current;
+
+    // Weird case if the element is removed and the subscription is not cancelled.
+    if (!element) {
+      return;
+    }
 
     settingsList
       .map(settingsItem => settingsItem.transitions?.[animatedState] as AnimatedSettingsTransition)

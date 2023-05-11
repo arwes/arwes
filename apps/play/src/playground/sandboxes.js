@@ -321,6 +321,17 @@ export const sandboxes = [
             ]
           }
         ]
+      },
+      {
+        name: '@arwes/react-core',
+        children: [
+          {
+            name: 'BleepsOnAnimator',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-core/src/BleepsOnAnimator/BleepsOnAnimator.basic.sandbox.tsx') }
+            ]
+          }
+        ]
       }
     ]
   }

@@ -4,9 +4,11 @@ import {
   Animated,
   FrameSVGOctagon,
   Illuminator,
+  useBleeps,
   cx
 } from '@arwes/react';
 
+import type { BleepNames } from '@app/types';
 import * as classes from './Button.css';
 
 interface ButtonProps {
@@ -16,6 +18,8 @@ interface ButtonProps {
   title?: string
   size?: 'small' | 'medium'
   frame?: 'simple' | 'hexagon'
+  onHoverAnimateIcons?: boolean
+  onClick?: () => void
   children: ReactNode
 }
 
@@ -27,8 +31,12 @@ const Button = (props: ButtonProps): ReactElement => {
     title,
     size = 'medium',
     frame = 'simple',
+    onHoverAnimateIcons,
+    onClick,
     children
   } = props;
+
+  const bleeps = useBleeps<BleepNames>();
 
   return (
     <Animated
@@ -38,17 +46,22 @@ const Button = (props: ButtonProps): ReactElement => {
         size === 'medium' && classes.medium,
         frame === 'simple' && classes.frameSimple,
         frame === 'hexagon' && classes.frameHexagon,
+        onHoverAnimateIcons && classes.onHoverAnimateIcons,
         className
       )}
       animated={animated}
       tabIndex={tabIndex}
       title={title}
+      onClick={() => {
+        onClick?.();
+        bleeps.click?.play();
+      }}
     >
       {frame === 'simple' && (
-        <div className={classes.frameSimpleDeco} />
+        <div className={cx(classes.frameElement, classes.frameSimpleDeco)} />
       )}
       {frame === 'hexagon' && (
-        <div className={classes.frameHexagonClip}>
+        <div className={cx(classes.frameElement, classes.frameHexagonClip)}>
           <Illuminator
             className={classes.frameHexagonIlluminator}
             color='hsl(60 50% 90% / 8%)'

@@ -32,6 +32,8 @@ interface TextProps<E extends HTMLElement = HTMLSpanElement> extends HTMLProps<E
    * or dynamic according to its children.
    */
   fixed?: boolean
+  hideOnExited?: boolean
+  hideOnEntered?: boolean
   children: ReactNode
 }
 
@@ -39,12 +41,14 @@ const TEXT_CLASS = 'arwes-react-text-text';
 
 const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): ReactElement => {
   const {
-    as: asProvided = 'span',
+    as: asProvided = 'p',
     className,
     children,
     manager,
     easing,
     fixed,
+    hideOnExited = true,
+    hideOnEntered,
     elementRef: elementRefProvided,
     ...otherProps
   } = props;
@@ -55,6 +59,8 @@ const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): Rea
   const contentElementRef = useRef<HTMLSpanElement>(null);
   const transitionControl = useRef<Animation | null>(null);
   const animator = useAnimator();
+  const [isExited, setIsExited] = useState(() => animator?.node.state === STATES.exited);
+  const [isEntered, setIsEntered] = useState(() => animator?.node.state === STATES.entered);
 
   useEffect(() => {
     setChildrenText(contentElementRef.current?.textContent ?? '');
@@ -100,11 +106,16 @@ const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): Rea
         contentElement: contentElementRef.current as HTMLElement,
         duration,
         isEntering,
-        easing
+        easing,
+        hideOnExited,
+        hideOnEntered
       });
     };
 
-    const subscription = animator.node.subscribe(node => {
+    const cancelSubscription = animator.node.subscribe(node => {
+      setIsEntered(node.state === STATES.entered);
+      setIsExited(node.state === STATES.exited);
+
       switch (node.state) {
         case 'entered': {
           if (!transitionControl.current) {
@@ -124,7 +135,7 @@ const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): Rea
     });
 
     return () => {
-      subscription();
+      cancelSubscription();
       transitionControl.current?.cancel();
       transitionControl.current = null;
     };
@@ -136,8 +147,7 @@ const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): Rea
       ...otherProps,
       className: cx(TEXT_CLASS, className),
       css: {
-        position: 'relative',
-        display: 'inline-block'
+        position: 'relative'
       },
       ref: mergeRefs<E>(elementRefProvided, elementRef)
     },
@@ -150,7 +160,7 @@ const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): Rea
           position: 'relative',
           zIndex: 1,
           display: 'inline-block',
-          visibility: animator && animator.node.state !== STATES.entered ? 'hidden' : undefined
+          visibility: animator && ((hideOnEntered && isEntered) || (hideOnExited && isExited)) ? 'hidden' : 'visible'
         }
       },
       children

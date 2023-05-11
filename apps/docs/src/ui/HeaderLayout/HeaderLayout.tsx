@@ -1,5 +1,5 @@
 import { type ReactElement, type ReactNode } from 'react';
-import { type AnimatedProp, Animated, Illuminator, cx } from '@arwes/react';
+import { type AnimatedProp, Animated, Illuminator, cx, aa } from '@arwes/react';
 
 import { transition } from '@app/styles/motion.css';
 import * as classes from './HeaderLayout.css';
@@ -24,21 +24,31 @@ const HeaderLayout = (props: HeaderLayoutProps): ReactElement => {
     >
       <div className={classes.container}>
         {hasFrame && (
-          <div role='presentation' className={cx(classes.frame, transition)}>
-            <div className={classes.frameLineLeft} />
-            <div className={classes.frameLineRight} />
-            <Illuminator color='hsl(180 50% 50% / 5%)' size={400} />
+          <div
+            role='presentation'
+            className={cx(classes.frame, transition)}
+          >
+            <Illuminator color='hsl(180 50% 50% / 10%)' size={400} />
           </div>
         )}
-        <div className={classes.left}>
+        <Animated
+          className={cx(classes.section, classes.left)}
+          animated={aa('x', -12, 0)}
+        >
           {left}
-        </div>
-        <div className={classes.center}>
+        </Animated>
+        <Animated
+          className={cx(classes.section, classes.center)}
+          animated={aa('scaleX', 0.9, 1)}
+        >
           {center}
-        </div>
-        <div className={classes.right}>
+        </Animated>
+        <Animated
+          className={cx(classes.section, classes.right)}
+          animated={aa('x', 12, 0)}
+        >
           {right}
-        </div>
+        </Animated>
       </div>
     </Animated>
   );

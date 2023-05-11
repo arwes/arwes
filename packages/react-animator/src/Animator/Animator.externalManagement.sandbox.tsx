@@ -40,6 +40,7 @@ const AnimatorUIListener = (props: AnimatorUIListenerProps): ReactElement => {
           exiting: { opacity: [1, 0.2] }
         }
       }}
+      hideOnExited={false}
     >
       {props.children}
     </Animated>

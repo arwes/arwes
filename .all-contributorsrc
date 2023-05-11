@@ -73,6 +73,16 @@
         "bug",
         "code"
       ]
+    },
+    {
+      "login": "TheNetAdmin",
+      "name": "Zixuan Wang",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18525442?v=4",
+      "profile": "https://github.com/TheNetAdmin",
+      "contributions": [
+        "bug",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5

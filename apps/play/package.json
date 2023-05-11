@@ -1,17 +1,17 @@
 {
   "name": "@arwes/app-play",
-  "version": "1.0.0-next.6",
+  "version": "1.0.0-next.7",
   "private": true,
   "dependencies": {
-    "@arwes/react": "^1.0.0-next.6",
+    "@arwes/react": "^1.0.0-next.7",
     "@babel/core": "^7.20.12",
     "@babel/preset-react": "^7.18.6",
-    "arwes": "^1.0.0-next.6",
+    "arwes": "^1.0.0-next.7",
     "babel-loader": "^9.1.2",
     "copy-webpack-plugin": "^11.0.0",
     "empanada": "^0.2.2",
     "html-webpack-plugin": "^5.5.0",
-    "noxtron": "^0.7.5",
+    "noxtron": "^0.7.6",
     "raw-loader": "^4.0.2"
   },
   "scripts": {

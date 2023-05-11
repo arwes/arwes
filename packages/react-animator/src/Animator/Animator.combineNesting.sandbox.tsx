@@ -26,6 +26,7 @@ const Item = ({ children, ...animator }: ItemProps): ReactElement => {
             }
           }
         }}
+        hideOnExited={false}
       />
       <div style={{ marginLeft: 20 }}>
         {children}

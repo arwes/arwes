@@ -1,5 +1,6 @@
 import { type RefObject, useRef, useCallback, useEffect } from 'react';
 import { animate, type AnimationControls } from 'motion';
+import { ANIMATOR_STATES as STATES } from '@arwes/animator';
 import { useAnimator } from '@arwes/react-animator';
 
 interface FrameSVGAssemblingAnimation {
@@ -11,13 +12,24 @@ const useFrameSVGAssemblingAnimation = (svgRef: RefObject<SVGSVGElement>): Frame
   const animationControlRef = useRef<AnimationControls | null>(null);
 
   useEffect(() => {
-    if (!animator || !svgRef.current) {
+    const svg = svgRef.current;
+
+    if (!svg) {
       return;
     }
 
-    const svg = svgRef.current;
     const shapes = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="shape"]'));
     const polylines = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="decoration"]'));
+
+    shapes.concat(polylines).forEach(path => {
+      path.style.opacity = '1';
+      path.style.strokeDasharray = '';
+      path.style.strokeDashoffset = '';
+    });
+
+    if (!animator) {
+      return;
+    }
 
     const unsubscribe = animator.node.subscribe(node => {
       const { duration } = node;
@@ -96,7 +108,7 @@ const useFrameSVGAssemblingAnimation = (svgRef: RefObject<SVGSVGElement>): Frame
       animationControlRef.current?.cancel();
       unsubscribe();
     };
-  }, []);
+  }, [animator]);
 
   const onRender = useCallback(() => {
     if (!animator || !svgRef.current) {
@@ -107,7 +119,7 @@ const useFrameSVGAssemblingAnimation = (svgRef: RefObject<SVGSVGElement>): Frame
     const shapes = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="shape"]'));
     const polylines = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="decoration"]'));
 
-    const isVisible = animator.node.state === 'entering' || animator.node.state === 'entered';
+    const isVisible = animator.node.state === STATES.entering || animator.node.state === STATES.entered;
 
     animationControlRef.current?.cancel();
 
@@ -116,7 +128,7 @@ const useFrameSVGAssemblingAnimation = (svgRef: RefObject<SVGSVGElement>): Frame
       path.style.strokeDasharray = '';
       path.style.strokeDashoffset = '';
     });
-  }, []);
+  }, [animator]);
 
   return { onRender };
 };

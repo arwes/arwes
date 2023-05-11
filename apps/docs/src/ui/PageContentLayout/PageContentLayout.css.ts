@@ -9,6 +9,7 @@ export const root = style({
   justifyContent: 'flex-start',
   alignItems: 'center',
   width: '100%',
+  minWidth: 0,
   minHeight: 0
 });
 
@@ -19,13 +20,20 @@ export const frame = style({
   position: 'absolute',
   left: '50%',
   top: '2rem',
+  display: 'none',
   bottom: '2rem',
   width: '100%',
   maxWidth: 900,
   transform: 'translate(-50%, 0)',
   clipPath: createFrameOctagonClip({
     squareSize: '1rem'
-  })
+  }),
+
+  '@media': {
+    '(min-width: 1200px)': {
+      display: 'block'
+    }
+  }
 });
 
 globalStyle(`${frame} path`, {
@@ -35,19 +43,11 @@ globalStyle(`${frame} path`, {
 });
 
 globalStyle(`${frame} path[data-name="shape"]`, {
-  color: 'hsla(180, 100%, 75%, 0.02)'
+  color: 'hsla(180, 100%, 10%, 0.1)'
 });
 
 globalStyle(`${frame} path[data-name="decoration"]`, {
-  color: 'hsla(180, 100%, 9%, 0.6)'
-});
-
-globalStyle(`${root}:hover ${frame} path[data-name="shape"]`, {
-  color: 'hsla(180, 100%, 75%, 0.04)'
-});
-
-globalStyle(`${root}:hover ${frame} path[data-name="decoration"]`, {
-  color: 'hsla(180, 100%, 9%, 0.8)'
+  color: 'hsla(180, 100%, 10%, 0.5)'
 });
 
 export const overflow = style({
@@ -55,9 +55,16 @@ export const overflow = style({
   flex: 1,
   display: 'flex',
   justifyContent: 'center',
-  padding: '2rem 1rem',
+  padding: 0,
   width: '100%',
-  minHeight: 0
+  minWidth: 0,
+  minHeight: 0,
+
+  '@media': {
+    '(min-width: 1200px)': {
+      padding: '2rem 1rem'
+    }
+  }
 });
 
 export const container = style({
@@ -66,12 +73,15 @@ export const container = style({
   justifyContent: 'center',
   overflowY: 'auto',
   width: '100%',
+  minWidth: 0,
   minHeight: 0
 });
 
 export const content = style({
-  padding: '3rem',
+  padding: '2.5rem 1.25rem',
   width: '100%',
+  minWidth: 0,
+  minHeight: 0,
   maxWidth: 900,
 
   // To create the container scroll padding bottom space.
@@ -85,7 +95,19 @@ export const content = style({
 
   selectors: {
     [`${floating} &`]: {
-      padding: 0
+      padding: '2rem',
+
+      '@media': {
+        '(min-width: 1200px)': {
+          padding: 0
+        }
+      }
+    }
+  },
+
+  '@media': {
+    '(min-width: 1200px)': {
+      padding: '3rem'
     }
   }
 });

@@ -1,14 +1,25 @@
+// An Animator disabled will not its animator interface so the components
+// expecting it to subscribe to will not be able to do so.
+// Children animators will work as root animators since they don't receive a valid
+// parent animator to subscribe to.
+// The option is useful for removing all components animations which
+// depend on the animator transitions.
+
 import React, { type ReactNode, type ReactElement, useState, useRef, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { animate } from 'motion';
-import { type AnimatorInterface } from '@arwes/animator';
 import { Animator, type AnimatorProps, useAnimator } from '@arwes/react-animator';
 
 const AnimatorUIListener = (): ReactElement => {
   const elementRef = useRef<HTMLDivElement>(null);
-  const animator = useAnimator() as AnimatorInterface;
+  const animator = useAnimator();
 
   useEffect(() => {
+    // If the Animator is disabled, it will provide an undefined value.
+    if (!animator) {
+      return;
+    }
+
     animator.node.subscribe(node => {
       const element = elementRef.current as HTMLElement;
       const { duration } = node;
@@ -69,18 +80,24 @@ const Sandbox = (): ReactElement => {
   return (
     <Animator active={active} combine>
       <Item>
-        <Item />
-        <Item />
-        <Item />
-        <Item />
+        <Item>
+          <Item />
+          <Item />
+        </Item>
+        <Item>
+          <Item />
+          <Item />
+        </Item>
       </Item>
       <Item>
-        <Item />
-        {/* The item will have its corresponding Animator disabled, so
-        it will work with the closest parent Animator. */}
-        <Item animator={{ disabled: true }} />
-        <Item />
-        <Item />
+        <Item animator={{ disabled: true }}>
+          <Item />
+          <Item />
+        </Item>
+        <Item>
+          <Item />
+          <Item />
+        </Item>
       </Item>
     </Animator>
   );

@@ -6,5 +6,12 @@ export const root = style({
   columnGap: '0.5rem',
   listStyle: 'none',
   justifyContent: 'center',
-  alignItems: 'center'
+  alignItems: 'center',
+  fontSize: '0.875rem',
+
+  '@media': {
+    '(min-width: 900px)': {
+      fontSize: '1rem'
+    }
+  }
 });

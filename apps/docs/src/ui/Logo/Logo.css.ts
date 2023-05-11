@@ -1,7 +1,8 @@
 import { style, keyframes } from '@vanilla-extract/css';
 
 export const root = style({
-  display: 'block'
+  display: 'block',
+  margin: 0
 });
 
 const blink = keyframes({
@@ -15,7 +16,7 @@ export const link = style({
   gridAutoFlow: 'column',
   alignItems: 'center',
   padding: '0.25rem',
-  columnGap: '0.5rem',
+  columnGap: '0.25rem',
   textDecoration: 'none',
   opacity: 0.8,
   transitionProperty: 'opacity, color, outline',
@@ -29,6 +30,12 @@ export const link = style({
   ':focus': {
     opacity: 1,
     outline: '1px dotted hsl(180deg 100% 40% / 50%)'
+  },
+
+  '@media': {
+    '(min-width: 900px)': {
+      columnGap: '0.5rem'
+    }
   }
 });
 
@@ -39,13 +46,14 @@ const rotation = keyframes({
 
 export const logo = style({
   display: 'block',
+  margin: 0,
   width: 'auto',
-  height: '1.5rem',
-  animation: `${rotation} 30s infinite linear`
-});
+  height: '1.325rem',
+  animation: `${rotation} 30s infinite linear`,
 
-export const type = style({
-  display: 'block',
-  width: 'auto',
-  height: '1.25rem'
+  '@media': {
+    '(min-width: 900px)': {
+      height: '1.5rem'
+    }
+  }
 });

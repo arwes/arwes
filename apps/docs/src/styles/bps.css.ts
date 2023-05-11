@@ -2,6 +2,22 @@ import { style } from '@vanilla-extract/css';
 
 // Ups
 
+export const hiddenXS = style({
+  '@media': {
+    '(min-width: 400px)': {
+      display: 'none'
+    }
+  }
+});
+
+export const hiddenSM = style({
+  '@media': {
+    '(min-width: 600px)': {
+      display: 'none'
+    }
+  }
+});
+
 export const hiddenMD = style({
   '@media': {
     '(min-width: 900px)': {
@@ -18,7 +34,23 @@ export const hiddenLG = style({
   }
 });
 
+export const hiddenXL = style({
+  '@media': {
+    '(min-width: 1536px)': {
+      display: 'none'
+    }
+  }
+});
+
 // Downs
+
+export const hiddenXSDown = style({
+  '@media': {
+    '(max-width: 399px)': {
+      display: 'none'
+    }
+  }
+});
 
 export const hiddenSMDown = style({
   '@media': {

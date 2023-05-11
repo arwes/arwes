@@ -14,6 +14,7 @@ const Item = (): ReactElement => {
             exiting: { x: [100, 0], backgroundColor: ['#ff0', '#0ff'] }
           }
         }}
+        hideOnExited={false}
       />
     </Animator>
   );

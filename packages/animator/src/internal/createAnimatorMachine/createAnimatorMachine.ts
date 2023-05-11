@@ -53,8 +53,7 @@ const createAnimatorMachine = (node: AnimatorNode, initialState: AnimatorState):
             }
           }
           else {
-            const isActive = (settings.active as boolean | undefined) === true ||
-              settings.active === undefined;
+            const isActive = settings.active === undefined || settings.active;
 
             if (isActive) {
               return STATES.entering;

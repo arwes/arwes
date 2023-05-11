@@ -3,7 +3,6 @@ import { timeline } from 'motion';
 import type { AnimatedSettings } from '../types';
 
 const aa = (prop: string, from: number | string, to: number | string, back?: number | string): AnimatedSettings => ({
-  initialStyle: { [prop]: from },
   transitions: {
     entering: { [prop]: [from, to] },
     exiting: { [prop]: [to, back ?? from] }
@@ -14,7 +13,6 @@ const aaOpacity = (): AnimatedSettings => aa('opacity', 0, 1);
 
 const aaVisibility = (): AnimatedSettings => {
   return {
-    initialStyle: { opacity: 0 },
     transitions: {
       entering: ({ element, duration }) => timeline(
         [

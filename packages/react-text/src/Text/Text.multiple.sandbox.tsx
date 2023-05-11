@@ -15,13 +15,13 @@ const Sandbox = (): ReactElement => {
     <div style={{ color: '#ddd' }}>
       <Animator active={active} combine manager='sequence'>
         <Animator>
-          <Text as='p'>
+          <Text>
             Numquam eius modi tempora incidunt ut labore et dolore magnam aliquam
             quaerat voluptatem. Ut enim ad minima veniam, qui nostrum.
           </Text>
         </Animator>
         <Animator>
-          <Text as='p'>
+          <Text>
             Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
             sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
             Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
@@ -31,7 +31,7 @@ const Sandbox = (): ReactElement => {
           </Text>
         </Animator>
         <Animator>
-          <Text as='p'>
+          <Text>
             Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
             sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
             Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,

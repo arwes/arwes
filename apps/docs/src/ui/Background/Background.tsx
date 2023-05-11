@@ -13,6 +13,7 @@ const Background = (props: BackgroundProps): ReactElement => {
   const { className, animated } = props;
 
   const router = useRouter();
+  const isIndex = router.asPath === '/';
 
   return (
     <Animator merge combine>
@@ -27,9 +28,9 @@ const Background = (props: BackgroundProps): ReactElement => {
             role='presentation'
             className={classes.layer1}
             style={{
-              filter: `brightness(0.4) blur(${router.asPath === '/' ? 0 : 10}px)`
+              filter: `brightness(${isIndex ? 0.4 : 0.3}) blur(${isIndex ? 0 : 10}px)`
             }}
-            animated={[aa('opacity', 0.8, 1), aa('scale', 1.025, 1)]}
+            animated={[aa('opacity', 0.8, 1), aa('scale', 1.05, 1)]}
           >
             <source media='(min-width:1280px)' srcSet='/assets/images/background-large.webp' type='image/webp' />
             <source media='(min-width:1280px)' srcSet='/assets/images/background-large.jpg' type='image/jpeg' />
@@ -40,7 +41,7 @@ const Background = (props: BackgroundProps): ReactElement => {
           </Animated>
         </Animator>
 
-        <Animator duration={{ enter: 2 }}>
+        <Animator duration={{ enter: 2 }} unmountOnDisabled>
           <Dots
             className={classes.layer2}
             color='hsla(180, 29%, 72%, 0.15)'
@@ -50,7 +51,7 @@ const Background = (props: BackgroundProps): ReactElement => {
           />
         </Animator>
 
-        <Animator duration={{ enter: 2, interval: 4 }}>
+        <Animator duration={{ enter: 2, interval: 4 }} unmountOnDisabled>
           <Puffs
             className={classes.layer3}
             color='hsla(180, 29%, 72%, 0.25)'

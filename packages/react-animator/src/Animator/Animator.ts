@@ -11,7 +11,6 @@ import {
 
 import {
   type AnimatorNode,
-  type AnimatorSubscriber,
   type AnimatorSettings,
   type AnimatorSettingsPartial,
   type AnimatorSystem,
@@ -37,12 +36,16 @@ const setNodeRefValue = (nodeRef: ForwardedRef<AnimatorNode> | undefined, node: 
 };
 
 const Animator = (props: AnimatorProps): ReactElement => {
+  // It is responsibility of the <Animator> to register, setup, update, and unregister
+  // the new node every time there is a change in it, since they happen on UI events.
+
   const {
     root,
     disabled,
     dismissed,
     unmountOnExited,
     unmountOnEntered,
+    unmountOnDisabled,
     checkToSendAction,
     checkToSend,
     nodeRef,
@@ -64,20 +67,20 @@ const Animator = (props: AnimatorProps): ReactElement => {
 
   const animatorGeneralSettings = animatorGeneralInterface?.getSettings();
   const isRoot = !!root || !parentAnimatorInterface;
-  const isDisabled = !!disabled || animatorGeneralSettings?.disabled;
   const isDismissed = !!dismissed || animatorGeneralSettings?.dismissed;
+  const isDisabled = !!disabled || animatorGeneralSettings?.disabled;
 
   const animatorInterface: AnimatorInterface | undefined = useMemo(() => {
     if (prevAnimatorRef.current) {
       prevAnimatorRef.current.system.unregister(prevAnimatorRef.current.node);
     }
 
-    if (isDisabled) {
+    if (isDismissed) {
       setNodeRefValue(nodeRef, null);
       return parentAnimatorInterface;
     }
 
-    if (isDismissed) {
+    if (isDisabled) {
       setNodeRefValue(nodeRef, null);
       return undefined;
     }
@@ -145,12 +148,11 @@ const Animator = (props: AnimatorProps): ReactElement => {
 
   const [isEnabledToUnmount, setIsEnabledToUnmount] = useState<boolean | undefined>(() =>
     (unmountOnExited && animatorInterface?.node.state === STATES.exited) ||
-    (unmountOnEntered && animatorInterface?.node.state === STATES.entered)
+    (unmountOnEntered && animatorInterface?.node.state === STATES.entered) ||
+    (unmountOnDisabled && isDisabled)
   );
 
   useEffect(() => {
-    animatorInterface?.node.send(ACTIONS.setup);
-
     return () => {
       if (prevAnimatorRef.current) {
         prevAnimatorRef.current.system.unregister(prevAnimatorRef.current.node);
@@ -158,6 +160,14 @@ const Animator = (props: AnimatorProps): ReactElement => {
     };
   }, []);
 
+  // Setup on mounted and in case animator is disabled and then re-enabled,
+  // trigger the setup once is created again.
+  useEffect(() => {
+    animatorInterface?.node.send(ACTIONS.setup);
+  }, [!!animatorInterface]);
+
+  // Trigger updates on animator only after first render, since in the first render
+  // the setup event would take care of the initial data procedore.
   useEffect(() => {
     if (isFirstRender1Ref.current) {
       isFirstRender1Ref.current = false;
@@ -168,21 +178,19 @@ const Animator = (props: AnimatorProps): ReactElement => {
   }, [settings.active, settings.manager, settings.merge, settings.combine]);
 
   useEffect(() => {
-    if ((unmountOnExited || unmountOnEntered) && animatorInterface) {
-      const subscriber: AnimatorSubscriber = node => {
+    if (animatorInterface) {
+      const cancelSubscription = animatorInterface.node.subscribe(node => {
         setIsEnabledToUnmount(
           (unmountOnExited && node.state === STATES.exited) ||
           (unmountOnEntered && node.state === STATES.entered)
         );
-      };
-
-      animatorInterface.node.subscribe(subscriber);
-
-      return () => {
-        animatorInterface?.node.unsubscribe(subscriber);
-      };
+      });
+      return () => cancelSubscription();
     }
-  }, [unmountOnExited, unmountOnEntered, animatorInterface]);
+    else {
+      setIsEnabledToUnmount(unmountOnDisabled);
+    }
+  }, [animatorInterface, unmountOnExited, unmountOnEntered, unmountOnDisabled]);
 
   useEffect(() => {
     if (isFirstRender2Ref.current) {
