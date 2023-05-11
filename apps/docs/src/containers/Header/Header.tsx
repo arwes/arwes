@@ -14,7 +14,8 @@ import {
   RemoveKeyframes,
   SoundHigh,
   SoundOff,
-  Menu as MenuIcon
+  Menu as MenuIcon,
+  Heart
 } from 'iconoir-react';
 import { cx, Animator, aa, aaVisibility, aaOpacity } from '@arwes/react';
 
@@ -135,6 +136,13 @@ const Header = (props: HeaderProps): ReactElement => {
             <Version className={hiddenLGDown} animated={rightItemAnimation} />
           </Animator>
           <Menu className={hiddenLGDown}>
+            <Animator>
+              <MenuItem className={classes.menuItem} animated={rightItemAnimation}>
+                <a href='https://github.com/sponsors/romelperez' target='sponsor' title='Sponsor'>
+                  <Heart />
+                </a>
+              </MenuItem>
+            </Animator>
             <Animator>
               <MenuItem className={classes.menuItem} animated={rightItemAnimation}>
                 <a href='https://github.com/arwes/arwes' target='github' title='Go to GitHub'>

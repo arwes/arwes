@@ -252,5 +252,6 @@ globalStyle('img', {
 
 globalStyle('button', {
   outline: 'none',
-  border: 'none'
+  border: 'none',
+  fontFamily: '"Titillium Web", "Segoe UI Web (West European)","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif'
 });
