@@ -11,7 +11,7 @@
     "copy-webpack-plugin": "^11.0.0",
     "empanada": "^0.2.2",
     "html-webpack-plugin": "^5.5.0",
-    "noxtron": "^0.7.5",
+    "noxtron": "^0.7.6",
     "raw-loader": "^4.0.2"
   },
   "scripts": {

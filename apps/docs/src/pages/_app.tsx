@@ -26,7 +26,7 @@ const animatorsSettings: AnimatorGeneralProviderSettings = {
 };
 
 const bleepsSettings: BleepsManagerProps<BleepNames> = {
-  master: { volume: 0.6 },
+  master: { volume: 0.8 },
   categories: {
     background: { volume: 0.3 },
     transition: { volume: 0.5 },
