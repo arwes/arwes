@@ -15,11 +15,14 @@
   <a href="https://github.com/arwes/arwes/actions">
       <img src="https://github.com/arwes/arwes/workflows/ci/badge.svg?style=flat-square" alt="CI" />
   </a>
+  <a href="https://www.codefactor.io/repository/github/arwes/arwes">
+    <img src="https://www.codefactor.io/repository/github/arwes/arwes/badge" alt="CodeFactor" />
+  </a>
   <a href="https://github.com/arwes/arwes">
       <img src="https://img.shields.io/github/stars/arwes/arwes.svg?style=flat-square&label=stars" alt="Github Stars" />
   </a>
   <a href="https://npmjs.org/package/arwes">
-      <img src="https://img.shields.io/npm/dm/arwes.svg?style=flat-square" alt="Downloads" />
+    <img alt="npm" src="https://img.shields.io/npm/dm/arwes?label=installs&style=flat-square" />
   </a>
   <a href="https://twitter.com/arwesjs">
     <img src="https://img.shields.io/twitter/url?label=ArwesJS&logo=twitter&url=https%3A%2F%2Ftwitter.com%2Farwesjs" alt="Follow on Twitter" />
