@@ -44,8 +44,8 @@ export type AnimatedSettingsTransitionTypes = AnimatedSettingsTransitionFunction
 
 export type AnimatedSettingsTransition = AnimatedSettingsTransitionTypes | AnimatedSettingsTransitionTypes[];
 
-export interface AnimatedSettings<A extends HTMLProps<HTMLElement> | SVGProps<SVGElement> = HTMLProps<HTMLDivElement>> {
-  initialAttributes?: A
+export interface AnimatedSettings {
+  initialAttributes?: HTMLProps<HTMLDivElement> | SVGProps<SVGPathElement>
   initialStyle?: AnimatedCSSProps
   transitions?: {
     [P in AnimatorState]?: AnimatedSettingsTransition | undefined
@@ -54,8 +54,7 @@ export interface AnimatedSettings<A extends HTMLProps<HTMLElement> | SVGProps<SV
   }
 };
 
-export type AnimatedProp<A extends HTMLProps<HTMLElement> | SVGProps<SVGElement> = HTMLProps<HTMLDivElement>> =
-  AnimatedSettings<A> | Array<AnimatedSettings<A> | undefined> | undefined;
+export type AnimatedProp = AnimatedSettings | Array<AnimatedSettings | undefined> | undefined;
 
 export type AnimatedAnimation = AnimatedSettings | AnimatedSettings[];
 
