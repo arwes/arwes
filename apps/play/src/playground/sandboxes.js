@@ -274,6 +274,13 @@ export const sandboxes = [
             ]
           },
           {
+            name: 'FrameSVGNefrex',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGNefrex/FrameSVGNefrex.basic.sandbox.tsx') },
+              { name: 'assembling', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGNefrex/FrameSVGNefrex.assembling.sandbox.tsx') }
+            ]
+          },
+          {
             name: 'IlluminatorSVG',
             children: [
               { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/IlluminatorSVG/IlluminatorSVG.basic.sandbox.tsx') }
