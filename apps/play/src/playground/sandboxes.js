@@ -221,6 +221,13 @@ export const sandboxes = [
               { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameOctagonClip/createFrameOctagonClip.basic.sandbox.tsx') },
               { name: 'corners', code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameOctagonClip/createFrameOctagonClip.corners.sandbox.tsx') }
             ]
+          },
+          {
+            name: 'createFrameKranoxClip',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameKranoxClip/createFrameKranoxClip.basic.sandbox.tsx') },
+              { name: 'lengths', code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameKranoxClip/createFrameKranoxClip.lengths.sandbox.tsx') }
+            ]
           }
         ]
       },
