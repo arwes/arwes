@@ -8,7 +8,7 @@ import {
 
 import { type FrameSVGProps, FrameSVG } from '../FrameSVG/index';
 
-interface FrameSVGNefrexProps extends FrameSVGProps {
+interface FrameSVGKranoxProps extends FrameSVGProps {
   squareSize?: number
   padding?: number
   strokeWidth?: number
@@ -22,7 +22,7 @@ type Point = [number | string, number | string];
 const toPath = (points: Point[]): FrameSVGPath =>
   points.map((p, i) => [i === 0 ? 'M' : 'L', ...p]);
 
-const FrameSVGNefrex = (props: FrameSVGNefrexProps): ReactElement => {
+const FrameSVGKranox = (props: FrameSVGKranoxProps): ReactElement => {
   const {
     squareSize: ss = 16,
     strokeWidth = 1,
@@ -44,18 +44,38 @@ const FrameSVGNefrex = (props: FrameSVGNefrexProps): ReactElement => {
       fill: 'none'
     };
 
+    // Left-bottom > left-top > right-top.
     const leftTopLine: Point[] = [
-      [so + p, sll + ss + so + p],
-      [so + p, ss + so + p],
-      [ss + so + p, so + p],
-      [ss + lll + so + p, so + p]
+      // Left-bottom.
+      [so + p + ss * 2, `100% - ${so + p}`],
+      [so + p + ss, `100% - ${so + p + ss}`],
+      // Left.
+      [so + p + ss, so + p + lll + ss * 3 + sll],
+      [so + p, so + p + lll + ss * 2 + sll],
+      [so + p, so + p + ss * 2 + sll],
+      [so + p + ss, so + p + sll + ss],
+      // Left-top.
+      [so + p + ss, so + p + ss],
+      [so + p + ss * 2, so + p],
+      // Right-top.
+      [`100% - ${so + p + ss * 2}`, so + p]
     ];
 
+    // Right-top > Right-bottom > Left-bottom.
     const rightBottomLine: Point[] = [
-      [`100% - ${so + p}`, `100% - ${sll + ss + so + p}`],
-      [`100% - ${so + p}`, `100% - ${ss + so + p}`],
-      [`100% - ${ss + so + p}`, `100% - ${so + p}`],
-      [`100% - ${ss + lll + so + p}`, `100% - ${so + p}`]
+      // Right-top.
+      [`100% - ${so + p + ss * 2}`, so + p],
+      [`100% - ${so + p + ss}`, so + p + ss],
+      // Right.
+      [`100% - ${so + p + ss}`, `100% - ${so + p + ss * 3 + sll + lll}`],
+      [`100% - ${so + p}`, `100% - ${so + p + ss * 2 + sll + lll}`],
+      [`100% - ${so + p}`, `100% - ${so + p + ss * 2 + sll}`],
+      [`100% - ${so + p + ss}`, `100% - ${so + p + ss + sll}`],
+      // Right-bottom.
+      [`100% - ${so + p + ss}`, `100% - ${so + p + ss}`],
+      [`100% - ${so + p + ss * 2}`, `100% - ${so + p}`],
+      // Left-bottom.
+      [so + p + ss * 2, `100% - ${so + p}`]
     ];
 
     const paths: FrameSVGPathGeneric[] = [
@@ -65,16 +85,7 @@ const FrameSVGNefrex = (props: FrameSVGNefrexProps): ReactElement => {
           strokeWidth: 0,
           fill: 'currentcolor'
         },
-        path: toPath(
-          leftTopLine
-            .concat([
-              [`100% - ${so + p}`, so + p]
-            ])
-            .concat(rightBottomLine)
-            .concat([
-              [so + p, `100% - ${so + p}`]
-            ])
-        )
+        path: toPath(leftTopLine.concat(rightBottomLine))
       },
       {
         name: 'decoration',
@@ -94,11 +105,11 @@ const FrameSVGNefrex = (props: FrameSVGNefrexProps): ReactElement => {
   return (
     <FrameSVG
       {...otherProps}
-      className={cx('arwes-react-frames-framesvgnefrex', className)}
+      className={cx('arwes-react-frames-framesvgkranox', className)}
       paths={paths}
     />
   );
 };
 
-export type { FrameSVGNefrexProps };
-export { FrameSVGNefrex };
+export type { FrameSVGKranoxProps };
+export { FrameSVGKranox };

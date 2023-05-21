@@ -1,7 +1,6 @@
 import React, { useMemo, type ReactElement } from 'react';
 import { cx } from '@arwes/tools';
 import {
-  type FrameSVGPathCommand,
   type FrameSVGPath,
   type FrameSVGStyle,
   type FrameSVGPathGeneric
@@ -19,6 +18,11 @@ interface FrameSVGOctagonProps extends FrameSVGProps {
   strokeWidth?: number
   className?: string
 }
+
+type Point = [number | string, number | string];
+
+const toPath = (points: Point[]): FrameSVGPath =>
+  points.map((p, i) => [i === 0 ? 'M' : 'L', ...p]);
 
 const FrameSVGOctagon = (props: FrameSVGOctagonProps): ReactElement => {
   const {
@@ -43,8 +47,6 @@ const FrameSVGOctagon = (props: FrameSVGOctagonProps): ReactElement => {
       strokeWidth: String(strokeWidth),
       fill: 'none'
     };
-
-    type Point = [number | string, number | string];
 
     const leftTopPoints: Point[] = leftTop
       ? [
@@ -83,18 +85,18 @@ const FrameSVGOctagon = (props: FrameSVGOctagonProps): ReactElement => {
         ];
 
     // leftTop > leftBottom > rightBottom
-    const polyline1: FrameSVGPath = [
+    const polyline1 = toPath([
       ...leftTopPoints,
       ...leftBottomPoints,
       rightBottomPoints[0]
-    ].map((point, i) => [i === 0 ? 'M' : 'L', ...point] as FrameSVGPathCommand);
+    ]);
 
     // rightBottom > rightTop > leftTop
-    const polyline2: FrameSVGPath = [
+    const polyline2 = toPath([
       ...rightBottomPoints,
       ...rightTopPoints,
       leftTopPoints[0]
-    ].map((point, i) => [i === 0 ? 'M' : 'L', ...point] as FrameSVGPathCommand);
+    ]);
 
     const paths: FrameSVGPathGeneric[] = [
       {

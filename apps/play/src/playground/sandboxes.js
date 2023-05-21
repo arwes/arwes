@@ -281,6 +281,13 @@ export const sandboxes = [
             ]
           },
           {
+            name: 'FrameSVGKranox',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGKranox/FrameSVGKranox.basic.sandbox.tsx') },
+              { name: 'assembling', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGKranox/FrameSVGKranox.assembling.sandbox.tsx') }
+            ]
+          },
+          {
             name: 'IlluminatorSVG',
             children: [
               { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/IlluminatorSVG/IlluminatorSVG.basic.sandbox.tsx') }
