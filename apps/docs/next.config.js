@@ -8,6 +8,7 @@ const withVanillaExtract = createVanillaExtractPlugin();
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
+  reactStrictMode: false,
   poweredByHeader: false,
   webpack: (config, { isServer }) => {
     if (!isServer) {

@@ -1,17 +1,17 @@
-import { type ReactElement } from 'react';
+import { type HTMLProps, type ReactElement } from 'react';
 import { Highlight, themes } from 'prism-react-renderer';
 import { type AnimatedProp, Animated, cx } from '@arwes/react';
 
 import * as classes from './CodeBlock.css';
 
-interface CodeBlockProps {
+interface CodeBlockProps extends HTMLProps<HTMLPreElement> {
   className?: string
   animated?: AnimatedProp
   code: string
 }
 
 const CodeBlock = (props: CodeBlockProps): ReactElement => {
-  const { className, animated, code } = props;
+  const { className, animated, code, ...otherProps } = props;
 
   return (
     <Animated
@@ -25,6 +25,7 @@ const CodeBlock = (props: CodeBlockProps): ReactElement => {
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre
+            {...otherProps}
             className={cx(classes.pre, className)}
             style={{
               ...style,

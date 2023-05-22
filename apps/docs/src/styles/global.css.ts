@@ -55,7 +55,7 @@ globalStyle('::selection', {
 
 globalStyle(`
   :where(
-    .arwes-global-block,
+    [data-arwes-global-block],
     h1:not(:last-child),
     h2:not(:last-child),
     h3:not(:last-child),
@@ -163,6 +163,11 @@ globalStyle('blockquote', {
   width: '100%',
   backgroundColor: 'hsl(180deg 28.67% 71.96% / 8%)',
   clipPath: createFrameOctagonClip({ squareSize: '0.75rem', leftTop: false, leftBottom: false })
+});
+
+globalStyle('blockquote[data-arwes-global-palette=error]', {
+  borderLeftColor: 'hsl(0deg 69.7% 67.65%)',
+  backgroundColor: 'hsl(0deg 28.67% 71.96% / 8%)'
 });
 
 globalStyle('code, pre', {
