@@ -65,7 +65,7 @@ const Header = (props: HeaderProps): ReactElement => {
                 <Menu>
                   <Animator>
                     <MenuItem
-                      className={classes.menuItem}
+                      className={cx(classes.menuItem, hiddenSMDown)}
                       active={router.asPath.startsWith('/docs')}
                       animated={leftItemAnimation}
                     >
@@ -76,7 +76,7 @@ const Header = (props: HeaderProps): ReactElement => {
                   </Animator>
                   <Animator>
                     <MenuItem
-                      className={classes.menuItem}
+                      className={cx(classes.menuItem, hiddenSMDown)}
                       active={router.asPath.startsWith('/samples')}
                       animated={leftItemAnimation}
                     >
@@ -87,7 +87,7 @@ const Header = (props: HeaderProps): ReactElement => {
                   </Animator>
                   <Animator>
                     <MenuItem
-                      className={classes.menuItem}
+                      className={cx(classes.menuItem, hiddenSMDown)}
                       animated={leftItemAnimation}
                     >
                       <a href='/play' title='Go to Playground'>
@@ -97,7 +97,7 @@ const Header = (props: HeaderProps): ReactElement => {
                   </Animator>
                   <Animator>
                     <MenuItem
-                      className={classes.menuItem}
+                      className={cx(classes.menuItem, hiddenSMDown)}
                       animated={leftItemAnimation}
                     >
                       <a href='/perf' title='Go to Performance'>

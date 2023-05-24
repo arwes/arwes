@@ -13,8 +13,11 @@ interface CodeBlockProps extends HTMLProps<HTMLPreElement> {
 const CodeBlock = (props: CodeBlockProps): ReactElement => {
   const { className, animated, code, ...otherProps } = props;
 
+  // TODO: Fix type.
+
   return (
-    <Animated
+    <Animated<HTMLPreElement, HTMLProps<HTMLPreElement>>
+      {...otherProps as any}
       animated={animated}
       className={cx(classes.root, className)}
     >
@@ -25,7 +28,6 @@ const CodeBlock = (props: CodeBlockProps): ReactElement => {
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre
-            {...otherProps}
             className={cx(classes.pre, className)}
             style={{
               ...style,

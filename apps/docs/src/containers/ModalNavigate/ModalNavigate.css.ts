@@ -9,7 +9,7 @@ export const links = style({
 
 export const link = style({
   display: 'flex',
-  justifyContent: 'space-between'
+  flexDirection: 'row'
 });
 
 export const linkAnchor = style({
@@ -18,30 +18,30 @@ export const linkAnchor = style({
   clipPath: createFrameOctagonClip({ squareSize: '12px', leftTop: false, leftBottom: false, rightBottom: false })
 });
 
-export const linkOpen = style({
+export const linkButton = style({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  marginLeft: '1rem',
   width: '3rem',
   height: '100%',
-  clipPath: createFrameOctagonClip({ squareSize: '12px', leftTop: false, leftBottom: false, rightBottom: false })
+  clipPath: createFrameOctagonClip({ squareSize: '12px', leftTop: false, leftBottom: false, rightBottom: false }),
+  cursor: 'pointer'
+});
+
+export const linkButtonLeft = style({
+  marginRight: '1rem'
+});
+
+export const linkButtonRight = style({
+  marginLeft: '1rem'
 });
 
 export const social = style({
   display: 'grid',
-  gridTemplateColumns: 'repeat(3, 1fr)',
-  gridTemplateRows: 'repeat(2, 1fr)',
+  gridTemplateColumns: 'repeat(4, 1fr)',
   gridAutoFlow: 'row',
   gap: '0.5rem',
-  marginBottom: '1.5rem',
-
-  '@media': {
-    '(min-width: 480px)': {
-      gridTemplateColumns: 'repeat(4, 1fr)',
-      gridTemplateRows: 'repeat(1, 1fr)'
-    }
-  }
+  marginBottom: '1.5rem'
 });
 
 export const socialLink = style({
@@ -59,10 +59,18 @@ export const version = style({
   justifyContent: 'center'
 });
 
-export const surface = style({
+export const surfacePrimary = style({
   backgroundColor: 'hsla(180deg, 100%, 50%, 0.02)',
 
   ':hover': {
     backgroundColor: 'hsla(180deg, 100%, 50%, 0.04)'
+  }
+});
+
+export const surfaceSecondary = style({
+  backgroundColor: 'hsla(60deg, 100%, 50%, 0.02)',
+
+  ':hover': {
+    backgroundColor: 'hsla(60deg, 100%, 50%, 0.04)'
   }
 });

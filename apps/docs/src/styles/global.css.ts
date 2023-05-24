@@ -34,17 +34,17 @@ globalStyle('::-webkit-scrollbar', {
 });
 
 globalStyle('::-webkit-scrollbar-track, ::-webkit-scrollbar-corner', {
-  background: 'hsla(180, 33%, 45%, 0.05)'
+  background: 'hsla(180, 33%, 7%)'
 });
 
 globalStyle('::-webkit-scrollbar-thumb', {
-  border: '1px solid hsla(60, 83%, 71%, 0.5)',
-  background: 'transparent',
+  border: '0.2rem solid hsla(180, 33%, 7%)',
+  background: 'hsla(60, 83%, 71%, 0.5)',
   transition: 'border 200ms ease-out'
 });
 
 globalStyle('::-webkit-scrollbar-thumb:hover', {
-  border: '1px solid hsla(60, 83%, 71%, 1)'
+  background: 'hsla(60, 83%, 71%, 1)'
 });
 
 globalStyle('::selection', {
