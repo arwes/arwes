@@ -17,14 +17,13 @@ import {
   Menu as MenuIcon,
   Heart
 } from 'iconoir-react';
-import { cx, Animator, BleepsOnAnimator, Text, aa, aaVisibility, aaOpacity } from '@arwes/react';
+import { cx, Animator, aa, aaVisibility, aaOpacity } from '@arwes/react';
 
-import type { BleepNames } from '@app/types';
 import { atomMotion, atomAudio } from '@app/utils';
 import { hiddenLG, hiddenSMDown, hiddenLGDown, hiddenXLDown } from '@app/styles';
-import { type HeaderLayoutProps, HeaderLayout, Logo, LogoType, Menu, MenuItem, ModalLayout } from '@app/ui';
+import { type HeaderLayoutProps, HeaderLayout, Logo, LogoType, Menu, MenuItem } from '@app/ui';
 import { Version } from '../Version';
-import { Modal } from '../Modal';
+import { ModalNavigate } from '../ModalNavigate';
 import * as classes from './Header.css';
 
 interface HeaderProps extends HeaderLayoutProps {}
@@ -34,7 +33,6 @@ const Header = (props: HeaderProps): ReactElement => {
   const [motion, setMotion] = useAtom(atomMotion);
   const [audio, setAudio] = useAtom(atomAudio);
   const [showModal, setShowModal] = useState(false);
-  const onModalClose = (): void => setShowModal(false);
 
   // The pages where the page content elements are floating instead
   // of being container by containers.
@@ -197,7 +195,7 @@ const Header = (props: HeaderProps): ReactElement => {
                 <MenuItem className={cx(classes.menuItem, hiddenLG)} animated={rightItemAnimation}>
                   <button
                     className={classes.button}
-                    title='Navigation and Settings'
+                    title='Navigate'
                     onClick={() => setShowModal(v => !v)}
                   >
                     <MenuIcon />
@@ -209,57 +207,10 @@ const Header = (props: HeaderProps): ReactElement => {
         }
       />
 
-      {/* TODO: Fix Animator timing calculation. */}
       {/* TODO: How to handle the rendering on Animations disabled? */}
-      <Modal>
-        <Animator root active={showModal}>
-          <BleepsOnAnimator<BleepNames>
-            transitions={{ entering: 'open', exiting: 'close' }}
-            continuous
-          />
-          <Animator unmountOnExited>
-            <ModalLayout title='Explorer' onClose={onModalClose}>
-              <div style={{ padding: '0 1rem' }}>
-                <Text>
-                  <Link href='/docs' onClick={onModalClose}>
-                    Docs
-                  </Link>
-                </Text>
-                <Text style={{ marginLeft: '1rem' }}>
-                  <Link href='/docs/develop' onClick={onModalClose}>
-                    Develop
-                  </Link>
-                </Text>
-                <Text style={{ marginLeft: '1rem' }}>
-                  <Link href='/docs/design' onClick={onModalClose}>
-                    Design
-                  </Link>
-                </Text>
-                <Text style={{ marginLeft: '1rem' }}>
-                  <Link href='/docs/community' onClick={onModalClose}>
-                    Community
-                  </Link>
-                </Text>
-                <Text>
-                  <Link href='/samples' onClick={onModalClose}>
-                    Samples
-                  </Link>
-                </Text>
-                <Text>
-                  <a href='/play' onClick={onModalClose}>
-                    Play
-                  </a>
-                </Text>
-                <Text>
-                  <a href='/perf' onClick={onModalClose}>
-                    Perf
-                  </a>
-                </Text>
-              </div>
-            </ModalLayout>
-          </Animator>
-        </Animator>
-      </Modal>
+      <Animator root active={showModal}>
+        <ModalNavigate onClose={() => setShowModal(false)} />
+      </Animator>
     </>
   );
 };

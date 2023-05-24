@@ -1,34 +1,39 @@
 import { style, globalStyle } from '@vanilla-extract/css';
 
 export const root = style({
-  position: 'absolute',
+  position: 'fixed',
   zIndex: 100,
   inset: 0,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  padding: '1.5rem'
+  padding: '1.5rem',
+  overflowY: 'auto'
 });
 
 export const bg = style({
-  position: 'absolute',
-  margin: 0,
+  position: 'fixed',
   inset: 0,
-  background: 'hsla(180deg, 50%, 5%, 0.95)'
+  background: 'hsla(180deg, 50%, 5%)'
+});
+
+export const overflow = style({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: '100%',
+  minHeight: '100%'
 });
 
 export const container = style({
   position: 'relative',
-  display: 'flex',
+  margin: 'auto',
   padding: '2rem',
   width: '100%',
-  minWidth: 300,
-  minHeight: 300,
+  minWidth: 0,
   maxWidth: 500,
-  maxHeight: 800
+  minHeight: 0
 });
 
 export const frames = style({
+  zIndex: -1,
   position: 'absolute',
   inset: 0
 });
@@ -53,14 +58,7 @@ globalStyle(`${frame2} [data-name="decoration"]`, {
   color: 'hsla(180deg, 50%, 40%, 1)'
 });
 
-export const content = style({
-  position: 'relative',
-  zIndex: 10,
-  flex: 1,
-  minWidth: 0,
-  minHeight: 0,
-  overflowY: 'auto'
-});
+export const content = style({});
 
 export const header = style({
   display: 'flex',
@@ -75,7 +73,5 @@ export const title = style({
 export const close = style({
   padding: '0.25rem 0',
   fontSize: '1.25rem',
-  color: ''
+  cursor: 'pointer'
 });
-
-export const body = style({});
