@@ -39,8 +39,6 @@ const ModalLayout = (props: ModalLayoutProps): ReactElement => {
         role='dialog'
         className={cx(classes.root, className)}
       >
-        <div role='presentation' className={classes.bg} />
-
         <Animator>
           <Dots
             style={{

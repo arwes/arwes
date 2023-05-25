@@ -17,7 +17,7 @@ import {
   Menu as MenuIcon,
   Heart
 } from 'iconoir-react';
-import { cx, Animator, aa, aaVisibility, aaOpacity } from '@arwes/react';
+import { cx, AnimatorGeneralProvider, Animator, aa, aaVisibility, aaOpacity } from '@arwes/react';
 
 import { atomMotion, atomAudio } from '@app/utils';
 import { hiddenLG, hiddenSMDown, hiddenLGDown, hiddenXLDown } from '@app/styles';
@@ -207,10 +207,23 @@ const Header = (props: HeaderProps): ReactElement => {
         }
       />
 
-      {/* TODO: How to handle the rendering on Animations disabled? */}
-      <Animator root active={showModal}>
-        <ModalNavigate onClose={() => setShowModal(false)} />
-      </Animator>
+      <AnimatorGeneralProvider
+        duration={{
+          enter: 0.1,
+          exit: 0.1,
+          stagger: 0.05
+        }}
+        // TODO: How to handle the rendering on Animations disabled?
+        // The root parent <AnimatorGeneralProvider> disables all <Animator>
+        // children components, but the modal components depend on the
+        // animations enabled.
+        disabled={false}
+        dismissed={false}
+      >
+        <Animator root active={showModal}>
+          <ModalNavigate onClose={() => setShowModal(false)} />
+        </Animator>
+      </AnimatorGeneralProvider>
     </>
   );
 };

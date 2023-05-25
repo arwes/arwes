@@ -5,13 +5,8 @@ export const root = style({
   zIndex: 100,
   inset: 0,
   padding: '1.5rem',
-  overflowY: 'auto'
-});
-
-export const bg = style({
-  position: 'fixed',
-  inset: 0,
-  background: 'linear-gradient(to bottom right, hsla(180deg, 50%, 2%), hsla(180deg, 50%, 8%))'
+  overflowY: 'auto',
+  background: 'linear-gradient(to bottom right, hsla(180deg, 50%, 2%), hsla(180deg, 50%, 10%))'
 });
 
 export const container = style({
@@ -33,11 +28,11 @@ export const frames = style({
 export const frame1 = style({});
 
 globalStyle(`${frame1} [data-name="shape"]`, {
-  color: 'hsla(180, 100%, 10%, 0.1)'
+  color: 'hsla(180, 100%, 7%, 0.5)'
 });
 
 globalStyle(`${frame1} [data-name="decoration"]`, {
-  color: 'hsla(180, 100%, 10%, 0.5)'
+  color: 'hsla(180, 100%, 15%, 0.5)'
 });
 
 export const frame2 = style({});
