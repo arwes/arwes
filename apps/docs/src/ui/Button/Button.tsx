@@ -1,4 +1,4 @@
-import { type ReactElement, type ReactNode } from 'react';
+import { type HTMLProps, type ReactElement, type ReactNode } from 'react';
 import {
   type AnimatedProp,
   Animated,
@@ -11,7 +11,7 @@ import {
 import type { BleepNames } from '@app/types';
 import * as classes from './Button.css';
 
-interface ButtonProps {
+interface ButtonProps extends Omit<HTMLProps<HTMLButtonElement>, 'size'> {
   className?: string
   animated?: AnimatedProp
   tabIndex?: number
@@ -33,13 +33,15 @@ const Button = (props: ButtonProps): ReactElement => {
     frame = 'simple',
     onHoverAnimateIcons,
     onClick,
-    children
+    children,
+    ...otherProps
   } = props;
 
   const bleeps = useBleeps<BleepNames>();
 
   return (
-    <Animated
+    <Animated<HTMLButtonElement, HTMLProps<HTMLButtonElement>>
+      {...otherProps}
       as='button'
       className={cx(
         classes.root,

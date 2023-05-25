@@ -5,5 +5,7 @@ export * from './FrameSVGOctagon/index';
 export * from './FrameSVGUnderline/index';
 export * from './FrameSVGCorners/index';
 export * from './FrameSVGLines/index';
+export * from './FrameSVGNefrex/index';
+export * from './FrameSVGKranox/index';
 export * from './IlluminatorSVG/index';
 export * from './Illuminator/index';

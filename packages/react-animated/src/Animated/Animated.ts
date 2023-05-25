@@ -26,11 +26,11 @@ import type {
 } from '../types';
 import { formatAnimatedCSSPropsShorthands } from '../internal/formatAnimatedCSSPropsShorthands/index';
 
-interface AnimatedProps<E extends HTMLElement | SVGElement = HTMLDivElement, P extends HTMLProps<HTMLElement> | SVGProps<SVGElement> = HTMLProps<HTMLDivElement>> {
+interface AnimatedProps<E extends HTMLElement | SVGElement = HTMLDivElement> {
   elementRef?: ForwardedRef<E>
   className?: string
   style?: CSSProperties
-  animated?: AnimatedProp<P>
+  animated?: AnimatedProp
   hideOnExited?: boolean
   hideOnEntered?: boolean
   as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
@@ -40,7 +40,7 @@ interface AnimatedProps<E extends HTMLElement | SVGElement = HTMLDivElement, P e
 const Animated = <
   E extends HTMLElement | SVGElement = HTMLDivElement,
   P extends HTMLProps<HTMLElement> | SVGProps<SVGElement> = HTMLProps<HTMLDivElement>
->(props: AnimatedProps<E, P> & NoInfer<P>): ReactElement => {
+>(props: AnimatedProps<E> & NoInfer<P>): ReactElement => {
   const {
     as: asProvided,
     animated,
@@ -56,13 +56,13 @@ const Animated = <
 
   const as = useMemo(() => asProvided || 'div', []);
   const elementRef = useRef<E | null>(null);
-  const animatedSettingsRef = useRef<Array<AnimatedSettings<P>>>([]);
+  const animatedSettingsRef = useRef<AnimatedSettings[]>([]);
   const animationControlsRef = useRef<AnimatedSettingsTransitionFunctionReturn[]>([]);
   const [isExited, setIsExited] = useState(() => animator?.node.state === STATES.exited);
   const [isEntered, setIsEntered] = useState(() => animator?.node.state === STATES.entered);
 
   const animatedSettingsListReceived = Array.isArray(animated) ? animated : [animated];
-  const animatedSettingsList = animatedSettingsListReceived.filter(Boolean) as Array<AnimatedSettings<P>>;
+  const animatedSettingsList = animatedSettingsListReceived.filter(Boolean) as AnimatedSettings[];
 
   // The animations list is passed as a reference so the Animator node subscription
   // and its respective functionalities are only initialized once for performance.
@@ -125,12 +125,12 @@ const Animated = <
     };
   }, [animator]);
 
-  let initialAttributes: P | undefined;
+  let initialAttributes: object | undefined;
   if (animator) {
     // TODO: Fix type.
     initialAttributes = animatedSettingsList
       .map(item => item?.initialAttributes)
-      .reduce<any>((total: P, item: P | undefined) => ({ ...total, ...item }), {});
+      .reduce<any>((total: object, item: object | undefined) => ({ ...total, ...item }), {});
   }
 
   let dynamicStyles: CSSProperties | undefined;

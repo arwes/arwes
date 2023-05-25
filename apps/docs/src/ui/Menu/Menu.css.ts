@@ -3,7 +3,7 @@ import { style } from '@vanilla-extract/css';
 export const root = style({
   display: 'grid',
   gridAutoFlow: 'column',
-  columnGap: '0.5rem',
+  columnGap: '0.25rem',
   listStyle: 'none',
   justifyContent: 'center',
   alignItems: 'center',

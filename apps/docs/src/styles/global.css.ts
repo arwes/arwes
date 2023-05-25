@@ -34,17 +34,17 @@ globalStyle('::-webkit-scrollbar', {
 });
 
 globalStyle('::-webkit-scrollbar-track, ::-webkit-scrollbar-corner', {
-  background: 'hsla(180, 33%, 45%, 0.05)'
+  background: 'hsla(180, 33%, 7%)'
 });
 
 globalStyle('::-webkit-scrollbar-thumb', {
-  border: '1px solid hsla(60, 83%, 71%, 0.5)',
-  background: 'transparent',
+  border: '0.2rem solid hsla(180, 33%, 7%)',
+  background: 'hsla(60, 83%, 71%, 0.5)',
   transition: 'border 200ms ease-out'
 });
 
 globalStyle('::-webkit-scrollbar-thumb:hover', {
-  border: '1px solid hsla(60, 83%, 71%, 1)'
+  background: 'hsla(60, 83%, 71%, 1)'
 });
 
 globalStyle('::selection', {
@@ -55,7 +55,7 @@ globalStyle('::selection', {
 
 globalStyle(`
   :where(
-    .arwes-global-block,
+    [data-arwes-global-block],
     h1:not(:last-child),
     h2:not(:last-child),
     h3:not(:last-child),
@@ -165,6 +165,11 @@ globalStyle('blockquote', {
   clipPath: createFrameOctagonClip({ squareSize: '0.75rem', leftTop: false, leftBottom: false })
 });
 
+globalStyle('blockquote[data-arwes-global-palette=error]', {
+  borderLeftColor: 'hsl(0deg 69.7% 67.65%)',
+  backgroundColor: 'hsl(0deg 28.67% 71.96% / 8%)'
+});
+
 globalStyle('code, pre', {
   // Correct the inheritance and scaling of font size in all browsers.
   fontFamily: 'JetBrains Mono,Menlo,Monaco,Consolas,Courier New,monospace'
@@ -252,5 +257,6 @@ globalStyle('img', {
 
 globalStyle('button', {
   outline: 'none',
-  border: 'none'
+  border: 'none',
+  fontFamily: '"Titillium Web", "Segoe UI Web (West European)","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif'
 });

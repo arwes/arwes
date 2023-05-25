@@ -67,8 +67,8 @@ const Animator = (props: AnimatorProps): ReactElement => {
 
   const animatorGeneralSettings = animatorGeneralInterface?.getSettings();
   const isRoot = !!root || !parentAnimatorInterface;
-  const isDismissed = !!dismissed || animatorGeneralSettings?.dismissed;
-  const isDisabled = !!disabled || animatorGeneralSettings?.disabled;
+  const isDismissed = dismissed !== undefined ? !!dismissed : !!animatorGeneralSettings?.dismissed;
+  const isDisabled = disabled !== undefined ? !!disabled : !!animatorGeneralSettings?.disabled;
 
   const animatorInterface: AnimatorInterface | undefined = useMemo(() => {
     if (prevAnimatorRef.current) {

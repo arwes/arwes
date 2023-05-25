@@ -24,6 +24,7 @@ import {
 interface TextProps<E extends HTMLElement = HTMLSpanElement> extends HTMLProps<E> {
   as?: keyof HTMLElementTagNameMap
   className?: string
+  contentClassName?: string
   elementRef?: ForwardedRef<E>
   manager?: TextTransitionManager
   easing?: keyof typeof easing
@@ -43,6 +44,7 @@ const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): Rea
   const {
     as: asProvided = 'p',
     className,
+    contentClassName,
     children,
     manager,
     easing,
@@ -155,7 +157,7 @@ const Text = <E extends HTMLElement = HTMLSpanElement>(props: TextProps<E>): Rea
       'span',
       {
         ref: contentElementRef,
-        className: `${TEXT_CLASS}__content`,
+        className: cx(`${TEXT_CLASS}__content`, contentClassName),
         css: {
           position: 'relative',
           zIndex: 1,

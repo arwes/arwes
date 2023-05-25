@@ -45,7 +45,8 @@ const Page = (): ReactElement => {
         </Animator>
         <Animator>
           <Animated
-            className='badges arwes-global-block'
+            className='badges'
+            data-arwes-global-block
             animated={aaVisibility()}
           >
             <a href="https://npmjs.org/package/arwes" target='_blank'>

@@ -1,6 +1,6 @@
 {
   "name": "arwes",
-  "version": "1.0.0-next.7",
+  "version": "1.0.0-next.8",
   "publishConfig": {
     "access": "public"
   },
@@ -45,7 +45,7 @@
     "@arwes/animator": "^1.0.0-next.7",
     "@arwes/bgs": "^1.0.0-next.7",
     "@arwes/bleeps": "^1.0.0-next.7",
-    "@arwes/frames": "^1.0.0-next.7",
+    "@arwes/frames": "^1.0.0-next.8",
     "@arwes/text": "^1.0.0-next.7",
     "@arwes/theme": "^1.0.0-next.7",
     "@arwes/tools": "^1.0.0-next.7",

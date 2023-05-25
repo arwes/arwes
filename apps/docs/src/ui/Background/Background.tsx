@@ -37,7 +37,7 @@ const Background = (props: BackgroundProps): ReactElement => {
             <source media='(min-width:768px)' srcSet='/assets/images/background-medium.webp' type='image/webp' />
             <source media='(min-width:768px)' srcSet='/assets/images/background-medium.jpg' type='image/jpeg' />
             <source media='(max-width:767px)' srcSet='/assets/images/background-small.webp' type='image/webp' />
-            <img className={classes.layer1Image} src='/assets/images/background-small.jpg' role='presentation' alt='Background' />
+            <img className={classes.layer1Image} src='/assets/images/background-small.jpg' alt='Background' />
           </Animated>
         </Animator>
 

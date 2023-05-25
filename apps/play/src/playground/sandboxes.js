@@ -221,6 +221,13 @@ export const sandboxes = [
               { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameOctagonClip/createFrameOctagonClip.basic.sandbox.tsx') },
               { name: 'corners', code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameOctagonClip/createFrameOctagonClip.corners.sandbox.tsx') }
             ]
+          },
+          {
+            name: 'createFrameKranoxClip',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameKranoxClip/createFrameKranoxClip.basic.sandbox.tsx') },
+              { name: 'lengths', code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameKranoxClip/createFrameKranoxClip.lengths.sandbox.tsx') }
+            ]
           }
         ]
       },
@@ -271,6 +278,20 @@ export const sandboxes = [
               { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGLines/FrameSVGLines.basic.sandbox.tsx') },
               { name: 'lines', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGLines/FrameSVGLines.lines.sandbox.tsx') },
               { name: 'assembling', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGLines/FrameSVGLines.assembling.sandbox.tsx') }
+            ]
+          },
+          {
+            name: 'FrameSVGNefrex',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGNefrex/FrameSVGNefrex.basic.sandbox.tsx') },
+              { name: 'assembling', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGNefrex/FrameSVGNefrex.assembling.sandbox.tsx') }
+            ]
+          },
+          {
+            name: 'FrameSVGKranox',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGKranox/FrameSVGKranox.basic.sandbox.tsx') },
+              { name: 'assembling', code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGKranox/FrameSVGKranox.assembling.sandbox.tsx') }
             ]
           },
           {

@@ -144,6 +144,10 @@ const ClientApp = (props: ClientAppProps): ReactElement => {
             <Header />
             <Component {...pageProps} />
           </MainLayout>
+
+          {/* Element used to render all modals for them to be above all other
+              application components. */}
+          <div id='app-modal-container' />
         </Animator>
       </BleepsProvider>
     </AnimatorGeneralProvider>

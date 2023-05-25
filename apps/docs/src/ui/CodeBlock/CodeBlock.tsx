@@ -1,20 +1,23 @@
-import { type ReactElement } from 'react';
+import { type HTMLProps, type ReactElement } from 'react';
 import { Highlight, themes } from 'prism-react-renderer';
 import { type AnimatedProp, Animated, cx } from '@arwes/react';
 
 import * as classes from './CodeBlock.css';
 
-interface CodeBlockProps {
+interface CodeBlockProps extends HTMLProps<HTMLPreElement> {
   className?: string
   animated?: AnimatedProp
   code: string
 }
 
 const CodeBlock = (props: CodeBlockProps): ReactElement => {
-  const { className, animated, code } = props;
+  const { className, animated, code, ...otherProps } = props;
+
+  // TODO: Fix type.
 
   return (
-    <Animated
+    <Animated<HTMLPreElement, HTMLProps<HTMLPreElement>>
+      {...otherProps as any}
       animated={animated}
       className={cx(classes.root, className)}
     >

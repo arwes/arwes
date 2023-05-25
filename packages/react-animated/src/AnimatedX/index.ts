@@ -4,7 +4,7 @@ import { AnimatedX as Component } from './AnimatedX';
 
 const AnimatedX: typeof Component = memo(
   forwardRef((props: any, forwardedRef: any) => (
-    createElement(Component, {
+    createElement(Component as any, {
       elementRef: forwardedRef,
       ...props
     })

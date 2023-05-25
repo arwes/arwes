@@ -168,12 +168,37 @@ const Page = (): ReactElement => {
         </Animator>
         <Animator>
           <Text>
-            Get started with <a href="https://nextjs.org/docs/getting-started/installation">Next.js</a> or any other React setup for a new or existing project and then install Arwes for React.
+            Get started with <a href="https://nextjs.org/docs/getting-started/installation">Next.js</a> or any other React setup for a new or existing project.
+          </Text>
+        </Animator>
+        <Animator>
+          <Text as='blockquote' data-arwes-global-palette='error'>
+            Arwes does not work with React strict mode.
+          </Text>
+        </Animator>
+        <Animator>
+          <Text>
+            In the Next.js configuration file, disable React strict mode:
           </Text>
         </Animator>
         <Animator>
           <CodeBlock
-            className='arwes-global-block'
+            data-arwes-global-block
+            animated={aaVisibility()}
+            code={`// next.config.js
+module.exports = {
+  reactStrictMode: false
+};`}
+          />
+        </Animator>
+        <Animator>
+          <Text>
+            And then install Arwes for React.
+          </Text>
+        </Animator>
+        <Animator>
+          <CodeBlock
+            data-arwes-global-block
             animated={aaVisibility()}
             code='npm install @arwes/react'
           />
@@ -185,12 +210,12 @@ const Page = (): ReactElement => {
         </Animator>
         <Animator>
           <Text>
-            If the app is going to use the Arwes animator system, some optional global animation settings can be setup as a root component. For example, to enable/disable animations or their durations.
+            If the app is going to use the Arwes animator system, some optional global animation settings can be setup at the root component. For example, to enable/disable animations or their durations.
           </Text>
         </Animator>
         <Animator>
           <CodeBlock
-            className='arwes-global-block'
+            data-arwes-global-block
             animated={aaVisibility()}
             code={`import { type ReactElement } from 'react';
 import {
@@ -223,9 +248,9 @@ const App = (): ReactElement => {
         </Animator>
         <Animator>
           <CodeBlock
-            className='arwes-global-block'
+            data-arwes-global-block
             animated={aaVisibility()}
-            code={`import { type ReactElement, useState } from 'react';
+            code={`import { useState } from 'react';
 import { Animator } from '@arwes/react';
 
 const App = (): ReactElement => {
@@ -246,10 +271,9 @@ const App = (): ReactElement => {
         </Animator>
         <Animator>
           <CodeBlock
-            className='arwes-global-block'
+            data-arwes-global-block
             animated={aaVisibility()}
-            code={`import { type ReactElement } from 'react';
-import {
+            code={`import {
   type BleepsManagerProps,
   BleepsProvider
 } from '@arwes/react';
@@ -260,10 +284,10 @@ const bleepsSettings: BleepsManagerProps = {
     volume: 0.9
   },
   bleeps: {
-    // A transition bleep sound to play when an object appears on the screen.
-    object: {
+    // A transition bleep sound to play when the user enters the app.
+    intro: {
       sources: [
-        { src: 'https://next.arwes.dev/assets/sounds/object.mp3', type: 'audio/mpeg' }
+        { src: 'https://next.arwes.dev/assets/sounds/intro.mp3', type: 'audio/mpeg' }
       ]
     },
     // An interactive bleep sound to play when user clicks.
@@ -291,7 +315,7 @@ const App = (): ReactElement => {
         </Animator>
         <Animator>
           <CodeBlock
-            className='arwes-global-block'
+            data-arwes-global-block
             animated={aaVisibility()}
             code={`import { GridLines, Dots, MovingLines } from '@arwes/react';
 
@@ -338,7 +362,7 @@ const App = (): ReactElement => {
         </Animator>
         <Animator>
           <CodeBlock
-            className='arwes-global-block'
+            data-arwes-global-block
             animated={aaVisibility()}
             code={`import {
   useBleeps,

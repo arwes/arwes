@@ -10,10 +10,12 @@ import * as classes from './Version.css';
 interface VersionProps {
   className?: string
   animated?: AnimatedProp
+  prefix?: string
+  sufix?: string
 }
 
 const Version = (props: VersionProps): ReactElement => {
-  const { className, animated } = props;
+  const { className, animated, prefix, sufix } = props;
 
   const bleeps = useBleeps<BleepNames>();
   const [isNext, setIsNext] = useState(false);
@@ -37,7 +39,7 @@ const Version = (props: VersionProps): ReactElement => {
       title={`Version ${isNext ? '@next' : lernaSettings.version} deployed at ${date.toUTCString()}`}
       onClick={() => bleeps.click?.play()}
     >
-      {isNext ? 'v@next' : `v${lernaSettings.version}`}
+      {prefix}{isNext ? 'v@next' : `v${lernaSettings.version}`}{sufix}
     </Animated>
   );
 };

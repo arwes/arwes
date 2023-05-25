@@ -23,12 +23,12 @@ import type {
 } from '../types';
 import { formatAnimatedCSSPropsShorthands } from '../internal/formatAnimatedCSSPropsShorthands/index';
 
-interface AnimatedXProps<E extends HTMLElement | SVGElement = HTMLDivElement, P extends HTMLProps<HTMLElement> | SVGProps<SVGElement> = HTMLProps<HTMLDivElement>> {
+interface AnimatedXProps<E extends HTMLElement | SVGElement = HTMLDivElement> {
   elementRef?: ForwardedRef<E>
   className?: string
   style?: CSSProperties
   state?: string
-  animated?: AnimatedProp<P>
+  animated?: AnimatedProp
   as?: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
   children?: ReactNode
 }
@@ -36,7 +36,7 @@ interface AnimatedXProps<E extends HTMLElement | SVGElement = HTMLDivElement, P 
 const AnimatedX = <
   E extends HTMLElement | SVGElement = HTMLDivElement,
   P extends HTMLProps<HTMLElement> | SVGProps<SVGElement> = HTMLProps<HTMLDivElement>
->(props: AnimatedXProps<E, P> & NoInfer<P>): ReactElement => {
+>(props: AnimatedXProps<E> & NoInfer<P>): ReactElement => {
   const {
     as: asProvided,
     state: animatedState,
@@ -50,11 +50,11 @@ const AnimatedX = <
   const hasState = animatedState !== undefined && animatedState !== null;
   const as = useMemo(() => asProvided || 'div', []);
   const elementRef = useRef<E | null>(null);
-  const animatedSettingsRef = useRef<Array<AnimatedSettings<P>>>([]);
+  const animatedSettingsRef = useRef<AnimatedSettings[]>([]);
   const animationControlsRef = useRef<AnimatedSettingsTransitionFunctionReturn[]>([]);
 
   const animatedSettingsListReceived = Array.isArray(animated) ? animated : [animated];
-  const animatedSettingsList = animatedSettingsListReceived.filter(Boolean) as Array<AnimatedSettings<P>>;
+  const animatedSettingsList = animatedSettingsListReceived.filter(Boolean) as AnimatedSettings[];
 
   // The animations list is passed as a reference so the Animator node subscription
   // and its respective functionalities are only initialized once for performance.
@@ -103,12 +103,12 @@ const AnimatedX = <
     };
   }, [hasState, animatedState]);
 
-  let initialAttributes: P | undefined;
+  let initialAttributes: object | undefined;
   if (hasState) {
     // TODO: Fix type.
     initialAttributes = animatedSettingsList
       .map(item => item?.initialAttributes)
-      .reduce<any>((total: P, item: P | undefined) => ({ ...total, ...item }), {});
+      .reduce<any>((total: object, item: object | undefined) => ({ ...total, ...item }), {});
   }
 
   let dynamicStyles: CSSProperties | undefined;
