@@ -2,7 +2,12 @@ import React, { type ReactElement, useState, useRef, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { animate } from 'motion';
 import { type AnimatorInterface } from '@arwes/animator';
-import { Animator, AnimatorGeneralProvider, useAnimator } from '@arwes/react-animator';
+import {
+  type AnimatorGeneralProviderSettings,
+  AnimatorGeneralProvider,
+  Animator,
+  useAnimator
+} from '@arwes/react-animator';
 
 const AnimatorUIListener = (): ReactElement => {
   const elementRef = useRef<HTMLDivElement>(null);
@@ -50,18 +55,21 @@ const Item = (): ReactElement => {
   );
 };
 
+const animatorGeneralSettings: AnimatorGeneralProviderSettings = {
+  disabled: false,
+  duration: { enter: 0.1, exit: 0.1, stagger: 0.3 }
+};
+
 const Sandbox = (): ReactElement => {
   const [active, setActive] = useState(true);
 
   useEffect(() => {
-    const tid = setTimeout(() => setActive(!active), 2000);
-    return () => clearTimeout(tid);
-  }, [active]);
+    const tid = setInterval(() => setActive(v => !v), 2000);
+    return () => clearInterval(tid);
+  }, []);
 
   return (
-    <AnimatorGeneralProvider
-      duration={{ enter: 0.1, exit: 0.1, stagger: 0.3 }}
-    >
+    <AnimatorGeneralProvider {...animatorGeneralSettings}>
       <Animator active={active} manager='stagger'>
         <Item />
         <Item />

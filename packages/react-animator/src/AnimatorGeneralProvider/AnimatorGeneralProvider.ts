@@ -1,8 +1,11 @@
-import { createElement, type ReactElement, useRef, useMemo } from 'react';
+import { createElement, type ReactNode, type ReactElement, useRef, useMemo } from 'react';
 
 import type { AnimatorGeneralProviderSettings, AnimatorGeneralInterface } from '../types';
 import { AnimatorGeneralContext } from '../internal/AnimatorGeneralContext/index';
-import { type AnimatorGeneralProviderProps } from './AnimatorGeneralProvider.types';
+
+interface AnimatorGeneralProviderProps extends AnimatorGeneralProviderSettings {
+  children: ReactNode
+}
 
 const AnimatorGeneralProvider = (props: AnimatorGeneralProviderProps): ReactElement => {
   const { children, ...animatorGeneralSettings } = props;
@@ -22,4 +25,5 @@ const AnimatorGeneralProvider = (props: AnimatorGeneralProviderProps): ReactElem
   return createElement(AnimatorGeneralContext.Provider, { value: animatorGeneralInterface }, children);
 };
 
+export type { AnimatorGeneralProviderProps };
 export { AnimatorGeneralProvider };
