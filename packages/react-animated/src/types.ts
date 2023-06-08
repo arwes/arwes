@@ -23,6 +23,7 @@ export type AnimatedCSSProps = Omit<CSSProperties, keyof AnimatedCSSPropsShortha
 
 export type AnimatedSettingsTransitionDefinition = MotionKeyframesDefinition & {
   duration?: number
+  delay?: AnimationOptionsWithOverrides['delay']
   easing?: AnimationOptionsWithOverrides['easing']
   options?: AnimationOptionsWithOverrides
 };
