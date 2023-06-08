@@ -231,6 +231,4 @@ const Puffs = (props: PuffsProps): ReactElement => {
   );
 };
 
-Puffs.defaultProps = defaultProps as PuffsProps;
-
 export { Puffs };

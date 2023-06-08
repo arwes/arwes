@@ -188,6 +188,4 @@ const MovingLines = (props: MovingLinesProps): ReactElement => {
   );
 };
 
-MovingLines.defaultProps = defaultProps as MovingLinesProps;
-
 export { MovingLines };

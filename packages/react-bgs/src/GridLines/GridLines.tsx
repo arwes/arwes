@@ -157,6 +157,4 @@ const GridLines = (props: GridLinesProps): ReactElement => {
   );
 };
 
-GridLines.defaultProps = defaultProps as GridLinesProps;
-
 export { GridLines };
