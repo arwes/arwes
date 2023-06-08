@@ -5,7 +5,9 @@ import { createBleepsManager } from '@arwes/bleeps';
 
 import { BleepsManagerContext } from '../internal/BleepsManagerContext';
 
-interface BleepsProviderProps <BleepsNames extends string> extends BleepsManagerProps<BleepsNames> {
+interface BleepsProviderSettings <BleepsNames extends string> extends BleepsManagerProps<BleepsNames> {}
+
+interface BleepsProviderProps <BleepsNames extends string> extends BleepsProviderSettings<BleepsNames> {
   children: ReactNode
 }
 
@@ -35,5 +37,5 @@ const BleepsProvider = <BleepsNames extends string>(props: BleepsProviderProps<B
   );
 };
 
-export type { BleepsProviderProps };
+export type { BleepsProviderSettings, BleepsProviderProps };
 export { BleepsProvider };
