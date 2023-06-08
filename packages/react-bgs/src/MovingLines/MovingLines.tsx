@@ -134,11 +134,11 @@ const MovingLines = (props: MovingLinesProps): ReactElement => {
           transitionControl = animate(
             canvas,
             { opacity: [0, 1] },
-            { duration: duration?.enter, easing: 'ease-out' }
+            { duration: duration.enter, easing: 'ease-out' }
           );
           intervalControl = animate(
             draw,
-            { duration: duration?.interval, easing: 'linear', repeat: Infinity }
+            { duration: duration.interval || 10, easing: 'linear', repeat: Infinity }
           );
           break;
         }
@@ -146,7 +146,7 @@ const MovingLines = (props: MovingLinesProps): ReactElement => {
           transitionControl = animate(
             canvas,
             { opacity: [1, 0] },
-            { duration: duration?.exit, easing: 'ease-out' }
+            { duration: duration.exit, easing: 'ease-out' }
           );
           break;
         }
