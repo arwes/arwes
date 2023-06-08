@@ -42,11 +42,11 @@ globalStyle(`${frame} path`, {
   transitionTimingFunction: 'ease-out'
 });
 
-globalStyle(`${frame} path[data-name="shape"]`, {
+globalStyle(`${frame} [data-name=bg]`, {
   color: 'hsla(180, 100%, 10%, 0.1)'
 });
 
-globalStyle(`${frame} path[data-name="decoration"]`, {
+globalStyle(`${frame} [data-name=line]`, {
   color: 'hsla(180, 100%, 10%, 0.5)'
 });
 

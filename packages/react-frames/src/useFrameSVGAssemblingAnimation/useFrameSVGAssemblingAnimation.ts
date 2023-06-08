@@ -18,10 +18,10 @@ const useFrameSVGAssemblingAnimation = (svgRef: RefObject<SVGSVGElement>): Frame
       return;
     }
 
-    const shapes = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="shape"]'));
-    const polylines = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="decoration"]'));
+    const bgs = Array.from(svg.querySelectorAll<SVGPathElement>('[data-name=bg]'));
+    const lines = Array.from(svg.querySelectorAll<SVGPathElement>('[data-name=line]'));
 
-    shapes.concat(polylines).forEach(path => {
+    bgs.concat(lines).forEach(path => {
       path.style.opacity = '1';
       path.style.strokeDasharray = '';
       path.style.strokeDashoffset = '';
@@ -38,7 +38,7 @@ const useFrameSVGAssemblingAnimation = (svgRef: RefObject<SVGSVGElement>): Frame
 
       switch (node.state) {
         case 'exited': {
-          shapes.concat(polylines).forEach(path => {
+          bgs.concat(lines).forEach(path => {
             path.style.opacity = '0';
             path.style.strokeDasharray = '';
             path.style.strokeDashoffset = '';
@@ -47,7 +47,7 @@ const useFrameSVGAssemblingAnimation = (svgRef: RefObject<SVGSVGElement>): Frame
         }
 
         case 'entering': {
-          for (const polyline of polylines) {
+          for (const polyline of lines) {
             const length = polyline.getTotalLength();
             polyline.style.opacity = '1';
             polyline.style.strokeDasharray = String(length);
@@ -56,11 +56,11 @@ const useFrameSVGAssemblingAnimation = (svgRef: RefObject<SVGSVGElement>): Frame
 
           animationControlRef.current = animate(
             progress => {
-              for (const shape of shapes) {
+              for (const shape of bgs) {
                 shape.style.opacity = String(progress);
               }
 
-              for (const polyline of polylines) {
+              for (const polyline of lines) {
                 const length = Number(polyline.dataset.length);
                 polyline.style.strokeDashoffset = String((1 - progress) * length);
               }
@@ -71,7 +71,7 @@ const useFrameSVGAssemblingAnimation = (svgRef: RefObject<SVGSVGElement>): Frame
         }
 
         case 'entered': {
-          shapes.concat(polylines).forEach(path => {
+          bgs.concat(lines).forEach(path => {
             path.style.opacity = '1';
             path.style.strokeDasharray = '';
             path.style.strokeDashoffset = '';
@@ -80,7 +80,7 @@ const useFrameSVGAssemblingAnimation = (svgRef: RefObject<SVGSVGElement>): Frame
         }
 
         case 'exiting': {
-          for (const polyline of polylines) {
+          for (const polyline of lines) {
             const length = polyline.getTotalLength();
             polyline.style.strokeDasharray = String(length);
             polyline.dataset.length = String(length);
@@ -88,11 +88,11 @@ const useFrameSVGAssemblingAnimation = (svgRef: RefObject<SVGSVGElement>): Frame
 
           animationControlRef.current = animate(
             progress => {
-              for (const shape of shapes) {
+              for (const shape of bgs) {
                 shape.style.opacity = String(1 - progress);
               }
 
-              for (const polyline of polylines) {
+              for (const polyline of lines) {
                 const length = Number(polyline.dataset.length);
                 polyline.style.strokeDashoffset = String(progress * length);
               }
@@ -116,14 +116,14 @@ const useFrameSVGAssemblingAnimation = (svgRef: RefObject<SVGSVGElement>): Frame
     }
 
     const svg = svgRef.current;
-    const shapes = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="shape"]'));
-    const polylines = Array.from(svg.querySelectorAll<SVGPathElement>('path[data-name="decoration"]'));
+    const bgs = Array.from(svg.querySelectorAll<SVGPathElement>('[data-name=bg]'));
+    const lines = Array.from(svg.querySelectorAll<SVGPathElement>('[data-name=line]'));
 
     const isVisible = animator.node.state === STATES.entering || animator.node.state === STATES.entered;
 
     animationControlRef.current?.cancel();
 
-    shapes.concat(polylines).forEach(path => {
+    bgs.concat(lines).forEach(path => {
       path.style.opacity = isVisible ? '1' : '0';
       path.style.strokeDasharray = '';
       path.style.strokeDashoffset = '';

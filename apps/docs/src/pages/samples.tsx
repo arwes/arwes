@@ -53,11 +53,11 @@ const Page = (): ReactElement => {
           z-index: -1;
         }
 
-        .frame path[data-name="decoration"] {
+        .frame [data-name=line] {
           color: hsl(0deg 100% 60%);
         }
 
-        .frame path[data-name="shape"] {
+        .frame [data-name=bg] {
           color: hsl(0deg 50% 10% / 0.5);
         }
 

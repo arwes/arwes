@@ -80,7 +80,7 @@ const FrameSVGKranox = (props: FrameSVGKranoxProps): ReactElement => {
 
     const paths: FrameSVGPathGeneric[] = [
       {
-        name: 'shape',
+        name: 'bg',
         style: {
           strokeWidth: 0,
           fill: 'currentcolor'
@@ -88,12 +88,12 @@ const FrameSVGKranox = (props: FrameSVGKranoxProps): ReactElement => {
         path: toPath(leftTopLine.concat(rightBottomLine))
       },
       {
-        name: 'decoration',
+        name: 'line',
         style: polylineStyle,
         path: toPath(leftTopLine)
       },
       {
-        name: 'decoration',
+        name: 'line',
         style: polylineStyle,
         path: toPath(rightBottomLine)
       }

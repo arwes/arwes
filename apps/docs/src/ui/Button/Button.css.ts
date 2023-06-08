@@ -150,18 +150,18 @@ globalStyle(`${onHoverAnimateIcons}:hover svg:first-child`, {
   transform: 'translateX(-0.25rem)'
 });
 
-globalStyle(`${root} ${frameElement} path[data-name="shape"]`, {
+globalStyle(`${root} ${frameElement} [data-name=bg]`, {
   color: 'hsl(60deg 100% 40% / 8%)'
 });
 
-globalStyle(`${root} ${frameElement} path[data-name="decoration"]`, {
+globalStyle(`${root} ${frameElement} [data-name=line]`, {
   color: 'hsl(60deg 100% 40% / 14%)'
 });
 
-globalStyle(`${root}:hover ${frameElement} path[data-name="shape"]`, {
+globalStyle(`${root}:hover ${frameElement} [data-name=bg]`, {
   color: 'hsl(60deg 100% 40% / 16%)'
 });
 
-globalStyle(`${root}:hover ${frameElement} path[data-name="decoration"]`, {
+globalStyle(`${root}:hover ${frameElement} [data-name=line]`, {
   color: 'hsl(60deg 100% 40% / 22%)'
 });

@@ -19,19 +19,19 @@ globalStyle(`${root} path`, {
   transitionTimingFunction: 'ease-out'
 });
 
-globalStyle(`${root} path[data-name="shape"]`, {
+globalStyle(`${root} [data-name=bg]`, {
   color: 'hsla(180, 100%, 10%, 0.1)'
 });
 
-globalStyle(`${root} path[data-name="decoration"]`, {
+globalStyle(`${root} [data-name=line]`, {
   color: 'hsla(180, 33%, 25%, 0.5)'
 });
 
-globalStyle(`${root}:hover path[data-name="shape"]`, {
+globalStyle(`${root}:hover [data-name=bg]`, {
   color: 'hsla(180, 100%, 10%, 0.2)'
 });
 
-globalStyle(`${root}:hover path[data-name="decoration"]`, {
+globalStyle(`${root}:hover [data-name=line]`, {
   color: 'hsla(180, 33%, 30%, 0.5)'
 });
 

@@ -15,11 +15,11 @@ const Frame = (): ReactElement => {
       width: 300,
       height: 150,
 
-      '& path[data-name="shape"]': {
+      '[data-name=bg]': {
         color: 'hsl(60, 75%, 10%)',
         filter: 'drop-shadow(0 0 4px hsl(60, 75%, 10%))'
       },
-      '& path[data-name="decoration"]': {
+      '[data-name=line]': {
         color: 'hsl(60, 75%, 50%)',
         filter: 'drop-shadow(0 0 4px hsl(60, 75%, 50%))'
       }

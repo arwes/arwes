@@ -60,7 +60,7 @@ const FrameSVGNefrex = (props: FrameSVGNefrexProps): ReactElement => {
 
     const paths: FrameSVGPathGeneric[] = [
       {
-        name: 'shape',
+        name: 'bg',
         style: {
           strokeWidth: 0,
           fill: 'currentcolor'
@@ -77,12 +77,12 @@ const FrameSVGNefrex = (props: FrameSVGNefrexProps): ReactElement => {
         )
       },
       {
-        name: 'decoration',
+        name: 'line',
         style: polylineStyle,
         path: toPath(leftTopLine)
       },
       {
-        name: 'decoration',
+        name: 'line',
         style: polylineStyle,
         path: toPath(rightBottomLine)
       }
