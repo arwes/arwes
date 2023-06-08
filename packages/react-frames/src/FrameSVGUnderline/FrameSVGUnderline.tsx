@@ -25,7 +25,7 @@ const FrameSVGUnderline = (props: FrameSVGUnderlineProps): ReactElement => {
 
     return [
       {
-        name: 'shape',
+        name: 'bg',
         style: {
           strokeWidth: 0,
           fill: 'currentcolor'
@@ -39,7 +39,7 @@ const FrameSVGUnderline = (props: FrameSVGUnderlineProps): ReactElement => {
         ]
       },
       {
-        name: 'decoration',
+        name: 'line',
         style: {
           stroke: 'currentcolor',
           strokeLinecap: 'round',

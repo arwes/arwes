@@ -22,7 +22,7 @@ const FrameSVGCorners = (props: FrameSVGCornersProps): ReactElement => {
     const co = cw / 2;
 
     const bg: FrameSVGPathGeneric = {
-      name: 'shape',
+      name: 'bg',
       style: {
         strokeWidth: 0,
         fill: 'currentcolor'
@@ -54,7 +54,7 @@ const FrameSVGCorners = (props: FrameSVGCornersProps): ReactElement => {
     ];
 
     const lines: FrameSVGPathGeneric[] = linesPaths.map(path => ({
-      name: 'decoration',
+      name: 'line',
       style: {
         stroke: 'currentcolor',
         strokeLinecap: 'round',

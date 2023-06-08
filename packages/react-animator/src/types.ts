@@ -8,7 +8,7 @@ export interface AnimatorGeneralProviderSettings {
 
   /**
    * If dismissed, it will inherit its parent animator interface, so the system
-   * will continue without this animator node.
+   * will continue without this specific animator node.
    */
   dismissed?: boolean
 

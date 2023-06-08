@@ -164,6 +164,4 @@ const Dots = (props: DotsProps): ReactElement => {
   );
 };
 
-Dots.defaultProps = defaultProps as DotsProps;
-
 export { Dots };

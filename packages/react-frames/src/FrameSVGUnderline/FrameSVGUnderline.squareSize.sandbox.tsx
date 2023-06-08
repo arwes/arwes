@@ -13,10 +13,10 @@ const Sandbox = (): ReactElement => {
     }}>
       <FrameSVGUnderline
         css={{
-          '& path[data-name="shape"]': {
+          '[data-name=bg]': {
             color: 'hsl(60, 75%, 10%)'
           },
-          '& path[data-name="decoration"]': {
+          '[data-name=line]': {
             color: 'hsl(60, 75%, 50%)'
           }
         }}

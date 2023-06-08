@@ -1,8 +1,6 @@
-import type { ReactNode, ReactElement } from 'react';
-import React, { useState } from 'react';
+import React, { type ReactNode, type ReactElement } from 'react';
 import { createRoot } from 'react-dom/client';
-import type { BleepsManagerProps } from '@arwes/bleeps';
-import { BleepsProvider, useBleeps } from '@arwes/react-bleeps';
+import { type BleepsProviderSettings, BleepsProvider, useBleeps } from '@arwes/react-bleeps';
 
 type BleepsNames = 'click' | 'toggle';
 
@@ -18,23 +16,23 @@ const Button = (props: ButtonProps): ReactElement => {
   return <button onClick={onClick}>{children}</button>;
 };
 
-const Sandbox = (): ReactElement => {
-  const [settings] = useState<BleepsManagerProps<BleepsNames>>({
-    master: {
-      volume: 0.75
+const bleepsSettings: BleepsProviderSettings<BleepsNames> = {
+  master: {
+    volume: 0.75
+  },
+  bleeps: {
+    click: {
+      sources: [{ src: '/assets/sounds/click.mp3', type: 'audio/mpeg' }]
     },
-    bleeps: {
-      click: {
-        sources: [{ src: '/assets/sounds/click.mp3', type: 'audio/mpeg' }]
-      },
-      toggle: {
-        sources: [{ src: '/assets/sounds/toggle.mp3', type: 'audio/mpeg' }]
-      }
+    toggle: {
+      sources: [{ src: '/assets/sounds/toggle.mp3', type: 'audio/mpeg' }]
     }
-  });
+  }
+};
 
+const Sandbox = (): ReactElement => {
   return (
-    <BleepsProvider {...settings}>
+    <BleepsProvider {...bleepsSettings}>
       <Button name='click'>Click!</Button>
       {' '}
       <Button name='toggle'>Toggle!</Button>

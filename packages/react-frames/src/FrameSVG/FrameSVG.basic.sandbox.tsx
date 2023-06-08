@@ -7,7 +7,7 @@ const Sandbox = (): ReactElement => {
   const paths: FrameSVGPathGeneric[] = useMemo(() => [
     // Background shape.
     {
-      name: 'shape',
+      name: 'bg',
       style: {
         strokeWidth: 0,
         fill: 'hsl(180, 75%, 10%)',
@@ -22,7 +22,7 @@ const Sandbox = (): ReactElement => {
     },
     // Top decoration.
     {
-      name: 'decoration',
+      name: 'line',
       style: {
         strokeWidth: '1',
         stroke: 'hsl(180, 75%, 50%)',
@@ -37,7 +37,7 @@ const Sandbox = (): ReactElement => {
     },
     // Bottom decoration.
     {
-      name: 'decoration',
+      name: 'line',
       style: {
         strokeWidth: '2',
         stroke: 'hsl(180, 75%, 50%)',

@@ -100,7 +100,7 @@ const FrameSVGOctagon = (props: FrameSVGOctagonProps): ReactElement => {
 
     const paths: FrameSVGPathGeneric[] = [
       {
-        name: 'shape',
+        name: 'bg',
         style: {
           strokeWidth: 0,
           fill: 'currentcolor'
@@ -108,12 +108,12 @@ const FrameSVGOctagon = (props: FrameSVGOctagonProps): ReactElement => {
         path: polyline1.concat(polyline2)
       },
       {
-        name: 'decoration',
+        name: 'line',
         style: polylineStyle,
         path: polyline1
       },
       {
-        name: 'decoration',
+        name: 'line',
         style: polylineStyle,
         path: polyline2
       }

@@ -158,8 +158,8 @@ globalStyle('a:focus', {
 globalStyle('blockquote', {
   display: 'block',
   border: 'none',
-  borderLeft: '0.25rem solid hsl(180deg 69.7% 67.65%)',
-  padding: '1rem 1rem 1rem 1.25rem',
+  borderLeft: '0.1875rem solid hsl(180deg 69.7% 67.65%)',
+  padding: '1rem 1rem 1rem 1.1875rem',
   width: '100%',
   backgroundColor: 'hsl(180deg 28.67% 71.96% / 8%)',
   clipPath: createFrameOctagonClip({ squareSize: '0.75rem', leftTop: false, leftBottom: false })

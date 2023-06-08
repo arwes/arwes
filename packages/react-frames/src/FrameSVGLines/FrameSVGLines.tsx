@@ -80,7 +80,7 @@ const FrameSVGLines = (props: FrameSVGLinesProps): ReactElement => {
 
     return [
       {
-        name: 'shape',
+        name: 'bg',
         style: {
           strokeWidth: 0,
           fill: 'currentcolor'
@@ -93,7 +93,7 @@ const FrameSVGLines = (props: FrameSVGLinesProps): ReactElement => {
         ]
       },
       ...largePolylines.map(polyline => ({
-        name: 'decoration',
+        name: 'line',
         style: {
           ...polylineStyle,
           strokeWidth: String(llw)
@@ -101,7 +101,7 @@ const FrameSVGLines = (props: FrameSVGLinesProps): ReactElement => {
         path: polyline
       })),
       ...smallPolylines.map(polyline => ({
-        name: 'decoration',
+        name: 'line',
         style: {
           ...polylineStyle,
           strokeWidth: String(slw)

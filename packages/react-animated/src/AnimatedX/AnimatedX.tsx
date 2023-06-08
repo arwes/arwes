@@ -88,11 +88,11 @@ const AnimatedX = <
           }
         }
         else {
-          const { duration, easing, options, ...definition } = transition;
+          const { duration, delay, easing, options, ...definition } = transition;
           const control = animate(
             element,
             definition,
-            { duration, easing, ...options }
+            { duration, delay, easing, ...options }
           );
           animationControlsRef.current.push(control);
         }

@@ -131,13 +131,7 @@ const ClientApp = (props: ClientAppProps): ReactElement => {
           <meta name="twitter:image:alt" content="Arwes" />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:site" content="@arwesjs" />
-
-          <link rel="icon" type="image/png" href="/logo.png" />
         </Head>
-
-        <style>{`
-          html { background-color: #050b0b; }
-        `}</style>
 
         <Animator combine manager='stagger'>
           <MainLayout>

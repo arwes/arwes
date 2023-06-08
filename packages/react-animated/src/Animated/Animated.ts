@@ -108,11 +108,11 @@ const Animated = <
             }
           }
           else {
-            const { duration, easing, options, ...definition } = transition;
+            const { duration, delay, easing, options, ...definition } = transition;
             const control = animate(
               element,
               definition,
-              { duration: duration || durationTransition, easing, ...options }
+              { duration: duration || durationTransition, delay, easing, ...options }
             );
             animationControlsRef.current.push(control);
           }
