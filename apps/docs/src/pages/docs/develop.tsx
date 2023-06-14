@@ -393,10 +393,10 @@ const Card = (): ReactElement => {
           {/* Frame decoration and shape colors defined by CSS.
               (This way of overwriting is not recommended for production apps.) */}
           <style>{\`
-            :where(.arwes-react-frames-framesvg [data-name="decoration"]) {
+            :where(.arwes-react-frames-framesvg [data-name=line]) {
               color: hsla(100deg, 100%, 50%);
             }
-            :where(.arwes-react-frames-framesvg [data-name="shape"]) {
+            :where(.arwes-react-frames-framesvg [data-name=bg]) {
               color: hsla(100deg, 100%, 75%, 0.05)
             }
           \`}</style>
