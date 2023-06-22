@@ -97,9 +97,15 @@ export const typeDefinitions = [
           options: MotionOptions
         ): AnimationControls;
 
-        const animate: AnimateFunction = () => AnimationControls;
+        declare function Stagger (
+          duration: number,
+          options?: { start: any, from: any, easing: any }
+        ): any;
 
-        export { AnimationControls, animate };
+        const animate: AnimateFunction;
+        const stagger: Stagger;
+
+        export { AnimationControls, animate, stagger };
       }
     `
   },
