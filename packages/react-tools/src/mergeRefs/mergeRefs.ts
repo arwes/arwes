@@ -1,6 +1,6 @@
 import type { ForwardedRef } from 'react';
 
-const mergeRefs = <T>(...refs: Array<ForwardedRef<T> | undefined>) => {
+const mergeRefs = <T = HTMLDivElement | null>(...refs: Array<ForwardedRef<T> | undefined>) => {
   return (value: T) => {
     refs.filter(Boolean).forEach(ref => {
       if (typeof ref === 'function') {
