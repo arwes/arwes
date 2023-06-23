@@ -6,7 +6,13 @@ import { type AppProps } from 'next/app';
 import Head from 'next/head';
 import { useEffect } from 'react';
 import { useAtomValue } from 'jotai';
-import { type AnimatorGeneralProviderSettings, AnimatorGeneralProvider, Animator, BleepsProvider, type BleepsManagerProps } from '@arwes/react';
+import {
+  type AnimatorGeneralProviderSettings,
+  type BleepsProviderSettings,
+  AnimatorGeneralProvider,
+  Animator,
+  BleepsProvider
+} from '@arwes/react';
 
 import type { BleepNames } from '@app/types';
 import { MainLayout } from '@app/ui';
@@ -25,7 +31,7 @@ const animatorsSettings: AnimatorGeneralProviderSettings = {
   }
 };
 
-const bleepsSettings: BleepsManagerProps<BleepNames> = {
+const bleepsSettings: BleepsProviderSettings<BleepNames> = {
   master: { volume: 0.8 },
   categories: {
     background: { volume: 0.3 },
@@ -55,18 +61,18 @@ const bleepsSettings: BleepsManagerProps<BleepNames> = {
         { src: '/assets/sounds/close.mp3', type: 'audio/mpeg' }
       ]
     },
-    error: {
-      category: 'notification',
-      sources: [
-        { src: '/assets/sounds/error.webm', type: 'audio/webm' },
-        { src: '/assets/sounds/error.mp3', type: 'audio/mpeg' }
-      ]
-    },
     info: {
       category: 'notification',
       sources: [
         { src: '/assets/sounds/info.webm', type: 'audio/webm' },
         { src: '/assets/sounds/info.mp3', type: 'audio/mpeg' }
+      ]
+    },
+    error: {
+      category: 'notification',
+      sources: [
+        { src: '/assets/sounds/error.webm', type: 'audio/webm' },
+        { src: '/assets/sounds/error.mp3', type: 'audio/mpeg' }
       ]
     },
     intro: {
