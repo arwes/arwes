@@ -140,6 +140,15 @@ const Page = (): ReactElement => {
                   <td>Passive UI background effects</td>
                 </tr>
                 <tr>
+                  <td><code>@arwes/core</code></td>
+                  <td><small style={{ color: 'hsl(30 100% 50%)' }}>Development</small></td>
+                  <td>
+                    <img src="https://img.shields.io/bundlephobia/minzip/@arwes/core?style=flat-square" alt="npm bundle size (scoped)" />
+                    <img src="https://img.shields.io/npm/dm/@arwes/core.svg?style=flat-square" alt="Downloads" />
+                  </td>
+                  <td>Base UI functionalities</td>
+                </tr>
+                <tr>
                   <td><code>arwes</code></td>
                   <td><small style={{ color: 'hsl(150 100% 50%)' }}>Polishing</small></td>
                   <td>

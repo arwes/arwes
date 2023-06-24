@@ -6,3 +6,4 @@ export * from '@arwes/bleeps';
 export * from '@arwes/text';
 export * from '@arwes/frames';
 export * from '@arwes/bgs';
+export * from '@arwes/core';
