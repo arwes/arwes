@@ -1,11 +1,22 @@
-import React, { type ReactElement, Fragment, useMemo } from 'react';
+import React, { type ReactElement, Fragment } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Global } from '@emotion/react';
 import { type AppTheme, createAppTheme } from '@arwes/theme';
 
-const Sandbox = (): ReactElement => {
-  const t: AppTheme = useMemo(() => createAppTheme(), []);
+const t: AppTheme = createAppTheme({
+  settings: {
+    hues: {
+      primary: 200,
+      secondary: 80
+    },
+    fontFamilies: {
+      title: 'Copperplate, Copper, "Comic Sans"',
+      body: 'Tahoma, Techno, Trebuchet'
+    }
+  }
+});
 
+const Sandbox = (): ReactElement => {
   return (
     <Fragment>
       <Global styles={{
@@ -43,7 +54,8 @@ const Sandbox = (): ReactElement => {
         },
         img: {
           margin: 0,
-          maxWidth: '100%'
+          maxWidth: '100%',
+          borderRadius: t.space(1)
         }
       }} />
 

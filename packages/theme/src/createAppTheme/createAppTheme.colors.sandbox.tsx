@@ -1,31 +1,22 @@
-import React, { type ReactElement, Fragment, useMemo } from 'react';
+import React, { type ReactElement, Fragment } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Global } from '@emotion/react';
 import { type AppTheme, createAppTheme } from '@arwes/theme';
 
-const Sandbox = (): ReactElement => {
-  const t: AppTheme = useMemo(() => createAppTheme(), []);
+const t: AppTheme = createAppTheme();
 
+const Sandbox = (): ReactElement => {
   return (
     <Fragment>
       <Global styles={{
         html: {
           margin: '0.5rem',
           lineHeight: 1.5,
-          color: '#aaa',
+          color: '#ddd',
           backgroundColor: '#111'
         },
-        h1: {
-          margin: 0,
-          color: '#eee'
-        },
-        h2: {
-          margin: 0,
-          color: '#ddd'
-        },
-        h3: {
-          margin: 0,
-          color: '#ccc'
+        'h1, h2, h3': {
+          margin: 0
         }
       }} />
 

@@ -1,3 +1,4 @@
+import type { PartialDeep } from '@arwes/tools';
 import type {
   ThemeCreatorStructure,
   ThemeSettingsUnit,
@@ -10,11 +11,9 @@ import type {
   ThemeMultiplier
 } from '../types';
 import { createCreateTheme } from '../createCreateTheme/index';
-import type { PartialDeep } from '@arwes/tools';
+import { deepExtend } from './deepExtend';
 
 // THEME SETTINGS TYPES
-
-type AppThemeType = 'dark' | 'light';
 
 interface AppThemeSettingsPalette {
   main: ThemeSettingsColor
@@ -25,7 +24,7 @@ interface AppThemeSettingsPalette {
 }
 
 interface AppThemeSettings {
-  type: AppThemeType
+  dark: boolean
   space: ThemeSettingsUnit
   spaceN: ThemeSettingsMultiplier
   hues: {
@@ -51,7 +50,6 @@ interface AppThemeSettings {
     input: string
     code: string
   }
-  fontWeights: ThemeSettingsUnit
   typography: {
     title: ThemeSettingsStyle
     body: ThemeSettingsStyle
@@ -76,7 +74,7 @@ interface AppThemePalette {
 }
 
 interface AppTheme {
-  type: AppThemeType
+  dark: boolean
   space: ThemeUnit
   spaceN: ThemeMultiplier
   hues: {
@@ -102,7 +100,6 @@ interface AppTheme {
     input: string
     code: string
   }
-  fontWeights: ThemeUnit
   typography: {
     title: ThemeStyle
     body: ThemeStyle
@@ -118,7 +115,7 @@ interface AppTheme {
 
 // THEME STRUCTURE
 
-const appThemeStructurePalette: ThemeCreatorStructure = {
+const APP_THEME_STRUCTURE_PALETTE: ThemeCreatorStructure = {
   main: 'color',
   text: 'color',
   bg: 'color',
@@ -126,7 +123,7 @@ const appThemeStructurePalette: ThemeCreatorStructure = {
   deco: 'color'
 };
 
-const appThemeStructure: ThemeCreatorStructure = {
+const APP_THEME_STRUCTURE: ThemeCreatorStructure = {
   type: 'other',
   space: 'unit',
   spaceN: 'multiplier',
@@ -139,12 +136,12 @@ const appThemeStructure: ThemeCreatorStructure = {
     error: 'other'
   },
   colors: {
-    primary: appThemeStructurePalette,
-    secondary: appThemeStructurePalette,
-    success: appThemeStructurePalette,
-    info: appThemeStructurePalette,
-    warning: appThemeStructurePalette,
-    error: appThemeStructurePalette
+    primary: APP_THEME_STRUCTURE_PALETTE,
+    secondary: APP_THEME_STRUCTURE_PALETTE,
+    success: APP_THEME_STRUCTURE_PALETTE,
+    info: APP_THEME_STRUCTURE_PALETTE,
+    warning: APP_THEME_STRUCTURE_PALETTE,
+    error: APP_THEME_STRUCTURE_PALETTE
   },
   fontFamilies: {
     title: 'other',
@@ -153,7 +150,6 @@ const appThemeStructure: ThemeCreatorStructure = {
     input: 'other',
     code: 'other'
   },
-  fontWeights: 'unit',
   typography: {
     title: 'style',
     body: 'style',
@@ -169,53 +165,58 @@ const appThemeStructure: ThemeCreatorStructure = {
 
 // CREATOR
 
-interface CreateAppThemeProps {
-  type?: AppThemeType
+interface CreateAppThemeProps <AppThemeSettingsExt extends AppThemeSettings = AppThemeSettings> {
   structure?: ThemeCreatorStructure
-  settings?: PartialDeep<AppThemeSettings>
+  settings?: PartialDeep<AppThemeSettingsExt>
 }
 
-const createAppTheme = (props: CreateAppThemeProps = {}): AppTheme => {
-  const createPalette = (hue: number): AppThemeSettingsPalette => ({
-    main: (i: number) => [hue, 80 + i, 5 + i * 10],
-    text: (i: number) => [hue, 40 + i, 5 + i * 10],
-    bg: (i: number) => [hue, 40 + i, 2 + i * 2],
-    ol: (i: number) => [hue, 80 + i, 2 + i * 2],
-    deco: (i: number) => [hue, 80 + i, 50, 0.05 + i * 0.05]
-  });
+const createAppThemePalette = (hue: number): AppThemeSettingsPalette => ({
+  main: (i: number) => [hue, 80 + i, 7.5 + i * 9.44],
+  text: (i: number) => [hue, 40 + i, 7.5 + i * 9.44],
+  bg: (i: number) => [hue, 40 + i, 2 + i * 2],
+  ol: (i: number) => [hue, 80 + i, 2 + i * 2],
+  deco: (i: number) => [hue, 80 + i, 50, 0.05 + i * 0.05]
+});
 
+const createAppTheme = <
+  AppThemeSettingsExt extends AppThemeSettings = AppThemeSettings,
+  AppThemeExt extends AppTheme = AppTheme
+>(props: CreateAppThemeProps<AppThemeSettingsExt> = {}): AppThemeExt => {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
   const hues = {
     primary: 200,
     secondary: 80,
     success: 120,
     info: 220,
     warning: 40,
-    error: 0
-  };
+    error: 0,
+    ...props.settings?.hues
+  } as AppTheme['hues'];
 
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
   const fontFamilies = {
     title: '"Segoe UI Web (West European)","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif',
     body: '"Segoe UI Web (West European)","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif',
     cta: '"Segoe UI Web (West European)","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif',
     input: '"Segoe UI Web (West European)","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif',
-    code: 'JetBrains Mono,Menlo,Monaco,Consolas,Courier New,monospace'
-  };
+    code: 'JetBrains Mono,Menlo,Monaco,Consolas,Courier New,monospace',
+    ...props.settings?.fontFamilies
+  } as AppTheme['fontFamilies'];
 
-  const themeSettings: AppThemeSettings = {
-    type: 'dark',
+  const appThemeSettingsBase: AppThemeSettings = {
+    dark: true,
     space: index => `${index * 0.25}rem`,
     spaceN: index => index * 4,
     hues,
     colors: {
-      primary: createPalette(hues.primary),
-      secondary: createPalette(hues.secondary),
-      success: createPalette(hues.success),
-      info: createPalette(hues.info),
-      warning: createPalette(hues.warning),
-      error: createPalette(hues.error)
+      primary: createAppThemePalette(hues.primary),
+      secondary: createAppThemePalette(hues.secondary),
+      success: createAppThemePalette(hues.success),
+      info: createAppThemePalette(hues.info),
+      warning: createAppThemePalette(hues.warning),
+      error: createAppThemePalette(hues.error)
     },
     fontFamilies,
-    fontWeights: ['600', '400', '300'],
     typography: {
       title: [
         { fontFamily: fontFamilies.title, fontWeight: '600', fontSize: '1.75rem' },
@@ -253,18 +254,25 @@ const createAppTheme = (props: CreateAppThemeProps = {}): AppTheme => {
   };
 
   const createTheme = createCreateTheme<AppThemeSettings, AppTheme>(
-    {
-      ...appThemeStructure,
-      // TODO: Implement deep nesting extension.
-      ...props.structure
-    },
-    themeSettings
+    deepExtend(APP_THEME_STRUCTURE, props.structure),
+    deepExtend(appThemeSettingsBase, props.settings)
   );
 
-  const theme = createTheme(props.settings);
+  const theme = createTheme();
 
-  return theme;
+  return theme as AppThemeExt;
 };
 
-export type { AppThemeSettings, AppTheme };
-export { createAppTheme };
+export type {
+  AppThemeSettingsPalette,
+  AppThemeSettings,
+  AppThemePalette,
+  AppTheme,
+  CreateAppThemeProps
+};
+export {
+  APP_THEME_STRUCTURE_PALETTE,
+  APP_THEME_STRUCTURE,
+  createAppThemePalette,
+  createAppTheme
+};
