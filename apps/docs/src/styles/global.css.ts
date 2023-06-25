@@ -1,8 +1,8 @@
 import { globalStyle } from '@vanilla-extract/css';
-import { createStylesBaseline } from '@arwes/react';
+import { createAppStylesBaseline } from '@arwes/react';
 import { theme } from '@app/theme';
 
-const stylesBaseline = createStylesBaseline(theme);
+const stylesBaseline = createAppStylesBaseline(theme);
 
 Object.keys(stylesBaseline).forEach(styleName => {
   globalStyle(styleName, stylesBaseline[styleName]);

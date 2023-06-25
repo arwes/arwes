@@ -210,10 +210,10 @@ export const sandboxes = [
         name: '@arwes/core',
         children: [
           {
-            name: 'createStylesBaseline',
+            name: 'createAppStylesBaseline',
             children: [
-              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/core/src/createStylesBaseline/createStylesBaseline.basic.sandbox.tsx') },
-              { name: 'light', code: require('!raw-loader?esModule=false!@repository/packages/core/src/createStylesBaseline/createStylesBaseline.light.sandbox.tsx') }
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/core/src/createAppStylesBaseline/createAppStylesBaseline.basic.sandbox.tsx') },
+              { name: 'light', code: require('!raw-loader?esModule=false!@repository/packages/core/src/createAppStylesBaseline/createAppStylesBaseline.light.sandbox.tsx') }
             ]
           }
         ]

@@ -2,7 +2,7 @@ import type { Properties as CSSProperties } from 'csstype';
 import { type AppTheme } from '@arwes/theme';
 import { createFrameOctagonClip } from '@arwes/frames';
 
-const createStylesBaseline = (theme: AppTheme): Record<string, CSSProperties> => {
+const createAppStylesBaseline = (theme: AppTheme): Record<string, CSSProperties> => {
   const { dark, space, colors, fontFamilies, typography, transitions } = theme;
 
   // Remove "fontSize" from main typography styles since the browser should set this value.
@@ -335,4 +335,4 @@ const createStylesBaseline = (theme: AppTheme): Record<string, CSSProperties> =>
   };
 };
 
-export { createStylesBaseline };
+export { createAppStylesBaseline };

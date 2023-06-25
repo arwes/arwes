@@ -1,1 +1,1 @@
-export * from './createStylesBaseline/index';
+export * from './createAppStylesBaseline/index';

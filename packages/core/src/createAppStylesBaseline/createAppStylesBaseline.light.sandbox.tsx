@@ -2,10 +2,14 @@ import React, { type ReactElement } from 'react';
 import { createRoot } from 'react-dom/client';
 import { type CSSObject, Global } from '@emotion/react';
 import { createAppTheme } from '@arwes/theme';
-import { createStylesBaseline } from '@arwes/core';
+import { createAppStylesBaseline } from '@arwes/core';
 
-const theme = createAppTheme();
-const stylesBaseline = createStylesBaseline(theme);
+const theme = createAppTheme({
+  settings: {
+    dark: false
+  }
+});
+const stylesBaseline = createAppStylesBaseline(theme);
 
 const Sandbox = (): ReactElement => (
   <main style={{ padding: '2rem' }}>
