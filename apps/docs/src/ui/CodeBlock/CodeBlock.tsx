@@ -32,11 +32,13 @@ const CodeBlock = (props: CodeBlockProps): ReactElement => {
             className={cx(classes.pre, className)}
             style={{
               ...style,
-              background: `linear-gradient(
-                to right,
-                ${t.colors.primary.text(2, { alpha: 0.2 })},
-                ${t.colors.primary.text(0, { alpha: 0.2 })}
-              )`
+              background: t.dark
+                ? `linear-gradient(
+                  to right,
+                  ${t.colors.primary.text(6, { alpha: 0.1 })},
+                  ${t.colors.primary.text(9, { alpha: 0.1 })}
+                )`
+                : t.colors.primary.bg(2)
             }}
           >
             {tokens.map((line, i) => {

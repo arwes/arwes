@@ -1,6 +1,6 @@
-import React, { type ReactElement, Fragment } from 'react';
+import React, { type ReactElement } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Global } from '@emotion/react';
+import { type CSSObject, Global } from '@emotion/react';
 import { createAppTheme } from '@arwes/theme';
 import { createStylesBaseline } from '@arwes/core';
 
@@ -13,7 +13,7 @@ const stylesBaseline = createStylesBaseline(theme);
 
 const Sandbox = (): ReactElement => (
   <main style={{ padding: '2rem' }}>
-    <Global styles={stylesBaseline} />
+    <Global styles={stylesBaseline as Record<string, CSSObject>} />
 
     <h1>h1. Lorem ipsum lov sit amet</h1>
     <h2>h2. Lorem ipsum lov sit amet</h2>
@@ -47,6 +47,41 @@ const Sandbox = (): ReactElement => (
       Lorem ipsum <a href='#'>lov sit amet, consectetur</a> adipiscing elit.
     </p>
 
+    <ul>
+      <li>Lorem ipsum lov sit amet.</li>
+      <li>
+        Lorem ipsum lov sit amet.
+        <ul>
+          <li>Lorem ipsum lov sit amet.</li>
+          <li>Lorem ipsum lov sit amet.</li>
+          <li>Lorem ipsum lov sit amet.</li>
+        </ul>
+      </li>
+      <li>Lorem ipsum lov sit amet.</li>
+    </ul>
+
+    <ol>
+      <li>Lorem ipsum lov sit amet.</li>
+      <li>
+        Lorem ipsum lov sit amet.
+        <ol>
+          <li>Lorem ipsum lov sit amet.</li>
+          <li>Lorem ipsum lov sit amet.</li>
+          <li>Lorem ipsum lov sit amet.</li>
+        </ol>
+      </li>
+      <li>Lorem ipsum lov sit amet.</li>
+    </ol>
+
+    <p>
+      Lorem ipsum <code>lov sit amet, consectetur</code> adipiscing elit.
+    </p>
+    <pre>
+      Lorem ipsum lov sit amet.{'\n'}
+      Lorem ipsum lov sit amet.{'\n'}
+      Lorem ipsum lov sit amet.
+    </pre>
+
     <blockquote>
       Lorem ipsum lov sit amet, consectetur adipiscing elit.
     </blockquote>
@@ -65,40 +100,6 @@ const Sandbox = (): ReactElement => (
     <blockquote data-arwes-global-palette='error'>
       Lorem ipsum lov sit amet, consectetur adipiscing elit.
     </blockquote>
-
-    <p>
-      Lorem ipsum <code>lov sit amet, consectetur</code> adipiscing elit.
-    </p>
-    <pre>
-      Lorem ipsum lov sit amet.{'\n'}
-      Lorem ipsum lov sit amet.{'\n'}
-      Lorem ipsum lov sit amet.
-    </pre>
-
-    <ul>
-      <li>Lorem ipsum lov sit amet.</li>
-      <li>
-        Lorem ipsum lov sit amet.
-        <ul>
-          <li>Lorem ipsum lov sit amet.</li>
-          <li>Lorem ipsum lov sit amet.</li>
-          <li>Lorem ipsum lov sit amet.</li>
-        </ul>
-      </li>
-      <li>Lorem ipsum lov sit amet.</li>
-    </ul>
-    <ol>
-      <li>Lorem ipsum lov sit amet.</li>
-      <li>
-        Lorem ipsum lov sit amet.
-        <ol>
-          <li>Lorem ipsum lov sit amet.</li>
-          <li>Lorem ipsum lov sit amet.</li>
-          <li>Lorem ipsum lov sit amet.</li>
-        </ol>
-      </li>
-      <li>Lorem ipsum lov sit amet.</li>
-    </ol>
 
     <table>
       <thead>

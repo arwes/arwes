@@ -3,7 +3,7 @@ import { type AppTheme } from '@arwes/theme';
 import { createFrameOctagonClip } from '@arwes/frames';
 
 const createStylesBaseline = (theme: AppTheme): Record<string, CSSProperties> => {
-  const { space, colors, fontFamilies, typography, transitions } = theme;
+  const { dark, space, colors, fontFamilies, typography, transitions } = theme;
 
   // Remove "fontSize" from main typography styles since the browser should set this value.
   const { fontSize: _typographyMainStylesFontSize, ...typographyMainStyles } = typography.body(1);
@@ -14,11 +14,11 @@ const createStylesBaseline = (theme: AppTheme): Record<string, CSSProperties> =>
   const blockquotesThemes = themeNames.reduce((themes: Record<string, CSSProperties>, themeName: PaletteName) => {
     const palette = colors[themeName];
     themes[`blockquote[data-arwes-global-palette=${String(themeName)}]`] = {
-      borderColor: palette.main(5),
+      borderColor: palette.main(4),
       background: `linear-gradient(
         to right,
-        ${palette.main(5, { alpha: 0.15 })},
-        ${palette.main(5, { alpha: 0.05 })}
+        ${palette.main(4, { alpha: 0.15 })},
+        ${palette.main(4, { alpha: 0.05 })}
       )`
     };
     return themes;
@@ -42,13 +42,13 @@ const createStylesBaseline = (theme: AppTheme): Record<string, CSSProperties> =>
       fontStyle: 'normal',
       fontWeight: 400,
       lineHeight: '1.5',
-      color: colors.primary.text(7),
+      color: colors.primary.text(dark ? 2 : 7),
       ...typographyMainStyles,
 
-      backgroundColor: colors.primary.bg(2),
+      backgroundColor: dark ? colors.primary.bg(2) : 'white',
 
       scrollbarWidth: 'auto',
-      scrollbarColor: `${colors.secondary.main(3)} transparent`
+      scrollbarColor: `${colors.secondary.main(7)} transparent`
     },
 
     '::-webkit-scrollbar': {
@@ -57,11 +57,11 @@ const createStylesBaseline = (theme: AppTheme): Record<string, CSSProperties> =>
     },
 
     '::-webkit-scrollbar-track, ::-webkit-scrollbar-corner': {
-      background: colors.primary.bg(4)
+      background: dark ? colors.primary.bg(4) : 'white'
     },
     '::-webkit-scrollbar-thumb': {
-      border: `0.2rem solid ${colors.primary.bg(4)}`,
-      background: colors.secondary.main(3),
+      border: `0.2rem solid ${dark ? colors.primary.bg(4) : 'white'}`,
+      background: colors.secondary.main(7),
       transitionProperty: 'color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, outline',
       transitionTimingFunction: 'ease-out',
       transitionDuration: transitions.duration(1)
@@ -71,7 +71,7 @@ const createStylesBaseline = (theme: AppTheme): Record<string, CSSProperties> =>
     },
 
     '::selection': {
-      backgroundColor: colors.secondary.deco(5)
+      backgroundColor: colors.secondary.deco(dark ? 2 : 4)
     },
 
     // TEXTS
@@ -99,8 +99,8 @@ const createStylesBaseline = (theme: AppTheme): Record<string, CSSProperties> =>
     'h1, h2, h3, h4, h5, h6': {
       scrollMarginTop: space(12),
       fontStyle: 'normal',
-      color: colors.primary.main(5),
-      textShadow: `0 0 1px ${colors.primary.main(5)}`
+      color: colors.primary.main(dark ? 4 : 9),
+      textShadow: dark ? `0 0 1px ${colors.primary.main(4)}` : undefined
     },
 
     h1: typography.title(0),
@@ -149,8 +149,8 @@ const createStylesBaseline = (theme: AppTheme): Record<string, CSSProperties> =>
     },
 
     a: {
-      color: colors.secondary.text(7),
-      textShadow: `0 0 1px ${colors.secondary.text(7)}`,
+      color: colors.secondary.text(dark ? 3 : 7),
+      textShadow: dark ? `0 0 1px ${colors.secondary.text(3)}` : undefined,
       textDecoration: 'none',
       transitionProperty: 'color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, outline',
       transitionDuration: transitions.duration(1),
@@ -158,11 +158,11 @@ const createStylesBaseline = (theme: AppTheme): Record<string, CSSProperties> =>
     },
 
     'a:hover': {
-      color: colors.secondary.main(7)
+      color: colors.secondary.main(dark ? 3 : 7)
     },
 
     'a:focus': {
-      outline: `1px dotted ${colors.secondary.text(5)}`
+      outline: `1px dotted ${colors.secondary.text(4)}`
     },
 
     // LISTS
@@ -180,28 +180,6 @@ const createStylesBaseline = (theme: AppTheme): Record<string, CSSProperties> =>
       fontSize: '0.9em'
     },
 
-    // BLOCKQUOTE
-
-    blockquote: {
-      display: 'block',
-      border: 'none',
-      borderLeft: `${space(0.5)} solid ${colors.primary.main(5)}`,
-      padding: space([4, 4, 4, 4.5]),
-      width: '100%',
-      background: `linear-gradient(
-        to right,
-        ${colors.primary.main(5, { alpha: 0.15 })},
-        ${colors.primary.main(5, { alpha: 0.05 })}
-      )`,
-      clipPath: createFrameOctagonClip({
-        squareSize: space(3),
-        leftTop: false,
-        leftBottom: false
-      })
-    },
-
-    ...blockquotesThemes,
-
     // CODE
 
     'code, pre': {
@@ -217,41 +195,39 @@ const createStylesBaseline = (theme: AppTheme): Record<string, CSSProperties> =>
       display: 'block',
       borderWidth: '1px 0',
       borderStyle: 'solid',
-      borderColor: colors.primary.text(2),
+      borderColor: colors.primary.text(6),
       padding: '1rem',
       fontSize: '0.75rem',
+      background: dark
+        ? `linear-gradient(
+          to right,
+          ${colors.primary.text(6, { alpha: 0.1 })},
+          ${colors.primary.text(9, { alpha: 0.1 })}
+        )`
+        : colors.primary.bg(1)
+    },
+
+    // BLOCKQUOTE
+
+    blockquote: {
+      display: 'block',
+      border: 'none',
+      borderLeft: `${space(0.5)} solid ${colors.primary.main(5)}`,
+      padding: space([4, 4, 4, 4.5]),
+      width: '100%',
       background: `linear-gradient(
         to right,
-        ${colors.primary.text(2, { alpha: 0.2 })},
-        ${colors.primary.text(0, { alpha: 0.2 })}
-      )`
-    },
-
-    // LINES
-
-    hr: {
-      position: 'relative',
-      border: 'none',
-      background: `linear-gradient(
-        to left,
-        ${colors.primary.deco(8)},
-        ${colors.primary.deco(2)}
+        ${colors.primary.main(4, { alpha: 0.15 })},
+        ${colors.primary.main(4, { alpha: 0.05 })}
       )`,
-      width: '100%',
-      height: '1px',
-      transformOrigin: 'left center'
+      clipPath: createFrameOctagonClip({
+        squareSize: space(3),
+        leftTop: false,
+        leftBottom: false
+      })
     },
 
-    'hr::after': {
-      content: '""',
-      position: 'absolute',
-      right: 0,
-      bottom: 0,
-      display: 'block',
-      width: space(6),
-      height: 0,
-      borderBottom: `1px solid ${colors.primary.deco(10)}`
-    },
+    ...blockquotesThemes,
 
     // TABLES
 
@@ -263,25 +239,31 @@ const createStylesBaseline = (theme: AppTheme): Record<string, CSSProperties> =>
     },
 
     ':where(thead tr)': {
-      background: `linear-gradient(
-        to top,
-        ${colors.primary.main(2, { alpha: 0.2 })},
-        ${colors.primary.main(2, { alpha: 0.05 })}
-      )`
+      background: dark
+        ? `linear-gradient(
+          to top,
+          ${colors.primary.main(7, { alpha: 0.2 })},
+          ${colors.primary.main(7, { alpha: 0.05 })}
+        )`
+        : colors.primary.bg(1)
     },
 
     ':where(thead th, thead td)': {
       ...typography.body(2),
-      color: colors.primary.text(5),
-      borderBottom: `1px solid ${colors.primary.main(2)}`
+      color: colors.primary.text(dark ? 4 : 5),
+      borderBottom: `1px solid ${colors.primary.main(dark ? 7 : 9)}`
     },
 
     ':where(tbody tr)': {
-      backgroundColor: colors.primary.main(1, { alpha: 0.1 })
+      backgroundColor: dark
+        ? colors.primary.main(8, { alpha: 0.1 })
+        : undefined
     },
 
     ':where(tbody tr:hover)': {
-      backgroundColor: colors.primary.main(1, { alpha: 0.2 })
+      backgroundColor: dark
+        ? colors.primary.main(8, { alpha: 0.3 })
+        : colors.primary.deco(1)
     },
 
     'th, td': {
@@ -314,13 +296,41 @@ const createStylesBaseline = (theme: AppTheme): Record<string, CSSProperties> =>
 
     figcaption: {
       padding: space([2, 4]),
-      backgroundColor: colors.primary.main(1, { alpha: 0.2 }),
+      backgroundColor: dark
+        ? colors.primary.main(8, { alpha: 0.2 })
+        : colors.primary.bg(1),
       clipPath: createFrameOctagonClip({
         squareSize: space(3),
         leftTop: false,
         leftBottom: false,
         rightTop: false
       })
+    },
+
+    // LINES
+
+    hr: {
+      position: 'relative',
+      border: 'none',
+      background: `linear-gradient(
+        to right,
+        ${colors.primary.deco(dark ? 2 : 8)},
+        ${colors.primary.deco(8)}
+      )`,
+      width: '100%',
+      height: '1px',
+      transformOrigin: 'left center'
+    },
+
+    'hr::after': {
+      content: '""',
+      position: 'absolute',
+      right: 0,
+      bottom: 0,
+      display: 'block',
+      width: space(6),
+      height: 0,
+      borderBottom: `1px solid ${dark ? colors.primary.deco(10) : colors.primary.main(9)}`
     }
   };
 };

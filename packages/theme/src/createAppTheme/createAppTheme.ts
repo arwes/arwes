@@ -124,7 +124,7 @@ const APP_THEME_STRUCTURE_PALETTE: ThemeCreatorStructure = {
 };
 
 const APP_THEME_STRUCTURE: ThemeCreatorStructure = {
-  type: 'other',
+  dark: 'other',
   space: 'unit',
   spaceN: 'multiplier',
   hues: {
