@@ -2,7 +2,7 @@ import React, { type ReactNode, type ReactElement } from 'react';
 import { createRoot } from 'react-dom/client';
 import { type BleepsProviderSettings, BleepsProvider, useBleeps } from '@arwes/react-bleeps';
 
-type BleepsNames = 'click' | 'toggle';
+type BleepsNames = 'click' | 'intro';
 
 interface ButtonProps {
   name: BleepsNames
@@ -24,8 +24,8 @@ const bleepsSettings: BleepsProviderSettings<BleepsNames> = {
     click: {
       sources: [{ src: '/assets/sounds/click.mp3', type: 'audio/mpeg' }]
     },
-    toggle: {
-      sources: [{ src: '/assets/sounds/toggle.mp3', type: 'audio/mpeg' }]
+    intro: {
+      sources: [{ src: '/assets/sounds/intro.mp3', type: 'audio/mpeg' }]
     }
   }
 };
@@ -35,7 +35,7 @@ const Sandbox = (): ReactElement => {
     <BleepsProvider {...bleepsSettings}>
       <Button name='click'>Click!</Button>
       {' '}
-      <Button name='toggle'>Toggle!</Button>
+      <Button name='intro'>Intro!</Button>
     </BleepsProvider>
   );
 };
