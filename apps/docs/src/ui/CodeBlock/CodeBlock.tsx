@@ -2,6 +2,7 @@ import { type HTMLProps, type ReactElement } from 'react';
 import { Highlight, themes } from 'prism-react-renderer';
 import { type AnimatedProp, Animated, cx } from '@arwes/react';
 
+import { theme as t } from '@app/theme';
 import * as classes from './CodeBlock.css';
 
 interface CodeBlockProps extends HTMLProps<HTMLPreElement> {
@@ -31,7 +32,11 @@ const CodeBlock = (props: CodeBlockProps): ReactElement => {
             className={cx(classes.pre, className)}
             style={{
               ...style,
-              backgroundColor: 'hsl(180deg 25% 15% / 25%)'
+              background: `linear-gradient(
+                to right,
+                ${t.colors.primary.text(2, { alpha: 0.2 })},
+                ${t.colors.primary.text(0, { alpha: 0.2 })}
+              )`
             }}
           >
             {tokens.map((line, i) => {

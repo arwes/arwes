@@ -74,6 +74,7 @@ Package | Status | Description
 `@arwes/text` | Polishing | Text rendering effect tools
 `@arwes/frames` | Polishing | Build responsive vector graphics components
 `@arwes/bgs` | Development | Passive UI background effects
+`@arwes/core` | Development | Base UI functionalities
 `arwes` | Polishing | All vanilla packages bundle
 
 ### React

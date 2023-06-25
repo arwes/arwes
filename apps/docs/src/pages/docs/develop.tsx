@@ -182,7 +182,7 @@ const Page = (): ReactElement => {
         </Animator>
         <Animator>
           <Text as='blockquote' data-arwes-global-palette='error'>
-            Arwes does not work with React strict mode.
+            Arwes does not work with React strict mode nor React Server Components.
           </Text>
         </Animator>
         <Animator>
