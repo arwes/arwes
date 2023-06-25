@@ -1,7 +1,7 @@
 {
   "private": true,
   "engines": {
-    "node": "^18.13"
+    "node": "^18.16"
   },
   "workspaces": [
     "apps/*",
