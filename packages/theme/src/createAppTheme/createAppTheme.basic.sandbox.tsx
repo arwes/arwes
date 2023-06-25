@@ -28,11 +28,11 @@ const Sandbox = (): ReactElement => {
         h1: {
           ...t.typography.title(0),
           margin: t.space([0, 0, 4]),
-          color: t.colors.primary.text(8),
+          color: t.colors.primary.text(4),
           background: `-webkit-linear-gradient(
             0deg,
-            ${t.colors.primary.main(6)},
-            ${t.colors.secondary.main(6)}
+            ${t.colors.primary.main(4)},
+            ${t.colors.secondary.main(4)}
           )`,
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent'
@@ -50,12 +50,12 @@ const Sandbox = (): ReactElement => {
         p: {
           margin: t.space([0, 0, 4]),
           ...t.typography.body(1),
-          color: t.colors.primary.text(6)
+          color: t.colors.primary.text(4)
         },
         img: {
           margin: 0,
           maxWidth: '100%',
-          borderRadius: t.space(1)
+          borderRadius: t.space(2)
         }
       }} />
 
@@ -63,7 +63,7 @@ const Sandbox = (): ReactElement => {
         border: `1px solid ${t.colors.primary.deco(5)}`,
         padding: t.space([4, 8]),
         maxWidth: 400,
-        borderRadius: t.space(2),
+        borderRadius: t.space(4),
         background: `linear-gradient(
           to bottom right,
           ${t.colors.primary.bg(2)},

@@ -18,9 +18,9 @@ import { deepExtend } from './deepExtend';
 interface AppThemeSettingsPalette {
   main: ThemeSettingsColor
   text: ThemeSettingsColor
+  deco: ThemeSettingsColor
   bg: ThemeSettingsColor
   ol: ThemeSettingsColor
-  deco: ThemeSettingsColor
 }
 
 interface AppThemeSettings {
@@ -68,9 +68,9 @@ interface AppThemeSettings {
 interface AppThemePalette {
   main: ThemeColor
   text: ThemeColor
+  deco: ThemeColor
   bg: ThemeColor
   ol: ThemeColor
-  deco: ThemeColor
 }
 
 interface AppTheme {
@@ -118,9 +118,9 @@ interface AppTheme {
 const APP_THEME_STRUCTURE_PALETTE: ThemeCreatorStructure = {
   main: 'color',
   text: 'color',
+  deco: 'color',
   bg: 'color',
-  ol: 'color',
-  deco: 'color'
+  ol: 'color'
 };
 
 const APP_THEME_STRUCTURE: ThemeCreatorStructure = {
@@ -170,18 +170,20 @@ interface CreateAppThemeProps <AppThemeSettingsExt extends AppThemeSettings = Ap
   settings?: PartialDeep<AppThemeSettingsExt>
 }
 
-const createAppThemePalette = (hue: number): AppThemeSettingsPalette => ({
-  main: (i: number) => [hue, 80 + i, 7.5 + i * 9.44],
-  text: (i: number) => [hue, 40 + i, 7.5 + i * 9.44],
-  bg: (i: number) => [hue, 40 + i, 2 + i * 2],
-  ol: (i: number) => [hue, 80 + i, 2 + i * 2],
-  deco: (i: number) => [hue, 80 + i, 50, 0.05 + i * 0.05]
+const createAppThemePalette = (hue: number, dark: boolean = true): AppThemeSettingsPalette => ({
+  main: (i: number) => [hue, 80 + i, 92.5 - i * 9.44],
+  text: (i: number) => [hue, 40 + i, 92.5 - i * 9.44],
+  deco: (i: number) => [hue, 80 + i, 50, 0.05 + i * 0.05],
+  bg: (i: number) => [hue, 40 + i, dark ? 2 + i * 2 : 98 - i * 2],
+  ol: (i: number) => [hue, 80 + i, dark ? 2 + i * 2 : 98 - i * 2]
 });
 
 const createAppTheme = <
   AppThemeSettingsExt extends AppThemeSettings = AppThemeSettings,
   AppThemeExt extends AppTheme = AppTheme
 >(props: CreateAppThemeProps<AppThemeSettingsExt> = {}): AppThemeExt => {
+  const dark = props.settings?.dark === undefined ? true : !!props.settings?.dark;
+
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
   const hues = {
     primary: 200,
@@ -204,17 +206,17 @@ const createAppTheme = <
   } as AppTheme['fontFamilies'];
 
   const appThemeSettingsBase: AppThemeSettings = {
-    dark: true,
+    dark,
     space: index => `${index * 0.25}rem`,
     spaceN: index => index * 4,
     hues,
     colors: {
-      primary: createAppThemePalette(hues.primary),
-      secondary: createAppThemePalette(hues.secondary),
-      success: createAppThemePalette(hues.success),
-      info: createAppThemePalette(hues.info),
-      warning: createAppThemePalette(hues.warning),
-      error: createAppThemePalette(hues.error)
+      primary: createAppThemePalette(hues.primary, dark),
+      secondary: createAppThemePalette(hues.secondary, dark),
+      success: createAppThemePalette(hues.success, dark),
+      info: createAppThemePalette(hues.info, dark),
+      warning: createAppThemePalette(hues.warning, dark),
+      error: createAppThemePalette(hues.error, dark)
     },
     fontFamilies,
     typography: {

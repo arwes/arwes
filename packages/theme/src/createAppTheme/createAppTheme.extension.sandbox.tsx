@@ -59,16 +59,16 @@ const Sandbox = (): ReactElement => {
         html: {
           margin: t.space(2),
           lineHeight: 1.6,
-          backgroundColor: t.colors.complementary.ol(1)
+          backgroundColor: t.colors.primary.ol(2)
         },
         h1: {
           ...t.typography.title(0),
           margin: t.space([0, 0, 4]),
-          color: t.colors.complementary.text(8),
+          color: t.colors.primary.text(4),
           background: `-webkit-linear-gradient(
             0deg,
-            ${t.colors.complementary.main(6)},
-            ${t.colors.secondary.main(6)}
+            ${t.colors.primary.main(4)},
+            ${t.colors.complementary.main(4)}
           )`,
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent'
@@ -79,32 +79,31 @@ const Sandbox = (): ReactElement => {
           height: 2,
           background: `linear-gradient(
             90deg,
-            ${t.colors.complementary.deco(5)},
-            ${t.colors.secondary.deco(10)}
+            ${t.colors.primary.deco(5)},
+            ${t.colors.complementary.deco(10)}
           )`
         },
         p: {
           margin: t.space([0, 0, 4]),
           ...t.typography.body(1),
-          color: t.colors.complementary.text(6)
+          color: t.colors.primary.text(4)
         },
         img: {
           margin: 0,
           maxWidth: '100%',
-          borderRadius: t.radius(2),
-          filter: 'hue'
+          borderRadius: t.space(2)
         }
       }} />
 
       <main style={{
-        border: `1px solid ${t.colors.complementary.deco(5)}`,
+        border: `1px solid ${t.colors.primary.deco(5)}`,
         padding: t.space([4, 8]),
         maxWidth: 400,
-        borderRadius: t.radius(2),
+        borderRadius: t.space(4),
         background: `linear-gradient(
           to bottom right,
-          ${t.colors.complementary.bg(2)},
-          ${t.colors.complementary.bg(5)}
+          ${t.colors.primary.bg(2)},
+          ${t.colors.primary.bg(5)}
         )`
       }}>
         <h1>Arwes Framework</h1>
