@@ -146,7 +146,7 @@ const Page = (): ReactElement => {
                     <img src="https://img.shields.io/bundlephobia/minzip/@arwes/core?style=flat-square" alt="npm bundle size (scoped)" />
                     <img src="https://img.shields.io/npm/dm/@arwes/core.svg?style=flat-square" alt="Downloads" />
                   </td>
-                  <td>Base UI functionalities</td>
+                  <td>Core UI functionalities</td>
                 </tr>
                 <tr>
                   <td><code>arwes</code></td>
@@ -529,15 +529,6 @@ const App = (): ReactElement => {
                   <td>Interactive short sound effects manager</td>
                 </tr>
                 <tr>
-                  <td><code>@arwes/react-core</code></td>
-                  <td><small style={{ color: 'hsl(0 100% 50%)' }}>Specification</small></td>
-                  <td>
-                    <img src="https://img.shields.io/bundlephobia/minzip/@arwes/react-core?style=flat-square" alt="npm bundle size (scoped)" />
-                    <img src="https://img.shields.io/npm/dm/@arwes/react-core.svg?style=flat-square" alt="Downloads" />
-                  </td>
-                  <td>Core UI components</td>
-                </tr>
-                <tr>
                   <td><code>@arwes/react-text</code></td>
                   <td><small style={{ color: 'hsl(150 100% 50%)' }}>Polishing</small></td>
                   <td>
@@ -563,6 +554,15 @@ const App = (): ReactElement => {
                     <img src="https://img.shields.io/npm/dm/@arwes/react-bgs.svg?style=flat-square" alt="Downloads" />
                   </td>
                   <td>Passive UI background effects</td>
+                </tr>
+                <tr>
+                  <td><code>@arwes/react-core</code></td>
+                  <td><small style={{ color: 'hsl(0 100% 50%)' }}>Specification</small></td>
+                  <td>
+                    <img src="https://img.shields.io/bundlephobia/minzip/@arwes/react-core?style=flat-square" alt="npm bundle size (scoped)" />
+                    <img src="https://img.shields.io/npm/dm/@arwes/react-core.svg?style=flat-square" alt="Downloads" />
+                  </td>
+                  <td>Core UI components</td>
                 </tr>
                 <tr>
                   <td><code>@arwes/react</code></td>
