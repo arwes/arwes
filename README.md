@@ -55,9 +55,15 @@ releases and public content deployed at [arwes.dev](https://arwes.dev).
 > Branch [`next`](https://github.com/arwes/arwes/tree/next) is for `1.0.0-next`
 releases and active development deployed at [next.arwes.dev](https://next.arwes.dev).
 
+> The previous version `@arwes/[package]@1.0.0-alpha.19` was moved to [version1-breakpoint2.arwes.dev](https://version1-breakpoint2.arwes.dev)
+and [playground.version1-breakpoint2.arwes.dev](https://playground.version1-breakpoint2.arwes.dev)
+with the branch [`version1-breakpoint2`](https://github.com/arwes/arwes/tree/version1-breakpoint2)
+where you can find the components, the playground, and the website source code. This version
+was released in April, 2021, and it is now deprecated.
+
 > The previous version `arwes@1.0.0-alpha.5` was moved to [version1-breakpoint1.arwes.dev](https://version1-breakpoint1.arwes.dev)
 with the branch [`version1-breakpoint1`](https://github.com/arwes/arwes/tree/version1-breakpoint1)
-where you can find the components and the website source code. This package was
+where you can find the components and the website source code. This version was
 released in February, 2018, and it is now deprecated.
 
 ## Packages
