@@ -1,6 +1,6 @@
 {
   "name": "@arwes/react-styles",
-  "version": "1.0.0-next.7",
+  "version": "1.0.0-alpha.20",
   "publishConfig": {
     "access": "public"
   },

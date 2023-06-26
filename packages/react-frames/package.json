@@ -1,6 +1,6 @@
 {
   "name": "@arwes/react-frames",
-  "version": "1.0.0-next.9",
+  "version": "1.0.0-alpha.20",
   "publishConfig": {
     "access": "public"
   },
@@ -41,10 +41,10 @@
   "main": "./build/cjs/index.js",
   "unpkg": "./build/umd/umd.min.js",
   "peerDependencies": {
-    "@arwes/frames": "^1.0.0-next.3",
-    "@arwes/react-animator": "^1.0.0-next.3",
-    "@arwes/react-tools": "^1.0.0-next.3",
-    "@arwes/tools": "^1.0.0-next.3",
+    "@arwes/frames": "^1.0.0-alpha.20",
+    "@arwes/react-animator": "^1.0.0-alpha.20",
+    "@arwes/react-tools": "^1.0.0-alpha.20",
+    "@arwes/tools": "^1.0.0-alpha.20",
     "motion": "10",
     "react": "18"
   },
