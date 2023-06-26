@@ -63,6 +63,7 @@ export const title = style({
 });
 
 export const close = style({
+  border: 'none',
   padding: '0.25rem 0',
   fontSize: '1.25rem',
   cursor: 'pointer'
