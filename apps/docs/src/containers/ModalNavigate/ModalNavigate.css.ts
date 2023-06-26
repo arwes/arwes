@@ -22,6 +22,7 @@ export const linkButton = style({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  border: 'none',
   width: '3rem',
   height: '100%',
   clipPath: createFrameOctagonClip({ squareSize: '12px', leftTop: false, leftBottom: false, rightBottom: false }),

@@ -26,7 +26,7 @@ rootElement.innerHTML = `
     <div>
       <button class="click">Click</button>
       <button class="error">Error</button>
-      <button class="assemble">Readout</button>
+      <button class="type">Readout</button>
     </div>
   </div>
 `;
@@ -35,9 +35,9 @@ const volumeElement = rootElement.querySelector('.volume') as HTMLInputElement;
 const disableElement = rootElement.querySelector('.disable') as HTMLInputElement;
 const clickElement = rootElement.querySelector('.click') as HTMLButtonElement;
 const errorElement = rootElement.querySelector('.error') as HTMLButtonElement;
-const assembleElement = rootElement.querySelector('.assemble') as HTMLButtonElement;
+const assembleElement = rootElement.querySelector('.type') as HTMLButtonElement;
 
-type BleepsNames = 'click' | 'error' | 'assemble';
+type BleepsNames = 'click' | 'error' | 'type';
 
 const bleepsManager = createBleepsManager<BleepsNames>({
   master: {
@@ -63,9 +63,9 @@ const bleepsManager = createBleepsManager<BleepsNames>({
       category: 'notification',
       sources: [{ src: '/assets/sounds/error.webm', type: 'audio/webm' }]
     },
-    assemble: {
+    type: {
       category: 'transition',
-      sources: [{ src: '/assets/sounds/assemble.webm', type: 'audio/webm' }]
+      sources: [{ src: '/assets/sounds/type.webm', type: 'audio/webm' }]
     }
   }
 });
@@ -93,5 +93,5 @@ errorElement.addEventListener('click', () => {
 });
 
 assembleElement.addEventListener('click', () => {
-  bleepsManager?.bleeps.assemble?.play();
+  bleepsManager?.bleeps.type?.play();
 });

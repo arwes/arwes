@@ -46,6 +46,12 @@ test('Should return last element in provided list if index exceeds', () => {
   expect(themeColor(4)).toBe('2px');
 });
 
+test('Should return same string if provided string', () => {
+  const themeColor = createThemeUnit(i => `${i * 2}rem`);
+  expect(themeColor('auto')).toBe('auto');
+  expect(themeColor([2, 'auto', 1])).toBe('4rem auto 2rem');
+});
+
 test('Should return empty string if empty list and provided', () => {
   const themeColor = createThemeUnit([]);
   expect(themeColor(0)).toBe('');

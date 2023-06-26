@@ -42,6 +42,15 @@ export const sandboxes = [
             children: [
               { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createCreateTheme/createCreateTheme.basic.sandbox.tsx') }
             ]
+          },
+          {
+            name: 'createAppTheme',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createAppTheme/createAppTheme.basic.sandbox.tsx') },
+              { name: 'extension', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createAppTheme/createAppTheme.extension.sandbox.tsx') },
+              { name: 'dark', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createAppTheme/createAppTheme.dark.sandbox.tsx') },
+              { name: 'light', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createAppTheme/createAppTheme.light.sandbox.tsx') }
+            ]
           }
         ]
       },
@@ -113,7 +122,8 @@ export const sandboxes = [
               { name: 'dismissed', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.dismissed.sandbox.tsx') },
               { name: 'dynamicRendering', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.dynamicRendering.sandbox.tsx') },
               { name: 'externalManagement', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.externalManagement.sandbox.tsx') },
-              { name: 'subsystemsTransitions', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.subsystemsTransitions.sandbox.tsx') }
+              { name: 'subsystemsTransitions', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.subsystemsTransitions.sandbox.tsx') },
+              { name: 'scrollList', code: require('!raw-loader?esModule=false!@repository/packages/react-animator/src/Animator/Animator.scrollList.sandbox.tsx') }
             ]
           },
           {
@@ -196,6 +206,18 @@ export const sandboxes = [
   {
     name: 'Components',
     children: [
+      {
+        name: '@arwes/core',
+        children: [
+          {
+            name: 'createAppStylesBaseline',
+            children: [
+              { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/core/src/createAppStylesBaseline/createAppStylesBaseline.basic.sandbox.tsx') },
+              { name: 'light', code: require('!raw-loader?esModule=false!@repository/packages/core/src/createAppStylesBaseline/createAppStylesBaseline.light.sandbox.tsx') }
+            ]
+          }
+        ]
+      },
       {
         name: '@arwes/react-text',
         children: [

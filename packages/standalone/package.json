@@ -49,6 +49,7 @@
     "@arwes/text": "^1.0.0-next.7",
     "@arwes/theme": "^1.0.0-next.7",
     "@arwes/tools": "^1.0.0-next.7",
+    "@arwes/core": "^1.0.0-next.7",
     "tslib": "^2.3.1"
   },
   "scripts": {

@@ -74,6 +74,7 @@ Package | Status | Description
 `@arwes/text` | Polishing | Text rendering effect tools
 `@arwes/frames` | Polishing | Build responsive vector graphics components
 `@arwes/bgs` | Development | Passive UI background effects
+`@arwes/core` | Development | Core UI functionalities
 `arwes` | Polishing | All vanilla packages bundle
 
 ### React
@@ -84,10 +85,10 @@ Package | Status | Description
 `@arwes/react-animator` | Polishing | Animator interface tools
 `@arwes/react-animated` | Polishing | Animated UI elements using animator tools
 `@arwes/react-bleeps` | Polishing | Interactive short sound effects manager
-`@arwes/react-core` | Specification | Core UI components
 `@arwes/react-text` | Polishing | Text effect components
 `@arwes/react-frames` | Polishing | Build responsive vector graphics components
 `@arwes/react-bgs` | Polishing | Passive UI background effects
+`@arwes/react-core` | Specification | Core UI components
 `@arwes/react` | Polishing | All vanilla and React packages bundle
 
 ## Community
