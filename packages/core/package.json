@@ -1,6 +1,6 @@
 {
   "name": "@arwes/core",
-  "version": "1.0.0-next.7",
+  "version": "1.0.0-next.10",
   "publishConfig": {
     "access": "public"
   },
@@ -41,8 +41,8 @@
   "main": "./build/cjs/index.js",
   "unpkg": "./build/umd/umd.min.js",
   "peerDependencies": {
-    "@arwes/theme": "^1.0.0-next.7",
-    "@arwes/frames": "^1.0.0-next.7"
+    "@arwes/frames": "^1.0.0-next.7",
+    "@arwes/theme": "^1.0.0-next.7"
   },
   "dependencies": {
     "csstype": "^3.0.11",
