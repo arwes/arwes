@@ -6,6 +6,10 @@ const getSeriesItem = (list: string[], indexProvided: number): string => {
 };
 
 const createThemeUnit = (settings: ThemeSettingsUnit): ThemeUnit => index => {
+  if (typeof index === 'string') {
+    return index;
+  }
+
   const indexes = Array.isArray(index) ? index : [index];
 
   if (Array.isArray(settings)) {
@@ -13,10 +17,24 @@ const createThemeUnit = (settings: ThemeSettingsUnit): ThemeUnit => index => {
       return '';
     }
 
-    return indexes.map((subIndex) => getSeriesItem(settings, subIndex)).join(' ');
+    return indexes
+      .map((subIndex) => {
+        if (typeof subIndex === 'string') {
+          return subIndex;
+        }
+        return getSeriesItem(settings, subIndex);
+      })
+      .join(' ');
   }
 
-  return indexes.map(settings).join(' ');
+  return indexes
+    .map(subIndex => {
+      if (typeof subIndex === 'string') {
+        return subIndex;
+      }
+      return settings(subIndex);
+    })
+    .join(' ');
 };
 
 export { createThemeUnit };
