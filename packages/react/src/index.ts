@@ -1,6 +1,5 @@
 export * from 'arwes';
 export * from '@arwes/react-tools';
-export * from '@arwes/react-styles';
 export * from '@arwes/react-animator';
 export * from '@arwes/react-animated';
 export * from '@arwes/react-bleeps';
