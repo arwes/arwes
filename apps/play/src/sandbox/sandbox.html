@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Arwes Sandbox</title>
+    <meta name="description" content="Futuristic Sci-Fi UI Web Framework.">
+    <meta property="og:title" content="Arwes Sandbox">
+    <meta property="og:site_name" content="Arwes">
+    <meta property="og:description" content="Futuristic Sci-Fi UI Web Framework.">
+    <meta property="og:image" content="https://next.arwes.dev/arwes.jpg">
+    <meta property="og:url" content="https://next.arwes.dev/play">
+    <meta property="og:type" content="website">
+    <meta name="twitter:image:alt" content="Arwes Sandbox">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@arwesjs">
+
+    <meta name="theme-color" content="#141515" />
+    <style>html { background-color: #141515; }</style>
+    <link rel="icon" href="https://next.arwes.dev/logo.png" type="image/png">
+
+    <script>
+      (function () {
+        window.addEventListener('load', function () {
+          const gFontsLink = document.createElement('link');
+          gFontsLink.rel = 'stylesheet';
+          gFontsLink.href = 'https://fonts.googleapis.com/css2?family=Source+Code+Pro&family=Titillium+Web:wght@400;600&display=swap';
+          document.body.appendChild(gFontsLink);
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="/play/noxtron/sandbox.js"></script>
+  </body>
+</html>

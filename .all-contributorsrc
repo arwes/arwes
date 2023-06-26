@@ -53,6 +53,36 @@
         "ideas",
         "review"
       ]
+    },
+    {
+      "login": "amir-arad",
+      "name": "Amir Arad",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6019373?v=4",
+      "profile": "https://github.com/amir-arad",
+      "contributions": [
+        "bug",
+        "code"
+      ]
+    },
+    {
+      "login": "StephenCodesThings",
+      "name": "Stephen Bennett",
+      "avatar_url": "https://avatars.githubusercontent.com/u/126058?v=4",
+      "profile": "https://github.com/StephenCodesThings",
+      "contributions": [
+        "bug",
+        "code"
+      ]
+    },
+    {
+      "login": "TheNetAdmin",
+      "name": "Zixuan Wang",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18525442?v=4",
+      "profile": "https://github.com/TheNetAdmin",
+      "contributions": [
+        "bug",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5

@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>react-animated | Arwes Perf</title>
+    <link rel="icon" href="https://arwes.dev/logo.png" type="image/png">
+    <link rel="stylesheet" href="/perf/common.css">
+    <script src="/perf/common.js" defer></script>
+    <style>
+      .items {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 2px;
+      }
+      .item {
+        width: 10px;
+        height: 10px;
+        background: #233;
+      }
+    </style>
+  </head
+  <body>
+    <h1>Arwes Perf | react-animated</h1>
+    <p>
+      1 <code>Animator</code> with 1000 DIV elements rendered with an
+      <code>Animated</code> component with transform animation. Every 1 second
+      updating the root <code>Animator</code> state with 0.5s for enter and exit
+      transitions.
+    </p>
+    <div id="root"></div>
+  </body>
+</html>

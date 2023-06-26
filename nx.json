@@ -1,0 +1,38 @@
+{
+  "extends": "@nrwl/workspace/presets/core.json",
+  "npmScope": "arwes",
+  "affected": {
+    "defaultBase": "next"
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/workspace"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "parallel": 8,
+        "cacheableOperations": [
+          "build",
+          "build-esm",
+          "build-cjs",
+          "build-umd",
+          "build-types"
+        ]
+      }
+    }
+  },
+  "targetDependencies": {
+    "dev": [
+      {
+        "target": "build-esm",
+        "projects": "dependencies"
+      }
+    ]
+  },
+  "pluginsConfig": {
+    "@nrwl/js": {
+      "analyzeSourceFiles": false
+    }
+  }
+}

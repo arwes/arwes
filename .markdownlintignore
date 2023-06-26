@@ -1,5 +1,9 @@
 node_modules
-packages/*/lib
-packages/*/dist
-playground/dist
-CHANGELOG.md
+build
+public
+static
+out
+www
+.deprecated
+.cache
+.next

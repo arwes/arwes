@@ -1,0 +1,100 @@
+[
+  {
+    "name": "SoulExtract.com",
+    "description": "Alternative Rock injected with electronic and cinematic elements.",
+    "url": "https://soulextract.com",
+    "repository": "https://github.com/soulextract/soulextract.com",
+    "image": "soulextract.com.jpg"
+  },
+  {
+    "name": "RomelPerez.dev",
+    "description": "Romel Pérez's personal website.",
+    "url": "https://romelperez.dev",
+    "repository": "",
+    "image": "romelperez.dev.jpg"
+  },
+  {
+    "name": "Badgeth",
+    "description": "A dApp for identifying and rewarding noteworthy behavior on the blockchain by issuing NFT badges.",
+    "url": "https://www.reddit.com/r/reactjs/comments/p6x6j7/show_rreactjs_badgeth_a_scifi_dapp_built_with/",
+    "repository": "",
+    "image": "badgeth.jpg"
+  },
+  {
+    "name": "Dark Galaxies",
+    "description": "Online Web Videogame made with Unity.",
+    "url": "https://darkgalaxies.io",
+    "repository": "",
+    "image": "darkgalaxies.io.jpg"
+  },
+  {
+    "name": "inCyberPunk",
+    "description": "A Full Stack Social Media with Node/React with a CyberPunk theme.",
+    "url": "https://cybersocial.herokuapp.com",
+    "repository": "https://github.com/inPhoenix/inCyberPunk2022",
+    "image": "incyberpunk.jpg"
+  },
+  {
+    "name": "Stream Overlay",
+    "description": "Web UI stream overlay.",
+    "url": "https://beko.famkos.net/tag/streamoverlay",
+    "repository": "",
+    "image": "beko-stream-overlay.jpg"
+  },
+  {
+    "name": "ArchiveRPG.com",
+    "description": "Digital tabletop roleplaying game set in a sci-fi world.",
+    "url": "https://archiverpg.com",
+    "repository": "",
+    "image": "archiverpg.com.jpg"
+  },
+  {
+    "name": "StarWards",
+    "description": "Starwards is a space and starship simulator designed specifically for LARPs.",
+    "url": "https://blog.starwards.space",
+    "repository": "https://github.com/starwards/starwards",
+    "image": "starwards.jpg"
+  },
+  {
+    "name": "Cyber Movie Database",
+    "description": "Movie Database using TMDb API.",
+    "url": "https://cmdb.wrick17.com",
+    "repository": "https://github.com/wrick17/cmdb",
+    "image": "cmdb.wrick17.jpg"
+  },
+  {
+    "name": "Lady of the Shalott",
+    "description": "Home dashboard application.",
+    "url": "https://www.myxouz.com/2021/12/lady-of-shalott-first-version-of-our-home-dashboard/",
+    "repository": "",
+    "image": "lady-of-shalott.jpg"
+  },
+  {
+    "name": "Assembly RTS",
+    "description": "Assemble your own army in an epic online real-time strategy experience.",
+    "url": "https://www.indiedb.com/games/assembly-rts",
+    "repository": "",
+    "image": "AssemblyRTS.jpg"
+  },
+  {
+    "name": "Universe Dawn",
+    "description": "Universe Dawn is a browser-based space-themed strategy game where players build empires and engage in intergalactic warfare.",
+    "url": "https://universe-dawn.com",
+    "repository": "",
+    "image": "universe-dawn.com.jpg"
+  },
+  {
+    "name": "paingthet.com",
+    "description": "Pi's personal website.",
+    "url": "https://paingthet.com",
+    "repository": "",
+    "image": "paingthet.com.jpg"
+  },
+  {
+    "name": "Primary Buffer Panel",
+    "description": "A simulated spaceship cockpit made of cardboard on a budget.",
+    "url": "https://beko.famkos.net/category/simpit",
+    "repository": "",
+    "image": "beko-primary-buffer-panel.jpg"
+  }
+]

@@ -1,21 +1,21 @@
 {
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "declaration": true,
-    "strict": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "jsx": "react",
-    "baseUrl": ".",
-    "paths": {
-      "@arwes/*": ["packages/*/src"]
-    }
+    "resolveJsonModule": false
   },
   "exclude": [
     "node_modules",
-    "lib",
-    "dist"
+    "**/node_modules",
+    "**/static",
+    "**/public",
+    "**/build",
+    "**/out",
+    "**/.next",
+    "**/.deprecated",
+    "**/__testUtils__",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.sandbox.ts",
+    "**/*.sandbox.tsx"
   ]
 }

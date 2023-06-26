@@ -1,0 +1,27 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "declaration": false,
+    "incremental": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "allowJs": true,
+    "paths": {
+      "@repository/*": ["./*"],
+      "@app/*": ["./apps/docs/src/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ]
+}

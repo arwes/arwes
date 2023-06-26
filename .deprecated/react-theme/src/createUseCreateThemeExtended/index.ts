@@ -1,0 +1,1 @@
+export { createUseCreateThemeExtended } from './createUseCreateThemeExtended';

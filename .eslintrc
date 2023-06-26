@@ -4,20 +4,19 @@
     "node_modules",
     "build",
     "coverage",
-    "packages/*/lib",
-    "packages/*/dist",
-    "playground",
-    "website",
-    "__deprecated__"
+    "public",
+    "static",
+    "out",
+    "www",
+    "__testUtils__",
+    ".deprecated",
+    ".cache",
+    ".next",
+    "apps/docs/next-env.d.ts"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./tsconfig.json",
-    "ecmaVersion": 2020,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
+    "project": "./tsconfig.json"
   },
   "plugins": [
     "react",
@@ -44,6 +43,7 @@
     "@typescript-eslint/promise-function-async": ["error", {
       "checkArrowFunctions": false
     }],
+    "@typescript-eslint/no-confusing-void-expression": [0],
     "react/prop-types": "off",
     "semi": ["error", "always"],
     "brace-style": ["error", "stroustrup"],

@@ -105,14 +105,14 @@ TODO              text
 .gitattributes    text
 .gitconfig        text
 .htaccess         text
-*.lock            text -diff
-package-lock.json text -diff
 *.toml            text
 *.yaml            text
 *.yml             text
 browserslist      text
 Makefile          text
 makefile          text
+*.lock            binary
+package-lock.json binary
 
 # Heroku
 Procfile          text

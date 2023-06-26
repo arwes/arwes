@@ -1,0 +1,71 @@
+{
+  "name": "standalone",
+  "root": "packages/standalone",
+  "targets": {
+    "build": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build"
+      },
+      "outputs": ["build", ".tsbuildinfo"],
+      "dependsOn": [
+        {
+          "target": "build",
+          "projects": "dependencies"
+        }
+      ]
+    },
+    "build-esm": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build-esm"
+      },
+      "outputs": ["build/esm", ".tsbuildinfo"],
+      "dependsOn": [
+        {
+          "target": "build-esm",
+          "projects": "dependencies"
+        }
+      ]
+    },
+    "build-cjs": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build-cjs"
+      },
+      "outputs": ["build/cjs"],
+      "dependsOn": [
+        {
+          "target": "build-cjs",
+          "projects": "dependencies"
+        }
+      ]
+    },
+    "build-umd": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build-umd"
+      },
+      "outputs": ["build/umd"],
+      "dependsOn": [
+        {
+          "target": "build-umd",
+          "projects": "dependencies"
+        }
+      ]
+    },
+    "build-types": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build-types"
+      },
+      "outputs": ["build/types"],
+      "dependsOn": [
+        {
+          "target": "build-types",
+          "projects": "dependencies"
+        }
+      ]
+    }
+  }
+}

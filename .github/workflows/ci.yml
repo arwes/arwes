@@ -1,13 +1,13 @@
 # This workflow will do a clean install of node dependencies
-# and run the test/build commands for `npm run ci`
+# and test/build the project.
 
 name: ci
 
 on:
   push:
-    branches: [ main, next ]
+    branches: [ next ]
   pull_request:
-    branches: [ main, next ]
+    branches: [ main, next, dev ]
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.15]
+        node-version: [18.16]
 
     steps:
     - uses: actions/checkout@v2
@@ -24,4 +24,5 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci && npm run ci
+    - run: npm ci
+    - run: npm run integration

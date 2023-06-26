@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>react-animator | Arwes Perf</title>
+    <link rel="icon" href="https://arwes.dev/logo.png" type="image/png">
+    <link rel="stylesheet" href="/perf/common.css">
+    <script src="/perf/common.js" defer></script>
+    <style>
+      .items {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 2px;
+      }
+      .item {
+        width: 5px;
+        height: 5px;
+        background: #0ff;
+        opacity: 0.05;
+      }
+    </style>
+  </head
+  <body>
+    <h1>Arwes Perf | react-animator</h1>
+    <p>
+      1 root <code>Animator</code> with 3000 children <code>Animator</code>s
+      managed in parallel, each child with a DIV element which updates its element
+      opacity on state transition. Every 2 seconds the root <code>Animator</code>
+      is updated and all <code>Animator</code>s take 0.5s on enter and exit
+      transitions.
+    </p>
+    <div id="root"></div>
+  </body>
+</html>
