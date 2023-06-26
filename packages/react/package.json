@@ -44,16 +44,16 @@
     "react": "18"
   },
   "dependencies": {
-    "@arwes/react-animated": "^1.0.0-next.9",
-    "@arwes/react-animator": "^1.0.0-next.10",
-    "@arwes/react-bgs": "^1.0.0-next.10",
-    "@arwes/react-bleeps": "^1.0.0-next.10",
-    "@arwes/react-core": "^1.0.0-next.7",
-    "@arwes/react-frames": "^1.0.0-next.9",
-    "@arwes/react-styles": "^1.0.0-next.7",
-    "@arwes/react-text": "^1.0.0-next.8",
-    "@arwes/react-tools": "^1.0.0-next.10",
-    "arwes": "^1.0.0-next.10",
+    "@arwes/react-animated": "^1.0.0-alpha.20",
+    "@arwes/react-animator": "^1.0.0-alpha.20",
+    "@arwes/react-bgs": "^1.0.0-alpha.20",
+    "@arwes/react-bleeps": "^1.0.0-alpha.20",
+    "@arwes/react-core": "^1.0.0-alpha.20",
+    "@arwes/react-frames": "^1.0.0-alpha.20",
+    "@arwes/react-styles": "^1.0.0-alpha.20",
+    "@arwes/react-text": "^1.0.0-alpha.20",
+    "@arwes/react-tools": "^1.0.0-alpha.20",
+    "arwes": "^1.0.0-alpha.20",
     "tslib": "^2.3.1"
   },
   "scripts": {
