@@ -36,31 +36,33 @@ const Test = (): ReactElement => {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
-    const tid = setTimeout(() => setActive(!active), 2000);
-    return () => clearTimeout(tid);
-  }, [active]);
+    const tid = setInterval(() => setActive(v => !v), 2000);
+    return () => clearInterval(tid);
+  }, []);
 
   return (
     <Fragment>
-      <p>Root animator state: <b>{active ? 'active' : 'deactivated'}</b></p>
+      <p>Root animator state: <b>{active ? 'activated' : 'inactivated'}</b></p>
       <AnimatorGeneralProvider duration={{ enter: 0.5, exit: 0.5 }}>
         <Animator active={active} combine>
-          {Array(TEST_RENDER_NUMBER).fill(null).map((_, index) =>
-            <Animator
-              key={index}
-              onTransition={(node: AnimatorNode) => {
-                const state = node.state;
-                if (index === 0) {
-                  console.time(state);
-                }
-                else if (index + 1 === TEST_RENDER_NUMBER) {
-                  console.timeEnd(state);
-                }
-              }}
-            >
-              <Item />
-            </Animator>
-          )}
+          <div className='items'>
+            {Array(TEST_RENDER_NUMBER).fill(null).map((_, index) =>
+              <Animator
+                key={index}
+                onTransition={(node: AnimatorNode) => {
+                  const state = node.state;
+                  if (index === 0) {
+                    console.time(state);
+                  }
+                  else if (index + 1 === TEST_RENDER_NUMBER) {
+                    console.timeEnd(state);
+                  }
+                }}
+              >
+                <Item />
+              </Animator>
+            )}
+          </div>
         </Animator>
       </AnimatorGeneralProvider>
     </Fragment>

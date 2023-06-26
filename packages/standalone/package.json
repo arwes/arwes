@@ -1,6 +1,6 @@
 {
   "name": "arwes",
-  "version": "1.0.0-next.8",
+  "version": "1.0.0-next.10",
   "publishConfig": {
     "access": "public"
   },
@@ -44,10 +44,11 @@
     "@arwes/animated": "^1.0.0-next.7",
     "@arwes/animator": "^1.0.0-next.7",
     "@arwes/bgs": "^1.0.0-next.7",
-    "@arwes/bleeps": "^1.0.0-next.7",
+    "@arwes/bleeps": "^1.0.0-next.10",
+    "@arwes/core": "^1.0.0-next.10",
     "@arwes/frames": "^1.0.0-next.8",
     "@arwes/text": "^1.0.0-next.7",
-    "@arwes/theme": "^1.0.0-next.7",
+    "@arwes/theme": "^1.0.0-next.10",
     "@arwes/tools": "^1.0.0-next.7",
     "tslib": "^2.3.1"
   },

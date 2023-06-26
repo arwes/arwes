@@ -44,7 +44,7 @@ const AnimatorUIListener = (): ReactElement => {
       animation?.cancel();
       animator.node.unsubscribe(subscriber);
     };
-  }, []);
+  }, [animator]);
 
   return (
     <div

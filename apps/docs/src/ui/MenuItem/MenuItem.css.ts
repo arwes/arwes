@@ -15,6 +15,7 @@ globalStyle(`${root} a, ${root} button`, {
   columnGap: '0.5rem',
   justifyContent: 'center',
   alignItems: 'center',
+  border: 'none',
   padding: '0 0.25rem',
   color: 'hsl(180 82.31% 71.18%)',
   cursor: 'pointer',

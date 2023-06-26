@@ -16,33 +16,35 @@ const Test = (): ReactElement => {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
-    const tid = setTimeout(() => setActive(!active), 1000);
-    return () => clearTimeout(tid);
-  }, [active]);
+    const tid = setInterval(() => setActive(v => !v), 1000);
+    return () => clearInterval(tid);
+  }, []);
 
   return (
     <Fragment>
-      <p>Root animator state: <b>{active ? 'active' : 'deactivated'}</b></p>
+      <p>Root animator state: <b>{active ? 'activated' : 'inactivated'}</b></p>
       <Animator
         active={active}
         duration={{ enter: 0.5, exit: 0.5 }}
       >
-        {Array(TEST_RENDER_NUMBER).fill(null).map((_, index) => (
-          <Animated
-            key={index}
-            className='item'
-            animated={{
-              initialStyle: {
-                scale: 0.2,
-                rotate: 90
-              },
-              transitions: {
-                entering: { scale: [0.2, 1], rotate: [90, 0] },
-                exiting: { scale: [1, 0.2], rotate: [0, 90] }
-              }
-            }}
-          />
-        ))}
+        <div className='items'>
+          {Array(TEST_RENDER_NUMBER).fill(null).map((_, index) => (
+            <Animated
+              key={index}
+              className='item'
+              animated={{
+                initialStyle: {
+                  scale: 0.2,
+                  rotate: 90
+                },
+                transitions: {
+                  entering: { scale: [0.2, 1], rotate: [90, 0] },
+                  exiting: { scale: [1, 0.2], rotate: [0, 90] }
+                }
+              }}
+            />
+          ))}
+        </div>
       </Animator>
     </Fragment>
   );

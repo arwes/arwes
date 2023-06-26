@@ -27,21 +27,21 @@ export const frames = style({
 
 export const frame1 = style({});
 
-globalStyle(`${frame1} [data-name="shape"]`, {
+globalStyle(`${frame1} [data-name=bg]`, {
   color: 'hsla(180, 100%, 7%, 0.5)'
 });
 
-globalStyle(`${frame1} [data-name="decoration"]`, {
+globalStyle(`${frame1} [data-name=line]`, {
   color: 'hsla(180, 100%, 15%, 0.5)'
 });
 
 export const frame2 = style({});
 
-globalStyle(`${frame2} [data-name="shape"]`, {
+globalStyle(`${frame2} [data-name=bg]`, {
   display: 'none'
 });
 
-globalStyle(`${frame2} [data-name="decoration"]`, {
+globalStyle(`${frame2} [data-name=line]`, {
   color: 'hsla(180, 100%, 50%, 0.5)'
 });
 
@@ -63,6 +63,7 @@ export const title = style({
 });
 
 export const close = style({
+  border: 'none',
   padding: '0.25rem 0',
   fontSize: '1.25rem',
   cursor: 'pointer'

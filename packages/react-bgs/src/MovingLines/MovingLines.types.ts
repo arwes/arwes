@@ -13,7 +13,7 @@ export interface MovingLinesProps {
   /**
    * Sets of lines per interval animation.
    */
-  sets: number
+  sets?: number
 };
 
 export interface MovingLinesLineConfig {

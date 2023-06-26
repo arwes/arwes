@@ -97,9 +97,15 @@ export const typeDefinitions = [
           options: MotionOptions
         ): AnimationControls;
 
-        const animate: AnimateFunction = () => AnimationControls;
+        declare function Stagger (
+          duration: number,
+          options?: { start: any, from: any, easing: any }
+        ): any;
 
-        export { AnimationControls, animate };
+        const animate: AnimateFunction;
+        const stagger: Stagger;
+
+        export { AnimationControls, animate, stagger };
       }
     `
   },
@@ -148,6 +154,10 @@ export const typeDefinitions = [
   {
     filename: 'file:///node_modules/@arwes/bgs/index.d.ts',
     code: require('!raw-loader?esModule=false!@arwes/bgs/build/types/index.d.ts')
+  },
+  {
+    filename: 'file:///node_modules/@arwes/core/index.d.ts',
+    code: require('!raw-loader?esModule=false!@arwes/core/build/types/index.d.ts')
   },
   {
     filename: 'file:///node_modules/arwes/index.d.ts',

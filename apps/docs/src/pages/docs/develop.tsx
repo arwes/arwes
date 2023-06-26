@@ -140,6 +140,15 @@ const Page = (): ReactElement => {
                   <td>Passive UI background effects</td>
                 </tr>
                 <tr>
+                  <td><code>@arwes/core</code></td>
+                  <td><small style={{ color: 'hsl(30 100% 50%)' }}>Development</small></td>
+                  <td>
+                    <img src="https://img.shields.io/bundlephobia/minzip/@arwes/core?style=flat-square" alt="npm bundle size (scoped)" />
+                    <img src="https://img.shields.io/npm/dm/@arwes/core.svg?style=flat-square" alt="Downloads" />
+                  </td>
+                  <td>Core UI functionalities</td>
+                </tr>
+                <tr>
                   <td><code>arwes</code></td>
                   <td><small style={{ color: 'hsl(150 100% 50%)' }}>Polishing</small></td>
                   <td>
@@ -173,12 +182,12 @@ const Page = (): ReactElement => {
         </Animator>
         <Animator>
           <Text as='blockquote' data-arwes-global-palette='error'>
-            Arwes does not work with React strict mode.
+            Arwes does not work with React strict mode nor React Server Components.
           </Text>
         </Animator>
         <Animator>
           <Text>
-            In the Next.js configuration file, disable React strict mode:
+            If using Next.js, in the configuration file, disable React strict mode:
           </Text>
         </Animator>
         <Animator>
@@ -207,6 +216,43 @@ module.exports = {
           <Text>
             The package re-exports all the vanilla packages and the React specific packages.
           </Text>
+        </Animator>
+        <Animator>
+          <Text>
+            One possible solution for styling can be <a href="https://emotion.sh" target='_blank'>Emotion</a>. Install Emotion for React.
+          </Text>
+        </Animator>
+        <Animator>
+          <CodeBlock
+            data-arwes-global-block
+            animated={aaVisibility()}
+            code='npm install @emotion/react'
+          />
+        </Animator>
+        <Animator>
+          <Text>
+            Arwes provides a base customizable theme and global baseline styles. They can be applied with the Emotion <code>&lt;Global/&gt;</code> component.
+          </Text>
+        </Animator>
+        <Animator>
+          <CodeBlock
+            data-arwes-global-block
+            animated={aaVisibility()}
+            code={`import { type CSSObject, Global } from '@emotion/react';
+import { createAppTheme, createAppStylesBaseline } from '@arwes/react';
+
+const theme = createAppTheme();
+const stylesBaseline = createAppStylesBaseline(theme);
+
+const App = (): ReactElement => {
+  return (
+    <>
+      <Global styles={stylesBaseline as Record<string, CSSObject>} />
+      {/* ... */}
+    </>
+  );
+};`}
+          />
         </Animator>
         <Animator>
           <Text>
@@ -325,12 +371,12 @@ const Background = (): ReactElement => {
       style={{
         position: 'absolute',
         inset: 0,
-        backgroundColor: 'hsla(100deg, 100%, 3%)'
+        backgroundColor: theme.colors.primary.bg(1)
       }}
     >
-      <GridLines lineColor='hsla(100deg, 100%, 75%, 0.05)' />
-      <Dots color='hsla(100deg, 100%, 75%, 0.05)' />
-      <MovingLines lineColor='hsla(100deg, 100%, 75%, 0.07)' />
+      <GridLines lineColor={theme.colors.primary.deco(0)} />
+      <Dots color={theme.colors.primary.deco(1)} />
+      <MovingLines lineColor={theme.colors.primary.deco(2)} />
     </div>
   );
 };
@@ -373,15 +419,19 @@ const Card = (): ReactElement => {
   return (
     <Animator merge combine manager='stagger'>
       {/* Play the intro bleep when card appears. */}
-      <BleepsOnAnimator transitions={{ entering: 'intro' }} continuous />
+      <BleepsOnAnimator
+        transitions={{ entering: 'intro' }}
+        continuous
+      />
 
       <Animated
+        className='card'
         style={{
           position: 'relative',
           display: 'block',
           maxWidth: '300px',
-          margin: '1rem auto',
-          padding: '2rem',
+          margin: theme.space([4, 'auto']),
+          padding: theme.space(8),
           textAlign: 'center'
         }}
         // Effects for entering and exiting animation transitions.
@@ -389,17 +439,17 @@ const Card = (): ReactElement => {
         // Play bleep when the card is clicked.
         onClick={() => bleeps.click?.play()}
       >
+        {/* Frame decoration and shape colors defined by CSS. */}
+        <style>{\`
+          .card .arwes-react-frames-framesvg [data-name=bg] {
+            color: \${theme.colors.primary.deco(1)};
+          }
+          .card .arwes-react-frames-framesvg [data-name=line] {
+            color: \${theme.colors.primary.main(4)};
+          }
+        \`}</style>
+
         <Animator>
-          {/* Frame decoration and shape colors defined by CSS.
-              (This way of overwriting is not recommended for production apps.) */}
-          <style>{\`
-            :where(.arwes-react-frames-framesvg [data-name="decoration"]) {
-              color: hsla(100deg, 100%, 50%);
-            }
-            :where(.arwes-react-frames-framesvg [data-name="shape"]) {
-              color: hsla(100deg, 100%, 75%, 0.05)
-            }
-          \`}</style>
           <FrameSVGCorners strokeWidth={2} />
         </Animator>
 
@@ -441,7 +491,149 @@ const App = (): ReactElement => {
         <Animator>
           <p>
             <a
-              href='/play?code=aW1wb3J0IFJlYWN0LCB7IHR5cGUgUmVhY3RFbGVtZW50IH0gZnJvbSAncmVhY3QnOwppbXBvcnQgeyBjcmVhdGVSb290IH0gZnJvbSAncmVhY3QtZG9tL2NsaWVudCc7CmltcG9ydCB7CiAgdHlwZSBBbmltYXRvckdlbmVyYWxQcm92aWRlclNldHRpbmdzLAogIEFuaW1hdG9yR2VuZXJhbFByb3ZpZGVyLAogIEFuaW1hdG9yLAogIEFuaW1hdGVkLAogIGFhVmlzaWJpbGl0eSwKICBhYSwKICB0eXBlIEJsZWVwc1Byb3ZpZGVyU2V0dGluZ3MsCiAgQmxlZXBzUHJvdmlkZXIsCiAgdXNlQmxlZXBzLAogIEJsZWVwc09uQW5pbWF0b3IsCiAgRnJhbWVTVkdDb3JuZXJzLAogIEdyaWRMaW5lcywKICBEb3RzLAogIE1vdmluZ0xpbmVzLAogIFRleHQKfSBmcm9tICdAYXJ3ZXMvcmVhY3QnOwoKY29uc3QgQmFja2dyb3VuZCA9ICgpOiBSZWFjdEVsZW1lbnQgPT4gewogIHJldHVybiAoCiAgICA8ZGl2CiAgICAgIHN0eWxlPXt7CiAgICAgICAgcG9zaXRpb246ICdhYnNvbHV0ZScsCiAgICAgICAgaW5zZXQ6IDAsCiAgICAgICAgYmFja2dyb3VuZENvbG9yOiAnaHNsYSgxMDBkZWcsIDEwMCUsIDMlKScKICAgICAgfX0KICAgID4KICAgICAgPEdyaWRMaW5lcyBsaW5lQ29sb3I9J2hzbGEoMTAwZGVnLCAxMDAlLCA3NSUsIDAuMDUpJyAvPgogICAgICA8RG90cyBjb2xvcj0naHNsYSgxMDBkZWcsIDEwMCUsIDc1JSwgMC4wNSknIC8%2BCiAgICAgIDxNb3ZpbmdMaW5lcyBsaW5lQ29sb3I9J2hzbGEoMTAwZGVnLCAxMDAlLCA3NSUsIDAuMDcpJyAvPgogICAgPC9kaXY%2BCiAgKTsKfTsKCmNvbnN0IENhcmQgPSAoKTogUmVhY3RFbGVtZW50ID0%2BIHsKICBjb25zdCBibGVlcHMgPSB1c2VCbGVlcHMoKTsKCiAgcmV0dXJuICgKICAgIDxBbmltYXRvciBtZXJnZSBjb21iaW5lIG1hbmFnZXI9J3N0YWdnZXInPgogICAgICB7LyogUGxheSB0aGUgaW50cm8gYmxlZXAgd2hlbiBjYXJkIGFwcGVhcnMuICovfQogICAgICA8QmxlZXBzT25BbmltYXRvciB0cmFuc2l0aW9ucz17eyBlbnRlcmluZzogJ2ludHJvJyB9fSBjb250aW51b3VzIC8%2BCgogICAgICA8QW5pbWF0ZWQKICAgICAgICBzdHlsZT17ewogICAgICAgICAgcG9zaXRpb246ICdyZWxhdGl2ZScsCiAgICAgICAgICBkaXNwbGF5OiAnYmxvY2snLAogICAgICAgICAgbWF4V2lkdGg6ICczMDBweCcsCiAgICAgICAgICBtYXJnaW46ICcxcmVtIGF1dG8nLAogICAgICAgICAgcGFkZGluZzogJzJyZW0nLAogICAgICAgICAgdGV4dEFsaWduOiAnY2VudGVyJwogICAgICAgIH19CiAgICAgICAgLy8gRWZmZWN0cyBmb3IgZW50ZXJpbmcgYW5kIGV4aXRpbmcgYW5pbWF0aW9uIHRyYW5zaXRpb25zLgogICAgICAgIGFuaW1hdGVkPXtbYWFWaXNpYmlsaXR5KCksIGFhKCd5JywgJzJyZW0nLCAwKV19CiAgICAgICAgLy8gUGxheSBibGVlcCB3aGVuIHRoZSBjYXJkIGlzIGNsaWNrZWQuCiAgICAgICAgb25DbGljaz17KCkgPT4gYmxlZXBzLmNsaWNrPy5wbGF5KCl9CiAgICAgID4KICAgICAgICA8QW5pbWF0b3I%2BCiAgICAgICAgICB7LyogRnJhbWUgZGVjb3JhdGlvbiBhbmQgc2hhcGUgY29sb3JzIGRlZmluZWQgYnkgQ1NTLgogICAgICAgICAgICAgIChUaGlzIHdheSBvZiBvdmVyd3JpdGluZyBpcyBub3QgcmVjb21tZW5kZWQgZm9yIHByb2R1Y3Rpb24gYXBwcy4pICovfQogICAgICAgICAgPHN0eWxlPntgCiAgICAgICAgICAgIC5hcndlcy1yZWFjdC1mcmFtZXMtZnJhbWVzdmcgW2RhdGEtbmFtZT1iZ10gewogICAgICAgICAgICAgIGNvbG9yOiBoc2xhKDEwMGRlZywgMTAwJSwgNzUlLCAwLjA1KTsKICAgICAgICAgICAgfQogICAgICAgICAgICAuYXJ3ZXMtcmVhY3QtZnJhbWVzLWZyYW1lc3ZnIFtkYXRhLW5hbWU9bGluZV0gewogICAgICAgICAgICAgIGNvbG9yOiBoc2xhKDEwMGRlZywgMTAwJSwgNTAlKTsKICAgICAgICAgICAgfQogICAgICAgICAgYH08L3N0eWxlPgogICAgICAgICAgPEZyYW1lU1ZHQ29ybmVycyBzdHJva2VXaWR0aD17Mn0gLz4KICAgICAgICA8L0FuaW1hdG9yPgoKICAgICAgICA8QW5pbWF0b3I%2BCiAgICAgICAgICA8VGV4dCBhcz0naDEnPgogICAgICAgICAgICBBcndlcyBQcm9qZWN0CiAgICAgICAgICA8L1RleHQ%2BCiAgICAgICAgPC9BbmltYXRvcj4KCiAgICAgICAgPEFuaW1hdG9yPgogICAgICAgICAgPFRleHQ%2BCiAgICAgICAgICAgIEZ1dHVyaXN0aWMgc2NpZW5jZSBmaWN0aW9uIHVzZXIgaW50ZXJmYWNlIHdlYiBmcmFtZXdvcmsuCiAgICAgICAgICA8L1RleHQ%2BCiAgICAgICAgPC9BbmltYXRvcj4KICAgICAgPC9BbmltYXRlZD4KICAgIDwvQW5pbWF0b3I%2BCiAgKTsKfTsKCmNvbnN0IGFuaW1hdG9yc1NldHRpbmdzOiBBbmltYXRvckdlbmVyYWxQcm92aWRlclNldHRpbmdzID0gewogIGR1cmF0aW9uOiB7CiAgICBlbnRlcjogMC4yLAogICAgZXhpdDogMC4yLAogICAgc3RhZ2dlcjogMC4wNAogIH0KfTsKCmNvbnN0IGJsZWVwc1NldHRpbmdzOiBCbGVlcHNQcm92aWRlclNldHRpbmdzID0gewogIG1hc3RlcjogewogICAgdm9sdW1lOiAwLjkKICB9LAogIGJsZWVwczogewogICAgaW50cm86IHsKICAgICAgc291cmNlczogW3sgc3JjOiAnaHR0cHM6Ly9uZXh0LmFyd2VzLmRldi9hc3NldHMvc291bmRzL2ludHJvLm1wMycsIHR5cGU6ICdhdWRpby9tcGVnJyB9XQogICAgfSwKICAgIGNsaWNrOiB7CiAgICAgIHNvdXJjZXM6IFt7IHNyYzogJ2h0dHBzOi8vbmV4dC5hcndlcy5kZXYvYXNzZXRzL3NvdW5kcy9jbGljay5tcDMnLCB0eXBlOiAnYXVkaW8vbXBlZycgfV0KICAgIH0KICB9Cn07Cgpjb25zdCBTYW5kYm94ID0gKCk6IFJlYWN0RWxlbWVudCA9PiB7CiAgcmV0dXJuICgKICAgIDw%2BCiAgICAgIHsvKiBHbG9iYWwgc3R5bGVzLiAqL30KICAgICAgPHN0eWxlPntgCiAgICAgICAgYm9keSB7IGZvbnQtZmFtaWx5OiAtYXBwbGUtc3lzdGVtLHNhbnMtc2VyaWY7IH0KICAgICAgICBoMSB7IG1hcmdpbjogMCAwIDFyZW07IGNvbG9yOiBoc2woMTAwZGVnIDEwMCUgNjAlKTsgfQogICAgICAgIHAgeyBtYXJnaW46IDA7IGNvbG9yOiBoc2woMTAwZGVnIDUwJSA3NSUpOyB9CiAgICAgIGB9PC9zdHlsZT4KCiAgICAgIDxBbmltYXRvckdlbmVyYWxQcm92aWRlciB7Li4uYW5pbWF0b3JzU2V0dGluZ3N9PgogICAgICAgIDxCbGVlcHNQcm92aWRlciB7Li4uYmxlZXBzU2V0dGluZ3N9PgogICAgICAgICAgPEFuaW1hdG9yIGFjdGl2ZT17dHJ1ZX0gY29tYmluZSBtYW5hZ2VyPSdzdGFnZ2VyJz4KICAgICAgICAgICAgPEFuaW1hdG9yPgogICAgICAgICAgICAgIDxCYWNrZ3JvdW5kIC8%2BCiAgICAgICAgICAgIDwvQW5pbWF0b3I%2BCiAgICAgICAgICAgIDxBbmltYXRvcj4KICAgICAgICAgICAgICA8Q2FyZCAvPgogICAgICAgICAgICA8L0FuaW1hdG9yPgogICAgICAgICAgPC9BbmltYXRvcj4KICAgICAgICA8L0JsZWVwc1Byb3ZpZGVyPgogICAgICA8L0FuaW1hdG9yR2VuZXJhbFByb3ZpZGVyPgogICAgPC8%2BCiAgKTsKfTsKCmNyZWF0ZVJvb3QoZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI3Jvb3QnKSBhcyBIVE1MRWxlbWVudCkucmVuZGVyKDxTYW5kYm94IC8%2BKTsK&type=custom&sandbox=&explorer=false&editor=false&preview=true'
+              href={`/play?type=custom&sandbox=&explorer=false&editor=false&preview=true&code=${encodeURIComponent(btoa(`
+import React, { type ReactElement } from 'react';
+import { createRoot } from 'react-dom/client';
+import { type CSSObject, Global } from '@emotion/react';
+import {
+  createAppTheme,
+  createAppStylesBaseline,
+  type AnimatorGeneralProviderSettings,
+  AnimatorGeneralProvider,
+  Animator,
+  Animated,
+  aaVisibility,
+  aa,
+  type BleepsProviderSettings,
+  BleepsProvider,
+  useBleeps,
+  BleepsOnAnimator,
+  FrameSVGCorners,
+  GridLines,
+  Dots,
+  MovingLines,
+  Text
+} from '@arwes/react';
+
+const theme = createAppTheme();
+const stylesBaseline = createAppStylesBaseline(theme);
+
+const Background = (): ReactElement => {
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        inset: 0,
+        backgroundColor: theme.colors.primary.bg(1)
+      }}
+    >
+      <GridLines lineColor={theme.colors.primary.deco(0)} />
+      <Dots color={theme.colors.primary.deco(1)} />
+      <MovingLines lineColor={theme.colors.primary.deco(2)} />
+    </div>
+  );
+};
+
+const Card = (): ReactElement => {
+  const bleeps = useBleeps();
+
+  return (
+    <Animator merge combine manager='stagger'>
+      {/* Play the intro bleep when card appears. */}
+      <BleepsOnAnimator
+        transitions={{ entering: 'intro' }}
+        continuous
+      />
+
+      <Animated
+        className='card'
+        style={{
+          position: 'relative',
+          display: 'block',
+          maxWidth: '300px',
+          margin: theme.space([4, 'auto']),
+          padding: theme.space(8),
+          textAlign: 'center'
+        }}
+        // Effects for entering and exiting animation transitions.
+        animated={[aaVisibility(), aa('y', '2rem', 0)]}
+        // Play bleep when the card is clicked.
+        onClick={() => bleeps.click?.play()}
+      >
+        {/* Frame decoration and shape colors defined by CSS. */}
+        <style>{\`
+          .card .arwes-react-frames-framesvg [data-name=bg] {
+            color: \${theme.colors.primary.deco(1)};
+          }
+          .card .arwes-react-frames-framesvg [data-name=line] {
+            color: \${theme.colors.primary.main(4)};
+          }
+        \`}</style>
+
+        <Animator>
+          <FrameSVGCorners strokeWidth={2} />
+        </Animator>
+
+        <Animator>
+          <Text as='h1'>
+            Arwes Project
+          </Text>
+        </Animator>
+
+        <Animator>
+          <Text>
+            Futuristic science fiction user interface web framework.
+          </Text>
+        </Animator>
+      </Animated>
+    </Animator>
+  );
+};
+
+const animatorsSettings: AnimatorGeneralProviderSettings = {
+  duration: {
+    enter: 0.2,
+    exit: 0.2,
+    stagger: 0.04
+  }
+};
+
+const bleepsSettings: BleepsProviderSettings = {
+  master: {
+    volume: 0.9
+  },
+  bleeps: {
+    intro: {
+      sources: [{ src: 'https://next.arwes.dev/assets/sounds/intro.mp3', type: 'audio/mpeg' }]
+    },
+    click: {
+      sources: [{ src: 'https://next.arwes.dev/assets/sounds/click.mp3', type: 'audio/mpeg' }]
+    }
+  }
+};
+
+const Sandbox = (): ReactElement => {
+  return (
+    <>
+      <Global styles={stylesBaseline as Record<string, CSSObject>} />
+      <AnimatorGeneralProvider {...animatorsSettings}>
+        <BleepsProvider {...bleepsSettings}>
+          <Animator active={true} combine manager='stagger'>
+            <Animator>
+              <Background />
+            </Animator>
+            <Animator>
+              <Card />
+            </Animator>
+          </Animator>
+        </BleepsProvider>
+      </AnimatorGeneralProvider>
+    </>
+  );
+};
+
+createRoot(document.querySelector('#root') as HTMLElement).render(<Sandbox />);
+`.trim()))}`}
               target='_blank'
             >
               <Button
@@ -520,15 +712,6 @@ const App = (): ReactElement => {
                   <td>Interactive short sound effects manager</td>
                 </tr>
                 <tr>
-                  <td><code>@arwes/react-core</code></td>
-                  <td><small style={{ color: 'hsl(0 100% 50%)' }}>Specification</small></td>
-                  <td>
-                    <img src="https://img.shields.io/bundlephobia/minzip/@arwes/react-core?style=flat-square" alt="npm bundle size (scoped)" />
-                    <img src="https://img.shields.io/npm/dm/@arwes/react-core.svg?style=flat-square" alt="Downloads" />
-                  </td>
-                  <td>Core UI components</td>
-                </tr>
-                <tr>
                   <td><code>@arwes/react-text</code></td>
                   <td><small style={{ color: 'hsl(150 100% 50%)' }}>Polishing</small></td>
                   <td>
@@ -554,6 +737,15 @@ const App = (): ReactElement => {
                     <img src="https://img.shields.io/npm/dm/@arwes/react-bgs.svg?style=flat-square" alt="Downloads" />
                   </td>
                   <td>Passive UI background effects</td>
+                </tr>
+                <tr>
+                  <td><code>@arwes/react-core</code></td>
+                  <td><small style={{ color: 'hsl(0 100% 50%)' }}>Specification</small></td>
+                  <td>
+                    <img src="https://img.shields.io/bundlephobia/minzip/@arwes/react-core?style=flat-square" alt="npm bundle size (scoped)" />
+                    <img src="https://img.shields.io/npm/dm/@arwes/react-core.svg?style=flat-square" alt="Downloads" />
+                  </td>
+                  <td>Core UI components</td>
                 </tr>
                 <tr>
                   <td><code>@arwes/react</code></td>

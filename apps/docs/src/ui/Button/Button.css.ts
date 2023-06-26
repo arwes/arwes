@@ -6,6 +6,7 @@ export const root = style({
   display: 'inline-flex',
   justifyContent: 'center',
   alignItems: 'center',
+  border: 'none',
   padding: '0 12px',
   minWidth: '60px',
   height: '24px',
