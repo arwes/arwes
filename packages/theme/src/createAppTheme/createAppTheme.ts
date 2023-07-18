@@ -23,26 +23,30 @@ interface AppThemeSettingsPalette {
   ol: ThemeSettingsColor
 }
 
+interface AppThemeSettingsColors {
+  primary: AppThemeSettingsPalette
+  secondary: AppThemeSettingsPalette
+  success: AppThemeSettingsPalette
+  info: AppThemeSettingsPalette
+  warning: AppThemeSettingsPalette
+  error: AppThemeSettingsPalette
+}
+
+interface AppThemeSettingsHues {
+  primary: number
+  secondary: number
+  success: number
+  info: number
+  warning: number
+  error: number
+}
+
 interface AppThemeSettings {
   dark: boolean
   space: ThemeSettingsUnit
   spaceN: ThemeSettingsMultiplier
-  hues: {
-    primary: number
-    secondary: number
-    success: number
-    info: number
-    warning: number
-    error: number
-  }
-  colors: {
-    primary: AppThemeSettingsPalette
-    secondary: AppThemeSettingsPalette
-    success: AppThemeSettingsPalette
-    info: AppThemeSettingsPalette
-    warning: AppThemeSettingsPalette
-    error: AppThemeSettingsPalette
-  }
+  hues: AppThemeSettingsHues
+  colors: AppThemeSettingsColors
   fontFamilies: {
     title: string
     body: string
@@ -73,26 +77,23 @@ interface AppThemePalette {
   ol: ThemeColor
 }
 
+interface AppThemeColors {
+  primary: AppThemePalette
+  secondary: AppThemePalette
+  success: AppThemePalette
+  info: AppThemePalette
+  warning: AppThemePalette
+  error: AppThemePalette
+}
+
+type AppThemeHues = AppThemeSettingsHues;
+
 interface AppTheme {
   dark: boolean
   space: ThemeUnit
   spaceN: ThemeMultiplier
-  hues: {
-    primary: number
-    secondary: number
-    success: number
-    info: number
-    warning: number
-    error: number
-  }
-  colors: {
-    primary: AppThemePalette
-    secondary: AppThemePalette
-    success: AppThemePalette
-    info: AppThemePalette
-    warning: AppThemePalette
-    error: AppThemePalette
-  }
+  hues: AppThemeHues
+  colors: AppThemeColors
   fontFamilies: {
     title: string
     body: string
@@ -170,12 +171,15 @@ interface CreateAppThemeProps <AppThemeSettingsExt extends AppThemeSettings = Ap
   settings?: PartialDeep<AppThemeSettingsExt>
 }
 
-const createAppThemePalette = (hue: number, dark: boolean = true): AppThemeSettingsPalette => ({
+const createAppThemePalette = (hue: number): AppThemeSettingsPalette => ({
+  // Darkening colors.
   main: (i: number) => [hue, 80 + i, 92.5 - i * 9.44],
-  text: (i: number) => [hue, 40 + i, 92.5 - i * 9.44],
-  deco: (i: number) => [hue, 80 + i, 50, 0.05 + i * 0.05],
-  bg: (i: number) => [hue, 40 + i, dark ? 2 + i * 2 : 98 - i * 2],
-  ol: (i: number) => [hue, 80 + i, dark ? 2 + i * 2 : 98 - i * 2]
+  text: (i: number) => [hue, 20 + i, 92.5 - i * 9.44],
+
+  // Lightening colors.
+  deco: (i: number) => [hue, 80 + i, 50, 0.025 + i * 0.025],
+  bg: (i: number) => [hue, 20 + i, 2 + i * 2],
+  ol: (i: number) => [hue, 80 + i, 2 + i * 2]
 });
 
 const createAppTheme = <
@@ -211,12 +215,12 @@ const createAppTheme = <
     spaceN: index => index * 4,
     hues,
     colors: {
-      primary: createAppThemePalette(hues.primary, dark),
-      secondary: createAppThemePalette(hues.secondary, dark),
-      success: createAppThemePalette(hues.success, dark),
-      info: createAppThemePalette(hues.info, dark),
-      warning: createAppThemePalette(hues.warning, dark),
-      error: createAppThemePalette(hues.error, dark)
+      primary: createAppThemePalette(hues.primary),
+      secondary: createAppThemePalette(hues.secondary),
+      success: createAppThemePalette(hues.success),
+      info: createAppThemePalette(hues.info),
+      warning: createAppThemePalette(hues.warning),
+      error: createAppThemePalette(hues.error)
     },
     fontFamilies,
     typography: {
@@ -266,9 +270,13 @@ const createAppTheme = <
 };
 
 export type {
+  AppThemeSettingsColors,
   AppThemeSettingsPalette,
+  AppThemeSettingsHues,
   AppThemeSettings,
   AppThemePalette,
+  AppThemeColors,
+  AppThemeHues,
   AppTheme,
   CreateAppThemeProps
 };

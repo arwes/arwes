@@ -1,11 +1,34 @@
 import React, { type ReactElement, Fragment } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Global } from '@emotion/react';
-import { type AppTheme, createAppTheme } from '@arwes/theme';
+import {
+  type AppTheme,
+  type AppThemeSettingsPalette,
+  createAppTheme
+} from '@arwes/theme';
+
+// Custom color palette generator.
+const createThemePalette = (hue: number): AppThemeSettingsPalette => ({
+  // Darkening colors.
+  main: (i: number) => [hue, 80 + i, 92.5 - i * 9.44],
+  text: (i: number) => [hue, 20 + i, 92.5 - i * 9.44],
+
+  // Lightening colors.
+  deco: (i: number) => [hue, 80 + i, 50, 0.025 + i * 0.025],
+  bg: (i: number) => [hue, 20 + i, 2 + i * 2],
+  ol: (i: number) => [hue, 80 + i, 2 + i * 2]
+});
 
 const t: AppTheme = createAppTheme({
   settings: {
-    dark: false
+    hues: {
+      primary: 160,
+      secondary: 280
+    },
+    colors: {
+      primary: createThemePalette(160),
+      secondary: createThemePalette(280)
+    }
   }
 });
 
@@ -16,8 +39,8 @@ const Sandbox = (): ReactElement => {
         html: {
           margin: '0.5rem',
           lineHeight: 1.5,
-          color: '#222',
-          backgroundColor: '#fff'
+          color: '#ddd',
+          backgroundColor: '#111'
         },
         'h1, h2, h3': {
           margin: 0

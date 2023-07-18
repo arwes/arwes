@@ -79,14 +79,14 @@ const Page = (): ReactElement => {
           <Text>Arwes is a web framework to build user interfaces based on futuristic science fiction designs, animations, and sound effects. The concepts behind are opinionated with influences from <a href="https://aesthetics.fandom.com/wiki/Cyberprep" target='_blank'>Cyberprep</a> and <a href="https://en.wikipedia.org/wiki/Synthwave" target='_blank'>Synthwave</a>, and productions like <a href="http://robertsspaceindustries.com" target='_blank'>Star Citizen</a>, <a href="https://www.halowaypoint.com" target='_blank'>Halo</a>, and <a href="http://www.imdb.com/title/tt1104001" target='_blank'>TRON: Legacy</a>. It tries to inspire advanced science and technology.</Text>
         </Animator>
         <Animator>
-          <Animated as='blockquote' animated={aaVisibility()}>
+          <Animated as='blockquote'>
             <Text>
               The project is under development and not ready for production yet. It is still in <a href="https://stackoverflow.com/questions/40067469" target='_blank'>alpha release</a>, so the components are being tested and their API may change as it gets completed.
             </Text>
           </Animated>
         </Animator>
         <Animator>
-          <Animated as='blockquote' animated={aaVisibility()}>
+          <Animated as='blockquote'>
             <Text>
               <a href='https://github.com/arwes/arwes/tree/main' target='_blank'>Branch main</a> is for <code>@alpha</code> version releases and public content deployed at <a href='https://arwes.dev' target='_blank'>arwes.dev</a>.
               <br />
