@@ -30,7 +30,7 @@ window.noxtron.setupPlayground(({ emotion, Icon }) => {
   const ArwesIcon = () => (
     <img
       css={{ display: 'inline-block', marginRight: '5px', width: '1em', height: '1em' }}
-      src='https://arwes.dev/logo.png'
+      src='/logo.png'
     />
   );
 
@@ -58,14 +58,14 @@ window.noxtron.setupPlayground(({ emotion, Icon }) => {
       small: (
         <img
           style={{ display: 'block', margin: 0, height: '0.9em' }}
-          src='https://arwes.dev/logo-horizontal-text.png'
+          src='/logotype.png'
           alt='Arwes Playground'
         />
       ),
       medium: (
         <img
           style={{ display: 'block', margin: 0, height: '0.9em' }}
-          src='https://arwes.dev/logo-horizontal-text.png'
+          src='/logotype.png'
           alt='Arwes Playground'
         />
       )
