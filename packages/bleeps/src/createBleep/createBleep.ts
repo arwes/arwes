@@ -1,9 +1,10 @@
-import { IS_BROWSER, IS_BROWSER_SAFARI } from '@arwes/tools';
+import { IS_BROWSER_SAFARI } from '@arwes/tools';
+import { IS_BLEEPS_AVAILABLE } from '../constants';
 
 import type { BleepProps, Bleep, BleepPropsUpdatable } from '../types';
 
 const createBleep = (props: BleepProps): Bleep | null => {
-  if (!IS_BROWSER) {
+  if (!IS_BLEEPS_AVAILABLE) {
     return null;
   }
 
