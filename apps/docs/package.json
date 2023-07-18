@@ -1,9 +1,9 @@
 {
   "name": "@arwes/app-docs",
-  "version": "1.0.0-alpha.21",
+  "version": "1.0.0-alpha.22",
   "private": true,
   "dependencies": {
-    "@arwes/react": "^1.0.0-alpha.21",
+    "@arwes/react": "^1.0.0-alpha.22",
     "@vanilla-extract/next-plugin": "^2.1.2",
     "iconoir-react": "^6.6.0",
     "jotai": "^2.1.0",
