@@ -5,13 +5,13 @@ import { createBleepsManager } from '@arwes/bleeps';
 
 import { BleepsManagerContext } from '../internal/BleepsManagerContext';
 
-interface BleepsProviderSettings <BleepsNames extends string> extends BleepsManagerProps<BleepsNames> {}
+interface BleepsProviderSettings <BleepsNames extends string = string> extends BleepsManagerProps<BleepsNames> {}
 
-interface BleepsProviderProps <BleepsNames extends string> extends BleepsProviderSettings<BleepsNames> {
+interface BleepsProviderProps <BleepsNames extends string = string> extends BleepsProviderSettings<BleepsNames> {
   children: ReactNode
 }
 
-const BleepsProvider = <BleepsNames extends string>(props: BleepsProviderProps<BleepsNames>): ReactElement => {
+const BleepsProvider = <BleepsNames extends string = string>(props: BleepsProviderProps<BleepsNames>): ReactElement => {
   const { master, common, categories, bleeps, children } = props;
 
   // The bleeps is created once with the provided bleep names.
