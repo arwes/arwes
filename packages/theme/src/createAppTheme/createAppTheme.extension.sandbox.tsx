@@ -59,7 +59,7 @@ const Sandbox = (): ReactElement => {
         html: {
           margin: t.space(2),
           lineHeight: 1.6,
-          backgroundColor: t.colors.primary.ol(2)
+          backgroundColor: t.colors.primary.ol(1)
         },
         h1: {
           ...t.typography.title(0),
@@ -102,8 +102,8 @@ const Sandbox = (): ReactElement => {
         borderRadius: t.space(4),
         background: `linear-gradient(
           to bottom right,
-          ${t.colors.primary.bg(2)},
-          ${t.colors.primary.bg(5)}
+          ${t.colors.primary.ol(2)},
+          ${t.colors.primary.ol(4)}
         )`
       }}>
         <h1>Arwes Framework</h1>

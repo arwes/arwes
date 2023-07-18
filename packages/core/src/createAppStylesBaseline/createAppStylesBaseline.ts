@@ -71,7 +71,7 @@ const createAppStylesBaseline = (theme: AppTheme): Record<string, CSSProperties>
     },
 
     '::selection': {
-      backgroundColor: colors.secondary.deco(dark ? 2 : 4)
+      backgroundColor: colors.secondary.deco(7)
     },
 
     // TEXTS
@@ -109,8 +109,6 @@ const createAppStylesBaseline = (theme: AppTheme): Record<string, CSSProperties>
     h4: typography.title(3),
     h5: typography.title(4),
     h6: typography.title(5),
-
-    p: typography.body(1),
 
     'b, strong': {
       fontWeight: 'bolder'
@@ -162,13 +160,13 @@ const createAppStylesBaseline = (theme: AppTheme): Record<string, CSSProperties>
     },
 
     'a:focus': {
-      outline: `1px dotted ${colors.secondary.text(4)}`
+      outline: `1px dashed ${colors.secondary.main(3)}`
     },
 
     // LISTS
 
     'ul, ol': {
-      paddingLeft: space(6)
+      paddingLeft: space(4)
     },
     ':where(ul, ol) ul, :where(ul, ol) ol': {
       marginBottom: 0
@@ -177,7 +175,8 @@ const createAppStylesBaseline = (theme: AppTheme): Record<string, CSSProperties>
       content: '"≫ "',
       display: 'inline-block',
       marginTop: '0.05em',
-      fontSize: '0.9em'
+      fontSize: '0.9em',
+      fontWeight: 'bold'
     },
 
     // CODE
@@ -195,7 +194,7 @@ const createAppStylesBaseline = (theme: AppTheme): Record<string, CSSProperties>
       display: 'block',
       borderWidth: '1px 0',
       borderStyle: 'solid',
-      borderColor: colors.primary.text(6),
+      borderColor: colors.primary.main(7),
       padding: '1rem',
       fontSize: '0.75rem',
       background: dark
@@ -204,7 +203,7 @@ const createAppStylesBaseline = (theme: AppTheme): Record<string, CSSProperties>
           ${colors.primary.text(6, { alpha: 0.1 })},
           ${colors.primary.text(9, { alpha: 0.1 })}
         )`
-        : colors.primary.bg(1)
+        : colors.primary.text(0)
     },
 
     // BLOCKQUOTE
@@ -239,19 +238,19 @@ const createAppStylesBaseline = (theme: AppTheme): Record<string, CSSProperties>
     },
 
     ':where(thead tr)': {
+      ...typography.body(2),
+      color: colors.primary.text(dark ? 4 : 7),
       background: dark
         ? `linear-gradient(
           to top,
           ${colors.primary.main(7, { alpha: 0.2 })},
           ${colors.primary.main(7, { alpha: 0.05 })}
         )`
-        : colors.primary.bg(1)
+        : colors.primary.text(0)
     },
 
     ':where(thead th, thead td)': {
-      ...typography.body(2),
-      color: colors.primary.text(dark ? 4 : 5),
-      borderBottom: `1px solid ${colors.primary.main(dark ? 7 : 9)}`
+      borderBottom: `1px solid ${colors.primary.main(dark ? 7 : 2)}`
     },
 
     ':where(tbody tr)': {
@@ -263,7 +262,7 @@ const createAppStylesBaseline = (theme: AppTheme): Record<string, CSSProperties>
     ':where(tbody tr:hover)': {
       backgroundColor: dark
         ? colors.primary.main(8, { alpha: 0.3 })
-        : colors.primary.deco(1)
+        : colors.primary.deco(4)
     },
 
     'th, td': {
@@ -298,7 +297,8 @@ const createAppStylesBaseline = (theme: AppTheme): Record<string, CSSProperties>
       padding: space([2, 4]),
       backgroundColor: dark
         ? colors.primary.main(8, { alpha: 0.2 })
-        : colors.primary.bg(1),
+        : colors.primary.text(0),
+      color: dark ? undefined : colors.primary.text(7),
       clipPath: createFrameOctagonClip({
         squareSize: space(3),
         leftTop: false,
@@ -312,26 +312,30 @@ const createAppStylesBaseline = (theme: AppTheme): Record<string, CSSProperties>
     hr: {
       position: 'relative',
       border: 'none',
-      background: `linear-gradient(
-        to right,
-        ${colors.primary.deco(dark ? 2 : 8)},
-        ${colors.primary.deco(8)}
-      )`,
+      background: dark
+        ? `linear-gradient(
+          to right,
+          ${colors.primary.deco(2)},
+          ${colors.primary.deco(8)}
+        )`
+        : colors.primary.main(7),
       width: '100%',
       height: '1px',
       transformOrigin: 'left center'
     },
 
-    'hr::after': {
-      content: '""',
-      position: 'absolute',
-      right: 0,
-      bottom: 0,
-      display: 'block',
-      width: space(6),
-      height: 0,
-      borderBottom: `1px solid ${dark ? colors.primary.deco(10) : colors.primary.main(9)}`
-    }
+    'hr::after': dark
+      ? {
+          content: '""',
+          position: 'absolute',
+          right: 0,
+          bottom: 0,
+          display: 'block',
+          width: space(6),
+          height: 0,
+          borderBottom: `1px solid ${colors.primary.deco(10)}`
+        }
+      : {}
   };
 };
 

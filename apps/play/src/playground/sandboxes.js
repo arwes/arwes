@@ -48,8 +48,8 @@ export const sandboxes = [
             children: [
               { name: 'basic', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createAppTheme/createAppTheme.basic.sandbox.tsx') },
               { name: 'extension', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createAppTheme/createAppTheme.extension.sandbox.tsx') },
-              { name: 'dark', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createAppTheme/createAppTheme.dark.sandbox.tsx') },
-              { name: 'light', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createAppTheme/createAppTheme.light.sandbox.tsx') }
+              { name: 'colors', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createAppTheme/createAppTheme.colors.sandbox.tsx') },
+              { name: 'colorsCustom', code: require('!raw-loader?esModule=false!@repository/packages/theme/src/createAppTheme/createAppTheme.colorsCustom.sandbox.tsx') }
             ]
           }
         ]
