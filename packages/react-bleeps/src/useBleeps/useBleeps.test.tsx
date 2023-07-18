@@ -7,23 +7,38 @@ import { render, cleanup } from '@testing-library/react';
 import { BleepsProvider } from '../BleepsProvider/index';
 import { useBleeps } from '../index';
 
+const mockAudioContextDestination = Symbol('destination');
+
 beforeEach(() => {
   class AudioContext {
+    state = 'suspended';
+    destination = mockAudioContextDestination;
+    resume = jest.fn();
+
     createGain (): object {
       return {
         connect: jest.fn(),
         gain: {
+          value: 0,
           setValueAtTime: jest.fn()
         }
       };
     }
   };
 
+  class Audio {
+    canPlayType = jest.fn(type => type === 'audio/mpeg' ? 'probably' : '');
+  }
+
   window.AudioContext = AudioContext as any;
+  window.Audio = Audio as any;
+  window.fetch = jest.fn();
 });
 
 afterEach(() => {
   window.AudioContext = null as any;
+  window.Audio = null as any;
+  window.fetch = null as any;
 
   cleanup();
 });

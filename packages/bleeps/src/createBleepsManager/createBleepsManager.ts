@@ -1,3 +1,4 @@
+import { IS_BROWSER } from '@arwes/tools';
 import type {
   Bleep,
   BleepGeneralProps,
@@ -5,7 +6,6 @@ import type {
   BleepsManager,
   BleepsManagerProps
 } from '../types';
-import { IS_BLEEPS_AVAILABLE } from '../constants';
 import { createBleep } from '../createBleep/index';
 
 const createBleepsManager = <Names extends string>(
@@ -13,8 +13,9 @@ const createBleepsManager = <Names extends string>(
 ): BleepsManager<Names> => {
   // In non-browser environments, the bleeps manager is still created but without
   // actual functionalities.
-  const context = IS_BLEEPS_AVAILABLE ? new window.AudioContext() : null as unknown as AudioContext;
-  const masterGain = IS_BLEEPS_AVAILABLE ? context.createGain() : null as unknown as GainNode;
+  const isBleepsAvailable = IS_BROWSER && !!window.AudioContext;
+  const context = isBleepsAvailable ? new window.AudioContext() : null as unknown as AudioContext;
+  const masterGain = isBleepsAvailable ? context.createGain() : null as unknown as GainNode;
 
   const bleeps = {} as unknown as Record<Names, Bleep | null>;
   const bleepNames = Object.keys(props.bleeps) as Names[];
@@ -40,7 +41,7 @@ const createBleepsManager = <Names extends string>(
       });
   });
 
-  if (IS_BLEEPS_AVAILABLE) {
+  if (isBleepsAvailable) {
     masterGain.connect(context.destination);
 
     // Set initial master gain value.
@@ -49,12 +50,20 @@ const createBleepsManager = <Names extends string>(
   }
 
   const unload = (): void => {
+    if (!isBleepsAvailable) {
+      return;
+    }
+
     bleepNames.forEach(bleepName => {
       bleeps[bleepName]?.unload();
     });
   };
 
   const update = (newProps: BleepsManagerPropsUpdatable): void => {
+    if (!isBleepsAvailable) {
+      return;
+    }
+
     // Global settings.
 
     if (newProps.master?.volume !== undefined) {

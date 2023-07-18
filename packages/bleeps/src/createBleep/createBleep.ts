@@ -1,10 +1,11 @@
-import { IS_BROWSER_SAFARI } from '@arwes/tools';
-import { IS_BLEEPS_AVAILABLE } from '../constants';
+import { IS_BROWSER, IS_BROWSER_SAFARI } from '@arwes/tools';
 
 import type { BleepProps, Bleep, BleepPropsUpdatable } from '../types';
 
 const createBleep = (props: BleepProps): Bleep | null => {
-  if (!IS_BLEEPS_AVAILABLE) {
+  const isBleepsAvailable = IS_BROWSER && !!window.AudioContext;
+
+  if (!isBleepsAvailable) {
     return null;
   }
 
