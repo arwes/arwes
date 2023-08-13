@@ -4,6 +4,7 @@ import { ArrowRight, FastArrowRight, OpenInBrowser } from 'iconoir-react';
 import { Animator, Animated, Text, BleepsOnAnimator, aa, aaVisibility } from '@arwes/react';
 import type { BleepNames } from '@app/types';
 import { PageContentLayout, Button, CodeBlock } from '@app/ui';
+import lernaSettings from '@repository/lerna.json';
 
 const Page = (): ReactElement => {
   return (
@@ -211,7 +212,7 @@ module.exports = {
           <CodeBlock
             data-arwes-global-block
             animated={aaVisibility()}
-            code='npm install @arwes/react'
+            code={`npm install @arwes/react@${lernaSettings.version}`}
           />
         </Animator>
         <Animator>
@@ -335,13 +336,13 @@ const bleepsSettings: BleepsProviderSettings = {
     // A transition bleep sound to play when the user enters the app.
     intro: {
       sources: [
-        { src: 'https://next.arwes.dev/assets/sounds/intro.mp3', type: 'audio/mpeg' }
+        { src: 'https://arwes.dev/assets/sounds/intro.mp3', type: 'audio/mpeg' }
       ]
     },
     // An interactive bleep sound to play when user clicks.
     click: {
       sources: [
-        { src: 'https://next.arwes.dev/assets/sounds/click.mp3', type: 'audio/mpeg' }
+        { src: 'https://arwes.dev/assets/sounds/click.mp3', type: 'audio/mpeg' }
       ]
     }
   }
@@ -606,10 +607,10 @@ const bleepsSettings: BleepsProviderSettings = {
   },
   bleeps: {
     intro: {
-      sources: [{ src: 'https://next.arwes.dev/assets/sounds/intro.mp3', type: 'audio/mpeg' }]
+      sources: [{ src: 'https://arwes.dev/assets/sounds/intro.mp3', type: 'audio/mpeg' }]
     },
     click: {
-      sources: [{ src: 'https://next.arwes.dev/assets/sounds/click.mp3', type: 'audio/mpeg' }]
+      sources: [{ src: 'https://arwes.dev/assets/sounds/click.mp3', type: 'audio/mpeg' }]
     }
   }
 };

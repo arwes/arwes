@@ -50,7 +50,7 @@ const Sandbox = (): ReactElement => {
         p: {
           margin: t.space([0, 0, 4]),
           ...t.typography.body(1),
-          color: t.colors.primary.text(4)
+          color: t.colors.primary.text(5)
         },
         img: {
           margin: 0,

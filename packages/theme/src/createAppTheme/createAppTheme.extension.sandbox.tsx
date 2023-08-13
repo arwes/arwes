@@ -2,12 +2,17 @@ import React, { type ReactElement, Fragment } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Global } from '@emotion/react';
 import {
+  // Base theme types.
   type ThemeSettingsUnit,
   type ThemeUnit,
+  // App theme types.
   type AppThemeSettingsPalette,
+  type AppThemeSettingsColors,
   type AppThemeSettings,
   type AppThemePalette,
+  type AppThemeColors,
   type AppTheme,
+
   APP_THEME_STRUCTURE_PALETTE,
   createAppThemePalette,
   createAppTheme
@@ -15,29 +20,25 @@ import {
 
 // Settings Extension
 
-type AppThemeSettingsColors = AppThemeSettings['colors'];
-interface AppTheme2SettingsColors extends AppThemeSettingsColors {
-  complementary: AppThemeSettingsPalette
-}
-interface AppTheme2Settings extends Omit<AppThemeSettings, 'colors'> {
+interface ThemeSettings extends Omit<AppThemeSettings, 'colors'> {
   radius: ThemeSettingsUnit
-  colors: AppTheme2SettingsColors
+  colors: AppThemeSettingsColors & {
+    complementary: AppThemeSettingsPalette
+  }
 }
 
 // Theme Extension
 
-type AppThemeColors = AppTheme['colors'];
-interface AppTheme2Colors extends AppThemeColors {
-  complementary: AppThemePalette
-}
-interface AppTheme2 extends Omit<AppTheme, 'colors'> {
+interface Theme extends Omit<AppTheme, 'colors'> {
   radius: ThemeUnit
-  colors: AppTheme2Colors
+  colors: AppThemeColors & {
+    complementary: AppThemePalette
+  }
 }
 
 // Theme Creation
 
-const t = createAppTheme<AppTheme2Settings, AppTheme2>({
+const t = createAppTheme<ThemeSettings, Theme>({
   structure: {
     radius: 'unit',
     colors: {
@@ -86,7 +87,7 @@ const Sandbox = (): ReactElement => {
         p: {
           margin: t.space([0, 0, 4]),
           ...t.typography.body(1),
-          color: t.colors.primary.text(4)
+          color: t.colors.primary.text(5)
         },
         img: {
           margin: 0,

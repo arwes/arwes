@@ -18,9 +18,9 @@ import { deepExtend } from './deepExtend';
 interface AppThemeSettingsPalette {
   main: ThemeSettingsColor
   text: ThemeSettingsColor
-  deco: ThemeSettingsColor
   bg: ThemeSettingsColor
   ol: ThemeSettingsColor
+  deco: ThemeSettingsColor
 }
 
 interface AppThemeSettingsColors {
@@ -72,9 +72,9 @@ interface AppThemeSettings {
 interface AppThemePalette {
   main: ThemeColor
   text: ThemeColor
-  deco: ThemeColor
   bg: ThemeColor
   ol: ThemeColor
+  deco: ThemeColor
 }
 
 interface AppThemeColors {
@@ -174,12 +174,12 @@ interface CreateAppThemeProps <AppThemeSettingsExt extends AppThemeSettings = Ap
 const createAppThemePalette = (hue: number): AppThemeSettingsPalette => ({
   // Darkening colors.
   main: (i: number) => [hue, 80 + i, 92.5 - i * 9.44],
-  text: (i: number) => [hue, 20 + i, 92.5 - i * 9.44],
+  text: (i: number) => [hue, 10, 92.5 - i * 9.44],
 
   // Lightening colors.
-  deco: (i: number) => [hue, 80 + i, 50, 0.025 + i * 0.025],
-  bg: (i: number) => [hue, 20 + i, 2 + i * 2],
-  ol: (i: number) => [hue, 80 + i, 2 + i * 2]
+  bg: (i: number) => [hue, 10, 2 + i * 2],
+  ol: (i: number) => [hue, 80 + 1, 2 + i * 2],
+  deco: (i: number) => [hue, 80 + 1, 50, 0.025 + i * 0.025]
 });
 
 const createAppTheme = <
