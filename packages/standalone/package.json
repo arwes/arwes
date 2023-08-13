@@ -1,6 +1,6 @@
 {
   "name": "arwes",
-  "version": "1.0.0-alpha.22",
+  "version": "1.0.0-alpha.23",
   "publishConfig": {
     "access": "public"
   },
@@ -41,15 +41,15 @@
   "main": "./build/cjs/index.js",
   "unpkg": "./build/umd/umd.min.js",
   "dependencies": {
-    "@arwes/animated": "^1.0.0-alpha.21",
-    "@arwes/animator": "^1.0.0-alpha.21",
-    "@arwes/bgs": "^1.0.0-alpha.21",
-    "@arwes/bleeps": "^1.0.0-alpha.22",
-    "@arwes/core": "^1.0.0-alpha.22",
-    "@arwes/frames": "^1.0.0-alpha.21",
-    "@arwes/text": "^1.0.0-alpha.21",
-    "@arwes/theme": "^1.0.0-alpha.22",
-    "@arwes/tools": "^1.0.0-alpha.21",
+    "@arwes/animated": "^1.0.0-alpha.23",
+    "@arwes/animator": "^1.0.0-alpha.23",
+    "@arwes/bgs": "^1.0.0-alpha.23",
+    "@arwes/bleeps": "^1.0.0-alpha.23",
+    "@arwes/core": "^1.0.0-alpha.23",
+    "@arwes/frames": "^1.0.0-alpha.23",
+    "@arwes/text": "^1.0.0-alpha.23",
+    "@arwes/theme": "^1.0.0-alpha.23",
+    "@arwes/tools": "^1.0.0-alpha.23",
     "tslib": "^2.3.1"
   },
   "scripts": {
