@@ -70,21 +70,21 @@ const createFrameSVGCorners = (props?: CreateFrameSVGCornersProps): FrameSVGSett
     // Right bottom.
     [
       ['M', `100% - ${co} - ${p}`, `100% - ${co} - ${p}`],
-      ['L', `100% - ${cl} - ${p}`, `100% - ${co} - ${p}`]
+      ['L', `100% - ${co} - ${p}`, `100% - ${cl} - ${p}`]
     ],
     [
       ['M', `100% - ${co} - ${p}`, `100% - ${co} - ${p}`],
-      ['L', `100% - ${co} - ${p}`, `100% - ${cl} - ${p}`]
+      ['L', `100% - ${cl} - ${p}`, `100% - ${co} - ${p}`]
     ],
 
     // Left bottom.
     [
       ['M', co + p, `100% - ${co} - ${p}`],
-      ['L', co + p, `100% - ${cl} - ${p}`]
+      ['L', cl + p, `100% - ${co} - ${p}`]
     ],
     [
       ['M', co + p, `100% - ${co} - ${p}`],
-      ['L', cl + p, `100% - ${co} - ${p}`]
+      ['L', co + p, `100% - ${cl} - ${p}`]
     ]
   ]
 
