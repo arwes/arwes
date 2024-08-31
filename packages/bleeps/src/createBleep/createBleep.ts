@@ -116,14 +116,14 @@ const createBleep = (props: BleepProps): Bleep | null => {
 
   function onUserWindowFocus(): void {
     if (muteOnWindowBlur) {
-      isExternallyMuted = true
+      isExternallyMuted = false
       update({})
     }
   }
 
   function onUserWindowBlur(): void {
     if (muteOnWindowBlur) {
-      isExternallyMuted = false
+      isExternallyMuted = true
       update({})
     }
   }

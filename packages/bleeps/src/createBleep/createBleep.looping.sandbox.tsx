@@ -8,8 +8,9 @@ const bleepElement = rootElement.querySelector('.bleep')!
 
 const bleep = createBleep({
   sources: [{ src: '/assets/sounds/type.mp3', type: 'audio/mpeg' }],
+  volume: 0.5,
   loop: true,
-  volume: 0.5
+  muteOnWindowBlur: true
 })
 
 bleepElement.addEventListener('click', () => {
