@@ -42,9 +42,7 @@ const Puffs = memo((props: PuffsProps): ReactElement => {
       settingsRef
     })
 
-    background.start()
-
-    return () => background.stop()
+    return () => background.cancel()
   }, [animator])
 
   return (

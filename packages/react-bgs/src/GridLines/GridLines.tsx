@@ -42,9 +42,7 @@ const GridLines = memo((props: GridLinesProps): ReactElement => {
       settingsRef
     })
 
-    background.start()
-
-    return () => background.stop()
+    return () => background.cancel()
   }, [animator])
 
   return (

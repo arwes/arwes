@@ -18,9 +18,8 @@ interface CreateBackgroundGridLinesProps {
   settingsRef: { current: CreateBackgroundGridLinesSettings }
 }
 
-interface CreateBackgroundGridLines {
-  start: () => void
-  stop: () => void
+interface BackgroundGridLines {
+  cancel: () => void
 }
 
 const defaultProps: Required<CreateBackgroundGridLinesSettings> = {
@@ -31,14 +30,12 @@ const defaultProps: Required<CreateBackgroundGridLinesSettings> = {
   distance: 30
 }
 
-const createBackgroundGridLines = (
-  props: CreateBackgroundGridLinesProps
-): CreateBackgroundGridLines => {
+const createBackgroundGridLines = (props: CreateBackgroundGridLinesProps): BackgroundGridLines => {
   const { canvas, animator } = props
   const ctx = canvas.getContext('2d')
 
   if (!ctx) {
-    return { start: () => {}, stop: () => {} }
+    return { cancel: () => {} }
   }
 
   let resizeObserver: ResizeObserver | undefined
@@ -119,7 +116,7 @@ const createBackgroundGridLines = (
     }
   }
 
-  const cancel = (): void => {
+  const stop = (): void => {
     resizeObserver?.disconnect()
     resizeObserver = undefined
 
@@ -168,7 +165,7 @@ const createBackgroundGridLines = (
         }
 
         case 'exited': {
-          cancel()
+          stop()
           canvas.style.opacity = '0'
           break
         }
@@ -176,14 +173,20 @@ const createBackgroundGridLines = (
     })
   }
 
-  const stop = (): void => {
+  const cancel = (): void => {
     unsubscribe?.()
-    cancel()
+    stop()
     canvas.style.opacity = '0'
   }
 
-  return { start, stop }
+  start()
+
+  return Object.freeze({ cancel })
 }
 
-export type { CreateBackgroundGridLinesProps, CreateBackgroundGridLinesSettings }
+export type {
+  CreateBackgroundGridLinesProps,
+  CreateBackgroundGridLinesSettings,
+  BackgroundGridLines
+}
 export { createBackgroundGridLines }

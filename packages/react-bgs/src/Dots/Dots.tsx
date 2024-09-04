@@ -42,9 +42,7 @@ const Dots = memo((props: DotsProps): ReactElement => {
       settingsRef
     })
 
-    background.start()
-
-    return () => background.stop()
+    return () => background.cancel()
   }, [animator])
 
   return (

@@ -21,9 +21,8 @@ interface CreateBackgroundMovingLinesProps {
   settingsRef: { current: CreateBackgroundMovingLinesSettings }
 }
 
-interface CreateBackgroundMovingLines {
-  start: () => void
-  stop: () => void
+interface BackgroundMovingLines {
+  cancel: () => void
 }
 
 interface MovingLinesLineConfig {
@@ -72,12 +71,12 @@ const createLinesSet = (config: MovingLinesLineConfig): MovingLinesLine[] => {
 
 const createBackgroundMovingLines = (
   props: CreateBackgroundMovingLinesProps
-): CreateBackgroundMovingLines => {
+): BackgroundMovingLines => {
   const { canvas, animator } = props
   const ctx = canvas.getContext('2d')
 
   if (!ctx) {
-    return { start: () => {}, stop: () => {} }
+    return { cancel: () => {} }
   }
 
   let resizeObserver: ResizeObserver | undefined
@@ -188,7 +187,7 @@ const createBackgroundMovingLines = (
     }
   }
 
-  const cancel = (): void => {
+  const stop = (): void => {
     resizeObserver?.disconnect()
     resizeObserver = undefined
 
@@ -244,7 +243,7 @@ const createBackgroundMovingLines = (
         }
 
         case 'exited': {
-          cancel()
+          stop()
           canvas.style.opacity = '0'
           break
         }
@@ -252,14 +251,20 @@ const createBackgroundMovingLines = (
     })
   }
 
-  const stop = (): void => {
+  const cancel = (): void => {
     unsubscribe?.()
-    cancel()
+    stop()
     canvas.style.opacity = '0'
   }
 
-  return { start, stop }
+  start()
+
+  return Object.freeze({ cancel })
 }
 
-export type { CreateBackgroundMovingLinesProps, CreateBackgroundMovingLinesSettings }
+export type {
+  CreateBackgroundMovingLinesProps,
+  CreateBackgroundMovingLinesSettings,
+  BackgroundMovingLines
+}
 export { createBackgroundMovingLines }

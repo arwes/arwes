@@ -15,7 +15,7 @@ const animator = system.register(undefined, {
   setForeignRef: () => {}
 })
 
-const bg = createBackgroundMovingLines({
+createBackgroundMovingLines({
   canvas,
   animator,
   settingsRef: {
@@ -33,6 +33,5 @@ const update = (): void => {
   setTimeout(update, active ? 5_000 : 1_000)
 }
 
-bg.start()
 animator.send('setup')
 update()

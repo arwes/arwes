@@ -42,9 +42,7 @@ const MovingLines = memo((props: MovingLinesProps): ReactElement => {
       settingsRef
     })
 
-    background.start()
-
-    return () => background.stop()
+    return () => background.cancel()
   }, [animator])
 
   return (

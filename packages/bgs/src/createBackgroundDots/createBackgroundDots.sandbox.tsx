@@ -15,7 +15,7 @@ const animator = system.register(undefined, {
   setForeignRef: () => {}
 })
 
-const bg = createBackgroundDots({
+createBackgroundDots({
   canvas,
   animator,
   settingsRef: {
@@ -31,6 +31,5 @@ const update = (): void => {
   setTimeout(update, active ? 2_000 : 1_500)
 }
 
-bg.start()
 animator.send('setup')
 update()

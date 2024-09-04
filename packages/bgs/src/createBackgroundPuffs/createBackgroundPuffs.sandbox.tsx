@@ -15,7 +15,7 @@ const animator = system.register(undefined, {
   setForeignRef: () => {}
 })
 
-const bg = createBackgroundPuffs({
+createBackgroundPuffs({
   canvas,
   animator,
   settingsRef: {
@@ -32,6 +32,5 @@ const update = (): void => {
   setTimeout(update, active ? 3_000 : 1_500)
 }
 
-bg.start()
 animator.send('setup')
 update()

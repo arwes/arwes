@@ -52,9 +52,8 @@ interface CreateBackgroundPuffsProps {
   settingsRef: { current: CreateBackgroundPuffsSettings }
 }
 
-interface CreateBackgroundPuffs {
-  start: () => void
-  stop: () => void
+interface BackgroundPuffs {
+  cancel: () => void
 }
 
 interface Puff {
@@ -80,12 +79,12 @@ const defaultProps: Required<CreateBackgroundPuffsSettings> = {
 const minmaxOverflow01 = (value: number): number =>
   Math.min(1, Math.max(0, value === 1 ? 1 : value % 1))
 
-const createBackgroundPuffs = (props: CreateBackgroundPuffsProps): CreateBackgroundPuffs => {
+const createBackgroundPuffs = (props: CreateBackgroundPuffsProps): BackgroundPuffs => {
   const { canvas, animator } = props
   const ctx = canvas.getContext('2d')
 
   if (!ctx) {
-    return { start: () => {}, stop: () => {} }
+    return { cancel: () => {} }
   }
 
   let resizeObserver: ResizeObserver | undefined
@@ -216,7 +215,7 @@ const createBackgroundPuffs = (props: CreateBackgroundPuffsProps): CreateBackgro
     }
   }
 
-  const cancel = (): void => {
+  const stop = (): void => {
     resizeObserver?.disconnect()
     resizeObserver = undefined
 
@@ -277,7 +276,7 @@ const createBackgroundPuffs = (props: CreateBackgroundPuffsProps): CreateBackgro
         }
 
         case 'exited': {
-          cancel()
+          stop()
           canvas.style.opacity = '0'
           break
         }
@@ -285,14 +284,16 @@ const createBackgroundPuffs = (props: CreateBackgroundPuffsProps): CreateBackgro
     })
   }
 
-  const stop = (): void => {
+  const cancel = (): void => {
     unsubscribe?.()
-    cancel()
+    stop()
     canvas.style.opacity = '0'
   }
 
-  return { start, stop }
+  start()
+
+  return Object.freeze({ cancel })
 }
 
-export type { CreateBackgroundPuffsSettings, CreateBackgroundPuffsProps, CreateBackgroundPuffs }
+export type { CreateBackgroundPuffsSettings, CreateBackgroundPuffsProps, BackgroundPuffs }
 export { createBackgroundPuffs }

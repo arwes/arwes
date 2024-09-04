@@ -49,9 +49,8 @@ interface CreateBackgroundDotsProps {
   settingsRef: { current: CreateBackgroundDotsSettings }
 }
 
-interface CreateBackgroundDots {
-  start: () => void
-  stop: () => void
+interface BackgroundDots {
+  cancel: () => void
 }
 
 const defaultProps: Required<CreateBackgroundDotsSettings> = {
@@ -65,12 +64,12 @@ const defaultProps: Required<CreateBackgroundDotsSettings> = {
   easing: easing.inSine
 }
 
-const createBackgroundDots = (props: CreateBackgroundDotsProps): CreateBackgroundDots => {
+const createBackgroundDots = (props: CreateBackgroundDotsProps): BackgroundDots => {
   const { canvas, animator } = props
   const ctx = canvas.getContext('2d')
 
   if (!ctx) {
-    return { start: () => {}, stop: () => {} }
+    return { cancel: () => {} }
   }
 
   const dpr = Math.min(window.devicePixelRatio || 2, 2)
@@ -201,7 +200,7 @@ const createBackgroundDots = (props: CreateBackgroundDotsProps): CreateBackgroun
     }
   }
 
-  const cancel = (): void => {
+  const stop = (): void => {
     canvas.style.opacity = '0'
 
     resizeObserver?.disconnect()
@@ -256,20 +255,22 @@ const createBackgroundDots = (props: CreateBackgroundDotsProps): CreateBackgroun
         }
 
         case 'exited': {
-          cancel()
+          stop()
           break
         }
       }
     })
   }
 
-  const stop = (): void => {
+  const cancel = (): void => {
     unsubscribe?.()
-    cancel()
+    stop()
   }
 
-  return { start, stop }
+  start()
+
+  return Object.freeze({ cancel })
 }
 
-export type { CreateBackgroundDotsSettings, CreateBackgroundDotsProps }
+export type { CreateBackgroundDotsSettings, CreateBackgroundDotsProps, BackgroundDots }
 export { createBackgroundDots }
