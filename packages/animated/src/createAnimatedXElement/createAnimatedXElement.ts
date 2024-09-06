@@ -66,7 +66,9 @@ const createAnimatedXElement = <
     })
 
     const dynamicStyles = animatedList
-      .map((item) => formatAnimatedCSSPropsShorthands(item?.initialStyle))
+      .map((item) => item?.initialStyle)
+      .filter(Boolean)
+      .map((style) => formatAnimatedCSSPropsShorthands(style!))
       .reduce((total, item) => ({ ...total, ...item }), {})
 
     Object.assign(element.style, dynamicStyles)

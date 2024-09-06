@@ -68,7 +68,9 @@ const AnimatedX = <
   let dynamicStyles: CSSProperties | undefined
   if (hasState) {
     dynamicStyles = animatedSettingsList
-      .map((item) => formatAnimatedCSSPropsShorthands(item?.initialStyle))
+      .map((item) => item.initialStyle)
+      .filter(Boolean)
+      .map((styles) => formatAnimatedCSSPropsShorthands(styles!))
       .reduce((total, item) => ({ ...total, ...item }), {})
   }
 

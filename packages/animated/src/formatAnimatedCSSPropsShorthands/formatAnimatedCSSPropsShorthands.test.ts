@@ -2,10 +2,6 @@ import { test, expect } from 'vitest'
 
 import { formatAnimatedCSSPropsShorthands } from './formatAnimatedCSSPropsShorthands'
 
-test('Should return undefined if undefined is received', () => {
-  expect(formatAnimatedCSSPropsShorthands()).toBeUndefined()
-})
-
 test('Should merge transform distances shorthands', () => {
   const received = formatAnimatedCSSPropsShorthands({
     opacity: 0,

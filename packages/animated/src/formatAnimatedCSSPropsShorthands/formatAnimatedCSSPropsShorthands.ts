@@ -26,12 +26,8 @@ const propsTransformUnitless = {
 }
 
 const formatAnimatedCSSPropsShorthands = (
-  cssPropertiesEnhanced?: AnimatedCSSProps
-): CSSProperties | undefined => {
-  if (!cssPropertiesEnhanced) {
-    return
-  }
-
+  cssPropertiesEnhanced: AnimatedCSSProps
+): CSSProperties => {
   const cssProperties: CSSProperties = {}
 
   let transform = ''
