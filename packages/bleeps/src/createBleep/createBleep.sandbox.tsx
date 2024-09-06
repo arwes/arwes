@@ -17,11 +17,10 @@ const bleep = createBleep({
   // volume: 1,
   // fetchHeaders: null,
   // maxPlaybackDelay: 0.25,
+  // muteOnWindowBlur: false,
 })
 
 bleepElement.addEventListener('click', () => {
   // If conditions are met, the bleep is created and available.
-  if (bleep) {
-    bleep.play()
-  }
+  bleep?.play()
 })
