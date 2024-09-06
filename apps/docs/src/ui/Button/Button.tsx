@@ -3,7 +3,7 @@ import {
   type AnimatedProp,
   memo,
   Animated,
-  FrameSVGOctagon,
+  FrameOctagon,
   styleFrameClipOctagon,
   Illuminator,
   useBleeps,
@@ -48,7 +48,7 @@ const Button = memo((props: ButtonProps): JSX.Element => {
         bleeps.click?.play()
       }}
     >
-      <FrameSVGOctagon
+      <FrameOctagon
         className="opacity-70 transition-opacity ease-out duration-200 group-hover:opacity-100"
         style={{
           filter: `drop-shadow(0 0 ${theme.space(2)} ${theme.colors.secondary.main(3)})`,
@@ -60,9 +60,7 @@ const Button = memo((props: ButtonProps): JSX.Element => {
         rightTop={false}
         squareSize={theme.spacen(2)}
       />
-      <div
-        role="presentation"
-        className="absolute inset-0 overflow-hidden"
+      <Illuminator
         style={{
           clipPath: styleFrameClipOctagon({
             leftBottom: false,
@@ -70,12 +68,9 @@ const Button = memo((props: ButtonProps): JSX.Element => {
             squareSize: theme.spacen(2)
           })
         }}
-      >
-        <Illuminator
-          size={theme.spacen(60)}
-          color={theme.colors.secondary.main(3, { alpha: 0.15 })}
-        />
-      </div>
+        size={theme.spacen(60)}
+        color={theme.colors.secondary.main(3, { alpha: 0.15 })}
+      />
       <div
         className={cx(
           'relative',

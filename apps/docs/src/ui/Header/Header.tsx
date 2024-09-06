@@ -9,7 +9,7 @@ import {
   Animator,
   styleFrameClipOctagon,
   cx,
-  FrameSVGOctagon,
+  FrameOctagon,
   Illuminator,
   memo,
   useBleeps
@@ -88,7 +88,7 @@ const Header = memo((props: HeaderProps): JSX.Element => {
                 }}
                 animated={['flicker']}
               >
-                <FrameSVGOctagon
+                <FrameOctagon
                   style={{
                     // @ts-expect-error css variables
                     '--arwes-frames-bg-color': theme.colors.primary.main(9, { alpha: 0.1 }),

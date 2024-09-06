@@ -1,13 +1,6 @@
 import { useRef } from 'react'
 import { useMedia } from 'react-use'
-import {
-  Animated,
-  Animator,
-  FrameSVGLines,
-  Illuminator,
-  memo,
-  useFrameSVGAssembler
-} from '@arwes/react'
+import { Animated, Animator, FrameLines, Illuminator, memo, useFrameAssembler } from '@arwes/react'
 
 import { theme } from '@/config'
 import { spring } from 'motion'
@@ -16,7 +9,7 @@ const FrameAlert = memo((): JSX.Element => {
   const isMD = useMedia(theme.breakpoints.up('md', { strip: true }), false)
   const frameRef = useRef<SVGSVGElement>(null)
 
-  useFrameSVGAssembler(frameRef)
+  useFrameAssembler(frameRef)
 
   return (
     <Animated
@@ -49,7 +42,7 @@ const FrameAlert = memo((): JSX.Element => {
         </Animator>
       </div>
 
-      <FrameSVGLines
+      <FrameLines
         elementRef={frameRef}
         style={{
           filter: `drop-shadow(0 0 ${theme.space(1)} ${theme.colors.error(5, { alpha: 0.1 })})`,

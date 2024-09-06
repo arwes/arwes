@@ -1,7 +1,7 @@
 import { Children } from 'react'
 import {
   Animated,
-  FrameSVGOctagon,
+  FrameOctagon,
   Illuminator,
   styleFrameClipOctagon,
   memo,
@@ -62,7 +62,7 @@ const LayoutContent = memo((props: LayoutContentProps): JSX.Element => {
                   }}
                   animated={['flicker']}
                 >
-                  <FrameSVGOctagon
+                  <FrameOctagon
                     style={{
                       // @ts-expect-error css variables
                       '--arwes-frames-bg-color': theme.colors.primary.main(9, { alpha: 0.15 }),
@@ -102,7 +102,7 @@ const LayoutContent = memo((props: LayoutContentProps): JSX.Element => {
                 {Children.count(left) > 0 && (
                   <Animator>
                     <Animated className="relative flex w-full" animated={['flicker']}>
-                      <FrameSVGOctagon
+                      <FrameOctagon
                         style={{
                           // @ts-expect-error css variables
                           '--arwes-frames-bg-color': theme.colors.primary.main(9, { alpha: 0.1 }),
@@ -149,7 +149,7 @@ const LayoutContent = memo((props: LayoutContentProps): JSX.Element => {
                 {Children.count(right) > 0 && (
                   <Animator>
                     <Animated className="relative flex w-full mb-auto" animated={['flicker']}>
-                      <FrameSVGOctagon
+                      <FrameOctagon
                         style={{
                           // @ts-expect-error css variables
                           '--arwes-frames-bg-color': theme.colors.primary.main(9, { alpha: 0.1 }),

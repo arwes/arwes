@@ -1,8 +1,10 @@
-export * from './FrameSVG/index.js'
+export * from './FrameBase/index.js'
 
-export * from './FrameSVGOctagon/index.js'
-export * from './FrameSVGUnderline/index.js'
-export * from './FrameSVGCorners/index.js'
-export * from './FrameSVGLines/index.js'
-export * from './FrameSVGNefrex/index.js'
-export * from './FrameSVGKranox/index.js'
+export * from './FrameOctagon/index.js'
+export * from './FrameUnderline/index.js'
+export * from './FrameCorners/index.js'
+export * from './FrameLines/index.js'
+export * from './FrameNefrex/index.js'
+export * from './FrameKranox/index.js'
+
+export * from './useFrameAssembler/index.js'

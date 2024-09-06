@@ -7,8 +7,8 @@ import {
   Animator,
   Animated,
   AnimatedProp,
-  useFrameSVGAssembler,
-  FrameSVGOctagon,
+  useFrameAssembler,
+  FrameOctagon,
   Illuminator,
   BleepsProviderSettings,
   BleepsProvider,
@@ -90,7 +90,7 @@ const Button = memo((props: ButtonProps): JSX.Element => {
   const bleeps = useBleeps<BleepsNames>()
   const frameRef = useRef<SVGSVGElement>(null)
 
-  useFrameSVGAssembler(frameRef)
+  useFrameAssembler(frameRef)
 
   return (
     <Animated<HTMLButtonElement>
@@ -108,7 +108,7 @@ const Button = memo((props: ButtonProps): JSX.Element => {
       <div className="button-back">
         <Illuminator size={theme.spacen(50)} color={theme.colors[color](3, { alpha: 0.2 })} />
       </div>
-      <FrameSVGOctagon elementRef={frameRef} style={{ zIndex: 0 }} squareSize={theme.spacen(2)} />
+      <FrameOctagon elementRef={frameRef} style={{ zIndex: 0 }} squareSize={theme.spacen(2)} />
       <div className="button-content">{children}</div>
     </Animated>
   )

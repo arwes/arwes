@@ -4,9 +4,9 @@ import {
   memo,
   Animated,
   Animator,
-  FrameSVGKranox,
+  FrameKranox,
   useBleeps,
-  useFrameSVGAssembler,
+  useFrameAssembler,
   Text
 } from '@arwes/react'
 import { Xmark as IconClose } from 'iconoir-react'
@@ -30,7 +30,7 @@ const Modal = memo((props: ModalProps): JSX.Element => {
   const frameRef = useRef<SVGSVGElement>(null)
   const bleeps = useBleeps<BleepNames>()
 
-  useFrameSVGAssembler(frameRef)
+  useFrameAssembler(frameRef)
 
   return (
     <article
@@ -51,7 +51,7 @@ const Modal = memo((props: ModalProps): JSX.Element => {
       />
 
       <Animated className="relative flex-1 flex flex-col m-auto py-6 max-w-md min-h-0 max-h-full">
-        <FrameSVGKranox
+        <FrameKranox
           elementRef={frameRef}
           className={styles.frame}
           styled={false}

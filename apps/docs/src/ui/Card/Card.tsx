@@ -3,12 +3,12 @@ import { useMedia } from 'react-use'
 import {
   Animated,
   Animator,
-  FrameSVGNefrex,
+  FrameNefrex,
   Illuminator,
   Text,
   cx,
   styleFrameClipOctagon,
-  useFrameSVGAssembler
+  useFrameAssembler
 } from '@arwes/react'
 
 import { theme } from '@/config'
@@ -26,11 +26,11 @@ const Card = (props: CardProps): JSX.Element => {
   const isXL = useMedia(theme.breakpoints.up('xl', { strip: true }), false)
   const frameRef = useRef<SVGSVGElement>(null)
 
-  useFrameSVGAssembler(frameRef)
+  useFrameAssembler(frameRef)
 
   return (
     <Animated as="article" className={cx('relative group flex', styles.root)}>
-      <FrameSVGNefrex
+      <FrameNefrex
         elementRef={frameRef}
         className="opacity-70 transition-all ease-out duration-200 group-hover:opacity-100"
         strokeWidth={4}

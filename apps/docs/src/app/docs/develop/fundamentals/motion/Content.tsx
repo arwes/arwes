@@ -20,6 +20,40 @@ export default (): JSX.Element => (
       animation effects.
     </AR.P>
 
+    <AR.P>
+      ARWES motion tools are mostly to orchestrate animations rather than running them. There are
+      many great options already available such as{' '}
+      <a href="https://gsap.com" target="_blank">
+        GSAP
+      </a>
+      ,{' '}
+      <a href="https://www.framer.com/motion" target="_blank">
+        Framer Motion
+      </a>
+      , and{' '}
+      <a href="https://animejs.com" target="_blank">
+        Anime.js
+      </a>{' '}
+      to run animations and special effects, ARWES is intended to be used along with them.
+    </AR.P>
+
+    <AR.P>
+      ARWES uses{' '}
+      <a href="https://motion.dev" target="_blank">
+        Motion One
+      </a>{' '}
+      behind the scenes to run animations for its performance both at{' '}
+      <a href="https://motion.dev/docs/performance" target="_blank">
+        run time
+      </a>{' '}
+      and{' '}
+      <a href="https://bundlephobia.com/package/motion" target="_blank">
+        file size
+      </a>
+      . But it is limited due to its simplicity. So using ARWES along with other tools is
+      encouraged.
+    </AR.P>
+
     <AR.H2>Animator System</AR.H2>
 
     <AR.P>
@@ -235,41 +269,6 @@ export default (): JSX.Element => (
       still use it. Such as micro-interactions similar to the CSS hover effect, when the user enters
       the mouse in an UI element, it updates its style, and when it exits the mouse, it updates the
       styles back to the original styles, in this case, the exiting animations.
-    </AR.P>
-
-    <AR.H2>Animation Tools</AR.H2>
-
-    <AR.P>
-      ARWES motion tools are mostly to orchestrate animations rather than running them. There are
-      many great options already available such as{' '}
-      <a href="https://gsap.com" target="_blank">
-        GSAP
-      </a>
-      ,{' '}
-      <a href="https://www.framer.com/motion" target="_blank">
-        Framer Motion
-      </a>
-      , and{' '}
-      <a href="https://animejs.com" target="_blank">
-        Anime.js
-      </a>{' '}
-      to run animations and special effects, ARWES is intended to be used along with them.
-    </AR.P>
-
-    <AR.P>
-      ARWES uses{' '}
-      <a href="https://motion.dev" target="_blank">
-        Motion One
-      </a>{' '}
-      behind the scenes to run animations for its performance both at{' '}
-      <a href="https://motion.dev/docs/performance" target="_blank">
-        run time
-      </a>{' '}
-      and{' '}
-      <a href="https://bundlephobia.com/package/motion" target="_blank">
-        file size
-      </a>
-      . But it is limited due to its simplicity. So using other tools is encouraged.
     </AR.P>
 
     <AR.H2>Accessibility</AR.H2>

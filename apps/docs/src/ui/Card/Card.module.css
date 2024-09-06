@@ -4,10 +4,10 @@
 .root {
 }
 
-.root [data-frame][data-name='bg'] {
+.root [data-frame] [data-name='bg'] {
   @apply fill-primary-main-7/[0.25] stroke-[1] stroke-primary-main-7/[0.5];
 }
 
-.root [data-frame][data-name='line'] {
+.root [data-frame] [data-name='line'] {
   @apply fill-none stroke-[4] stroke-primary-main-7;
 }

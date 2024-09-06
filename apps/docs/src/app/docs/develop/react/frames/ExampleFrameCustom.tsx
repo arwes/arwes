@@ -4,11 +4,11 @@ import {
   Animated,
   Animator,
   AnimatorGeneralProvider,
-  FrameSVG,
-  type FrameSVGSettings
+  FrameBase,
+  type FrameSettings
 } from '@arwes/react'
 
-const frameSettings: FrameSVGSettings = {
+const frameSettings: FrameSettings = {
   elements: [
     {
       style: { fill: 'none', stroke: '#20DFDF' },
@@ -56,7 +56,7 @@ const Example = (): JSX.Element => {
             }
           }}
         >
-          <FrameSVG {...frameSettings} />
+          <FrameBase settings={frameSettings} />
           <div className="relative m-auto p-4">Futuristic Sci-Fi UI Web Framework</div>
         </Animated>
       </Animator>

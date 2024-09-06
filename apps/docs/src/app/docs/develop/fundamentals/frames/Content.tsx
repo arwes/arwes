@@ -4,7 +4,6 @@ import { Animated, Animator } from '@arwes/react'
 
 import { AR } from '@/ui'
 import { ExampleFrames } from './ExampleFrames'
-import { ExampleSimpleSVG } from './ExampleSimpleSVG'
 import { ExampleFrame } from './ExampleFrame'
 
 export default (): JSX.Element => (
@@ -12,22 +11,66 @@ export default (): JSX.Element => (
     <AR.Header>Frames Fundamentals</AR.Header>
 
     <AR.P>
-      Simple rectangles and ellipses might not be enough for creative designs.{' '}
+      Simple rectangles and ellipses might not be enough for creative designs. Frames can be created
+      to customize how the content is structured and organized in more elegant ways.{' '}
       <a href="https://developer.mozilla.org/en-US/docs/Web/SVG" target="_blank">
         SVG
       </a>{' '}
-      offers a solution for rich and lightweight graphs using vectors. When these vectors need to be
-      responsive in [x, y] axes and dynamically configured, ARWES Frames may be a solution. This is
-      because SVG does not support such responsiveness nor calculations such as CSS{' '}
+      can be used to create these frames by using vector graphics but it does not support responsive
+      updates in [x, y] axes (such as percentages and{' '}
       <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/calc" target="_blank">
-        <code>calc()</code>
-      </a>{' '}
-      for its values and creating motion effects such as{' '}
+        CSS <code>calc()</code>
+      </a>
+      ) and creating certain effects such as{' '}
       <a href="https://css-tricks.com/svg-line-animation-works" target="_blank">
         line drawing
       </a>{' '}
       becomes difficult.
     </AR.P>
+
+    <AR.P>
+      ARWES Frames comes with a few built-in frames and it can be a solution to create custom
+      responsive and dynamic SVG elements along with interactive animations and effects. It is not a
+      general purpose canvas renderer but rather focus on structural panels, containers, or
+      separators for content.
+    </AR.P>
+
+    <AR.P>
+      For new frames, if they can be created with simple SVG, it is better than using ARWES Frames
+      because of simplicity, compatibility, and performance. Make sure to read{' '}
+      <a href="https://css-tricks.com/scale-svg" target="_blank">
+        Scaling SVG
+      </a>{' '}
+      and check out the main features you can use to create graphs with SVG and CSS such as{' '}
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Clipping_and_masking"
+        target="_blank"
+      >
+        clipping and masking
+      </a>
+      ,{' '}
+      <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Patterns" target="_blank">
+        patterns
+      </a>
+      , or{' '}
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Filter_effects"
+        target="_blank"
+      >
+        filters
+      </a>
+      . Also, check out some alternatives such as{' '}
+      <a href="https://github.com/propjockey/augmented-ui" target="_blank">
+        Augmented UI
+      </a>{' '}
+      to create frames using{' '}
+      <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path" target="_blank">
+        CSS <code>clip-path</code>
+      </a>
+      . Otherwise, ARWES Frames can be the solution.
+    </AR.P>
+
+    <AR.H2>Out-of-the-box Frames</AR.H2>
 
     <AR.P>
       The framework provides a few out-of-the-box frame components which can be styled and animated.
@@ -75,139 +118,6 @@ export default (): JSX.Element => (
         </ul>
       </li>
     </AR.UL>
-
-    <AR.H2>Simple SVG</AR.H2>
-
-    <AR.P>
-      If possible, it is better to use/import SVG files directly into your app due to all the
-      benefits it has.
-    </AR.P>
-
-    <AR.P>Take for example this SVG:</AR.P>
-
-    <AR.CodeBlock
-      lang="html"
-      code={`<svg width="203" height="152" viewBox="0 0 203 152" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M186.738 149.5H16.0617L1.00195 124.5L69.7746 0.5H133.025L201.798 124.5L186.738 149.5Z" fill="#20DFDF" fill-opacity="0.1" stroke="#0D5959"/>
-  <path d="M16.4504 151L15.1982 149H66.2605L65.2566 150H37L36 151H16.4504Z" fill="#20DFDF"/>
-  <path d="M186.368 151L187.62 149H136.558L137.562 150H165.818L166.818 151H186.368Z" fill="#20DFDF"/>
-  <path d="M65.2568 7.6V9.70703L70.0467 1H76.3006L77.3046 0H69.4736L65.2568 7.6Z" fill="#20DFDF"/>
-  <path d="M137.544 7.6V9.70703L132.754 1H126.5L125.496 0H133.327L137.544 7.6Z" fill="#20DFDF"/>
-  <path d="M0.400391 124.5L6.14276 134L7.60857 134.5L1.60477 124.5L7.40778 114L5.97209 114.5L0.400391 124.5Z" fill="#20DFDF"/>
-  <path d="M202.4 124.5L196.658 134L195.192 134.5L201.196 124.5L195.393 114L196.829 114.5L202.4 124.5Z" fill="#20DFDF"/>
-</svg>`}
-    />
-
-    <AR.P>Which renders to this image:</AR.P>
-
-    <Animator>
-      <Animated data-name="example">
-        <svg
-          width="203"
-          height="152"
-          viewBox="0 0 203 152"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M186.738 149.5H16.0617L1.00195 124.5L69.7746 0.5H133.025L201.798 124.5L186.738 149.5Z"
-            fill="#20DFDF"
-            fillOpacity="0.1"
-            stroke="#0D5959"
-          />
-          <path
-            d="M16.4504 151L15.1982 149H66.2605L65.2566 150H37L36 151H16.4504Z"
-            fill="#20DFDF"
-          />
-          <path
-            d="M186.368 151L187.62 149H136.558L137.562 150H165.818L166.818 151H186.368Z"
-            fill="#20DFDF"
-          />
-          <path
-            d="M65.2568 7.6V9.70703L70.0467 1H76.3006L77.3046 0H69.4736L65.2568 7.6Z"
-            fill="#20DFDF"
-          />
-          <path
-            d="M137.544 7.6V9.70703L132.754 1H126.5L125.496 0H133.327L137.544 7.6Z"
-            fill="#20DFDF"
-          />
-          <path
-            d="M0.400391 124.5L6.14276 134L7.60857 134.5L1.60477 124.5L7.40778 114L5.97209 114.5L0.400391 124.5Z"
-            fill="#20DFDF"
-          />
-          <path
-            d="M202.4 124.5L196.658 134L195.192 134.5L201.196 124.5L195.393 114L196.829 114.5L202.4 124.5Z"
-            fill="#20DFDF"
-          />
-        </svg>
-      </Animated>
-    </Animator>
-
-    <AR.P>
-      This shape would normally only resize with the same aspect ratio of{' '}
-      <code>203/152 = 1.33</code> which is perfectly supported everywhere. That is one of the
-      purposes of SVG.
-    </AR.P>
-
-    <AR.P>
-      For example, it can be dynamically resized with other HTML elements, such as texts, preserving
-      the aspect ratio using simple CSS <code>width</code> and <code>font-size</code> along with SVG
-      attribute{' '}
-      <a
-        href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/vector-effect"
-        target="_blank"
-      >
-        <code>vector-effect</code>
-      </a>{' '}
-      for SVG elements which have stroke.
-    </AR.P>
-
-    <AR.CodeBlock
-      lang="html"
-      highlightLines={[5, 10, 20, 30]}
-      code={`<div
-  style="
-    position: relative;
-    display: inline-block;
-    width: 200px;
-  "
->
-  <svg
-    style="position: relative;"
-    width="100%"
-    viewBox="0 0 203 152"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M186.738 149.5H16.0617L1.00195 124.5L69.7746 0.5H133.025L201.798 124.5L186.738 149.5Z"
-      fill="#20DFDF"
-      fill-opacity="0.1"
-      stroke="#0D5959"
-      vector-effect="non-scaling-stroke"
-    />
-    ...
-  </svg>
-  <div
-    style="
-      position: absolute;
-      left: 50%;
-      top: 60%;
-      transform: translate(-50%, -50%);
-      font-size: 1rem;
-    "
-  >
-    74.9%
-  </div>
-</div>`}
-    />
-
-    <ExampleSimpleSVG />
-
-    <AR.P>
-      There are tons of tricks to create graphs with SVG and CSS. If the graphs need to be
-      responsive and dynamic, then they can be developed in ARWES Frames.
-    </AR.P>
 
     <AR.H2>Designing Frames</AR.H2>
 
@@ -398,12 +308,6 @@ export default (): JSX.Element => (
 ]`}
     />
 
-    <AR.Blockquote>
-      <p>
-        Currently, only SVG <code>path</code> elements are supported in the frames API.
-      </p>
-    </AR.Blockquote>
-
     <AR.P>The final frame can be now resized as desired with any other HTML/SVG element:</AR.P>
 
     <ExampleFrame />
@@ -411,14 +315,6 @@ export default (): JSX.Element => (
     <AR.P>
       Basic mathematical calculations are supported within the frame elements definition and the
       percentages in [x, y] axes are automatically calculated where it applies.
-    </AR.P>
-
-    <AR.P>
-      There are some alternatives such as{' '}
-      <a href="https://github.com/propjockey/augmented-ui" target="_blank">
-        Augmented UI
-      </a>
-      .
     </AR.P>
 
     <AR.Navigation

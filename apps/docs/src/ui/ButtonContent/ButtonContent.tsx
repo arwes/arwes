@@ -1,16 +1,16 @@
 import React, { type HTMLProps, type ReactNode } from 'react'
-import { type AnimatedProp, memo, Animated, FrameSVGOctagon, useBleeps, cx } from '@arwes/react'
+import { type AnimatedProp, memo, Animated, FrameOctagon, useBleeps, cx } from '@arwes/react'
 
 import { type BleepNames, theme } from '@/config'
 import styles from './ButtonContent.module.css'
 
-interface ButtonPropsProps extends HTMLProps<HTMLButtonElement> {
+interface ButtonContentProps extends HTMLProps<HTMLButtonElement> {
   className?: string
   animated?: AnimatedProp
   children: ReactNode
 }
 
-const ButtonContent = memo((props: ButtonPropsProps): JSX.Element => {
+const ButtonContent = memo((props: ButtonContentProps): JSX.Element => {
   const { className, animated, children, ...otherProps } = props
 
   const bleeps = useBleeps<BleepNames>()
@@ -39,7 +39,7 @@ const ButtonContent = memo((props: ButtonPropsProps): JSX.Element => {
         bleeps.click?.play()
       }}
     >
-      <FrameSVGOctagon
+      <FrameOctagon
         className="opacity-70 transition-opacity ease-out duration-200 group-hover:opacity-100"
         style={{
           filter: `drop-shadow(0 0 ${theme.space(2)} ${theme.colors.secondary.low(2)})`,

@@ -165,32 +165,46 @@ export const sandboxes = [
             name: '@arwes/frames',
             children: [
               {
-                name: 'createFrameSVGUnderline',
-                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameSVGUnderline/createFrameSVGUnderline.sandbox.tsx')
+                name: 'createFrameUnderline',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameUnderline/createFrameUnderline.sandbox.tsx')
               },
               {
-                name: 'createFrameSVGLines',
-                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameSVGLines/createFrameSVGLines.sandbox.tsx')
+                name: 'createFrameLines',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameLines/createFrameLines.sandbox.tsx')
               },
               {
-                name: 'createFrameSVGCorners',
-                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameSVGCorners/createFrameSVGCorners.sandbox.tsx')
+                name: 'createFrameCorners',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameCorners/createFrameCorners.sandbox.tsx')
               },
               {
-                name: 'createFrameSVGOctagon',
-                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameSVGOctagon/createFrameSVGOctagon.sandbox.tsx')
+                name: 'createFrameOctagon',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameOctagon/createFrameOctagon.sandbox.tsx')
               },
               {
-                name: 'createFrameSVGNefrex',
-                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameSVGNefrex/createFrameSVGNefrex.sandbox.tsx')
+                name: 'createFrameNefrex',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameNefrex/createFrameNefrex.sandbox.tsx')
               },
               {
-                name: 'createFrameSVGKranox',
-                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameSVGKranox/createFrameSVGKranox.sandbox.tsx')
+                name: 'createFrameKranox',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameKranox/createFrameKranox.sandbox.tsx')
               },
               {
-                name: 'renderFrameSVG',
-                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/renderFrameSVG/renderFrameSVG.sandbox.tsx')
+                name: 'createFrame',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.sandbox.tsx'),
+                children: [
+                  {
+                    name: 'paths',
+                    code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.paths.sandbox.tsx')
+                  },
+                  {
+                    name: 'clipping',
+                    code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.clipping.sandbox.tsx')
+                  }
+                ]
+              },
+              {
+                name: 'animateFrameAssembler',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/animateFrameAssembler/animateFrameAssembler.sandbox.tsx')
               },
               {
                 name: 'styleFrameClipOctagon',
@@ -257,10 +271,6 @@ export const sandboxes = [
       {
         name: 'Effects',
         children: [
-          {
-            name: 'animateFrameSVGAssembler',
-            code: require('!raw-loader?esModule=false!@repository/packages/effects/src/animateFrameSVGAssembler/animateFrameSVGAssembler.sandbox.tsx')
-          },
           {
             name: 'createEffectIlluminator',
             code: require('!raw-loader?esModule=false!@repository/packages/effects/src/createEffectIlluminator/createEffectIlluminator.sandbox.tsx')
@@ -490,42 +500,36 @@ export const sandboxes = [
             code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/basic.sandbox.tsx'),
             children: [
               {
-                name: 'FrameSVGUnderline',
-                code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGUnderline/FrameSVGUnderline.sandbox.tsx')
+                name: 'FrameUnderline',
+                code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameUnderline/FrameUnderline.sandbox.tsx')
               },
               {
-                name: 'FrameSVGLines',
-                code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGLines/FrameSVGLines.sandbox.tsx')
+                name: 'FrameLines',
+                code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameLines/FrameLines.sandbox.tsx')
               },
               {
-                name: 'FrameSVGCorners',
-                code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGCorners/FrameSVGCorners.sandbox.tsx')
+                name: 'FrameCorners',
+                code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameCorners/FrameCorners.sandbox.tsx')
               },
               {
-                name: 'FrameSVGOctagon',
-                code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGOctagon/FrameSVGOctagon.sandbox.tsx')
+                name: 'FrameOctagon',
+                code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameOctagon/FrameOctagon.sandbox.tsx')
               },
               {
-                name: 'FrameSVGNefrex',
-                code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGNefrex/FrameSVGNefrex.sandbox.tsx')
+                name: 'FrameNefrex',
+                code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameNefrex/FrameNefrex.sandbox.tsx')
               },
               {
-                name: 'FrameSVGKranox',
-                code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVGKranox/FrameSVGKranox.sandbox.tsx')
+                name: 'FrameKranox',
+                code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameKranox/FrameKranox.sandbox.tsx')
               },
               {
-                name: 'FrameSVG',
-                code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVG/FrameSVG.sandbox.tsx'),
-                children: [
-                  {
-                    name: 'paths',
-                    code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVG/FrameSVG.paths.sandbox.tsx')
-                  },
-                  {
-                    name: 'clipping',
-                    code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameSVG/FrameSVG.clipping.sandbox.tsx')
-                  }
-                ]
+                name: 'FrameBase',
+                code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameBase/FrameBase.sandbox.tsx')
+              },
+              {
+                name: 'useFrameAssembler',
+                code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/useFrameAssembler/useFrameAssembler.sandbox.tsx')
               }
             ]
           }
@@ -561,10 +565,6 @@ export const sandboxes = [
       {
         name: 'Effects',
         children: [
-          {
-            name: 'useFrameSVGAssembler',
-            code: require('!raw-loader?esModule=false!@repository/packages/react-effects/src/useFrameSVGAssembler/useFrameSVGAssembler.sandbox.tsx')
-          },
           {
             name: 'Illuminator',
             code: require('!raw-loader?esModule=false!@repository/packages/react-effects/src/Illuminator/Illuminator.sandbox.tsx')

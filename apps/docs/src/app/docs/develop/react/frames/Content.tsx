@@ -52,6 +52,14 @@ export default (): JSX.Element => (
 
     <ExampleFrameProvided />
 
+    <AR.P>
+      Check out the{' '}
+      <a href="/play">
+        <IconPlay /> Playground
+      </a>{' '}
+      for more examples on frames.
+    </AR.P>
+
     <AR.H2>
       <code>&lt;FrameSVG&gt;</code>
     </AR.H2>

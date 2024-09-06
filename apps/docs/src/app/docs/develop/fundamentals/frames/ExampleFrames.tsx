@@ -5,22 +5,22 @@ import {
   Animated,
   Animator,
   AnimatorGeneralProvider,
-  FrameSVGCorners,
-  FrameSVGKranox,
-  FrameSVGLines,
-  FrameSVGNefrex,
-  FrameSVGOctagon,
-  FrameSVGUnderline,
-  useFrameSVGAssembler
+  FrameCorners,
+  FrameKranox,
+  FrameLines,
+  FrameNefrex,
+  FrameOctagon,
+  FrameUnderline,
+  useFrameAssembler
 } from '@arwes/react'
 import { theme } from '@/config'
 
 const Frames = (): JSX.Element => {
-  const frameRef = useRef<HTMLDivElement>(null)
-  useFrameSVGAssembler(frameRef)
+  const containerRef = useRef<HTMLDivElement>(null)
+  useFrameAssembler(containerRef)
   return (
     <div
-      ref={frameRef}
+      ref={containerRef}
       className="flex flex-row flex-wrap gap-4"
       style={{
         // @ts-expect-error css variables
@@ -30,32 +30,32 @@ const Frames = (): JSX.Element => {
         '--arwes-frames-line-filter': `drop-shadow(0 0 2px ${theme.colors.secondary.main(3)})`
       }}
     >
-      <FrameSVGOctagon
+      <FrameOctagon
         className="!relative !inset-auto !w-36 !h-32 md:!w-48"
         padding={4}
         strokeWidth={2}
         squareSize={20}
       />
-      <FrameSVGUnderline
+      <FrameUnderline
         className="!relative !inset-auto !w-36 !h-32 md:!w-48"
         padding={4}
         strokeWidth={2}
         squareSize={20}
       />
-      <FrameSVGCorners
+      <FrameCorners
         className="!relative !inset-auto !w-36 !h-32 md:!w-48"
         padding={4}
         cornerLength={20}
         strokeWidth={2}
       />
-      <FrameSVGLines
+      <FrameLines
         className="!relative !inset-auto !w-36 !h-32 md:!w-48"
         padding={4}
         largeLineWidth={2}
         smallLineWidth={2}
         smallLineLength={20}
       />
-      <FrameSVGNefrex
+      <FrameNefrex
         className="!relative !inset-auto !w-36 !h-32 md:!w-48"
         padding={4}
         strokeWidth={2}
@@ -63,7 +63,7 @@ const Frames = (): JSX.Element => {
         smallLineLength={20}
         largeLineLength={40}
       />
-      <FrameSVGKranox
+      <FrameKranox
         className="!relative !inset-auto !w-36 !h-32 md:!w-48"
         padding={4}
         strokeWidth={2}

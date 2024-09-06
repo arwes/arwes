@@ -10,17 +10,17 @@ import {
   Animated,
   AnimatedProp,
   Dots,
+  FrameSettings,
+  FrameBase,
+  FrameCorners,
+  FrameNefrex,
+  useFrameAssembler,
   styleFrameClipOctagon,
-  useFrameSVGAssembler,
-  FrameSVG,
-  FrameSVGCorners,
-  FrameSVGNefrex,
   Illuminator,
   BleepsProviderSettings,
   BleepsProvider,
   useBleeps,
-  BleepsOnAnimator,
-  FrameSVGSettings
+  BleepsOnAnimator
 } from '@arwes/react'
 
 const addStyles = (css: string) => {
@@ -102,7 +102,7 @@ const bleepsSettings: BleepsProviderSettings<BleepsNames> = {
   }
 }
 
-const pageFrameSettings: FrameSVGSettings = {
+const pageFrameSettings: FrameSettings = {
   elements: [
     {
       name: 'line',
@@ -144,8 +144,8 @@ const pageFrameSettings: FrameSVGSettings = {
 }
 const PageFrame = (): ReactElement => {
   const frameRef = useRef<SVGSVGElement>(null)
-  useFrameSVGAssembler(frameRef)
-  return <FrameSVG elementRef={frameRef} className="page-frame" {...pageFrameSettings} />
+  useFrameAssembler(frameRef)
+  return <FrameBase elementRef={frameRef} className="page-frame" settings={pageFrameSettings} />
 }
 addStyles(`
   .page-frame [data-name=line] {
@@ -157,7 +157,7 @@ addStyles(`
 
 const MainFrame = (): ReactElement => {
   const svgRef = useRef<SVGSVGElement>(null)
-  useFrameSVGAssembler(svgRef)
+  useFrameAssembler(svgRef)
   return (
     <div
       className="main-frame"
@@ -166,7 +166,7 @@ const MainFrame = (): ReactElement => {
       }}
     >
       <div className="main-frame-bg" />
-      <FrameSVGNefrex elementRef={svgRef} />
+      <FrameNefrex elementRef={svgRef} />
       <Illuminator color={theme.colors.primary(7, { alpha: 0.05 })} />
     </div>
   )
@@ -198,7 +198,7 @@ addStyles(`
 const Button = (props: { animated?: AnimatedProp; children: ReactNode }): ReactElement => {
   const bleeps = useBleeps<BleepsNames>()
   const frameRef = useRef<SVGSVGElement>(null)
-  useFrameSVGAssembler(frameRef)
+  useFrameAssembler(frameRef)
   return (
     <Animated
       as="button"
@@ -207,7 +207,7 @@ const Button = (props: { animated?: AnimatedProp; children: ReactNode }): ReactE
       onMouseEnter={() => bleeps.hover?.play()}
       onClick={() => bleeps.click?.play()}
     >
-      <FrameSVGCorners elementRef={frameRef} cornerLength={theme.spacen(2)} />
+      <FrameCorners elementRef={frameRef} cornerLength={theme.spacen(2)} />
       <div className="button-content">{props.children}</div>
     </Animated>
   )

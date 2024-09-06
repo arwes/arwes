@@ -31,6 +31,10 @@ export default (): JSX.Element => (
       are many other libraries which offer these kinds of background effects too such as{' '}
       <a href="https://www.vantajs.com" target="_blank">
         VantaJS
+      </a>{' '}
+      and{' '}
+      <a href="https://github.com/tsparticles/tsparticles" target="_blank">
+        tsparticles
       </a>
       .
     </AR.P>

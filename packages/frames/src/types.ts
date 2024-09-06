@@ -1,10 +1,49 @@
-import type * as CSS from 'csstype'
+import type { AnimatedCSSProps, AnimatedXTransition } from '@arwes/animated'
 
-export type FrameSVGSettingsStyle = CSS.Properties
+type ContextType = Record<string, string>
 
-export type FrameSVGSettingsPathDimension = number | string
+export type FrameSettingsElementCommon<Contexts extends ContextType = ContextType> = {
+  name?: string
+  id?: string
+  className?: string
+  style?: AnimatedCSSProps
+  contexts?: {
+    [C in keyof Contexts]?: {
+      [S in Contexts[C]]?: {
+        className?: string
+        style?: AnimatedCSSProps
+        transition?: AnimatedXTransition
+      }
+    }
+  }
+}
 
-type FrameSVGSettingsPathCommandName =
+export type FrameSettingsG<Contexts extends ContextType = ContextType> =
+  FrameSettingsElementCommon<Contexts> & {
+    type: 'g'
+    elements: Array<FrameSettingsElement<Contexts>>
+  }
+
+export type FrameSettingsDefs<Contexts extends ContextType = ContextType> =
+  FrameSettingsElementCommon<Contexts> & {
+    type: 'defs'
+    elements: Array<FrameSettingsElement<Contexts>>
+  }
+
+export type FrameSettingsClipPath<Contexts extends ContextType = ContextType> =
+  FrameSettingsElementCommon<Contexts> & {
+    type: 'clipPath'
+    elements: Array<FrameSettingsElement<Contexts>>
+  }
+
+export type FrameSettingsMask<Contexts extends ContextType = ContextType> =
+  FrameSettingsElementCommon<Contexts> & {
+    type: 'mask'
+    elements: Array<FrameSettingsElement<Contexts>>
+  }
+
+export type FrameSettingsPathDimension = number | string
+export type FrameSettingsPathCommandName =
   | 'M'
   | 'm'
   | 'L'
@@ -23,26 +62,54 @@ type FrameSVGSettingsPathCommandName =
   | 't'
   | 'A'
   | 'a'
-
-export type FrameSVGSettingsPathCommand =
+export type FrameSettingsPathCommand =
   | 'Z'
   | 'z'
-  | [FrameSVGSettingsPathCommandName, ...FrameSVGSettingsPathDimension[]]
+  | [FrameSettingsPathCommandName, ...FrameSettingsPathDimension[]]
+export type FrameSettingsPathDefinition = FrameSettingsPathCommand[]
+export type FrameSettingsPath<Contexts extends ContextType = ContextType> =
+  FrameSettingsElementCommon<Contexts> & {
+    type?: 'path'
+    path: FrameSettingsPathDefinition
+    contexts?: {
+      [C in keyof Contexts]?: {
+        [S in Contexts[C]]?: {
+          className?: string
+          style?: AnimatedCSSProps
+          transition?: AnimatedXTransition
+          path?: FrameSettingsPathDefinition
+        }
+      }
+    }
+  }
 
-export type FrameSVGSettingsPathDefinition = FrameSVGSettingsPathCommand[]
+export type FrameSettingsElement<Contexts extends ContextType = ContextType> =
+  | FrameSettingsG<Contexts>
+  | FrameSettingsDefs<Contexts>
+  | FrameSettingsClipPath<Contexts>
+  | FrameSettingsMask<Contexts>
+  | FrameSettingsPath<Contexts>
 
-type FrameSVGSettingsElementCommon = {
-  name?: string
-  id?: string
-  className?: string
-  style?: FrameSVGSettingsStyle
+export type FrameSettingsContexts<Contexts extends ContextType = ContextType> = {
+  [C in keyof Contexts]: {
+    initial: Contexts[C]
+  }
 }
 
-export type FrameSVGSettingsElement = FrameSVGSettingsElementCommon & {
-  type?: 'path'
-  path: FrameSVGSettingsPathDefinition
+export interface FrameSettings<Contexts extends ContextType = ContextType> {
+  container?: SVGGElement
+  elements: Array<FrameSettingsElement<Contexts>>
+  contexts?: FrameSettingsContexts<Contexts>
 }
 
-export interface FrameSVGSettings {
-  elements: FrameSVGSettingsElement[]
+type FrameTransition<
+  Contexts extends ContextType = ContextType,
+  C extends keyof Contexts = keyof Contexts,
+  S extends Contexts[C] = Contexts[C]
+> = (context: C, state: S) => void
+
+export type Frame<Contexts extends ContextType = ContextType> = {
+  transition: FrameTransition<Contexts>
+  cancel: () => void
+  remove: () => void
 }

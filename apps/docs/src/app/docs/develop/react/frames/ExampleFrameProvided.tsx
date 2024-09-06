@@ -1,6 +1,6 @@
 'use client'
 
-import { Animated, Animator, AnimatorGeneralProvider, FrameSVGOctagon } from '@arwes/react'
+import { Animated, Animator, AnimatorGeneralProvider, FrameOctagon } from '@arwes/react'
 
 const Example = (): JSX.Element => {
   return (
@@ -20,7 +20,7 @@ const Example = (): JSX.Element => {
             }
           }}
         >
-          <FrameSVGOctagon
+          <FrameOctagon
             style={{
               // @ts-expect-error css variables
               '--arwes-frames-line-color': '#20DFDF',

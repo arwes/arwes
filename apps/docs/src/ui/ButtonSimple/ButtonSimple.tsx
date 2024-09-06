@@ -3,7 +3,7 @@ import {
   type AnimatedProp,
   memo,
   Animated,
-  FrameSVGCorners,
+  FrameCorners,
   Illuminator,
   useBleeps,
   cx
@@ -48,13 +48,7 @@ const ButtonSimple = memo((props: ButtonSimpleProps): JSX.Element => {
         bleeps.click?.play()
       }}
     >
-      <div role="presentation" className="absolute inset-0.5 overflow-hidden">
-        <Illuminator
-          size={theme.spacen(60)}
-          color={theme.colors.secondary.main(3, { alpha: 0.2 })}
-        />
-      </div>
-      <FrameSVGCorners
+      <FrameCorners
         className="opacity-30 transition-opacity ease-out duration-200 group-hover:opacity-70"
         style={{
           filter: `drop-shadow(0 0 ${theme.space(2)} ${theme.colors.secondary.main(3)})`,
@@ -62,6 +56,15 @@ const ButtonSimple = memo((props: ButtonSimpleProps): JSX.Element => {
           '--arwes-frames-bg-color': 'transparent'
         }}
         cornerLength={theme.spacen(2)}
+      />
+      <Illuminator
+        style={{
+          inset: theme.space(0.5),
+          width: `calc(100% - ${theme.space(1)})`,
+          height: `calc(100% - ${theme.space(1)})`
+        }}
+        size={theme.spacen(60)}
+        color={theme.colors.secondary.main(3, { alpha: 0.2 })}
       />
       <div
         className={cx(
