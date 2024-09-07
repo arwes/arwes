@@ -8,8 +8,8 @@ import type {
   EasingName,
   AnimatedXProp,
   AnimatedXSettings,
-  AnimatedXTransition,
-  AnimatedXTransitionFunctionReturn
+  AnimatedXAnimation,
+  AnimatedXAnimationFunctionReturn
 } from '../types.js'
 
 type AnimatedXElementPropsSettings<States extends string> = {
@@ -48,7 +48,7 @@ const createAnimatedXElement = <
 
   let stateLastExecuted = props.settingsRef.current.state
 
-  const animations = new Set<AnimatedXTransitionFunctionReturn>()
+  const animations = new Set<AnimatedXAnimationFunctionReturn>()
 
   const settingsInitial = getSettings()
 
@@ -89,7 +89,7 @@ const createAnimatedXElement = <
 
     animatedList
       // eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
-      .map((settingsItem) => settingsItem.transitions?.[state] as AnimatedXTransition)
+      .map((settingsItem) => settingsItem.transitions?.[state] as AnimatedXAnimation)
       .filter(Boolean)
       .forEach((transition) => {
         if (typeof transition === 'function') {

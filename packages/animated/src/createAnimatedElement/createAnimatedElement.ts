@@ -2,7 +2,7 @@ import { animate } from 'motion'
 import { filterProps } from '@arwes/tools'
 import type { AnimatorNode } from '@arwes/animator'
 
-import type { EasingName, AnimatedProp, AnimatedTransitionFunctionReturn } from '../types.js'
+import type { EasingName, AnimatedProp, AnimatedAnimationFunctionReturn } from '../types.js'
 import { easing } from '../easing/index.js'
 import { formatAnimatedCSSPropsShorthands } from '../formatAnimatedCSSPropsShorthands/index.js'
 import { transition, fade, flicker, draw } from '../transitions/index.js'
@@ -44,7 +44,7 @@ const createAnimatedElement = <Element extends HTMLElement | SVGElement = HTMLEl
     ...filterProps(props.settingsRef.current)
   })
 
-  const animations = new Set<AnimatedTransitionFunctionReturn>()
+  const animations = new Set<AnimatedAnimationFunctionReturn>()
 
   const settingsInitial = getSettings()
 

@@ -1,7 +1,7 @@
 import type { AnimationOptionsWithOverrides } from '@motionone/dom'
 import { animate } from 'motion'
 
-import type { EasingName, AnimatedSettings, AnimatedTransition } from '../types.js'
+import type { EasingName, AnimatedSettings, AnimatedAnimation } from '../types.js'
 import { easing } from '../easing/index.js'
 
 const transition = (
@@ -12,8 +12,8 @@ const transition = (
   easing?: AnimationOptionsWithOverrides['easing'] | EasingName
 ): AnimatedSettings => ({
   transitions: {
-    entering: { [prop]: [from, to], easing } as unknown as AnimatedTransition,
-    exiting: { [prop]: [to, back ?? from], easing } as unknown as AnimatedTransition
+    entering: { [prop]: [from, to], easing } as unknown as AnimatedAnimation,
+    exiting: { [prop]: [to, back ?? from], easing } as unknown as AnimatedAnimation
   }
 })
 
