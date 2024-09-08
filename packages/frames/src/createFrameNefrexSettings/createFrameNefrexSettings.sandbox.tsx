@@ -1,4 +1,4 @@
-import { createFrameNefrex } from '@arwes/frames'
+import { createFrame, createFrameNefrexSettings } from '@arwes/frames'
 
 const root = document.querySelector('#root')!
 root.innerHTML = `
@@ -15,11 +15,14 @@ root.innerHTML = `
 
 const svg = root.querySelector('svg')!
 
-createFrameNefrex(svg, {
-  // styled: true,
-  // squareSize: 16,
-  // strokeWidth: 1,
-  // smallLineLength: 16,
-  // largeLineLength: 64,
-  // padding: 0
-})
+createFrame(
+  svg,
+  createFrameNefrexSettings({
+    // styled: true,
+    // squareSize: 16,
+    // strokeWidth: 1,
+    // smallLineLength: 16,
+    // largeLineLength: 64,
+    // padding: 0
+  })
+)

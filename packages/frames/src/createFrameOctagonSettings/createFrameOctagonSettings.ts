@@ -1,9 +1,8 @@
 import { filterProps } from '@arwes/tools'
 import { type AnimatedCSSProps } from '@arwes/animated'
-import type { FrameSettingsElement, FrameSettingsPathDefinition, Frame } from '../types.js'
-import { createFrame } from '../createFrame/index.js'
+import type { FrameSettingsElement, FrameSettingsPathDefinition, FrameSettings } from '../types.js'
 
-type CreateFrameOctagonProps = {
+type CreateFrameOctagonSettingsProps = {
   styled?: boolean
   leftTop?: boolean
   rightTop?: boolean
@@ -14,7 +13,7 @@ type CreateFrameOctagonProps = {
   strokeWidth?: number
 }
 
-const defaultProps: Required<CreateFrameOctagonProps> = {
+const defaultProps: Required<CreateFrameOctagonSettingsProps> = {
   styled: true,
   leftTop: true,
   rightTop: true,
@@ -30,7 +29,7 @@ type Point = [number | string, number | string]
 const toPath = (points: Point[]): FrameSettingsPathDefinition =>
   points.map((p, i) => [i === 0 ? 'M' : 'L', ...p])
 
-const createFrameOctagon = (svg: SVGSVGElement, props?: CreateFrameOctagonProps): Frame => {
+const createFrameOctagonSettings = (props?: CreateFrameOctagonSettingsProps): FrameSettings => {
   const {
     styled,
     leftTop,
@@ -113,8 +112,8 @@ const createFrameOctagon = (svg: SVGSVGElement, props?: CreateFrameOctagonProps)
     }
   ]
 
-  return createFrame(svg, { elements })
+  return { elements }
 }
 
-export type { CreateFrameOctagonProps }
-export { createFrameOctagon }
+export type { CreateFrameOctagonSettingsProps }
+export { createFrameOctagonSettings }

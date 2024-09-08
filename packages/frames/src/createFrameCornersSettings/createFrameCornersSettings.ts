@@ -1,22 +1,21 @@
 import { filterProps } from '@arwes/tools'
-import type { FrameSettingsPathDefinition, FrameSettingsElement, Frame } from '../types.js'
-import { createFrame } from '../createFrame/index.js'
+import type { FrameSettingsPathDefinition, FrameSettingsElement, FrameSettings } from '../types.js'
 
-type CreateFrameCornersProps = {
+type CreateFrameCornersSettingsProps = {
   styled?: boolean
   strokeWidth?: number
   cornerLength?: number
   padding?: number
 }
 
-const defaultProps: Required<CreateFrameCornersProps> = {
+const defaultProps: Required<CreateFrameCornersSettingsProps> = {
   styled: true,
   strokeWidth: 1,
   cornerLength: 16,
   padding: 0
 }
 
-const createFrameCorners = (svg: SVGSVGElement, props?: CreateFrameCornersProps): Frame => {
+const createFrameCornersSettings = (props?: CreateFrameCornersSettingsProps): FrameSettings => {
   const {
     styled,
     strokeWidth: cw,
@@ -102,8 +101,8 @@ const createFrameCorners = (svg: SVGSVGElement, props?: CreateFrameCornersProps)
 
   const elements = [bg, ...lines]
 
-  return createFrame(svg, { elements })
+  return { elements }
 }
 
-export type { CreateFrameCornersProps }
-export { createFrameCorners }
+export type { CreateFrameCornersSettingsProps }
+export { createFrameCornersSettings }

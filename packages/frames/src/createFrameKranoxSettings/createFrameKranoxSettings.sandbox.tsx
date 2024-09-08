@@ -1,4 +1,4 @@
-import { createFrameKranox } from '@arwes/frames'
+import { createFrame, createFrameKranoxSettings } from '@arwes/frames'
 
 const root = document.querySelector('#root')!
 root.innerHTML = `
@@ -15,12 +15,15 @@ root.innerHTML = `
 
 const svg = root.querySelector('svg')!
 
-createFrameKranox(svg, {
-  // styled: true,
-  // padding: 0,
-  // strokeWidth: 2,
-  // bgStrokeWidth: 0,
-  // squareSize: 16,
-  // smallLineLength: 16,
-  // largeLineLength: 64
-})
+createFrame(
+  svg,
+  createFrameKranoxSettings({
+    // styled: true,
+    // padding: 0,
+    // strokeWidth: 2,
+    // bgStrokeWidth: 0,
+    // squareSize: 16,
+    // smallLineLength: 16,
+    // largeLineLength: 64
+  })
+)

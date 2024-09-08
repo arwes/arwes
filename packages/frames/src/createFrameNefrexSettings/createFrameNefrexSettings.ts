@@ -1,9 +1,8 @@
 import { filterProps } from '@arwes/tools'
 import { type AnimatedCSSProps } from '@arwes/animated'
-import type { FrameSettingsElement, FrameSettingsPathDefinition, Frame } from '../types.js'
-import { createFrame } from '../createFrame/index.js'
+import type { FrameSettingsElement, FrameSettingsPathDefinition, FrameSettings } from '../types.js'
 
-type CreateFrameNefrexProps = {
+type CreateFrameNefrexSettingsProps = {
   styled?: boolean
   squareSize?: number
   padding?: number
@@ -12,7 +11,7 @@ type CreateFrameNefrexProps = {
   largeLineLength?: number
 }
 
-const defaultProps: Required<CreateFrameNefrexProps> = {
+const defaultProps: Required<CreateFrameNefrexSettingsProps> = {
   styled: true,
   squareSize: 16,
   strokeWidth: 1,
@@ -26,7 +25,7 @@ type Point = [number | string, number | string]
 const toPath = (points: Point[]): FrameSettingsPathDefinition =>
   points.map((p, i) => [i === 0 ? 'M' : 'L', ...p])
 
-const createFrameNefrex = (svg: SVGSVGElement, props?: CreateFrameNefrexProps): Frame => {
+const createFrameNefrexSettings = (props?: CreateFrameNefrexSettingsProps): FrameSettings => {
   const {
     styled,
     squareSize: ss,
@@ -92,8 +91,8 @@ const createFrameNefrex = (svg: SVGSVGElement, props?: CreateFrameNefrexProps): 
     }
   ]
 
-  return createFrame(svg, { elements })
+  return { elements }
 }
 
-export type { CreateFrameNefrexProps }
-export { createFrameNefrex }
+export type { CreateFrameNefrexSettingsProps }
+export { createFrameNefrexSettings }

@@ -1,4 +1,4 @@
-// React integration of `createFrameSVGCorners`.
+// React integration of `createFrameCornersSettings`.
 
 import React, { type ReactElement } from 'react'
 import { createRoot } from 'react-dom/client'

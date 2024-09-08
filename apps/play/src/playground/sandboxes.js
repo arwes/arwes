@@ -169,28 +169,28 @@ export const sandboxes = [
             name: '@arwes/frames',
             children: [
               {
-                name: 'createFrameUnderline',
-                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameUnderline/createFrameUnderline.sandbox.tsx')
+                name: 'createFrameUnderlineSettings',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameUnderlineSettings/createFrameUnderlineSettings.sandbox.tsx')
               },
               {
-                name: 'createFrameLines',
-                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameLines/createFrameLines.sandbox.tsx')
+                name: 'createFrameLinesSettings',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameLinesSettings/createFrameLinesSettings.sandbox.tsx')
               },
               {
-                name: 'createFrameCorners',
-                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameCorners/createFrameCorners.sandbox.tsx')
+                name: 'createFrameCornersSettings',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameCornersSettings/createFrameCornersSettings.sandbox.tsx')
               },
               {
-                name: 'createFrameOctagon',
-                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameOctagon/createFrameOctagon.sandbox.tsx')
+                name: 'createFrameOctagonSettings',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameOctagonSettings/createFrameOctagonSettings.sandbox.tsx')
               },
               {
-                name: 'createFrameNefrex',
-                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameNefrex/createFrameNefrex.sandbox.tsx')
+                name: 'createFrameNefrexSettings',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameNefrexSettings/createFrameNefrexSettings.sandbox.tsx')
               },
               {
-                name: 'createFrameKranox',
-                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameKranox/createFrameKranox.sandbox.tsx')
+                name: 'createFrameKranoxSettings',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameKranoxSettings/createFrameKranoxSettings.sandbox.tsx')
               },
               {
                 name: 'createFrame',

@@ -2,7 +2,10 @@ import { type FrameSettings, createFrame } from '@arwes/frames'
 import { spring } from 'motion'
 
 const root = document.querySelector('#root')!
-root.innerHTML = `<svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg"></svg>`
+root.innerHTML = `
+  <p style="color: #ccc;">Click to activate</p>
+  <svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg"></svg>
+`
 
 const svg = root.querySelector('svg')!
 
@@ -133,12 +136,8 @@ const settings: FrameSettings<Contexts> = {
   ],
 
   contexts: {
-    status: {
-      initial: 'normal'
-    },
-    selection: {
-      initial: 'auto'
-    }
+    status: 'normal',
+    selection: 'auto'
   }
 }
 

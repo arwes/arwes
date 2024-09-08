@@ -1,9 +1,8 @@
 import { filterProps } from '@arwes/tools'
 import { type AnimatedCSSProps } from '@arwes/animated'
-import type { FrameSettingsPathDefinition, FrameSettingsElement, Frame } from '../types.js'
-import { createFrame } from '../createFrame/index.js'
+import type { FrameSettingsPathDefinition, FrameSettingsElement, FrameSettings } from '../types.js'
 
-type CreateFrameKranoxProps = {
+type CreateFrameKranoxSettingsProps = {
   styled?: boolean
   padding?: number
   strokeWidth?: number
@@ -13,7 +12,7 @@ type CreateFrameKranoxProps = {
   largeLineLength?: number
 }
 
-const defaultProps: Required<CreateFrameKranoxProps> = {
+const defaultProps: Required<CreateFrameKranoxSettingsProps> = {
   styled: true,
   padding: 0,
   strokeWidth: 2,
@@ -28,7 +27,7 @@ type Point = [number | string, number | string]
 const toPath = (points: Point[]): FrameSettingsPathDefinition =>
   points.map((p, i) => [i === 0 ? 'M' : 'L', ...p])
 
-const createFrameKranox = (svg: SVGSVGElement, props?: CreateFrameKranoxProps): Frame => {
+const createFrameKranoxSettings = (props?: CreateFrameKranoxSettingsProps): FrameSettings => {
   const {
     styled,
     padding: p,
@@ -125,8 +124,8 @@ const createFrameKranox = (svg: SVGSVGElement, props?: CreateFrameKranoxProps): 
     }
   ]
 
-  return createFrame(svg, { elements })
+  return { elements }
 }
 
-export type { CreateFrameKranoxProps }
-export { createFrameKranox }
+export type { CreateFrameKranoxSettingsProps }
+export { createFrameKranoxSettings }

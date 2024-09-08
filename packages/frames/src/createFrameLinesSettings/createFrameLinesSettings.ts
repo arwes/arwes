@@ -1,9 +1,8 @@
 import { filterProps } from '@arwes/tools'
 import { type AnimatedCSSProps } from '@arwes/animated'
-import type { FrameSettingsPathDefinition, FrameSettingsElement, Frame } from '../types.js'
-import { createFrame } from '../createFrame/index.js'
+import type { FrameSettingsPathDefinition, FrameSettingsElement, FrameSettings } from '../types.js'
 
-type CreateFrameLinesProps = {
+type CreateFrameLinesSettingsProps = {
   styled?: boolean
   padding?: number
   largeLineWidth?: number
@@ -11,7 +10,7 @@ type CreateFrameLinesProps = {
   smallLineLength?: number
 }
 
-const defaultProps: Required<CreateFrameLinesProps> = {
+const defaultProps: Required<CreateFrameLinesSettingsProps> = {
   styled: true,
   padding: 0,
   largeLineWidth: 1,
@@ -19,7 +18,7 @@ const defaultProps: Required<CreateFrameLinesProps> = {
   smallLineLength: 16
 }
 
-const createFrameLines = (svg: SVGSVGElement, props?: CreateFrameLinesProps): Frame => {
+const createFrameLinesSettings = (props?: CreateFrameLinesSettingsProps): FrameSettings => {
   const {
     styled,
     padding: p,
@@ -121,8 +120,8 @@ const createFrameLines = (svg: SVGSVGElement, props?: CreateFrameLinesProps): Fr
     }))
   ]
 
-  return createFrame(svg, { elements })
+  return { elements }
 }
 
-export type { CreateFrameLinesProps }
-export { createFrameLines }
+export type { CreateFrameLinesSettingsProps }
+export { createFrameLinesSettings }

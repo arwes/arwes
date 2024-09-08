@@ -1,4 +1,4 @@
-// React integration of `createFrameSVGOctagon`.
+// React integration of `createFrameOctagonSettings`.
 
 import React, { type ReactElement } from 'react'
 import { createRoot } from 'react-dom/client'

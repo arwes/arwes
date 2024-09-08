@@ -11,7 +11,7 @@ root.innerHTML = `
     .box {
       position: relative;
       width: 100px;
-      height: 100px;
+      height: 300px;
     }
     .frame {
       position: absolute;

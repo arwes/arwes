@@ -13,7 +13,7 @@ const animator = system.register(undefined, {
 })
 
 const root = document.querySelector('#root')!
-root.innerHTML = `<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg"></svg>`
+root.innerHTML = `<svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg"></svg>`
 
 const svg = root.querySelector('svg')!
 

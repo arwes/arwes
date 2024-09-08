@@ -1,9 +1,12 @@
 import { cx } from '@arwes/tools'
 import type { AnimatorNode } from '@arwes/animator'
-import { type AnimatedXAnimationFunctionReturn, createAnimatedElement } from '@arwes/animated'
+import {
+  type AnimatedXAnimationFunctionReturn,
+  formatAnimatedCSSPropsShorthands,
+  createAnimatedElement
+} from '@arwes/animated'
 
 import type { FrameSettingsElement, FrameSettingsPath } from '../types.js'
-import { formatStaticStyles } from './formatStaticStyles.js'
 
 const renderFrameElements = (
   parent: SVGElement,
@@ -14,6 +17,8 @@ const renderFrameElements = (
   animator: undefined | AnimatorNode,
   animations: Map<SVGElement, Map<string, AnimatedXAnimationFunctionReturn>>
 ): void => {
+  const children = Array.from(parent.children) as SVGElement[]
+
   for (let index = 0; index < elements.length; index++) {
     const elementSettings = { ...elements[index] }
     const elementContexts = (elementSettings as FrameSettingsPath).contexts
@@ -47,10 +52,10 @@ const renderFrameElements = (
       }
     }
 
-    const element = document.createElementNS(
-      'http://www.w3.org/2000/svg',
-      elementSettings.type ?? 'path'
-    )
+    const child = children[index]
+    const element =
+      child ??
+      document.createElementNS('http://www.w3.org/2000/svg', elementSettings.type ?? 'path')
 
     const { name, id, className, style } = elementSettings
 
@@ -67,7 +72,10 @@ const renderFrameElements = (
     }
 
     if (style) {
-      Object.assign(element.style, formatStaticStyles(style as Record<string, string>))
+      Object.assign(
+        element.style,
+        formatAnimatedCSSPropsShorthands(style as Record<string, string>)
+      )
     }
 
     if (elementSettings.type === 'svg') {
@@ -98,6 +106,12 @@ const renderFrameElements = (
     }
 
     if (animator && elementSettings.animated) {
+      const elementAnimations =
+        animations.get(element) ?? new Map<string, AnimatedXAnimationFunctionReturn>()
+
+      // Reset existing animations if currently running.
+      elementAnimations.get('__animator__')?.cancel()
+
       const animatedElement = createAnimatedElement({
         element,
         animator,
@@ -107,13 +121,14 @@ const renderFrameElements = (
           }
         }
       })
-      const elementAnimations =
-        animations.get(element) ?? new Map<string, AnimatedXAnimationFunctionReturn>()
+
       elementAnimations.set('__animator__', animatedElement)
       animations.set(element, elementAnimations)
     }
 
-    parent.appendChild(element)
+    if (!element.parentNode) {
+      parent.appendChild(element)
+    }
   }
 }
 

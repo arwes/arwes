@@ -1,4 +1,4 @@
-// React integration of `createFrameSVGKranox`.
+// React integration of `createFrameKranoxSettings`.
 
 import React, { type ReactElement } from 'react'
 import { createRoot } from 'react-dom/client'

@@ -1,4 +1,4 @@
-// React integration of `createFrameSVGUnderline`.
+// React integration of `createFrameUnderlineSettings`.
 
 import React, { type ReactElement } from 'react'
 import { createRoot } from 'react-dom/client'

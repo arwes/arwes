@@ -104,16 +104,10 @@ export type FrameSettingsElement<Contexts extends ContextType = ContextType> =
   | FrameSettingsMask<Contexts>
   | FrameSettingsPath<Contexts>
 
-export type FrameSettingsContexts<Contexts extends ContextType = ContextType> = {
-  [C in keyof Contexts]: {
-    initial: Contexts[C]
-  }
-}
-
 export interface FrameSettings<Contexts extends ContextType = ContextType> {
   container?: SVGGElement
   elements: Array<FrameSettingsElement<Contexts>>
-  contexts?: FrameSettingsContexts<Contexts>
+  contexts?: Contexts
   animator?: AnimatorNode
 }
 
@@ -125,6 +119,7 @@ type FrameTransition<
 
 export type Frame<Contexts extends ContextType = ContextType> = {
   contexts: Contexts
+  render: () => void
   transition: FrameTransition<Contexts>
   cancel: () => void
   remove: () => void

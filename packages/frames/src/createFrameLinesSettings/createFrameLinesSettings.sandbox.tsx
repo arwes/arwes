@@ -1,4 +1,4 @@
-import { createFrameUnderline } from '@arwes/frames'
+import { createFrame, createFrameLinesSettings } from '@arwes/frames'
 
 const root = document.querySelector('#root')!
 root.innerHTML = `
@@ -15,9 +15,13 @@ root.innerHTML = `
 
 const svg = root.querySelector('svg')!
 
-createFrameUnderline(svg, {
-  // styled: true,
-  // squareSize: 16,
-  // strokeWidth: 1,
-  // padding: 0
-})
+createFrame(
+  svg,
+  createFrameLinesSettings({
+    // styled: true,
+    // padding: 0,
+    // largeLineWidth: 1,
+    // smallLineWidth: 1,
+    // smallLineLength: 16
+  })
+)

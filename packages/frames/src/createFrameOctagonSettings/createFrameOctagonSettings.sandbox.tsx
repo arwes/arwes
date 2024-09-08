@@ -1,4 +1,4 @@
-import { createFrameOctagon } from '@arwes/frames'
+import { createFrame, createFrameOctagonSettings } from '@arwes/frames'
 
 const root = document.querySelector('#root')!
 root.innerHTML = `
@@ -15,13 +15,16 @@ root.innerHTML = `
 
 const svg = root.querySelector('svg')!
 
-createFrameOctagon(svg, {
-  // styled: true,
-  // leftTop: true,
-  // rightTop: true,
-  // rightBottom: true,
-  // leftBottom: true,
-  // squareSize: 16,
-  // strokeWidth: 1,
-  // padding: 0
-})
+createFrame(
+  svg,
+  createFrameOctagonSettings({
+    // styled: true,
+    // leftTop: true,
+    // rightTop: true,
+    // rightBottom: true,
+    // leftBottom: true,
+    // squareSize: 16,
+    // strokeWidth: 1,
+    // padding: 0
+  })
+)

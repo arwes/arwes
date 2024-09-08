@@ -1,36 +1,33 @@
-import React, { useMemo, type ReactElement } from 'react'
+import React, { useMemo } from 'react'
 import { cx } from '@arwes/tools'
 import { memo } from '@arwes/react-tools'
-import { type CreateFrameNefrexProps, createFrameNefrex } from '@arwes/frames'
+import { type CreateFrameNefrexSettingsProps, createFrameNefrexSettings } from '@arwes/frames'
 
 import { type FrameBaseProps, FrameBase } from '../FrameBase/index.js'
 
-interface FrameNefrexProps
-  extends Omit<FrameBaseProps, keyof CreateFrameNefrexProps>,
-    CreateFrameNefrexProps {}
+type FrameNefrexProps = FrameBaseProps & CreateFrameNefrexSettingsProps
 
-const FrameNefrex = memo((props: FrameNefrexProps): ReactElement => {
-  const {
-    styled,
-    squareSize,
-    strokeWidth,
-    smallLineLength,
-    largeLineLength,
-    padding,
-    className,
-    ...otherProps
-  } = props
+const FrameNefrex = memo((props: FrameNefrexProps): JSX.Element => {
+  const { styled, squareSize, strokeWidth, smallLineLength, largeLineLength, padding } = props
 
-  const create = useMemo(
-    () => (svg: SVGSVGElement) => createFrameNefrex(svg, props),
+  const settings = useMemo(
+    () =>
+      createFrameNefrexSettings({
+        styled,
+        squareSize,
+        strokeWidth,
+        smallLineLength,
+        largeLineLength,
+        padding
+      }),
     [styled, squareSize, strokeWidth, smallLineLength, largeLineLength, padding]
   )
 
   return (
     <FrameBase
-      {...otherProps}
-      className={cx('arwes-frames-framenefrex', className)}
-      create={create}
+      {...props}
+      className={cx('arwes-frames-framenefrex', props.className)}
+      settings={settings}
     />
   )
 })

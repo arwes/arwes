@@ -1,4 +1,4 @@
-// React integration of `createFrameSVGLines`.
+// React integration of `createFrameLinesSettings`.
 
 import React, { type ReactElement } from 'react'
 import { createRoot } from 'react-dom/client'

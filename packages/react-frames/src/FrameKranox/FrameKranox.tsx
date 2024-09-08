@@ -1,15 +1,13 @@
-import React, { useMemo, type ReactElement } from 'react'
+import React, { useMemo } from 'react'
 import { cx } from '@arwes/tools'
 import { memo } from '@arwes/react-tools'
-import { type CreateFrameKranoxProps, createFrameKranox } from '@arwes/frames'
+import { type CreateFrameKranoxSettingsProps, createFrameKranoxSettings } from '@arwes/frames'
 
 import { type FrameBaseProps, FrameBase } from '../FrameBase/index.js'
 
-interface FrameKranoxProps
-  extends Omit<FrameBaseProps, keyof CreateFrameKranoxProps>,
-    CreateFrameKranoxProps {}
+type FrameKranoxProps = FrameBaseProps & CreateFrameKranoxSettingsProps
 
-const FrameKranox = memo((props: FrameKranoxProps): ReactElement => {
+const FrameKranox = memo((props: FrameKranoxProps): JSX.Element => {
   const {
     styled,
     padding,
@@ -17,21 +15,27 @@ const FrameKranox = memo((props: FrameKranoxProps): ReactElement => {
     bgStrokeWidth,
     squareSize,
     smallLineLength,
-    largeLineLength,
-    className,
-    ...otherProps
+    largeLineLength
   } = props
 
-  const create = useMemo(
-    () => (svg: SVGSVGElement) => createFrameKranox(svg, props),
+  const settings = useMemo(
+    () =>
+      createFrameKranoxSettings({
+        styled,
+        padding,
+        strokeWidth,
+        bgStrokeWidth,
+        squareSize,
+        smallLineLength,
+        largeLineLength
+      }),
     [styled, padding, strokeWidth, bgStrokeWidth, squareSize, smallLineLength, largeLineLength]
   )
-
   return (
     <FrameBase
-      {...otherProps}
-      className={cx('arwes-frames-framekranox', className)}
-      create={create}
+      {...props}
+      className={cx('arwes-frames-framekranox', props.className)}
+      settings={settings}
     />
   )
 })

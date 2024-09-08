@@ -1,4 +1,4 @@
-import { createFrameCorners } from '@arwes/frames'
+import { createFrame, createFrameCornersSettings } from '@arwes/frames'
 
 const root = document.querySelector('#root')!
 root.innerHTML = `
@@ -15,9 +15,12 @@ root.innerHTML = `
 
 const svg = root.querySelector('svg')!
 
-createFrameCorners(svg, {
-  // styled: true,
-  // strokeWidth: 1,
-  // cornerLength: 16,
-  // padding: 0
-})
+createFrame(
+  svg,
+  createFrameCornersSettings({
+    // styled: true,
+    // strokeWidth: 1,
+    // cornerLength: 16,
+    // padding: 0
+  })
+)

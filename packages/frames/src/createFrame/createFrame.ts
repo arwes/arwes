@@ -1,6 +1,6 @@
 import { type AnimatedXAnimationFunctionReturn } from '@arwes/animated'
 
-import type { FrameSettingsContexts, FrameSettings, Frame } from '../types.js'
+import type { FrameSettings, Frame } from '../types.js'
 import { renderFrameElements } from '../internal/renderFrameElements.js'
 import { drawFrameElements } from '../internal/drawFrameElements.js'
 import { transitionFrameElements } from '../internal/transitionFrameElements.js'
@@ -16,15 +16,10 @@ const createFrame = <Contexts extends Record<string, string> = Record<string, st
   // eslint-disable-next-line prefer-const
   let observer: ResizeObserver
 
-  const settingsContexts = (settings.contexts ?? {}) as FrameSettingsContexts<Contexts>
-  const contexts = Object.keys(settingsContexts)
-    .map((name) => ({ [name]: settingsContexts[name].initial ?? '' }))
-    .reduce((t, i) => ({ ...t, ...i }), {}) as unknown as Contexts
-
-  const animations = new Map<SVGElement, Map<keyof Contexts, AnimatedXAnimationFunctionReturn>>()
-
   const container =
     settings.container ?? document.createElementNS('http://www.w3.org/2000/svg', 'g')
+  const contexts = { ...settings.contexts }
+  const animations = new Map<SVGElement, Map<keyof Contexts, AnimatedXAnimationFunctionReturn>>()
 
   const resize = (): void => {
     // In certain browsers, when the SVG viewBox has values with decimals above the 0.5,
@@ -38,13 +33,6 @@ const createFrame = <Contexts extends Record<string, string> = Record<string, st
   }
 
   const render = (): void => {
-    container.dataset.frame = ''
-
-    // For most use cases, a frame's lines/borders, which are rendered using SVG `stroke`,
-    // should not be re-scaled when the SVG is unexpectedly re-scaled and the frame is not
-    // re-scaled accordingly. These lines/borders should be presented the same way.
-    container.style.setProperty('vector-effect', 'non-scaling-stroke')
-
     renderFrameElements(
       container,
       width,
@@ -54,17 +42,13 @@ const createFrame = <Contexts extends Record<string, string> = Record<string, st
       animator,
       animations as Map<SVGElement, Map<string, AnimatedXAnimationFunctionReturn>>
     )
-
-    if (!container.parentNode) {
-      svg.appendChild(container)
-    }
   }
 
   const draw = (): void => {
     drawFrameElements(container, width, height, settings.elements)
   }
 
-  const transition = (context: keyof Contexts, state: Contexts[string]): void => {
+  const transition = (context: string, state: string): void => {
     contexts[context] = state
     transitionFrameElements(
       container,
@@ -84,11 +68,29 @@ const createFrame = <Contexts extends Record<string, string> = Record<string, st
     Array.from(container.children).forEach((child) => child.remove())
   }
 
+  container.dataset.frame = ''
+
+  // For most use cases, a frame's lines/borders, which are rendered using SVG `stroke`,
+  // should not be re-scaled when the SVG is unexpectedly re-scaled and the frame is not
+  // re-scaled accordingly. These lines/borders should be presented the same way.
+  container.style.setProperty('vector-effect', 'non-scaling-stroke')
+
   resize()
   render()
   draw()
 
+  if (!container.parentNode) {
+    svg.appendChild(container)
+  }
+
+  let isFirstResize = true
+
   observer = new ResizeObserver(() => {
+    if (isFirstResize) {
+      isFirstResize = false
+      return
+    }
+
     resize()
     draw()
   })
@@ -98,10 +100,15 @@ const createFrame = <Contexts extends Record<string, string> = Record<string, st
     get contexts() {
       return Object.freeze({ ...contexts })
     },
+    render: () => {
+      resize()
+      render()
+      draw()
+    },
     transition,
     cancel,
     remove
-  }) as Frame<Contexts>
+  }) as unknown as Frame<Contexts>
 }
 
 export { createFrame }

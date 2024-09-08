@@ -2,11 +2,11 @@ import { animate } from 'motion'
 import {
   type EasingName,
   type AnimatedXAnimationFunctionReturn,
-  easing as ARWESEasing
+  easing as ARWESEasing,
+  formatAnimatedCSSPropsShorthands
 } from '@arwes/animated'
 
 import type { FrameSettingsElement } from '../types.js'
-import { formatStaticStyles } from './formatStaticStyles.js'
 
 const transitionElement = (
   element: SVGElement,
@@ -52,7 +52,10 @@ const transitionElement = (
     }
 
     if (state.style) {
-      Object.assign(element.style, formatStaticStyles(state.style as Record<string, unknown>))
+      Object.assign(
+        element.style,
+        formatAnimatedCSSPropsShorthands(state.style as Record<string, unknown>)
+      )
     }
 
     if (state.animate) {

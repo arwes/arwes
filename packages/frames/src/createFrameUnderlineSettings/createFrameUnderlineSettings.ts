@@ -1,22 +1,21 @@
 import { filterProps } from '@arwes/tools'
-import type { FrameSettingsElement, Frame } from '../types.js'
-import { createFrame } from '../createFrame/index.js'
+import type { FrameSettingsElement, FrameSettings } from '../types.js'
 
-type CreateFrameUnderlineProps = {
+type CreateFrameUnderlineSettingsProps = {
   styled?: boolean
   squareSize?: number
   strokeWidth?: number
   padding?: number
 }
 
-const defaultProps: Required<CreateFrameUnderlineProps> = {
+const defaultProps: Required<CreateFrameUnderlineSettingsProps> = {
   styled: true,
   squareSize: 16,
   strokeWidth: 1,
   padding: 0
 }
 
-const createFrameUnderline = (svg: SVGSVGElement, props?: CreateFrameUnderlineProps): Frame => {
+const createFrameUnderlineSettings = (props?: CreateFrameUnderlineSettingsProps): FrameSettings => {
   const {
     styled,
     squareSize: ss,
@@ -64,8 +63,8 @@ const createFrameUnderline = (svg: SVGSVGElement, props?: CreateFrameUnderlinePr
     }
   ]
 
-  return createFrame(svg, { elements })
+  return { elements }
 }
 
-export type { CreateFrameUnderlineProps }
-export { createFrameUnderline }
+export type { CreateFrameUnderlineSettingsProps }
+export { createFrameUnderlineSettings }

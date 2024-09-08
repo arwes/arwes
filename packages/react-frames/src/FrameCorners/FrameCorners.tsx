@@ -1,27 +1,24 @@
-import React, { useMemo, type ReactElement } from 'react'
+import React, { useMemo } from 'react'
 import { cx } from '@arwes/tools'
 import { memo } from '@arwes/react-tools'
-import { type CreateFrameCornersProps, createFrameCorners } from '@arwes/frames'
+import { type CreateFrameCornersSettingsProps, createFrameCornersSettings } from '@arwes/frames'
 
 import { type FrameBaseProps, FrameBase } from '../FrameBase/index.js'
 
-interface FrameCornersProps
-  extends Omit<FrameBaseProps, keyof CreateFrameCornersProps>,
-    CreateFrameCornersProps {}
+type FrameCornersProps = FrameBaseProps & CreateFrameCornersSettingsProps
 
-const FrameCorners = memo((props: FrameCornersProps): ReactElement => {
-  const { styled, padding, strokeWidth, cornerLength, className, ...otherProps } = props
+const FrameCorners = memo((props: FrameCornersProps): JSX.Element => {
+  const { styled, padding, strokeWidth, cornerLength } = props
 
-  const create = useMemo(
-    () => (svg: SVGSVGElement) => createFrameCorners(svg, props),
+  const settings = useMemo(
+    () => createFrameCornersSettings({ styled, padding, strokeWidth, cornerLength }),
     [styled, padding, strokeWidth, cornerLength]
   )
-
   return (
     <FrameBase
-      {...otherProps}
-      className={cx('arwes-frames-framecorners', className)}
-      create={create}
+      {...props}
+      className={cx('arwes-frames-framecorners', props.className)}
+      settings={settings}
     />
   )
 })

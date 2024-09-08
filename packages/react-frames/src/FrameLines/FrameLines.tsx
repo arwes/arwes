@@ -1,35 +1,31 @@
-import React, { useMemo, type ReactElement } from 'react'
+import React, { useMemo } from 'react'
 import { cx } from '@arwes/tools'
 import { memo } from '@arwes/react-tools'
-import { type CreateFrameLinesProps, createFrameLines } from '@arwes/frames'
+import { type CreateFrameLinesSettingsProps, createFrameLinesSettings } from '@arwes/frames'
 
 import { type FrameBaseProps, FrameBase } from '../FrameBase/index.js'
 
-interface FrameLinesProps
-  extends Omit<FrameBaseProps, keyof CreateFrameLinesProps>,
-    CreateFrameLinesProps {}
+type FrameLinesProps = FrameBaseProps & CreateFrameLinesSettingsProps
 
-const FrameLines = memo((props: FrameLinesProps): ReactElement => {
-  const {
-    styled,
-    padding,
-    largeLineWidth,
-    smallLineWidth,
-    smallLineLength,
-    className,
-    ...otherProps
-  } = props
+const FrameLines = memo((props: FrameLinesProps): JSX.Element => {
+  const { styled, padding, largeLineWidth, smallLineWidth, smallLineLength } = props
 
-  const create = useMemo(
-    () => (svg: SVGSVGElement) => createFrameLines(svg, props),
+  const settings = useMemo(
+    () =>
+      createFrameLinesSettings({
+        styled,
+        padding,
+        largeLineWidth,
+        smallLineWidth,
+        smallLineLength
+      }),
     [styled, padding, largeLineWidth, smallLineWidth, smallLineLength]
   )
-
   return (
     <FrameBase
-      {...otherProps}
-      className={cx('arwes-frames-framelines', className)}
-      create={create}
+      {...props}
+      className={cx('arwes-frames-framelines', props.className)}
+      settings={settings}
     />
   )
 })

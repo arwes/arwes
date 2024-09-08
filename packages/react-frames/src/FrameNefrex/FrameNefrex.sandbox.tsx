@@ -1,4 +1,4 @@
-// React integration of `createFrameSVGNefrex`.
+// React integration of `createFrameNefrexSettings`.
 
 import React, { type ReactElement } from 'react'
 import { createRoot } from 'react-dom/client'

@@ -1,4 +1,4 @@
-import { createFrameLines, animateFrameAssembler } from '@arwes/frames'
+import { createFrame, createFrameLinesSettings, animateFrameAssembler } from '@arwes/frames'
 
 const root = document.querySelector('#root')!
 root.innerHTML = `
@@ -16,7 +16,7 @@ root.innerHTML = `
 
 const svg = root.querySelector('svg')!
 
-createFrameLines(svg)
+createFrame(svg, createFrameLinesSettings())
 
 let isEntering = false
 

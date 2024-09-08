@@ -126,12 +126,8 @@ const settings: FrameSettings<Contexts> = {
   ],
 
   contexts: {
-    status: {
-      initial: 'normal'
-    },
-    size: {
-      initial: 'medium'
-    }
+    status: 'normal',
+    size: 'medium'
   }
 }
 

@@ -1,38 +1,36 @@
-import React, { useMemo, type ReactElement } from 'react'
+import React, { useMemo } from 'react'
 import { cx } from '@arwes/tools'
 import { memo } from '@arwes/react-tools'
-import { type CreateFrameOctagonProps, createFrameOctagon } from '@arwes/frames'
+import { type CreateFrameOctagonSettingsProps, createFrameOctagonSettings } from '@arwes/frames'
 
 import { type FrameBaseProps, FrameBase } from '../FrameBase/index.js'
 
-interface FrameOctagonProps
-  extends Omit<FrameBaseProps, keyof CreateFrameOctagonProps>,
-    CreateFrameOctagonProps {}
+type FrameOctagonProps = FrameBaseProps & CreateFrameOctagonSettingsProps
 
-const FrameOctagon = memo((props: FrameOctagonProps): ReactElement => {
-  const {
-    styled,
-    leftTop,
-    rightTop,
-    rightBottom,
-    leftBottom,
-    squareSize,
-    strokeWidth,
-    padding,
-    className,
-    ...otherProps
-  } = props
+const FrameOctagon = memo((props: FrameOctagonProps): JSX.Element => {
+  const { styled, leftTop, rightTop, rightBottom, leftBottom, squareSize, strokeWidth, padding } =
+    props
 
-  const create = useMemo(
-    () => (svg: SVGSVGElement) => createFrameOctagon(svg, props),
+  const settings = useMemo(
+    () =>
+      createFrameOctagonSettings({
+        styled,
+        leftTop,
+        rightTop,
+        rightBottom,
+        leftBottom,
+        squareSize,
+        strokeWidth,
+        padding
+      }),
     [styled, leftTop, rightTop, rightBottom, leftBottom, squareSize, strokeWidth, padding]
   )
 
   return (
     <FrameBase
-      {...otherProps}
-      className={cx('arwes-frames-frameoctagon', className)}
-      create={create}
+      {...props}
+      className={cx('arwes-frames-frameoctagon', props.className)}
+      settings={settings}
     />
   )
 })
