@@ -1,4 +1,5 @@
-import type { AnimatedCSSProps, AnimatedXAnimation } from '@arwes/animated'
+import type { AnimatorNode } from '@arwes/animator'
+import type { AnimatedProp, AnimatedCSSProps, AnimatedXAnimation } from '@arwes/animated'
 
 type ContextType = Record<string, string>
 
@@ -7,6 +8,7 @@ export type FrameSettingsElementCommon<Contexts extends ContextType = ContextTyp
   id?: string
   className?: string
   style?: AnimatedCSSProps
+  animated?: AnimatedProp
   contexts?: {
     [C in keyof Contexts]?: {
       [S in Contexts[C]]?: {
@@ -112,6 +114,7 @@ export interface FrameSettings<Contexts extends ContextType = ContextType> {
   container?: SVGGElement
   elements: Array<FrameSettingsElement<Contexts>>
   contexts?: FrameSettingsContexts<Contexts>
+  animator?: AnimatorNode
 }
 
 type FrameTransition<

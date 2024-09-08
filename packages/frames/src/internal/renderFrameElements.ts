@@ -1,18 +1,18 @@
 import { cx } from '@arwes/tools'
+import type { AnimatorNode } from '@arwes/animator'
+import { type AnimatedXAnimationFunctionReturn, createAnimatedElement } from '@arwes/animated'
 
 import type { FrameSettingsElement, FrameSettingsPath } from '../types.js'
 import { formatStaticStyles } from './formatStaticStyles.js'
 
-/**
- * Render a list of frame elements inside a parent SVGElement.
- * Currently, only `<path/>` elements are supported.
- */
 const renderFrameElements = (
   parent: SVGElement,
   width: number,
   height: number,
   elements: FrameSettingsElement[],
-  contexts: Record<string, string>
+  contexts: Record<string, string>,
+  animator: undefined | AnimatorNode,
+  animations: Map<SVGElement, Map<string, AnimatedXAnimationFunctionReturn>>
 ): void => {
   for (let index = 0; index < elements.length; index++) {
     const elementSettings = { ...elements[index] }
@@ -83,10 +83,34 @@ const renderFrameElements = (
         if (typeof elementSettings.elements === 'string') {
           element.innerHTML = elementSettings.elements
         } else {
-          renderFrameElements(element, width, height, elementSettings.elements, contexts)
+          renderFrameElements(
+            element,
+            width,
+            height,
+            elementSettings.elements,
+            contexts,
+            animator,
+            animations
+          )
         }
         break
       }
+    }
+
+    if (animator && elementSettings.animated) {
+      const animatedElement = createAnimatedElement({
+        element,
+        animator,
+        settingsRef: {
+          current: {
+            animated: elementSettings.animated
+          }
+        }
+      })
+      const elementAnimations =
+        animations.get(element) ?? new Map<string, AnimatedXAnimationFunctionReturn>()
+      elementAnimations.set('__animator__', animatedElement)
+      animations.set(element, elementAnimations)
     }
 
     parent.appendChild(element)

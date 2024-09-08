@@ -1,14 +1,7 @@
 import { createFrame } from '@arwes/frames'
 
 const root = document.querySelector('#root')!
-root.innerHTML = `
-  <svg
-    width="100"
-    height="100"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-  </svg>
-`
+root.innerHTML = `<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"></svg>`
 
 const svg = root.querySelector('svg')!
 

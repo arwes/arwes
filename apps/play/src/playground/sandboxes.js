@@ -197,24 +197,28 @@ export const sandboxes = [
                     code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.shapes.sandbox.tsx')
                   },
                   {
-                    name: 'classes',
-                    code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.classes.sandbox.tsx')
-                  },
-                  {
-                    name: 'styles',
-                    code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.styles.sandbox.tsx')
-                  },
-                  {
-                    name: 'animations',
-                    code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.animations.sandbox.tsx')
-                  },
-                  {
                     name: 'clipping',
                     code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.clipping.sandbox.tsx')
                   },
                   {
                     name: 'masking',
                     code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.masking.sandbox.tsx')
+                  },
+                  {
+                    name: 'contextClasses',
+                    code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.contextClasses.sandbox.tsx')
+                  },
+                  {
+                    name: 'contextStyles',
+                    code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.contextStyles.sandbox.tsx')
+                  },
+                  {
+                    name: 'contextAnimations',
+                    code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.contextAnimations.sandbox.tsx')
+                  },
+                  {
+                    name: 'animator',
+                    code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.animator.sandbox.tsx')
                   }
                 ]
               },

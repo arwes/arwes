@@ -9,6 +9,8 @@ const createFrame = <Contexts extends Record<string, string> = Record<string, st
   svg: SVGSVGElement,
   settings: FrameSettings<Contexts>
 ): Frame<Contexts> => {
+  const { animator } = settings
+
   let width = 0
   let height = 0
   // eslint-disable-next-line prefer-const
@@ -43,7 +45,15 @@ const createFrame = <Contexts extends Record<string, string> = Record<string, st
     // re-scaled accordingly. These lines/borders should be presented the same way.
     container.style.setProperty('vector-effect', 'non-scaling-stroke')
 
-    renderFrameElements(container, width, height, settings.elements, contexts)
+    renderFrameElements(
+      container,
+      width,
+      height,
+      settings.elements,
+      contexts,
+      animator,
+      animations as Map<SVGElement, Map<string, AnimatedXAnimationFunctionReturn>>
+    )
 
     if (!container.parentNode) {
       svg.appendChild(container)
