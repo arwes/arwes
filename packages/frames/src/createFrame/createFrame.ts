@@ -1,14 +1,9 @@
-import { animate } from 'motion'
-import {
-  type EasingName,
-  type AnimatedXTransitionFunctionReturn,
-  easing as ARWESEasing
-} from '@arwes/animated'
+import { type AnimatedXAnimationFunctionReturn } from '@arwes/animated'
 
-import type { FrameSettingsElement, FrameSettingsContexts, FrameSettings, Frame } from '../types.js'
+import type { FrameSettingsContexts, FrameSettings, Frame } from '../types.js'
 import { renderFrameElements } from '../internal/renderFrameElements.js'
-import { formatFramePath } from '../internal/formatFramePath.js'
-import { formatStaticStyles } from '../internal/formatStaticStyles.js'
+import { drawFrameElements } from '../internal/drawFrameElements.js'
+import { transitionFrameElements } from '../internal/transitionFrameElements.js'
 
 const createFrame = <Contexts extends Record<string, string> = Record<string, string>>(
   svg: SVGSVGElement,
@@ -24,7 +19,7 @@ const createFrame = <Contexts extends Record<string, string> = Record<string, st
     .map((name) => ({ [name]: settingsContexts[name].initial ?? '' }))
     .reduce((t, i) => ({ ...t, ...i }), {}) as unknown as Contexts
 
-  const animations = new Map<SVGElement, Map<keyof Contexts, AnimatedXTransitionFunctionReturn>>()
+  const animations = new Map<SVGElement, Map<keyof Contexts, AnimatedXAnimationFunctionReturn>>()
 
   const container =
     settings.container ?? document.createElementNS('http://www.w3.org/2000/svg', 'g')
@@ -55,147 +50,18 @@ const createFrame = <Contexts extends Record<string, string> = Record<string, st
     }
   }
 
-  const drawElements = (parent: SVGElement, elementsSettings: FrameSettingsElement[]): void => {
-    const children = Array.from(parent.children) as SVGElement[]
-
-    for (let index = 0; index < children.length; index++) {
-      const child = children[index]
-      const childSettings = elementsSettings[index]
-
-      if (childSettings.type === undefined || childSettings.type === 'path') {
-        const d = formatFramePath(width, height, childSettings.path)
-
-        if (child.getAttribute('d') !== d) {
-          child.setAttribute('d', d)
-        }
-      }
-
-      switch (childSettings.type) {
-        case 'g':
-        case 'defs':
-        case 'clipPath':
-        case 'mask': {
-          drawElements(child, childSettings.elements)
-          break
-        }
-      }
-    }
-  }
-
   const draw = (): void => {
-    drawElements(container, settings.elements)
-  }
-
-  const transitionElement = (element: SVGElement, elementSettings: FrameSettingsElement): void => {
-    const elementContexts = elementSettings.contexts
-
-    if (!elementContexts) {
-      return
-    }
-
-    const contextNames = Object.keys(elementContexts)
-
-    contextNames
-      .map((name) => elementContexts[name])
-      .filter(Boolean)
-      .map((context) =>
-        Object.keys(context!)
-          .map((stateName) => context![stateName])
-          .map((state) => state?.className)
-      )
-      .flat()
-      .filter(Boolean)
-      .forEach((className) => element.classList.remove(className!))
-
-    for (const contextName of contextNames) {
-      const context = elementContexts[contextName]
-
-      if (!context) {
-        continue
-      }
-
-      const state = context[contexts[contextName]]
-
-      if (!state) {
-        continue
-      }
-
-      if (state.className) {
-        element.classList.add(state.className)
-      }
-
-      if (state.style) {
-        Object.assign(element.style, formatStaticStyles(state.style as Record<string, unknown>))
-      }
-
-      if (state.transition) {
-        let animation: undefined | AnimatedXTransitionFunctionReturn
-
-        if (typeof state.transition === 'function') {
-          const $ = <T = SVGElement | HTMLElement>(query: string): T[] =>
-            Array.from(element.querySelectorAll(query)) as T[]
-          animation = state.transition({ element, $ }) as
-            | undefined
-            | AnimatedXTransitionFunctionReturn
-        }
-        //
-        else {
-          const { duration, delay, easing, direction, repeat, options, ...styles } =
-            state.transition
-
-          const animateEasing = easing ?? options?.easing
-          const animateEasingFunction =
-            typeof animateEasing === 'string'
-              ? ARWESEasing[animateEasing as EasingName] || animateEasing
-              : animateEasing
-
-          animation = animate(element, styles, {
-            duration,
-            delay,
-            easing: animateEasingFunction,
-            direction,
-            repeat,
-            ...options
-          })
-        }
-
-        if (animation) {
-          const elementContextAnimations =
-            animations.get(element) ?? new Map<keyof Contexts, AnimatedXTransitionFunctionReturn>()
-          elementContextAnimations.get(contextName)?.cancel()
-          elementContextAnimations.set(contextName, animation)
-        }
-      }
-    }
-  }
-
-  const transitionElements = (
-    parent: SVGElement,
-    elementsSettings: FrameSettingsElement[]
-  ): void => {
-    const children = Array.from(parent.children) as SVGElement[]
-
-    for (let index = 0; index < children.length; index++) {
-      const child = children[index]
-      const childSettings = elementsSettings[index]
-
-      transitionElement(child, childSettings)
-
-      switch (childSettings.type) {
-        case 'g':
-        case 'defs':
-        case 'clipPath':
-        case 'mask': {
-          transitionElements(child, childSettings.elements)
-          break
-        }
-      }
-    }
+    drawFrameElements(container, width, height, settings.elements)
   }
 
   const transition = (context: keyof Contexts, state: Contexts[string]): void => {
     contexts[context] = state
-    transitionElements(container, settings.elements)
+    transitionFrameElements(
+      container,
+      contexts,
+      animations as Map<SVGElement, Map<string, AnimatedXAnimationFunctionReturn>>,
+      settings.elements
+    )
   }
 
   const cancel = (): void => {
@@ -218,7 +84,14 @@ const createFrame = <Contexts extends Record<string, string> = Record<string, st
   })
   observer.observe(svg)
 
-  return Object.freeze({ transition, cancel, remove }) as Frame<Contexts>
+  return Object.freeze({
+    get contexts() {
+      return Object.freeze({ ...contexts })
+    },
+    transition,
+    cancel,
+    remove
+  }) as Frame<Contexts>
 }
 
 export { createFrame }

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { ArrowLeft, ArrowRight, FastArrowRight, OpenNewWindow } from 'iconoir-react'
 import { animate, stagger } from 'motion'
 
-import { theme } from '@/config'
+import { settings, theme } from '@/config'
 import { type HrProps, Hr } from '../Hr'
 import { Button } from '../Button'
 import { ButtonContent } from '../ButtonContent'
@@ -250,6 +250,18 @@ const AR = {
           )}
         </div>
       </nav>
+    </Animator>
+  ),
+
+  Playground: (props: { className?: string; url: string }): JSX.Element => (
+    <Animator>
+      <Animated
+        as="iframe"
+        data-name="playground"
+        className={cx('block w-full', props.className)}
+        src={`${settings.apps.play.url}${props.url}`}
+        animated={['flicker']}
+      />
     </Animator>
   )
 }

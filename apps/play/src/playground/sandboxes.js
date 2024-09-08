@@ -193,12 +193,28 @@ export const sandboxes = [
                 code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.sandbox.tsx'),
                 children: [
                   {
-                    name: 'paths',
-                    code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.paths.sandbox.tsx')
+                    name: 'shapes',
+                    code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.shapes.sandbox.tsx')
+                  },
+                  {
+                    name: 'classes',
+                    code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.classes.sandbox.tsx')
+                  },
+                  {
+                    name: 'styles',
+                    code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.styles.sandbox.tsx')
+                  },
+                  {
+                    name: 'animations',
+                    code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.animations.sandbox.tsx')
                   },
                   {
                     name: 'clipping',
                     code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.clipping.sandbox.tsx')
+                  },
+                  {
+                    name: 'masking',
+                    code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.masking.sandbox.tsx')
                   }
                 ]
               },

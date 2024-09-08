@@ -2,7 +2,6 @@
 
 import { Animated, Animator } from '@arwes/react'
 
-import { settings } from '@/config'
 import { AR } from '@/ui'
 import { ExampleAnimatorNodeState } from './ExampleAnimatorNodeState'
 import { ExampleAnimatorTree } from './ExampleAnimatorTree'
@@ -254,15 +253,10 @@ export default (): JSX.Element => (
       subsystems. It is up to the user to decide which workflows and transitions to use for an app.
     </AR.P>
 
-    <Animator>
-      <Animated
-        as="iframe"
-        data-name="playground"
-        className="block w-full h-[30rem] md:h-[35rem] lg:h-[40rem]"
-        src={`${settings.apps.play.url}?code=&type=predefined&sandbox=Examples%7CReact%7Csubsystems&explorer=false&editor=false&preview=true`}
-        animated={['flicker']}
-      />
-    </Animator>
+    <AR.Playground
+      className="h-[30rem] md:h-[35rem] lg:h-[40rem]"
+      url="?code=&type=predefined&sandbox=React%7CExamples%7Csubsystems&explorer=false&editor=false&preview=true"
+    />
 
     <AR.P>
       Some apps may not even need the exit transition for the most part but certain UI elements can

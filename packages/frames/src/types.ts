@@ -1,4 +1,4 @@
-import type { AnimatedCSSProps, AnimatedXTransition } from '@arwes/animated'
+import type { AnimatedCSSProps, AnimatedXAnimation } from '@arwes/animated'
 
 type ContextType = Record<string, string>
 
@@ -12,34 +12,45 @@ export type FrameSettingsElementCommon<Contexts extends ContextType = ContextTyp
       [S in Contexts[C]]?: {
         className?: string
         style?: AnimatedCSSProps
-        transition?: AnimatedXTransition
+        animate?: AnimatedXAnimation
       }
     }
   }
 }
 
+export type FrameSettingsSVG<Contexts extends ContextType = ContextType> =
+  FrameSettingsElementCommon<Contexts> & {
+    type: 'svg'
+    viewBox: string
+    x: number | string
+    y: number | string
+    width: number | string
+    height: number | string
+    elements: string | Array<FrameSettingsElement<Contexts>>
+  }
+
 export type FrameSettingsG<Contexts extends ContextType = ContextType> =
   FrameSettingsElementCommon<Contexts> & {
     type: 'g'
-    elements: Array<FrameSettingsElement<Contexts>>
+    elements: string | Array<FrameSettingsElement<Contexts>>
   }
 
 export type FrameSettingsDefs<Contexts extends ContextType = ContextType> =
   FrameSettingsElementCommon<Contexts> & {
     type: 'defs'
-    elements: Array<FrameSettingsElement<Contexts>>
+    elements: string | Array<FrameSettingsElement<Contexts>>
   }
 
 export type FrameSettingsClipPath<Contexts extends ContextType = ContextType> =
   FrameSettingsElementCommon<Contexts> & {
     type: 'clipPath'
-    elements: Array<FrameSettingsElement<Contexts>>
+    elements: string | Array<FrameSettingsElement<Contexts>>
   }
 
 export type FrameSettingsMask<Contexts extends ContextType = ContextType> =
   FrameSettingsElementCommon<Contexts> & {
     type: 'mask'
-    elements: Array<FrameSettingsElement<Contexts>>
+    elements: string | Array<FrameSettingsElement<Contexts>>
   }
 
 export type FrameSettingsPathDimension = number | string
@@ -70,13 +81,13 @@ export type FrameSettingsPathDefinition = FrameSettingsPathCommand[]
 export type FrameSettingsPath<Contexts extends ContextType = ContextType> =
   FrameSettingsElementCommon<Contexts> & {
     type?: 'path'
-    path: FrameSettingsPathDefinition
+    path: string | FrameSettingsPathDefinition
     contexts?: {
       [C in keyof Contexts]?: {
         [S in Contexts[C]]?: {
           className?: string
           style?: AnimatedCSSProps
-          transition?: AnimatedXTransition
+          animate?: AnimatedXAnimation
           path?: FrameSettingsPathDefinition
         }
       }
@@ -84,6 +95,7 @@ export type FrameSettingsPath<Contexts extends ContextType = ContextType> =
   }
 
 export type FrameSettingsElement<Contexts extends ContextType = ContextType> =
+  | FrameSettingsSVG<Contexts>
   | FrameSettingsG<Contexts>
   | FrameSettingsDefs<Contexts>
   | FrameSettingsClipPath<Contexts>
@@ -109,6 +121,7 @@ type FrameTransition<
 > = (context: C, state: S) => void
 
 export type Frame<Contexts extends ContextType = ContextType> = {
+  contexts: Contexts
   transition: FrameTransition<Contexts>
   cancel: () => void
   remove: () => void

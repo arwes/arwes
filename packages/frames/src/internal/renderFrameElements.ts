@@ -70,12 +70,21 @@ const renderFrameElements = (
       Object.assign(element.style, formatStaticStyles(style as Record<string, string>))
     }
 
+    if (elementSettings.type === 'svg') {
+      element.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+    }
+
     switch (elementSettings.type) {
+      case 'svg':
       case 'g':
       case 'defs':
       case 'clipPath':
       case 'mask': {
-        renderFrameElements(element, width, height, elementSettings.elements, contexts)
+        if (typeof elementSettings.elements === 'string') {
+          element.innerHTML = elementSettings.elements
+        } else {
+          renderFrameElements(element, width, height, elementSettings.elements, contexts)
+        }
         break
       }
     }
