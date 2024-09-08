@@ -93,6 +93,10 @@ export const sandboxes = [
               {
                 name: 'createAnimatedXElement',
                 code: require('!raw-loader?esModule=false!@repository/packages/animated/src/createAnimatedXElement/createAnimatedXElement.sandbox.tsx')
+              },
+              {
+                name: 'animateDraw',
+                code: require('!raw-loader?esModule=false!@repository/packages/animated/src/animateDraw/animateDraw.sandbox.tsx')
               }
             ]
           }
@@ -219,6 +223,10 @@ export const sandboxes = [
                   {
                     name: 'animator',
                     code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.animator.sandbox.tsx')
+                  },
+                  {
+                    name: 'drawing',
+                    code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.drawing.sandbox.tsx')
                   }
                 ]
               },

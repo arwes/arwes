@@ -1,18 +1,30 @@
+import { animate } from 'motion'
 import { type FrameSettings, createFrame } from '@arwes/frames'
 
 const root = document.querySelector('#root')!
 root.innerHTML = `
-  <svg class="frame" xmlns="http://www.w3.org/2000/svg"></svg>
+  <div class="box">
+    <svg class="frame" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
 
   <style>
+    .box {
+      position: relative;
+      width: 100px;
+      height: 100px;
+    }
     .frame {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      width: round(down, 100%, 1px);
-      height: 200px;
+      width: round(down, 100%, 1px); /* Prevent clipping errors on decimals. */
+      height: 100%;
+      height: round(down, 100%, 1px); /* Prevent clipping errors on decimals. */
     }
   </style>
 `
 
+const box = root.querySelector<HTMLDivElement>('.box')!
 const svg = root.querySelector('svg')!
 
 const settings: FrameSettings = {
@@ -69,3 +81,12 @@ const settings: FrameSettings = {
 }
 
 createFrame(svg, settings)
+
+// Resize the frame dimensions to see how it re-draws the elements responsively.
+animate(
+  (progress) => {
+    box.style.width = `${100 + progress * 200}px`
+    box.style.height = `${300 - progress * 200}px`
+  },
+  { duration: 3, easing: 'linear', repeat: Infinity, direction: 'alternate' }
+)

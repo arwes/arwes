@@ -36,6 +36,7 @@ export type EasingName =
   | 'outBounce'
   | 'inOutBounce'
 export type Easing = EasingFn | EasingName
+export type EasingMotion = AnimationOptionsWithOverrides['easing'] | Easing
 
 export interface AnimatedCSSPropsShorthands {
   x?: number | string

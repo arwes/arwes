@@ -23,6 +23,11 @@ let isEntering = false
 const animate = (): void => {
   isEntering = !isEntering
 
+  // It will search for elements with the selector:
+  // - [data-name="line"]
+  // - [data-name="bg"]
+  // - [data-name="deco"]
+  // And animate them with assembling/disassembling animation.
   animateFrameAssembler({
     element: svg,
     duration: 1,

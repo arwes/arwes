@@ -1,15 +1,13 @@
-import type { AnimationOptionsWithOverrides } from '@motionone/dom'
-import { animate } from 'motion'
-
-import type { EasingName, AnimatedSettings, AnimatedAnimation } from '../types.js'
+import type { EasingMotion, AnimatedSettings, AnimatedAnimation } from '../types.js'
 import { easing } from '../easing/index.js'
+import { animateDraw } from '../animateDraw/index.js'
 
 const transition = (
   prop: string,
   from: number | string,
   to: number | string,
   back?: number | string,
-  easing?: AnimationOptionsWithOverrides['easing'] | EasingName
+  easing?: EasingMotion
 ): AnimatedSettings => ({
   transitions: {
     entering: { [prop]: [from, to], easing } as unknown as AnimatedAnimation,
@@ -33,43 +31,22 @@ const flickerTransition = Object.freeze({
 })
 const flicker = (): AnimatedSettings => flickerTransition
 
-const draw = (
-  durationCustom?: number | undefined,
-  easingCustom?: (x: number) => number
-): AnimatedSettings => ({
+const draw = (durationCustom?: number | undefined, easing?: EasingMotion): AnimatedSettings => ({
   transitions: {
-    entering: ({ element, duration }) => {
-      if (!(element instanceof SVGPathElement) || duration <= 0) {
-        return
-      }
-
-      const length = element.getTotalLength()
-
-      element.style.strokeDashoffset = String(length)
-      element.style.strokeDasharray = String(length)
-
-      return animate(
-        element,
-        { strokeDashoffset: [length, 0] },
-        { duration: durationCustom ?? duration, easing: easingCustom ?? easing.outSine }
-      )
-    },
-    exiting: ({ element, duration }) => {
-      if (!(element instanceof SVGPathElement) || duration <= 0) {
-        return
-      }
-
-      const length = element.getTotalLength()
-
-      element.style.strokeDashoffset = '0'
-      element.style.strokeDasharray = String(length)
-
-      return animate(
-        element,
-        { strokeDashoffset: [0, length] },
-        { duration: durationCustom ?? duration, easing: easingCustom ?? easing.outSine }
-      )
-    }
+    entering: ({ element, duration }) =>
+      animateDraw({
+        isEntering: true,
+        element: element as SVGPathElement,
+        duration: durationCustom ?? duration,
+        easing
+      }),
+    exiting: ({ element, duration }) =>
+      animateDraw({
+        isEntering: false,
+        element: element as SVGPathElement,
+        duration: durationCustom ?? duration,
+        easing
+      })
   }
 })
 
