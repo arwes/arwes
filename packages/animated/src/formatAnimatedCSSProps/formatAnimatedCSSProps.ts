@@ -25,9 +25,7 @@ const propsTransformUnitless = {
   scaleZ: 'scaleZ'
 }
 
-const formatAnimatedCSSPropsShorthands = (
-  cssPropertiesEnhanced: AnimatedCSSProps
-): CSSProperties => {
+const formatAnimatedCSSProps = (cssPropertiesEnhanced: AnimatedCSSProps): CSSProperties => {
   const cssProperties: CSSProperties = {}
 
   let transform = ''
@@ -38,15 +36,24 @@ const formatAnimatedCSSPropsShorthands = (
     if (propsTransformDistances[key as keyof typeof propsTransformDistances]) {
       const name = propsTransformDistances[key as keyof typeof propsTransformDistances]
       const value: string = Number.isFinite(raw) ? `${raw}px` : String(raw)
-      transform += ` ${name}(${value})`
-    } else if (propsTransformAngles[key as keyof typeof propsTransformAngles]) {
+      transform += ` ${name}(var(--motion-${name}))`
+      cssProperties[`--motion-${name}` as 'transform'] = value
+    }
+    //
+    else if (propsTransformAngles[key as keyof typeof propsTransformAngles]) {
       const name = propsTransformAngles[key as keyof typeof propsTransformAngles]
       const value: string = Number.isFinite(raw) ? `${raw}deg` : String(raw)
-      transform += ` ${name}(${value})`
-    } else if (propsTransformUnitless[key as keyof typeof propsTransformUnitless]) {
+      transform += ` ${name}(var(--motion-${name}))`
+      cssProperties[`--motion-${name}` as 'transform'] = value
+    }
+    //
+    else if (propsTransformUnitless[key as keyof typeof propsTransformUnitless]) {
       const name = propsTransformUnitless[key as keyof typeof propsTransformUnitless]
-      transform += ` ${name}(${raw})`
-    } else {
+      transform += ` ${name}(var(--motion-${name}))`
+      cssProperties[`--motion-${name}` as 'transform'] = raw
+    }
+    //
+    else {
       ;(cssProperties as any)[key] = raw
     }
   })
@@ -60,4 +67,4 @@ const formatAnimatedCSSPropsShorthands = (
   return cssProperties
 }
 
-export { formatAnimatedCSSPropsShorthands }
+export { formatAnimatedCSSProps }
