@@ -5,7 +5,7 @@ import { type CreateFrameUnderlineSettingsProps, createFrameUnderlineSettings } 
 
 import { type FrameBaseProps, FrameBase } from '../FrameBase/index.js'
 
-type FrameUnderlineProps = FrameBaseProps & CreateFrameUnderlineSettingsProps
+type FrameUnderlineProps = Omit<FrameBaseProps, 'settings'> & CreateFrameUnderlineSettingsProps
 
 const FrameUnderline = memo((props: FrameUnderlineProps): JSX.Element => {
   const { styled, squareSize, strokeWidth, padding } = props

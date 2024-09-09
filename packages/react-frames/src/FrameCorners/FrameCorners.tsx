@@ -5,7 +5,7 @@ import { type CreateFrameCornersSettingsProps, createFrameCornersSettings } from
 
 import { type FrameBaseProps, FrameBase } from '../FrameBase/index.js'
 
-type FrameCornersProps = FrameBaseProps & CreateFrameCornersSettingsProps
+type FrameCornersProps = Omit<FrameBaseProps, 'settings'> & CreateFrameCornersSettingsProps
 
 const FrameCorners = memo((props: FrameCornersProps): JSX.Element => {
   const { styled, padding, strokeWidth, cornerLength } = props

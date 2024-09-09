@@ -5,7 +5,7 @@ import { type CreateFrameLinesSettingsProps, createFrameLinesSettings } from '@a
 
 import { type FrameBaseProps, FrameBase } from '../FrameBase/index.js'
 
-type FrameLinesProps = FrameBaseProps & CreateFrameLinesSettingsProps
+type FrameLinesProps = Omit<FrameBaseProps, 'settings'> & CreateFrameLinesSettingsProps
 
 const FrameLines = memo((props: FrameLinesProps): JSX.Element => {
   const { styled, padding, largeLineWidth, smallLineWidth, smallLineLength } = props

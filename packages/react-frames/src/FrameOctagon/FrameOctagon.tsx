@@ -5,7 +5,7 @@ import { type CreateFrameOctagonSettingsProps, createFrameOctagonSettings } from
 
 import { type FrameBaseProps, FrameBase } from '../FrameBase/index.js'
 
-type FrameOctagonProps = FrameBaseProps & CreateFrameOctagonSettingsProps
+type FrameOctagonProps = Omit<FrameBaseProps, 'settings'> & CreateFrameOctagonSettingsProps
 
 const FrameOctagon = memo((props: FrameOctagonProps): JSX.Element => {
   const { styled, leftTop, rightTop, rightBottom, leftBottom, squareSize, strokeWidth, padding } =

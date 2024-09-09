@@ -5,7 +5,7 @@ import { type CreateFrameKranoxSettingsProps, createFrameKranoxSettings } from '
 
 import { type FrameBaseProps, FrameBase } from '../FrameBase/index.js'
 
-type FrameKranoxProps = FrameBaseProps & CreateFrameKranoxSettingsProps
+type FrameKranoxProps = Omit<FrameBaseProps, 'settings'> & CreateFrameKranoxSettingsProps
 
 const FrameKranox = memo((props: FrameKranoxProps): JSX.Element => {
   const {

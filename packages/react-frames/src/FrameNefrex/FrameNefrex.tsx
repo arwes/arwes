@@ -5,7 +5,7 @@ import { type CreateFrameNefrexSettingsProps, createFrameNefrexSettings } from '
 
 import { type FrameBaseProps, FrameBase } from '../FrameBase/index.js'
 
-type FrameNefrexProps = FrameBaseProps & CreateFrameNefrexSettingsProps
+type FrameNefrexProps = Omit<FrameBaseProps, 'settings'> & CreateFrameNefrexSettingsProps
 
 const FrameNefrex = memo((props: FrameNefrexProps): JSX.Element => {
   const { styled, squareSize, strokeWidth, smallLineLength, largeLineLength, padding } = props
