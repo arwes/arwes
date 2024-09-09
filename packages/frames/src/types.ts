@@ -96,6 +96,34 @@ export type FrameSettingsPath<Contexts extends ContextType = ContextType> =
     }
   }
 
+export type FrameSettingsRect<Contexts extends ContextType = ContextType> =
+  FrameSettingsElementCommon<Contexts> & {
+    type: 'rect'
+    x: number | string
+    y: number | string
+    width: number | string
+    height: number | string
+    rx?: number | string
+    ry?: number | string
+  }
+
+export type FrameSettingsCircle<Contexts extends ContextType = ContextType> =
+  FrameSettingsElementCommon<Contexts> & {
+    type: 'circle'
+    cx: number | string
+    cy: number | string
+    r: number | string
+  }
+
+export type FrameSettingsEllipse<Contexts extends ContextType = ContextType> =
+  FrameSettingsElementCommon<Contexts> & {
+    type: 'ellipse'
+    cx: number | string
+    cy: number | string
+    rx: number | string
+    ry: number | string
+  }
+
 export type FrameSettingsElement<Contexts extends ContextType = ContextType> =
   | FrameSettingsSVG<Contexts>
   | FrameSettingsG<Contexts>
@@ -103,6 +131,9 @@ export type FrameSettingsElement<Contexts extends ContextType = ContextType> =
   | FrameSettingsClipPath<Contexts>
   | FrameSettingsMask<Contexts>
   | FrameSettingsPath<Contexts>
+  | FrameSettingsRect<Contexts>
+  | FrameSettingsCircle<Contexts>
+  | FrameSettingsEllipse<Contexts>
 
 export interface FrameSettings<Contexts extends ContextType = ContextType> {
   container?: SVGGElement

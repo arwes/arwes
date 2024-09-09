@@ -25,6 +25,28 @@ const drawFrameElements = (
       }
     }
     //
+    else if (childSettings.type === 'rect') {
+      child.setAttribute('x', formatFrameDimension(width, childSettings.x))
+      child.setAttribute('y', formatFrameDimension(height, childSettings.y))
+      child.setAttribute('width', formatFrameDimension(width, childSettings.width))
+      child.setAttribute('height', formatFrameDimension(height, childSettings.height))
+      childSettings.rx !== undefined && child.setAttribute('rx', String(childSettings.rx))
+      childSettings.ry !== undefined && child.setAttribute('ry', String(childSettings.ry))
+    }
+    //
+    else if (childSettings.type === 'circle') {
+      child.setAttribute('cx', formatFrameDimension(width, childSettings.cx))
+      child.setAttribute('cy', formatFrameDimension(height, childSettings.cy))
+      child.setAttribute('r', String(childSettings.r))
+    }
+    //
+    else if (childSettings.type === 'ellipse') {
+      child.setAttribute('cx', formatFrameDimension(width, childSettings.cx))
+      child.setAttribute('cy', formatFrameDimension(height, childSettings.cy))
+      child.setAttribute('rx', String(childSettings.rx))
+      child.setAttribute('ry', String(childSettings.ry))
+    }
+    //
     else if (childSettings.type === 'svg') {
       child.setAttribute('viewBox', childSettings.viewBox)
       child.setAttribute('x', formatFrameDimension(width, childSettings.x))

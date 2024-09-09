@@ -64,7 +64,7 @@ const transitionElement = (
       if (typeof state.animate === 'function') {
         const $ = <T = SVGElement | HTMLElement>(query: string): T[] =>
           Array.from(element.querySelectorAll(query)) as T[]
-        animation = state.animate({ element, $ })!
+        animation = state.animate({ element, $ }) as undefined | AnimatedXAnimationFunctionReturn
       }
       //
       else {
