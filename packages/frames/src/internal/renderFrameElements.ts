@@ -1,4 +1,3 @@
-import { cx } from '@arwes/tools'
 import type { AnimatorNode } from '@arwes/animator'
 import {
   type AnimatedXAnimationFunctionReturn,
@@ -6,7 +5,7 @@ import {
   createAnimatedElement
 } from '@arwes/animated'
 
-import type { FrameSettingsElement, FrameSettingsPath } from '../types.js'
+import type { FrameSettingsElement } from '../types.js'
 
 const renderFrameElements = (
   parent: SVGElement,
@@ -20,44 +19,13 @@ const renderFrameElements = (
   const children = Array.from(parent.children) as SVGElement[]
 
   for (let index = 0; index < elements.length; index++) {
-    const elementSettings = { ...elements[index] }
-    const elementContexts = (elementSettings as FrameSettingsPath).contexts
+    const settings = elements[index]
 
-    if (elementContexts) {
-      const elementContextsNames = Object.keys(elementContexts)
-
-      for (const contextName of elementContextsNames) {
-        const elementContext = elementContexts[contextName]!
-        const contextState = contexts[contextName]
-        const elementState = elementContext[contextState]
-
-        if (!elementState) {
-          continue
-        }
-
-        if (elementState.className) {
-          elementSettings.className = cx(elementSettings.className, elementState.className)
-        }
-
-        if (elementState.style) {
-          elementSettings.style = {
-            ...elementSettings.style,
-            ...elementState.style
-          }
-        }
-
-        if (elementState.path) {
-          ;(elementSettings as FrameSettingsPath).path = elementState.path
-        }
-      }
-    }
-
-    const child = children[index]
     const element =
-      child ??
-      document.createElementNS('http://www.w3.org/2000/svg', elementSettings.type ?? 'path')
+      children[index] ??
+      document.createElementNS('http://www.w3.org/2000/svg', settings.type ?? 'path')
 
-    const { name, id, className, style } = elementSettings
+    const { name, id, className, style } = settings
 
     if (name) {
       element.dataset.name = name
@@ -78,24 +46,24 @@ const renderFrameElements = (
       )
     }
 
-    if (elementSettings.type === 'svg') {
+    if (settings.type === 'svg') {
       element.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
     }
 
-    switch (elementSettings.type) {
+    switch (settings.type) {
       case 'svg':
       case 'g':
       case 'defs':
       case 'clipPath':
       case 'mask': {
-        if (typeof elementSettings.elements === 'string') {
-          element.innerHTML = elementSettings.elements
+        if (typeof settings.elements === 'string') {
+          element.innerHTML = settings.elements
         } else {
           renderFrameElements(
             element,
             width,
             height,
-            elementSettings.elements,
+            settings.elements,
             contexts,
             animator,
             animations
@@ -105,7 +73,7 @@ const renderFrameElements = (
       }
     }
 
-    if (animator && elementSettings.animated) {
+    if (animator && settings.animated) {
       const elementAnimations =
         animations.get(element) ?? new Map<string, AnimatedXAnimationFunctionReturn>()
 
@@ -117,7 +85,7 @@ const renderFrameElements = (
         animator,
         settingsRef: {
           current: {
-            animated: elementSettings.animated
+            animated: settings.animated
           }
         }
       })

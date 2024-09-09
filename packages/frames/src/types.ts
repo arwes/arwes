@@ -105,6 +105,21 @@ export type FrameSettingsRect<Contexts extends ContextType = ContextType> =
     height: number | string
     rx?: number | string
     ry?: number | string
+    contexts?: {
+      [C in keyof Contexts]?: {
+        [S in Contexts[C]]?: {
+          className?: string
+          style?: AnimatedCSSProps
+          animate?: AnimatedXAnimation
+          x: number | string
+          y: number | string
+          width: number | string
+          height: number | string
+          rx?: number | string
+          ry?: number | string
+        }
+      }
+    }
   }
 
 export type FrameSettingsCircle<Contexts extends ContextType = ContextType> =
@@ -113,6 +128,18 @@ export type FrameSettingsCircle<Contexts extends ContextType = ContextType> =
     cx: number | string
     cy: number | string
     r: number | string
+    contexts?: {
+      [C in keyof Contexts]?: {
+        [S in Contexts[C]]?: {
+          className?: string
+          style?: AnimatedCSSProps
+          animate?: AnimatedXAnimation
+          cx: number | string
+          cy: number | string
+          r: number | string
+        }
+      }
+    }
   }
 
 export type FrameSettingsEllipse<Contexts extends ContextType = ContextType> =
@@ -122,6 +149,19 @@ export type FrameSettingsEllipse<Contexts extends ContextType = ContextType> =
     cy: number | string
     rx: number | string
     ry: number | string
+    contexts?: {
+      [C in keyof Contexts]?: {
+        [S in Contexts[C]]?: {
+          className?: string
+          style?: AnimatedCSSProps
+          animate?: AnimatedXAnimation
+          cx: number | string
+          cy: number | string
+          rx: number | string
+          ry: number | string
+        }
+      }
+    }
   }
 
 export type FrameSettingsElement<Contexts extends ContextType = ContextType> =

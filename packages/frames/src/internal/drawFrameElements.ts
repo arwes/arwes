@@ -6,63 +6,123 @@ const drawFrameElements = (
   parent: SVGElement,
   width: number,
   height: number,
-  elementsSettings: FrameSettingsElement[]
+  elementsSettings: FrameSettingsElement[],
+  contexts: Record<string, string>
 ): void => {
   const children = Array.from(parent.children) as SVGElement[]
 
-  for (let index = 0; index < children.length; index++) {
-    const child = children[index]
-    const childSettings = elementsSettings[index]
+  for (let index = 0; index < elementsSettings.length; index++) {
+    const element = children[index]
+    const settings = { ...elementsSettings[index] }
+    const contextsNames: string[] = settings.contexts ? Object.keys(settings.contexts) : []
 
-    if (childSettings.type === undefined || childSettings.type === 'path') {
+    if (!element) {
+      throw new Error('ARWES frame elements did not match the origin setup on drawing.')
+    }
+
+    if (settings.type === undefined || settings.type === 'path') {
+      for (const contextName of contextsNames) {
+        const state = contexts[contextName]
+        const elementState = settings.contexts![contextName]![state]
+
+        if (!elementState) {
+          continue
+        }
+
+        elementState.path && (settings.path = elementState.path)
+      }
+
       const d =
-        typeof childSettings.path === 'string'
-          ? childSettings.path
-          : formatFramePath(width, height, childSettings.path)
+        typeof settings.path === 'string'
+          ? settings.path
+          : formatFramePath(width, height, settings.path)
 
-      if (child.getAttribute('d') !== d) {
-        child.setAttribute('d', d)
+      if (element.getAttribute('d') !== d) {
+        element.setAttribute('d', d)
       }
     }
     //
-    else if (childSettings.type === 'rect') {
-      child.setAttribute('x', formatFrameDimension(width, childSettings.x))
-      child.setAttribute('y', formatFrameDimension(height, childSettings.y))
-      child.setAttribute('width', formatFrameDimension(width, childSettings.width))
-      child.setAttribute('height', formatFrameDimension(height, childSettings.height))
-      childSettings.rx !== undefined && child.setAttribute('rx', String(childSettings.rx))
-      childSettings.ry !== undefined && child.setAttribute('ry', String(childSettings.ry))
+    else if (settings.type === 'rect') {
+      for (const contextName of contextsNames) {
+        const state = contexts[contextName]
+        const elementState = settings.contexts![contextName]![state]
+
+        if (!elementState) {
+          continue
+        }
+
+        elementState.x !== undefined && (settings.x = elementState.x)
+        elementState.y !== undefined && (settings.y = elementState.y)
+        elementState.width !== undefined && (settings.width = elementState.width)
+        elementState.height !== undefined && (settings.height = elementState.height)
+        elementState.rx !== undefined && (settings.rx = elementState.rx)
+        elementState.ry !== undefined && (settings.ry = elementState.ry)
+      }
+
+      element.setAttribute('x', formatFrameDimension(width, settings.x))
+      element.setAttribute('y', formatFrameDimension(height, settings.y))
+      element.setAttribute('width', formatFrameDimension(width, settings.width))
+      element.setAttribute('height', formatFrameDimension(height, settings.height))
+      settings.rx !== undefined && element.setAttribute('rx', String(settings.rx))
+      settings.ry !== undefined && element.setAttribute('ry', String(settings.ry))
     }
     //
-    else if (childSettings.type === 'circle') {
-      child.setAttribute('cx', formatFrameDimension(width, childSettings.cx))
-      child.setAttribute('cy', formatFrameDimension(height, childSettings.cy))
-      child.setAttribute('r', String(childSettings.r))
+    else if (settings.type === 'circle') {
+      for (const contextName of contextsNames) {
+        const state = contexts[contextName]
+        const elementState = settings.contexts![contextName]![state]
+
+        if (!elementState) {
+          continue
+        }
+
+        elementState.cx !== undefined && (settings.cx = elementState.cx)
+        elementState.cy !== undefined && (settings.cy = elementState.cy)
+        elementState.r !== undefined && (settings.r = elementState.r)
+      }
+
+      element.setAttribute('cx', formatFrameDimension(width, settings.cx))
+      element.setAttribute('cy', formatFrameDimension(height, settings.cy))
+      element.setAttribute('r', String(settings.r))
     }
     //
-    else if (childSettings.type === 'ellipse') {
-      child.setAttribute('cx', formatFrameDimension(width, childSettings.cx))
-      child.setAttribute('cy', formatFrameDimension(height, childSettings.cy))
-      child.setAttribute('rx', String(childSettings.rx))
-      child.setAttribute('ry', String(childSettings.ry))
+    else if (settings.type === 'ellipse') {
+      for (const contextName of contextsNames) {
+        const state = contexts[contextName]
+        const elementState = settings.contexts![contextName]![state]
+
+        if (!elementState) {
+          continue
+        }
+
+        elementState.cx !== undefined && (settings.cx = elementState.cx)
+        elementState.cy !== undefined && (settings.cy = elementState.cy)
+        elementState.rx !== undefined && (settings.rx = elementState.rx)
+        elementState.ry !== undefined && (settings.ry = elementState.ry)
+      }
+
+      element.setAttribute('cx', formatFrameDimension(width, settings.cx))
+      element.setAttribute('cy', formatFrameDimension(height, settings.cy))
+      element.setAttribute('rx', String(settings.rx))
+      element.setAttribute('ry', String(settings.ry))
     }
     //
-    else if (childSettings.type === 'svg') {
-      child.setAttribute('viewBox', childSettings.viewBox)
-      child.setAttribute('x', formatFrameDimension(width, childSettings.x))
-      child.setAttribute('y', formatFrameDimension(height, childSettings.y))
-      child.setAttribute('width', formatFrameDimension(width, childSettings.width))
-      child.setAttribute('height', formatFrameDimension(height, childSettings.height))
+    else if (settings.type === 'svg') {
+      element.setAttribute('viewBox', settings.viewBox)
+      element.setAttribute('x', formatFrameDimension(width, settings.x))
+      element.setAttribute('y', formatFrameDimension(height, settings.y))
+      element.setAttribute('width', formatFrameDimension(width, settings.width))
+      element.setAttribute('height', formatFrameDimension(height, settings.height))
     }
 
-    switch (childSettings.type) {
+    switch (settings.type) {
       case 'svg':
       case 'g':
       case 'defs':
       case 'clipPath':
       case 'mask': {
-        if (Array.isArray(childSettings.elements)) {
-          drawFrameElements(child, width, height, childSettings.elements)
+        if (Array.isArray(settings.elements)) {
+          drawFrameElements(element, width, height, settings.elements, contexts)
         }
         break
       }

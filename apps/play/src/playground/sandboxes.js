@@ -97,10 +97,6 @@ export const sandboxes = [
               {
                 name: 'animateDraw',
                 code: require('!raw-loader?esModule=false!@repository/packages/animated/src/animateDraw/animateDraw.sandbox.tsx')
-              },
-              {
-                name: 'animateMorph',
-                code: require('!raw-loader?esModule=false!@repository/packages/animated/src/animateMorph/animateMorph.sandbox.tsx')
               }
             ]
           }
@@ -203,6 +199,10 @@ export const sandboxes = [
                   {
                     name: 'contextAnimations',
                     code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.contextAnimations.sandbox.tsx')
+                  },
+                  {
+                    name: 'contextAttrs',
+                    code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.contextAttrs.sandbox.tsx')
                   },
                   {
                     name: 'animator',

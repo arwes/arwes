@@ -45,11 +45,14 @@ const createFrame = <Contexts extends Record<string, string> = Record<string, st
   }
 
   const draw = (): void => {
-    drawFrameElements(container, width, height, settings.elements)
+    drawFrameElements(container, width, height, settings.elements, contexts)
   }
 
   const transition = (context: string, state: string): void => {
     contexts[context] = state
+
+    draw()
+
     transitionFrameElements(
       container,
       contexts,
@@ -79,6 +82,14 @@ const createFrame = <Contexts extends Record<string, string> = Record<string, st
   render()
   draw()
 
+  if (contexts) {
+    const contextNames = Object.keys(contexts)
+
+    for (const contextName of contextNames) {
+      transition(contextName, contexts[contextName])
+    }
+  }
+
   if (!container.parentNode) {
     svg.appendChild(container)
   }
@@ -94,6 +105,7 @@ const createFrame = <Contexts extends Record<string, string> = Record<string, st
     resize()
     draw()
   })
+
   observer.observe(svg)
 
   return Object.freeze({

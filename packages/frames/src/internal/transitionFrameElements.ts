@@ -10,18 +10,16 @@ const transitionElement = (
   element: SVGElement,
   contexts: Record<string, string>,
   animations: Map<SVGElement, Map<string, AnimatedXAnimationFunctionReturn>>,
-  elementSettings: FrameSettingsElement
+  settings: FrameSettingsElement
 ): void => {
-  const elementContexts = elementSettings.contexts
-
-  if (!elementContexts) {
+  if (!settings.contexts) {
     return
   }
 
-  const contextNames = Object.keys(elementContexts)
+  const contextNames = Object.keys(settings.contexts)
 
   contextNames
-    .map((name) => elementContexts[name])
+    .map((name) => settings.contexts![name])
     .filter(Boolean)
     .map((context) =>
       Object.keys(context!)
@@ -33,12 +31,7 @@ const transitionElement = (
     .forEach((className) => element.classList.remove(className!))
 
   for (const contextName of contextNames) {
-    const context = elementContexts[contextName]
-
-    if (!context) {
-      continue
-    }
-
+    const context = settings.contexts[contextName]!
     const state = context[contexts[contextName]]
 
     if (!state) {
@@ -66,10 +59,10 @@ const transitionElement = (
         element,
         settingsRef: {
           current: {
-            state: 'start',
+            state: 'initial',
             animated: {
               transitions: {
-                start: state.animate
+                initial: state.animate
               }
             }
           }
@@ -89,20 +82,24 @@ const transitionFrameElements = (
 ): void => {
   const children = Array.from(parent.children) as SVGElement[]
 
-  for (let index = 0; index < children.length; index++) {
-    const child = children[index]
-    const childSettings = elementsSettings[index]
+  for (let index = 0; index < elementsSettings.length; index++) {
+    const element = children[index]
+    const settings = elementsSettings[index]
 
-    transitionElement(child, contexts, animations, childSettings)
+    if (!element) {
+      throw new Error('ARWES frame elements did not match the origin setup on transition.')
+    }
 
-    switch (childSettings.type) {
+    transitionElement(element, contexts, animations, settings)
+
+    switch (settings.type) {
       case 'svg':
       case 'g':
       case 'defs':
       case 'clipPath':
       case 'mask': {
-        if (Array.isArray(childSettings.elements)) {
-          transitionFrameElements(child, contexts, animations, childSettings.elements)
+        if (Array.isArray(settings.elements)) {
+          transitionFrameElements(element, contexts, animations, settings.elements)
         }
         break
       }
