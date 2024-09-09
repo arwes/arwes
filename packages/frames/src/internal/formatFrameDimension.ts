@@ -7,7 +7,7 @@ const formatFrameDimension = (size: number, dimension: FrameSettingsPathDimensio
 
   if (/[^\d.\-+*/%\s()]/.test(dimension)) {
     throw new Error(
-      'ARWES formatFramePath does not support formulas with text different from math expressions.'
+      'ARWES frames does not support formulas with text different from math expressions.'
     )
   }
 

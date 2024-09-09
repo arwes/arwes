@@ -1,9 +1,7 @@
-import { animate } from 'motion'
 import {
-  type EasingName,
   type AnimatedXAnimationFunctionReturn,
-  easing as ARWESEasing,
-  formatAnimatedCSSPropsShorthands
+  formatAnimatedCSSPropsShorthands,
+  createAnimatedXElement
 } from '@arwes/animated'
 
 import type { FrameSettingsElement } from '../types.js'
@@ -59,39 +57,26 @@ const transitionElement = (
     }
 
     if (state.animate) {
-      let animation: undefined | AnimatedXAnimationFunctionReturn
+      const elementContextAnimations =
+        animations.get(element) ?? new Map<string, AnimatedXAnimationFunctionReturn>()
 
-      if (typeof state.animate === 'function') {
-        const $ = <T = SVGElement | HTMLElement>(query: string): T[] =>
-          Array.from(element.querySelectorAll(query)) as T[]
-        animation = state.animate({ element, $ }) as undefined | AnimatedXAnimationFunctionReturn
-      }
-      //
-      else {
-        const { duration, delay, easing, direction, repeat, options, ...styles } = state.animate
+      elementContextAnimations.get(contextName)?.cancel()
 
-        const animateEasing = easing ?? options?.easing
-        const animateEasingFunction =
-          typeof animateEasing === 'string'
-            ? ARWESEasing[animateEasing as EasingName] || animateEasing
-            : animateEasing
+      const animation = createAnimatedXElement({
+        element,
+        settingsRef: {
+          current: {
+            state: 'start',
+            animated: {
+              transitions: {
+                start: state.animate
+              }
+            }
+          }
+        }
+      })
 
-        animation = animate(element, styles, {
-          duration,
-          delay,
-          easing: animateEasingFunction,
-          direction,
-          repeat,
-          ...options
-        })
-      }
-
-      if (animation) {
-        const elementContextAnimations =
-          animations.get(element) ?? new Map<string, AnimatedXAnimationFunctionReturn>()
-        elementContextAnimations.get(contextName)?.cancel()
-        elementContextAnimations.set(contextName, animation)
-      }
+      elementContextAnimations.set(contextName, animation)
     }
   }
 }

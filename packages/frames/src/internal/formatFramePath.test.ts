@@ -121,8 +121,6 @@ test('Should throw error if characters different for math are found in the dimen
   ;['x', '1_0', '1$ 0', '1 a0', 'console.log(window);', '1e2'].forEach((formula) => {
     expect(() => {
       formatFramePath(10, 10, [['H', formula]])
-    }).toThrow(
-      'ARWES formatFramePath does not support formulas with text different from math expressions.'
-    )
+    }).toThrow('ARWES frames does not support formulas with text different from math expressions.')
   })
 })
