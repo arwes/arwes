@@ -97,6 +97,10 @@ export const sandboxes = [
               {
                 name: 'animateDraw',
                 code: require('!raw-loader?esModule=false!@repository/packages/animated/src/animateDraw/animateDraw.sandbox.tsx')
+              },
+              {
+                name: 'animateMorph',
+                code: require('!raw-loader?esModule=false!@repository/packages/animated/src/animateMorph/animateMorph.sandbox.tsx')
               }
             ]
           }
@@ -169,30 +173,6 @@ export const sandboxes = [
             name: '@arwes/frames',
             children: [
               {
-                name: 'createFrameUnderlineSettings',
-                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameUnderlineSettings/createFrameUnderlineSettings.sandbox.tsx')
-              },
-              {
-                name: 'createFrameLinesSettings',
-                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameLinesSettings/createFrameLinesSettings.sandbox.tsx')
-              },
-              {
-                name: 'createFrameCornersSettings',
-                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameCornersSettings/createFrameCornersSettings.sandbox.tsx')
-              },
-              {
-                name: 'createFrameOctagonSettings',
-                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameOctagonSettings/createFrameOctagonSettings.sandbox.tsx')
-              },
-              {
-                name: 'createFrameNefrexSettings',
-                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameNefrexSettings/createFrameNefrexSettings.sandbox.tsx')
-              },
-              {
-                name: 'createFrameKranoxSettings',
-                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameKranoxSettings/createFrameKranoxSettings.sandbox.tsx')
-              },
-              {
                 name: 'createFrame',
                 code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.sandbox.tsx'),
                 children: [
@@ -229,6 +209,30 @@ export const sandboxes = [
                     code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.drawing.sandbox.tsx')
                   }
                 ]
+              },
+              {
+                name: 'createFrameUnderlineSettings',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameUnderlineSettings/createFrameUnderlineSettings.sandbox.tsx')
+              },
+              {
+                name: 'createFrameLinesSettings',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameLinesSettings/createFrameLinesSettings.sandbox.tsx')
+              },
+              {
+                name: 'createFrameCornersSettings',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameCornersSettings/createFrameCornersSettings.sandbox.tsx')
+              },
+              {
+                name: 'createFrameOctagonSettings',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameOctagonSettings/createFrameOctagonSettings.sandbox.tsx')
+              },
+              {
+                name: 'createFrameNefrexSettings',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameNefrexSettings/createFrameNefrexSettings.sandbox.tsx')
+              },
+              {
+                name: 'createFrameKranoxSettings',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameKranoxSettings/createFrameKranoxSettings.sandbox.tsx')
               },
               {
                 name: 'animateFrameAssembler',
