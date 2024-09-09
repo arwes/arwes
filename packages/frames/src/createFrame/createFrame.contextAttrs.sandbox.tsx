@@ -69,25 +69,6 @@ const settings: FrameSettings<Contexts> = {
       }
     },
     {
-      type: 'circle',
-      style: {
-        fill: 'none',
-        stroke: 'hsl(200 75% 50%)',
-        strokeWidth: '2',
-        transition: 'all ease-out 200ms'
-      },
-      cx: 0,
-      cy: 0,
-      r: 0,
-      contexts: {
-        variant: {
-          first: { cx: 50, cy: 150, r: 40 },
-          second: { cx: 30, cy: 130, r: 20 },
-          third: { cx: 70, cy: 170, r: 20 }
-        }
-      }
-    },
-    {
       type: 'ellipse',
       style: {
         fill: 'none',
@@ -101,9 +82,9 @@ const settings: FrameSettings<Contexts> = {
       ry: 0,
       contexts: {
         variant: {
-          first: { cx: 150, cy: 150, rx: 40, ry: 20 },
-          second: { cx: 130, cy: 130, rx: 20, ry: 10 },
-          third: { cx: 170, cy: 170, rx: 10, ry: 20 }
+          first: { cx: 250, cy: 50, rx: 40, ry: 40 },
+          second: { cx: 230, cy: 30, rx: 20, ry: 10 },
+          third: { cx: 270, cy: 70, rx: 10, ry: 20 }
         }
       }
     }

@@ -17,7 +17,7 @@ const drawFrameElements = (
     const contextsNames: string[] = settings.contexts ? Object.keys(settings.contexts) : []
 
     if (!element) {
-      throw new Error('ARWES frame elements did not match the origin setup on drawing.')
+      throw new Error('ARWES frame elements did not match the original setup on drawing.')
     }
 
     if (settings.type === undefined || settings.type === 'path') {
@@ -67,25 +67,6 @@ const drawFrameElements = (
       settings.ry !== undefined && element.setAttribute('ry', String(settings.ry))
     }
     //
-    else if (settings.type === 'circle') {
-      for (const contextName of contextsNames) {
-        const state = contexts[contextName]
-        const elementState = settings.contexts![contextName]![state]
-
-        if (!elementState) {
-          continue
-        }
-
-        elementState.cx !== undefined && (settings.cx = elementState.cx)
-        elementState.cy !== undefined && (settings.cy = elementState.cy)
-        elementState.r !== undefined && (settings.r = elementState.r)
-      }
-
-      element.setAttribute('cx', formatFrameDimension(width, settings.cx))
-      element.setAttribute('cy', formatFrameDimension(height, settings.cy))
-      element.setAttribute('r', String(settings.r))
-    }
-    //
     else if (settings.type === 'ellipse') {
       for (const contextName of contextsNames) {
         const state = contexts[contextName]
@@ -108,6 +89,21 @@ const drawFrameElements = (
     }
     //
     else if (settings.type === 'svg') {
+      for (const contextName of contextsNames) {
+        const state = contexts[contextName]
+        const elementState = settings.contexts![contextName]![state]
+
+        if (!elementState) {
+          continue
+        }
+
+        elementState.viewBox !== undefined && (settings.viewBox = elementState.viewBox)
+        elementState.x !== undefined && (settings.x = elementState.x)
+        elementState.y !== undefined && (settings.y = elementState.y)
+        elementState.width !== undefined && (settings.width = elementState.width)
+        elementState.height !== undefined && (settings.height = elementState.height)
+      }
+
       element.setAttribute('viewBox', settings.viewBox)
       element.setAttribute('x', formatFrameDimension(width, settings.x))
       element.setAttribute('y', formatFrameDimension(height, settings.y))

@@ -1,7 +1,7 @@
 import { animate } from 'motion'
 import { filterProps } from '@arwes/tools'
 
-import { formatAnimatedCSSPropsShorthands } from '../formatAnimatedCSSPropsShorthands/index.js'
+import { applyAnimatedCSSProps } from '../applyAnimatedCSSProps/index.js'
 import { easing } from '../easing/index.js'
 
 import type {
@@ -67,11 +67,9 @@ const createAnimatedXElement = <
 
     const dynamicStyles = animatedList
       .map((item) => item?.initialStyle)
-      .filter(Boolean)
-      .map((style) => formatAnimatedCSSPropsShorthands(style!))
       .reduce((total, item) => ({ ...total, ...item }), {})
 
-    Object.assign(element.style, dynamicStyles)
+    applyAnimatedCSSProps(element, dynamicStyles!)
   }
 
   const runAnimations = (): void => {

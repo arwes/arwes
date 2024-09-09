@@ -1,8 +1,8 @@
 import type { AnimatorNode } from '@arwes/animator'
 import {
   type AnimatedXAnimationFunctionReturn,
-  formatAnimatedCSSPropsShorthands,
-  createAnimatedElement
+  createAnimatedElement,
+  applyAnimatedCSSProps
 } from '@arwes/animated'
 
 import type { FrameSettingsElement } from '../types.js'
@@ -40,10 +40,7 @@ const renderFrameElements = (
     }
 
     if (style) {
-      Object.assign(
-        element.style,
-        formatAnimatedCSSPropsShorthands(style as Record<string, string>)
-      )
+      applyAnimatedCSSProps(element, style)
     }
 
     if (settings.type === 'svg') {

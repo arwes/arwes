@@ -1,6 +1,6 @@
 import {
   type AnimatedXAnimationFunctionReturn,
-  formatAnimatedCSSPropsShorthands,
+  applyAnimatedCSSProps,
   createAnimatedXElement
 } from '@arwes/animated'
 
@@ -43,10 +43,7 @@ const transitionElement = (
     }
 
     if (state.style) {
-      Object.assign(
-        element.style,
-        formatAnimatedCSSPropsShorthands(state.style as Record<string, unknown>)
-      )
+      applyAnimatedCSSProps(element, state.style)
     }
 
     if (state.animate) {
@@ -87,7 +84,7 @@ const transitionFrameElements = (
     const settings = elementsSettings[index]
 
     if (!element) {
-      throw new Error('ARWES frame elements did not match the origin setup on transition.')
+      throw new Error('ARWES frame elements did not match the original setup on transition.')
     }
 
     transitionElement(element, contexts, animations, settings)

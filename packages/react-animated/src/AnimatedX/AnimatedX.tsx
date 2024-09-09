@@ -12,11 +12,7 @@ import {
 
 import type { NoInfer } from '@arwes/tools'
 import { mergeRefs } from '@arwes/react-tools'
-import {
-  type AnimatedSettings,
-  type AnimatedXProp,
-  formatAnimatedCSSPropsShorthands
-} from '@arwes/animated'
+import { type AnimatedSettings, type AnimatedXProp, formatAnimatedCSSProps } from '@arwes/animated'
 
 import { useAnimatedX } from '../useAnimatedX/index.js'
 
@@ -70,7 +66,7 @@ const AnimatedX = <
     dynamicStyles = animatedSettingsList
       .map((item) => item.initialStyle)
       .filter(Boolean)
-      .map((styles) => formatAnimatedCSSPropsShorthands(styles!))
+      .map((styles) => formatAnimatedCSSProps(styles!))
       .reduce((total, item) => ({ ...total, ...item }), {})
   }
 

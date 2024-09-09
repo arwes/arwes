@@ -29,6 +29,20 @@ export type FrameSettingsSVG<Contexts extends ContextType = ContextType> =
     width: number | string
     height: number | string
     elements: string | Array<FrameSettingsElement<Contexts>>
+    contexts?: {
+      [C in keyof Contexts]?: {
+        [S in Contexts[C]]?: {
+          className?: string
+          style?: AnimatedCSSProps
+          animate?: AnimatedXAnimation
+          viewBox?: string
+          x?: number | string
+          y?: number | string
+          width?: number | string
+          height?: number | string
+        }
+      }
+    }
   }
 
 export type FrameSettingsG<Contexts extends ContextType = ContextType> =
@@ -111,32 +125,12 @@ export type FrameSettingsRect<Contexts extends ContextType = ContextType> =
           className?: string
           style?: AnimatedCSSProps
           animate?: AnimatedXAnimation
-          x: number | string
-          y: number | string
-          width: number | string
-          height: number | string
+          x?: number | string
+          y?: number | string
+          width?: number | string
+          height?: number | string
           rx?: number | string
           ry?: number | string
-        }
-      }
-    }
-  }
-
-export type FrameSettingsCircle<Contexts extends ContextType = ContextType> =
-  FrameSettingsElementCommon<Contexts> & {
-    type: 'circle'
-    cx: number | string
-    cy: number | string
-    r: number | string
-    contexts?: {
-      [C in keyof Contexts]?: {
-        [S in Contexts[C]]?: {
-          className?: string
-          style?: AnimatedCSSProps
-          animate?: AnimatedXAnimation
-          cx: number | string
-          cy: number | string
-          r: number | string
         }
       }
     }
@@ -155,10 +149,10 @@ export type FrameSettingsEllipse<Contexts extends ContextType = ContextType> =
           className?: string
           style?: AnimatedCSSProps
           animate?: AnimatedXAnimation
-          cx: number | string
-          cy: number | string
-          rx: number | string
-          ry: number | string
+          cx?: number | string
+          cy?: number | string
+          rx?: number | string
+          ry?: number | string
         }
       }
     }
@@ -172,7 +166,6 @@ export type FrameSettingsElement<Contexts extends ContextType = ContextType> =
   | FrameSettingsMask<Contexts>
   | FrameSettingsPath<Contexts>
   | FrameSettingsRect<Contexts>
-  | FrameSettingsCircle<Contexts>
   | FrameSettingsEllipse<Contexts>
 
 export interface FrameSettings<Contexts extends ContextType = ContextType> {

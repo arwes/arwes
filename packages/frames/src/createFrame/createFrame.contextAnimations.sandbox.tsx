@@ -42,7 +42,7 @@ const settings: FrameSettings<Contexts> = {
         },
         {
           path: [
-            ['M', '100%-40', 20],
+            ['M', '100% - 40', 20],
             ['h', 10],
             ['l', 10, 10],
             ['v', 10]
@@ -56,7 +56,7 @@ const settings: FrameSettings<Contexts> = {
         },
         {
           path: [
-            ['M', '100%-20', '100%-40'],
+            ['M', '100% - 20', '100% - 40'],
             ['v', 10],
             ['l', -10, 10],
             ['h', -10]
@@ -70,7 +70,7 @@ const settings: FrameSettings<Contexts> = {
         },
         {
           path: [
-            ['M', 40, '100%-20'],
+            ['M', 40, '100% - 20'],
             ['h', -10],
             ['l', -10, -10],
             ['v', -10]
@@ -97,7 +97,7 @@ const settings: FrameSettings<Contexts> = {
         {
           style: { strokeWidth: '2' },
           path: [
-            ['M', '50%-4', '50%-40'],
+            ['M', '50% - 4', '50% - 40'],
             ['h', 8],
             ['l', 40 - 4, 80 - 4],
             ['l', -8, 8],

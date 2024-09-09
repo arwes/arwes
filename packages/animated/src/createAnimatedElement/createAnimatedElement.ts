@@ -4,7 +4,7 @@ import type { AnimatorNode } from '@arwes/animator'
 
 import type { EasingName, AnimatedProp, AnimatedAnimationFunctionReturn } from '../types.js'
 import { easing } from '../easing/index.js'
-import { formatAnimatedCSSPropsShorthands } from '../formatAnimatedCSSPropsShorthands/index.js'
+import { applyAnimatedCSSProps } from '../applyAnimatedCSSProps/index.js'
 import { transition, fade, flicker, draw } from '../transitions/index.js'
 
 type AnimatedElementPropsSettings<Element = HTMLElement | SVGElement> = {
@@ -65,11 +65,9 @@ const createAnimatedElement = <Element extends HTMLElement | SVGElement = HTMLEl
 
     const dynamicStyles = animatedList
       .map((item) => item?.initialStyle)
-      .filter(Boolean)
-      .map((style) => formatAnimatedCSSPropsShorthands(style!))
       .reduce((total, item) => ({ ...total, ...item }), {})
 
-    Object.assign(element.style, dynamicStyles)
+    applyAnimatedCSSProps(element, dynamicStyles!)
   }
 
   const unsubscribe = animator.subscribe((node) => {

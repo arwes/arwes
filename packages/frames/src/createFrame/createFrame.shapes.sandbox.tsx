@@ -1,7 +1,7 @@
 import { createFrame } from '@arwes/frames'
 
 const root = document.querySelector('#root')!
-root.innerHTML = `<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg"></svg>`
+root.innerHTML = `<svg width="300" height="100" xmlns="http://www.w3.org/2000/svg"></svg>`
 
 const svg = root.querySelector('svg')!
 
@@ -40,21 +40,9 @@ createFrame(svg, {
       }
     },
     {
-      type: 'circle',
-      cx: 50,
-      cy: 150,
-      r: 40,
-      style: {
-        strokeWidth: '2',
-        stroke: 'hsl(200, 75%, 50%)',
-        fill: 'hsl(200, 75%, 10%)',
-        filter: 'drop-shadow(0 0 2px hsl(200, 75%, 50%))'
-      }
-    },
-    {
       type: 'ellipse',
-      cx: 150,
-      cy: 150,
+      cx: 250,
+      cy: 50,
       rx: 30,
       ry: 40,
       style: {
