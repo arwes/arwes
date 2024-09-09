@@ -189,6 +189,10 @@ export const sandboxes = [
                     code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.masking.sandbox.tsx')
                   },
                   {
+                    name: 'patterns',
+                    code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.patterns.sandbox.tsx')
+                  },
+                  {
                     name: 'contextClasses',
                     code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrame/createFrame.contextClasses.sandbox.tsx')
                   },
