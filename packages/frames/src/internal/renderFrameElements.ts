@@ -9,10 +9,7 @@ import type { FrameSettingsElement } from '../types.js'
 
 const renderFrameElements = (
   parent: SVGElement,
-  width: number,
-  height: number,
   elements: FrameSettingsElement[],
-  contexts: Record<string, string>,
   animator: undefined | AnimatorNode,
   animations: Map<SVGElement, Map<string, AnimatedXAnimationFunctionReturn>>
 ): void => {
@@ -56,15 +53,7 @@ const renderFrameElements = (
         if (typeof settings.elements === 'string') {
           element.innerHTML = settings.elements
         } else {
-          renderFrameElements(
-            element,
-            width,
-            height,
-            settings.elements,
-            contexts,
-            animator,
-            animations
-          )
+          renderFrameElements(element, settings.elements, animator, animations)
         }
         break
       }

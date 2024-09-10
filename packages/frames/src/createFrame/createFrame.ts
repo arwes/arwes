@@ -9,6 +9,10 @@ const createFrame = <Contexts extends Record<string, string> = Record<string, st
   svg: SVGSVGElement,
   settings: FrameSettings<Contexts>
 ): Frame<Contexts> => {
+  if (!(svg instanceof SVGSVGElement)) {
+    throw new Error('ARWES createFrame requires a <svg> element.')
+  }
+
   const { animator } = settings
 
   let width = 0
@@ -35,10 +39,7 @@ const createFrame = <Contexts extends Record<string, string> = Record<string, st
   const render = (): void => {
     renderFrameElements(
       container,
-      width,
-      height,
       settings.elements,
-      contexts,
       animator,
       animations as Map<SVGElement, Map<string, AnimatedXAnimationFunctionReturn>>
     )

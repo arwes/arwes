@@ -17,5 +17,6 @@ animateDraw({
   element: path,
   duration: 1
   // isEntering: true,
+  // delay: 0,
   // easing: undefined,
 })

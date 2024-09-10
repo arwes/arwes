@@ -89,6 +89,12 @@ const drawFrameElements = (
     }
     //
     else if (settings.type === 'svg') {
+      let viewBox = settings.viewBox
+      let x = settings.x
+      let y = settings.y
+      let w = settings.width
+      let h = settings.height
+
       for (const contextName of contextsNames) {
         const state = contexts[contextName]
         const elementState = settings.contexts![contextName]![state]
@@ -97,22 +103,30 @@ const drawFrameElements = (
           continue
         }
 
-        elementState.viewBox !== undefined && (settings.viewBox = elementState.viewBox)
-        elementState.x !== undefined && (settings.x = elementState.x)
-        elementState.y !== undefined && (settings.y = elementState.y)
-        elementState.width !== undefined && (settings.width = elementState.width)
-        elementState.height !== undefined && (settings.height = elementState.height)
+        elementState.viewBox !== undefined && (viewBox = elementState.viewBox)
+        elementState.x !== undefined && (x = elementState.x)
+        elementState.y !== undefined && (y = elementState.y)
+        elementState.width !== undefined && (w = elementState.width)
+        elementState.height !== undefined && (h = elementState.height)
       }
 
-      element.setAttribute('viewBox', settings.viewBox)
-      element.setAttribute('x', formatFrameDimension(width, settings.x))
-      element.setAttribute('y', formatFrameDimension(height, settings.y))
-      element.setAttribute('width', formatFrameDimension(width, settings.width))
-      element.setAttribute('height', formatFrameDimension(height, settings.height))
+      w = formatFrameDimension(width, w)
+      h = formatFrameDimension(height, h)
+      x = formatFrameDimension(width, x)
+      y = formatFrameDimension(height, y)
+
+      element.setAttribute('viewBox', viewBox)
+      element.setAttribute('x', x)
+      element.setAttribute('y', y)
+      element.setAttribute('width', w)
+      element.setAttribute('height', h)
+
+      if (Array.isArray(settings.elements)) {
+        drawFrameElements(element, +w, +h, settings.elements, contexts)
+      }
     }
 
     switch (settings.type) {
-      case 'svg':
       case 'g':
       case 'defs':
       case 'clipPath':

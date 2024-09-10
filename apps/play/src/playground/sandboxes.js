@@ -239,6 +239,10 @@ export const sandboxes = [
                 code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameKranoxSettings/createFrameKranoxSettings.sandbox.tsx')
               },
               {
+                name: 'createFrameHeaderSettings',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameHeaderSettings/createFrameHeaderSettings.sandbox.tsx')
+              },
+              {
                 name: 'animateFrameAssembler',
                 code: require('!raw-loader?esModule=false!@repository/packages/frames/src/animateFrameAssembler/animateFrameAssembler.sandbox.tsx')
               },

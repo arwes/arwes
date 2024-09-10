@@ -6,12 +6,13 @@ import { easing } from '../easing/index.js'
 type AnimateDrawProps = {
   element: SVGPathElement
   duration?: number
+  delay?: number
   easing?: EasingMotion
   isEntering?: boolean
 }
 
 const animateDraw = (props: AnimateDrawProps): AnimationControls => {
-  const { element, duration, isEntering = true } = props
+  const { element, duration, delay, isEntering = true } = props
 
   if (!(element instanceof SVGPathElement)) {
     throw new Error('ARWES animateDraw() requires a SVGPathElement.')
@@ -27,7 +28,7 @@ const animateDraw = (props: AnimateDrawProps): AnimationControls => {
   const animation = animate(
     element,
     { strokeDashoffset: isEntering ? [length, 0] : [0, length] },
-    { duration, easing: easingCustom || easing.outSine }
+    { duration, delay, easing: easingCustom || easing.outSine }
   )
 
   void animation.finished.then(() => {
