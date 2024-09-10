@@ -10,16 +10,9 @@ type CreateFrameHeaderSettingsProps = {
   strokeWidth?: number
   decoWidth?: number
   contentLength?: number
-} & (
-  | {
-      direction?: 'horizontal'
-      align?: 'left' | 'right'
-    }
-  | {
-      direction?: 'vertical'
-      align?: 'top' | 'bottom'
-    }
-)
+  direction?: 'horizontal' | 'vertical'
+  align?: 'left' | 'right' | 'top' | 'bottom'
+}
 
 const defaultProps: Required<CreateFrameHeaderSettingsProps> = {
   styled: true,

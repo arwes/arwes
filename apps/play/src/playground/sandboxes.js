@@ -564,6 +564,10 @@ export const sandboxes = [
                 code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameKranox/FrameKranox.sandbox.tsx')
               },
               {
+                name: 'FrameHeader',
+                code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameHeader/FrameHeader.sandbox.tsx')
+              },
+              {
                 name: 'FrameBase',
                 code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameBase/FrameBase.sandbox.tsx')
               },

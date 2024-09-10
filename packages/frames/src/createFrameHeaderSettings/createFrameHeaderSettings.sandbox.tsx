@@ -34,13 +34,22 @@ root.innerHTML = `
   </div>
 
   <style>
-    .frame { outline: 1px dashed hsl(180, 75%, 10%); }
+    .frame { outline: 1px dashed hsl(180 0% 50% / 0.1); }
   </style>
 `
 
 createFrame(root.querySelector<SVGSVGElement>('.frame1')!, {
   animator,
-  ...createFrameHeaderSettings()
+  ...createFrameHeaderSettings({
+    // styled: true,
+    // animated: true,
+    // padding: 0,
+    // strokeWidth: 1,
+    // decoWidth: 4,
+    // direction: 'horizontal',
+    // align: 'left',
+    // contentLength: 0,
+  })
 })
 
 createFrame(root.querySelector<SVGSVGElement>('.frame2')!, {

@@ -6,5 +6,6 @@ export * from './FrameCorners/index.js'
 export * from './FrameLines/index.js'
 export * from './FrameNefrex/index.js'
 export * from './FrameKranox/index.js'
+export * from './FrameHeader/index.js'
 
 export * from './useFrameAssembler/index.js'
