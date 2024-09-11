@@ -564,6 +564,10 @@ export const sandboxes = [
                 code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameOctagon/FrameOctagon.sandbox.tsx')
               },
               {
+                name: 'FrameNero',
+                code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameNero/FrameNero.sandbox.tsx')
+              },
+              {
                 name: 'FrameNefrex',
                 code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameNefrex/FrameNefrex.sandbox.tsx')
               },
