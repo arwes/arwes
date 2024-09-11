@@ -1,5 +1,6 @@
 import type { Properties as CSSProperties } from 'csstype'
 import type { MotionKeyframesDefinition, AnimationOptionsWithOverrides } from '@motionone/dom'
+import type { animate, timeline, stagger, spring, glide } from 'motion'
 import type { AnimatorState, AnimatorDuration } from '@arwes/animator'
 
 export type EasingFn = (x: number) => number
@@ -90,6 +91,26 @@ export interface AnimatedAnimationFunctionConfig {
    * Associated node duration object.
    */
   nodeDuration: AnimatorDuration
+  /**
+   * Motion One `animate`.
+   */
+  animate: typeof animate
+  /**
+   * Motion One `timeline`.
+   */
+  timeline: typeof timeline
+  /**
+   * Motion One `stagger`.
+   */
+  stagger: typeof stagger
+  /**
+   * Motion One `spring`.
+   */
+  spring: typeof spring
+  /**
+   * Motion One `glide`.
+   */
+  glide: typeof glide
 }
 
 export interface AnimatedAnimationFunctionReturn {

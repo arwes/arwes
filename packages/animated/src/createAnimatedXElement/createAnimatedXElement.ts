@@ -1,4 +1,4 @@
-import { animate } from 'motion'
+import { animate, timeline, stagger, spring, glide } from 'motion'
 import { filterProps } from '@arwes/tools'
 
 import { applyAnimatedCSSProps } from '../applyAnimatedCSSProps/index.js'
@@ -91,7 +91,7 @@ const createAnimatedXElement = <
       .filter(Boolean)
       .forEach((transition) => {
         if (typeof transition === 'function') {
-          const animation = transition({ element, $ })
+          const animation = transition({ element, $, animate, timeline, stagger, spring, glide })
 
           if (animation) {
             animations.add(animation)

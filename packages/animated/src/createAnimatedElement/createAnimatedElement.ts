@@ -1,4 +1,4 @@
-import { animate } from 'motion'
+import { animate, timeline, stagger, spring, glide } from 'motion'
 import { filterProps } from '@arwes/tools'
 import type { AnimatorNode } from '@arwes/animator'
 
@@ -112,7 +112,12 @@ const createAnimatedElement = <Element extends HTMLElement | SVGElement = HTMLEl
             element,
             $,
             duration: transitionDuration,
-            nodeDuration
+            nodeDuration,
+            animate,
+            timeline,
+            stagger,
+            spring,
+            glide
           }) as unknown as AnimatedAnimationFunctionReturn
 
           // eslint-disable-next-line @typescript-eslint/no-misused-promises
