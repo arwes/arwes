@@ -231,6 +231,10 @@ export const sandboxes = [
                 code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameOctagonSettings/createFrameOctagonSettings.sandbox.tsx')
               },
               {
+                name: 'createFrameNeroSettings',
+                code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameNeroSettings/createFrameNeroSettings.sandbox.tsx')
+              },
+              {
                 name: 'createFrameNefrexSettings',
                 code: require('!raw-loader?esModule=false!@repository/packages/frames/src/createFrameNefrexSettings/createFrameNefrexSettings.sandbox.tsx')
               },

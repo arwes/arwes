@@ -59,6 +59,8 @@ const renderFrameElements = (
       }
     }
 
+    // TODO: Update `animatedElement` when it was already created.
+
     if (animator && settings.animated) {
       const elementAnimations =
         animations.get(element) ?? new Map<string, AnimatedXAnimationFunctionReturn>()
