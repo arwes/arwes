@@ -56,15 +56,15 @@ const createAnimatedElement = <Element extends HTMLElement | SVGElement = HTMLEl
       .filter(Boolean)
 
     const initialAttributes: Record<string, string> = animatedList
-      .map((item) => item?.initialAttributes)
-      .reduce((total: object, item: object | undefined) => ({ ...total, ...item }), {})
+      .map((item) => (item ? item.initialAttributes : null))
+      .reduce((total: object, item: object | null | undefined) => ({ ...total, ...item }), {})
 
     Object.keys(initialAttributes).forEach((attribute) => {
       element.setAttribute(attribute, initialAttributes[attribute])
     })
 
     const dynamicStyles = animatedList
-      .map((item) => item?.initialStyle)
+      .map((item) => (item ? item.initialStyle : null))
       .reduce((total, item) => ({ ...total, ...item }), {})
 
     applyAnimatedCSSProps(element, dynamicStyles!)
@@ -104,7 +104,7 @@ const createAnimatedElement = <Element extends HTMLElement | SVGElement = HTMLEl
         }
         return item
       })
-      .map((settingsItem) => settingsItem?.transitions?.[node.state])
+      .map((settingsItem) => (settingsItem ? settingsItem.transitions?.[node.state] : null))
       .filter(Boolean)
       .forEach((transition) => {
         if (typeof transition === 'function') {
@@ -113,8 +113,9 @@ const createAnimatedElement = <Element extends HTMLElement | SVGElement = HTMLEl
             $,
             duration: transitionDuration,
             nodeDuration
-          })
+          }) as unknown as AnimatedAnimationFunctionReturn
 
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           if (animation) {
             animations.add(animation)
 

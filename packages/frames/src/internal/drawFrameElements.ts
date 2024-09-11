@@ -68,6 +68,11 @@ const drawFrameElements = (
     }
     //
     else if (settings.type === 'ellipse') {
+      let cx = settings.cx
+      let cy = settings.cy
+      let rx = settings.rx
+      let ry = settings.ry
+
       for (const contextName of contextsNames) {
         const state = contexts[contextName]
         const elementState = settings.contexts![contextName]![state]
@@ -76,16 +81,21 @@ const drawFrameElements = (
           continue
         }
 
-        elementState.cx !== undefined && (settings.cx = elementState.cx)
-        elementState.cy !== undefined && (settings.cy = elementState.cy)
-        elementState.rx !== undefined && (settings.rx = elementState.rx)
-        elementState.ry !== undefined && (settings.ry = elementState.ry)
+        elementState.cx !== undefined && (cx = elementState.cx)
+        elementState.cy !== undefined && (cy = elementState.cy)
+        elementState.rx !== undefined && (rx = elementState.rx)
+        elementState.ry !== undefined && (ry = elementState.ry)
       }
 
-      element.setAttribute('cx', formatFrameDimension(width, settings.cx))
-      element.setAttribute('cy', formatFrameDimension(height, settings.cy))
-      element.setAttribute('rx', String(settings.rx))
-      element.setAttribute('ry', String(settings.ry))
+      cx = formatFrameDimension(width, cx)
+      cy = formatFrameDimension(height, cy)
+      rx = formatFrameDimension(width, rx)
+      ry = formatFrameDimension(height, ry)
+
+      element.setAttribute('cx', cx)
+      element.setAttribute('cy', cy)
+      element.setAttribute('rx', rx)
+      element.setAttribute('ry', ry)
     }
     //
     else if (settings.type === 'svg') {

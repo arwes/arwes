@@ -135,6 +135,7 @@ type AnimatedPropTransition = [
 export type AnimatedProp =
   | AnimatedSettings
   | Array<AnimatedPropPreset | AnimatedPropTransition | AnimatedSettings | undefined>
+  | false
   | undefined
 
 // AnimatedX
@@ -161,4 +162,5 @@ export interface AnimatedXSettings<States extends string> {
 export type AnimatedXProp<States extends string> =
   | AnimatedXSettings<States>
   | Array<AnimatedXSettings<States> | undefined>
+  | false
   | undefined

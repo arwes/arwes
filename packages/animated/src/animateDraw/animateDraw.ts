@@ -31,10 +31,12 @@ const animateDraw = (props: AnimateDrawProps): AnimationControls => {
     { duration, delay, easing: easingCustom || easing.outSine }
   )
 
-  void animation.finished.then(() => {
-    element.style.strokeDashoffset = ''
-    element.style.strokeDasharray = ''
-  })
+  if (isEntering) {
+    void animation.finished.then(() => {
+      element.style.strokeDashoffset = ''
+      element.style.strokeDasharray = ''
+    })
+  }
 
   return animation
 }

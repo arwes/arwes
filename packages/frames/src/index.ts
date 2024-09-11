@@ -9,6 +9,7 @@ export * from './createFrameOctagonSettings/index.js'
 export * from './createFrameNefrexSettings/index.js'
 export * from './createFrameKranoxSettings/index.js'
 export * from './createFrameHeaderSettings/index.js'
+export * from './createFrameCircleSettings/index.js'
 
 export * from './animateFrameAssembler/index.js'
 
