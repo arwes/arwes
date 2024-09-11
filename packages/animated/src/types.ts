@@ -88,6 +88,10 @@ export interface AnimatedAnimationFunctionConfig {
    */
   duration: number
   /**
+   * Easing presets.
+   */
+  easing: Record<EasingName, EasingFn>
+  /**
    * Associated node duration object.
    */
   nodeDuration: AnimatorDuration

@@ -113,6 +113,7 @@ const createAnimatedElement = <Element extends HTMLElement | SVGElement = HTMLEl
             $,
             duration: transitionDuration,
             nodeDuration,
+            easing,
             animate,
             timeline,
             stagger,

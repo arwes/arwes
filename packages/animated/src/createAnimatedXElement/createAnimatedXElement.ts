@@ -91,7 +91,16 @@ const createAnimatedXElement = <
       .filter(Boolean)
       .forEach((transition) => {
         if (typeof transition === 'function') {
-          const animation = transition({ element, $, animate, timeline, stagger, spring, glide })
+          const animation = transition({
+            element,
+            $,
+            easing,
+            animate,
+            timeline,
+            stagger,
+            spring,
+            glide
+          })
 
           if (animation) {
             animations.add(animation)
