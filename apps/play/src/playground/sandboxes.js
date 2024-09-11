@@ -572,6 +572,10 @@ export const sandboxes = [
                 code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameHeader/FrameHeader.sandbox.tsx')
               },
               {
+                name: 'FrameCircle',
+                code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameCircle/FrameCircle.sandbox.tsx')
+              },
+              {
                 name: 'FrameBase',
                 code: require('!raw-loader?esModule=false!@repository/packages/react-frames/src/FrameBase/FrameBase.sandbox.tsx')
               },
