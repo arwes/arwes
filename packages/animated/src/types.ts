@@ -159,7 +159,7 @@ type AnimatedPropTransition = [
 
 export type AnimatedProp =
   | AnimatedSettings
-  | Array<AnimatedPropPreset | AnimatedPropTransition | AnimatedSettings | undefined>
+  | Array<AnimatedPropPreset | AnimatedPropTransition | AnimatedSettings | false | undefined>
   | false
   | undefined
 
