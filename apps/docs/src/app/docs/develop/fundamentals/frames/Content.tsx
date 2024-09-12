@@ -242,12 +242,13 @@ export default (): JSX.Element => (
     </AR.P>
 
     <AR.P>
-      A frame definition would be a JavaScript object with all the elements to render. The first
-      line could look like:
+      A frame definition would be a JavaScript object with all the frame elements to render. The
+      first frame element could look like:
     </AR.P>
 
     <AR.CodeBlock
       code={`{
+  type: 'path',
   path: [
     ['M', 0.5, 1], // x,y pixels
     ['H', '100% - 0.5'], // x = svg_width * 100% - 0.5 pixels
@@ -263,6 +264,7 @@ export default (): JSX.Element => (
 
     <AR.CodeBlock
       code={`{
+  type: 'path',
   name: 'line', // [data-name] attribute
   className: 'my-frame-line', // class attribute
   style: { // CSS properties.
@@ -281,6 +283,7 @@ export default (): JSX.Element => (
     <AR.CodeBlock
       code={`[
   {
+    type: 'path',
     style: { fill: 'none', stroke: '#20DFDF' },
     path: [
       ['M', 0.5, 1],
@@ -289,6 +292,7 @@ export default (): JSX.Element => (
     ]
   },
   {
+    type: 'path',
     style: { fill: 'none', stroke: '#20DFDF' },
     path: [
       ['M', '100% - 0.5', '100% - 0.5'],
@@ -297,13 +301,12 @@ export default (): JSX.Element => (
     ]
   },
   {
+    type: 'rect',
     style: { fill: 'hsl(180deg 75% 50% / 10%)', stroke: 'none' },
-    path: [
-      ['M', 6, 6],
-      ['H', '100% - 6'],
-      ['V', '100% - 6'],
-      ['H', 6]
-    ]
+    x: 6,
+    y: 6,
+    width: '100% - 12',
+    height: '100% - 12'
   }
 ]`}
     />

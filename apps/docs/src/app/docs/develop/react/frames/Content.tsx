@@ -17,16 +17,22 @@ export default (): JSX.Element => (
       <Link href="/docs/develop/fundamentals/frames">Frames Fundamentals</Link> for context.
     </AR.P>
 
-    <AR.P>
-      All of the frames are by default with CSS <code>position: absolute</code> and taking full size
-      of the closest positioned parent. This pattern is an easy way to make the frame responsive.
-      This can be removed with the component prop <code>positioned=false</code>.
-    </AR.P>
-
-    <AR.P>
-      They also have default styles which can be overwriten or removed with the component prop{' '}
-      <code>styled=false</code>.
-    </AR.P>
+    <AR.UL>
+      <li>
+        All of the frames are by default with CSS <code>position: absolute</code> and taking full
+        size of the closest positioned parent. This pattern is an easy way to make the frame
+        responsive. This can be removed with the component prop{' '}
+        <code>positioned=&#123;false&#125;</code>.
+      </li>
+      <li>
+        Default styles for <code>stroke</code>, <code>stroke-width</code>, and <code>fill</code> can
+        be removed with <code>styled=&#123;false&#125;</code>.
+      </li>
+      <li>
+        Default animations for the animator system can be removed with{' '}
+        <code>animated=&#123;false&#125;</code>.
+      </li>
+    </AR.UL>
 
     <AR.H2>Out-of-the-box Frames</AR.H2>
 
@@ -35,14 +41,15 @@ export default (): JSX.Element => (
     <AR.P>For example, the octagon frame:</AR.P>
 
     <AR.CodeBlock
-      code={`import { FrameSVGOctagon } from '@arwes/react'
+      code={`import { FrameOctagon } from '@arwes/react'
 
 <div style={{ position: 'relative', width: 300, height: 300 }}>
-  <FrameSVGOctagon
+  <FrameOctagon
     style={{
       '--arwes-frames-line-color': '#20DFDF',
       '--arwes-frames-bg-color': 'hsl(180deg 75% 50% / 10%)'
     }}
+    animated={false}
   />
   <div style={{ position: 'relative' }}>
     Futuristic Sci-Fi UI Web Framework
@@ -61,11 +68,11 @@ export default (): JSX.Element => (
     </AR.P>
 
     <AR.H2>
-      <code>&lt;FrameSVG&gt;</code>
+      <code>&lt;FrameBase&gt;</code>
     </AR.H2>
 
     <AR.P>
-      Implementing custom SVG frames can be done with the <code>&lt;FrameSVG&gt;</code> component.
+      Implementing custom SVG frames can be done with the <code>&lt;FrameBase&gt;</code> component.
       All frames provided by the framework use it behind the scenes.
     </AR.P>
 
@@ -107,11 +114,12 @@ export default (): JSX.Element => (
     <AR.P>The following frame definition can be created:</AR.P>
 
     <AR.CodeBlock
-      code={`import { type FrameSVGSettings } from '@arwes/react'
+      code={`import { type FrameSettings } from '@arwes/react'
 
-const frameSettings: FrameSVGSettings = {
+const frameSettings: FrameSettings = {
   elements: [
     {
+      type: 'path',
       name: 'line',
       style: { fill: 'none', stroke: '#20DFDF' },
       path: [
@@ -121,6 +129,7 @@ const frameSettings: FrameSVGSettings = {
       ]
     },
     {
+      type: 'path',
       name: 'line',
       style: { fill: 'none', stroke: '#20DFDF' },
       path: [
@@ -130,14 +139,12 @@ const frameSettings: FrameSVGSettings = {
       ]
     },
     {
-      name: 'bg',
+      type: 'rect',
       style: { fill: 'hsl(180deg 75% 50% / 10%)', stroke: 'none' },
-      path: [
-        ['M', 6, 6],
-        ['H', '100% - 6'],
-        ['V', '100% - 6'],
-        ['H', 6]
-      ]
+      x: 6,
+      y: 6,
+      width: '100% - 12',
+      height: '100% - 12'
     }
   ]
 }`}
@@ -147,10 +154,10 @@ const frameSettings: FrameSVGSettings = {
 
     <AR.CodeBlock
       highlightLines={[4]}
-      code={`import { FrameSVG } from '@arwes/react'
+      code={`import { FrameBase } from '@arwes/react'
 
 <div style={{ position: 'relative', width: 300, height: 300 }}>
-  <FrameSVG {...frameSettings} />
+  <FrameBase settings={frameSettings} />
   <div style={{ position: 'relative' }}>
     Futuristic Sci-Fi UI Web Framework
   </div>

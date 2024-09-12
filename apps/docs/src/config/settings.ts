@@ -9,18 +9,10 @@ export const settings = Object.freeze({
   deployTime: DEPLOY_TIME,
   apps: {
     play: {
-      url:
-        typeof window !== 'undefined' &&
-        ['arwes.dev', 'next.arwes.dev'].includes(window.location.host)
-          ? '/play'
-          : 'http://localhost:9000/play'
+      url: process.env.NEXT_PUBLIC_APP_PLAY_URL || '/play'
     },
     perf: {
-      url:
-        typeof window !== 'undefined' &&
-        ['arwes.dev', 'next.arwes.dev'].includes(window.location.host)
-          ? '/perf'
-          : 'http://localhost:9001/perf'
+      url: process.env.NEXT_PUBLIC_APP_PERF_URL || '/perf'
     }
   }
 } as const)

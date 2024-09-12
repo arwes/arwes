@@ -27,13 +27,12 @@ const frameSettings: FrameSettings = {
       ]
     },
     {
+      type: 'rect',
       style: { fill: 'hsl(180deg 75% 50% / 10%)', stroke: 'none' },
-      path: [
-        ['M', 6, 6],
-        ['H', '100% - 6'],
-        ['V', '100% - 6'],
-        ['H', 6]
-      ]
+      x: 6,
+      y: 6,
+      width: '100% - 12',
+      height: '100% - 12'
     }
   ]
 }

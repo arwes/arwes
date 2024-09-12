@@ -17,7 +17,7 @@ import {
   Copy as IconSimilars
 } from 'iconoir-react'
 
-import { theme } from '@/config'
+import { settings, theme } from '@/config'
 import { IconTailwind, IconReact, IconSolid, IconSvelte } from '@/icons'
 
 type ListProps = {
@@ -165,8 +165,8 @@ const NavRoot = (props: NavSectionProps): JSX.Element => {
         <NavDocs onLink={onLink} />
       </Item>
       <Item href="/demos" icon={<IconDemos />} text="Demos" onLink={onLink} />
-      <Item href="/play" icon={<IconPlay />} text="Play" onLink={onLink} />
-      <Item href="/perf" icon={<IconPerf />} text="Perf" onLink={onLink} />
+      <Item href={settings.apps.play.url} icon={<IconPlay />} text="Play" onLink={onLink} />
+      <Item href={settings.apps.perf.url} icon={<IconPerf />} text="Perf" onLink={onLink} />
     </Item>
   )
 }
