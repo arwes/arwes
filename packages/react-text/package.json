@@ -1,6 +1,6 @@
 {
   "name": "@arwes/react-text",
-  "version": "1.0.0-next.24082701",
+  "version": "1.0.0-next.24091101",
   "publishConfig": {
     "access": "public"
   },
@@ -43,11 +43,11 @@
     "react": "18"
   },
   "dependencies": {
-    "@arwes/animator": "^1.0.0-next.24082701",
-    "@arwes/react-animator": "^1.0.0-next.24082701",
-    "@arwes/react-tools": "^1.0.0-next.24082701",
-    "@arwes/text": "^1.0.0-next.24082701",
-    "@arwes/tools": "^1.0.0-next.24082701",
+    "@arwes/animator": "^1.0.0-next.24091101",
+    "@arwes/react-animator": "^1.0.0-next.24091101",
+    "@arwes/react-tools": "^1.0.0-next.24091101",
+    "@arwes/text": "^1.0.0-next.24091101",
+    "@arwes/tools": "^1.0.0-next.24091101",
     "tslib": "2"
   },
   "scripts": {

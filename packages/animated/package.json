@@ -1,6 +1,6 @@
 {
   "name": "@arwes/animated",
-  "version": "1.0.0-next.24082701",
+  "version": "1.0.0-next.24091101",
   "publishConfig": {
     "access": "public"
   },
@@ -43,7 +43,7 @@
     "motion": "10"
   },
   "dependencies": {
-    "@arwes/animator": "^1.0.0-next.24082701",
+    "@arwes/animator": "^1.0.0-next.24091101",
     "csstype": "3",
     "tslib": "2"
   },

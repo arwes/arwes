@@ -1,12 +1,12 @@
 {
   "name": "apps-play",
-  "version": "1.0.0-next.24082701",
+  "version": "1.0.0-next.24091101",
   "private": true,
   "dependencies": {
-    "@arwes/react": "^1.0.0-next.24082701",
+    "@arwes/react": "^1.0.0-next.24091101",
     "@babel/core": "^7.25.2",
     "@babel/preset-react": "^7.24.7",
-    "arwes": "^1.0.0-next.24082701",
+    "arwes": "^1.0.0-next.24091101",
     "babel-loader": "^9.1.3",
     "copy-webpack-plugin": "^12.0.2",
     "empanada": "^0.2.4",

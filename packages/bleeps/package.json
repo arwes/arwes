@@ -1,6 +1,6 @@
 {
   "name": "@arwes/bleeps",
-  "version": "1.0.0-next.24082701",
+  "version": "1.0.0-next.24091101",
   "publishConfig": {
     "access": "public"
   },
@@ -40,7 +40,7 @@
   "module": "./build/esm/index.js",
   "main": "./build/cjs/index.js",
   "dependencies": {
-    "@arwes/tools": "^1.0.0-next.24082701",
+    "@arwes/tools": "^1.0.0-next.24091101",
     "tslib": "2"
   },
   "scripts": {

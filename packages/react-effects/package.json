@@ -1,6 +1,6 @@
 {
   "name": "@arwes/react-effects",
-  "version": "1.0.0-next.24082701",
+  "version": "1.0.0-next.24091101",
   "publishConfig": {
     "access": "public"
   },
@@ -43,9 +43,9 @@
     "react": "18"
   },
   "dependencies": {
-    "@arwes/effects": "^1.0.0-next.24082701",
-    "@arwes/react-tools": "^1.0.0-next.24082701",
-    "@arwes/tools": "^1.0.0-next.24082701",
+    "@arwes/effects": "^1.0.0-next.24091101",
+    "@arwes/react-tools": "^1.0.0-next.24091101",
+    "@arwes/tools": "^1.0.0-next.24091101",
     "tslib": "2"
   },
   "scripts": {

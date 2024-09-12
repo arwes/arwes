@@ -1,6 +1,6 @@
 {
   "name": "@arwes/solid",
-  "version": "1.0.0-next.24082701",
+  "version": "1.0.0-next.24091101",
   "publishConfig": {
     "access": "public"
   },
@@ -43,8 +43,8 @@
     "solid-js": "1"
   },
   "dependencies": {
-    "@arwes/solid-animator": "^1.0.0-next.24082701",
-    "arwes": "^1.0.0-next.24082701",
+    "@arwes/solid-animator": "^1.0.0-next.24091101",
+    "arwes": "^1.0.0-next.24091101",
     "tslib": "2"
   },
   "scripts": {
