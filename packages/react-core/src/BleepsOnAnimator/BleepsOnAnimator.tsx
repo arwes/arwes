@@ -1,8 +1,7 @@
-import { type ReactElement, useRef } from 'react'
-import React, { useId, useEffect } from 'react'
+import React, { type ReactElement, useRef, useId, useEffect } from 'react'
 import { type AnimatorState } from '@arwes/animator'
 import { useAnimator } from '@arwes/react-animator'
-import { type Bleep } from '@arwes/bleeps'
+import type { Bleep } from '@arwes/bleeps'
 import { useBleeps } from '@arwes/react-bleeps'
 
 type Transitions<BleepsNames extends string> = {

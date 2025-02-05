@@ -21,8 +21,8 @@ const settings: FrameSettings = {
       style: { fill: 'yellow' },
       animated: {
         transitions: {
-          entering: { opacity: [0, 1, 0.5, 1], x: [50, 0], duration: 0.8, easing: 'outExpo' },
-          exiting: { opacity: [1, 0, 0.5, 0], x: [0, 50], duration: 0.6, easing: 'outExpo' }
+          entering: { opacity: [0, 1, 0.5, 1], x: [50, 0], duration: 0.8, ease: 'outExpo' },
+          exiting: { opacity: [1, 0, 0.5, 0], x: [0, 50], duration: 0.6, ease: 'outExpo' }
         }
       },
       elements: [
@@ -53,8 +53,8 @@ const settings: FrameSettings = {
       style: { fill: 'yellow' },
       animated: {
         transitions: {
-          entering: { opacity: [0, 1, 0.5, 1], x: [-50, 0], duration: 0.8, easing: 'outExpo' },
-          exiting: { opacity: [1, 0, 0.5, 0], x: [0, -50], duration: 0.6, easing: 'outExpo' }
+          entering: { opacity: [0, 1, 0.5, 1], x: [-50, 0], duration: 0.8, ease: 'outExpo' },
+          exiting: { opacity: [1, 0, 0.5, 0], x: [0, -50], duration: 0.6, ease: 'outExpo' }
         }
       },
       elements: [

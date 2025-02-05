@@ -39,7 +39,7 @@ const createAnimated = (element: HTMLElement, node: AnimatorNode): void => {
   node.subscribe(() => {
     switch (node.state) {
       case 'entering': {
-        animate(
+        void animate(
           element,
           { x: [0, 100], background: ['#0ff', '#ff0'] },
           { duration: node.settings.duration.enter }
@@ -47,7 +47,7 @@ const createAnimated = (element: HTMLElement, node: AnimatorNode): void => {
         break
       }
       case 'exiting': {
-        animate(
+        void animate(
           element,
           { x: [100, 0], background: ['#ff0', '#0ff'] },
           { duration: node.settings.duration.exit }

@@ -13,7 +13,7 @@ const AnimatorUIListener = (): ReactElement => {
     animator.node.subscribe((node) => {
       switch (node.state) {
         case 'entering': {
-          animate(
+          void animate(
             element,
             { x: [0, 50], background: ['#0ff', '#ff0'] },
             { duration: node.settings.duration.enter }
@@ -21,7 +21,7 @@ const AnimatorUIListener = (): ReactElement => {
           break
         }
         case 'exiting': {
-          animate(
+          void animate(
             element,
             { x: [50, 0], background: ['#ff0', '#0ff'] },
             { duration: node.settings.duration.exit }

@@ -1,4 +1,4 @@
-import { animate, timeline, stagger, spring, glide } from 'motion'
+import { animate, stagger } from 'motion'
 import { filterProps } from '@arwes/tools'
 
 import { applyAnimatedCSSProps } from '../applyAnimatedCSSProps/index.js'
@@ -72,6 +72,9 @@ const createAnimatedXElement = <
     applyAnimatedCSSProps(element, dynamicStyles!)
   }
 
+  const $ = <T = HTMLElement | SVGElement>(query: string): T[] =>
+    Array.from(element.querySelectorAll(query)) as T[]
+
   const runAnimations = (): void => {
     const { state, animated, hideOnStates } = getSettings()
 
@@ -82,65 +85,51 @@ const createAnimatedXElement = <
 
     element.style.visibility = hideOnStates?.includes(state) ? 'hidden' : ''
 
-    const $ = <T = HTMLElement | SVGElement>(query: string): T[] =>
-      Array.from(element.querySelectorAll(query)) as T[]
-
     animatedList
       // eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
       .map((settingsItem) => settingsItem.transitions?.[state] as AnimatedXAnimation)
       .filter(Boolean)
       .forEach((transition) => {
-        if (typeof transition === 'function') {
-          const animation = transition({
-            element,
-            $,
-            easing,
-            animate,
-            timeline,
-            stagger,
-            spring,
-            glide
-          })
+        try {
+          if (typeof transition === 'function') {
+            const animation = transition({
+              element,
+              $,
+              animate,
+              stagger,
+              easing
+            })
 
-          if (animation) {
-            animations.add(animation)
+            if (animation) {
+              animations.add(animation)
 
-            if (animation.then) {
-              void animation.then(() => {
-                animations.delete(animation)
-              })
-            } else if (animation.finished) {
-              void animation.finished.then(() => {
-                animations.delete(animation)
-              })
+              if (animation.then) {
+                void animation.then(() => {
+                  animations.delete(animation)
+                })
+              } else if (animation.finished) {
+                void animation.finished.then(() => {
+                  animations.delete(animation)
+                })
+              }
             }
           }
-        }
-        //
-        else {
-          const {
-            duration,
-            delay,
-            easing: ease,
-            repeat,
-            direction,
-            options,
-            ...definition
-          } = transition
+          //
+          else {
+            const { duration, delay, ease, repeat, direction, options, ...definition } = transition
 
-          // TODO: Apply final animation state to element if duration is 0.
-          // eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
-          if (Number.isFinite(duration) && (duration as number) <= 0) {
-            throw new Error(
-              'ARWES createAnimatedXElement() animation duration must be greater than 0.'
-            )
-          }
+            // TODO: Apply final animation state to element if duration is 0.
+            // eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
+            if (Number.isFinite(duration) && (duration as number) <= 0) {
+              throw new Error(
+                'ARWES createAnimatedXElement() animation duration must be greater than 0.'
+              )
+            }
 
-          try {
             const animation = animate(element, definition, {
               duration,
               delay,
-              easing: typeof ease === 'string' ? easing[ease as EasingName] : ease,
+              ease: typeof ease === 'string' ? easing[ease as EasingName] : ease,
               repeat,
               direction,
               ...options
@@ -148,12 +137,12 @@ const createAnimatedXElement = <
 
             animations.add(animation)
 
-            void animation.finished.then(() => {
+            void animation.then(() => {
               animations.delete(animation)
             })
-          } catch (err) {
-            throw new Error(`ARWES createAnimatedXElement() animation error:\n${String(err)}`)
           }
+        } catch (err) {
+          throw new Error(`ARWES createAnimatedXElement() animation error:\n${String(err)}`)
         }
       })
   }

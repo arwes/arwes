@@ -1,44 +1,31 @@
-import { type AnimationControls, animate } from 'motion'
+import { animate } from 'motion'
+import type { AnimationPlaybackControls } from 'framer-motion'
 
-import type { EasingMotion, EasingName } from '../types.js'
+import type { MotionEase, EasingName } from '../types.js'
 import { easing } from '../easing/index.js'
 
 type AnimateDrawProps = {
-  element: SVGPathElement
+  element: Element
   duration?: number
   delay?: number
-  easing?: EasingMotion
+  ease?: MotionEase
   isEntering?: boolean
 }
 
-const animateDraw = (props: AnimateDrawProps): AnimationControls => {
+const animateDraw = (props: AnimateDrawProps): AnimationPlaybackControls => {
   const { element, duration, delay, isEntering = true } = props
 
-  if (!(element instanceof SVGPathElement)) {
-    throw new Error('ARWES animateDraw() requires a SVGPathElement.')
+  if (!(element instanceof SVGElement)) {
+    throw new Error(
+      'ARWES animateDraw() requires a SVG path, circle, ellipse, line, polygon, polyline or rect element.'
+    )
   }
 
-  const length = element.getTotalLength()
-  const easingCustom =
-    typeof props.easing === 'string' ? easing[props.easing as EasingName] : props.easing
+  const ease =
+    (typeof props.ease === 'string' ? easing[props.ease as EasingName] : props.ease) ||
+    (isEntering ? easing.outExpo : easing.outSine)
 
-  element.style.strokeDashoffset = String(isEntering ? length : 0)
-  element.style.strokeDasharray = String(length)
-
-  const animation = animate(
-    element,
-    { strokeDashoffset: isEntering ? [length, 0] : [0, length] },
-    { duration, delay, easing: easingCustom || (isEntering ? easing.outExpo : easing.outSine) }
-  )
-
-  if (isEntering) {
-    void animation.finished.then(() => {
-      element.style.strokeDashoffset = ''
-      element.style.strokeDasharray = ''
-    })
-  }
-
-  return animation
+  return animate(element, { pathLength: isEntering ? [0, 1] : [1, 0] }, { duration, delay, ease })
 }
 
 export type { AnimateDrawProps }

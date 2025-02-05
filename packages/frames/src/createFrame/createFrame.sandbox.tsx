@@ -83,10 +83,13 @@ const settings: FrameSettings = {
 createFrame(svg, settings)
 
 // Resize the frame dimensions to see how it re-draws the elements responsively.
-animate(
-  (progress) => {
+void animate(0, 1, {
+  onUpdate(progress) {
     box.style.width = `${100 + progress * 200}px`
     box.style.height = `${300 - progress * 200}px`
   },
-  { duration: 3, easing: 'linear', repeat: Infinity, direction: 'alternate' }
-)
+  duration: 3,
+  ease: 'linear',
+  repeatType: 'mirror',
+  repeat: Infinity
+})

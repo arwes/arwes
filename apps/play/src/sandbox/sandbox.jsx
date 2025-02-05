@@ -4,7 +4,7 @@ import ReactDOMClient from 'react-dom/client'
 import * as motion from 'motion'
 import * as empanada from 'empanada'
 
-// Arwes Vanilla
+// ARWES Vanilla
 import * as tools from '@arwes/tools'
 import * as theme from '@arwes/theme'
 import * as styles from '@arwes/styles'
@@ -17,7 +17,7 @@ import * as bgs from '@arwes/bgs'
 import * as effects from '@arwes/effects'
 import * as arwes from 'arwes'
 
-// Arwes React
+// ARWES React
 import * as reactTools from '@arwes/react-tools'
 import * as reactAnimator from '@arwes/react-animator'
 import * as reactAnimated from '@arwes/react-animated'

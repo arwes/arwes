@@ -14,9 +14,9 @@ root.innerHTML = `
 const path = root.querySelector('path')!
 
 animateDraw({
-  element: path,
-  duration: 1
-  // isEntering: true,
-  // delay: 0,
-  // easing: undefined,
+  element: path, // Element
+  duration: 1 // number?
+  // delay?: number = 0,
+  // ease?: Ease,
+  // isEntering?: boolean = true,
 })

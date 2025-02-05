@@ -1,4 +1,4 @@
-import { animate, timeline, stagger, spring, glide } from 'motion'
+import { animate, stagger } from 'motion'
 import { filterProps } from '@arwes/tools'
 import type { AnimatorNode } from '@arwes/animator'
 
@@ -73,6 +73,9 @@ const createAnimatedElement = <Element extends HTMLElement | SVGElement = HTMLEl
     applyAnimatedCSSProps(element, dynamicStyles!)
   }
 
+  const $ = <T = HTMLElement | SVGElement>(query: string): T[] =>
+    Array.from(element.querySelectorAll(query)) as T[]
+
   const unsubscribe = animator.subscribe((node) => {
     const { animated, hideOnExited, hideOnEntered, onTransition } = getSettings()
 
@@ -85,9 +88,6 @@ const createAnimatedElement = <Element extends HTMLElement | SVGElement = HTMLEl
     const nodeDuration = nodeSettings.duration
     const transitionDuration =
       node.state === 'entering' || node.state === 'entered' ? nodeDuration.enter : nodeDuration.exit
-
-    const $ = <T = HTMLElement | SVGElement>(query: string): T[] =>
-      Array.from(element.querySelectorAll(query)) as T[]
 
     const animatedListReceived = Array.isArray(animated) ? animated : [animated]
     const animatedList = animatedListReceived.filter(Boolean)
@@ -110,61 +110,58 @@ const createAnimatedElement = <Element extends HTMLElement | SVGElement = HTMLEl
       .map((settingsItem) => (settingsItem ? settingsItem.transitions?.[node.state] : null))
       .filter(Boolean)
       .forEach((transition) => {
-        if (typeof transition === 'function') {
-          const animation = transition({
-            element,
-            $,
-            duration: transitionDuration,
-            nodeDuration,
-            easing,
-            animate,
-            timeline,
-            stagger,
-            spring,
-            glide
-          }) as unknown as AnimatedAnimationFunctionReturn
+        try {
+          if (typeof transition === 'function') {
+            const animation = transition({
+              element,
+              $,
+              duration: transitionDuration,
+              nodeDuration,
+              animate,
+              stagger,
+              easing
+            }) as unknown as AnimatedAnimationFunctionReturn
 
-          // eslint-disable-next-line @typescript-eslint/no-misused-promises
-          if (animation) {
-            animations.add(animation)
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+            if (animation) {
+              animations.add(animation)
 
-            if (animation.then) {
-              void animation.then(() => {
-                animations.delete(animation)
-              })
-            } else if (animation.finished) {
-              void animation.finished.then(() => {
-                animations.delete(animation)
-              })
+              if (animation.then) {
+                void animation.then(() => {
+                  animations.delete(animation)
+                })
+              } else if (animation.finished) {
+                void animation.finished.then(() => {
+                  animations.delete(animation)
+                })
+              }
             }
           }
-        }
-        //
-        else if (transition) {
-          const {
-            duration: durationInitial,
-            delay,
-            easing: ease,
-            repeat,
-            direction,
-            options,
-            ...definition
-          } = transition
+          //
+          else if (transition) {
+            const {
+              duration: durationInitial,
+              delay,
+              ease,
+              repeat,
+              direction,
+              options,
+              ...definition
+            } = transition
 
-          const duration = durationInitial || transitionDuration
+            const duration = durationInitial || transitionDuration
 
-          // TODO: Apply final animation state to element if duration is 0.
-          if (duration <= 0) {
-            throw new Error(
-              'ARWES createAnimatedElement() animation duration must be greater than 0.'
-            )
-          }
+            // TODO: Apply final animation state to element if duration is 0.
+            if (duration <= 0) {
+              throw new Error(
+                'ARWES createAnimatedElement() animation duration must be greater than 0.'
+              )
+            }
 
-          try {
             const animation = animate(element, definition, {
               duration,
               delay,
-              easing: typeof ease === 'string' ? (easing[ease as EasingName] ?? ease) : ease,
+              ease: typeof ease === 'string' ? (easing[ease as EasingName] ?? ease) : ease,
               repeat,
               direction,
               ...options
@@ -172,12 +169,12 @@ const createAnimatedElement = <Element extends HTMLElement | SVGElement = HTMLEl
 
             animations.add(animation)
 
-            void animation.finished.then(() => {
+            void animation.then(() => {
               animations.delete(animation)
             })
-          } catch (err) {
-            throw new Error(`ARWES createAnimatedElement() animation error:\n${String(err)}`)
           }
+        } catch (err) {
+          throw new Error(`ARWES createAnimatedElement() animation error:\n${String(err)}`)
         }
       })
 

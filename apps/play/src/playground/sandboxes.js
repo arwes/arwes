@@ -78,13 +78,11 @@ export const sandboxes = [
             children: [
               {
                 name: 'createAnimation',
-                code: require('!raw-loader?esModule=false!@repository/packages/animated/src/createAnimation/createAnimation.sandbox.tsx'),
-                children: [
-                  {
-                    name: 'easing',
-                    code: require('!raw-loader?esModule=false!@repository/packages/animated/src/createAnimation/createAnimation.easing.sandbox.tsx')
-                  }
-                ]
+                code: require('!raw-loader?esModule=false!@repository/packages/animated/src/createAnimation/createAnimation.sandbox.tsx')
+              },
+              {
+                name: 'easing',
+                code: require('!raw-loader?esModule=false!@repository/packages/animated/src/easing/easing.sandbox.tsx')
               },
               {
                 name: 'createAnimatedElement',

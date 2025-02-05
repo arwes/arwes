@@ -1,4 +1,4 @@
-import { easing, createAnimation } from '@arwes/animated'
+import { type EasingName, easing, createAnimation } from '@arwes/animated'
 
 const rootElement = document.querySelector('#root')!
 
@@ -20,7 +20,7 @@ rootElement.innerHTML = `
 `
 
 const easingsElement = rootElement.querySelector('.easings')!
-const easingNames = Object.keys(easing) as Array<keyof typeof easing>
+const easingNames = Object.keys(easing) as EasingName[]
 
 easingNames.forEach((easingName) => {
   const itemElement = document.createElement('div')
@@ -31,7 +31,7 @@ easingNames.forEach((easingName) => {
   createAnimation({
     duration: 1,
     easing: easingName,
-    onUpdate: (progress) => {
+    onUpdate(progress) {
       itemElement.style.transform = `translateX(${progress * 200}px)`
     }
   })

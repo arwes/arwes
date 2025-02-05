@@ -1,6 +1,6 @@
 import type { Properties as CSSProperties } from 'csstype'
-import type { MotionKeyframesDefinition, AnimationOptionsWithOverrides } from '@motionone/dom'
-import type { animate, timeline, stagger, spring, glide } from 'motion'
+import type { animate, stagger } from 'motion'
+import type { DOMKeyframesDefinition, DynamicAnimationOptions } from 'framer-motion'
 import type { AnimatorState, AnimatorDuration } from '@arwes/animator'
 
 export type EasingFn = (x: number) => number
@@ -37,7 +37,7 @@ export type EasingName =
   | 'outBounce'
   | 'inOutBounce'
 export type Easing = EasingFn | EasingName
-export type EasingMotion = AnimationOptionsWithOverrides['easing'] | Easing
+export type MotionEase = DynamicAnimationOptions['ease'] | Easing
 
 export interface AnimatedCSSPropsShorthands {
   x?: number | string
@@ -61,13 +61,13 @@ export type AnimatedCSSProps = Omit<CSSProperties, keyof AnimatedCSSPropsShortha
 
 // Animated
 
-export type AnimatedAnimationDefinition = MotionKeyframesDefinition & {
+export type AnimatedAnimationDefinition = DOMKeyframesDefinition & {
   duration?: number
-  delay?: AnimationOptionsWithOverrides['delay']
-  easing?: AnimationOptionsWithOverrides['easing'] | Easing
-  repeat?: AnimationOptionsWithOverrides['repeat']
-  direction?: AnimationOptionsWithOverrides['direction']
-  options?: AnimationOptionsWithOverrides
+  delay?: DynamicAnimationOptions['delay']
+  ease?: DynamicAnimationOptions['ease'] | Easing
+  repeat?: DynamicAnimationOptions['repeat']
+  direction?: DynamicAnimationOptions['direction']
+  options?: DynamicAnimationOptions
 }
 
 export interface AnimatedAnimationFunctionConfig {
@@ -100,28 +100,16 @@ export interface AnimatedAnimationFunctionConfig {
    */
   animate: typeof animate
   /**
-   * Motion One `timeline`.
-   */
-  timeline: typeof timeline
-  /**
    * Motion One `stagger`.
    */
   stagger: typeof stagger
-  /**
-   * Motion One `spring`.
-   */
-  spring: typeof spring
-  /**
-   * Motion One `glide`.
-   */
-  glide: typeof glide
 }
 
 export interface AnimatedAnimationFunctionReturn {
   /**
    * A promise which resolves when the animation is finished/cancelled.
    */
-  then?: (callback?: () => void) => Promise<void>
+  then?: (callback: () => void) => Promise<void>
   /**
    * A promise which resolves when the animation is finished/cancelled.
    */
@@ -154,7 +142,7 @@ type AnimatedPropTransition = [
   number | string,
   number | string,
   (number | string)?,
-  (AnimationOptionsWithOverrides['easing'] | Easing)?
+  MotionEase?
 ]
 
 export type AnimatedProp =

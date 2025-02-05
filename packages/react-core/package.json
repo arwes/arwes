@@ -40,7 +40,6 @@
   "module": "./build/esm/index.js",
   "main": "./build/cjs/index.js",
   "peerDependencies": {
-    "motion": "10",
     "react": "18"
   },
   "dependencies": {

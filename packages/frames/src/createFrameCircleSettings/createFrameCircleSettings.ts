@@ -1,6 +1,6 @@
+import { animate } from 'motion'
 import { filterProps } from '@arwes/tools'
 import type { FrameSettings } from '../types.js'
-import { animate } from 'motion'
 
 type CreateFrameCircleSettingsProps = {
   styled?: boolean
@@ -42,8 +42,8 @@ const createFrameCircleSettings = (props?: CreateFrameCircleSettingsProps): Fram
         animated: animated && {
           initialStyle: { rotate: -45 },
           transitions: {
-            entering: { rotate: [-45, 0], easing: 'outExpo' },
-            exiting: { rotate: [0, 45], easing: 'outExpo' }
+            entering: { rotate: [-45, 0], ease: 'outExpo' },
+            exiting: { rotate: [0, 45], ease: 'outExpo' }
           }
         },
         elements: [

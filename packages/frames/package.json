@@ -40,7 +40,7 @@
   "module": "./build/esm/index.js",
   "main": "./build/cjs/index.js",
   "peerDependencies": {
-    "motion": "10"
+    "motion": "11"
   },
   "dependencies": {
     "@arwes/animated": "^1.0.0-next.24111501",

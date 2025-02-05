@@ -1,7 +1,6 @@
 import { filterProps } from '@arwes/tools'
 import { type AnimatedCSSProps, type AnimatedProp } from '@arwes/animated'
 import type { FrameSettings, FrameSettingsElement } from '../types.js'
-import { animate } from 'motion'
 
 type CreateFrameHeaderSettingsProps = {
   styled?: boolean
@@ -62,9 +61,9 @@ const createFrameHeaderSettings = (props?: CreateFrameHeaderSettingsProps): Fram
   const decoDashAnimated: AnimatedProp = animated
     ? {
         transitions: {
-          entering: ({ element, duration }) =>
+          entering: ({ element, duration, animate }) =>
             animate(element, { opacity: [0, 1, 0.5, 1] }, { duration: duration * 0.4 }),
-          exiting: ({ element, duration }) =>
+          exiting: ({ element, duration, animate }) =>
             animate(
               element,
               { opacity: [1, 0, 0.5, 0] },
@@ -79,7 +78,7 @@ const createFrameHeaderSettings = (props?: CreateFrameHeaderSettingsProps): Fram
   const decoBoxesAnimated: AnimatedProp = animated
     ? {
         transitions: {
-          entering: ({ element, duration }) =>
+          entering: ({ element, duration, animate }) =>
             animate(
               element,
               { opacity: [0, 1, 0.5, 1] },

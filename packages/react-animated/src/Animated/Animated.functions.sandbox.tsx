@@ -1,6 +1,5 @@
 import React, { type ReactElement, useState, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
-import { animate } from 'motion'
 import { Animator } from '@arwes/react-animator'
 import { Animated } from '@arwes/react-animated'
 
@@ -12,9 +11,9 @@ const Item = (): ReactElement => {
         animated={{
           initialStyle: { background: '#fff' },
           transitions: {
-            entering: ({ element, duration }) =>
+            entering: ({ element, duration, animate }) =>
               animate(element, { x: 100, background: '#ff0' }, { duration }),
-            exiting: ({ element, duration }) =>
+            exiting: ({ element, duration, animate }) =>
               animate(element, { x: 0, background: '#0ff' }, { duration })
           }
         }}

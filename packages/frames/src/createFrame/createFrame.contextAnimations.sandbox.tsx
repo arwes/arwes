@@ -1,5 +1,4 @@
 import { type FrameSettings, createFrame } from '@arwes/frames'
-import { spring } from 'motion'
 
 const root = document.querySelector('#root')!
 root.innerHTML = `
@@ -89,8 +88,8 @@ const settings: FrameSettings<Contexts> = {
       style: { transformOrigin: 'center' },
       contexts: {
         selection: {
-          auto: { animate: { scale: 1, easing: spring() } },
-          hovered: { animate: { scale: 1.25, easing: spring(), duration: 0.6 } }
+          auto: { animate: { scale: 1, options: { type: 'spring' } } },
+          hovered: { animate: { scale: 1.25, duration: 0.6, options: { type: 'spring' } } }
         }
       },
       elements: [
