@@ -22,7 +22,6 @@ const createBleep = (props: BleepProps): Bleep | null => {
   let volume = props.volume ?? 1
   let muted = !!props.muted
   let isExternallyMuted = false
-  let isPlaying = false
   let playbackCallbackTime = 0
   let bleepSource: BleepSource | null = null
 
@@ -83,7 +82,7 @@ const createBleep = (props: BleepProps): Bleep | null => {
       callersAccount.add(caller)
     }
 
-    if (loop && isPlaying) {
+    if (loop && bleepSource?.isPlaying) {
       return
     }
 
@@ -111,18 +110,13 @@ const createBleep = (props: BleepProps): Bleep | null => {
     }
 
     bleepSource = createBleepSource({
-      context,
       buffer: bleepLoader.buffer,
+      context,
       gain,
-      loop,
-      onStop() {
-        isPlaying = false
-      }
+      loop
     })
 
-    isPlaying = true
-
-    bleepSource.start()
+    bleepSource.play()
   }
 
   function stop(caller?: string): void {
@@ -136,12 +130,8 @@ const createBleep = (props: BleepProps): Bleep | null => {
 
     const canStop = loop ? !callersAccount.size : true
 
-    if (canStop) {
-      if (bleepSource) {
-        bleepSource.stop()
-      }
-
-      isPlaying = false
+    if (canStop && bleepSource) {
+      bleepSource.stop()
     }
   }
 
@@ -150,15 +140,10 @@ const createBleep = (props: BleepProps): Bleep | null => {
   }
 
   function unload(): void {
-    if (bleepSource) {
-      bleepSource.stop()
-    }
-
-    // Remove audio buffer from memory.
+    bleepSource?.stop()
     bleepSource = null
-    bleepLoader.unload()
 
-    isPlaying = false
+    bleepLoader.unload()
 
     window.removeEventListener('click', onUserAllowAudio)
     window.removeEventListener('focus', onUserWindowFocus)
@@ -181,6 +166,7 @@ const createBleep = (props: BleepProps): Bleep | null => {
   }
 
   const bleep = {} as unknown as Bleep
+
   const bleepAPI: { [P in keyof Bleep]: PropertyDescriptor } = {
     duration: {
       get: () => bleepLoader.buffer?.duration ?? 0,
@@ -197,7 +183,7 @@ const createBleep = (props: BleepProps): Bleep | null => {
       enumerable: true
     },
     isPlaying: {
-      get: () => isPlaying,
+      get: () => !!bleepSource?.isPlaying,
       enumerable: true
     },
     isLoaded: {

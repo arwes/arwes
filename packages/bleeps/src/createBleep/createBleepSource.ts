@@ -1,7 +1,7 @@
 type BleepSource = {
-  started: boolean
-  stopped: boolean
-  start: () => void
+  isPlaying: boolean
+  isPlayed: boolean
+  play: () => void
   stop: () => void
 }
 
@@ -10,16 +10,15 @@ type BleepSourceProps = {
   buffer: AudioBuffer
   gain: GainNode
   loop?: boolean
-  onStop?: () => void
 }
 
 const createBleepSource = (props: BleepSourceProps): BleepSource => {
-  const { context, buffer, gain, loop, onStop } = props
+  const { context, buffer, gain, loop } = props
 
   const source = context.createBufferSource()
 
-  let started = false
-  let stopped = false
+  let isPlaying = false
+  let isPlayed = false
 
   source.buffer = buffer
   source.loop = !!loop
@@ -29,38 +28,32 @@ const createBleepSource = (props: BleepSourceProps): BleepSource => {
     source.loopEnd = buffer.duration
   }
 
-  const start = (): void => {
-    if (!started) {
+  source.connect(gain)
+
+  const play = (): void => {
+    if (!isPlaying) {
       source.start()
-      started = true
+      isPlaying = true
     }
   }
 
   const stop = (): void => {
-    if (!stopped) {
+    if (!isPlayed) {
       source.stop()
       source.disconnect(gain)
-      stopped = true
-      onStop?.()
-    }
-  }
-
-  source.connect(gain)
-
-  source.onended = () => {
-    if (!stopped) {
-      onStop?.()
+      isPlaying = false
+      isPlayed = true
     }
   }
 
   return {
-    get started() {
-      return started
+    get isPlaying() {
+      return isPlaying
     },
-    get stopped() {
-      return stopped
+    get isPlayed() {
+      return isPlayed
     },
-    start,
+    play,
     stop
   }
 }
