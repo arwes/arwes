@@ -12,23 +12,11 @@
   <a href="https://npmjs.org/package/arwes">
     <img src="https://img.shields.io/npm/v/arwes.svg?style=flat-square" alt="Version" />
   </a>
-  <a href="https://github.com/arwes/arwes/actions">
-    <img src="https://github.com/arwes/arwes/workflows/ci/badge.svg?style=flat-square" alt="CI" />
-  </a>
-  <a href="https://www.codefactor.io/repository/github/arwes/arwes">
-    <img src="https://www.codefactor.io/repository/github/arwes/arwes/badge" alt="CodeFactor" />
-  </a>
   <a href="https://github.com/arwes/arwes">
     <img src="https://img.shields.io/github/stars/arwes/arwes.svg?style=flat-square&label=stars" alt="Github Stars" />
   </a>
   <a href="https://npmjs.org/package/arwes">
     <img src="https://img.shields.io/npm/dm/arwes?label=installs&style=flat-square" alt="npm" />
-  </a>
-  <a href="https://x.com/arwesjs">
-    <img src="https://img.shields.io/twitter/follow/arwesjs?style=social" alt="Follow on X" />
-  </a>
-  <a href="https://discord.gg/s5sbTkw">
-    <img src="https://img.shields.io/discord/457381046497968128?color=5865F2&logo=discord&logoColor=white&style=flat-square" alt="Discord" />
   </a>
   <a href="https://github.com/arwes/arwes/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/arwes/arwes.svg?maxAge=2592000&style=flat-square" alt="License" />
@@ -39,26 +27,7 @@
 
 [ARWES](https://arwes.dev) is a web framework to build user interfaces based on futuristic science fiction designs, animations, and sound effects. The concepts behind are opinionated with influences from [Cyberprep](https://aesthetics.fandom.com/wiki/Cyberprep) and productions like [Star Citizen](http://robertsspaceindustries.com), [Halo](https://www.halowaypoint.com/en-us/games), [NIKKE](https://nikke-en.com), and [Mecha Break](https://www.mechabreak.com/index). It tries to inspire advanced science and technology.
 
-> The project is under development and not ready for production yet. It is still in
-> [alpha release](https://stackoverflow.com/questions/40067469), so the components
-> are being tested and their API may change as it gets completed.
-
-> Branch [`main`](https://github.com/arwes/arwes/tree/main) is for `1.0.0-alpha`
-> releases and public content deployed at [arwes.dev](https://arwes.dev).
-
-> Branch [`next`](https://github.com/arwes/arwes/tree/next) is for `1.0.0-next`
-> releases and active development deployed at [next.arwes.dev](https://next.arwes.dev).
-
-> The previous version `@arwes/[package]@1.0.0-alpha.19` was moved to [version1-breakpoint2.arwes.dev](https://version1-breakpoint2.arwes.dev)
-> and [playground.version1-breakpoint2.arwes.dev](https://playground.version1-breakpoint2.arwes.dev)
-> with the branch [`version1-breakpoint2`](https://github.com/arwes/arwes/tree/version1-breakpoint2)
-> where you can find the components, the playground, and the website source code. This version
-> was released in April, 2021, and it is now deprecated.
-
-> The previous version `arwes@1.0.0-alpha.5` was moved to [version1-breakpoint1.arwes.dev](https://version1-breakpoint1.arwes.dev)
-> with the branch [`version1-breakpoint1`](https://github.com/arwes/arwes/tree/version1-breakpoint1)
-> where you can find the components and the website source code. This version was
-> released in February, 2018, and it is now deprecated.
+> **The ARWES project is no longer maintained and currently outdated but it is still functional and operational. Feel free to fork it for your own personal use.**
 
 ## Packages
 
@@ -86,7 +55,7 @@ ARWES does not work with React strict mode nor React Server Components.
 <!-- ARWES-COMMUNITY-APPS:START -->
 <table>
 <tr>
-<td align="center"><a href="https://0kn.io"><img src="./static/assets/community/apps/media/0kn.webp" width="189px;" alt="ØKN" /></a><br /><a href="https://0kn.io">ØKN</a></td>
+<td align="center"><a href="https://zknet.io"><img src="./static/assets/community/apps/media/0kn.webp" width="189px;" alt="ZKN" /></a><br /><a href="https://zknet.io">ZKN</a></td>
 <td align="center"><a href="https://soulextract.com"><img src="./static/assets/community/apps/media/soulextract.com.jpg" width="189px;" alt="SoulExtract.com" /></a><br /><a href="https://soulextract.com">SoulExtract.com</a></td>
 <td align="center"><a href="https://romelperez.dev"><img src="./static/assets/community/apps/media/romelperez.dev.jpg" width="189px;" alt="RomelPerez.dev" /></a><br /><a href="https://romelperez.dev">RomelPerez.dev</a></td>
 <td align="center"><a href="https://archiverpg.com"><img src="./static/assets/community/apps/media/archiverpg.com.jpg" width="189px;" alt="Archive RPG" /></a><br /><a href="https://archiverpg.com">Archive RPG</a></td></tr>
@@ -106,24 +75,7 @@ ARWES does not work with React strict mode nor React Server Components.
 </table>
 <!-- ARWES-COMMUNITY-APPS:END -->
 
-### Complements
-
-- [Augmented UI](https://augmented-ui.com)
-- [Rive App](https://rive.app)
-- [tsParticles](https://particles.js.org)
-- [Vanta.js](https://www.vantajs.com)
-- [Howler.js](https://howlerjs.com)
-
-## Need help?
-
-Open [a GitHub issue](https://github.com/arwes/arwes/issues/new/choose) or let's
-chat on [Discord](https://discord.gg/s5sbTkw).
-
-## Roadmap
-
-Check out the [ARWES Project Boards](https://github.com/orgs/arwes/projects).
-
-## Contributors
+### Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -155,8 +107,44 @@ Check out the [ARWES Project Boards](https://github.com/orgs/arwes/projects).
 _This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors)
 specification._
 
-## Want to contribute?
+## Workflow
 
-The project is not fully open for sustancial contributions yet until the
-first beta version is released. Follow the development on
-[Discord](https://discord.gg/s5sbTkw) and [X (Twitter)](https://x.com/arwesjs).
+Using [Node.js](http://nodejs.org) v20.
+
+### Setup
+
+Install and build all packages:
+
+```bash
+npm install
+npm run build
+```
+
+### Applications
+
+Open an app in development mode:
+
+```bash
+npx turbo dev -F apps-docs
+npx turbo dev -F apps-play
+npx turbo dev -F apps-perf
+```
+
+### Packages
+
+Build and watch a package in development mode:
+
+```bash
+npx turbo dev -F @arwes/animated
+# ...
+```
+
+### Production
+
+Build production website at the `./www` folder and open it:
+
+```bash
+npm run www
+npm run serve
+open http://localhost:3000
+```

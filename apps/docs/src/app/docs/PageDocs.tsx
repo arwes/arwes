@@ -125,28 +125,6 @@ const PageDocs = (): JSX.Element => {
                   >
                     <a
                       className="brightness-[0.8] transition-all ease-out duration-200 hover:brightness-100"
-                      href="https://github.com/arwes/arwes/actions"
-                      target="_blank"
-                    >
-                      <img
-                        className="!m-0"
-                        src="https://github.com/arwes/arwes/workflows/ci/badge.svg?style=flat-square"
-                        alt="CI"
-                      />
-                    </a>
-                    <a
-                      className="brightness-[0.8] transition-all ease-out duration-200 hover:brightness-100"
-                      href="https://www.codefactor.io/repository/github/arwes/arwes"
-                      target="_blank"
-                    >
-                      <img
-                        className="!m-0"
-                        src="https://www.codefactor.io/repository/github/arwes/arwes/badge"
-                        alt="CodeFactor"
-                      />
-                    </a>
-                    <a
-                      className="brightness-[0.8] transition-all ease-out duration-200 hover:brightness-100"
                       href="https://github.com/arwes/arwes"
                       target="_blank"
                     >
@@ -165,28 +143,6 @@ const PageDocs = (): JSX.Element => {
                         className="!m-0"
                         alt="npm"
                         src="https://img.shields.io/npm/dm/arwes?label=installs&style=flat-square"
-                      />
-                    </a>
-                    <a
-                      className="brightness-[0.8] transition-all ease-out duration-200 hover:brightness-100"
-                      href="https://x.com/arwesjs"
-                      target="_blank"
-                    >
-                      <img
-                        className="!m-0"
-                        src="https://img.shields.io/twitter/follow/arwesjs?style=social"
-                        alt="Follow on X"
-                      />
-                    </a>
-                    <a
-                      className="brightness-[0.8] transition-all ease-out duration-200 hover:brightness-100"
-                      href="https://discord.gg/s5sbTkw"
-                      target="_blank"
-                    >
-                      <img
-                        className="!m-0"
-                        src="https://img.shields.io/discord/457381046497968128?color=5865F2&logo=discord&logoColor=white&style=flat-square"
-                        alt="Discord"
                       />
                     </a>
                     <a
