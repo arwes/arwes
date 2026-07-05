@@ -1,13 +1,9 @@
 import type { BleepProps, Bleep, BleepPropsUpdatable } from '../types.js'
 import { type BleepSource, createBleepSource } from './createBleepSource.js'
+import { createBleepLoader } from './createBleepLoader.js'
 
 const createBleep = (props: BleepProps): Bleep | null => {
   const isBrowser: boolean = typeof window !== 'undefined'
-  const isBrowserSafari: boolean =
-    isBrowser &&
-    window.navigator.userAgent.includes('Safari') &&
-    !window.navigator.userAgent.includes('Chrome')
-
   const isBleepsAvailable = isBrowser && !!window.AudioContext
 
   if (!isBleepsAvailable) {
@@ -17,9 +13,7 @@ const createBleep = (props: BleepProps): Bleep | null => {
   const {
     sources,
     preload = true,
-    asyncLoad,
     loop,
-    fetchHeaders,
     masterGain,
     maxPlaybackDelay = 0.25,
     muteOnWindowBlur
@@ -28,106 +22,13 @@ const createBleep = (props: BleepProps): Bleep | null => {
   let volume = props.volume ?? 1
   let muted = !!props.muted
   let isExternallyMuted = false
-  let isBufferLoading = false
-  let isBufferError = false
-  let isBufferPlaying = false
   let playbackCallbackTime = 0
-  let asyncLoadCallbackId: number | undefined
-
   let bleepSource: BleepSource | null = null
-  let buffer: AudioBuffer | null = null
-  let duration = 0
-  let fetchPromise: Promise<void>
 
   const context = props.context ?? new window.AudioContext()
   const gain = context.createGain()
   const callersAccount = new Set<string>()
-
-  const fetchAudioFile = (src: string, type: string, callback: () => void): void => {
-    // Some browser extensions or users might try to overwrite the global fetch function
-    // and cause errors, particularly with fetching non-JSON resources.
-    try {
-      void window
-        .fetch(src, {
-          method: 'GET',
-          headers: fetchHeaders
-        })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('ARWES bleep source could not be fetched.')
-          }
-          return response
-        })
-        .then((response) => response.arrayBuffer())
-        .then((audioArrayBuffer) => context.decodeAudioData(audioArrayBuffer))
-        .then((audioBuffer) => {
-          buffer = audioBuffer
-          duration = buffer.duration
-        })
-        .catch((err) => {
-          isBufferError = true
-          console.error(
-            `ARWES bleep with source URL "${src}" and type "${type}" could not be used:`,
-            err
-          )
-        })
-        .then(() => {
-          isBufferLoading = false
-          callback()
-        })
-    } catch (err) {
-      isBufferError = true
-      isBufferLoading = false
-      console.error(`ARWES bleep throws when fetched.`)
-    }
-  }
-
-  function loadAudioBuffer(): void {
-    if (buffer || isBufferLoading || isBufferError) {
-      return
-    }
-
-    if (!sources.length) {
-      isBufferError = true
-      console.error(
-        'ARWES bleep must have at least one source with a valid audio file URL and type.'
-      )
-      return
-    }
-
-    const audioTest = new window.Audio()
-    const source = sources.find((source) => {
-      // "webm" and "weba" file formats are not supported on Safari.
-      if (isBrowserSafari && source.type.includes('audio/webm')) {
-        return false
-      }
-
-      const support = audioTest.canPlayType(source.type || '')
-      return support === 'probably' || support === 'maybe'
-    })
-
-    if (!source) {
-      isBufferError = true
-      console.error(
-        `ARWES bleep sources "${JSON.stringify(sources)}" are not supported on this navigator.`
-      )
-      return
-    }
-
-    const { src, type } = source
-
-    isBufferLoading = true
-
-    fetchPromise = new Promise((resolve) => {
-      if (asyncLoad) {
-        asyncLoadCallbackId = window.setTimeout(() => {
-          fetchAudioFile(src, type, resolve)
-        }, 0)
-      } else {
-        fetchAudioFile(src, type, resolve)
-      }
-    })
-  }
+  const bleepLoader = createBleepLoader(props, context)
 
   function onUserAllowAudio(): void {
     window.removeEventListener('click', onUserAllowAudio)
@@ -160,20 +61,19 @@ const createBleep = (props: BleepProps): Bleep | null => {
 
     playbackCallbackTime = Date.now()
 
-    if (isBufferError) {
+    if (bleepLoader.isError) {
       return
     }
 
-    if (isBufferLoading) {
-      void fetchPromise.then(schedulePlay)
+    if (bleepLoader.isLoading) {
+      bleepLoader.addOnLoad(schedulePlay)
 
       return
     }
 
-    if (!buffer) {
-      loadAudioBuffer()
-
-      void fetchPromise.then(schedulePlay)
+    if (!bleepLoader.buffer) {
+      bleepLoader.load()
+      bleepLoader.addOnLoad(schedulePlay)
 
       return
     }
@@ -182,7 +82,7 @@ const createBleep = (props: BleepProps): Bleep | null => {
       callersAccount.add(caller)
     }
 
-    if (loop && isBufferPlaying) {
+    if (loop && bleepSource?.isPlaying) {
       return
     }
 
@@ -210,22 +110,17 @@ const createBleep = (props: BleepProps): Bleep | null => {
     }
 
     bleepSource = createBleepSource({
+      buffer: bleepLoader.buffer,
       context,
-      buffer,
       gain,
-      loop,
-      onStop() {
-        isBufferPlaying = false
-      }
+      loop
     })
 
-    isBufferPlaying = true
-
-    bleepSource.start()
+    bleepSource.play()
   }
 
   function stop(caller?: string): void {
-    if (!buffer) {
+    if (!bleepLoader.buffer) {
       return
     }
 
@@ -235,33 +130,20 @@ const createBleep = (props: BleepProps): Bleep | null => {
 
     const canStop = loop ? !callersAccount.size : true
 
-    if (canStop) {
-      if (bleepSource) {
-        bleepSource.stop()
-      }
-
-      isBufferPlaying = false
+    if (canStop && bleepSource) {
+      bleepSource.stop()
     }
   }
 
   function load(): void {
-    loadAudioBuffer()
+    bleepLoader.load()
   }
 
   function unload(): void {
-    if (bleepSource) {
-      bleepSource.stop()
-    }
-
-    // Remove audio buffer from memory.
+    bleepSource?.stop()
     bleepSource = null
-    buffer = null
 
-    isBufferLoading = false
-    isBufferError = false
-    isBufferPlaying = false
-
-    window.clearTimeout(asyncLoadCallbackId)
+    bleepLoader.unload()
 
     window.removeEventListener('click', onUserAllowAudio)
     window.removeEventListener('focus', onUserWindowFocus)
@@ -284,9 +166,10 @@ const createBleep = (props: BleepProps): Bleep | null => {
   }
 
   const bleep = {} as unknown as Bleep
+
   const bleepAPI: { [P in keyof Bleep]: PropertyDescriptor } = {
     duration: {
-      get: () => duration,
+      get: () => bleepLoader.buffer?.duration ?? 0,
       enumerable: true
     },
     volume: {
@@ -300,11 +183,11 @@ const createBleep = (props: BleepProps): Bleep | null => {
       enumerable: true
     },
     isPlaying: {
-      get: () => isBufferPlaying,
+      get: () => !!bleepSource?.isPlaying,
       enumerable: true
     },
     isLoaded: {
-      get: () => !!buffer,
+      get: () => !!bleepLoader.buffer,
       enumerable: true
     },
     play: {
@@ -343,7 +226,7 @@ const createBleep = (props: BleepProps): Bleep | null => {
   update({ volume })
 
   if (preload) {
-    loadAudioBuffer()
+    bleepLoader.load()
   }
 
   if (muteOnWindowBlur) {
