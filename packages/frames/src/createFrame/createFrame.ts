@@ -17,8 +17,10 @@ const createFrame = <Contexts extends Record<string, string> = Record<string, st
 
   let width = 0
   let height = 0
-  // eslint-disable-next-line prefer-const
-  let observer: ResizeObserver
+  let observer: ResizeObserver | undefined
+  let isResizeListening = false
+  let resizeRaf = 0
+  let lastSize = ''
 
   const container =
     settings.container ?? document.createElementNS('http://www.w3.org/2000/svg', 'g')
@@ -53,6 +55,31 @@ const createFrame = <Contexts extends Record<string, string> = Record<string, st
     drawFrameElements(container, width, height, settings.elements, contexts)
   }
 
+  // Defer resize rerender to the next frame so SVG layout has settled.
+  const scheduleResizeRender = (): void => {
+    const rect = svg.getBoundingClientRect()
+    const rectWidth = Math.round(rect.width)
+    const rectHeight = Math.round(rect.height)
+    const nextSize = `${rectWidth}:${rectHeight}`
+
+    if (nextSize === lastSize) {
+      return
+    }
+
+    lastSize = nextSize
+
+    if (!rectWidth || !rectHeight) {
+      return
+    }
+
+    cancelAnimationFrame(resizeRaf)
+    resizeRaf = requestAnimationFrame(() => {
+      resize()
+      render()
+      draw()
+    })
+  }
+
   const transition = (context: string, state: string): void => {
     contexts[context] = state
 
@@ -67,7 +94,15 @@ const createFrame = <Contexts extends Record<string, string> = Record<string, st
   }
 
   const cancel = (): void => {
-    observer.disconnect()
+    observer?.disconnect()
+    observer = undefined
+
+    if (isResizeListening) {
+      window.removeEventListener('resize', scheduleResizeRender)
+      isResizeListening = false
+    }
+
+    cancelAnimationFrame(resizeRaf)
     animations.forEach((context) => context.forEach((animation) => animation.cancel()))
   }
 
@@ -99,19 +134,18 @@ const createFrame = <Contexts extends Record<string, string> = Record<string, st
     svg.appendChild(container)
   }
 
-  let isFirstResize = true
+  {
+    const rect = svg.getBoundingClientRect()
+    lastSize = `${Math.round(rect.width)}:${Math.round(rect.height)}`
+  }
 
-  observer = new ResizeObserver(() => {
-    if (isFirstResize) {
-      isFirstResize = false
-      return
-    }
-
-    resize()
-    draw()
-  })
-
-  observer.observe(svg)
+  if (typeof window !== 'undefined' && typeof window.ResizeObserver !== 'undefined') {
+    observer = new window.ResizeObserver(scheduleResizeRender)
+    observer.observe(svg)
+  } else if (typeof window !== 'undefined') {
+    isResizeListening = true
+    window.addEventListener('resize', scheduleResizeRender)
+  }
 
   return Object.freeze({
     get contexts() {
