@@ -1,5 +1,12 @@
 [
   {
+    "name": "profolio",
+    "description": "Debajyati Dey's Portfolio Website",
+    "url": "https://ddeb.pages.dev",
+    "image": "Debajyati-Dey-Portfolio-Site.webp",
+    "video": "Debajyati-Dey-Portfolio-Site.webm"
+  },
+  {
     "name": "ØKN",
     "description": "A decentralized metadata-private internet and application layer.",
     "url": "https://0kn.io",
